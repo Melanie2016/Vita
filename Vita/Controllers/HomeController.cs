@@ -13,9 +13,9 @@ namespace Vita.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Registrarse()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Registrese! Maldita sea";
 
             return View();
         }
@@ -23,6 +23,13 @@ namespace Vita.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public ActionResult Login()
+        {
+            ViewBag.Message = "Hola, este es el login.";
 
             return View();
         }
