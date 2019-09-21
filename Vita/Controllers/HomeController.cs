@@ -29,8 +29,6 @@ namespace Vita.Controllers
 
         public ActionResult Login()
         {
-            ViewBag.Message = "Hola, este es el login.";
-
             return View();
         }
     }
