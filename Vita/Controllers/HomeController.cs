@@ -20,9 +20,9 @@ namespace Vita.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Actividades()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Ranking de los más populares";
 
             return View();
         }
