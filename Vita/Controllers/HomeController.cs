@@ -13,10 +13,8 @@ namespace Vita.Controllers
             return View();
         }
 
-        public ActionResult Registrarse()
+        public ActionResult Registro()
         {
-            ViewBag.Message = "Registrese! Maldita sea";
-
             return View();
         }
 
