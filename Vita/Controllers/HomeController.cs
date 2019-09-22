@@ -13,24 +13,20 @@ namespace Vita.Controllers
             return View();
         }
 
-        public ActionResult Registrarse()
+        public ActionResult Registro()
         {
-            ViewBag.Message = "Registrese! Maldita sea";
-
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Actividades()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Ranking de los más populares";
 
             return View();
         }
 
         public ActionResult Login()
         {
-            ViewBag.Message = "Hola, este es el login.";
-
             return View();
         }
     }
