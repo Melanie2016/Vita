@@ -10,16 +10,17 @@
 <link href="~/vendor/select2/select2_registro.min.css" rel="stylesheet" media="all">
 <link href="~/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
 <link href="~/Content/css/registro.css" rel="stylesheet" media="all">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 
 <div class="page-wrapper  font-poppins" style="background-image: url('../../Content/images/bg-01.jpg');">
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
             <div class="card-body">
-                <!--<h2 class="title">Registro</h2> -->
                 <form method="POST">
                     <h2 id="tipo_usuario" class="form-title">¿Qué tipo de persona eres?</h2>
 
+                    <!--Tipo de persona-->
                     <center>
                         <div class="form-radio">
                             <input type="radio" name="member_level" value="newbie" id="newbie" checked="checked" />
@@ -30,103 +31,209 @@
                         </div>
                     </center>
 
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Nombre</label>
-                                <input class="input--style-4" type="text" name="first_name">
+                    <!--FOTO DE PERFIL-->
+                    <div class="avatar-wrapper" id="avatar">
+                        <img class="profile-pic" src="" />
+                        <div class="upload-button">
+                            <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+                        </div>
+                        <input class="file-upload" type="file" accept="image/*" />
+                    </div>
+
+                    <!--Formulario de persona-->
+                    <div id="persona">
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Nombre-->
+                                    <label class="label">Nombre</label>
+                                    <input class="input--style-4" type="text" name="nombre_per">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Apellido-->
+                                    <label class="label">Apellido</label>
+                                    <input class="input--style-4" type="text" name="apellido_per">
+                                </div>
                             </div>
                         </div>
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Apellido</label>
-                                <input class="input--style-4" type="text" name="last_name">
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Fecha de nacimiento-->
+                                    <label class="label">Fecha de nacimiento</label>
+                                    <div class="input-group-icon">
+                                        <input class="input--style-4 js-datepicker" type="text" name="birthday">
+                                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Email-->
+                                    <label class="label">Email</label>
+                                    <input class="input--style-4" type="email" name="email_per">
+                                </div>
+                            </div>
+
+                            <!--Sexo-->
+                            <!--<div class="col-2">
+                <div class="input-group">
+                    <label class="label">Sexo</label>
+                    <div class="p-t-10">
+                        <label class="radio-container m-r-45">
+                            Masculino
+                            <input type="radio" checked="checked" name="gender">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="radio-container">
+                            Femenino
+                            <input type="radio" name="gender">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+            </div> -->
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Localidad-->
+                                    <label class="label">Localidad</label>
+                                    <input class="input--style-4" type="text" name="localidad_per">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Celular-->
+                                    <label class="label">Celular</label>
+                                    <input class="input--style-4" type="text" name="cel_per">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label class="label"></label>
+                            <div class="rs-select2 js-select-simple select--no-search">
+                                <select name="actividades">
+                                    <!--Intereses-->
+                                    <option disabled="disabled" selected="selected">Intereses</option>
+                                    <option>Actividades al aire libre</option>
+                                    <option>Deportes</option>
+                                    <option>Cursos y Talleres</option>
+                                    <option>Entretenimientos</option>
+                                </select>
+                                <div class="select-dropdown"></div>
+                            </div>
+                        </div>
+
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Usuario-->
+                                    <label class="label">Usuario</label>
+                                    <input class="input--style-4" type="text" name="user">
+                                </div>
+                            </div>
+
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Contraseña-->
+                                    <label class="label">Contraseña</label>
+                                    <input class="input--style-4" type="password" name="pass">
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Fecha de nacimiento</label>
-                                <div class="input-group-icon">
-                                    <input class="input--style-4 js-datepicker" type="text" name="birthday">
-                                    <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+
+                    <div id="empresa">
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Nombre de la empresa-->
+                                    <label class="label">Nombre</label>
+                                    <input class="input--style-4" type="text" name="nombre_emp">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Email de la empresa-->
+                                    <label class="label">Email</label>
+                                    <input class="input--style-4" type="text" name="email_emp">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Localidad de la empresa-->
+                                    <label class="label">Localidad</label>
+                                    <input class="input--style-4" type="text" name="localidad_emp">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Telefono de la empresa-->
+                                    <label class="label">Teléfono</label>
+                                    <input class="input--style-4" type="text" name="tel_emp">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Celular de la empresa-->
+                                    <label class="label">Celular</label>
+                                    <input class="input--style-4" type="text" name="cel_emp">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Sitio web personal de la empresa-->
+                                    <label class="label">Sitio web personal</label>
+                                    <input class="input--style-4" type="text" name="web_emp">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label class="label"></label>
+                            <div class="rs-select2 js-select-simple select--no-search">
+                                <select name="rubro">
+                                    <!--Rubro-->
+                                    <option disabled="disabled" selected="selected">Rubro</option>
+                                    <option>Actividades al aire libre</option>
+                                    <option>Deportes</option>
+                                    <option>Cursos y Talleres</option>
+                                    <option>Entretenimientos</option>
+                                </select>
+                                <div class="select-dropdown"></div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Usuario-->
+                                    <label class="label">Usuario</label>
+                                    <input class="input--style-4" type="text" name="user_emp">
+                                </div>
+                            </div>
+
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Contraseña-->
+                                    <label class="label">Contraseña</label>
+                                    <input class="input--style-4" type="password" name="pass_empr">
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Email</label>
-                                <input class="input--style-4" type="email" name="email">
-                            </div>
-                        </div>
-
-                        <!--<div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Sexo</label>
-                                <div class="p-t-10">
-                                    <label class="radio-container m-r-45">
-                                        Masculino
-                                        <input type="radio" checked="checked" name="gender">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="radio-container">
-                                        Femenino
-                                        <input type="radio" name="gender">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div> -->
-                    </div>
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Localidad</label>
-                                <input class="input--style-4" type="localidad" name="localidad">
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Celular</label>
-                                <input class="input--style-4" type="text" name="phone">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <label class="label"></label>
-                        <div class="rs-select2 js-select-simple select--no-search">
-                            <select name="subject">
-                                <option disabled="disabled" selected="selected">Intereses</option>
-                                <option>Actividades al aire libre</option>
-                                <option>Torneos de juegos de mesa</option>
-                                <option>Deportes</option>
-                                <option>Talleres/Cursos</option>
-                                <option>De interés cultural</option>
-                            </select>
-                            <div class="select-dropdown"></div>
-                        </div>
                     </div>
 
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Usuario</label>
-                                <input class="input--style-4" type="text" name="user">
-                            </div>
-                        </div>
-
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Contraseña</label>
-                                <input class="input--style-4" type="password" name="pass">
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="p-t-15">
                         <button class="btn btn--radius-2 btn--blue" type="submit">Aceptar</button>
+                        <a href="/Home/Index"><button class="btn btn--radius-2 btn--blue" type="button">Cancelar</button></a>
                     </div>
                 </form>
             </div>

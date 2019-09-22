@@ -65,6 +65,46 @@
     } catch (err) {
         console.log(err);
     }
-    
 
+    //Formulario de registro, oculto y muestro segun el tipo de persona
+    $(document).ready(function () {
+        $("#average").on("click", function () { //Si es empresa
+            $('#persona').hide(); //oculto el formulario de persona
+            $('#empresa').show(); //muestro el formulario de empresa
+            $('#avatar').hide(); //oculto la foto de perfil
+        });
+
+        $("#newbie").on("click", function () { //Si es persona
+            $('#persona').show(); //muestro el formulario de persona
+            $('#empresa').hide(); //oculto el formulario de empresa
+            $('#avatar').show(); //muestro la foto de perfil
+        });
+
+        if ($('#newbie').prop('checked')) { //Si está seleccionado persona
+            $('#empresa').hide(); //oculto el formulario de empresa
+        }
+
+        //FOTO DE PERFIL
+        var readURL = function (input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.profile-pic').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $(".file-upload").on('change', function () {
+            readURL(this);
+        });
+
+        $(".upload-button").on('click', function () {
+            $(".file-upload").click();
+        });
+    });
+
+  
 })(jQuery);
