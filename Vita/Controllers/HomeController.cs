@@ -17,7 +17,19 @@ namespace Vita.Controllers
         {
             return View();
         }
+        public ActionResult PerfilUsuario()
+        {
+            return View();
+        }
 
+        public ActionResult PerfilEntidad()
+        {
+            return View();
+        }
+        public ActionResult Muro()
+        {
+            return View();
+        }
         public ActionResult Actividades()
         {
             ViewBag.Message = "Ranking de los más populares";

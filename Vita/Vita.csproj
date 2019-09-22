@@ -203,6 +203,10 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\PerfilUsuario.cshtml" />
+    <Content Include="Views\Shared\_LayoutPerfil.cshtml" />
+    <Content Include="Views\Home\Muro.cshtml" />
+    <Content Include="Views\Home\PerfilEntidad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -244,6 +248,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
+      <UserProperties content_4bootstrap-grid_1min_1css_1map__JsonSchema="" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
