@@ -20,70 +20,72 @@
     <link rel="stylesheet" href="~/Content/css/ionicons.min.css">
 
     <link rel="stylesheet" href="~/Content/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/css/jquery.timepicker.css">
 
 
     <link rel="stylesheet" href="~/Content/css/flaticon.css">
     <link rel="stylesheet" href="~/Content/css/icomoon.css">
     <link rel="stylesheet" href="~/Content/css/style.css">
-  
+
 </head>
 <body>
-    
-        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-            <div class="container">
-                <a class="navbar-brand" href="/Home/Index"><img id="logo" src="../../Content/images/iso.jpg" style="width:35px; height: 35px;"> Vita </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="oi oi-menu"></span> Menu
-                </button>
 
-                <div class="collapse navbar-collapse" id="ftco-nav">
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="/Home/Index"><img id="logo" src="../../Content/images/iso.jpg" style="width:35px; height: 35px;"> Vita </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
 
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"><a href="index.html" class="nav-link"></a></li>
-                        <li class="nav-item"><a href="about.html" class="nav-link"></a></li>
-                          <li class="nav-item"><a href="/Home/Index" class="nav-link">Home</a></li>
-                        <li class="nav-item"><a href="/Home/Actividades" class="nav-link">Actividades</a></li>
-                        <li class="nav-item"><a href="blog.html" class="nav-link">Eventos</a></li>
-                      
-                        <li class="nav-item cta mr-md-1"><a href="/Home/Login" class="nav-link">Login</a></li>
-                        <li class="nav-item cta cta-colored"><a href="/Home/Registro" class="nav-link">Registrarse</a></li>
+            <div class="collapse navbar-collapse" id="ftco-nav">
 
-                    </ul>
-                </div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active"><a href="index.html" class="nav-link"></a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link"></a></li>
+                    <li class="nav-item"><a href="/Home/Index" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="/Home/Actividades" class="nav-link">Actividades</a></li>
+                    <li class="nav-item"><a href="blog.html" class="nav-link">Eventos</a></li>
+
+                    <li class="nav-item cta mr-md-1"><a href="/Home/Login" class="nav-link">Login</a></li>
+                    <li class="nav-item cta cta-colored"><a href="/Home/Registro" class="nav-link">Registrarse</a></li>
+
+                </ul>
             </div>
-        </nav>
-     
-        <!-- END nav -->
-
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
-            </footer>
         </div>
+    </nav>
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
+    <!-- END nav -->
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 
 
-        <script src="~/Scripts/jquery.min.js"></script>
-        <script src="~/Scripts/jquery-migrate-3.0.1.min.js"></script>
-        <script src="~/Scripts/popper.min.js"></script>
-        <script src="~/Scripts/bootstrap.min.js"></script>
-        <script src="~/Scripts/jquery.easing.1.3.js"></script>
-        <script src="~/Scripts/jquery.waypoints.min.js"></script>
-        <script src="~/Scripts/jquery.stellar.min.js"></script>
-        <script src="~/Scripts/owl.carousel.min.js"></script>
-        <script src="~/Scripts/jquery.magnific-popup.min.js"></script>
-        <script src="~/Scripts/aos.js"></script>
-        <script src="~/Scripts/jquery.animateNumber.min.js"></script>
-        <script src="~/Scripts/scrollax.min.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-        <script src="~/Scripts/google-map.js"></script>
-        <script src="~/Scripts/main.js"></script>
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-migrate-3.0.1.min.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery.easing.1.3.js"></script>
+    <script src="~/Scripts/jquery.waypoints.min.js"></script>
+    <script src="~/Scripts/jquery.stellar.min.js"></script>
+    <script src="~/Scripts/owl.carousel.min.js"></script>
+    <script src="~/Scripts/jquery.magnific-popup.min.js"></script>
+    <script src="~/Scripts/aos.js"></script>
+    <script src="~/Scripts/jquery.animateNumber.min.js"></script>
+    <script src="~/Scripts/scrollax.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="~/Scripts/google-map.js"></script>
+    <script src="~/Scripts/main.js"></script>
 </body>
 
 
