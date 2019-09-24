@@ -1,0 +1,1091 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="VitaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Actividad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="200" />
+          <Property Name="fechaCreacion" Type="date" />
+          <Property Name="edadMinima" Type="int" />
+          <Property Name="edadMaxima" Type="int" />
+          <Property Name="fechaActividadComienzo" Type="date" />
+          <Property Name="fechaActividadFin" Type="date" />
+          <Property Name="cantidadDias" Type="int" />
+          <Property Name="precio" Type="int" />
+          <Property Name="cantidadParticipantes" Type="int" />
+          <Property Name="categoriaId" Type="int" />
+          <Property Name="subcategoriaId" Type="int" />
+          <Property Name="localidadId" Type="int" />
+          <Property Name="empresaId" Type="int" />
+        </EntityType>
+        <EntityType Name="ActividadUsuarioAnotado">
+          <Key>
+            <PropertyRef Name="actividadId" />
+            <PropertyRef Name="usuarioId" />
+          </Key>
+          <Property Name="actividadId" Type="int" Nullable="false" />
+          <Property Name="usuarioId" Type="int" Nullable="false" />
+          <Property Name="fechaAsociado" Type="date" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Colaborador">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="apellido" Type="varchar" MaxLength="50" />
+          <Property Name="fechaNacimiento" Type="date" />
+          <Property Name="correoElectronico" Type="varchar" MaxLength="100" />
+          <Property Name="localidadId" Type="int" />
+        </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="correoElectronico" Type="varchar" MaxLength="100" />
+          <Property Name="localidadId" Type="int" />
+        </EntityType>
+        <EntityType Name="Evento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="200" />
+          <Property Name="empresaId" Type="int" />
+          <Property Name="precio" Type="int" />
+          <Property Name="fechaInicio" Type="date" />
+          <Property Name="fechaDesde" Type="date" />
+          <Property Name="cantidadParticipantes" Type="int" />
+          <Property Name="localidadId" Type="int" />
+        </EntityType>
+        <EntityType Name="EventoActividad">
+          <Key>
+            <PropertyRef Name="actividadId" />
+            <PropertyRef Name="eventoId" />
+          </Key>
+          <Property Name="actividadId" Type="int" Nullable="false" />
+          <Property Name="eventoId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Habilidad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="HabilidadColaborador">
+          <Key>
+            <PropertyRef Name="habilidadId" />
+            <PropertyRef Name="colaboradorId" />
+          </Key>
+          <Property Name="habilidadId" Type="int" Nullable="false" />
+          <Property Name="colaboradorId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Localidad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Necesidad">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="eventoId" />
+            <PropertyRef Name="habilidadId" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="200" />
+          <Property Name="eventoId" Type="int" Nullable="false" />
+          <Property Name="habilidadId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PartidoDepartamento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="provinciaId" Type="int" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SubCategoria">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="200" />
+          <Property Name="categoriaId" Type="int" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="apellido" Type="varchar" MaxLength="50" />
+          <Property Name="fechaNacimiento" Type="date" />
+          <Property Name="correoElectronico" Type="varchar" MaxLength="100" />
+          <Property Name="localidadId" Type="int" />
+        </EntityType>
+        <Association Name="ActividadEmpresaId">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="0..1" />
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Actividad">
+              <PropertyRef Name="empresaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ActividadEventoId">
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="1" />
+          <End Role="EventoActividad" Type="Self.EventoActividad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actividad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="EventoActividad">
+              <PropertyRef Name="actividadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ActividadSubcategoriaId">
+          <End Role="SubCategoria" Type="Self.SubCategoria" Multiplicity="0..1" />
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategoria">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Actividad">
+              <PropertyRef Name="subcategoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ActividadUsuarioId">
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="1" />
+          <End Role="ActividadUsuarioAnotado" Type="Self.ActividadUsuarioAnotado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actividad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActividadUsuarioAnotado">
+              <PropertyRef Name="actividadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CategoriaActividadId">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Actividad">
+              <PropertyRef Name="categoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ColaboradorHabilidadid">
+          <End Role="Colaborador" Type="Self.Colaborador" Multiplicity="1" />
+          <End Role="HabilidadColaborador" Type="Self.HabilidadColaborador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colaborador">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="HabilidadColaborador">
+              <PropertyRef Name="colaboradorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EventoActividadId">
+          <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
+          <End Role="EventoActividad" Type="Self.EventoActividad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="EventoActividad">
+              <PropertyRef Name="eventoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EventoEmpresaId">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="0..1" />
+          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Evento">
+              <PropertyRef Name="empresaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EventoLocalidadId">
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
+          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Evento">
+              <PropertyRef Name="localidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EventoNecesidadId">
+          <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
+          <End Role="Necesidad" Type="Self.Necesidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Necesidad">
+              <PropertyRef Name="eventoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HabilidadColaboradorid">
+          <End Role="Habilidad" Type="Self.Habilidad" Multiplicity="1" />
+          <End Role="HabilidadColaborador" Type="Self.HabilidadColaborador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Habilidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="HabilidadColaborador">
+              <PropertyRef Name="habilidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HabilidadNecesidadId">
+          <End Role="Habilidad" Type="Self.Habilidad" Multiplicity="1" />
+          <End Role="Necesidad" Type="Self.Necesidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Habilidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Necesidad">
+              <PropertyRef Name="habilidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LocalidadActividadId">
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Actividad">
+              <PropertyRef Name="localidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="localidadColaborador">
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
+          <End Role="Colaborador" Type="Self.Colaborador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Colaborador">
+              <PropertyRef Name="localidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="localidadId">
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="localidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="localidadIdEmpresa">
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="localidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="provinciaId">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
+          <End Role="PartidoDepartamento" Type="Self.PartidoDepartamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PartidoDepartamento">
+              <PropertyRef Name="provinciaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SubcategoriaCategoriaId">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="SubCategoria" Type="Self.SubCategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SubCategoria">
+              <PropertyRef Name="categoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UsuarioActividadId">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="ActividadUsuarioAnotado" Type="Self.ActividadUsuarioAnotado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActividadUsuarioAnotado">
+              <PropertyRef Name="usuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VitaModelStoreContainer">
+          <EntitySet Name="Actividad" EntityType="Self.Actividad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActividadUsuarioAnotado" EntityType="Self.ActividadUsuarioAnotado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Colaborador" EntityType="Self.Colaborador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Evento" EntityType="Self.Evento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventoActividad" EntityType="Self.EventoActividad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Habilidad" EntityType="Self.Habilidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HabilidadColaborador" EntityType="Self.HabilidadColaborador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Necesidad" EntityType="Self.Necesidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartidoDepartamento" EntityType="Self.PartidoDepartamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubCategoria" EntityType="Self.SubCategoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="ActividadEmpresaId" Association="Self.ActividadEmpresaId">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="Actividad" EntitySet="Actividad" />
+          </AssociationSet>
+          <AssociationSet Name="ActividadEventoId" Association="Self.ActividadEventoId">
+            <End Role="Actividad" EntitySet="Actividad" />
+            <End Role="EventoActividad" EntitySet="EventoActividad" />
+          </AssociationSet>
+          <AssociationSet Name="ActividadSubcategoriaId" Association="Self.ActividadSubcategoriaId">
+            <End Role="SubCategoria" EntitySet="SubCategoria" />
+            <End Role="Actividad" EntitySet="Actividad" />
+          </AssociationSet>
+          <AssociationSet Name="ActividadUsuarioId" Association="Self.ActividadUsuarioId">
+            <End Role="Actividad" EntitySet="Actividad" />
+            <End Role="ActividadUsuarioAnotado" EntitySet="ActividadUsuarioAnotado" />
+          </AssociationSet>
+          <AssociationSet Name="CategoriaActividadId" Association="Self.CategoriaActividadId">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Actividad" EntitySet="Actividad" />
+          </AssociationSet>
+          <AssociationSet Name="ColaboradorHabilidadid" Association="Self.ColaboradorHabilidadid">
+            <End Role="Colaborador" EntitySet="Colaborador" />
+            <End Role="HabilidadColaborador" EntitySet="HabilidadColaborador" />
+          </AssociationSet>
+          <AssociationSet Name="EventoActividadId" Association="Self.EventoActividadId">
+            <End Role="Evento" EntitySet="Evento" />
+            <End Role="EventoActividad" EntitySet="EventoActividad" />
+          </AssociationSet>
+          <AssociationSet Name="EventoEmpresaId" Association="Self.EventoEmpresaId">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="Evento" EntitySet="Evento" />
+          </AssociationSet>
+          <AssociationSet Name="EventoLocalidadId" Association="Self.EventoLocalidadId">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="Evento" EntitySet="Evento" />
+          </AssociationSet>
+          <AssociationSet Name="EventoNecesidadId" Association="Self.EventoNecesidadId">
+            <End Role="Evento" EntitySet="Evento" />
+            <End Role="Necesidad" EntitySet="Necesidad" />
+          </AssociationSet>
+          <AssociationSet Name="HabilidadColaboradorid" Association="Self.HabilidadColaboradorid">
+            <End Role="Habilidad" EntitySet="Habilidad" />
+            <End Role="HabilidadColaborador" EntitySet="HabilidadColaborador" />
+          </AssociationSet>
+          <AssociationSet Name="HabilidadNecesidadId" Association="Self.HabilidadNecesidadId">
+            <End Role="Habilidad" EntitySet="Habilidad" />
+            <End Role="Necesidad" EntitySet="Necesidad" />
+          </AssociationSet>
+          <AssociationSet Name="LocalidadActividadId" Association="Self.LocalidadActividadId">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="Actividad" EntitySet="Actividad" />
+          </AssociationSet>
+          <AssociationSet Name="localidadColaborador" Association="Self.localidadColaborador">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="Colaborador" EntitySet="Colaborador" />
+          </AssociationSet>
+          <AssociationSet Name="localidadId" Association="Self.localidadId">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="localidadIdEmpresa" Association="Self.localidadIdEmpresa">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="provinciaId" Association="Self.provinciaId">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="PartidoDepartamento" EntitySet="PartidoDepartamento" />
+          </AssociationSet>
+          <AssociationSet Name="SubcategoriaCategoriaId" Association="Self.SubcategoriaCategoriaId">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="SubCategoria" EntitySet="SubCategoria" />
+          </AssociationSet>
+          <AssociationSet Name="UsuarioActividadId" Association="Self.UsuarioActividadId">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="ActividadUsuarioAnotado" EntitySet="ActividadUsuarioAnotado" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VitaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Actividad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="fechaCreacion" Type="DateTime" Precision="0" />
+          <Property Name="edadMinima" Type="Int32" />
+          <Property Name="edadMaxima" Type="Int32" />
+          <Property Name="fechaActividadComienzo" Type="DateTime" Precision="0" />
+          <Property Name="fechaActividadFin" Type="DateTime" Precision="0" />
+          <Property Name="cantidadDias" Type="Int32" />
+          <Property Name="precio" Type="Int32" />
+          <Property Name="cantidadParticipantes" Type="Int32" />
+          <Property Name="categoriaId" Type="Int32" />
+          <Property Name="subcategoriaId" Type="Int32" />
+          <Property Name="localidadId" Type="Int32" />
+          <Property Name="empresaId" Type="Int32" />
+          <NavigationProperty Name="Empresa" Relationship="Self.ActividadEmpresaId" FromRole="Actividad" ToRole="Empresa" />
+          <NavigationProperty Name="SubCategoria" Relationship="Self.ActividadSubcategoriaId" FromRole="Actividad" ToRole="SubCategoria" />
+          <NavigationProperty Name="ActividadUsuarioAnotado" Relationship="Self.ActividadUsuarioId" FromRole="Actividad" ToRole="ActividadUsuarioAnotado" />
+          <NavigationProperty Name="Categoria" Relationship="Self.CategoriaActividadId" FromRole="Actividad" ToRole="Categoria" />
+          <NavigationProperty Name="Localidad" Relationship="Self.LocalidadActividadId" FromRole="Actividad" ToRole="Localidad" />
+          <NavigationProperty Name="Evento" Relationship="Self.EventoActividad" FromRole="Actividad" ToRole="Evento" />
+        </EntityType>
+        <EntityType Name="ActividadUsuarioAnotado">
+          <Key>
+            <PropertyRef Name="actividadId" />
+            <PropertyRef Name="usuarioId" />
+          </Key>
+          <Property Name="actividadId" Type="Int32" Nullable="false" />
+          <Property Name="usuarioId" Type="Int32" Nullable="false" />
+          <Property Name="fechaAsociado" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Actividad" Relationship="Self.ActividadUsuarioId" FromRole="ActividadUsuarioAnotado" ToRole="Actividad" />
+          <NavigationProperty Name="Usuario" Relationship="Self.UsuarioActividadId" FromRole="ActividadUsuarioAnotado" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Actividad" Relationship="Self.CategoriaActividadId" FromRole="Categoria" ToRole="Actividad" />
+          <NavigationProperty Name="SubCategoria" Relationship="Self.SubcategoriaCategoriaId" FromRole="Categoria" ToRole="SubCategoria" />
+        </EntityType>
+        <EntityType Name="Colaborador">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fechaNacimiento" Type="DateTime" Precision="0" />
+          <Property Name="correoElectronico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="localidadId" Type="Int32" />
+          <NavigationProperty Name="Localidad" Relationship="Self.localidadColaborador" FromRole="Colaborador" ToRole="Localidad" />
+          <NavigationProperty Name="Habilidad" Relationship="Self.HabilidadColaborador" FromRole="Colaborador" ToRole="Habilidad" />
+        </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="correoElectronico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="localidadId" Type="Int32" />
+          <NavigationProperty Name="Actividad" Relationship="Self.ActividadEmpresaId" FromRole="Empresa" ToRole="Actividad" />
+          <NavigationProperty Name="Evento" Relationship="Self.EventoEmpresaId" FromRole="Empresa" ToRole="Evento" />
+          <NavigationProperty Name="Localidad" Relationship="Self.localidadIdEmpresa" FromRole="Empresa" ToRole="Localidad" />
+        </EntityType>
+        <EntityType Name="Evento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="empresaId" Type="Int32" />
+          <Property Name="precio" Type="Int32" />
+          <Property Name="fechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="fechaDesde" Type="DateTime" Precision="0" />
+          <Property Name="cantidadParticipantes" Type="Int32" />
+          <Property Name="localidadId" Type="Int32" />
+          <NavigationProperty Name="Empresa" Relationship="Self.EventoEmpresaId" FromRole="Evento" ToRole="Empresa" />
+          <NavigationProperty Name="Localidad" Relationship="Self.EventoLocalidadId" FromRole="Evento" ToRole="Localidad" />
+          <NavigationProperty Name="Necesidad" Relationship="Self.EventoNecesidadId" FromRole="Evento" ToRole="Necesidad" />
+          <NavigationProperty Name="Actividad" Relationship="Self.EventoActividad" FromRole="Evento" ToRole="Actividad" />
+        </EntityType>
+        <EntityType Name="Habilidad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Necesidad" Relationship="Self.HabilidadNecesidadId" FromRole="Habilidad" ToRole="Necesidad" />
+          <NavigationProperty Name="Colaborador" Relationship="Self.HabilidadColaborador" FromRole="Habilidad" ToRole="Colaborador" />
+        </EntityType>
+        <EntityType Name="Localidad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Actividad" Relationship="Self.LocalidadActividadId" FromRole="Localidad" ToRole="Actividad" />
+          <NavigationProperty Name="Colaborador" Relationship="Self.localidadColaborador" FromRole="Localidad" ToRole="Colaborador" />
+          <NavigationProperty Name="Empresa" Relationship="Self.localidadIdEmpresa" FromRole="Localidad" ToRole="Empresa" />
+          <NavigationProperty Name="Evento" Relationship="Self.EventoLocalidadId" FromRole="Localidad" ToRole="Evento" />
+          <NavigationProperty Name="Usuario" Relationship="Self.localidadId" FromRole="Localidad" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Necesidad">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="eventoId" />
+            <PropertyRef Name="habilidadId" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="eventoId" Type="Int32" Nullable="false" />
+          <Property Name="habilidadId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Evento" Relationship="Self.EventoNecesidadId" FromRole="Necesidad" ToRole="Evento" />
+          <NavigationProperty Name="Habilidad" Relationship="Self.HabilidadNecesidadId" FromRole="Necesidad" ToRole="Habilidad" />
+        </EntityType>
+        <EntityType Name="PartidoDepartamento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="provinciaId" Type="Int32" />
+          <NavigationProperty Name="Provincia" Relationship="Self.provinciaId" FromRole="PartidoDepartamento" ToRole="Provincia" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PartidoDepartamento" Relationship="Self.provinciaId" FromRole="Provincia" ToRole="PartidoDepartamento" />
+        </EntityType>
+        <EntityType Name="SubCategoria">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="categoriaId" Type="Int32" />
+          <NavigationProperty Name="Actividad" Relationship="Self.ActividadSubcategoriaId" FromRole="SubCategoria" ToRole="Actividad" />
+          <NavigationProperty Name="Categoria" Relationship="Self.SubcategoriaCategoriaId" FromRole="SubCategoria" ToRole="Categoria" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fechaNacimiento" Type="DateTime" Precision="0" />
+          <Property Name="correoElectronico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="localidadId" Type="Int32" />
+          <NavigationProperty Name="ActividadUsuarioAnotado" Relationship="Self.UsuarioActividadId" FromRole="Usuario" ToRole="ActividadUsuarioAnotado" />
+          <NavigationProperty Name="Localidad" Relationship="Self.localidadId" FromRole="Usuario" ToRole="Localidad" />
+        </EntityType>
+        <Association Name="ActividadEmpresaId">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="0..1" />
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Actividad">
+              <PropertyRef Name="empresaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ActividadSubcategoriaId">
+          <End Role="SubCategoria" Type="Self.SubCategoria" Multiplicity="0..1" />
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategoria">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Actividad">
+              <PropertyRef Name="subcategoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ActividadUsuarioId">
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="1" />
+          <End Role="ActividadUsuarioAnotado" Type="Self.ActividadUsuarioAnotado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actividad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActividadUsuarioAnotado">
+              <PropertyRef Name="actividadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CategoriaActividadId">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Actividad">
+              <PropertyRef Name="categoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LocalidadActividadId">
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Actividad">
+              <PropertyRef Name="localidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UsuarioActividadId">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="ActividadUsuarioAnotado" Type="Self.ActividadUsuarioAnotado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActividadUsuarioAnotado">
+              <PropertyRef Name="usuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SubcategoriaCategoriaId">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="SubCategoria" Type="Self.SubCategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SubCategoria">
+              <PropertyRef Name="categoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="localidadColaborador">
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
+          <End Role="Colaborador" Type="Self.Colaborador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Colaborador">
+              <PropertyRef Name="localidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EventoEmpresaId">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="0..1" />
+          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Evento">
+              <PropertyRef Name="empresaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="localidadIdEmpresa">
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="localidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EventoLocalidadId">
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
+          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Evento">
+              <PropertyRef Name="localidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EventoNecesidadId">
+          <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
+          <End Role="Necesidad" Type="Self.Necesidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Necesidad">
+              <PropertyRef Name="eventoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HabilidadNecesidadId">
+          <End Role="Habilidad" Type="Self.Habilidad" Multiplicity="1" />
+          <End Role="Necesidad" Type="Self.Necesidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Habilidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Necesidad">
+              <PropertyRef Name="habilidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="localidadId">
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="localidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="provinciaId">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
+          <End Role="PartidoDepartamento" Type="Self.PartidoDepartamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PartidoDepartamento">
+              <PropertyRef Name="provinciaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EventoActividad">
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="*" />
+          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+        </Association>
+        <Association Name="HabilidadColaborador">
+          <End Role="Colaborador" Type="Self.Colaborador" Multiplicity="*" />
+          <End Role="Habilidad" Type="Self.Habilidad" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="VitaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Actividad" EntityType="Self.Actividad" />
+          <EntitySet Name="ActividadUsuarioAnotado" EntityType="Self.ActividadUsuarioAnotado" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="Colaborador" EntityType="Self.Colaborador" />
+          <EntitySet Name="Empresa" EntityType="Self.Empresa" />
+          <EntitySet Name="Evento" EntityType="Self.Evento" />
+          <EntitySet Name="Habilidad" EntityType="Self.Habilidad" />
+          <EntitySet Name="Localidad" EntityType="Self.Localidad" />
+          <EntitySet Name="Necesidad" EntityType="Self.Necesidad" />
+          <EntitySet Name="PartidoDepartamento" EntityType="Self.PartidoDepartamento" />
+          <EntitySet Name="Provincia" EntityType="Self.Provincia" />
+          <EntitySet Name="SubCategoria" EntityType="Self.SubCategoria" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="ActividadEmpresaId" Association="Self.ActividadEmpresaId">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="Actividad" EntitySet="Actividad" />
+          </AssociationSet>
+          <AssociationSet Name="ActividadSubcategoriaId" Association="Self.ActividadSubcategoriaId">
+            <End Role="SubCategoria" EntitySet="SubCategoria" />
+            <End Role="Actividad" EntitySet="Actividad" />
+          </AssociationSet>
+          <AssociationSet Name="ActividadUsuarioId" Association="Self.ActividadUsuarioId">
+            <End Role="Actividad" EntitySet="Actividad" />
+            <End Role="ActividadUsuarioAnotado" EntitySet="ActividadUsuarioAnotado" />
+          </AssociationSet>
+          <AssociationSet Name="CategoriaActividadId" Association="Self.CategoriaActividadId">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Actividad" EntitySet="Actividad" />
+          </AssociationSet>
+          <AssociationSet Name="LocalidadActividadId" Association="Self.LocalidadActividadId">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="Actividad" EntitySet="Actividad" />
+          </AssociationSet>
+          <AssociationSet Name="UsuarioActividadId" Association="Self.UsuarioActividadId">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="ActividadUsuarioAnotado" EntitySet="ActividadUsuarioAnotado" />
+          </AssociationSet>
+          <AssociationSet Name="SubcategoriaCategoriaId" Association="Self.SubcategoriaCategoriaId">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="SubCategoria" EntitySet="SubCategoria" />
+          </AssociationSet>
+          <AssociationSet Name="localidadColaborador" Association="Self.localidadColaborador">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="Colaborador" EntitySet="Colaborador" />
+          </AssociationSet>
+          <AssociationSet Name="EventoEmpresaId" Association="Self.EventoEmpresaId">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="Evento" EntitySet="Evento" />
+          </AssociationSet>
+          <AssociationSet Name="localidadIdEmpresa" Association="Self.localidadIdEmpresa">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="EventoLocalidadId" Association="Self.EventoLocalidadId">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="Evento" EntitySet="Evento" />
+          </AssociationSet>
+          <AssociationSet Name="EventoNecesidadId" Association="Self.EventoNecesidadId">
+            <End Role="Evento" EntitySet="Evento" />
+            <End Role="Necesidad" EntitySet="Necesidad" />
+          </AssociationSet>
+          <AssociationSet Name="HabilidadNecesidadId" Association="Self.HabilidadNecesidadId">
+            <End Role="Habilidad" EntitySet="Habilidad" />
+            <End Role="Necesidad" EntitySet="Necesidad" />
+          </AssociationSet>
+          <AssociationSet Name="localidadId" Association="Self.localidadId">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="provinciaId" Association="Self.provinciaId">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="PartidoDepartamento" EntitySet="PartidoDepartamento" />
+          </AssociationSet>
+          <AssociationSet Name="EventoActividad" Association="Self.EventoActividad">
+            <End Role="Actividad" EntitySet="Actividad" />
+            <End Role="Evento" EntitySet="Evento" />
+          </AssociationSet>
+          <AssociationSet Name="HabilidadColaborador" Association="Self.HabilidadColaborador">
+            <End Role="Colaborador" EntitySet="Colaborador" />
+            <End Role="Habilidad" EntitySet="Habilidad" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VitaModelStoreContainer" CdmEntityContainer="VitaEntities">
+          <EntitySetMapping Name="Actividad">
+            <EntityTypeMapping TypeName="VitaModel.Actividad">
+              <MappingFragment StoreEntitySet="Actividad">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+                <ScalarProperty Name="edadMinima" ColumnName="edadMinima" />
+                <ScalarProperty Name="edadMaxima" ColumnName="edadMaxima" />
+                <ScalarProperty Name="fechaActividadComienzo" ColumnName="fechaActividadComienzo" />
+                <ScalarProperty Name="fechaActividadFin" ColumnName="fechaActividadFin" />
+                <ScalarProperty Name="cantidadDias" ColumnName="cantidadDias" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="cantidadParticipantes" ColumnName="cantidadParticipantes" />
+                <ScalarProperty Name="categoriaId" ColumnName="categoriaId" />
+                <ScalarProperty Name="subcategoriaId" ColumnName="subcategoriaId" />
+                <ScalarProperty Name="localidadId" ColumnName="localidadId" />
+                <ScalarProperty Name="empresaId" ColumnName="empresaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActividadUsuarioAnotado">
+            <EntityTypeMapping TypeName="VitaModel.ActividadUsuarioAnotado">
+              <MappingFragment StoreEntitySet="ActividadUsuarioAnotado">
+                <ScalarProperty Name="actividadId" ColumnName="actividadId" />
+                <ScalarProperty Name="usuarioId" ColumnName="usuarioId" />
+                <ScalarProperty Name="fechaAsociado" ColumnName="fechaAsociado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="VitaModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Colaborador">
+            <EntityTypeMapping TypeName="VitaModel.Colaborador">
+              <MappingFragment StoreEntitySet="Colaborador">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
+                <ScalarProperty Name="correoElectronico" ColumnName="correoElectronico" />
+                <ScalarProperty Name="localidadId" ColumnName="localidadId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresa">
+            <EntityTypeMapping TypeName="VitaModel.Empresa">
+              <MappingFragment StoreEntitySet="Empresa">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="correoElectronico" ColumnName="correoElectronico" />
+                <ScalarProperty Name="localidadId" ColumnName="localidadId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Evento">
+            <EntityTypeMapping TypeName="VitaModel.Evento">
+              <MappingFragment StoreEntitySet="Evento">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="empresaId" ColumnName="empresaId" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
+                <ScalarProperty Name="fechaDesde" ColumnName="fechaDesde" />
+                <ScalarProperty Name="cantidadParticipantes" ColumnName="cantidadParticipantes" />
+                <ScalarProperty Name="localidadId" ColumnName="localidadId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Habilidad">
+            <EntityTypeMapping TypeName="VitaModel.Habilidad">
+              <MappingFragment StoreEntitySet="Habilidad">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Localidad">
+            <EntityTypeMapping TypeName="VitaModel.Localidad">
+              <MappingFragment StoreEntitySet="Localidad">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Necesidad">
+            <EntityTypeMapping TypeName="VitaModel.Necesidad">
+              <MappingFragment StoreEntitySet="Necesidad">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="eventoId" ColumnName="eventoId" />
+                <ScalarProperty Name="habilidadId" ColumnName="habilidadId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartidoDepartamento">
+            <EntityTypeMapping TypeName="VitaModel.PartidoDepartamento">
+              <MappingFragment StoreEntitySet="PartidoDepartamento">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="provinciaId" ColumnName="provinciaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provincia">
+            <EntityTypeMapping TypeName="VitaModel.Provincia">
+              <MappingFragment StoreEntitySet="Provincia">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubCategoria">
+            <EntityTypeMapping TypeName="VitaModel.SubCategoria">
+              <MappingFragment StoreEntitySet="SubCategoria">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="categoriaId" ColumnName="categoriaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="VitaModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
+                <ScalarProperty Name="correoElectronico" ColumnName="correoElectronico" />
+                <ScalarProperty Name="localidadId" ColumnName="localidadId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="EventoActividad" TypeName="VitaModel.EventoActividad" StoreEntitySet="EventoActividad">
+            <EndProperty Name="Actividad">
+              <ScalarProperty Name="id" ColumnName="actividadId" />
+            </EndProperty>
+            <EndProperty Name="Evento">
+              <ScalarProperty Name="id" ColumnName="eventoId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="HabilidadColaborador" TypeName="VitaModel.HabilidadColaborador" StoreEntitySet="HabilidadColaborador">
+            <EndProperty Name="Colaborador">
+              <ScalarProperty Name="id" ColumnName="colaboradorId" />
+            </EndProperty>
+            <EndProperty Name="Habilidad">
+              <ScalarProperty Name="id" ColumnName="habilidadId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
