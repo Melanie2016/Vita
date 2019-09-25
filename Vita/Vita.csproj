@@ -166,6 +166,7 @@
     <Compile Include="Provincia.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Servicios\CategoriaServicio.cs" />
     <Compile Include="Servicios\EntidadServicio.cs" />
     <Compile Include="Servicios\UsuarioServicio.cs" />
     <Compile Include="SubCategoria.cs">

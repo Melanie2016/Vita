@@ -82,22 +82,22 @@
 
                             <!--Sexo-->
                             <!--<div class="col-2">
-                    <div class="input-group">
-                        <label class="label">Sexo</label>
-                        <div class="p-t-10">
-                            <label class="radio-container m-r-45">
-                                Masculino
-                                <input type="radio" checked="checked" name="gender">
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="radio-container">
-                                Femenino
-                                <input type="radio" name="gender">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                    </div>
-                </div> -->
+            <div class="input-group">
+                <label class="label">Sexo</label>
+                <div class="p-t-10">
+                    <label class="radio-container m-r-45">
+                        Masculino
+                        <input type="radio" checked="checked" name="gender">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="radio-container">
+                        Femenino
+                        <input type="radio" name="gender">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>
+        </div> -->
                         </div>
                         <div class="row row-space">
                             <div class="col-2">
@@ -116,10 +116,26 @@
                             </div>
                         </div>
                         <div class="input-group">
+                            <label class="label">Seleccione intereses</label>
+                            <div>
+                                <select class="selectpicker" id="categoriaId" onchange="changeOption(this)"
+                                        class="form-control" data-live-search="true" title="Seleccione intereses.." name="categoriaId">
+
+
+                                    @foreach (var item in ViewBag.ListaIntereses as MultiSelectList)
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+
+                                </select>
+                            </div>
+                        </div>
+
+                        @*<div class="input-group">
                             <label class="label"></label>
                             <div class="rs-select2 js-select-simple select--no-search">
-                                <select  name="actividades">
-                                    <!--Intereses-->
+                                <select name="actividades">
+                                  
                                     <option disabled="disabled" selected="selected">Intereses</option>
                                     <option>Actividades al aire libre</option>
                                     <option>Deportes</option>
@@ -128,7 +144,7 @@
                                 </select>
                                 <div class="select-dropdown"></div>
                             </div>
-                        </div>
+                        </div>*@
 
                         <div class="row row-space">
                             <div class="col-2">
@@ -199,45 +215,62 @@
                             </div>
                         </div>
                         <div class="input-group">
-                            <label class="label"></label>
-                            <div class="rs-select2 js-select-simple select--no-search">
-                                <select name="rubro">
-                                    <!--Rubro-->
-                                    <option disabled="disabled" selected="selected">Rubro</option>
-                                    <option>Actividades al aire libre</option>
-                                    <option>Deportes</option>
-                                    <option>Cursos y Talleres</option>
-                                    <option>Entretenimientos</option>
+                            <label class="label">Seleccione Rubro</label>
+                            <div>
+                                <select class="selectpicker" id="categoriaId" onchange="changeOption(this)"
+                                        class="form-control" data-live-search="true" title="Seleccione rubro.." name="categoriaIdEntidad">
+
+
+                                    @foreach (var item in ViewBag.ListaRubro as MultiSelectList)
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+
                                 </select>
-                                <div class="select-dropdown"></div>
                             </div>
-                        </div>
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <!--Usuario-->
-                                    <label class="label">Usuario</label>
-                                    <input class="input--style-4" type="text" name="usuarioEntidad">
+                          </div>
+                            <!--- <div class="input-group">
+                                <label class="label"></label>
+                                <div class="rs-select2 js-select-simple select--no-search">
+                                    <select name="rubro">
+
+                                        <option disabled="disabled" selected="selected">Rubro</option>
+                                        <option>Actividades al aire libre</option>
+                                        <option>Deportes</option>
+                                        <option>Cursos y Talleres</option>
+                                        <option>Entretenimientos</option>
+                                    </select>
+                                    <div class="select-dropdown"></div>
+                                </div>
+                                </div>-->
+
+
+                            <div class="row row-space">
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <!--Usuario-->
+                                        <label class="label">Usuario</label>
+                                        <input class="input--style-4" type="text" name="usuarioEntidad">
+                                    </div>
+                                </div>
+
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <!--Contraseña-->
+                                        <label class="label">Contraseña</label>
+                                        <input class="input--style-4" type="password" name="passwordEntidad">
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <!--Contraseña-->
-                                    <label class="label">Contraseña</label>
-                                    <input class="input--style-4" type="password" name="passwordEntidad">
-                                </div>
-                            </div>
                         </div>
 
-                    </div>
 
-
-                    <div class="p-t-15">
-                        <button class="btn btn--radius-2 btn--blue" type="submit">Aceptar</button>
-                        <a href="/Home/Index"><button class="btn btn--radius-2 btn--blue" type="button">Cancelar</button></a>
-                    </div>
-                </form>
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--blue" type="submit">Aceptar</button>
+                            <a href="/Home/Index"><button class="btn btn--radius-2 btn--blue" type="button">Cancelar</button></a>
+                        </div>
+</form>
             </div>
         </div>
     </div>

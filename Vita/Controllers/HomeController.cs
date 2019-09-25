@@ -11,6 +11,7 @@ namespace Vita.Controllers
     {
         private UsuarioServicio usuarioServicio = new UsuarioServicio();
         private EntidadServicio entidadServicio = new EntidadServicio();
+        private CategoriaServicio categoriaServicio = new CategoriaServicio();
         private VitaEntities myDbContext = new VitaEntities();
         public ActionResult Index()
         {
@@ -20,6 +21,13 @@ namespace Vita.Controllers
         [HttpGet]
         public ActionResult Registro()
         {
+          
+            List<Categoria> rubros = categoriaServicio.GetAllCategorias();
+            ViewBag.ListaRubro = new MultiSelectList(rubros, "id", "descripcion");
+
+            List<Categoria> intereses = categoriaServicio.GetAllCategorias();
+            ViewBag.ListaIntereses = new MultiSelectList(intereses, "id", "descripcion");
+
 
             return View();
         }
@@ -30,13 +38,15 @@ namespace Vita.Controllers
 
             if (usuario.apellido != null && usuario.nombre != null) //buscar una forma mejor de validar
             {
-                //no trae celular, localidadId,categoria, muestra la contrasenia en plano
+                //no trae celular, localidadId, muestra la contrasenia en plano
+                
                 usuarioServicio.CrearUsuario(usuario);
                 return RedirectToAction("PerfilUsuario", "Home");
             }
             else
             {
-                //no trae celular, telefono, categoriaID, localidadId, muestra la contrasenia en plano
+                //no trae localidadId, muestra la contrasenia en plano
+                
                 entidadServicio.CrearEmpresa(entidad);
                 return RedirectToAction("PerfilEntidad", "Home");
 
