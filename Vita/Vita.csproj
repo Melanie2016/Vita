@@ -126,66 +126,68 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actividad.cs">
-      <DependentUpon>VitaModel.tt</DependentUpon>
+      <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ActividadUsuarioAnotado.cs">
-      <DependentUpon>VitaModel.tt</DependentUpon>
+      <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Categoria.cs">
-      <DependentUpon>VitaModel.tt</DependentUpon>
+      <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Colaborador.cs">
-      <DependentUpon>VitaModel.tt</DependentUpon>
+      <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Empresa.cs">
-      <DependentUpon>VitaModel.tt</DependentUpon>
+    <Compile Include="Entidad.cs">
+      <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Evento.cs">
-      <DependentUpon>VitaModel.tt</DependentUpon>
+      <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Habilidad.cs">
-      <DependentUpon>VitaModel.tt</DependentUpon>
+      <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Localidad.cs">
-      <DependentUpon>VitaModel.tt</DependentUpon>
+      <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Necesidad.cs">
-      <DependentUpon>VitaModel.tt</DependentUpon>
+      <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="PartidoDepartamento.cs">
-      <DependentUpon>VitaModel.tt</DependentUpon>
+      <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provincia.cs">
-      <DependentUpon>VitaModel.tt</DependentUpon>
+      <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Servicios\EntidadServicio.cs" />
+    <Compile Include="Servicios\UsuarioServicio.cs" />
     <Compile Include="SubCategoria.cs">
-      <DependentUpon>VitaModel.tt</DependentUpon>
+      <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Usuario.cs">
-      <DependentUpon>VitaModel.tt</DependentUpon>
+      <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="VitaModel.Context.cs">
+    <Compile Include="VitaEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>VitaModel.Context.tt</DependentUpon>
+      <DependentUpon>VitaEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="VitaModel.cs">
+    <Compile Include="VitaEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>VitaModel.tt</DependentUpon>
+      <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="VitaModel.Designer.cs">
+    <Compile Include="VitaEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>VitaModel.edmx</DependentUpon>
+      <DependentUpon>VitaEntities.edmx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -241,15 +243,15 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="VitaModel.Context.tt">
+    <Content Include="VitaEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>VitaModel.Context.cs</LastGenOutput>
-      <DependentUpon>VitaModel.edmx</DependentUpon>
+      <DependentUpon>VitaEntities.edmx</DependentUpon>
+      <LastGenOutput>VitaEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="VitaModel.tt">
+    <Content Include="VitaEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>VitaModel.edmx</DependentUpon>
-      <LastGenOutput>VitaModel.cs</LastGenOutput>
+      <DependentUpon>VitaEntities.edmx</DependentUpon>
+      <LastGenOutput>VitaEntities.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -279,12 +281,12 @@
     <Content Include="Views\Shared\_LayoutPerfil.cshtml" />
     <Content Include="Views\Home\Muro.cshtml" />
     <Content Include="Views\Home\PerfilEntidad.cshtml" />
-    <EntityDeploy Include="VitaModel.edmx">
+    <EntityDeploy Include="VitaEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>VitaModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>VitaEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="VitaModel.edmx.diagram">
-      <DependentUpon>VitaModel.edmx</DependentUpon>
+    <Content Include="VitaEntities.edmx.diagram">
+      <DependentUpon>VitaEntities.edmx</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>

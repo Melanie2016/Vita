@@ -24,11 +24,16 @@ namespace Vita
         public string nombre { get; set; }
         public string apellido { get; set; }
         public Nullable<System.DateTime> fechaNacimiento { get; set; }
-        public string correoElectronico { get; set; }
+        public string email { get; set; }
         public Nullable<int> localidadId { get; set; }
+        public Nullable<int> celular { get; set; }
+        public string usuario1 { get; set; }
+        public string pass { get; set; }
+        public Nullable<int> categoriaId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActividadUsuarioAnotado> ActividadUsuarioAnotado { get; set; }
+        public virtual Categoria Categoria { get; set; }
         public virtual Localidad Localidad { get; set; }
     }
 }

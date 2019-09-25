@@ -17,8 +17,10 @@
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
             <div class="card-body">
-                <form method="POST">
+                <form action="/Home/Registrar" method="Post">
                     <h2 id="tipo_usuario" class="form-title">¿Qué tipo de persona eres?</h2>
+
+
 
                     <!--Tipo de persona-->
                     <center>
@@ -47,14 +49,14 @@
                                 <div class="input-group">
                                     <!--Nombre-->
                                     <label class="label">Nombre</label>
-                                    <input class="input--style-4" type="text" name="nombre_per">
+                                    <input class="input--style-4" type="text" name="nombre">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Apellido-->
                                     <label class="label">Apellido</label>
-                                    <input class="input--style-4" type="text" name="apellido_per">
+                                    <input class="input--style-4" type="text" name="apellido">
                                 </div>
                             </div>
                         </div>
@@ -64,7 +66,7 @@
                                     <!--Fecha de nacimiento-->
                                     <label class="label">Fecha de nacimiento</label>
                                     <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="text" name="birthday">
+                                        <input class="input--style-4 js-datepicker" type="text" name="fechaNacimiento">
                                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                     </div>
                                 </div>
@@ -74,28 +76,28 @@
                                 <div class="input-group">
                                     <!--Email-->
                                     <label class="label">Email</label>
-                                    <input class="input--style-4" type="email" name="email_per">
+                                    <input class="input--style-4" type="email" name="email">
                                 </div>
                             </div>
 
                             <!--Sexo-->
                             <!--<div class="col-2">
-                <div class="input-group">
-                    <label class="label">Sexo</label>
-                    <div class="p-t-10">
-                        <label class="radio-container m-r-45">
-                            Masculino
-                            <input type="radio" checked="checked" name="gender">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="radio-container">
-                            Femenino
-                            <input type="radio" name="gender">
-                            <span class="checkmark"></span>
-                        </label>
+                    <div class="input-group">
+                        <label class="label">Sexo</label>
+                        <div class="p-t-10">
+                            <label class="radio-container m-r-45">
+                                Masculino
+                                <input type="radio" checked="checked" name="gender">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="radio-container">
+                                Femenino
+                                <input type="radio" name="gender">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
                     </div>
-                </div>
-            </div> -->
+                </div> -->
                         </div>
                         <div class="row row-space">
                             <div class="col-2">
@@ -109,14 +111,14 @@
                                 <div class="input-group">
                                     <!--Celular-->
                                     <label class="label">Celular</label>
-                                    <input class="input--style-4" type="text" name="cel_per">
+                                    <input class="input--style-4" type="number" name="celular">
                                 </div>
                             </div>
                         </div>
                         <div class="input-group">
                             <label class="label"></label>
                             <div class="rs-select2 js-select-simple select--no-search">
-                                <select name="actividades">
+                                <select  name="actividades">
                                     <!--Intereses-->
                                     <option disabled="disabled" selected="selected">Intereses</option>
                                     <option>Actividades al aire libre</option>
@@ -133,7 +135,7 @@
                                 <div class="input-group">
                                     <!--Usuario-->
                                     <label class="label">Usuario</label>
-                                    <input class="input--style-4" type="text" name="user">
+                                    <input class="input--style-4" type="text" name="usuario1">
                                 </div>
                             </div>
 
@@ -153,14 +155,14 @@
                                 <div class="input-group">
                                     <!--Nombre de la empresa-->
                                     <label class="label">Nombre</label>
-                                    <input class="input--style-4" type="text" name="nombre_emp">
+                                    <input class="input--style-4" type="text" name="nombreEntidad">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Email de la empresa-->
                                     <label class="label">Email</label>
-                                    <input class="input--style-4" type="text" name="email_emp">
+                                    <input class="input--style-4" type="text" name="emailEntidad">
                                 </div>
                             </div>
                         </div>
@@ -176,7 +178,7 @@
                                 <div class="input-group">
                                     <!--Telefono de la empresa-->
                                     <label class="label">Teléfono</label>
-                                    <input class="input--style-4" type="text" name="tel_emp">
+                                    <input class="input--style-4" type="number" name="telefonoEntidad">
                                 </div>
                             </div>
                         </div>
@@ -185,14 +187,14 @@
                                 <div class="input-group">
                                     <!--Celular de la empresa-->
                                     <label class="label">Celular</label>
-                                    <input class="input--style-4" type="text" name="cel_emp">
+                                    <input class="input--style-4" type="number" name="celularEntidad">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Sitio web personal de la empresa-->
                                     <label class="label">Sitio web personal</label>
-                                    <input class="input--style-4" type="text" name="web_emp">
+                                    <input class="input--style-4" type="text" name="sitioWeb">
                                 </div>
                             </div>
                         </div>
@@ -215,7 +217,7 @@
                                 <div class="input-group">
                                     <!--Usuario-->
                                     <label class="label">Usuario</label>
-                                    <input class="input--style-4" type="text" name="user_emp">
+                                    <input class="input--style-4" type="text" name="usuarioEntidad">
                                 </div>
                             </div>
 
@@ -223,7 +225,7 @@
                                 <div class="input-group">
                                     <!--Contraseña-->
                                     <label class="label">Contraseña</label>
-                                    <input class="input--style-4" type="password" name="pass_empr">
+                                    <input class="input--style-4" type="password" name="passwordEntidad">
                                 </div>
                             </div>
                         </div>

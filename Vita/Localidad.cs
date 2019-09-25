@@ -19,7 +19,7 @@ namespace Vita
         {
             this.Actividad = new HashSet<Actividad>();
             this.Colaborador = new HashSet<Colaborador>();
-            this.Empresa = new HashSet<Empresa>();
+            this.Entidad = new HashSet<Entidad>();
             this.Evento = new HashSet<Evento>();
             this.Usuario = new HashSet<Usuario>();
         }
@@ -32,7 +32,7 @@ namespace Vita
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Colaborador> Colaborador { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Empresa> Empresa { get; set; }
+        public virtual ICollection<Entidad> Entidad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Evento> Evento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

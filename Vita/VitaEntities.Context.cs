@@ -29,7 +29,7 @@ namespace Vita
         public virtual DbSet<ActividadUsuarioAnotado> ActividadUsuarioAnotado { get; set; }
         public virtual DbSet<Categoria> Categoria { get; set; }
         public virtual DbSet<Colaborador> Colaborador { get; set; }
-        public virtual DbSet<Empresa> Empresa { get; set; }
+        public virtual DbSet<Entidad> Entidad { get; set; }
         public virtual DbSet<Evento> Evento { get; set; }
         public virtual DbSet<Habilidad> Habilidad { get; set; }
         public virtual DbSet<Localidad> Localidad { get; set; }

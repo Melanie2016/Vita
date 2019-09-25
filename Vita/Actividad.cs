@@ -34,9 +34,9 @@ namespace Vita
         public Nullable<int> categoriaId { get; set; }
         public Nullable<int> subcategoriaId { get; set; }
         public Nullable<int> localidadId { get; set; }
-        public Nullable<int> empresaId { get; set; }
+        public Nullable<int> entidadId { get; set; }
     
-        public virtual Empresa Empresa { get; set; }
+        public virtual Entidad Entidad { get; set; }
         public virtual SubCategoria SubCategoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActividadUsuarioAnotado> ActividadUsuarioAnotado { get; set; }

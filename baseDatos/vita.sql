@@ -6,55 +6,72 @@ USE Vita
 GO
 
 create table Localidad(
-id int primary key,
+id int identity(1,1) primary key,
 descripcion varchar(100)
 );
 
 create table Provincia(
-id int primary key,
+id int  identity(1,1) primary key,
 descripcion varchar(100)
 
 );
 
+
+create Table Categoria(
+id int identity(1,1) primary key,
+descripcion varchar(100)
+);
+
+
 create table PartidoDepartamento(
-id int primary key,
+id int identity(1,1) primary key,
 descripcion varchar(100),
 provinciaId int, 
 CONSTRAINT provinciaId FOREIGN KEY(provinciaId)
 REFERENCES Provincia (id)
 );
+create Table Entidad(
+id int identity(1,1) primary key,
+nombreEntidad varchar(50),
+emailEntidad varchar(100),
+telefonoEntidad int,
+celularEntidad int,
+categoriaIdEntidad int,
+localidadIdEntidad int,
+usuarioEntidad varchar(100),
+passwordEntidad varchar(10),
+sitioWeb varchar(200)
+CONSTRAINT localidadIdEntidad FOREIGN KEY(localidadIdEntidad)
+REFERENCES Localidad (id),
+CONSTRAINT categoriaIdEmpresa FOREIGN KEY(categoriaIdEntidad)
+REFERENCES Categoria (id),
+
+);
 create Table Usuario(
-id int primary key,
+id int identity(1,1) primary key,
 nombre varchar(50),
 apellido varchar(50),
 fechaNacimiento Date, 
-correoElectronico varchar(100),
+email varchar(100),
 localidadId int,
-CONSTRAINT localidadId FOREIGN KEY(localidadId)
-REFERENCES Localidad (id)
+celular int,
+usuario varchar(100),
+pass varchar(10),
+categoriaId int,
+CONSTRAINT localidadUsuarioId FOREIGN KEY(localidadId)
+REFERENCES Localidad (id),
+CONSTRAINT categoriaUsuarioId FOREIGN KEY(categoriaId)
+REFERENCES Categoria (id)
 );
 
-create Table Empresa(
-id int primary key,
-nombre varchar(50),
-correoElectronico varchar(100),
-localidadId int,
-CONSTRAINT localidadIdEmpresa FOREIGN KEY(localidadId)
-REFERENCES Localidad (id)
-);
-
-create Table Categoria(
-id int primary key,
-descripcion varchar(100)
-);
 
 create Table Habilidad(
-id int primary key,
+id int identity(1,1) primary key,
 descripcion varchar(100)
 );
 
 create Table Colaborador(
-id int primary key,
+id int identity(1,1) primary key,
 nombre varchar(50),
 apellido varchar(50),
 fechaNacimiento Date, 
@@ -75,21 +92,21 @@ primary key(habilidadId, colaboradorId)
 );
 
 create Table Evento(
-id int primary key,
+id int identity(1,1) primary key,
 descripcion varchar(200),
-empresaId int,
+entidadId int,
 precio int,
 fechaInicio date, 
 fechaDesde date,
 cantidadParticipantes int, 
 localidadId int,
-CONSTRAINT EventoEmpresaId FOREIGN KEY(empresaId)
-REFERENCES Empresa (id),
+CONSTRAINT EventoEmpresaId FOREIGN KEY(entidadId)
+REFERENCES Entidad (id),
 CONSTRAINT EventoLocalidadId FOREIGN KEY(localidadId)
 REFERENCES Localidad (id)
 );
 create Table Necesidad(
-id int,
+id int identity(1,1),
 descripcion varchar(200),
 eventoId int,
 habilidadId int,
@@ -100,14 +117,14 @@ REFERENCES Habilidad (id),
 primary key (id,eventoId,habilidadId)
 );
 CREATE Table SubCategoria(
-id int primary key,
+id int identity(1,1) primary key,
 descripcion varchar(200),
 categoriaId int,
 CONSTRAINT SubcategoriaCategoriaId FOREIGN KEY(categoriaId)
 REFERENCES Categoria (id));
 
 create Table Actividad(
-id int primary key,
+id int identity(1,1) primary key,
 descripcion varchar(200),
 fechaCreacion date,
 edadMinima int,
@@ -120,13 +137,13 @@ cantidadParticipantes int,
 categoriaId int,
 subcategoriaId int,
 localidadId int,
-empresaId int,
+entidadId int,
 CONSTRAINT CategoriaActividadId FOREIGN KEY(categoriaId)
 REFERENCES Categoria (id),
 CONSTRAINT LocalidadActividadId FOREIGN KEY(localidadId)
 REFERENCES Localidad (id),
-CONSTRAINT ActividadEmpresaId FOREIGN KEY(empresaId)
-REFERENCES Empresa (id),
+CONSTRAINT ActividadEmpresaId FOREIGN KEY(entidadId)
+REFERENCES Entidad (id),
 CONSTRAINT ActividadSubcategoriaId FOREIGN KEY(subcategoriaId)
 REFERENCES SubCategoria (id)
 );

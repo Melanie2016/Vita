@@ -23,14 +23,14 @@ namespace Vita
     
         public int id { get; set; }
         public string descripcion { get; set; }
-        public Nullable<int> empresaId { get; set; }
+        public Nullable<int> entidadId { get; set; }
         public Nullable<int> precio { get; set; }
         public Nullable<System.DateTime> fechaInicio { get; set; }
         public Nullable<System.DateTime> fechaDesde { get; set; }
         public Nullable<int> cantidadParticipantes { get; set; }
         public Nullable<int> localidadId { get; set; }
     
-        public virtual Empresa Empresa { get; set; }
+        public virtual Entidad Entidad { get; set; }
         public virtual Localidad Localidad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Necesidad> Necesidad { get; set; }
