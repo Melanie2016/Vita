@@ -22,12 +22,12 @@ namespace Vita.Controllers
         public ActionResult Registro()
         {
           
-            List<Categoria> rubros = categoriaServicio.GetAllCategorias();
+            /*List<Categoria> rubros = categoriaServicio.GetAllCategorias();
             ViewBag.ListaRubro = new MultiSelectList(rubros, "id", "descripcion");
 
             List<Categoria> intereses = categoriaServicio.GetAllCategorias();
             ViewBag.ListaIntereses = new MultiSelectList(intereses, "id", "descripcion");
-
+            */
 
             return View();
         }

@@ -13,7 +13,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 
-<div class="page-wrapper  font-poppins" style="background-image: url('../../Content/images/bg-01.jpg');">
+<div class="page-wrapper  font-poppins">
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
             <div class="card-body">
@@ -29,7 +29,7 @@
                             <label for="newbie">Usuario</label>
 
                             <input type="radio" name="member_level" value="average" id="average" />
-                            <label for="average">Empresa</label>
+                            <label for="average">Entidad</label>
                         </div>
                     </center>
 
@@ -115,28 +115,28 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="input-group">
-                            <label class="label">Seleccione intereses</label>
-                            <div>
-                                <select class="selectpicker" id="categoriaId" onchange="changeOption(this)"
-                                        class="form-control" data-live-search="true" title="Seleccione intereses.." name="categoriaId">
 
-
-                                    @foreach (var item in ViewBag.ListaIntereses as MultiSelectList)
-                                    {
-                                        <option value="@item.Value">@item.Text</option>
-                                    }
-
-                                </select>
-                            </div>
-                        </div>
-
+                        <!-- Intereses-->
                         @*<div class="input-group">
-                            <label class="label"></label>
-                            <div class="rs-select2 js-select-simple select--no-search">
-                                <select name="actividades">
-                                  
-                                    <option disabled="disabled" selected="selected">Intereses</option>
+            <label class="label">Seleccione intereses</label>
+            <div>
+                <select class="selectpicker" id="categoriaId" onchange="changeOption(this)"
+                        class="form-control" data-live-search="true" title="Seleccione intereses.." name="categoriaId">
+
+
+                    @foreach (var item in ViewBag.ListaIntereses as MultiSelectList)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+
+                </select>
+            </div>
+        </div>*@
+
+                        <div class="input-group">
+                            <label class="label">Intereses</label>
+                            <div class="rs-select2 js-select-simple select--no-search" id="multi">
+                                <select multiple name="intereses">
                                     <option>Actividades al aire libre</option>
                                     <option>Deportes</option>
                                     <option>Cursos y Talleres</option>
@@ -144,7 +144,22 @@
                                 </select>
                                 <div class="select-dropdown"></div>
                             </div>
-                        </div>*@
+                        </div>
+
+                        <!--Segmento-->
+
+                        <div class="input-group">
+                            <label class="label">¿A qué segmento perteneces?</label>
+                            <div class="rs-select2 js-select-simple select--no-search">
+                                <select name="segmento">
+                                    <option>Niños</option>
+                                    <option>Jóvenes</option>
+                                    <option>Adultos</option>
+                                    <option>Adultos mayores</option>
+                                </select>
+                                <div class="select-dropdown"></div>
+                            </div>
+                        </div>
 
                         <div class="row row-space">
                             <div class="col-2">
@@ -214,7 +229,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="input-group">
+                        @*<div class="input-group">
                             <label class="label">Seleccione Rubro</label>
                             <div>
                                 <select class="selectpicker" id="categoriaId" onchange="changeOption(this)"
@@ -228,13 +243,11 @@
 
                                 </select>
                             </div>
-                          </div>
-                            <!--- <div class="input-group">
-                                <label class="label"></label>
+                          </div>*@
+                           <div class="input-group">
+                                <label class="label">Rubro</label>
                                 <div class="rs-select2 js-select-simple select--no-search">
                                     <select name="rubro">
-
-                                        <option disabled="disabled" selected="selected">Rubro</option>
                                         <option>Actividades al aire libre</option>
                                         <option>Deportes</option>
                                         <option>Cursos y Talleres</option>
@@ -242,8 +255,7 @@
                                     </select>
                                     <div class="select-dropdown"></div>
                                 </div>
-                                </div>-->
-
+                           </div>
 
                             <div class="row row-space">
                                 <div class="col-2">
