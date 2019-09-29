@@ -23,6 +23,7 @@
   flex-wrap: wrap;
 }
 
+
 .row-space {
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
@@ -126,6 +127,7 @@ button {
   background-position: center;
   background-size: cover;
   padding: 15px;
+  background: #e9faff;
 }
 
 body {
@@ -291,7 +293,7 @@ h6 {
 }
 
 .btn--blue {
-  background: #4272d7;
+  background: #6c63ff;
 }
 
 .btn--blue:hover {
@@ -757,4 +759,7 @@ h2#tipo_usuario {
 }
 .avatar-wrapper .upload-button:hover .fa-arrow-circle-up {
   opacity: 0.9;
+}
+div #multi {
+
 }
