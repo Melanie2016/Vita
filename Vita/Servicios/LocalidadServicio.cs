@@ -5,17 +5,14 @@ using System.Web;
 
 namespace Vita.Servicios
 {
-    public class CategoriaServicio
+    public class LocalidadServicio
     {
         private VitaEntities myDbContext = new VitaEntities();
 
-        public List<Categoria> GetAllCategorias()
+        public List<Localidad> GetAllLocalidades()
         {
-            return myDbContext.Categoria.OrderBy(x=>x.Id).ToList();
-        
-        }
+            return myDbContext.Localidad.OrderBy(x => x.Descripcion).ToList();
 
+        }
     }
-    
-      
 }

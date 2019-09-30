@@ -12,23 +12,18 @@ namespace Vita
     using System;
     using System.Collections.Generic;
     
-    public partial class Colaborador
+    public partial class Rol
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Colaborador()
+        public Rol()
         {
-            this.Habilidad = new HashSet<Habilidad>();
+            this.Usuario = new HashSet<Usuario>();
         }
     
-        public int id { get; set; }
-        public string nombre { get; set; }
-        public string apellido { get; set; }
-        public Nullable<System.DateTime> fechaNacimiento { get; set; }
-        public string correoElectronico { get; set; }
-        public Nullable<int> localidadId { get; set; }
+        public int Id { get; set; }
+        public string Descripcion { get; set; }
     
-        public virtual Localidad Localidad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Habilidad> Habilidad { get; set; }
+        public virtual ICollection<Usuario> Usuario { get; set; }
     }
 }

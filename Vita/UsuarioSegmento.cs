@@ -12,14 +12,13 @@ namespace Vita
     using System;
     using System.Collections.Generic;
     
-    public partial class Necesidad
+    public partial class UsuarioSegmento
     {
-        public int id { get; set; }
-        public string descripcion { get; set; }
-        public int eventoId { get; set; }
-        public int habilidadId { get; set; }
+        public int UsuarioId { get; set; }
+        public int SegmentoId { get; set; }
+        public Nullable<System.DateTime> FechaCreacion { get; set; }
     
-        public virtual Evento Evento { get; set; }
-        public virtual Habilidad Habilidad { get; set; }
+        public virtual Segmento Segmento { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }
