@@ -1,0 +1,101 @@
+﻿/* =========
+   Get Fonts */
+@import url(https://fonts.googleapis.com/css?family=Quicksand);
+/* ================
+   Assign Variables */
+/* ===========================
+   Setup Mixins/Helper Classes */
+.clearfix:after, .calendar ol:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+/* ==========
+   Setup Page */
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+
+/* ================
+   Calendar Styling */
+.calendar {
+  background: white;
+  padding: 3em;
+  border-radius: 10px;
+}
+.calendar .month {
+  margin-top: 0;
+  font-weight: normal;
+  font-size: 3em;
+  color: #6EB590;
+}
+.calendar ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.calendar ol li {
+  float: left;
+  width: 14.28571%;
+}
+.calendar .day-names {
+  border-bottom: 1px solid #eee;
+}
+.calendar .day-names li {
+  text-transform: uppercase;
+  margin-bottom: .5em;
+}
+.calendar .days li {
+  border-bottom: 1px solid #eee;
+  min-height: 8em;
+}
+.calendar .days li .date {
+  margin: .5em 0;
+}
+.calendar .days li .event {
+  background: #6EB590;
+  font-size: .75em;
+  padding: 0 .75em;
+  line-height: 2em;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 1em;
+  margin-bottom: 1px;
+}
+.calendar .days li .event.span-2 {
+  width: 200%;
+}
+.calendar .days li .event.begin {
+  border-radius: 1em 0 0 1em;
+}
+.calendar .days li .event.end {
+  border-radius: 0 1em 1em 0;
+}
+.calendar .days li .event.all-day {
+  background: #9987B5;
+}
+.calendar .days li .event.clear {
+  background: none;
+}
+.calendar .days li:nth-child(n+29) {
+  border-bottom: none;
+}
+.calendar .days li.outside .date {
+  color: #ddd;
+}
+
+.event {
+    cursor: url(puntero.svg), url(puntero.cur), pointer
+}
+
+.btn btn-secondary{
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
