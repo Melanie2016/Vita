@@ -281,8 +281,6 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\PerfilUsuario.cshtml" />
-    <Content Include="Views\Shared\_LayoutPerfil.cshtml" />
-    <Content Include="Views\Home\Muro.cshtml" />
     <Content Include="Views\Home\PerfilEntidad.cshtml" />
     <EntityDeploy Include="VitaEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -294,6 +292,8 @@
     <Content Include="Views\Home\Eventos.cshtml" />
     <Content Include="Views\Home\FichaEvento.cshtml" />
     <Content Include="Views\Home\Calendario.cshtml" />
+    <Content Include="Views\Shared\_LayoutPerfilUsuario.cshtml" />
+    <Content Include="Views\Shared\_LayoutPerfilEntidad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

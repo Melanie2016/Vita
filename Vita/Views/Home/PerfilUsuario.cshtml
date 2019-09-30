@@ -1,79 +1,9 @@
 ﻿
 @{
     ViewBag.Title = "Perfil";
-    Layout = "~/Views/Shared/_LayoutPerfil.cshtml";
+    Layout = "~/Views/Shared/_LayoutPerfilUsuario.cshtml";
 
 }
-
-<!--**********************************
-    Sidebar start
-***********************************-->
-@section list {
-<div class="nk-sidebar">
-    <div class="nk-nav-scroll">
-        <ul class="metismenu" id="menu">
-            <li class="nav-label">Dashboard</li>
-            <li>
-                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="icon-puzzle menu-icon"></i><span class="nav-text">Actividades</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="/Home/Muro">Buscar actividades</a></li>
-                    <li><a href="/Home/Muro">Sugerencias</a></li>
-                    <li><a href="/Home/Actividades">Agenda</a></li>
-                           
-                </ul>
-            </li>
-            <li>
-                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="icon-speedometer   menu-icon"></i><span class="nav-text">Eventos</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="/Home/Muro">Buscar actividades</a></li>
-                    <li><a href="/Home/Muro">Sugerencias</a></li>
-                    <li><a href="/Home/Muro">Agenda</a></li>
-                           
-                </ul>
-            </li>
-            <li class="mega-menu mega-menu-sm">
-                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="icon-calender menu-icon"></i><span class="nav-text">Calendario</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="/Home/Calendario">Ver fechas</a></li>
-                </ul>
-            </li>
-            <li class="nav-label">Configuracion</li>
-            <li>
-                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="icon-user menu-icon"></i> <span class="nav-text">Perfil</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="./email-inbox.html">Modificar perfil</a></li>
-                    <li><a href="./email-inbox.html">Cambiar seccion</a></li>
-            
-                </ul>
-            </li>
-
-            <li class="nav-label">Apps</li>
-            <li>
-                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="icon-envelope menu-icon"></i> <span class="nav-text">Chat</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="./email-inbox.html">Grupal</a></li>
-                    <li><a href="./email-read.html">Individual</a></li>
-                </ul>
-            </li>
-                    
-                    
-        </ul>
-    </div>
-</div>
-}
-<!--**********************************
-    Sidebar end
-***********************************-->
 
 
 <div class="container-fluid">
@@ -82,29 +12,27 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row mb-5">
-
-                                    <div class="col-12 text-center">
-                                         <img src="~/Content/images/h.png" width="150" height="150" alt="">
-                                    </div>
-                                    <br><br>
-                                    <div class="col">
-                                        <div class="card card-profile text-center">
-                                            <span class="mb-1 text-primary"><i class="icon-people"></i></span>
-                                            <h3 class="mb-0">263</h3>
-                                            <p class="text-muted px-4">Amigos</p>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="card card-profile text-center">
-                                            <span class="mb-1 text-warning"><i class="icon-user-follow"></i></span>
-                                        
-                                            <p class="text-muted">Agregar amigo</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 text-center">
-                                        <button class="btn btn-danger px-5">MODIFICAR</button>
-                                    </div>
-                                </div>
+                        <div class="col-12 text-center">
+                            <img src="~/Content/images/h.png" width="150" height="150" alt="">
+                        </div>
+                        <br><br>
+                        <div class="col">
+                            <div class="card card-profile text-center">
+                                <span class="mb-1 text-primary"><i class="icon-people"></i></span>
+                                <h3 class="mb-0">263</h3>
+                                <p class="text-muted px-4">Amigos</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card card-profile text-center">
+                                <span class="mb-1 text-warning"><i class="icon-user-follow"></i></span>
+                                <p class="text-muted">Agregar amigo</p>
+                            </div>
+                        </div>
+                        <div class="col-12 text-center">
+                            <button class="btn btn-danger px-5">MODIFICAR</button>
+                        </div>
+                    </div>
 
                     <h4>About Me</h4>
                     <p class="text-muted">Hi, I'm Pikamy, has been the industry standard dummy text ever since the 1500s.</p>
@@ -141,9 +69,7 @@
                                     <!--Table-->
                                     <table id="tablePreview" class="table">
                                     <!--Table head-->
-                                      <thead>
-                                        
-                                      </thead>
+                                      <thead> </thead>
                                       <!--Table head-->
                                       <!--Table body-->
                                       <tbody>

@@ -65,7 +65,7 @@ namespace Vita.Controllers
         {
             return View();
         }
-        public ActionResult Muro()
+        public ActionResult Sugerencias()
         {
             return View();
         }
