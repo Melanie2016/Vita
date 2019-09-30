@@ -49,9 +49,9 @@ namespace Vita.Servicios
 
         public Usuario VerificarExistenciaDelUsuario(Usuario u)
         {
-            if (u.Dni !=null)//en caso de ser un usuario
+            if (u.Dni.HasValue)//en caso de ser un usuario
             {
-                var user = myDbContext.Usuario.Where(us => us.Dni.Equals(u.Dni)).FirstOrDefault();
+                var user = myDbContext.Usuario.Where(us => us.Dni.HasValue.Equals(u.Dni.HasValue)).FirstOrDefault();
                 return user;
 
             }
