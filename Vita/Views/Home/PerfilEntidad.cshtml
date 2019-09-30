@@ -7,87 +7,93 @@
 
 
 <script>
-window.onload = function () {
+    window.onload = function () {
 
-var options = {
-    exportEnabled: true,
-    animationEnabled: true,
-    title: {
-        text: "Popularidad"
-    },
-    data: [
-    {
-        type: "splineArea",
-        dataPoints: [
-            { y: 10 },
-            { y: 6 },
-            { y: 14 },
-            { y: 12 },
-            { y: 19 },
-            { y: 14 },
-            { y: 05 },
-            { y: 10 },
-            { y: 22 }
-        ]
+        var options = {
+            exportEnabled: true,
+            animationEnabled: true,
+            title: {
+                text: "Popularidad"
+            },
+            data: [
+                {
+                    type: "splineArea",
+                    dataPoints: [
+                        { y: 10 },
+                        { y: 6 },
+                        { y: 14 },
+                        { y: 12 },
+                        { y: 19 },
+                        { y: 14 },
+                        { y: 05 },
+                        { y: 10 },
+                        { y: 22 }
+                    ]
+                }
+            ]
+        };
+        $("#chartContainer").CanvasJSChart(options);
+
     }
-    ]
-};
-$("#chartContainer").CanvasJSChart(options);
-
-}
 </script>
 
 
+<link href="~/Content/css/FotoPerfil.css" rel="stylesheet" media="all">
 
-<div class="row page-titles mx-0">
- </div>
-    <!-- row -->
+<!-- row -->
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-8 col-xl-3">
             <div class="card">
-                            <div class="card-body">
-                                
-                                <div class="row mb-5">
+                <div class="card-body">
 
-                                    <div class="col-12 text-center">
-                                         <img src="~/Content/images/h.png" width="150" height="150" alt="">
-                                    </div>
-                                    <br><br>
-                                    <div class="col">
-                                        <div class="card card-profile text-center">
-                                            <span class="mb-1 text-primary"><i class="icon-people"></i></span>
-                                            <h3 class="mb-0">263</h3>
-                                            <p class="text-muted px-4">Amigos</p>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="card card-profile text-center">
-                                            <span class="mb-1 text-warning"><i class="icon-user-follow"></i></span>
-                                        
-                                            <p class="text-muted">Agregar amigo</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 text-center">
-                                        <button class="btn btn-danger px-5">Follow Now</button>
-                                    </div>
-                                </div>
+                    <div class="row mb-5">
 
-                                <h4>About Me</h4>
-                                <p class="text-muted">Hi, I'm Pikamy, has been the industry standard dummy text ever since the 1500s.</p>
-                                <ul class="card-profile__info">
-                                    <li class="mb-1"><strong class="text-dark mr-4">Mobile</strong> <span>01793931609</span></li>
-                                    <li><strong class="text-dark mr-4">Email</strong> <span>name@domain.com</span></li>
-                                </ul>
+                        <div class="col-12 text-center">
+                            <!--Foto de perfil-->
+                            <div class="avatar-wrapper">
+                                <img class="profile-pic" src="~/Content/images/abuelos.jpg" width="150" height="150" alt="">
+                                <input class="file-upload" type="file" accept="image/*" />
                             </div>
-            </div>  
+                            <!---->
+                        </div>
+                        <br><br>
+                        <div class="col">
+                            <div class="card card-profile text-center">
+                                <span class="mb-1 text-primary"><i class="icon-people"></i></span>
+                                <h3 class="mb-0">100</h3>
+                                <p class="text-muted px-4">Amigos</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card card-profile text-center">
+                                <span class="mb-1 text-warning"><i class="icon-user-follow"></i></span>
+
+                                <p class="text-muted">Agregar amigo</p>
+                            </div>
+                        </div>
+                        <div class="col-12 text-center">
+                            <button class="btn btn-danger px-5 upload-button">CAMBIAR FOTO</button>
+                        </div>
+                    </div>
+
+                    <h4>Sobre nosotros</h4>
+                    <p class="text-muted">
+                        El Centro de Jubilados Alí es un espacio para compartir entre todos, con diversos talleres y actividades. Veni a disfrutar con nosotros!!
+                    </p>
+                    <ul class="card-profile__info">
+                        <li class="mb-1"><strong class="text-dark mr-4">Contacto</strong> <br /><span>4854-8419</span></li>
+                        <li><strong class="text-dark mr-4">Email</strong> <span>aliCentro@gmail.com</span></li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="col-lg-8 col-xl-9">
             <div class="card">
                 <div class="card-body">
                     <div class="media-body">
-                        <h5 class="mb-sm-0">Centro de jubilados Alí <small class="text-muted ml-3">about 3 days ago</small></h5>
-                        <br>
+                        <h5 class="mb-sm-0">AliCentro<small class="text-muted ml-3">última modificación hace 1 día</small></h5>
+                        <br><br />
                         <!--Table-->
                         <table id="tablePreview" class="table">
                             <!--Table head-->
@@ -97,22 +103,49 @@ $("#chartContainer").CanvasJSChart(options);
                             <tbody>
                                 <tr>
                                     <th scope="row">Nombre</th>
-                                    <td>Mark</td>
+                                    <td>Centro de jubilados Alí</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Nick</th>
-                                    <td>Ali baba</td>
+                                    <th scope="row">Email</th>
+                                    <td>aliCentro@gmail.com</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Intereses</th>
-                                    <td>Truco, chinchon y loteria</td>
-                                                          
+                                    <th scope="row">Localidad</th>
+                                    <td>Ramos Mejía</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Teléfono</th>
+                                    <td>4854-8419</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Celular</th>
+                                    <td>11 1122-8419</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Sitio Web Personal</th>
+                                    <td>wwww.centroAliJubi.com.ar</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Rubro</th>
+                                    <td>Cursos y talleres</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Sobre nosotros</th>
+                                    <td>El Centro de Jubilados Alí es un espacio para compartir entre todos, con diversos talleres y actividades. Veni a disfrutar con nosotros!!</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Usuario</th>
+                                    <td>AliCentro</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Password</th>
+                                    <td>************</td>
                                 </tr>
                             </tbody>
                             <!--Table body-->
                         </table>
                         <!--Table-->
-                        <button type="submit" class="btn btn-default">MODIFICAR</button> 
+                        <button type="submit" class="btn btn-default">MODIFICAR</button>
                     </div>
                 </div>
             </div>
@@ -129,3 +162,5 @@ $("#chartContainer").CanvasJSChart(options);
 
 <!-- #/ container -->
 
+<script src="~/vendor/jquery/jquery.min.js"></script>
+<script src="~/Content/js/FotoPerfil.js"></script>
