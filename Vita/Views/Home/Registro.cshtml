@@ -17,7 +17,7 @@
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
             <div class="card-body">
-                <form action="/Home/Registrar" method="Post">
+                <form action="/Home/Registrar" method="Post" class="formu-usuario" id="form-rol-usuario">
                     <h2 id="tipo_usuario" class="form-title">¿Qué tipo de persona eres?</h2>
 
 
@@ -25,11 +25,11 @@
                     <!--Tipo de persona-->
                     <center>
                         <div class="form-radio">
-                            <input type="radio" name="member_level" value="newbie" id="newbie" checked="checked" />
+                            <input type="radio" id="newbie" checked="checked" />
                             <label for="newbie">Usuario</label>
 
-                            <input type="radio" name="member_level" value="average" id="average" />
-                            <label for="average">Entidad</label>
+                            <input type="radio" id="average" />
+                            <label for="average">Empresa</label>
                         </div>
                     </center>
 
@@ -44,19 +44,22 @@
 
                     <!--Formulario de persona-->
                     <div id="persona">
+                        <div class="input-group" hidden>
+                            <input class="input--style-4" type="number" value="1" name="RolId">
+                        </div>
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Nombre-->
                                     <label class="label">Nombre</label>
-                                    <input class="input--style-4" type="text" name="nombre">
+                                    <input class="input--style-4" type="text" name="Nombre">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Apellido-->
                                     <label class="label">Apellido</label>
-                                    <input class="input--style-4" type="text" name="apellido">
+                                    <input class="input--style-4" type="text" name="Apellido">
                                 </div>
                             </div>
                         </div>
@@ -67,102 +70,142 @@
                                     <!--Fecha de nacimiento-->
                                     <label class="label">Fecha de nacimiento</label>
                                     <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="text" name="fechaNacimiento">
+                                        <input class="input--style-4 js-datepicker" type="text" name="FechaNacimiento">
                                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label class="label">Seleccione sexo</label>
+                                <div>
+                                    <select class="selectpicker" id="sexoId" onchange="changeOption(this)"
+                                            class="form-control" data-live-search="true" title="Seleccione sexo.." name="SexoId">
+
+
+                                        @foreach (var item in ViewBag.ListaSexo as MultiSelectList)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+
+                                    </select>
+                                </div>
+                            </div>
+                            <!--Sexo-->
+                            @*<div class="col-2">
+                                    <div class="input-group">
+
+                                        <label class="label">Sexo</label>
+                                        <div class="p-t-10">
+                                            <label class="radio-container m-r-45">
+                                                Masculino
+                                                <input type="radio" checked="checked" name="gender">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <label class="radio-container">
+                                                Femenino
+                                                <input type="radio" name="gender">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>*@
+                        </div>
+
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--DNI-->
+                                    <label class="label">DNI</label>
+                                    <input class="input--style-4" type="number" name="Dni">
                                 </div>
                             </div>
 
                             <div class="col-2">
                                 <div class="input-group">
-                                    <!--Sexo-->
-                                    <label class="label">Sexo</label>
-                                    <div class="p-t-10">
-                                        <label class="radio-container m-r-45">
-                                            Masculino
-                                            <input type="radio" checked="checked" name="gender">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label class="radio-container">
-                                            Femenino
-                                            <input type="radio" name="gender">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
+                                    <!--Email-->
+                                    <label class="label">Email</label>
+                                    <input class="input--style-4" type="email" name="Email">
                                 </div>
-                            </div> 
-                        </div>
-
-                        <div class="row row-space">
-                               <div class="col-2">
-                                    <div class="input-group">
-                                        <!--DNI-->
-                                        <label class="label">DNI</label>
-                                        <input class="input--style-4" type="dni" name="dni">
-                                    </div>
-                                </div>
-
-                                <div class="col-2">
-                                    <div class="input-group">
-                                        <!--Email-->
-                                        <label class="label">Email</label>
-                                        <input class="input--style-4" type="email" name="email">
-                                    </div>
-                                </div>
+                            </div>
                         </div>
 
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Localidad-->
-                                    <label class="label">Localidad</label>
-                                    <input class="input--style-4" type="text" name="localidad_per">
+                                    <label class="label">Seleccione Localidad</label>
+                                    <div>
+                                        <select class="selectpicker" id="LocalidadId" onchange="changeOption(this)"
+                                                class="form-control" data-live-search="true" title="Seleccione localidad.." name="LocalidadId">
+
+
+                                            @foreach (var item in ViewBag.ListaLocalidades as MultiSelectList)
+                                            {
+                                                <option value="@item.Value">@item.Text</option>
+                                            }
+
+                                        </select>
+                                    </div>
+                                    @*<label class="label">Localidad</label>
+                                        <input class="input--style-4" type="text" name="localidad_per">*@
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Celular-->
                                     <label class="label">Celular</label>
-                                    <input class="input--style-4" type="number" name="celular">
+                                    <input class="input--style-4" type="number" name="Celular">
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Intereses-->
-                        @*<div class="input-group">
-            <label class="label">Seleccione intereses</label>
-            <div>
-                <select class="selectpicker" id="categoriaId" onchange="changeOption(this)"
-                        class="form-control" data-live-search="true" title="Seleccione intereses.." name="categoriaId">
-
-
-                    @foreach (var item in ViewBag.ListaIntereses as MultiSelectList)
-                    {
-                        <option value="@item.Value">@item.Text</option>
-                    }
-
-                </select>
-            </div>
-        </div>*@
 
                         <div class="input-group">
-                            <label class="label">Intereses</label>
-                            <div class="rs-select2 js-select-simple select--no-search" id="multi">
-                                <select multiple name="intereses">
-                                    <option>Actividades al aire libre</option>
-                                    <option>Deportes</option>
-                                    <option>Cursos y Talleres</option>
-                                    <option>Entretenimientos</option>
+                            <label class="label">Seleccione intereses</label>
+                            <div>
+                                <select class="selectpicker" id="Categoria" onchange="changeOption(this)"
+                                        class="form-control" data-live-search="true" title="Seleccione intereses.." name="Categoria.Id">
+
+
+                                    @foreach (var item in ViewBag.ListaIntereses as MultiSelectList)
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+
                                 </select>
-                                <div class="select-dropdown"></div>
                             </div>
                         </div>
+
+                        @*<div class="input-group">
+                                <label class="label">Intereses</label>
+                                <div class="rs-select2 js-select-simple select--no-search" id="multi">
+                                    <select multiple name="intereses">
+                                        <option>Actividades al aire libre</option>
+                                        <option>Deportes</option>
+                                        <option>Cursos y Talleres</option>
+                                        <option>Entretenimientos</option>
+                                    </select>
+                                    <div class="select-dropdown"></div>
+                                </div>
+                            </div>*@
 
                         <!--Segmento-->
 
                         <div class="input-group">
                             <label class="label">¿A qué segmento perteneces?</label>
-                            <div class="rs-select2 js-select-simple select--no-search">
+                            <div>
+                                <select class="selectpicker" id="segmentoId" onchange="changeOption(this)"
+                                        class="form-control" data-live-search="true" title="Seleccione segmento.." name="SegmentoId">
+
+
+                                    @foreach (var item in ViewBag.ListaSegmentos as MultiSelectList)
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+
+                                </select>
+                            </div>
+                            @*<div class="rs-select2 js-select-simple select--no-search">
                                 <select name="segmento">
                                     <option>Niños</option>
                                     <option>Jóvenes</option>
@@ -170,7 +213,7 @@
                                     <option>Adultos mayores</option>
                                 </select>
                                 <div class="select-dropdown"></div>
-                            </div>
+                            </div>*@
                         </div>
 
                         <div class="row row-space">
@@ -178,7 +221,7 @@
                                 <div class="input-group">
                                     <!--Usuario-->
                                     <label class="label">Usuario</label>
-                                    <input class="input--style-4" type="text" name="usuario1">
+                                    <input class="input--style-4" type="text" name="Usuario1">
                                 </div>
                             </div>
 
@@ -186,42 +229,68 @@
                                 <div class="input-group">
                                     <!--Contraseña-->
                                     <label class="label">Contraseña</label>
-                                    <input class="input--style-4" type="password" name="pass">
+                                    <input class="input--style-4" type="password" name="Pass">
                                 </div>
                             </div>
                         </div>
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--blue" type="submit">Aceptar</button>
+                            <a href="/Home/Index"><button class="btn btn--radius-2 btn--blue" type="button">Cancelar</button></a>
+
+                        </div>
+
+
                     </div>
 
+                </form>
+                <form action="/Home/Registrar" method="Post" class="formu-entidad" id="form-rol-entidad">
+
                     <div id="empresa">
+                        <div class="input-group" hidden>
+                            <input class="input--style-4" type="number" value="2" name="RolId">
+                        </div>
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Nombre de la empresa-->
                                     <label class="label">Nombre</label>
-                                    <input class="input--style-4" type="text" name="nombreEntidad">
+                                    <input class="input--style-4" type="text" name="Nombre">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Email de la empresa-->
                                     <label class="label">Email</label>
-                                    <input class="input--style-4" type="text" name="emailEntidad">
+                                    <input class="input--style-4" type="text" name="Email">
                                 </div>
                             </div>
                         </div>
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
+                                    <label class="label">Seleccione Localidad</label>
+                                    <div>
+                                        <select class="selectpicker" id="LocalidadId" onchange="changeOption(this)"
+                                                class="form-control" data-live-search="true" title="Seleccione localidad.." name="LocalidadId">
+
+
+                                            @foreach (var item in ViewBag.ListaLocalidades as MultiSelectList)
+                                            {
+                                                <option value="@item.Value">@item.Text</option>
+                                            }
+
+                                        </select>
+                                    </div>
                                     <!--Localidad de la empresa-->
-                                    <label class="label">Localidad</label>
-                                    <input class="input--style-4" type="text" name="localidad_emp">
+                                    @*<label class="label">Localidad</label>
+                                        <input class="input--style-4" type="text" name="localidad_emp">*@
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Telefono de la empresa-->
                                     <label class="label">Teléfono</label>
-                                    <input class="input--style-4" type="number" name="telefonoEntidad">
+                                    <input class="input--style-4" type="number" name="Telefono">
                                 </div>
                             </div>
                         </div>
@@ -230,22 +299,22 @@
                                 <div class="input-group">
                                     <!--Celular de la empresa-->
                                     <label class="label">Celular</label>
-                                    <input class="input--style-4" type="number" name="celularEntidad">
+                                    <input class="input--style-4" type="number" name="Celular">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Sitio web personal de la empresa-->
                                     <label class="label">Sitio web personal</label>
-                                    <input class="input--style-4" type="text" name="sitioWeb">
+                                    <input class="input--style-4" type="text" name="SitioWeb">
                                 </div>
                             </div>
                         </div>
-                        @*<div class="input-group">
+                        <div class="input-group">
                             <label class="label">Seleccione Rubro</label>
                             <div>
                                 <select class="selectpicker" id="categoriaId" onchange="changeOption(this)"
-                                        class="form-control" data-live-search="true" title="Seleccione rubro.." name="categoriaIdEntidad">
+                                        class="form-control" data-live-search="true" title="Seleccione rubro.." name="UsuarioInscriptoEnActividad">
 
 
                                     @foreach (var item in ViewBag.ListaRubro as MultiSelectList)
@@ -255,8 +324,8 @@
 
                                 </select>
                             </div>
-                          </div>*@
-                           <div class="input-group">
+                        </div>
+                        @*<div class="input-group">
                                 <label class="label">Rubro</label>
                                 <div class="rs-select2 js-select-simple select--no-search">
                                     <select name="rubro">
@@ -267,38 +336,40 @@
                                     </select>
                                     <div class="select-dropdown"></div>
                                 </div>
-                           </div>
+                            </div>*@
 
-                            <div class="row row-space">
-                                <div class="col-2">
-                                    <div class="input-group">
-                                        <!--Usuario-->
-                                        <label class="label">Usuario</label>
-                                        <input class="input--style-4" type="text" name="usuarioEntidad">
-                                    </div>
-                                </div>
-
-                                <div class="col-2">
-                                    <div class="input-group">
-                                        <!--Contraseña-->
-                                        <label class="label">Contraseña</label>
-                                        <input class="input--style-4" type="password" name="passwordEntidad">
-                                    </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Usuario-->
+                                    <label class="label">Usuario</label>
+                                    <input class="input--style-4" type="text" name="Usuario1">
                                 </div>
                             </div>
 
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Contraseña-->
+                                    <label class="label">Contraseña</label>
+                                    <input class="input--style-4" type="password" name="Pass">
+                                </div>
+                            </div>
                         </div>
-
-
                         <div class="p-t-15">
                             <button class="btn btn--radius-2 btn--blue" type="submit">Aceptar</button>
                             <a href="/Home/Index"><button class="btn btn--radius-2 btn--blue" type="button">Cancelar</button></a>
+
                         </div>
-</form>
+                    </div>
+
+
+
+                </form>
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- Scripts del Login-->
 <script src="~/vendor/jquery/jquery.min.js"></script>

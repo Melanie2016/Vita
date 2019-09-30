@@ -17,6 +17,7 @@ namespace Vita.Servicios
         public void CrearUsuario(Usuario usuario)
         {
             //falta validar tooodo
+            //usuario.Categoria.ToList();
             Usuario usuarioNuevo = usuario;
             myDbContext.Usuario.Add(usuarioNuevo);
             myDbContext.SaveChanges();

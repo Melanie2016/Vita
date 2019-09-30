@@ -10,8 +10,10 @@ namespace Vita.Controllers
     public class HomeController : Controller
     {
         private UsuarioServicio usuarioServicio = new UsuarioServicio();
-        private EntidadServicio entidadServicio = new EntidadServicio();
         private CategoriaServicio categoriaServicio = new CategoriaServicio();
+        private SexoServicio sexoServicio = new SexoServicio();
+        private SegmentoServicio segmentoServicio = new SegmentoServicio();
+        private LocalidadServicio localidadServicio = new LocalidadServicio();
         private VitaEntities myDbContext = new VitaEntities();
         public ActionResult Index()
         {
@@ -21,49 +23,51 @@ namespace Vita.Controllers
         [HttpGet]
         public ActionResult Registro()
         {
-          
-            /*List<Categoria> rubros = categoriaServicio.GetAllCategorias();
+            List<Sexo> sexos = sexoServicio.GetAllSexo();
+            ViewBag.ListaSexo = new MultiSelectList(sexos, "id", "descripcion");
+
+            List<Segmento> segmentos = segmentoServicio.GetAllSegmento();
+            ViewBag.ListaSegmentos = new MultiSelectList(segmentos, "id", "descripcion");
+
+            List<Localidad> localidades = localidadServicio.GetAllLocalidades();
+            ViewBag.ListaLocalidades = new MultiSelectList(localidades, "id", "descripcion");
+
+            List<Categoria> rubros = categoriaServicio.GetAllCategorias();
             ViewBag.ListaRubro = new MultiSelectList(rubros, "id", "descripcion");
 
             List<Categoria> intereses = categoriaServicio.GetAllCategorias();
             ViewBag.ListaIntereses = new MultiSelectList(intereses, "id", "descripcion");
-            */
+
 
             return View();
         }
 
         [HttpPost]
-        public ActionResult Registrar(Usuario usuario, Entidad entidad )
+        public ActionResult Registrar(Usuario usuario)
         {
-
-            if (usuario.apellido != null && usuario.nombre != null) //buscar una forma mejor de validar
+           
+            usuarioServicio.CrearUsuario(usuario);
+            if (usuario.RolId == 1)
             {
-                //no trae celular, localidadId, muestra la contrasenia en plano
-                
-                usuarioServicio.CrearUsuario(usuario);
                 return RedirectToAction("PerfilUsuario", "Home");
             }
             else
             {
-                //no trae localidadId, muestra la contrasenia en plano
-                
-                entidadServicio.CrearEmpresa(entidad);
                 return RedirectToAction("PerfilEntidad", "Home");
-
             }
-        
-           
+
+
         }
         [HttpGet]
-        public ActionResult PerfilUsuario()
+        public ActionResult PerfilUsuario(Usuario usuario)
         {
             
-            return View();
+            return View(usuario);
         }
 
-        public ActionResult PerfilEntidad()
+        public ActionResult PerfilEntidad(Usuario usuario)
         {
-            return View();
+            return View(usuario);
         }
         public ActionResult Sugerencias()
         {
