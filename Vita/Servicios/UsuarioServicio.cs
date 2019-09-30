@@ -28,24 +28,17 @@ namespace Vita.Servicios
         }
         public Usuario VerificarExistenciaUsuario(Usuario u)
         {
-           
-            u.RolId = 1;
-          //  u.UsuarioName = "dani";
-            if (u.RolId == 1)
-            {
-                var user = myDbContext.Usuario.Where(us => us.UsuarioName.Equals(u.UsuarioName) && us.Pass.Equals(u.Pass)).FirstOrDefault();
-                return user;
-            }
-            else
-            {
-                var user = myDbContext.Usuario.Where(us => us.Email.Equals(u.Email) && us.Pass.Equals(u.Pass)).FirstOrDefault();
-                return user;
-            }
-
-            
+         
+                if (u.Email != null)
+                {
+                    var user = myDbContext.Usuario.Where((us => us.Email.Equals(u.Email) && us.Pass.Equals(u.Pass))).FirstOrDefault();
+                    return user;
+                }
+                else
+                {
+                    var user = myDbContext.Usuario.Where(us => us.UsuarioName.Equals(u.UsuarioName) && us.Pass.Equals(u.Pass)).FirstOrDefault();
+                    return user;
+                }     
         }
-
-
-
     }
 }

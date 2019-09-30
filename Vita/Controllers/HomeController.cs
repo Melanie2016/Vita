@@ -100,7 +100,16 @@ namespace Vita.Controllers
                     if (usuario != null)
                     {
                         Session["Usuario"] = usuario;
-                        return RedirectToAction("PerfilUsuario", "Home");
+                        if (usuario.RolId == 1)
+                        {
+                            return RedirectToAction("PerfilUsuario", "Home");
+
+                        }
+                        else
+                        {
+                            return RedirectToAction("PerfilEntidad", "Home");
+
+                        }
                     }
                     else
                     {
@@ -128,7 +137,15 @@ namespace Vita.Controllers
                     Session.Remove("RedireccionLogin");
                     return RedirectToAction(accion[1], accion[0]);
                 }
-                return RedirectToAction("PerfilUsuario", "Home");
+                if (user.RolId == 1)
+                {
+                    return RedirectToAction("PerfilUsuario", "Home");
+                }
+                else
+                {
+                    return RedirectToAction("PerfilEntidad", "Home");
+                }
+               
 
             }
             else
@@ -138,6 +155,11 @@ namespace Vita.Controllers
             }
         }
 
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Login", "Home");
+        }
         public ActionResult Eventos()
         {
             return View();
