@@ -199,7 +199,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\Calendario.css" />
+    <Content Include="Content\css\PerfilUsuario.css" />
     <Content Include="Content\js\Calendario.js" />
+    <Content Include="Content\js\PerfilUsuario.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
