@@ -46,18 +46,32 @@ namespace Vita.Controllers
         [HttpPost]
         public ActionResult Registrar(Usuario usuario)
         {
-           
-            usuarioServicio.CrearUsuario(usuario);
-            if (usuario.RolId == 1)
-            {
-                return RedirectToAction("PerfilUsuario", "Home");
-            }
-            else
-            {
-                return RedirectToAction("PerfilEntidad", "Home");
-            }
+            var nombreDeUsuarioExiste=usuarioServicio.VerificarExistenciaUsuarioNombre(usuario);
+            var existeElUsuario = usuarioServicio.VerificarExistenciaDelUsuario(usuario);
 
 
+            if (nombreDeUsuarioExiste != null)
+            {
+                //ACA DEBERIA DECIR, SU El nombre de usuario ya existe ingrese otro nombre de usuario  
+                return RedirectToAction("Login", "Home");
+            }
+            else if(existeElUsuario !=null)
+            {
+                //ACA DEBERIA DECIR, su usuario ya existe 
+                return RedirectToAction("Login", "Home");
+            }
+            else {
+                usuarioServicio.CrearUsuario(usuario);
+                if (usuario.RolId == 1)
+                {
+                    return RedirectToAction("PerfilUsuario", "Home");
+                }
+                else
+                {
+                    return RedirectToAction("PerfilEntidad", "Home");
+                }
+            }
+ 
         }
         [HttpGet]
         public ActionResult PerfilUsuario(Usuario usuario)
@@ -124,7 +138,7 @@ namespace Vita.Controllers
         [HttpPost]
         public ActionResult Login(Usuario u)
         {
-            var user = usuarioServicio.VerificarExistenciaUsuario(u);
+            var user = usuarioServicio.VerificarLogin(u);
             if (user != null)
             {
                 Session["Usuario"] = user;

@@ -26,7 +26,7 @@ namespace Vita.Servicios
         {
             return myDbContext.Usuario.FirstOrDefault(x => x.Id == id);
         }
-        public Usuario VerificarExistenciaUsuario(Usuario u)
+        public Usuario VerificarLogin(Usuario u)
         {
          
                 if (u.Email != null)
@@ -39,6 +39,29 @@ namespace Vita.Servicios
                     var user = myDbContext.Usuario.Where(us => us.UsuarioName.Equals(u.UsuarioName) && us.Pass.Equals(u.Pass)).FirstOrDefault();
                     return user;
                 }     
+        }
+
+        public Usuario VerificarExistenciaUsuarioNombre(Usuario u)
+        {
+            var user = myDbContext.Usuario.Where(us => us.UsuarioName.Equals(u.UsuarioName)).FirstOrDefault();
+            return user;
+        }
+
+        public Usuario VerificarExistenciaDelUsuario(Usuario u)
+        {
+            if (u.Dni !=null)//en caso de ser un usuario
+            {
+                var user = myDbContext.Usuario.Where(us => us.Dni.Equals(u.Dni)).FirstOrDefault();
+                return user;
+
+            }
+            else
+            {
+                var user = myDbContext.Usuario.Where(us => us.UsuarioName.Equals(u.UsuarioName) && us.SitioWeb.Equals(u.SitioWeb)).FirstOrDefault();
+                return user;
+
+            }
+
         }
     }
 }
