@@ -198,6 +198,8 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\Calendario.css" />
+    <Content Include="Content\js\Calendario.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -291,6 +293,7 @@
     </Content>
     <Content Include="Views\Home\Eventos.cshtml" />
     <Content Include="Views\Home\FichaEvento.cshtml" />
+    <Content Include="Views\Home\Calendario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
