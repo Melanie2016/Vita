@@ -82,6 +82,21 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="PartidoDepartamento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="300" />
+          <Property Name="ProvinciaId" Type="int" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="Rol">
           <Key>
             <PropertyRef Name="Id" />
@@ -132,7 +147,7 @@
           <Property Name="LocalidadId" Type="int" />
           <Property Name="Celular" Type="int" />
           <Property Name="Telefono" Type="int" />
-          <Property Name="Usuario" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="UsuarioName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Pass" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="SitioWeb" Type="varchar" MaxLength="200" />
           <Property Name="RolId" Type="int" />
@@ -341,6 +356,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="provinciaId">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
+          <End Role="PartidoDepartamento" Type="Self.PartidoDepartamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PartidoDepartamento">
+              <PropertyRef Name="ProvinciaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="SegmentoActividadId">
           <End Role="Segmento" Type="Self.Segmento" Multiplicity="1" />
           <End Role="ActividadSegmento" Type="Self.ActividadSegmento" Multiplicity="*" />
@@ -469,6 +496,8 @@
           <EntitySet Name="EventoActividad" EntityType="Self.EventoActividad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EventoSegmento" EntityType="Self.EventoSegmento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartidoDepartamento" EntityType="Self.PartidoDepartamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Segmento" EntityType="Self.Segmento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sexo" EntityType="Self.Sexo" Schema="dbo" store:Type="Tables" />
@@ -534,6 +563,10 @@
           <AssociationSet Name="localidadUsuarioId" Association="Self.localidadUsuarioId">
             <End Role="Localidad" EntitySet="Localidad" />
             <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="provinciaId" Association="Self.provinciaId">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="PartidoDepartamento" EntitySet="PartidoDepartamento" />
           </AssociationSet>
           <AssociationSet Name="SegmentoActividadId" Association="Self.SegmentoActividadId">
             <End Role="Segmento" EntitySet="Segmento" />
@@ -662,6 +695,23 @@
           <NavigationProperty Name="Evento" Relationship="Self.EventoLocalidadId" FromRole="Localidad" ToRole="Evento" />
           <NavigationProperty Name="Usuario" Relationship="Self.localidadUsuarioId" FromRole="Localidad" ToRole="Usuario" />
         </EntityType>
+        <EntityType Name="PartidoDepartamento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="ProvinciaId" Type="Int32" />
+          <NavigationProperty Name="Provincia" Relationship="Self.provinciaId" FromRole="PartidoDepartamento" ToRole="Provincia" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PartidoDepartamento" Relationship="Self.provinciaId" FromRole="Provincia" ToRole="PartidoDepartamento" />
+        </EntityType>
         <EntityType Name="Rol">
           <Key>
             <PropertyRef Name="Id" />
@@ -719,7 +769,7 @@
           <Property Name="LocalidadId" Type="Int32" />
           <Property Name="Celular" Type="Int32" />
           <Property Name="Telefono" Type="Int32" />
-          <Property Name="Usuario1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UsuarioName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Pass" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SitioWeb" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="RolId" Type="Int32" />
@@ -911,6 +961,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="provinciaId">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
+          <End Role="PartidoDepartamento" Type="Self.PartidoDepartamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PartidoDepartamento">
+              <PropertyRef Name="ProvinciaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="usuarioRolId">
           <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
@@ -1001,6 +1063,8 @@
           <EntitySet Name="Evento" EntityType="Self.Evento" />
           <EntitySet Name="EventoActividad" EntityType="Self.EventoActividad" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" />
+          <EntitySet Name="PartidoDepartamento" EntityType="Self.PartidoDepartamento" />
+          <EntitySet Name="Provincia" EntityType="Self.Provincia" />
           <EntitySet Name="Rol" EntityType="Self.Rol" />
           <EntitySet Name="Segmento" EntityType="Self.Segmento" />
           <EntitySet Name="Sexo" EntityType="Self.Sexo" />
@@ -1057,6 +1121,10 @@
           <AssociationSet Name="localidadUsuarioId" Association="Self.localidadUsuarioId">
             <End Role="Localidad" EntitySet="Localidad" />
             <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="provinciaId" Association="Self.provinciaId">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="PartidoDepartamento" EntitySet="PartidoDepartamento" />
           </AssociationSet>
           <AssociationSet Name="usuarioRolId" Association="Self.usuarioRolId">
             <End Role="Rol" EntitySet="Rol" />
@@ -1166,6 +1234,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PartidoDepartamento">
+            <EntityTypeMapping TypeName="VitaModel.PartidoDepartamento">
+              <MappingFragment StoreEntitySet="PartidoDepartamento">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ProvinciaId" ColumnName="ProvinciaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provincia">
+            <EntityTypeMapping TypeName="VitaModel.Provincia">
+              <MappingFragment StoreEntitySet="Provincia">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Rol">
             <EntityTypeMapping TypeName="VitaModel.Rol">
               <MappingFragment StoreEntitySet="Rol">
@@ -1220,7 +1305,7 @@
                 <ScalarProperty Name="LocalidadId" ColumnName="LocalidadId" />
                 <ScalarProperty Name="Celular" ColumnName="Celular" />
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Usuario1" ColumnName="Usuario" />
+                <ScalarProperty Name="UsuarioName" ColumnName="UsuarioName" />
                 <ScalarProperty Name="Pass" ColumnName="Pass" />
                 <ScalarProperty Name="SitioWeb" ColumnName="SitioWeb" />
                 <ScalarProperty Name="RolId" ColumnName="RolId" />

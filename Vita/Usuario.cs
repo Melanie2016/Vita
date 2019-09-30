@@ -35,7 +35,7 @@ namespace Vita
         public Nullable<int> LocalidadId { get; set; }
         public Nullable<int> Celular { get; set; }
         public Nullable<int> Telefono { get; set; }
-        public string Usuario1 { get; set; }
+        public string UsuarioName { get; set; }
         public string Pass { get; set; }
         public string SitioWeb { get; set; }
         public Nullable<int> RolId { get; set; }

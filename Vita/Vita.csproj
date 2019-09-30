@@ -147,7 +147,13 @@
     <Compile Include="Localidad.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="PartidoDepartamento.cs">
+      <DependentUpon>VitaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provincia.cs">
+      <DependentUpon>VitaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Rol.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
@@ -5727,6 +5733,11 @@
     <Content Include="Views\Home\PerfilEntidad.cshtml" />
     <Content Include="Views\Home\Eventos.cshtml" />
     <Content Include="Views\Home\FichaEvento.cshtml" />
+    <Content Include="Views\Home\Eventos.cshtml" />
+    <Content Include="Views\Home\FichaEvento.cshtml" />
+    <Content Include="Views\Home\Calendario.cshtml" />
+    <Content Include="Views\Shared\_LayoutPerfilUsuario.cshtml" />
+    <Content Include="Views\Shared\_LayoutPerfilEntidad.cshtml" />
     <EntityDeploy Include="VitaEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>VitaEntities.Designer.cs</LastGenOutput>
@@ -5734,11 +5745,6 @@
     <Content Include="VitaEntities.edmx.diagram">
       <DependentUpon>VitaEntities.edmx</DependentUpon>
     </Content>
-    <Content Include="Views\Home\Eventos.cshtml" />
-    <Content Include="Views\Home\FichaEvento.cshtml" />
-    <Content Include="Views\Home\Calendario.cshtml" />
-    <Content Include="Views\Shared\_LayoutPerfilUsuario.cshtml" />
-    <Content Include="Views\Shared\_LayoutPerfilEntidad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

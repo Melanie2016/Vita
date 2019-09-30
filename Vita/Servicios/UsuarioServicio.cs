@@ -22,6 +22,30 @@ namespace Vita.Servicios
             myDbContext.Usuario.Add(usuarioNuevo);
             myDbContext.SaveChanges();
         }
+        public Usuario GetById(int id)
+        {
+            return myDbContext.Usuario.FirstOrDefault(x => x.Id == id);
+        }
+        public Usuario VerificarExistenciaUsuario(Usuario u)
+        {
+           
+            u.RolId = 1;
+          //  u.UsuarioName = "dani";
+            if (u.RolId == 1)
+            {
+                var user = myDbContext.Usuario.Where(us => us.UsuarioName.Equals(u.UsuarioName) && us.Pass.Equals(u.Pass)).FirstOrDefault();
+                return user;
+            }
+            else
+            {
+                var user = myDbContext.Usuario.Where(us => us.Email.Equals(u.Email) && us.Pass.Equals(u.Pass)).FirstOrDefault();
+                return user;
+            }
+
+            
+        }
+
+
 
     }
 }
