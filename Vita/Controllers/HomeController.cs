@@ -80,5 +80,16 @@ namespace Vita.Controllers
         {
             return View();
         }
+
+
+        public ActionResult Eventos()
+        {
+            return View();
+        }
+
+        public ActionResult FichaEvento()
+        {
+            return View();
+        }
     }
 }
