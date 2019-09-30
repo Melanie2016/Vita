@@ -5,6 +5,7 @@
 
 }
 
+<link href="~/Content/css/PerfilUsuario.css" rel="stylesheet" media="all">
 
 <div class="container-fluid">
     <div class="row">
@@ -13,7 +14,12 @@
                 <div class="card-body">
                     <div class="row mb-5">
                         <div class="col-12 text-center">
-                            <img src="~/Content/images/h.png" width="150" height="150" alt="">
+                            <!--Foto de perfil-->
+                            <div class="avatar-wrapper">
+                                <img class="profile-pic" src="~/Content/images/person_2.jpg">
+                                <input class="file-upload" type="file" accept="image/*" />
+                            </div>
+                            <!---->
                         </div>
                         <br><br>
                         <div class="col">
@@ -30,15 +36,15 @@
                             </div>
                         </div>
                         <div class="col-12 text-center">
-                            <button class="btn btn-danger px-5">MODIFICAR</button>
+                            <button class="btn btn-danger px-5 upload-button">CAMBIAR FOTO</button>
                         </div>
                     </div>
 
-                    <h4>About Me</h4>
-                    <p class="text-muted">Hi, I'm Pikamy, has been the industry standard dummy text ever since the 1500s.</p>
+                    <h4>Sobre mí</h4>
+                    <p class="text-muted">Soy de zona oeste, me gustan los juegos de mesa tales como , la loteria, el truco y el chinchon.</p>
                     <ul class="card-profile__info">
-                        <li class="mb-1"><strong class="text-dark mr-4">Mobile</strong> <span>01793931609</span></li>
-                        <li><strong class="text-dark mr-4">Email</strong> <span>name@domain.com</span></li>
+                        <li class="mb-1"><strong class="text-dark mr-4">Celular</strong> <br><span>011 2781 7645</span></li>
+                        <li><strong class="text-dark mr-4">Email</strong> <span>gusti_fuentes1@gmail.com</span></li>
                     </ul>
                 </div>
             </div>  
@@ -49,12 +55,12 @@
                     <div class="media media-reply">
                         <div class="media-body">
                             <div class="d-sm-flex justify-content-between mb-2">
-                                <h5 class="mb-sm-0">Gustavo CABJ <small class="text-muted ml-3">about 3 days ago</small></h5>
-                                <div class="media-reply__link">
+                                <h5 class="mb-sm-0">Gustavo CABJ <small class="text-muted ml-3">última modificación hace 3 días </small></h5>
+                                <!--<div class="media-reply__link">
                                     <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
                                     <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
                                     <button class="btn btn-transparent text-dark font-weight-bold p-0 ml-2">Reply</button>
-                                </div>
+                                </div>-->
                             </div>
                             <p>Soy de zona oeste, me gustan los juegos de mesa tales como , la loteria, el truco y el chinchon.</p>
                             <ul>
@@ -73,19 +79,54 @@
                                       <!--Table head-->
                                       <!--Table body-->
                                       <tbody>
-                                        <tr>
-                                          <th scope="row">Nombre</th>
-                                          <td>Mark</td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row">Nick</th>
-                                          <td>GustiCABJ</td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row">Intereses</th>
-                                          <td>Truco, chinchon y loteria</td>
-                                          
-                                        </tr>
+                                          <tr>
+                                              <th scope="row">Nombre</th>
+                                              <td>Gustavo Damian</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">Apellido</th>
+                                              <td>Fuentes</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">Fecha de Nacimiento</th>
+                                              <td>15/06/1960</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">Sexo</th>
+                                              <td>Masculino</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">DNI</th>
+                                              <td>22.145.678</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">Email</th>
+                                              <td>gusti_fuentes1@gmail.com</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">Localidad</th>
+                                              <td>Ramos Mejía</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">Celular</th>
+                                              <td>011 2781 7645</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">Intereses</th>
+                                              <td>Actividades al aire libre, Deportes</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">Segmento</th>
+                                              <td>Adultos Mayores</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">Usuario</th>
+                                              <td>GustiCABJ</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">Password</th>
+                                              <td>************</td>
+                                          </tr>
                                       </tbody>
                                       <!--Table body-->
                                     </table>
@@ -102,3 +143,6 @@
     </div>
 </div>
 <!-- #/ container -->
+
+<script src="~/vendor/jquery/jquery.min.js"></script>
+<script src="~/Content/js/PerfilUsuario.js"></script>
