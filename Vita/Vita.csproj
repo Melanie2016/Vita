@@ -296,6 +296,8 @@
     <Content Include="Views\Home\Calendario.cshtml" />
     <Content Include="Views\Shared\_LayoutPerfilUsuario.cshtml" />
     <Content Include="Views\Shared\_LayoutPerfilEntidad.cshtml" />
+    <Content Include="Views\Shared\_LayoutEventos.cshtml" />
+    <Content Include="Views\Home\FichaActividad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
