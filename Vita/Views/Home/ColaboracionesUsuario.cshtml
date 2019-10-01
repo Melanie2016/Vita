@@ -4,3 +4,299 @@
     Layout = "~/Views/Shared/_LayoutPerfilUsuario.cshtml";
 }
 
+@*<div>
+    <h4>
+        Bienvendido al sector mis colaboraciones, en este apartado usted podrá ver las colaboraciones pendientes y
+        las que ya realizó.
+    </h4>
+</div>*@
+@*<div class="list-group">
+        <button type="button" class="list-group-item list-group-item-action active">
+            Cras justo odio
+        </button>
+        <button type="button" class="list-group-item list-group-item-action">Dapibus ac facilisis in</button>
+        <button type="button" class="list-group-item list-group-item-action">Morbi leo risus</button>
+        <button type="button" class="list-group-item list-group-item-action">Porta ac consectetur ac</button>
+        <button type="button" class="list-group-item list-group-item-action" disabled>Vestibulum at eros</button>
+    </div>*@
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div><h3>Colaboraciones pendientes</h3></div>
+                <nav>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#populares" role="tab" aria-controls="nav-home" aria-selected="true">Logistica</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#zona" role="tab" aria-controls="nav-profile" aria-selected="false">Monetaria</a>
+                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#sugerencias" role="tab" aria-controls="nav-contact" aria-selected="false">Servicio</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <!--Logistica-->
+                    <div class="tab-pane fade show active" id="populares" role="tabpanel" aria-labelledby="nav-home-tab">
+
+                        <table class="table table-striped custab" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Evento</th>
+                                    <th>Zona</th>
+                                    <th>Lugar</th>
+                                    <th>Fecha</th>
+                                    <th>Bienes materiales</th>
+                                    <th class="text-center">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><img src="~/Content/images/g1.jpg" class="mr-3" alt="">Dia del niño en Garrahan</td>
+                                    <td>Parque Patricios</td>
+                                    <td>Combate de los Pozos 1881</td>
+                                    <td>10/10/2019</td>
+                                    <td>Sillas de Plastico</td>
+                                    <td class="text-center"><a href="/Home/Login" class="btn btn-primary">+ Info</a> </td>
+                                </tr>
+
+                                <tr>
+                                    <td><img src="~/Content/images/n1.jpg" class="mr-3" alt="">Solidaridad para Norita Perez</td>
+                                    <td>La Plata</td>
+                                    <td>Calle 4</td>
+                                    <td>12/10/2019</td>
+                                    <td>Mesa de madera</td>
+                                    <td class="text-center"><a href="/Home/Login" class="btn btn-primary">+ Info</a> </td>
+                                </tr>
+                                <tr>
+                                    <td><img src="~/Content/images/q1.jpg" class="mr-3" alt="">¡Divertite y Doná!</td>
+                                    <td>Chascomús</td>
+                                    <td>Buen viaje 234</td>
+                                    <td>12/10/2019</td>
+                                    <td>Pochoclera grande</td>
+                                    <td class="text-center"><a href="/Home/Login" class="btn btn-primary">+ Info</a> </td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade show" id="zona" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <table class="table table-striped custab" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Evento</th>
+                                    <th>Zona</th>
+                                    <th>Lugar</th>
+                                    <th>Fecha</th>
+                                    <th>Forma de pago</th>
+                                    <th>Cantidad en pesos</th>
+                                    <th class="text-center">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><img src="~/Content/images/g1.jpg" class="mr-3" alt="">Maraton dia de la madre</td>
+                                    <td>San Justo</td>
+                                    <td>Florencio Varela 1903</td>
+                                    <td>25/10/2019</td>
+                                    <td>Efectivo</td>
+                                    <td>350</td>
+                                    <td class="text-center"><a href="/Home/Login" class="btn btn-primary">+ Info</a> </td>
+                                </tr>
+
+                                <tr>
+                                    <td><img src="~/Content/images/n1.jpg" class="mr-3" alt="">Fondos para Nueva esperanza</td>
+                                    <td>La Plata</td>
+                                    <td>Calle 12</td>
+                                    <td>25/10/2019</td>
+                                    <td>Mercado pago</td>
+                                    <td>100</td>
+                                    <td class="text-center"><a href="/Home/Login" class="btn btn-primary">+ Info</a> </td>
+                                </tr>
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade show" id="sugerencias" role="tabpanel" aria-labelledby="nav-contact-tab">
+                        <table class="table table-striped custab" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Evento</th>
+                                    <th>Zona</th>
+                                    <th>Lugar</th>
+                                    <th>Fecha</th>
+                                    <th>Cantidad de horas</th>
+                                    <th>Franja horaria</th>
+                                    <th class="text-center">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><img src="~/Content/images/g1.jpg" class="mr-3" alt="">Cine al aire libre Abuelos contentos</td>
+                                    <td>San Justo</td>
+                                    <td>Arieta 1233</td>
+                                    <td>01/11/2019</td>
+                                    <td>4</td>
+                                    <td>12:00 hasta 16:00</td>
+
+                                    <td class="text-center"><a href="/Home/Login" class="btn btn-primary">+ Info</a> </td>
+                                </tr>
+
+
+                            </tbody>
+
+                        </table>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+
+    <script src="~/Content/js/popup.js"></script>
+
+</section>
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div><h3>Colaboraciones anteriores (Las que ya realiz&oacute;)</h3></div>
+                <nav>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#populares1" role="tab" aria-controls="nav-home" aria-selected="true">Logistica</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#zona1" role="tab" aria-controls="nav-profile" aria-selected="false">Monetaria</a>
+                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#sugerencias1" role="tab" aria-controls="nav-contact" aria-selected="false">Servicio</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <!--Logistica-->
+                    <div class="tab-pane fade show active" id="populares1" role="tabpanel" aria-labelledby="nav-home-tab">
+
+                        <table class="table table-striped custab" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Evento</th>
+                                    <th>Zona</th>
+                                    <th>Lugar</th>
+                                    <th>Fecha</th>
+                                    <th>Bienes materiales</th>
+                                    <th class="text-center">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><img src="~/Content/images/g1.jpg" class="mr-3" alt="">Dia del niño en Garrahan</td>
+                                    <td>Parque Patricios</td>
+                                    <td>Combate de los Pozos 1881</td>
+                                    <td>10/10/2019</td>
+                                    <td>Sillas de Plastico</td>
+                                    <td class="text-center"><a href="/Home/Login" class="btn btn-primary">+ Info</a> </td>
+                                </tr>
+
+                                <tr>
+                                    <td><img src="~/Content/images/n1.jpg" class="mr-3" alt="">Solidaridad para Norita Perez</td>
+                                    <td>La Plata</td>
+                                    <td>Calle 4</td>
+                                    <td>12/10/2019</td>
+                                    <td>Mesa de madera</td>
+                                    <td class="text-center"><a href="/Home/Login" class="btn btn-primary">+ Info</a> </td>
+                                </tr>
+                                <tr>
+                                    <td><img src="~/Content/images/q1.jpg" class="mr-3" alt="">¡Divertite y Doná!</td>
+                                    <td>Chascomús</td>
+                                    <td>Buen viaje 234</td>
+                                    <td>12/10/2019</td>
+                                    <td>Pochoclera grande</td>
+                                    <td class="text-center"><a href="/Home/Login" class="btn btn-primary">+ Info</a> </td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade show" id="zona1" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <table class="table table-striped custab" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Evento</th>
+                                    <th>Zona</th>
+                                    <th>Lugar</th>
+                                    <th>Fecha</th>
+                                    <th>Forma de pago</th>
+                                    <th>Cantidad en pesos</th>
+                                    <th class="text-center">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><img src="~/Content/images/g1.jpg" class="mr-3" alt="">Maraton dia de la madre</td>
+                                    <td>San Justo</td>
+                                    <td>Florencio Varela 1903</td>
+                                    <td>25/10/2019</td>
+                                    <td>Efectivo</td>
+                                    <td>350</td>
+                                    <td class="text-center"><a href="/Home/Login" class="btn btn-primary">+ Info</a> </td>
+                                </tr>
+
+                                <tr>
+                                    <td><img src="~/Content/images/n1.jpg" class="mr-3" alt="">Fondos para Nueva esperanza</td>
+                                    <td>La Plata</td>
+                                    <td>Calle 12</td>
+                                    <td>25/10/2019</td>
+                                    <td>Mercado pago</td>
+                                    <td>100</td>
+                                    <td class="text-center"><a href="/Home/Login" class="btn btn-primary">+ Info</a> </td>
+                                </tr>
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade show" id="sugerencias1" role="tabpanel" aria-labelledby="nav-contact-tab">
+                        <table class="table table-striped custab" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Evento</th>
+                                    <th>Zona</th>
+                                    <th>Lugar</th>
+                                    <th>Fecha</th>
+                                    <th>Cantidad de horas</th>
+                                    <th>Franja horaria</th>
+                                    <th class="text-center">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><img src="~/Content/images/g1.jpg" class="mr-3" alt="">Cine al aire libre Abuelos contentos</td>
+                                    <td>San Justo</td>
+                                    <td>Arieta 1233</td>
+                                    <td>01/11/2019</td>
+                                    <td>4</td>
+                                    <td>12:00 hasta 16:00</td>
+
+                                    <td class="text-center"><a href="/Home/Login" class="btn btn-primary">+ Info</a> </td>
+                                </tr>
+
+
+                            </tbody>
+
+                        </table>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="~/Content/js/popup.js"></script>
+
+</section>
