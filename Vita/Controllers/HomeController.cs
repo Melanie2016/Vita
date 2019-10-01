@@ -69,6 +69,14 @@ namespace Vita.Controllers
         {
             return View();
         }
+        public ActionResult ModificarActividad()
+        {
+            return View();
+        }
+        public ActionResult ModificarEvento()
+        {
+            return View();
+        }
         public ActionResult Actividades()
         {
             ViewBag.Message = "Ranking de los más populares";

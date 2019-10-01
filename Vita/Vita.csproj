@@ -200,6 +200,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\Calendario.css" />
     <Content Include="Content\css\FotoPerfil.css" />
+    <Content Include="Content\css\Sugerencias.css" />
     <Content Include="Content\js\Calendario.js" />
     <Content Include="Content\js\FotoPerfil.js" />
     <Content Include="favicon.ico" />
@@ -296,6 +297,8 @@
     <Content Include="Views\Home\Calendario.cshtml" />
     <Content Include="Views\Shared\_LayoutPerfilUsuario.cshtml" />
     <Content Include="Views\Shared\_LayoutPerfilEntidad.cshtml" />
+    <Content Include="Views\Home\ModificarEvento.cshtml" />
+    <Content Include="Views\Home\ModificarActividad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
