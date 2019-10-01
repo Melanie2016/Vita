@@ -297,8 +297,13 @@
     <Content Include="Views\Home\Calendario.cshtml" />
     <Content Include="Views\Shared\_LayoutPerfilUsuario.cshtml" />
     <Content Include="Views\Shared\_LayoutPerfilEntidad.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Home\ModificarEvento.cshtml" />
     <Content Include="Views\Home\ModificarActividad.cshtml" />
+=======
+    <Content Include="Views\Shared\_LayoutEventos.cshtml" />
+    <Content Include="Views\Home\FichaActividad.cshtml" />
+>>>>>>> cab7c41e89b0b7930554a29ba905db2ecd78143a
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -100,6 +100,11 @@ namespace Vita.Controllers
             return View();
         }
 
+        public ActionResult FichaActividad()
+        {
+            return View();
+        }
+
         public ActionResult Calendario()
         {
             return View();
