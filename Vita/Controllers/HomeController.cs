@@ -96,5 +96,13 @@ namespace Vita.Controllers
         {
             return View();
         }
+        public ActionResult ChatSimple()
+        {
+            return View();
+        }
+        public ActionResult ChatGrupal()
+        {
+            return View();
+        }
     }
 }
