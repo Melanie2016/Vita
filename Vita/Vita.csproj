@@ -935,6 +935,8 @@
     <Content Include="Views\Home\ColaboracionesUsuario.cshtml" />
     <Content Include="Views\Shared\_LayoutEventos.cshtml" />
     <Content Include="Views\Home\FichaActividad.cshtml" />
+    <Content Include="Views\Home\CrearActividad.cshtml" />
+    <Content Include="Views\Home\CrearEvento.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
