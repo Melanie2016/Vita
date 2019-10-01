@@ -300,6 +300,8 @@
     <Content Include="Views\Shared\_LayoutPerfilEntidad.cshtml" />
     <Content Include="Views\Home\ChatSimple.cshtml" />
     <Content Include="Views\Home\ChatGrupal.cshtml" />
+    <Content Include="Views\Home\ColaboracionesEntidad.cshtml" />
+    <Content Include="Views\Home\ColaboracionesUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
