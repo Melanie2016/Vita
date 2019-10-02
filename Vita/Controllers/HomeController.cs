@@ -133,6 +133,24 @@ namespace Vita.Controllers
 
 
 
+        public ActionResult ChatSimple()
+        {
+            return View();
+        }
+        public ActionResult ChatGrupal()
+        {
+            return View();
+        }
+        /*Las colaboraciones en las que el usuario entidad creo*/
+        public ActionResult ColaboracionesEntidad()
+        {
+            return View();
+        }
+        /*Las colaboraciones en las que el usuario participa*/
+        public ActionResult ColaboracionesUsuario()
+        {
+            return View();
+        }
 
     }
 }
