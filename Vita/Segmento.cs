@@ -12,30 +12,24 @@ namespace Vita
     using System;
     using System.Collections.Generic;
     
-    public partial class Entidad
+    public partial class Segmento
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Entidad()
+        public Segmento()
         {
+            this.UsuarioSegmento = new HashSet<UsuarioSegmento>();
             this.Actividad = new HashSet<Actividad>();
             this.Evento = new HashSet<Evento>();
         }
     
-        public int id { get; set; }
-        public string nombreEntidad { get; set; }
-        public string emailEntidad { get; set; }
-        public Nullable<int> telefonoEntidad { get; set; }
-        public Nullable<int> celularEntidad { get; set; }
-        public Nullable<int> categoriaIdEntidad { get; set; }
-        public Nullable<int> localidadIdEntidad { get; set; }
-        public string usuarioEntidad { get; set; }
-        public string passwordEntidad { get; set; }
+        public int Id { get; set; }
+        public string Descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UsuarioSegmento> UsuarioSegmento { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Actividad> Actividad { get; set; }
-        public virtual Categoria Categoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Evento> Evento { get; set; }
-        public virtual Localidad Localidad { get; set; }
     }
 }

@@ -106,5 +106,9 @@
         });
     });
 
-  
+
+    $("#Categoria").change(function (c) {
+        //alert("Opción seleccionada: " + $("#Categoria").val());
+    })
+
 })(jQuery);

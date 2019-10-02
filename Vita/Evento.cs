@@ -17,24 +17,31 @@ namespace Vita
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Evento()
         {
-            this.Necesidad = new HashSet<Necesidad>();
-            this.Actividad = new HashSet<Actividad>();
+            this.EventoActividad = new HashSet<EventoActividad>();
+            this.UsuarioInscriptoEvento = new HashSet<UsuarioInscriptoEvento>();
+            this.Segmento = new HashSet<Segmento>();
         }
     
-        public int id { get; set; }
-        public string descripcion { get; set; }
-        public Nullable<int> entidadId { get; set; }
-        public Nullable<int> precio { get; set; }
-        public Nullable<System.DateTime> fechaInicio { get; set; }
-        public Nullable<System.DateTime> fechaDesde { get; set; }
-        public Nullable<int> cantidadParticipantes { get; set; }
-        public Nullable<int> localidadId { get; set; }
+        public int Id { get; set; }
+        public string Titulo { get; set; }
+        public string Descripcion { get; set; }
+        public Nullable<int> UsuarioId { get; set; }
+        public Nullable<System.DateTime> FechaCreacion { get; set; }
+        public Nullable<int> Precio { get; set; }
+        public Nullable<System.DateTime> FechaDesde { get; set; }
+        public Nullable<System.DateTime> FechaHasta { get; set; }
+        public Nullable<int> CantidadDias { get; set; }
+        public Nullable<int> CantidadCupo { get; set; }
+        public Nullable<int> LocalidadId { get; set; }
+        public byte[] Foto { get; set; }
     
-        public virtual Entidad Entidad { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EventoActividad> EventoActividad { get; set; }
         public virtual Localidad Localidad { get; set; }
+        public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Necesidad> Necesidad { get; set; }
+        public virtual ICollection<UsuarioInscriptoEvento> UsuarioInscriptoEvento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Actividad> Actividad { get; set; }
+        public virtual ICollection<Segmento> Segmento { get; set; }
     }
 }
