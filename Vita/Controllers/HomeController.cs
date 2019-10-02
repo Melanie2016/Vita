@@ -69,6 +69,14 @@ namespace Vita.Controllers
         {
             return View();
         }
+        public ActionResult ModificarActividad()
+        {
+            return View();
+        }
+        public ActionResult ModificarEvento()
+        {
+            return View();
+        }
         public ActionResult Actividades()
         {
             ViewBag.Message = "Ranking de los más populares";
@@ -101,6 +109,30 @@ namespace Vita.Controllers
         {
             return View();
         }
+
+        public ActionResult ListaActividades()
+        {
+            return View();
+        }
+
+
+        public ActionResult ListaEventos()
+        {
+            return View();
+        }
+        public ActionResult Buscador()
+        {
+            return View();
+        }
+
+
+
+
+
+
+
+
+
         public ActionResult ChatSimple()
         {
             return View();

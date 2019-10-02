@@ -3,139 +3,67 @@
     ViewBag.Title = "Muro";
     Layout = "~/Views/Shared/_LayoutPerfilUsuario.cshtml";
 }
-
-@section list {
-<div class="nk-sidebar">
-    <div class="nk-nav-scroll">
-        <ul class="metismenu" id="menu">
-            <li class="nav-label">Dashboard</li>
-            <li>
-                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="icon-speedometer menu-icon"></i><span class="nav-text">Actividades</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="/Home/Muro">Buscar actividades</a></li>
-                    <li><a href="/Home/Muro">Muro</a></li>
-                           
-                </ul>
-            </li>
-            <li class="mega-menu mega-menu-sm">
-                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Calendario</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="./layout-blank.html">Blank</a></li>
-                    <li><a href="./layout-fixed-header.html">Fixed Header</a></li>
-                    <li><a href="layout-fixed-sidebar.html">Fixed Sidebar</a></li>
-                </ul>
-            </li>
-            <li class="nav-label">Apps</li>
-            <li>
-                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="icon-envelope menu-icon"></i> <span class="nav-text">Chat</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="./email-inbox.html">Grupal</a></li>
-                    <li><a href="./email-read.html">Individual</a></li>
-                </ul>
-            </li>
-                    
-                    
-        </ul>
-    </div>
-</div>
-}
-<!--**********************************
-    Sidebar end
-***********************************-->
-    <section>
-        <div class="container-fluid mt-3">
-            <div class="row">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="card gradient-1">
-                        <div class="card-body">
-                            <h3 class="heading mb-3">Al aire libre</h3>
-                            <div class="d-inline-block">
-                                <img class="one-third align-self-end order-md-last img-fluid" src="~/Content/images/aireL.png" width="200" height="200" alt="">
-                                <br><br>
-                                <p>Seleccionando esta categoria, encontraras las mejores actividades al aire libre.</p>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="card gradient-2">
-                        <div class="card-body">
-                           <h3 class="heading mb-3">Deportes </h3>
-                            <div class="d-inline-block">
-                                <img class="one-third align-self-end order-md-last img-fluid" src="~/Content/images/deporte.png" width="200" height="200" alt=""> 
-                                <br><br>    
-                                <p>Seleccionando esta categoria, encontraras actividades de deportes genericos.</p>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="card gradient-3">
-                        <div class="card-body">
-                            <h3 class="heading mb-3">Cursos y talleres</h3>
-                            <div class="d-inline-block">
-                                <img class="one-third align-self-end order-md-last img-fluid" src="~/Content/images/cursos.png" width="200" height="200" alt="">
-                                <br><br>
-                                <p>Seleccionando esta categoria, encontraras los mejores cursos o talleres de tu agrado.</p>
-                    
-                            </div>
-                           
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="card gradient-4">
-                        <div class="card-body">
-                            <h3 class="heading mb-3">Juegos</h3>
-                            <div class="d-inline-block">
-                                <img class="one-third align-self-end order-md-last img-fluid" src="~/Content/images/juegos.png" width="200" height="200" alt="">
-                                <br><br>
-                                <p>Seleccionando esta categoria, encontraras entretenimiento o juegos de mesa.</p>
-                  
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body pb-0 d-flex justify-content-between">
-                                    <div>
-
-                                    </div>
-                                    <div class="chart-wrapper">
-                                        <canvas id="chart_widget_2"></canvas>
-                                    </div>
+ 
+<section>
+<div class="container-fluid">
+    
+    <div class="row">
+                    <div class="col-12 m-b-30">
+                        <h4 class="d-inline">Sugerencias</h4>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="card">
+                                    <img class="img-fluid" src="../../Content/images/g2.jpg" alt="">
                                     <div class="card-body">
-
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Descripcion</p>
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
+                            <!-- End Col -->
+                            <div class="col-md-6 col-lg-3">
+                                <div class="card">
+                                    <img class="img-fluid" src="../../Content/images/g3.jpg" alt="">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Descripcion</p>
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Col -->
+                            <div class="col-md-6 col-lg-3">
+                                <div class="card">
+                                    <img class="img-fluid" src="../../Content/images/g4.jpg" alt="">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Descripcion</p>
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Col -->
+                            <div class="col-md-6 col-lg-3">
+                                <div class="card">
+                                    <img class="img-fluid" src="../../Content/images/c3.jpg" alt="">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Descripcion</p>
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Col -->
                         </div>
                     </div>
                 </div>
 
 
-
-
-
-
-
-
-            </div>
-            <!-- #/ container -->
-
-    </section>
+</div>
+     
+</section>

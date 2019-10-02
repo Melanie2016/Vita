@@ -203,6 +203,7 @@
     <Content Include="Content\css\css\bootstrap-reboot.css" />
     <Content Include="Content\css\css\mixins\_text-hide.css" />
     <Content Include="Content\css\FotoPerfil.css" />
+    <Content Include="Content\css\Sugerencias.css" />
     <Content Include="Content\fonts\flaticon\backup.txt" />
     <Content Include="Content\fonts\flaticon\font\flaticon.css" />
     <Content Include="Content\fonts\flaticon\font\flaticon.html" />
@@ -929,6 +930,8 @@
     <Content Include="Views\Home\Calendario.cshtml" />
     <Content Include="Views\Shared\_LayoutPerfilUsuario.cshtml" />
     <Content Include="Views\Shared\_LayoutPerfilEntidad.cshtml" />
+    <Content Include="Views\Home\ModificarEvento.cshtml" />
+    <Content Include="Views\Home\ModificarActividad.cshtml" />
     <Content Include="Views\Home\ChatSimple.cshtml" />
     <Content Include="Views\Home\ChatGrupal.cshtml" />
     <Content Include="Views\Home\ColaboracionesEntidad.cshtml" />
@@ -937,6 +940,9 @@
     <Content Include="Views\Home\FichaActividad.cshtml" />
     <Content Include="Views\Home\CrearActividad.cshtml" />
     <Content Include="Views\Home\CrearEvento.cshtml" />
+    <Content Include="Views\Home\ListaActividades.cshtml" />
+    <Content Include="Views\Home\ListaEventos.cshtml" />
+    <Content Include="Views\Home\Buscador.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
