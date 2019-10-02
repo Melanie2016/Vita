@@ -109,5 +109,30 @@ namespace Vita.Controllers
         {
             return View();
         }
+
+        public ActionResult ListaActividades()
+        {
+            return View();
+        }
+
+
+        public ActionResult ListaEventos()
+        {
+            return View();
+        }
+        public ActionResult Buscador()
+        {
+            return View();
+        }
+
+
+
+
+
+
+
+
+
+
     }
 }
