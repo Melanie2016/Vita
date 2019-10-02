@@ -10282,11 +10282,7 @@ td:nth-child(2){
   width: 40px;
 }
 
-tr:last-child td{
-  border:none;
-  padding:30px 10px 10px;
-  text-align: center;
-}
+
 
 input[type=checkbox] {
   cursor: pointer;

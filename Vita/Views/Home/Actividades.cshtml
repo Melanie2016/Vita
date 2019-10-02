@@ -41,7 +41,7 @@
                                             </div>
                                         </td>
                                         <td>Desde 50$</td>
-                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalZumba">+ Info</button> <a href="#" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
+                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalZumba">+ Info</button> <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
                                     </tr>
 
                                     <tr>
@@ -56,7 +56,7 @@
                                             </div>
                                         </td>
                                         <td>Desde 150$</td>
-                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAquaGym">+ Info</button> <a href="#" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
+                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAquaGym">+ Info</button> <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
                                     </tr>
                                     <tr>
                                         <td><img src="~/Content/images/3.jpg" class="mr-3" alt="">Bingo</td>
@@ -71,12 +71,36 @@
                                             </div>
                                         </td>
                                         <td>Gratis</td>
-                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalZumba">+ Info</button> <a href="#" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalZumba">+ Info</button>
+
+                                            <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse"><span class="glyphicon glyphicon-remove"></span>Unirse</a>
+                                        </td>
+
                                     </tr>
 
 
                                 </tbody>
                             </table>
+                            <div class="modal fade" id="unirse" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                <div class="modal-dialog modal-notify modal-info" role="document">
+                                    <div class="modal-content text-center">
+                                        <div class="modal-header d-flex justify-content-center">
+                                            <h4 class="modal-title" id="myModalLabel">¡Se ha unido a la actividad!</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h3>Puede ver si se unió satisfactoriamente en <a href="/Home/PerfilUsuario">su perfil </a></h3>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade show" id="zona" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <table class="table table-striped custab" cellspacing="0">
@@ -85,13 +109,14 @@
                                         <th>Actividad</th>
                                         <th>Zona</th>
                                         <th>Edad</th>
+                                        <th>Presentes</th>
                                         <th>Precio</th>
                                         <th class="text-center">Acción</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><img src="~/Content/images/2.jpg" class="mr-3" alt="">AquaGym</td>
+                                        <td><img src="~/Content/images/1.jpg" class="mr-3" alt="">Zumba</td>
                                         <td>San Justo</td>
                                         <td>60-90</td>
                                         <td>
@@ -101,42 +126,67 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>Desde 100$</td>
-                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAquaGym">+ Info</button> <a href="#" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
+                                        <td>Desde 50$</td>
+                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalZumba">+ Info</button> <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse1"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
                                     </tr>
 
                                     <tr>
-                                        <td><img src="~/Content/images/1.jpg" class="mr-3" alt="">Zumba</td>
-                                        <td>Laferrere</td>
+                                        <td><img src="~/Content/images/2.jpg" class="mr-3" alt="">AquaGym</td>
+                                        <td>La Plata</td>
                                         <td>60-80</td>
                                         <td>
                                             <div class="progress">
-                                                <div style="width: 70%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="30" role="progressbar" class="red progress-bar">
-                                                    <span>70%</span>
+                                                <div style="width: 50%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="30" role="progressbar" class="red progress-bar">
+                                                    <span>50%</span>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>Desde 150$</td>
-                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalZumba">+ Info</button> <a href="#" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
+                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAquaGym">+ Info</button> <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse1"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
                                     </tr>
                                     <tr>
-                                        <td><img src="~/Content/images/5.jpg" class="mr-3" alt="">Salsa</td>
-                                        <td>Morón</td>
+                                        <td><img src="~/Content/images/3.jpg" class="mr-3" alt="">Bingo</td>
+                                        <td>Temperley</td>
                                         <td>55-90</td>
+
                                         <td>
                                             <div class="progress">
-                                                <div style="width: 10%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="30" role="progressbar" class="red progress-bar">
-                                                    <span>10%</span>
+                                                <div style="width: 80%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="30" role="progressbar" class="red progress-bar">
+                                                    <span>80%</span>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>Gratis</td>
-                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAquaGym">+ Info</button> <a href="#" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalZumba">+ Info</button>
+
+                                            <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse1"><span class="glyphicon glyphicon-remove"></span>Unirse</a>
+                                        </td>
+
                                     </tr>
 
 
                                 </tbody>
                             </table>
+                            <div class="modal fade" id="unirse1" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                <div class="modal-dialog modal-notify modal-info" role="document">
+                                    <div class="modal-content text-center">
+                                        <div class="modal-header d-flex justify-content-center">
+                                            <h4 class="modal-title" id="myModalLabel">¡Se ha unido a la actividad!</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h3>Puede ver si se unió satisfactoriamente en <a href="/Home/PerfilUsuario">su perfil </a></h3>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade show" id="intereses" role="tabpanel" aria-labelledby="nav-contact-tab">
                             <table class="table table-striped custab" cellspacing="0">
@@ -145,60 +195,84 @@
                                         <th>Actividad</th>
                                         <th>Zona</th>
                                         <th>Edad</th>
+                                        <th>Presentes</th>
                                         <th>Precio</th>
                                         <th class="text-center">Acción</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><img src="~/Content/images/4.jpg" class="mr-3" alt="">Dominó</td>
+                                        <td><img src="~/Content/images/1.jpg" class="mr-3" alt="">Zumba</td>
                                         <td>San Justo</td>
-                                        <td>60-100</td>
+                                        <td>60-90</td>
                                         <td>
                                             <div class="progress">
-                                                <div style="width: 35%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="30" role="progressbar" class="red progress-bar">
-                                                    <span>35%</span>
+                                                <div style="width: 20%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="30" role="progressbar" class="red progress-bar">
+                                                    <span>20%</span>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>Gratis</td>
-                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalZumba">+ Info</button> <a href="#" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
+                                        <td>Desde 50$</td>
+                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalZumba">+ Info</button> <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse2"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
                                     </tr>
 
                                     <tr>
-                                        <td><img src="~/Content/images/5.jpg" class="mr-3" alt="">Salsa</td>
-                                        <td>Ramos Mejía</td>
-                                        <td>55-80</td>
-                                        <td>
-                                            <div class="progress">
-                                                <div style="width: 65%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="30" role="progressbar" class="red progress-bar">
-                                                    <span>65%</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>Desde 200$</td>
-                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalZumba">+ Info</button>  <a href="#" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="~/Content/images/6.jpg" class="mr-3" alt="">Rock And Roll</td>
-                                        <td>Quilmes</td>
+                                        <td><img src="~/Content/images/2.jpg" class="mr-3" alt="">AquaGym</td>
+                                        <td>La Plata</td>
                                         <td>60-80</td>
                                         <td>
                                             <div class="progress">
-                                                <div style="width: 90%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="30" role="progressbar" class="red progress-bar">
-                                                    <span>90%</span>
+                                                <div style="width: 50%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="30" role="progressbar" class="red progress-bar">
+                                                    <span>50%</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Desde 150$</td>
+                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAquaGym">+ Info</button> <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse2"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="~/Content/images/3.jpg" class="mr-3" alt="">Bingo</td>
+                                        <td>Temperley</td>
+                                        <td>55-90</td>
+
+                                        <td>
+                                            <div class="progress">
+                                                <div style="width: 80%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="30" role="progressbar" class="red progress-bar">
+                                                    <span>80%</span>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>Gratis</td>
-                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAquaGym">+ Info</button>  <a href="#" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalZumba">+ Info</button>
+
+                                            <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse2"><span class="glyphicon glyphicon-remove"></span>Unirse</a>
+                                        </td>
+
                                     </tr>
 
 
                                 </tbody>
-
                             </table>
+                            <div class="modal fade" id="unirse2" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                <div class="modal-dialog modal-notify modal-info" role="document">
+                                    <div class="modal-content text-center">
+                                        <div class="modal-header d-flex justify-content-center">
+                                            <h4 class="modal-title" id="myModalLabel">¡Se ha unido a la actividad!</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h3>Puede ver si se unió satisfactoriamente en <a href="/Home/PerfilUsuario">su perfil </a></h3>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
 
                         </div>
@@ -287,7 +361,7 @@
                                             <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
                                                aria-controls="collapseOne1">
                                                 <h5 class="mb-0">
-                                                    Descripción <i class="fas fa-angle-down rotate-icon"></i>
+                                                    Descripción 
                                                 </h5>
                                             </a>
                                         </div>
@@ -310,7 +384,7 @@
                                             <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo2"
                                                aria-expanded="false" aria-controls="collapseTwo2">
                                                 <h5 class="mb-0">
-                                                    Edad <i class="fas fa-angle-down rotate-icon"></i>
+                                                    Edad 
                                                 </h5>
                                             </a>
                                         </div>
@@ -333,7 +407,7 @@
                                             <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseThree3"
                                                aria-expanded="false" aria-controls="collapseThree3">
                                                 <h5 class="mb-0">
-                                                    Precio <i class="fas fa-angle-down rotate-icon"></i>
+                                                    Precio 
                                                 </h5>
                                             </a>
                                         </div>
@@ -352,46 +426,65 @@
                                 </div>
                                 <!-- Accordion wrapper -->
                                 <!-- Add to Cart -->
-                                <div class="card-body">
+                        
                                     <!-- <div class="row">
-         <div class="col-md-6">
+        <div class="col-md-6">
 
-             <select class="md-form mdb-select colorful-select dropdown-primary">
-                 <option value="" disabled selected>Choose your option</option>
-                 <option value="1">White</option>
-                 <option value="2">Black</option>
-                 <option value="3">Pink</option>
-             </select>
-             <label>Select color</label>
+            <select class="md-form mdb-select colorful-select dropdown-primary">
+                <option value="" disabled selected>Choose your option</option>
+                <option value="1">White</option>
+                <option value="2">Black</option>
+                <option value="3">Pink</option>
+            </select>
+            <label>Select color</label>
 
-         </div>
-         <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
 
-             <select class="md-form mdb-select colorful-select dropdown-primary">
-                 <option value="" disabled selected>Choose your option</option>
-                 <option value="1">XS</option>
-                 <option value="2">S</option>
-                 <option value="3">L</option>
-             </select>
-             <label>Select size</label>
+            <select class="md-form mdb-select colorful-select dropdown-primary">
+                <option value="" disabled selected>Choose your option</option>
+                <option value="1">XS</option>
+                <option value="2">S</option>
+                <option value="3">L</option>
+            </select>
+            <label>Select size</label>
 
-         </div>
-     </div> -->
-                                    <div class="text-center">
+        </div>
+    </div> -->
+                                    <div class="card-body">
 
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                        <button class="btn btn-primary">
-                                            ¡Quiero unirme!
-                                            <i class="fas fa-cart-plus ml-2" aria-hidden="true"></i>
-                                        </button>
-                                        <a class="btn btn-success" href="/Home/FichaActividad">
-                                            Más Detalles
-                                            <i class="fas fa-cart-plus ml-2" aria-hidden="true"></i>
-                                        </a>
+                                        <div class="text-center">
+
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                            <a href="#" class="btn btn-primary" value="¡Quiero Ayudar!" data-toggle="modal" data-target="#ayuda"> ¡Quiero Unirme!</a>
+                                            <a class="btn btn-success" href="/Home/FichaActividad">
+                                                Más Detalles
+
+                                            </a>
+                                        </div>
                                     </div>
+
+                                    <div class="modal fade" id="ayuda" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                        <div class="modal-dialog modal-notify modal-info" role="document">
+                                            <div class="modal-content text-center">
+                                                <div class="modal-header d-flex justify-content-center">
+                                                    <h4 class="modal-title" id="myModalLabel">¡Se ha unido a la actividad!</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h3>Puede ver si se unió satisfactoriamente en <a href="/Home/PerfilUsuario">su perfil </a></h3>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.Add to Cart -->
                                 </div>
-                                <!-- /.Add to Cart -->
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -478,7 +571,7 @@
                                                 <a data-toggle="collapse" data-parent="#accordionEx1" href="#collapseOne1" aria-expanded="true"
                                                    aria-controls="collapseOne1">
                                                     <h5 class="mb-0">
-                                                        Descripción <i class="fas fa-angle-down rotate-icon"></i>
+                                                        Descripción
                                                     </h5>
                                                 </a>
                                             </div>
@@ -502,7 +595,7 @@
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo2"
                                                    aria-expanded="false" aria-controls="collapseTwo2">
                                                     <h5 class="mb-0">
-                                                        Edad <i class="fas fa-angle-down rotate-icon"></i>
+                                                        Edad
                                                     </h5>
                                                 </a>
                                             </div>
@@ -525,7 +618,7 @@
                                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseThree3"
                                                    aria-expanded="false" aria-controls="collapseThree3">
                                                     <h5 class="mb-0">
-                                                        Precio <i class="fas fa-angle-down rotate-icon"></i>
+                                                        Precio
                                                     </h5>
                                                 </a>
                                             </div>
@@ -545,18 +638,35 @@
                                     <!-- Accordion wrapper -->
                                     <!-- Add to Cart -->
                                     <div class="card-body">
-                                
+
                                         <div class="text-center">
 
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                            <button class="btn btn-primary">
-                                                ¡Quiero unirme!
-                                                <i class="fas fa-cart-plus ml-2" aria-hidden="true"></i>
-                                            </button>
+                                            <a href="#" class="btn btn-primary" value="¡Quiero Ayudar!" data-toggle="modal" data-target="#ayuda1"> ¡Quiero Unirme!</a>
                                             <a class="btn btn-success" href="/Home/FichaActividad">
                                                 Más Detalles
-                                                <i class="fas fa-cart-plus ml-2" aria-hidden="true"></i>
+
                                             </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal fade" id="ayuda1" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                        <div class="modal-dialog modal-notify modal-info" role="document">
+                                            <div class="modal-content text-center">
+                                                <div class="modal-header d-flex justify-content-center">
+                                                    <h4 class="modal-title" id="myModalLabel">¡Se ha unido a la actividad!</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h3>Puede ver si se unió satisfactoriamente en <a href="/Home/PerfilUsuario">su perfil </a></h3>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- /.Add to Cart -->

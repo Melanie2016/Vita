@@ -38,7 +38,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalGarraham">+ Info</button> <a href="#" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
+                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalGarraham">+ Info</button> <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse2"><span class="glyphicon glyphicon-remove"></span>Unirse</a>
                                     </tr>
 
                                     <tr>
@@ -52,7 +52,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalNorita">+ Info</button> <a href="#" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
+                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalNorita">+ Info</button> <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse2"><span class="glyphicon glyphicon-remove"></span>Unirse</a>
                                     </tr>
                                     <tr>
                                         <td><img src="~/Content/images/q1.jpg" class="mr-3" alt="">¡Divertite y Doná!</td>
@@ -65,12 +65,32 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalChas">+ Info</button> <a href="#" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
+                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalChas">+ Info</button> <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse2"><span class="glyphicon glyphicon-remove"></span>Unirse</a>
                                     </tr>
 
 
                                 </tbody>
                             </table>
+
+                            <div class="modal fade" id="unirse2" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                <div class="modal-dialog modal-notify modal-info" role="document">
+                                    <div class="modal-content text-center">
+                                        <div class="modal-header d-flex justify-content-center">
+                                            <h4 class="modal-title" id="myModalLabel">¡Se ha unido a la actividad!</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h3>Puede ver si se unió satisfactoriamente en <a href="/Home/PerfilUsuario">su perfil </a></h3>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade show" id="zona" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <table class="table table-striped custab" cellspacing="0">
@@ -95,7 +115,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalGarraham">+ Info</button> <a href="#" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
+                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalGarraham">+ Info</button> <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse"><span class="glyphicon glyphicon-remove"></span>Unirse</a>
                                     </tr>
 
                                     <tr>
@@ -109,7 +129,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalNorita">+ Info</button> <a href="#" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
+                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalNorita">+ Info</button> <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse"><span class="glyphicon glyphicon-remove"></span>Unirse</a>
                                     </tr>
                                     <tr>
                                         <td><img src="~/Content/images/q1.jpg" class="mr-3" alt="">¡Divertite y Doná!</td>
@@ -122,12 +142,32 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalChas">+ Info</button> <a href="#" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
+                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalChas">+ Info</button> <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse"><span class="glyphicon glyphicon-remove"></span>Unirse</a>
                                     </tr>
 
 
                                 </tbody>
                             </table>
+
+                            <div class="modal fade" id="unirse" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                <div class="modal-dialog modal-notify modal-info" role="document">
+                                    <div class="modal-content text-center">
+                                        <div class="modal-header d-flex justify-content-center">
+                                            <h4 class="modal-title" id="myModalLabel">¡Se ha unido a la actividad!</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h3>Puede ver si se unió satisfactoriamente en <a href="/Home/PerfilUsuario">su perfil </a></h3>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade show" id="sugerencias" role="tabpanel" aria-labelledby="nav-contact-tab">
                             <table class="table table-striped custab" cellspacing="0">
@@ -152,7 +192,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalGarraham">+ Info</button> <a href="#" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
+                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalGarraham">+ Info</button> <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse1"><span class="glyphicon glyphicon-remove"></span>Unirse</a>
                                     </tr>
 
                                     <tr>
@@ -166,7 +206,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalNorita">+ Info</button> <a href="#" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
+                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalNorita">+ Info</button> <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse1"><span class="glyphicon glyphicon-remove"></span>Unirse</a>
                                     </tr>
                                     <tr>
                                         <td><img src="~/Content/images/q1.jpg" class="mr-3" alt="">¡Divertite y Doná!</td>
@@ -179,7 +219,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalChas">+ Info</button> <a href="#" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-remove"></span>Unirse</a></td>
+                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalChas">+ Info</button> <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse1"><span class="glyphicon glyphicon-remove"></span>Unirse</a>
                                     </tr>
 
 
@@ -187,7 +227,25 @@
 
                             </table>
 
+                            <div class="modal fade" id="unirse1" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                <div class="modal-dialog modal-notify modal-info" role="document">
+                                    <div class="modal-content text-center">
+                                        <div class="modal-header d-flex justify-content-center">
+                                            <h4 class="modal-title" id="myModalLabel">¡Se ha unido a la actividad!</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h3>Puede ver si se unió satisfactoriamente en <a href="/Home/PerfilUsuario">su perfil </a></h3>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -270,7 +328,7 @@
                                             <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
                                                aria-controls="collapseOne1">
                                                 <h5 class="mb-0">
-                                                    Descripción <i class="fas fa-angle-down rotate-icon"></i>
+                                                    Descripción
                                                 </h5>
                                             </a>
                                         </div>
@@ -293,7 +351,7 @@
                                             <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo2"
                                                aria-expanded="false" aria-controls="collapseTwo2">
                                                 <h5 class="mb-0">
-                                                    Necesidades <i class="fas fa-angle-down rotate-icon"></i>
+                                                    Necesidades
                                                 </h5>
                                             </a>
                                         </div>
@@ -316,7 +374,7 @@
                                             <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseThree3"
                                                aria-expanded="false" aria-controls="collapseThree3">
                                                 <h5 class="mb-0">
-                                                    ¿Cuándo y Dónde? <i class="fas fa-angle-down rotate-icon"></i>
+                                                    ¿Cuándo y Dónde? 
                                                 </h5>
                                             </a>
                                         </div>
@@ -338,41 +396,57 @@
                                 <!-- Add to Cart -->
                                 <div class="card-body">
                                     <!-- <div class="row">
-                                    <div class="col-md-6">
+        <div class="col-md-6">
 
-                                        <select class="md-form mdb-select colorful-select dropdown-primary">
-                                            <option value="" disabled selected>Choose your option</option>
-                                            <option value="1">White</option>
-                                            <option value="2">Black</option>
-                                            <option value="3">Pink</option>
-                                        </select>
-                                        <label>Select color</label>
+            <select class="md-form mdb-select colorful-select dropdown-primary">
+                <option value="" disabled selected>Choose your option</option>
+                <option value="1">White</option>
+                <option value="2">Black</option>
+                <option value="3">Pink</option>
+            </select>
+            <label>Select color</label>
 
-                                    </div>
-                                    <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
 
-                                        <select class="md-form mdb-select colorful-select dropdown-primary">
-                                            <option value="" disabled selected>Choose your option</option>
-                                            <option value="1">XS</option>
-                                            <option value="2">S</option>
-                                            <option value="3">L</option>
-                                        </select>
-                                        <label>Select size</label>
+            <select class="md-form mdb-select colorful-select dropdown-primary">
+                <option value="" disabled selected>Choose your option</option>
+                <option value="1">XS</option>
+                <option value="2">S</option>
+                <option value="3">L</option>
+            </select>
+            <label>Select size</label>
 
-                                    </div>
-                                </div> -->
+        </div>
+    </div> -->
                                     <div class="text-center">
 
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                        <button class="btn btn-primary">
-                                            ¡Quiero unirme!
-                                            <i class="fas fa-cart-plus ml-2" aria-hidden="true"></i>
-                                        </button>
+                                        <a href="#" class="btn btn-primary" value="¡Quiero Ayudar!" data-toggle="modal" data-target="#ayuda2"> ¡Quiero Unirme!</a>
                                         <a class="btn btn-warning" href="/Home/FichaEvento">
                                             ¿Cómo puedo ayudar?
-                                            <i class="fas fa-cart-plus ml-2" aria-hidden="true"></i>
+
                                         </a>
-                                       
+
+                                    </div>
+                                    <div class="modal fade" id="ayuda2" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                        <div class="modal-dialog modal-notify modal-info" role="document">
+                                            <div class="modal-content text-center">
+                                                <div class="modal-header d-flex justify-content-center">
+                                                    <h4 class="modal-title" id="myModalLabel">¡Se ha unido a la actividad!</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h3>Puede ver si se unió satisfactoriamente en <a href="/Home/PerfilUsuario">su perfil </a></h3>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- /.Add to Cart -->
@@ -459,7 +533,7 @@
                                             <a data-toggle="collapse" data-parent="#accordionEx1" href="#collapseOne1" aria-expanded="true"
                                                aria-controls="collapseOne1">
                                                 <h5 class="mb-0">
-                                                    Descripción <i class="fas fa-angle-down rotate-icon"></i>
+                                                    Descripción
                                                 </h5>
                                             </a>
                                         </div>
@@ -482,7 +556,7 @@
                                             <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo2"
                                                aria-expanded="false" aria-controls="collapseTwo2">
                                                 <h5 class="mb-0">
-                                                    Necesidades <i class="fas fa-angle-down rotate-icon"></i>
+                                                    Necesidades
                                                 </h5>
                                             </a>
                                         </div>
@@ -505,7 +579,7 @@
                                             <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseThree3"
                                                aria-expanded="false" aria-controls="collapseThree3">
                                                 <h5 class="mb-0">
-                                                    ¿Cuándo y Dónde? <i class="fas fa-angle-down rotate-icon"></i>
+                                                    ¿Cuándo y Dónde?
                                                 </h5>
                                             </a>
                                         </div>
@@ -529,14 +603,31 @@
                                     <div class="text-center">
 
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                        <button class="btn btn-primary">
-                                            ¡Quiero unirme!
-                                            <i class="fas fa-cart-plus ml-2" aria-hidden="true"></i>
-                                        </button>
-                                        <button class="btn btn-warning">
+                                        <a href="#" class="btn btn-primary" value="¡Quiero Ayudar!" data-toggle="modal" data-target="#ayuda"> ¡Quiero Unirme!</a>
+                                        <a class="btn btn-warning" href="/Home/FichaEvento">
                                             ¿Cómo puedo ayudar?
-                                            <i class="fas fa-cart-plus ml-2" aria-hidden="true"></i>
-                                        </button>
+
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="modal fade" id="ayuda" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                    <div class="modal-dialog modal-notify modal-info" role="document">
+                                        <div class="modal-content text-center">
+                                            <div class="modal-header d-flex justify-content-center">
+                                                <h4 class="modal-title" id="myModalLabel">¡Se ha unido a la actividad!</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h3>Puede ver si se unió satisfactoriamente en <a href="/Home/PerfilUsuario">su perfil </a></h3>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- /.Add to Cart -->
@@ -623,7 +714,7 @@
                                             <a data-toggle="collapse" data-parent="#accordionEx1" href="#collapseOne1" aria-expanded="true"
                                                aria-controls="collapseOne1">
                                                 <h5 class="mb-0">
-                                                    Descripción <i class="fas fa-angle-down rotate-icon"></i>
+                                                    Descripción
                                                 </h5>
                                             </a>
                                         </div>
@@ -646,7 +737,7 @@
                                             <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo2"
                                                aria-expanded="false" aria-controls="collapseTwo2">
                                                 <h5 class="mb-0">
-                                                    Necesidades <i class="fas fa-angle-down rotate-icon"></i>
+                                                    Necesidades
                                                 </h5>
                                             </a>
                                         </div>
@@ -669,7 +760,7 @@
                                             <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseThree3"
                                                aria-expanded="false" aria-controls="collapseThree3">
                                                 <h5 class="mb-0">
-                                                    ¿Cuándo y Dónde? <i class="fas fa-angle-down rotate-icon"></i>
+                                                    ¿Cuándo y Dónde?
                                                 </h5>
                                             </a>
                                         </div>
@@ -693,16 +784,34 @@
                                     <div class="text-center">
 
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                        <button class="btn btn-primary">
-                                            ¡Quiero unirme!
-                                            <i class="fas fa-cart-plus ml-2" aria-hidden="true"></i>
-                                        </button>
-                                        <button class="btn btn-warning">
+                                        <a href="#" class="btn btn-primary" value="¡Quiero Ayudar!" data-toggle="modal" data-target="#ayuda1"> ¡Quiero Unirme!</a>
+                                        <a class="btn btn-warning" href="/Home/FichaEvento">
                                             ¿Cómo puedo ayudar?
-                                            <i class="fas fa-cart-plus ml-2" aria-hidden="true"></i>
-                                        </button>
+
+                                        </a>
                                     </div>
                                 </div>
+
+                                <div class="modal fade" id="ayuda1" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                    <div class="modal-dialog modal-notify modal-info" role="document">
+                                        <div class="modal-content text-center">
+                                            <div class="modal-header d-flex justify-content-center">
+                                                <h4 class="modal-title" id="myModalLabel">¡Se ha unido a la actividad!</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h3>Puede ver si se unió satisfactoriamente en <a href="/Home/PerfilUsuario">su perfil </a></h3>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <!-- /.Add to Cart -->
                             </div>
                         </div>
