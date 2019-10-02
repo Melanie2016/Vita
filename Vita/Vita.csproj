@@ -965,6 +965,7 @@
     <Content Include="Views\Home\Sugerencias.cshtml" />
     <Content Include="Views\Chat\ChatGrupal.cshtml" />
     <Content Include="Views\Chat\ChatSimple.cshtml" />
+    <Content Include="Views\Home\Sugerencias.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
