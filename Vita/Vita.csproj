@@ -584,6 +584,7 @@
     <Content Include="Content\images\custom-select.png" />
     <Content Include="Content\images\deporte.png" />
     <Content Include="Content\images\favicon.png" />
+    <Content Include="Content\images\fondo2.png" />
     <Content Include="Content\images\g1.jpg" />
     <Content Include="Content\images\g2.jpg" />
     <Content Include="Content\images\g3.jpg" />
@@ -614,7 +615,7 @@
     <Content Include="Content\images\imgs\7.png" />
     <Content Include="Content\images\imgs\8.png" />
     <Content Include="Content\images\imgs\9.png" />
-    <Content Include="Content\images\iso.jpg" />
+    <Content Include="Content\images\iso.png" />
     <Content Include="Content\images\juegos.png" />
     <Content Include="Content\images\l-dark.png" />
     <Content Include="Content\images\l-white.png" />
