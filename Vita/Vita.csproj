@@ -938,6 +938,8 @@
     <Content Include="Views\Home\ColaboracionesUsuario.cshtml" />
     <Content Include="Views\Shared\_LayoutEventos.cshtml" />
     <Content Include="Views\Home\FichaActividad.cshtml" />
+    <Content Include="Views\Home\CrearActividad.cshtml" />
+    <Content Include="Views\Home\CrearEvento.cshtml" />
     <Content Include="Views\Home\ListaActividades.cshtml" />
     <Content Include="Views\Home\ListaEventos.cshtml" />
     <Content Include="Views\Home\Buscador.cshtml" />
