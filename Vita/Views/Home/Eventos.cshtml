@@ -4,19 +4,15 @@
 }
 
     <section class="ftco-section">
-        <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <nav style="margin-bottom: -54px">
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#populares" role="tab" aria-controls="nav-home" aria-selected="true">Más Populares</a>
-                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#zona" role="tab" aria-controls="nav-profile" aria-selected="false">Por mi zona</a>
-                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#sugerencias" role="tab" aria-controls="nav-contact" aria-selected="false">¡Sugerencias para vos!</a>
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#populares" role="tab" aria-controls="nav-home" aria-selected="true"><h5>Más Populares</h5></a>
+                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#resto" role="tab" aria-controls="nav-profile" aria-selected="false"><h5>Todas los eventos</h5></a>
                         </div>
-                    </nav>
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="populares" role="tabpanel" aria-labelledby="nav-home-tab">
-                            <table class="table table-striped custab" cellspacing="0">
+                            <table class="table table-hover custab" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>Evento</th>
@@ -92,8 +88,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade show" id="zona" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <table class="table table-striped custab" cellspacing="0">
+                        <div class="tab-pane fade show" id="resto" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <table class="table table-hover custab" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>Evento</th>
@@ -169,85 +165,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade show" id="sugerencias" role="tabpanel" aria-labelledby="nav-contact-tab">
-                            <table class="table table-striped custab" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Evento</th>
-                                        <th>Zona</th>
-                                        <th>Necesidades</th>
-                                        <th>Objetivo Cumplido</th>
-                                        <th class="text-center">Acción</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><img src="~/Content/images/g1.jpg" class="mr-3" alt="">Ayuda para el Garrahan</td>
-                                        <td>Parque Patricios</td>
-                                        <td>Monetaria, Logística</td>
-                                        <td>
-                                            <div class="progress">
-                                                <div style="width: 60%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="60" role="progressbar" class="red progress-bar">
-                                                    <span>60%</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalGarraham">+ Info</button> <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse1"><span class="glyphicon glyphicon-remove"></span>Unirse</a>
-                                    </tr>
-
-                                    <tr>
-                                        <td><img src="~/Content/images/n1.jpg" class="mr-3" alt="">Solidaridad para Norita Perez</td>
-                                        <td>La Plata</td>
-                                        <td>Servicios, Logística</td>
-                                        <td>
-                                            <div class="progress">
-                                                <div style="width: 30%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="30" role="progressbar" class="red progress-bar">
-                                                    <span>30%</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalNorita">+ Info</button> <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse1"><span class="glyphicon glyphicon-remove"></span>Unirse</a>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="~/Content/images/q1.jpg" class="mr-3" alt="">¡Divertite y Doná!</td>
-                                        <td>Chascomús</td>
-                                        <td>Logística</td>
-                                        <td>
-                                            <div class="progress">
-                                                <div style="width: 70%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="30" role="progressbar" class="red progress-bar">
-                                                    <span>70%</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalChas">+ Info</button> <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse1"><span class="glyphicon glyphicon-remove"></span>Unirse</a>
-                                    </tr>
-
-
-                                </tbody>
-
-                            </table>
-
-                            <div class="modal fade" id="unirse1" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                                <div class="modal-dialog modal-notify modal-info" role="document">
-                                    <div class="modal-content text-center">
-                                        <div class="modal-header d-flex justify-content-center">
-                                            <h4 class="modal-title" id="myModalLabel">¡Se ha unido a la actividad!</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <h3>Puede ver si se unió satisfactoriamente en <a href="/Home/PerfilUsuario">su perfil </a></h3>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -307,7 +225,7 @@
                                 </div>
                                 <!--/.Carousel Wrapper-->
                             </div>
-                            <div class="col-lg-7 alert alert-primary alert-dismissible fade show">
+                            <div class="col-lg-7 alert alert-ligth alert-dismissible fade show">
                                 <h2 class="h2-responsive product-name">
                                     <strong>Ayuda para el Garrahan</strong>
                                 </h2>
@@ -511,7 +429,7 @@
                                 </div>
                                 <!--/.Carousel Wrapper-->
                             </div>
-                            <div class="col-lg-7 alert alert-primary alert-dismissible fade show">
+                            <div class="col-lg-7 alert alert-ligth alert-dismissible fade show">
                                 <h2 class="h2-responsive product-name">
                                     <strong>Solidaridad para Norita Perez</strong>
                                 </h2>
@@ -692,7 +610,7 @@
                                 </div>
                                 <!--/.Carousel Wrapper-->
                             </div>
-                            <div class="col-lg-7 alert alert-primary alert-dismissible fade show">
+                            <div class="col-lg-7 alert alert-ligth alert-dismissible fade show">
                                 <h2 class="h2-responsive product-name">
                                     <strong>Divertite y de paso AYUDAS</strong>
                                 </h2>
