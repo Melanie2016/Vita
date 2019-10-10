@@ -17,23 +17,44 @@ namespace Vita
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuario()
         {
-            this.ActividadUsuarioAnotado = new HashSet<ActividadUsuarioAnotado>();
+            this.Actividad = new HashSet<Actividad>();
+            this.Evento = new HashSet<Evento>();
+            this.UsuarioInscriptoActividad = new HashSet<UsuarioInscriptoActividad>();
+            this.UsuarioInscriptoEvento = new HashSet<UsuarioInscriptoEvento>();
+            this.UsuarioSegmento = new HashSet<UsuarioSegmento>();
+            this.Categoria = new HashSet<Categoria>();
         }
     
-        public int id { get; set; }
-        public string nombre { get; set; }
-        public string apellido { get; set; }
-        public Nullable<System.DateTime> fechaNacimiento { get; set; }
-        public string email { get; set; }
-        public Nullable<int> localidadId { get; set; }
-        public Nullable<int> celular { get; set; }
-        public string usuario1 { get; set; }
-        public string pass { get; set; }
-        public Nullable<int> categoriaId { get; set; }
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public Nullable<System.DateTime> FechaNacimiento { get; set; }
+        public Nullable<int> SexoId { get; set; }
+        public Nullable<int> Dni { get; set; }
+        public string Email { get; set; }
+        public Nullable<int> LocalidadId { get; set; }
+        public Nullable<int> Celular { get; set; }
+        public Nullable<int> Telefono { get; set; }
+        public string UsuarioName { get; set; }
+        public string Pass { get; set; }
+        public string SitioWeb { get; set; }
+        public Nullable<int> RolId { get; set; }
+        public byte[] Foto { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ActividadUsuarioAnotado> ActividadUsuarioAnotado { get; set; }
-        public virtual Categoria Categoria { get; set; }
+        public virtual ICollection<Actividad> Actividad { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Evento> Evento { get; set; }
         public virtual Localidad Localidad { get; set; }
+        public virtual Rol Rol { get; set; }
+        public virtual Sexo Sexo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UsuarioInscriptoActividad> UsuarioInscriptoActividad { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UsuarioInscriptoEvento> UsuarioInscriptoEvento { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UsuarioSegmento> UsuarioSegmento { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Categoria> Categoria { get; set; }
     }
 }
