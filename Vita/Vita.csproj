@@ -128,35 +128,29 @@
     <Compile Include="Actividad.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="ActividadUsuarioAnotado.cs">
-      <DependentUpon>VitaEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Categoria.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Colaborador.cs">
-      <DependentUpon>VitaEntities.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Controllers\ActividadController.cs" />
+    <Compile Include="Controllers\ChatControllers.cs" />
+    <Compile Include="Controllers\ColaboracionController.cs" />
+    <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Entidad.cs">
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Evento.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Evento.cs">
+    <Compile Include="EventoActividad.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Habilidad.cs">
-      <DependentUpon>VitaEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Localidad.cs">
-      <DependentUpon>VitaEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Necesidad.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="PartidoDepartamento.cs">
@@ -166,13 +160,36 @@
     <Compile Include="Provincia.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Rol.cs">
+      <DependentUpon>VitaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Segmento.cs">
+      <DependentUpon>VitaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Servicios\CategoriaServicio.cs" />
-    <Compile Include="Servicios\EntidadServicio.cs" />
+    <Compile Include="Servicios\LocalidadServicio.cs" />
+    <Compile Include="Servicios\SegmentoServicio.cs" />
+    <Compile Include="Servicios\SexoServicio.cs" />
     <Compile Include="Servicios\UsuarioServicio.cs" />
+    <Compile Include="Sexo.cs">
+      <DependentUpon>VitaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="SubCategoria.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="TipoNecesidad.cs">
+      <DependentUpon>VitaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Usuario.cs">
+      <DependentUpon>VitaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsuarioInscriptoActividad.cs">
+      <DependentUpon>VitaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsuarioInscriptoEvento.cs">
+      <DependentUpon>VitaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsuarioSegmento.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="VitaEntities.Context.cs">
@@ -904,8 +921,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Registro.cshtml" />
-    <Content Include="Views\Home\Actividades.cshtml" />
+    <Content Include="Views\Actividad\Actividades.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
@@ -916,9 +932,12 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Home\PerfilUsuario.cshtml" />
-    <Content Include="Views\Home\PerfilEntidad.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Evento\Eventos.cshtml" />
+    <Content Include="Views\Evento\FichaEvento.cshtml" />
+    <Content Include="Views\Home\Calendario.cshtml" />
+    <Content Include="Views\Shared\_LayoutPerfilUsuario.cshtml" />
+    <Content Include="Views\Shared\_LayoutPerfilEntidad.cshtml" />
     <EntityDeploy Include="VitaEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>VitaEntities.Designer.cs</LastGenOutput>
@@ -926,24 +945,26 @@
     <Content Include="VitaEntities.edmx.diagram">
       <DependentUpon>VitaEntities.edmx</DependentUpon>
     </Content>
-    <Content Include="Views\Home\Eventos.cshtml" />
-    <Content Include="Views\Home\FichaEvento.cshtml" />
     <Content Include="Views\Home\Calendario.cshtml" />
     <Content Include="Views\Shared\_LayoutPerfilUsuario.cshtml" />
     <Content Include="Views\Shared\_LayoutPerfilEntidad.cshtml" />
-    <Content Include="Views\Home\ModificarEvento.cshtml" />
-    <Content Include="Views\Home\ModificarActividad.cshtml" />
-    <Content Include="Views\Home\ChatSimple.cshtml" />
-    <Content Include="Views\Home\ChatGrupal.cshtml" />
-    <Content Include="Views\Home\ColaboracionesEntidad.cshtml" />
-    <Content Include="Views\Home\ColaboracionesUsuario.cshtml" />
+    <Content Include="Views\Evento\ModificarEvento.cshtml" />
+    <Content Include="Views\Actividad\ModificarActividad.cshtml" />
+    <Content Include="Views\Colaboracion\ColaboracionesEntidad.cshtml" />
+    <Content Include="Views\Colaboracion\ColaboracionesUsuario.cshtml" />
     <Content Include="Views\Shared\_LayoutEventos.cshtml" />
-    <Content Include="Views\Home\FichaActividad.cshtml" />
-    <Content Include="Views\Home\CrearActividad.cshtml" />
-    <Content Include="Views\Home\CrearEvento.cshtml" />
-    <Content Include="Views\Home\ListaActividades.cshtml" />
-    <Content Include="Views\Home\ListaEventos.cshtml" />
+    <Content Include="Views\Actividad\FichaActividad.cshtml" />
+    <Content Include="Views\Actividad\CrearActividad.cshtml" />
+    <Content Include="Views\Evento\CrearEvento.cshtml" />
+    <Content Include="Views\Actividad\ListaActividades.cshtml" />
+    <Content Include="Views\Evento\ListaEventos.cshtml" />
     <Content Include="Views\Home\Buscador.cshtml" />
+    <Content Include="Views\Usuario\PerfilEntidad.cshtml" />
+    <Content Include="Views\Usuario\PerfilUsuario.cshtml" />
+    <Content Include="Views\Usuario\Registro.cshtml" />
+    <Content Include="Views\Home\Sugerencias.cshtml" />
+    <Content Include="Views\Chat\ChatGrupal.cshtml" />
+    <Content Include="Views\Chat\ChatSimple.cshtml" />
     <Content Include="Views\Home\Sugerencias.cshtml" />
   </ItemGroup>
   <ItemGroup>

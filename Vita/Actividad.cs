@@ -17,32 +17,37 @@ namespace Vita
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Actividad()
         {
-            this.ActividadUsuarioAnotado = new HashSet<ActividadUsuarioAnotado>();
-            this.Evento = new HashSet<Evento>();
+            this.EventoActividad = new HashSet<EventoActividad>();
+            this.UsuarioInscriptoActividad = new HashSet<UsuarioInscriptoActividad>();
+            this.Segmento = new HashSet<Segmento>();
         }
     
-        public int id { get; set; }
-        public string descripcion { get; set; }
-        public Nullable<System.DateTime> fechaCreacion { get; set; }
-        public Nullable<int> edadMinima { get; set; }
-        public Nullable<int> edadMaxima { get; set; }
-        public Nullable<System.DateTime> fechaActividadComienzo { get; set; }
-        public Nullable<System.DateTime> fechaActividadFin { get; set; }
-        public Nullable<int> cantidadDias { get; set; }
-        public Nullable<int> precio { get; set; }
-        public Nullable<int> cantidadParticipantes { get; set; }
-        public Nullable<int> categoriaId { get; set; }
-        public Nullable<int> subcategoriaId { get; set; }
-        public Nullable<int> localidadId { get; set; }
-        public Nullable<int> entidadId { get; set; }
+        public int Id { get; set; }
+        public string Titulo { get; set; }
+        public string Descripcion { get; set; }
+        public System.DateTime FechaCreacion { get; set; }
+        public int EdadMinima { get; set; }
+        public Nullable<int> EdadMaxima { get; set; }
+        public Nullable<int> Precio { get; set; }
+        public System.DateTime FechaDesde { get; set; }
+        public System.DateTime FechaHasta { get; set; }
+        public Nullable<int> CantidadDias { get; set; }
+        public int CantidadCupo { get; set; }
+        public int CategoriaId { get; set; }
+        public int SubcategoriaId { get; set; }
+        public int LocalidadId { get; set; }
+        public Nullable<int> UsuarioId { get; set; }
+        public byte[] Foto { get; set; }
     
-        public virtual Entidad Entidad { get; set; }
-        public virtual SubCategoria SubCategoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ActividadUsuarioAnotado> ActividadUsuarioAnotado { get; set; }
+        public virtual ICollection<EventoActividad> EventoActividad { get; set; }
+        public virtual SubCategoria SubCategoria { get; set; }
+        public virtual Usuario Usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UsuarioInscriptoActividad> UsuarioInscriptoActividad { get; set; }
         public virtual Categoria Categoria { get; set; }
         public virtual Localidad Localidad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Evento> Evento { get; set; }
+        public virtual ICollection<Segmento> Segmento { get; set; }
     }
 }

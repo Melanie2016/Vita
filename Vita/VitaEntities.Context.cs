@@ -26,17 +26,20 @@ namespace Vita
         }
     
         public virtual DbSet<Actividad> Actividad { get; set; }
-        public virtual DbSet<ActividadUsuarioAnotado> ActividadUsuarioAnotado { get; set; }
         public virtual DbSet<Categoria> Categoria { get; set; }
-        public virtual DbSet<Colaborador> Colaborador { get; set; }
-        public virtual DbSet<Entidad> Entidad { get; set; }
         public virtual DbSet<Evento> Evento { get; set; }
-        public virtual DbSet<Habilidad> Habilidad { get; set; }
+        public virtual DbSet<EventoActividad> EventoActividad { get; set; }
         public virtual DbSet<Localidad> Localidad { get; set; }
-        public virtual DbSet<Necesidad> Necesidad { get; set; }
         public virtual DbSet<PartidoDepartamento> PartidoDepartamento { get; set; }
         public virtual DbSet<Provincia> Provincia { get; set; }
+        public virtual DbSet<Rol> Rol { get; set; }
+        public virtual DbSet<Segmento> Segmento { get; set; }
+        public virtual DbSet<Sexo> Sexo { get; set; }
         public virtual DbSet<SubCategoria> SubCategoria { get; set; }
+        public virtual DbSet<TipoNecesidad> TipoNecesidad { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<UsuarioInscriptoActividad> UsuarioInscriptoActividad { get; set; }
+        public virtual DbSet<UsuarioInscriptoEvento> UsuarioInscriptoEvento { get; set; }
+        public virtual DbSet<UsuarioSegmento> UsuarioSegmento { get; set; }
     }
 }

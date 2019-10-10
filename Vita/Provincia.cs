@@ -20,8 +20,8 @@ namespace Vita
             this.PartidoDepartamento = new HashSet<PartidoDepartamento>();
         }
     
-        public int id { get; set; }
-        public string descripcion { get; set; }
+        public int Id { get; set; }
+        public string Descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PartidoDepartamento> PartidoDepartamento { get; set; }
