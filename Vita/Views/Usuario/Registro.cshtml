@@ -163,16 +163,7 @@
                                     <input type="checkbox" name="selectedCategoria" value="@item.Value" />
                                     @item.Text
                                 }
-                                @*<select class="selectpicker" id="Categoria" onchange="changeOption(this)"
-                                            class="form-control" data-live-search="true" title="Seleccione intereses.." name="Categoria.Id">
-
-
-                                        @foreach (var item in ViewBag.ListaIntereses as MultiSelectList)
-                                        {
-                                            <option value="@item.Value">@item.Text</option>
-                                        }
-
-                                    </select>*@
+                              
                             </div>
                         </div>
 
@@ -255,9 +246,7 @@
 
                                         </select>
                                     </div>
-                                    <!--Localidad de la empresa-->
-                                    @*<label class="label">Localidad</label>
-                                        <input class="input--style-4" type="text" name="localidad_emp">*@
+                                    
                                 </div>
                             </div>
                             <div class="col-2">
@@ -284,21 +273,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="input-group">
-                            <label class="label">Seleccione Rubro</label>
-                            <div>
-                                <select class="selectpicker" id="categoriaId" onchange="changeOption(this)"
-                                        class="form-control" data-live-search="true" title="Seleccione rubro.." name="UsuarioInscriptoEnActividad">
-
-
-                                    @foreach (var item in ViewBag.ListaRubro as MultiSelectList)
-                                    {
-                                        <option value="@item.Value">@item.Text</option>
-                                    }
-
-                                </select>
-                            </div>
-                        </div>
+                
 
                         <div class="row row-space">
                             <div class="col-2">

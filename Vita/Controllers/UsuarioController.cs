@@ -54,11 +54,10 @@ namespace Vita.Controllers
             }
             else {
                 usuarioServicio.CrearUsuario(usuario);
-                usuarioServicio.CrearUsuarioSegmento(usuario.Id, selectedSegmento);
-                usuarioServicio.CrearUsuarioCategoriaElegida(usuario.Id, selectedCategoria);
-
                 if (usuario.RolId == 1)
                 {
+                    usuarioServicio.CrearUsuarioSegmento(usuario.Id, selectedSegmento);
+                    usuarioServicio.CrearUsuarioCategoriaElegida(usuario.Id, selectedCategoria);
                     return RedirectToAction("PerfilUsuario", "Usuario");
                 }
                 else
