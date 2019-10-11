@@ -75,21 +75,27 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="input-group">
-                                <label class="label">Seleccione sexo</label>
-                                <div>
-                                    <select class="selectpicker" id="sexoId" onchange="changeOption(this)"
-                                            class="form-control" data-live-search="true" title="Seleccione sexo.." name="SexoId">
+                        
 
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Sexo</label>
+                                    <div class="rs-select2 js-select-simple select--no-search" id="multi" >
+                                        <select  id="sexoId" onchange="changeOption(this)"
+                                                 data-live-search="true" name="SexoId">
+                                            <option>Seleccione...</option>
 
-                                        @foreach (var item in ViewBag.ListaSexo as MultiSelectList)
-                                        {
-                                            <option value="@item.Value">@item.Text</option>
-                                        }
+                                            @foreach (var item in ViewBag.ListaSexo as MultiSelectList)
+                                            {
+                                                <option value="@item.Value">@item.Text</option>
+                                            }
 
-                                    </select>
+                                        </select>
+                                        <div class="select-dropdown"></div>
+                                    </div>
                                 </div>
                             </div>
+
                             <!--Sexo-->
                             @*<div class="col-2">
                                     <div class="input-group">
@@ -133,21 +139,19 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Localidad-->
-                                    <label class="label">Seleccione Localidad</label>
-                                    <div>
-                                        <select class="selectpicker" id="LocalidadId" onchange="changeOption(this)"
-                                                class="form-control" data-live-search="true" title="Seleccione localidad.." name="LocalidadId">
-
-
+                                    <label class="label">Localidad</label>
+                                    <div class="rs-select2 js-select-simple select--no-search" id="multi" >
+                                        <select  id="LocalidadId" data-live-search="true" onchange="changeOption(this)" name="LocalidadId">
+                                            
+                                            <option>Seleccione ...</option>
                                             @foreach (var item in ViewBag.ListaLocalidades as MultiSelectList)
                                             {
                                                 <option value="@item.Value">@item.Text</option>
                                             }
 
                                         </select>
+                                        <div class="select-dropdown"></div>
                                     </div>
-                                    @*<label class="label">Localidad</label>
-                                        <input class="input--style-4" type="text" name="localidad_per">*@
                                 </div>
                             </div>
                             <div class="col-2">
@@ -161,49 +165,38 @@
 
 
                         <div class="input-group">
-                            <label class="label">Seleccione intereses</label>
-                            <div>
-                                <select class="selectpicker" id="Categoria" onchange="changeOption(this)"
-                                        class="form-control" data-live-search="true" title="Seleccione intereses.." name="Categoria.Id">
+                            <label class="label">Intereses</label>
+                            <div class="rs-select2 js-select-simple select--no-search" id="multi" >
+                                <select id="Categoria" onchange="changeOption(this)"
+                                         data-live-search="true" name="Categoria.Id">
 
-
+                                    <option>Seleccione ...</option>
                                     @foreach (var item in ViewBag.ListaIntereses as MultiSelectList)
                                     {
                                         <option value="@item.Value">@item.Text</option>
                                     }
 
                                 </select>
+                                <div class="select-dropdown"></div>
                             </div>
                         </div>
-
-                        @*<div class="input-group">
-                                <label class="label">Intereses</label>
-                                <div class="rs-select2 js-select-simple select--no-search" id="multi">
-                                    <select multiple name="intereses">
-                                        <option>Actividades al aire libre</option>
-                                        <option>Deportes</option>
-                                        <option>Cursos y Talleres</option>
-                                        <option>Entretenimientos</option>
-                                    </select>
-                                    <div class="select-dropdown"></div>
-                                </div>
-                            </div>*@
 
                         <!--Segmento-->
 
                         <div class="input-group">
                             <label class="label">¿A qué segmento perteneces?</label>
-                            <div>
-                                <select class="selectpicker" id="segmentoId" onchange="changeOption(this)"
-                                        class="form-control" data-live-search="true" title="Seleccione segmento.." name="SegmentoId">
+                             <div class="rs-select2 js-select-simple select--no-search" id="multi" >
+                                <select id="segmentoId" onchange="changeOption(this)"
+                                        data-live-search="true" name="SegmentoId">
 
-
+                                    <option>Seleccione ...</option>
                                     @foreach (var item in ViewBag.ListaSegmentos as MultiSelectList)
                                     {
                                         <option value="@item.Value">@item.Text</option>
                                     }
 
                                 </select>
+                                <div class="select-dropdown"></div>
                             </div>
                             @*<div class="rs-select2 js-select-simple select--no-search">
                                 <select name="segmento">
