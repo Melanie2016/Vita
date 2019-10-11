@@ -68,7 +68,7 @@ namespace Vita.Servicios
                 var usuarioSegmento = new UsuarioSegmento();
                 usuarioSegmento.UsuarioId = usuarioId;
                 usuarioSegmento.SegmentoId = segmento;
-                usuarioSegmento.FechaCreacion = DateTime.UtcNow;
+                usuarioSegmento.FechaCreacion = DateTime.Now;
                 myDbContext.UsuarioSegmento.Add(usuarioSegmento);
                 myDbContext.SaveChanges();
             }
