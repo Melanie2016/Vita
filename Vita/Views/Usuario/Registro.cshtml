@@ -1,7 +1,7 @@
 ﻿@{
     Layout = null;
 }
-@Model  Segmento
+
 <!-- Estilo del Registro -->
 <link href="~/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 <link href="~/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
@@ -19,8 +19,6 @@
             <div class="card-body">
                 <form action="/Usuario/Registrar" method="Post" class="formu-usuario" id="form-rol-usuario">
                     <h2 id="tipo_usuario" class="form-title">¿Qué tipo de persona eres?</h2>
-
-
 
                     <!--Tipo de persona-->
                     <center>
@@ -146,8 +144,6 @@
 
                                         </select>
                                     </div>
-                                    @*<label class="label">Localidad</label>
-                                        <input class="input--style-4" type="text" name="localidad_per">*@
                                 </div>
                             </div>
                             <div class="col-2">
@@ -175,46 +171,19 @@
                                 </select>
                             </div>
                         </div>
-
-                        @*<div class="input-group">
-                                <label class="label">Intereses</label>
-                                <div class="rs-select2 js-select-simple select--no-search" id="multi">
-                                    <select multiple name="intereses">
-                                        <option>Actividades al aire libre</option>
-                                        <option>Deportes</option>
-                                        <option>Cursos y Talleres</option>
-                                        <option>Entretenimientos</option>
-                                    </select>
-                                    <div class="select-dropdown"></div>
-                                </div>
-                            </div>*@
-
+ 
                         <!--Segmento-->
 
                         <div class="input-group">
                             <label class="label">¿A qué segmento perteneces?</label>
                             <div>
-                                <select class="selectpicker" id="segmentoId" onchange="changeOption(this)"
-                                        class="form-control" data-live-search="true" title="Seleccione segmento.." name="SegmentoId">
-
-
-                                    @foreach (var item in ViewBag.ListaSegmentos as MultiSelectList)
-                                    {
-                                        <option value="@item.Value">@item.Text</option>
-                                    }
-
-                                </select>
+                                @foreach (var item in ViewBag.ListaSegmentos)
+                                {
+                                    <input type="checkbox" name="selectedSegmento" value="@item.Value" />
+                                    @item.Text
+                                }
+                             
                             </div>
-                            @*<div class="rs-select2 js-select-simple select--no-search">
-                                <select name="segmento">
-                                    <option>Niños</option>
-                                    <option>Jóvenes</option>
-                                    <option>Adultos</option>
-                                    <option>Adultos mayores</option>
-                                </select>
-                                <div class="select-dropdown"></div>
-                            </div>*@
-                        </div>
 
                         <div class="row row-space">
                             <div class="col-2">
@@ -241,6 +210,7 @@
 
 
                     </div>
+                  </div>
 
                 </form>
                 <form action="/Usuario/Registrar" method="Post" class="formu-entidad" id="form-rol-entidad">
@@ -325,18 +295,6 @@
                                 </select>
                             </div>
                         </div>
-                        @*<div class="input-group">
-                                <label class="label">Rubro</label>
-                                <div class="rs-select2 js-select-simple select--no-search">
-                                    <select name="rubro">
-                                        <option>Actividades al aire libre</option>
-                                        <option>Deportes</option>
-                                        <option>Cursos y Talleres</option>
-                                        <option>Entretenimientos</option>
-                                    </select>
-                                    <div class="select-dropdown"></div>
-                                </div>
-                            </div>*@
 
                         <div class="row row-space">
                             <div class="col-2">
@@ -361,9 +319,6 @@
 
                         </div>
                     </div>
-
-
-
                 </form>
             </div>
         </div>

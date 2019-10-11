@@ -34,19 +34,14 @@ namespace Vita.Controllers
             List<Categoria> intereses = categoriaServicio.GetAllCategorias();
             ViewBag.ListaIntereses = new MultiSelectList(intereses, "id", "descripcion");
 
-
-
             return View();
         }
 
         [HttpPost]
-        public ActionResult Registrar(Usuario usuario, List<Categoria> categorias, int SegmentoId)
+        public ActionResult Registrar(Usuario usuario, int[] selectedSegmento)
         {
             var nombreDeUsuarioExiste=usuarioServicio.VerificarExistenciaUsuarioNombre(usuario);
             var existeElUsuario = usuarioServicio.VerificarExistenciaDelUsuario(usuario);
-
-
-
             if (nombreDeUsuarioExiste != null)
             {
                 //ACA DEBERIA DECIR, SU El nombre de usuario ya existe ingrese otro nombre de usuario  
@@ -59,8 +54,7 @@ namespace Vita.Controllers
             }
             else {
                 usuarioServicio.CrearUsuario(usuario);
-                //usuarioServicio.CrearUsuarioCategoriaId(categorias,usuario.Id);
-                usuarioServicio.CrearUsuarioSegmento(SegmentoId, usuario.Id);
+                usuarioServicio.CrearUsuarioSegmento(usuario.Id, selectedSegmento);
 
                 if (usuario.RolId == 1)
                 {
@@ -73,13 +67,9 @@ namespace Vita.Controllers
             }
  
         }
-
-
- 
         [HttpGet]
         public ActionResult PerfilUsuario(Usuario usuario)
         {
-
             return View(usuario);
         }
 
