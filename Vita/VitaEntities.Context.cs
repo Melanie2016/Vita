@@ -30,8 +30,6 @@ namespace Vita
         public virtual DbSet<Evento> Evento { get; set; }
         public virtual DbSet<EventoActividad> EventoActividad { get; set; }
         public virtual DbSet<Localidad> Localidad { get; set; }
-        public virtual DbSet<PartidoDepartamento> PartidoDepartamento { get; set; }
-        public virtual DbSet<Provincia> Provincia { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
         public virtual DbSet<Segmento> Segmento { get; set; }
         public virtual DbSet<Sexo> Sexo { get; set; }

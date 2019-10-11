@@ -1,7 +1,7 @@
 ﻿@{
     Layout = null;
 }
-
+@Model  Segmento
 <!-- Estilo del Registro -->
 <link href="~/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 <link href="~/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
@@ -17,7 +17,7 @@
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
             <div class="card-body">
-                <form action="/Home/Registrar" method="Post" class="formu-usuario" id="form-rol-usuario">
+                <form action="/Usuario/Registrar" method="Post" class="formu-usuario" id="form-rol-usuario">
                     <h2 id="tipo_usuario" class="form-title">¿Qué tipo de persona eres?</h2>
 
 
@@ -243,7 +243,7 @@
                     </div>
 
                 </form>
-                <form action="/Home/Registrar" method="Post" class="formu-entidad" id="form-rol-entidad">
+                <form action="/Usuario/Registrar" method="Post" class="formu-entidad" id="form-rol-entidad">
 
                     <div id="empresa">
                         <div class="input-group" hidden>
