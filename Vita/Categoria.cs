@@ -18,8 +18,8 @@ namespace Vita
         public Categoria()
         {
             this.Actividad = new HashSet<Actividad>();
+            this.UsuarioCategoria = new HashSet<UsuarioCategoria>();
             this.SubCategoria = new HashSet<SubCategoria>();
-            this.Usuario = new HashSet<Usuario>();
         }
     
         public int Id { get; set; }
@@ -28,8 +28,8 @@ namespace Vita
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Actividad> Actividad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SubCategoria> SubCategoria { get; set; }
+        public virtual ICollection<UsuarioCategoria> UsuarioCategoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario> Usuario { get; set; }
+        public virtual ICollection<SubCategoria> SubCategoria { get; set; }
     }
 }

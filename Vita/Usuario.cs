@@ -20,9 +20,9 @@ namespace Vita
             this.Actividad = new HashSet<Actividad>();
             this.Evento = new HashSet<Evento>();
             this.UsuarioInscriptoActividad = new HashSet<UsuarioInscriptoActividad>();
+            this.UsuarioCategoria = new HashSet<UsuarioCategoria>();
             this.UsuarioInscriptoEvento = new HashSet<UsuarioInscriptoEvento>();
             this.UsuarioSegmento = new HashSet<UsuarioSegmento>();
-            this.Categoria = new HashSet<Categoria>();
         }
     
         public int Id { get; set; }
@@ -51,10 +51,10 @@ namespace Vita
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsuarioInscriptoActividad> UsuarioInscriptoActividad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UsuarioCategoria> UsuarioCategoria { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsuarioInscriptoEvento> UsuarioInscriptoEvento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsuarioSegmento> UsuarioSegmento { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Categoria> Categoria { get; set; }
     }
 }

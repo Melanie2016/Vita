@@ -18,8 +18,8 @@ namespace Vita
         public Evento()
         {
             this.EventoActividad = new HashSet<EventoActividad>();
+            this.EventoSegmento = new HashSet<EventoSegmento>();
             this.UsuarioInscriptoEvento = new HashSet<UsuarioInscriptoEvento>();
-            this.Segmento = new HashSet<Segmento>();
         }
     
         public int Id { get; set; }
@@ -38,10 +38,10 @@ namespace Vita
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EventoActividad> EventoActividad { get; set; }
         public virtual Localidad Localidad { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EventoSegmento> EventoSegmento { get; set; }
         public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsuarioInscriptoEvento> UsuarioInscriptoEvento { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Segmento> Segmento { get; set; }
     }
 }

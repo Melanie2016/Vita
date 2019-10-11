@@ -129,6 +129,9 @@
     <Compile Include="Actividad.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ActividadSegmento.cs">
+      <DependentUpon>VitaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -146,6 +149,9 @@
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="EventoActividad.cs">
+      <DependentUpon>VitaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventoSegmento.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -176,6 +182,9 @@
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Usuario.cs">
+      <DependentUpon>VitaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsuarioCategoria.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="UsuarioInscriptoActividad.cs">

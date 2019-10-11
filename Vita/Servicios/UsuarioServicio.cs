@@ -65,30 +65,29 @@ namespace Vita.Servicios
 
             foreach (var segmento in selectedSegmento)
             {
-                var usuarioSegmento = new UsuarioSegmento();
-                usuarioSegmento.UsuarioId = usuarioId;
-                usuarioSegmento.SegmentoId = segmento;
-                usuarioSegmento.FechaCreacion = DateTime.Now;
+                var usuarioSegmento = new UsuarioSegmento
+                {
+                    UsuarioId = usuarioId,
+                    SegmentoId = segmento,
+                    FechaCreacion = DateTime.Now
+                };
                 myDbContext.UsuarioSegmento.Add(usuarioSegmento);
                 myDbContext.SaveChanges();
             }
         }
-        //public void CrearUsuarioCategoriaId(List<Categoria> categorias, long usuarioId)
-        //{
-        //    //falta validar tooodo
-        //    List<UsuarioCategoriaElegida> ListaUsuarioCategoriaElegidas = new List<UsuarioCategoriaElegida>();
-        //    foreach(var categoria in categorias)
-        //    {
-        //        var usuarioCategoriaElegida = new UsuarioCategoriaElegida();
-        //        usuarioCategoriaElegida.UsuarioId = usuarioId;
-        //        usuarioCategoriaElegida.CategoriaId = categoria.Id;
-        //        ListaUsuarioCategoriaElegidas.Add(usuarioCategoriaElegida);
-
-        //    }
-
-        //    myDbContext.UsuarioCategoriaElegida.Add(ListaUsuarioCategoriaElegidas);
-        //    myDbContext.SaveChanges();
-        //}
-        //   public void CrearUsuarioSegmento(List<Segmento> segmentos, int usuarioId)
+        public void CrearUsuarioCategoriaElegida(int usuarioId, int[] selectedCategoria)
+        {
+            foreach (var categoria in selectedCategoria)
+            {
+                var usuarioCategoriaElegida = new UsuarioCategoria
+                {
+                    UsuarioId = usuarioId,
+                    CategoriaId = categoria 
+                };
+                myDbContext.UsuarioCategoria.Add(usuarioCategoriaElegida);
+                myDbContext.SaveChanges();
+            }
+        }
+      
     }
 }

@@ -38,7 +38,7 @@ namespace Vita.Controllers
         }
 
         [HttpPost]
-        public ActionResult Registrar(Usuario usuario, int[] selectedSegmento)
+        public ActionResult Registrar(Usuario usuario, int[] selectedSegmento, int[] selectedCategoria)
         {
             var nombreDeUsuarioExiste=usuarioServicio.VerificarExistenciaUsuarioNombre(usuario);
             var existeElUsuario = usuarioServicio.VerificarExistenciaDelUsuario(usuario);
@@ -55,6 +55,7 @@ namespace Vita.Controllers
             else {
                 usuarioServicio.CrearUsuario(usuario);
                 usuarioServicio.CrearUsuarioSegmento(usuario.Id, selectedSegmento);
+                usuarioServicio.CrearUsuarioCategoriaElegida(usuario.Id, selectedCategoria);
 
                 if (usuario.RolId == 1)
                 {
