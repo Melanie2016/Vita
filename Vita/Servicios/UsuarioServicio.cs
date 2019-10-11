@@ -17,7 +17,6 @@ namespace Vita.Servicios
         public void CrearUsuario(Usuario usuario)
         {
             //falta validar tooodo
-            //usuario.Categoria.ToList();
             Usuario usuarioNuevo = usuario;
             myDbContext.Usuario.Add(usuarioNuevo);
             myDbContext.SaveChanges();
@@ -51,17 +50,45 @@ namespace Vita.Servicios
         {
             if (u.Dni.HasValue)//en caso de ser un usuario
             {
-                var user = myDbContext.Usuario.Where(us => us.Dni.HasValue.Equals(u.Dni.HasValue)).FirstOrDefault();
+                var user = myDbContext.Usuario.Where(us => us.Dni ==u.Dni).FirstOrDefault();
                 return user;
-
             }
             else
             {
                 var user = myDbContext.Usuario.Where(us => us.UsuarioName.Equals(u.UsuarioName) && us.SitioWeb.Equals(u.SitioWeb)).FirstOrDefault();
                 return user;
-
             }
-
         }
+
+        public void CrearUsuarioSegmento(int usuarioId, int[] selectedSegmento)
+        {
+
+            foreach (var segmento in selectedSegmento)
+            {
+                var usuarioSegmento = new UsuarioSegmento();
+                usuarioSegmento.UsuarioId = usuarioId;
+                usuarioSegmento.SegmentoId = segmento;
+                usuarioSegmento.FechaCreacion = DateTime.Now;
+                myDbContext.UsuarioSegmento.Add(usuarioSegmento);
+                myDbContext.SaveChanges();
+            }
+        }
+        //public void CrearUsuarioCategoriaId(List<Categoria> categorias, long usuarioId)
+        //{
+        //    //falta validar tooodo
+        //    List<UsuarioCategoriaElegida> ListaUsuarioCategoriaElegidas = new List<UsuarioCategoriaElegida>();
+        //    foreach(var categoria in categorias)
+        //    {
+        //        var usuarioCategoriaElegida = new UsuarioCategoriaElegida();
+        //        usuarioCategoriaElegida.UsuarioId = usuarioId;
+        //        usuarioCategoriaElegida.CategoriaId = categoria.Id;
+        //        ListaUsuarioCategoriaElegidas.Add(usuarioCategoriaElegida);
+
+        //    }
+
+        //    myDbContext.UsuarioCategoriaElegida.Add(ListaUsuarioCategoriaElegidas);
+        //    myDbContext.SaveChanges();
+        //}
+        //   public void CrearUsuarioSegmento(List<Segmento> segmentos, int usuarioId)
     }
 }

@@ -15,6 +15,7 @@ namespace Vita.Controllers
         private SegmentoServicio segmentoServicio = new SegmentoServicio();
         private LocalidadServicio localidadServicio = new LocalidadServicio();
         private VitaEntities myDbContext = new VitaEntities();
+       
          [HttpGet]
         public ActionResult Registro()
         {
@@ -33,17 +34,14 @@ namespace Vita.Controllers
             List<Categoria> intereses = categoriaServicio.GetAllCategorias();
             ViewBag.ListaIntereses = new MultiSelectList(intereses, "id", "descripcion");
 
-
             return View();
         }
 
         [HttpPost]
-        public ActionResult Registrar(Usuario usuario)
+        public ActionResult Registrar(Usuario usuario, int[] selectedSegmento)
         {
             var nombreDeUsuarioExiste=usuarioServicio.VerificarExistenciaUsuarioNombre(usuario);
             var existeElUsuario = usuarioServicio.VerificarExistenciaDelUsuario(usuario);
-
-
             if (nombreDeUsuarioExiste != null)
             {
                 //ACA DEBERIA DECIR, SU El nombre de usuario ya existe ingrese otro nombre de usuario  
@@ -56,6 +54,8 @@ namespace Vita.Controllers
             }
             else {
                 usuarioServicio.CrearUsuario(usuario);
+                usuarioServicio.CrearUsuarioSegmento(usuario.Id, selectedSegmento);
+
                 if (usuario.RolId == 1)
                 {
                     return RedirectToAction("PerfilUsuario", "Usuario");
@@ -67,11 +67,9 @@ namespace Vita.Controllers
             }
  
         }
-
         [HttpGet]
         public ActionResult PerfilUsuario(Usuario usuario)
         {
-
             return View(usuario);
         }
 

@@ -17,10 +17,8 @@
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
             <div class="card-body">
-                <form action="/Home/Registrar" method="Post" class="formu-usuario" id="form-rol-usuario">
+                <form action="/Usuario/Registrar" method="Post" class="formu-usuario" id="form-rol-usuario">
                     <h2 id="tipo_usuario" class="form-title">¿Qué tipo de persona eres?</h2>
-
-
 
                     <!--Tipo de persona-->
                     <center>
@@ -75,31 +73,24 @@
                                     </div>
                                 </div>
                             </div>
-                        
+                            <div class="input-group">
+                                <label class="label">Seleccione sexo</label>
+                                <div>
+                                    <select class="selectpicker" id="sexoId" onchange="changeOption(this)"
+                                            class="form-control" data-live-search="true" title="Seleccione sexo.." name="SexoId">
 
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Sexo</label>
-                                    <div class="rs-select2 js-select-simple select--no-search" id="multi" >
-                                        <select  id="sexoId" onchange="changeOption(this)"
-                                                 data-live-search="true" name="SexoId">
-                                            <option>Seleccione...</option>
 
-                                            @foreach (var item in ViewBag.ListaSexo as MultiSelectList)
-                                            {
-                                                <option value="@item.Value">@item.Text</option>
-                                            }
+                                        @foreach (var item in ViewBag.ListaSexo as MultiSelectList)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
 
-                                        </select>
-                                        <div class="select-dropdown"></div>
-                                    </div>
+                                    </select>
                                 </div>
                             </div>
-
                             <!--Sexo-->
                             @*<div class="col-2">
                                     <div class="input-group">
-
                                         <label class="label">Sexo</label>
                                         <div class="p-t-10">
                                             <label class="radio-container m-r-45">
@@ -139,18 +130,18 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Localidad-->
-                                    <label class="label">Localidad</label>
-                                    <div class="rs-select2 js-select-simple select--no-search" id="multi" >
-                                        <select  id="LocalidadId" data-live-search="true" onchange="changeOption(this)" name="LocalidadId">
-                                            
-                                            <option>Seleccione ...</option>
+                                    <label class="label">Seleccione Localidad</label>
+                                    <div>
+                                        <select class="selectpicker" id="LocalidadId" onchange="changeOption(this)"
+                                                class="form-control" data-live-search="true" title="Seleccione localidad.." name="LocalidadId">
+
+
                                             @foreach (var item in ViewBag.ListaLocalidades as MultiSelectList)
                                             {
                                                 <option value="@item.Value">@item.Text</option>
                                             }
 
                                         </select>
-                                        <div class="select-dropdown"></div>
                                     </div>
                                 </div>
                             </div>
@@ -165,19 +156,18 @@
 
 
                         <div class="input-group">
-                            <label class="label">Intereses</label>
-                            <div class="rs-select2 js-select-simple select--no-search" id="multi" >
-                                <select id="Categoria" onchange="changeOption(this)"
-                                         data-live-search="true" name="Categoria.Id">
+                            <label class="label">Seleccione intereses</label>
+                            <div>
+                                <select class="selectpicker" id="Categoria" onchange="changeOption(this)"
+                                        class="form-control" data-live-search="true" title="Seleccione intereses.." name="Categoria.Id">
 
-                                    <option>Seleccione ...</option>
+
                                     @foreach (var item in ViewBag.ListaIntereses as MultiSelectList)
                                     {
                                         <option value="@item.Value">@item.Text</option>
                                     }
 
                                 </select>
-                                <div class="select-dropdown"></div>
                             </div>
                         </div>
 
@@ -185,58 +175,44 @@
 
                         <div class="input-group">
                             <label class="label">¿A qué segmento perteneces?</label>
-                             <div class="rs-select2 js-select-simple select--no-search" id="multi" >
-                                <select id="segmentoId" onchange="changeOption(this)"
-                                        data-live-search="true" name="SegmentoId">
+                            <div>
+                                @foreach (var item in ViewBag.ListaSegmentos)
+                                {
+                                    <input type="checkbox" name="selectedSegmento" value="@item.Value" />
+                                    @item.Text
+                                }
 
-                                    <option>Seleccione ...</option>
-                                    @foreach (var item in ViewBag.ListaSegmentos as MultiSelectList)
-                                    {
-                                        <option value="@item.Value">@item.Text</option>
-                                    }
-
-                                </select>
-                                <div class="select-dropdown"></div>
                             </div>
-                            @*<div class="rs-select2 js-select-simple select--no-search">
-                                <select name="segmento">
-                                    <option>Niños</option>
-                                    <option>Jóvenes</option>
-                                    <option>Adultos</option>
-                                    <option>Adultos mayores</option>
-                                </select>
-                                <div class="select-dropdown"></div>
-                            </div>*@
-                        </div>
 
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <!--Usuario-->
-                                    <label class="label">Usuario</label>
-                                    <input class="input--style-4" type="text" name="UsuarioName">
+                            <div class="row row-space">
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <!--Usuario-->
+                                        <label class="label">Usuario</label>
+                                        <input class="input--style-4" type="text" name="UsuarioName">
+                                    </div>
+                                </div>
+
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <!--Contraseña-->
+                                        <label class="label">Contraseña</label>
+                                        <input class="input--style-4" type="password" name="Pass">
+                                    </div>
                                 </div>
                             </div>
+                            <div class="p-t-15">
+                                <button class="btn btn--radius-2 btn--blue" type="submit">Aceptar</button>
+                                <a href="/Home/Index"><button class="btn btn--radius-2 btn--blue" type="button">Cancelar</button></a>
 
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <!--Contraseña-->
-                                    <label class="label">Contraseña</label>
-                                    <input class="input--style-4" type="password" name="Pass">
-                                </div>
                             </div>
-                        </div>
-                        <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" type="submit">Aceptar</button>
-                            <a href="/Home/Index"><button class="btn btn--radius-2 btn--blue" type="button">Cancelar</button></a>
+
 
                         </div>
-
-
                     </div>
 
                 </form>
-                <form action="/Home/Registrar" method="Post" class="formu-entidad" id="form-rol-entidad">
+                <form action="/Usuario/Registrar" method="Post" class="formu-entidad" id="form-rol-entidad">
 
                     <div id="empresa">
                         <div class="input-group" hidden>
@@ -318,18 +294,6 @@
                                 </select>
                             </div>
                         </div>
-                        @*<div class="input-group">
-                                <label class="label">Rubro</label>
-                                <div class="rs-select2 js-select-simple select--no-search">
-                                    <select name="rubro">
-                                        <option>Actividades al aire libre</option>
-                                        <option>Deportes</option>
-                                        <option>Cursos y Talleres</option>
-                                        <option>Entretenimientos</option>
-                                    </select>
-                                    <div class="select-dropdown"></div>
-                                </div>
-                            </div>*@
 
                         <div class="row row-space">
                             <div class="col-2">
@@ -354,9 +318,6 @@
 
                         </div>
                     </div>
-
-
-
                 </form>
             </div>
         </div>
