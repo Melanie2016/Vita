@@ -16,16 +16,20 @@ namespace Vita.Servicios
         }
         public List<Categoria> GetAllCategoriasDelUsuario(Usuario usuario)
         {
-            var listUsuarioCategoria = myDbContext.UsuarioCategoria.Where(x => x.UsuarioId == usuario.Id).ToArray();
             var categorias = new List<Categoria>();
-            foreach (var usercate in listUsuarioCategoria)
+            if (usuario != null)
             {
+                var listUsuarioCategoria = myDbContext.UsuarioCategoria.Where(x => x.UsuarioId == usuario.Id).ToArray();
+                
+                foreach (var usercate in listUsuarioCategoria)
+                {
 
-                 categorias.AddRange(myDbContext.Categoria.Where(x => x.Id == usercate.CategoriaId).ToList());
+                    categorias.AddRange(myDbContext.Categoria.Where(x => x.Id == usercate.CategoriaId).ToList());
 
+                }
             }
-            var cates = categorias;
-            return cates;
+          
+            return categorias;
         }
 
     }

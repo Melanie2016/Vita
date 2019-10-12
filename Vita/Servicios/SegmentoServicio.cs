@@ -9,6 +9,11 @@ namespace Vita.Servicios
     {
         private VitaEntities myDbContext = new VitaEntities();
 
+        public Segmento Get(int segmentoId)
+        {
+            return myDbContext.Segmento.Find(segmentoId);
+
+        }
         public List<Segmento> GetAllSegmento()
         {
             return myDbContext.Segmento.OrderBy(x => x.Id).ToList();

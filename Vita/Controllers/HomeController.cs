@@ -37,56 +37,67 @@ namespace Vita.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult BuscadorSegmento(int SegmentoId, Usuario usuario)
+        public ActionResult Buscador(int SegmentoId)
         {
             var usuarioLogueado = Session["Usuario"] as Usuario; //obtengo usuario logueado
-            var listaActividadPorSegmento= buscardorServicio.GetActividadBySegmentoId(SegmentoId); //busco las actividades por ese segmento
-            if (listaActividadPorSegmento.Count == 0)//si no encontre deberia mostrar un mensaje
+            if (usuarioLogueado == null)
             {
-                return View();
-                //Hay que agregar ese mensaje No se encontraron actividades para ese segmento
-            }else{//si encontro ENTRA ACA
-                //SE CREAN LISTA PARA ALMACENAR LAS ACTIVIDADES QUE TIENEN EN COMUN CON EL USUARIO
-                var listaPorLocalidad = new List<Actividad>();
-                var listaPorInterese = new List<Actividad>();
-                var listaMasPopulares = new List<Actividad>();
-                var categoriasDelUsuario = categoriaServicio.GetAllCategoriasDelUsuario(usuarioLogueado);//obtenemos la lista de categorias por el usuario
-                foreach (var actividad in listaActividadPorSegmento) //recorremos las lista obtenidas por el segmento elegido
-                {
-                    foreach (var cate in categoriasDelUsuario)//recorremos las categorias del usuario
-                    {
-                        if (actividad.CategoriaId == cate.Id)//comparamos el id de la categoria que tiene el usuario con la de la actividad
-                        {
-                            listaPorInterese.Add(actividad);//agregamos a la lista de intereses esa actividad
-                        }
-                    }
-                    if (actividad.LocalidadId == usuarioLogueado.LocalidadId)//comparamos la localidad del usuario y de la actividad
-                    {
-                        listaPorLocalidad.Add(actividad);//agregamos a la lista de localidad
-                    }
-                    
-                    //if (listaActividadPorSegmento == popular) hay que plantearlo bien
-                    //{
-                    //listaMasPopulares.Add(actividad);
-                    //}
-               
-                }
-                if (listaPorLocalidad.Count != 0)//verificamos que cada lista tenga valor para agregar a los viewBag
-                {
-                    ViewBag.ListaPorLocalidad = listaPorLocalidad;
-                }
-                if (listaActividadPorSegmento.Count != 0)
-                {
-                    ViewBag.ListaActividadPorSegmento = listaActividadPorSegmento;
-                }
-                if(listaMasPopulares.Count!= 0)
-                {
-                    ViewBag.ListaMasPopulares = listaMasPopulares;
-                }
-                return RedirectToAction("Buscador", "Home",listaActividadPorSegmento);//igual le pasamos todas las actividades por el segmento
+                return RedirectToAction("Login", "Login");
             }
-              
-          
+            else
+            {
+                var listaActividadPorSegmento = buscardorServicio.GetActividadBySegmentoId(SegmentoId); //busco las actividades por ese segmento
+                if (listaActividadPorSegmento.Count == 0)//si no encontre deberia mostrar un mensaje
+                {
+                    var segmento = segmentoServicio.Get(SegmentoId).Descripcion;
+
+                    ViewBag.SegmentoNoEncontrado = "No se encontro actividades por " + segmento;
+                    //Por alguna razon no muestra los mensajes :( 
+                    return RedirectToAction("Buscador", "Home");
+                }
+                else
+                {//si encontro ENTRA ACA
+                 //SE CREAN LISTA PARA ALMACENAR LAS ACTIVIDADES QUE TIENEN EN COMUN CON EL USUARIO
+                    var listaPorLocalidad = new List<Actividad>();
+                    var listaPorInterese = new List<Actividad>();
+                    var listaMasPopulares = new List<Actividad>();
+                    var categoriasDelUsuario = categoriaServicio.GetAllCategoriasDelUsuario(usuarioLogueado);//obtenemos la lista de categorias por el usuario
+                    foreach (var actividad in listaActividadPorSegmento) //recorremos las lista obtenidas por el segmento elegido
+                    {
+                        foreach (var cate in categoriasDelUsuario)//recorremos las categorias del usuario
+                        {
+                            if (actividad.CategoriaId == cate.Id)//comparamos el id de la categoria que tiene el usuario con la de la actividad
+                            {
+                                listaPorInterese.Add(actividad);//agregamos a la lista de intereses esa actividad
+                            }
+                        }
+                        if (actividad.LocalidadId == usuarioLogueado.LocalidadId)//comparamos la localidad del usuario y de la actividad
+                        {
+                            listaPorLocalidad.Add(actividad);//agregamos a la lista de localidad
+                        }
+
+                        //if (listaActividadPorSegmento == popular) hay que plantearlo bien
+                        //{
+                        //listaMasPopulares.Add(actividad);
+                        //}
+
+                    }
+                    if (listaPorLocalidad.Count != 0)//verificamos que cada lista tenga valor para agregar a los viewBag
+                    {
+                        ViewBag.ListaPorLocalidad = listaPorLocalidad;
+                    }
+                    if (listaPorInterese.Count != 0)
+                    {
+                        ViewBag.ListaPorInterese = listaPorInterese;
+                    }
+                    if (listaMasPopulares.Count != 0)
+                    {
+                        ViewBag.ListaMasPopulares = listaMasPopulares;
+                    }
+                    return RedirectToAction("Buscador", "Home", listaActividadPorSegmento);//igual le pasamos todas las actividades por el segmento
+                }
+
+            }
         }
     }
 }
