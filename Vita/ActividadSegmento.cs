@@ -14,9 +14,11 @@ namespace Vita
     
     public partial class ActividadSegmento
     {
-        public int ActividadSegmentoId { get; set; }
-        public Nullable<int> ActividadId { get; set; }
-        public Nullable<int> SegmentoId { get; set; }
+        public int ActividadId { get; set; }
+        public int SegmentoId { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public Nullable<System.DateTime> DeletedAt { get; set; }
     
         public virtual Actividad Actividad { get; set; }
         public virtual Segmento Segmento { get; set; }

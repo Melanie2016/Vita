@@ -185,7 +185,7 @@
     <Compile Include="Usuario.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="UsuarioCategoria.cs">
+    <Compile Include="UsuarioCategoriaElegida.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="UsuarioInscriptoActividad.cs">

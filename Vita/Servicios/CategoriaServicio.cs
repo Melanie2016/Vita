@@ -19,7 +19,7 @@ namespace Vita.Servicios
             var categorias = new List<Categoria>();
             if (usuario != null)
             {
-                var listUsuarioCategoria = myDbContext.UsuarioCategoria.Where(x => x.UsuarioId == usuario.Id).ToArray();
+                var listUsuarioCategoria = myDbContext.UsuarioCategoriaElegida.Where(x => x.UsuarioId == usuario.Id).ToArray();
                 
                 foreach (var usercate in listUsuarioCategoria)
                 {

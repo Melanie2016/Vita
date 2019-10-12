@@ -16,7 +16,9 @@ namespace Vita
     {
         public int ActividadId { get; set; }
         public int EventoId { get; set; }
-        public Nullable<System.DateTime> Fecha { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public Nullable<System.DateTime> DeletedAt { get; set; }
     
         public virtual Actividad Actividad { get; set; }
         public virtual Evento Evento { get; set; }

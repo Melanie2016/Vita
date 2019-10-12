@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutPerfilUsuario.cshtml";
 
 }
-
+@model Usuario
 <link href="~/Content/css/FotoPerfil.css" rel="stylesheet" media="all">
 
 <div class="container-fluid">
@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <div class="row mb-6">
                         <div class="col-12 text-center">
-                            
+
                             <div class="avatar-wrapper">
                                 <img class="profile-pic" src="~/Content/images/person_2.jpg" width="100" height="100" alt="">
                                 <input class="file-upload" type="file" accept="image/*" />
@@ -38,14 +38,14 @@
                         <div class="col-12 text-center">
                             <button class="btn btn-success px-4 upload-button">CAMBIAR FOTO</button>
                         </div>
-                    </div>
+                    </div>@Model.SobreMi
                     <br><br>
 
                     <h4>Sobre mí</h4>
-                    <p class="text-muted">Soy de zona oeste, me gustan los juegos de mesa tales como , la loteria, el truco y el chinchon.</p>
+                    <p class="text-muted"></p>
                     <ul class="card-profile__info">
-                        <li class="mb-1"><strong class="text-dark mr-4">Contacto</strong> <br><span>011 2781 7645</span></li>
-                        <li><strong class="text-dark mr-4">Email</strong> <span>gusti_fuentes1@gmail.com</span></li>
+                        <li class="mb-1"><strong class="text-dark mr-4">Contacto</strong> <br><span>@Model.Celular</span></li>
+                        <li><strong class="text-dark mr-4">Email</strong> <span>@Model.Email</span></li>
                     </ul>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                     <div class="media media-reply">
                         <div class="media-body">
                             <div class="d-sm-flex justify-content-between mb-2">
-                                <h5 class="mb-sm-0">GustiCABJ<small class="text-muted ml-3">última modificación hace 3 días </small></h5>
+                                <h5 class="mb-sm-0">@Model.UsuarioName<small class="text-muted ml-3">última modificación hace (@Model.UpdatedAt) días </small></h5>
                                 <!--<div class="media-reply__link">
                                     <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
                                     <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
@@ -75,55 +75,55 @@
                                         <tbody>
                                             <tr>
                                                 <th scope="row">Nombre</th>
-                                                <td>Gustavo Damian</td>
+                                                <td>@Model.Nombre</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Apellido</th>
-                                                <td>Fuentes</td>
+                                                <td>@Model.Apellido</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Fecha de Nacimiento</th>
-                                                <td>15/06/1960</td>
+                                                <td>@Model.FechaNacimiento</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Sexo</th>
-                                                <td>Masculino</td>
+                                                <td>@Model.Sexo.Descripcion</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">DNI</th>
-                                                <td>22.145.678</td>
+                                                <td>@Model.Dni</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Email</th>
-                                                <td>gusti_fuentes1@gmail.com</td>
+                                                <td>@Model.Email</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Localidad</th>
-                                                <td>Ramos Mejía</td>
+                                                <td>@Model.Localidad.Descripcion</td><!--Puede tirarte el error al crear, pero si te fijas en la base, ya lo creo, no quitar, ya lo voy a ver-->
                                             </tr>
                                             <tr>
                                                 <th scope="row">Celular</th>
-                                                <td>011 2781 7645</td>
+                                                <td>@Model.Celular</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Intereses</th>
-                                                <td>Actividades al aire libre, Deportes</td>
+                                                <td>@Model.UsuarioCategoriaElegida.ToList()</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Segmento</th>
-                                                <td>Adultos Mayores</td>
+                                                <td>@Model.UsuarioSegmento</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Sobre mí</th>
-                                                <td>Soy de zona oeste, me gustan los juegos de mesa tales como , la loteria, el truco y el chinchon.</td>
+                                                <td>@Model.SobreMi</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Usuario</th>
-                                                <td>GustiCABJ</td>
+                                                <td>@Model.UsuarioName</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Password</th>
-                                                <td>************</td>
+                                                <td>@Model.Pass</td>
                                             </tr>
                                         </tbody>
                                         <!--Table body-->

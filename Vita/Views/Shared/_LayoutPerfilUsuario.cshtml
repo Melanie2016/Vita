@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model Usuario
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -19,8 +20,8 @@
 
     <!-- galeria sugerencias-->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </head>
 
@@ -73,7 +74,7 @@
                         <span class="toggle-icon"><i class="icon-menu"></i></span>
                     </div>
                 </div>
-                
+
                 <div class="header-right">
                     <ul class="clearfix">
                         <li class="icons dropdown">
@@ -172,9 +173,9 @@
                         </li>
                         <li class="icons dropdown">
                             <a href="javascript:void(0)" class="log-user" data-toggle="dropdown">
-                                <span>Hola GustiCABJ !</span>  <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
+                                <span>Hola @Model.UsuarioName !</span>  <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
                             </a>
-                            <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
+                            <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
                                 <img src="../../Content/images/person_2.jpg" height="40" width="40" alt="">
                             </div>
@@ -203,7 +204,6 @@
         <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
-        
         <!--**********************************
             Sidebar start
         ***********************************-->
@@ -220,7 +220,7 @@
                             <li><a href="/Home/Buscador">Buscar actividades</a></li>
                             <li><a href="/Home/Sugerencias">Sugerencias</a></li>
                             <li><a href="/Actividad/Actividades">Agenda</a></li>
-                                   
+
                         </ul>
                     </li>
                     <li>
@@ -232,7 +232,7 @@
                             <li><a href="/Home/Sugerencias">Sugerencias</a></li>
                             <li><a href="/Home/">Agenda</a></li>
                             <li><a href="/Colaboracion/ColaboracionesUsuario">Colaboraciones</a></li>
-                                   
+
                         </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">
@@ -250,7 +250,7 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="/Usuario/PerfilUsuario">Modificar perfil</a></li>
-                    
+
                         </ul>
                     </li>
 
@@ -264,8 +264,8 @@
                             <li><a href="/Chat/ChatSimple">Individual</a></li>
                         </ul>
                     </li>
-                            
-                            
+
+
                 </ul>
             </div>
         </div>
@@ -273,8 +273,6 @@
         <!--**********************************
             Sidebar end
         ***********************************-->
-
-
         <!--**********************************
             Content body start
         ***********************************-->
@@ -282,7 +280,7 @@
 
 
             @RenderBody()
-            
+
 
             @Scripts.Render("~/bundles/jquery")
             @Scripts.Render("~/bundles/bootstrap")
@@ -292,11 +290,11 @@
             <!--**********************************
                 Content body end
             ***********************************-->
-          
-    </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
+
+        </div>
+        <!--**********************************
+            Main wrapper end
+        ***********************************-->
         <!--**********************************
             Scripts
         ***********************************-->

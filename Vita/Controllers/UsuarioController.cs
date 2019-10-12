@@ -58,11 +58,11 @@ namespace Vita.Controllers
                 {
                     usuarioServicio.CrearUsuarioSegmento(usuario.Id, selectedSegmento);
                     usuarioServicio.CrearUsuarioCategoriaElegida(usuario.Id, selectedCategoria);
-                    return RedirectToAction("PerfilUsuario", "Usuario");
+                    return RedirectToAction("PerfilUsuario", "Usuario", usuario);
                 }
                 else
                 {
-                    return RedirectToAction("PerfilEntidad", "Usuario");
+                    return RedirectToAction("PerfilEntidad", "Usuario", usuario);
                 }
             }
  
@@ -70,13 +70,49 @@ namespace Vita.Controllers
         [HttpGet]
         public ActionResult PerfilUsuario(Usuario usuario)
         {
-            return View(usuario);
+            var usuarioLogueado = usuario;
+            if (usuarioLogueado.Id == 0)
+            {
+                var buscarUsuarioLogueado = Session["Usuario"] as Usuario; //obtengo usuario logueado
+                if (buscarUsuarioLogueado == null)
+                {
+                    return RedirectToAction("Login", "Login");
+                }
+                else
+                {
+                    return View(buscarUsuarioLogueado);
+                }
+                
+            }
+            else
+            {
+                return View(usuarioLogueado);
+            }
+
+
         }
 
         [HttpGet]
         public ActionResult PerfilEntidad(Usuario usuario)
         {
-            return View(usuario);
+            var usuarioLogueado = usuario;
+            if (usuarioLogueado.Id == 0)
+            {
+                var buscarUsuarioLogueado = Session["Usuario"] as Usuario; //obtengo usuario logueado
+                if (buscarUsuarioLogueado == null)
+                {
+                    return RedirectToAction("Login", "Login");
+                }
+                else
+                {
+                    return View(buscarUsuarioLogueado);
+                }
+
+            }
+            else
+            {
+                return View(usuarioLogueado);
+            }
         }
     }
 }

@@ -38,7 +38,7 @@ namespace Vita
         public virtual DbSet<SubCategoria> SubCategoria { get; set; }
         public virtual DbSet<TipoNecesidad> TipoNecesidad { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
-        public virtual DbSet<UsuarioCategoria> UsuarioCategoria { get; set; }
+        public virtual DbSet<UsuarioCategoriaElegida> UsuarioCategoriaElegida { get; set; }
         public virtual DbSet<UsuarioInscriptoActividad> UsuarioInscriptoActividad { get; set; }
         public virtual DbSet<UsuarioInscriptoEvento> UsuarioInscriptoEvento { get; set; }
         public virtual DbSet<UsuarioSegmento> UsuarioSegmento { get; set; }

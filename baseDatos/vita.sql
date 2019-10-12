@@ -55,8 +55,12 @@ Telefono int null,
 UsuarioName varchar(100) not null,
 Pass varchar(10) not null,
 SitioWeb varchar(200) null,
+SobreMi varchar (500) null,
 RolId int,
 Foto image,
+CreatedAt Date null,
+UpdatedAt Date null, 
+DeletedAt Date null, 
 CONSTRAINT sexoUsuarioId FOREIGN KEY(SexoId)
 REFERENCES Sexo(Id),
 CONSTRAINT localidadUsuarioId FOREIGN KEY(LocalidadId)
@@ -68,6 +72,9 @@ REFERENCES Rol (Id)
 CREATE TABLE UsuarioCategoriaElegida(
 UsuarioId int, 
 CategoriaId int,
+CreatedAt Date null,
+UpdatedAt Date null, 
+DeletedAt Date null, 
 CONSTRAINT UsuarioCategoriaId FOREIGN KEY(UsuarioId)
 REFERENCES Usuario (Id),
 CONSTRAINT CategoriaUsuarioId FOREIGN KEY(CategoriaId)
@@ -87,7 +94,9 @@ primary key(UsuarioId, CategoriaId));
 create table UsuarioSegmento(
 UsuarioId int,
 SegmentoId int,
-FechaCreacion Date,
+CreatedAt Date null,
+UpdatedAt Date null, 
+DeletedAt Date null, 
 CONSTRAINT UsuarioSegmentoId FOREIGN KEY(UsuarioId)
 REFERENCES Usuario (Id),
 CONSTRAINT SegmentoUsuarioId FOREIGN KEY(SegmentoId)
@@ -106,7 +115,6 @@ Id int identity(1,1) primary key,
 Titulo varchar(100) not null,
 Descripcion varchar(200),
 UsuarioId int,
-FechaCreacion date,
 Precio int,
 FechaDesde date, 
 FechaHasta date,
@@ -114,6 +122,9 @@ CantidadDias int,
 CantidadCupo int, 
 LocalidadId int,
 Foto image,
+CreatedAt Date null,
+UpdatedAt Date null, 
+DeletedAt Date null, 
 CONSTRAINT EventoUsuarioId FOREIGN KEY(UsuarioId)
 REFERENCES Usuario (Id),
 CONSTRAINT EventoLocalidadId FOREIGN KEY(LocalidadId)
@@ -123,6 +134,9 @@ REFERENCES Localidad (id)
 create Table EventoSegmento(
 EventoId int,
 SegmentoId int,
+CreatedAt Date null,
+UpdatedAt Date null, 
+DeletedAt Date null, 
 CONSTRAINT EventoSegmentoId FOREIGN KEY(EventoId)
 REFERENCES Evento (Id),
 CONSTRAINT SegmentoEventoId FOREIGN KEY(SegmentoId)
@@ -133,7 +147,6 @@ create Table Actividad(
 Id int identity(1,1) primary key,
 Titulo varchar(100) not null,
 Descripcion varchar(200) not null,
-FechaCreacion date not null,
 EdadMinima int not null,
 EdadMaxima int,
 Precio int null,
@@ -146,6 +159,9 @@ SubcategoriaId int not null,
 LocalidadId int not null,
 UsuarioId int,
 Foto image,
+CreatedAt Date null,
+UpdatedAt Date null, 
+DeletedAt Date null, 
 CONSTRAINT CategoriaActividadId FOREIGN KEY(categoriaId)
 REFERENCES Categoria (id),
 CONSTRAINT LocalidadActividadId FOREIGN KEY(localidadId)
@@ -158,6 +174,9 @@ REFERENCES SubCategoria (id)
 create Table ActividadSegmento(
 ActividadId int,
 SegmentoId int,
+CreatedAt Date null,
+UpdatedAt Date null, 
+DeletedAt Date null, 
 CONSTRAINT ActividadSegmentoId FOREIGN KEY(ActividadId)
 REFERENCES Actividad (Id),
 CONSTRAINT SegmentoActividadId FOREIGN KEY(SegmentoId)
@@ -166,13 +185,18 @@ primary key(ActividadId, SegmentoId));
 
 CREATE TABLE TipoNecesidad(
 Id int identity(1,1) primary key,
-Descripcion varchar(100)
+Descripcion varchar(100),
+CreatedAt Date null,
+UpdatedAt Date null, 
+DeletedAt Date null
 );
 
 create Table EventoActividad(
 ActividadId int,
 EventoId int,
-Fecha date,
+CreatedAt Date null,
+UpdatedAt Date null, 
+DeletedAt Date null, 
 primary key(ActividadId, EventoId),
 CONSTRAINT ActividadEventoId FOREIGN KEY(ActividadId)
 REFERENCES Actividad (Id),
@@ -182,7 +206,9 @@ REFERENCES Evento (Id));
 create Table UsuarioInscriptoActividad(
 ActividadId int,
 UsuarioId int, 
-Fecha date,
+CreatedAt Date null,
+UpdatedAt Date null, 
+DeletedAt Date null, 
 primary key(ActividadId,UsuarioId),
 CONSTRAINT ActividadUsuarioInsId FOREIGN KEY(ActividadId)
 REFERENCES Actividad (Id),
@@ -192,7 +218,9 @@ REFERENCES Usuario (Id));
 create Table UsuarioInscriptoEvento(
 EventoId int,
 UsuarioId int, 
-Fecha date,
+CreatedAt Date null,
+UpdatedAt Date null, 
+DeletedAt Date null, 
 primary key(EventoId,UsuarioId),
 CONSTRAINT EventoUsuarioInsId FOREIGN KEY(EventoId)
 REFERENCES Evento (Id),

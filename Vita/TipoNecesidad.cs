@@ -16,5 +16,8 @@ namespace Vita
     {
         public int Id { get; set; }
         public string Descripcion { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public Nullable<System.DateTime> DeletedAt { get; set; }
     }
 }

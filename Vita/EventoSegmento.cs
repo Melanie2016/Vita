@@ -14,9 +14,11 @@ namespace Vita
     
     public partial class EventoSegmento
     {
-        public int EventoSegmentoId { get; set; }
-        public Nullable<int> EventoId { get; set; }
-        public Nullable<int> SegmentoId { get; set; }
+        public int EventoId { get; set; }
+        public int SegmentoId { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public Nullable<System.DateTime> DeletedAt { get; set; }
     
         public virtual Evento Evento { get; set; }
         public virtual Segmento Segmento { get; set; }

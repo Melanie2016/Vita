@@ -3,7 +3,7 @@
 
     Layout = "~/Views/Shared/_LayoutPerfilEntidad.cshtml";
 }
-
+@model Usuario
 
 <script>
     window.onload = function () {
@@ -77,12 +77,11 @@
                     </div>
 
                     <h4>Sobre nosotros</h4>
-                    <p class="text-muted">
-                        El Centro de Jubilados Alí es un espacio para compartir entre todos, con diversos talleres y actividades. Veni a disfrutar con nosotros!!
+                    <p class="text-muted">@Model.SobreMi
                     </p>
                     <ul class="card-profile__info">
-                        <li class="mb-1"><strong class="text-dark mr-4">Contacto</strong> <br /><span>4854-8419</span></li>
-                        <li><strong class="text-dark mr-4">Email</strong> <span>aliCentro@gmail.com</span></li>
+                        <li class="mb-1"><strong class="text-dark mr-4">Contacto</strong> <br /><span>@Model.Telefono</span></li>
+                        <li><strong class="text-dark mr-4">Email</strong> <span>@Model.Email</span></li>
                     </ul>
                 </div>
             </div>
@@ -91,7 +90,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="media-body">
-                        <h5 class="mb-sm-0">AliCentro<small class="text-muted ml-3">última modificación hace 1 día</small></h5>
+                        <h5 class="mb-sm-0">@Model.UsuarioName<small class="text-muted ml-3">última modificación hace @Model.UpdatedAt día</small></h5>
                         <br><br />
                         <!--Table-->
                         <table id="tablePreview" class="table">
@@ -102,43 +101,40 @@
                             <tbody>
                                 <tr>
                                     <th scope="row">Nombre</th>
-                                    <td>Centro de jubilados Alí</td>
+                                    <td>@Model.Nombre</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Email</th>
-                                    <td>aliCentro@gmail.com</td>
+                                    <td>@Model.Email</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Localidad</th>
-                                    <td>Ramos Mejía</td>
+                                    <td>@Model.Localidad.Descripcion</td><!--Puede tirarte el error al crear, pero si te fijas en la base, ya lo creo, no quitar, ya lo voy a ver-->
                                 </tr>
                                 <tr>
                                     <th scope="row">Teléfono</th>
-                                    <td>4854-8419</td>
+                                    <td>@Model.Telefono</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Celular</th>
-                                    <td>11 1122-8419</td>
+                                    <td>@Model.Celular</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Sitio Web Personal</th>
-                                    <td>wwww.centroAliJubi.com.ar</td>
+                                    <td>@Model.SitioWeb</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">Rubro</th>
-                                    <td>Cursos y talleres</td>
-                                </tr>
+                               
                                 <tr>
                                     <th scope="row">Sobre nosotros</th>
-                                    <td>El Centro de Jubilados Alí es un espacio para compartir entre todos, con diversos talleres y actividades. Veni a disfrutar con nosotros!!</td>
+                                    <td>@Model.SobreMi</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Usuario</th>
-                                    <td>AliCentro</td>
+                                    <td>@Model.UsuarioName</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Password</th>
-                                    <td>************</td>
+                                    <td>@Model.Pass</td>
                                 </tr>
                             </tbody>
                             <!--Table body-->

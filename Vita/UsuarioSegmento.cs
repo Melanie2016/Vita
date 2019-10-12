@@ -16,7 +16,9 @@ namespace Vita
     {
         public int UsuarioId { get; set; }
         public int SegmentoId { get; set; }
-        public Nullable<System.DateTime> FechaCreacion { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public Nullable<System.DateTime> DeletedAt { get; set; }
     
         public virtual Segmento Segmento { get; set; }
         public virtual Usuario Usuario { get; set; }

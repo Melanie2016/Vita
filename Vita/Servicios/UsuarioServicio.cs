@@ -19,6 +19,7 @@ namespace Vita.Servicios
         {
             //falta validar tooodo
             Usuario usuarioNuevo = usuario;
+            usuarioNuevo.CreatedAt = DateTime.Now;
             myDbContext.Usuario.Add(usuarioNuevo);
             myDbContext.SaveChanges();
         }
@@ -70,7 +71,7 @@ namespace Vita.Servicios
                 {
                     UsuarioId = usuarioId,
                     SegmentoId = segmento,
-                    FechaCreacion = DateTime.Now
+                    CreatedAt = DateTime.Now
                 };
                 myDbContext.UsuarioSegmento.Add(usuarioSegmento);
                 myDbContext.SaveChanges();
@@ -80,12 +81,13 @@ namespace Vita.Servicios
         {
             foreach (var categoria in selectedCategoria)
             {
-                var usuarioCategoriaElegida = new UsuarioCategoria
+                var usuarioCategoriaElegida = new UsuarioCategoriaElegida
                 {
                     UsuarioId = usuarioId,
-                    CategoriaId = categoria 
+                    CategoriaId = categoria,
+                    CreatedAt=DateTime.Now
                 };
-                myDbContext.UsuarioCategoria.Add(usuarioCategoriaElegida);
+                myDbContext.UsuarioCategoriaElegida.Add(usuarioCategoriaElegida);
                 myDbContext.SaveChanges();
             }
         }

@@ -25,7 +25,6 @@ namespace Vita
         public int Id { get; set; }
         public string Titulo { get; set; }
         public string Descripcion { get; set; }
-        public System.DateTime FechaCreacion { get; set; }
         public int EdadMinima { get; set; }
         public Nullable<int> EdadMaxima { get; set; }
         public Nullable<int> Precio { get; set; }
@@ -38,6 +37,9 @@ namespace Vita
         public int LocalidadId { get; set; }
         public Nullable<int> UsuarioId { get; set; }
         public byte[] Foto { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public Nullable<System.DateTime> DeletedAt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EventoActividad> EventoActividad { get; set; }

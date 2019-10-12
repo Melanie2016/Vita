@@ -12,11 +12,13 @@ namespace Vita
     using System;
     using System.Collections.Generic;
     
-    public partial class UsuarioCategoria
+    public partial class UsuarioCategoriaElegida
     {
-        public int UsuarioCategoriaId { get; set; }
-        public Nullable<int> UsuarioId { get; set; }
-        public Nullable<int> CategoriaId { get; set; }
+        public int UsuarioId { get; set; }
+        public int CategoriaId { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public Nullable<System.DateTime> DeletedAt { get; set; }
     
         public virtual Categoria Categoria { get; set; }
         public virtual Usuario Usuario { get; set; }
