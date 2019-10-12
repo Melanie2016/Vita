@@ -13,6 +13,7 @@ namespace Vita.Servicios
         {
             return myDbContext.Usuario.Find(id);
         }
+        
 
         public void CrearUsuario(Usuario usuario)
         {

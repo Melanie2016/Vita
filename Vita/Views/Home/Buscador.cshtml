@@ -45,37 +45,44 @@
                                     </div>
 
                                     <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-performance-tab">
-                                        <form action="#" class="search-job">
-                                            <div class="row no-gutters">
-                                                
-                                                <div class="col-md mr-md-4">
-                                                    <div class="form-group">
-                                                        <div class="form-field">
-                                                            <div class="select-wrap">
-                                                                <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                                                <select name="" id="" class="form-control">
-                                                                    <option value="">Elegir secci&oacute;n</option>
-                                                                    <option value="">Niños</option>
-                                                                    <option value="">Adolescentes</option>
-                                                                    <option value="">Adultos</option>
-                                                                    <option value="">Adultos Mayores</option>
-                                                                   
-                                                                </select>
+                                        <form action="BuscadorSegmento"  method="Post"class="search-job">
+                     
+
+                                                <div class="row no-gutters">
+
+                                                    <div class="col-md mr-md-4">
+                                                        <div class="form-group">
+                                                            <div class="form-field">
+                                                                <div class="select-wrap">
+                                                                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                                                    <select class="selectpicker" id="SegmentoId" onchange="changeOption(this)"
+                                                                            data-live-search="true" title="Seleccione segmento.." name="SegmentoId">
+
+
+                                                                        @foreach (var item in ViewBag.ListaSegmentos as MultiSelectList)
+                                                                        {
+                                                                            <option value="@item.Value">@item.Text</option>
+
+                                                                        }
+
+
+
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <div class="form-field">
+                                                                <button type="submit" class="form-control btn btn-secondary">Buscar</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
-                                                <div class="col-md-2">
-                                                    <div class="form-group">
-                                                        <div class="form-field">
-                                                            <button type="submit" class="form-control btn btn-secondary">Buscar</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
+                                            </form>
+</div>
                                 </div>
                             </div>
                         </div>
