@@ -1,5 +1,11 @@
 ﻿
 @{
+    ViewBag.Title = "ModificarPerfilUsuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
     ViewBag.Title = "Perfil";
     Layout = "~/Views/Shared/_LayoutPerfilUsuario.cshtml";
 
@@ -38,14 +44,14 @@
                         <div class="col-12 text-center">
                             <button class="btn btn-success px-4 upload-button">CAMBIAR FOTO</button>
                         </div>
-                    </div>@Model.SobreMi
+                    </div>
                     <br><br>
 
-                    <h4>Sobre mí</h4>
+                    <h4>Sobre mí</h4> @Model.SobreMi
                     <p class="text-muted"></p>
                     <ul class="card-profile__info">
-                        <li class="mb-1"><strong class="text-dark mr-4">Contacto</strong> <br><span>@Model.Celular</span></li>
-                        <li><strong class="text-dark mr-4">Email</strong> <span>@Model.Email</span></li>
+                        <li class="mb-1"><strong class="text-dark mr-4">Contacto</strong> <br><span> @Model.Celular</span></li>
+                        <li><strong class="text-dark mr-4">Email</strong> <span> @Model.Email</span></li>
                     </ul>
                 </div>
             </div>
@@ -56,17 +62,21 @@
                     <div class="media media-reply">
                         <div class="media-body">
                             <div class="d-sm-flex justify-content-between mb-2">
-                                <h5 class="mb-sm-0">@Model.UsuarioName<small class="text-muted ml-3">última modificación hace (@Model.UpdatedAt) días </small></h5>
+                                <h5 class="mb-sm-0"><small class="text-muted ml-3">última modificación hace () días </small></h5>
                                 <!--<div class="media-reply__link">
-                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
-                                    <button class="btn btn-transparent text-dark font-weight-bold p-0 ml-2">Reply</button>
-                                </div>-->
+                                <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
+                                <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
+                                <button class="btn btn-transparent text-dark font-weight-bold p-0 ml-2">Reply</button>
+                            </div>-->
                             </div>
+
+
+
+
 
                             <div class="media mt-3">
                                 <div class="media-body">
-                                    <form action="IraModificarPerfilUsuario">
+                                    <form action="ModificarPerfilUsuario" method="post">
                                         <!--Table-->
                                         <table id="tablePreview" class="table">
                                             <!--Table head-->
@@ -76,70 +86,108 @@
                                             <tbody>
                                                 <tr>
                                                   
-                                                    <td hidden>@Model.Id</td>
+                                                    <td> <input class="input--style-4" type="text" hidden name="Id" value="@Model.Id"></td>
+
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Nombre</th>
-                                                    <td>@Model.Nombre</td>
+                                                    <td> <input class="input--style-4" type="text" name="Nombre" value="@Model.Nombre"></td>
+
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Apellido</th>
-                                                    <td>@Model.Apellido</td>
+                                                    <td> <input class="input--style-4" type="text" value="@Model.Apellido" name="Apellido"></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Fecha de Nacimiento</th>
-                                                    <td>@Model.FechaNacimiento</td>
+                                                    <td>
+                                                        <input class="input--style-4 js-datepicker" type="text" name="FechaNacimiento" value="@Model.FechaNacimiento">
+                                                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Sexo</th>
+                                                    <td>
+                                                        <select class="selectpicker" id="sexoId" onchange="changeOption(this)"
+                                                                class="form-control" data-live-search="true" title="Seleccione sexo.." name="SexoId">
 
-                                                    <td>@Model.Sexo.Descripcion</td>
+
+                                                            @foreach (var item in ViewBag.ListaSexo as MultiSelectList)
+                                                            {
+                                                                <option value="@item.Value">@item.Text</option>
+                                                            }
+
+                                                        </select>
+                                                    </td>
+
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">DNI</th>
-                                                    <td>@Model.Dni</td>
+                                                    <td> <input class="input--style-4" type="number" name="Dni" value="@Model.Dni"></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Email</th>
-                                                    <td>@Model.Email</td>
+                                                    <td><input class="input--style-4" type="email" name="Email" value="@Model.Email"></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Localidad</th>
-                                                    <td>@Model.Localidad.Descripcion</td><!--Puede tirarte el error al crear, pero si te fijas en la base, ya lo creo, no quitar, ya lo voy a ver-->
+                                                    <td>
+                                                        <select class="selectpicker" id="LocalidadId" onchange="changeOption(this)"
+                                                                data-live-search="true" title="Seleccione localidad.." name="LocalidadId">
+
+
+                                                            @foreach (var item in ViewBag.ListaLocalidades as MultiSelectList)
+                                                            {
+                                                                <option value="@item.Value">@item.Text  </option>
+                                                            }
+
+                                                        </select>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Celular</th>
-                                                    <td>@Model.Celular</td>
+                                                    <td><input class="input--style-4" type="number" value="@Model.Celular" name="Celular"></td>
+
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Intereses</th>
+
                                                     <td>
-                                                        @foreach (var item in ViewBag.ListacategoriasElegidas as MultiSelectList)
+                                                        @foreach (var item in ViewBag.ListaIntereses)
                                                         {
-                                                            @item.Text <br>
+                                                            <input type="checkbox" name="selectedCategoria" value="@item.Value" />
+                                                            @item.Text<br />
                                                         }
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Segmento</th>
+
                                                     <td>
-                                                        @foreach (var item in ViewBag.ListasegmentosElegidos as MultiSelectList)
+                                                        @foreach (var item in ViewBag.ListaSegmentos)
                                                         {
-                                                            @item.Text <br>
+                                                            <input type="checkbox" name="selectedSegmento" value="@item.Value" />
+                                                            @item.Text <br />
                                                         }
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Sobre mí</th>
-                                                    <td>@Model.SobreMi</td>
+                                                    <td>
+
+                                                        <textarea class="form-control" id="val-suggestions" name="SobreMi" rows="10" cols="70"> @Model.SobreMi</textarea>
+
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Usuario</th>
-                                                    <td>@Model.UsuarioName</td>
+                                                    <td> <input class="input--style-4" type="text" name="UsuarioName" value="@Model.UsuarioName"></td>
+
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Password</th>
-                                                    <td>@Model.Pass</td>
+                                                    <td><input class="input--style-4" type="password" value="@Model.Pass" name="Pass"></td>
+
                                                 </tr>
                                             </tbody>
                                             <!--Table body-->
@@ -147,17 +195,23 @@
                                         <!--Table-->
 
                                         <button type="submit" class="btn btn-default">MODIFICAR</button>
-                                </form>
-                               </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<!-- #/ container -->
+        <!-- #/ container -->
 
-<script src="~/vendor/jquery/jquery.min.js"></script>
-<script src="~/Content/js/FotoPerfil.js"></script>
+        <script src="~/vendor/jquery/jquery.min.js"></script>
+        <script src="~/Content/js/FotoPerfil.js"></script>
+
+        <!-- Scripts del Login-->
+        <script src="~/vendor/jquery/jquery.min.js"></script>
+        <script src="~/vendor/select2/select2.min.js"></script>
+        <script src="~/vendor/datepicker/moment.min.js"></script>
+        <script src="~/vendor/datepicker/daterangepicker.js"></script>
+        <script src="/Content/js/registro.js"></script>
+

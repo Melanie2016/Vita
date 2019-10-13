@@ -91,6 +91,37 @@ namespace Vita.Servicios
                 myDbContext.SaveChanges();
             }
         }
-      
+        public void ModificarUsuario(Usuario us)
+        {
+
+            Usuario usuarioModificar = myDbContext.Usuario.Find(us.Id);
+            usuarioModificar.Nombre = us.Nombre;
+            usuarioModificar.Apellido = us.Apellido;
+            usuarioModificar.Dni = us.Dni;
+            usuarioModificar.UpdatedAt = DateTime.Now;
+            usuarioModificar.SexoId = us.SexoId;
+            usuarioModificar.SobreMi = us.SobreMi;
+            usuarioModificar.UsuarioName = us.UsuarioName;
+            usuarioModificar.Celular = us.Celular;
+            usuarioModificar.FechaNacimiento = us.FechaNacimiento;
+            usuarioModificar.Email = us.Email;
+            usuarioModificar.LocalidadId = us.LocalidadId;
+            usuarioModificar.Pass = us.Pass;
+
+
+            foreach (var segmento in us.UsuarioSegmento)
+            {
+                UsuarioSegmento usuarioseg = myDbContext.UsuarioSegmento.Find(segmento.UsuarioId);
+                usuarioModificar.UsuarioSegmento.Add(usuarioseg);
+                myDbContext.SaveChanges();
+            }
+
+
+
+
+            myDbContext.SaveChanges();
+        }
+
+
     }
 }
