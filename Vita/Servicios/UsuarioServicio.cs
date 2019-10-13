@@ -8,6 +8,7 @@ namespace Vita.Servicios
     public class UsuarioServicio
     {
         private VitaEntities myDbContext = new VitaEntities();
+        private SegmentoServicio segmentoServicio = new SegmentoServicio();
 
         public Usuario GetUsuarioById(long id)
         {
@@ -91,7 +92,7 @@ namespace Vita.Servicios
                 myDbContext.SaveChanges();
             }
         }
-        public void ModificarUsuario(Usuario us)
+        public void ModificarUsuario(Usuario us, int[] selectedSegmento, int[] selectedCategoria)
         {
 
             Usuario usuarioModificar = myDbContext.Usuario.Find(us.Id);
@@ -108,17 +109,28 @@ namespace Vita.Servicios
             usuarioModificar.LocalidadId = us.LocalidadId;
             usuarioModificar.Pass = us.Pass;
 
-
-            foreach (var segmento in us.UsuarioSegmento)
+            var segmentousuario = myDbContext.UsuarioSegmento.Where(x => x.UsuarioId == us.Id).ToList();
+            var listaUsuarioSegmento = new List<UsuarioSegmento>();
+            foreach (var segmentoUser in segmentousuario)
             {
-                UsuarioSegmento usuarioseg = myDbContext.UsuarioSegmento.Find(segmento.UsuarioId);
-                usuarioModificar.UsuarioSegmento.Add(usuarioseg);
-                myDbContext.SaveChanges();
+                foreach (var segmento in selectedSegmento)//la lista con los segmento elegidos actualizados
+                {
+                    if (!(segmentoUser.SegmentoId == segmento))
+                    {
+                        var usuariosegmentoNuevo = new UsuarioSegmento
+                        {
+                            SegmentoId = segmento,
+                            UsuarioId = us.Id,
+                            CreatedAt = DateTime.Now
+                        };
+                        listaUsuarioSegmento.Add(usuariosegmentoNuevo);
+
+
+                    }
+                }       
             }
-
-
-
-
+            myDbContext.UsuarioSegmento.AddRange(listaUsuarioSegmento);
+            myDbContext.SaveChanges();
             myDbContext.SaveChanges();
         }
 

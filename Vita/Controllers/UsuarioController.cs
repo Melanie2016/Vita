@@ -157,22 +157,12 @@ namespace Vita.Controllers
   
         
         [HttpPost]
-        public ActionResult ModificarPerfilUsuario(Usuario usuario, string btnConfirmar, string btnCancelar)
+        public ActionResult ModificarPerfilUsuario(Usuario usuario, string btnConfirmar, string btnCancelar, int[] selectedSegmento, int[] selectedCategoria)
         {
             if (ModelState.IsValid)
             {
-
-                //if (btnCancelar == "Cancelar")
-                //{
-                //    return RedirectToAction("Listar");
-                //}
-
-                //if (btnConfirmar == "Confirmar")
-                //{
-                    
-                //}
                
-                usuarioServicio.ModificarUsuario(usuario);
+                usuarioServicio.ModificarUsuario(usuario,selectedCategoria,selectedSegmento);
                 usuario = usuarioServicio.GetById(usuario.Id);
                 return RedirectToAction("PerfilUsuario", "Usuario", usuario);
 
