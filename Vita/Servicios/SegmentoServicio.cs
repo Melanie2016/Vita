@@ -17,7 +17,23 @@ namespace Vita.Servicios
         public List<Segmento> GetAllSegmento()
         {
             return myDbContext.Segmento.OrderBy(x => x.Id).ToList();
+        }
+        public List<Segmento> GetAllSegmentosDelUsuario(Usuario usuario)
+        {
+            var segmentos = new List<Segmento>();
+            if (usuario != null)
+            {
+                var listUsuarioSegmento = myDbContext.UsuarioSegmento.Where(x => x.UsuarioId == usuario.Id).ToArray();
 
+                foreach (var userseg in listUsuarioSegmento)
+                {
+
+                    segmentos.AddRange(myDbContext.Segmento.Where(x => x.Id == userseg.SegmentoId).ToList());
+
+                }
+            }
+
+            return segmentos;
         }
     }
 }

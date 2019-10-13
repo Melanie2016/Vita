@@ -87,6 +87,7 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row">Sexo</th>
+                                               
                                                 <td>@Model.Sexo.Descripcion</td>
                                             </tr>
                                             <tr>
@@ -107,11 +108,21 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row">Intereses</th>
-                                                <td>@Model.UsuarioCategoriaElegida.ToList()</td>
+                                                <td>
+                                                    @foreach (var item in ViewBag.ListacategoriasElegidas as MultiSelectList)
+                                                    {
+                                                        @item.Text <br>
+                                                    }
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Segmento</th>
-                                                <td>@Model.UsuarioSegmento</td>
+                                                <td>
+                                                    @foreach (var item in ViewBag.ListasegmentosElegidos as MultiSelectList)
+                                                    {
+                                                        @item.Text <br>
+                                                    }
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Sobre mí</th>

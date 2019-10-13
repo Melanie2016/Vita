@@ -80,12 +80,22 @@ namespace Vita.Controllers
                 }
                 else
                 {
+                    List<Categoria> categoriasElegidas = categoriaServicio.GetAllCategoriasDelUsuario(buscarUsuarioLogueado);
+                    ViewBag.ListacategoriasElegidas = new MultiSelectList(categoriasElegidas, "id", "descripcion");
+                    List<Segmento> segmentoElegidos = segmentoServicio.GetAllSegmentosDelUsuario(buscarUsuarioLogueado);
+                    ViewBag.ListasegmentosElegidos = new MultiSelectList(segmentoElegidos, "id", "descripcion");
+                    
                     return View(buscarUsuarioLogueado);
                 }
                 
             }
             else
             {
+                usuarioLogueado = usuarioServicio.GetById(usuario.Id);
+                List<Categoria> categoriasElegidas = categoriaServicio.GetAllCategoriasDelUsuario(usuarioLogueado);
+                ViewBag.ListacategoriasElegidas = new MultiSelectList(categoriasElegidas, "id", "descripcion");
+                List<Segmento> segmentoElegidos = segmentoServicio.GetAllSegmentosDelUsuario(usuarioLogueado);
+                ViewBag.ListasegmentosElegidos = new MultiSelectList(segmentoElegidos, "id", "descripcion");
                 return View(usuarioLogueado);
             }
 
@@ -111,6 +121,7 @@ namespace Vita.Controllers
             }
             else
             {
+                usuarioLogueado = usuarioServicio.GetById(usuario.Id);
                 return View(usuarioLogueado);
             }
         }

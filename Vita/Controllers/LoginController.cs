@@ -12,6 +12,7 @@ namespace Vita.Controllers
     {
         private UsuarioServicio usuarioServicio = new UsuarioServicio();
         private VitaEntities myDbContext = new VitaEntities();
+        private CategoriaServicio categoriaServicio = new CategoriaServicio();
         public ActionResult Login()
         {
             if (Request.Cookies.AllKeys.Contains("usuarioSesion") && Request.Cookies["usuarioSesion"].Values.Count > 0)
@@ -65,6 +66,7 @@ namespace Vita.Controllers
                 }
                 if (user.RolId == 1)
                 {
+                    
                     return RedirectToAction("PerfilUsuario", "Usuario");
                 }
                 else
