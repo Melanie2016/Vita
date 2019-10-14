@@ -60,7 +60,7 @@ namespace Vita.Controllers
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 actividadServicio.CrearActividad(actividad, buscarUsuarioLogueado, selectedSegmento);
                
-                return RedirectToAction("PerfilEntidad", "Usuario", buscarUsuarioLogueado);
+                return RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
 
             }
         }
@@ -99,8 +99,13 @@ namespace Vita.Controllers
             }
             else
             {
+
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                ViewBag.ListaActvidades = actividadServicio.GetAllActividadByRolEntidadId(buscarUsuarioLogueado.Id);
+
                 return View(buscarUsuarioLogueado);
+               // return View(actividades);
             }
         }
 
