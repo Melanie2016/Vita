@@ -54,16 +54,43 @@ namespace Vita.Controllers
 
         public ActionResult Eventos()
         {
-            return View();
+            //obtengo usuario logueado
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                return View(buscarUsuarioLogueado);
+            }
         }
 
         public ActionResult ModificarEvento()
         {
-            return View();
+            //obtengo usuario logueado
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                return View(buscarUsuarioLogueado);
+            }
         }
         public ActionResult ListaEventos()
         {
-            return View();
+            //obtengo usuario logueado
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                return View(buscarUsuarioLogueado);
+            }
         }
         public ActionResult FichaEvento()
         {

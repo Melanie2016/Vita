@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Vita.Controllers
 {
-    public class ChatControllers : Controller
+    public class ChatController : Controller
     {
         public ActionResult ChatIndividual()
         {

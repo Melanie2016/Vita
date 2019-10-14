@@ -139,7 +139,7 @@
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ActividadController.cs" />
-    <Compile Include="Controllers\ChatControllers.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\ColaboracionController.cs" />
     <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -965,7 +965,7 @@
     <Content Include="Views\Usuario\Registro.cshtml" />
     <Content Include="Views\Home\Sugerencias.cshtml" />
     <Content Include="Views\Chat\ChatGrupal.cshtml" />
-    <Content Include="Views\Chat\ChatSimple.cshtml" />
+    <Content Include="Views\Chat\ChatIndividual.cshtml" />
     <Content Include="Views\Home\Sugerencias.cshtml" />
     <EntityDeploy Include="VitaEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
