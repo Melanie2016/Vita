@@ -61,5 +61,19 @@ namespace Vita.Servicios
             myDbContext.Actividad.Add(actividadNueva);
             myDbContext.SaveChanges();
         }
+        public void CrearSegmentoActividad(int actividadId, int[] selectedSegmento)
+        {
+            foreach (var segmento in selectedSegmento)
+            {
+                var actvidadSegmento = new ActividadSegmento
+                {
+                    ActividadId = actividadId,
+                    SegmentoId = segmento,
+                    CreatedAt = DateTime.Now
+                };
+                myDbContext.ActividadSegmento.Add(actvidadSegmento);
+                myDbContext.SaveChanges();
+            }
+        }
     }
 }

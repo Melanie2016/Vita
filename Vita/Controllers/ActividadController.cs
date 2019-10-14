@@ -10,6 +10,7 @@ namespace Vita.Controllers
     public class ActividadController: Controller
     {
         private UsuarioServicio usuarioServicio = new UsuarioServicio();
+        private ActividadServicio actividadServicio = new ActividadServicio();
         private CategoriaServicio categoriaServicio = new CategoriaServicio();
         private SexoServicio sexoServicio = new SexoServicio();
         private SegmentoServicio segmentoServicio = new SegmentoServicio();
@@ -27,14 +28,18 @@ namespace Vita.Controllers
         {
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
-            {
-                return RedirectToAction("Login", "Login");
-            }
+            { return RedirectToAction("Login", "Login");}
             else
             {
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 List<Categoria> rubros = categoriaServicio.GetAllCategorias();
                 ViewBag.ListaRubro = new MultiSelectList(rubros, "id", "descripcion");
+                List<SubCategoria> tipoActividad = categoriaServicio.GetAllSubCategorias();//hacer que le pase el id de categoria
+                ViewBag.ListaTipoActividad = new MultiSelectList(tipoActividad, "id", "descripcion");
+                List<Segmento> segmentos = segmentoServicio.GetAllSegmento();
+                ViewBag.ListaSegmentos = new MultiSelectList(segmentos, "id", "descripcion");
+                List<Localidad> localidades = localidadServicio.GetAllLocalidades();
+                ViewBag.ListaLocalidades = new MultiSelectList(localidades, "id", "descripcion");
                 return View(buscarUsuarioLogueado);
 
             }
@@ -42,7 +47,7 @@ namespace Vita.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreacionActividad()
+        public ActionResult CreacionActividad(Actividad actividad, int[] selectedSegmento)
         {
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -51,9 +56,10 @@ namespace Vita.Controllers
             }
             else
             {
+                
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
-                // eventoServicio.CrearEvento(evento); HACER SERVICIO DE EVENTO
-                // usuarioServicio.CrearUsuarioCategoriaElegida(usuario.Id, selectedCategoria);
+                actividadServicio.CrearActividad(actividad, buscarUsuarioLogueado);
+                actividadServicio.CrearSegmentoActividad(actividad.Id, selectedSegmento);
                 return RedirectToAction("PerfilEntidad", "Usuario", buscarUsuarioLogueado);
 
             }

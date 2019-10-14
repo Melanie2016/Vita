@@ -12,7 +12,10 @@ namespace Vita.Servicios
         public List<Categoria> GetAllCategorias()
         {
             return myDbContext.Categoria.OrderBy(x=>x.Id).ToList();
-        
+        }
+        public List<SubCategoria> GetAllSubCategorias()
+        {
+            return myDbContext.SubCategoria.OrderBy(x => x.Id).ToList();
         }
         public List<Categoria> GetAllCategoriasDelUsuario(Usuario usuario)
         {

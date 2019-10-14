@@ -20,21 +20,35 @@
 
                         <h3>Crear actividad</h3>
                         <div class="form-validation">
-                            <form class="form-valide" action="#" method="post">
+                            <form class="form-valide" action="CreacionActividad" method="POST">
                                 <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-username">
+                                    <label class="col-lg-4 col-form-label" for="Titulo">
                                         Título de la actividad<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-username" name="val-username" placeholder="Truco..">
+                                        <input type="text" class="form-control" id="val-username" name="Titulo" placeholder="Truco..">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-suggestions">
+                                    <label class="col-lg-4 col-form-label" for="Descripcion">
                                         Breve descripción <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <textarea class="form-control" id="val-suggestions" name="val-suggestions" rows="5" placeholder="Torneo de truco con premios..."></textarea>
+                                        <textarea class="form-control" id="val-suggestions" name="Descripcion" rows="5" placeholder="Torneo de truco con premios..."></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="val-skill">
+                                        Segmento <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <div class="form-control">
+                                            @foreach (var item in ViewBag.ListaSegmentos)
+                                            {
+                                                <input type="checkbox" name="selectedSegmento" value="@item.Value" />
+                                                @item.Text
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -42,63 +56,88 @@
                                         Rubro <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <select class="form-control" id="val-skill" name="val-skill">
-                                            <option>Actividades al aire libre</option>
-                                            <option>Deportes</option>
-                                            <option>Cursos y Talleres</option>
-                                            <option>Entretenimientos</option>
+                                        <select class="form-control" id="categoriaId" onchange="changeOption(this)"
+                                                data-live-search="true" title="Seleccione tipo de categoria de la actividad.." name="CategoriaId">
+                                            @foreach (var item in ViewBag.ListaRubro as MultiSelectList)
+                                            {
+                                                <option value="@item.Value">@item.Text</option>
+                                            }
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-skill">
+                                    <label class="col-lg-4 col-form-label" for="SubCategoriaId">
                                         Tipo de actividad <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <select class="form-control" id="val-skill" name="val-skill">
-                                            <option>Actividades al aire libre</option>
-                                            <option>Deportes</option>
-                                            <option>Cursos y Talleres</option>
-                                            <option>Entretenimientos</option>
+                                        <select class="form-control" id="SubCategoriaId" onchange="changeOption(this)"
+                                                data-live-search="true" title="Seleccione tipo de actividad.." name="SubCategoriaId">
+                                            @foreach (var item in ViewBag.ListaTipoActividad as MultiSelectList)
+                                            {
+                                                <option value="@item.Value">@item.Text</option>
+                                            }
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-number">
+                                    <label class="col-lg-4 col-form-label" for="SubCategoriaId">
+                                        Seleccione Localidad <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <select class="form-control" id="LocalidadId" onchange="changeOption(this)"
+                                                data-live-search="true" title="Seleccione localidad.." name="LocalidadId">
+                                            @foreach (var item in ViewBag.ListaLocalidades as MultiSelectList)
+                                            {
+                                                <option value="@item.Value">@item.Text</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="CantidadDias">
+                                        Cantidad de dias que va a estar la actividad<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="val-number" name="CantidadDias" placeholder="5">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="CantidadCupo">
+                                        Cantidad de cupos disponibles<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="val-number" name="CantidadCupo" placeholder="100">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="EdadMinima">
                                         Edad mínima<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-number" name="val-number" placeholder="25">
+                                        <input type="text" class="form-control" id="val-number" name="EdadMinima" placeholder="25">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-number">
+                                    <label class="col-lg-4 col-form-label" for="EdadMaxima">
                                         Edad máxima<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-number" name="val-number" placeholder="120">
+                                        <input type="text" class="form-control" id="val-number" name="EdadMaxima" placeholder="120">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-currency">
+                                    <label class="col-lg-4 col-form-label" for="Precio">
                                         Precio (en caso de no tener, poner cero en número) <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-currency" name="val-currency" placeholder="$21.60">
+                                        <input type="text" class="form-control" id="val-currency" name="Precio" placeholder="21.60">
                                     </div>
                                 </div>
-                               
 
-
-
-                               
-                               
-
-                               
                                 <div class="form-group row">
                                     <div class="col-lg-8 ml-auto">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" class="btn btn-primary">Crear Actividad</button>
                                     </div>
                                 </div>
                             </form>
