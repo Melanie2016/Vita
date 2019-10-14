@@ -58,8 +58,8 @@ namespace Vita.Controllers
             {
                 
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
-                actividadServicio.CrearActividad(actividad, buscarUsuarioLogueado);
-                actividadServicio.CrearSegmentoActividad(actividad.Id, selectedSegmento);
+                actividadServicio.CrearActividad(actividad, buscarUsuarioLogueado, selectedSegmento);
+               
                 return RedirectToAction("PerfilEntidad", "Usuario", buscarUsuarioLogueado);
 
             }

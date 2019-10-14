@@ -38,7 +38,7 @@ namespace Vita.Servicios
             }
             return listaActividad;
         }
-        public void CrearActividad(Actividad actividad, Usuario usuario)
+        public void CrearActividad(Actividad actividad, Usuario usuario, int[] selectedSegmento)
         {
             Actividad actividadNueva = new Actividad
             {
@@ -60,6 +60,8 @@ namespace Vita.Servicios
             };
             myDbContext.Actividad.Add(actividadNueva);
             myDbContext.SaveChanges();
+            this.CrearSegmentoActividad(actividadNueva.Id, selectedSegmento);
+           
         }
         public void CrearSegmentoActividad(int actividadId, int[] selectedSegmento)
         {
