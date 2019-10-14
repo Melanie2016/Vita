@@ -167,8 +167,10 @@
     <Compile Include="Segmento.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Servicios\ActividadServicio.cs" />
     <Compile Include="Servicios\BuscardorServicio.cs" />
     <Compile Include="Servicios\CategoriaServicio.cs" />
+    <Compile Include="Servicios\EventoServicio.cs" />
     <Compile Include="Servicios\LocalidadServicio.cs" />
     <Compile Include="Servicios\SegmentoServicio.cs" />
     <Compile Include="Servicios\SexoServicio.cs" />

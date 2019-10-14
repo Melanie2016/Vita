@@ -13,7 +13,9 @@ namespace Vita.Controllers
      
         private VitaEntities myDbContext = new VitaEntities();
         private SegmentoServicio segmentoServicio = new SegmentoServicio();
-        private BuscardorServicio buscardorServicio = new BuscardorServicio();
+        //private BuscardorServicio buscardorServicio = new BuscardorServicio();
+        private ActividadServicio actividadServicio = new ActividadServicio();
+        private EventoServicio eventoServicio = new EventoServicio();
         private CategoriaServicio categoriaServicio = new CategoriaServicio();
         private UsuarioServicio usuarioServicio = new UsuarioServicio();
         public ActionResult Index()
@@ -46,7 +48,7 @@ namespace Vita.Controllers
             }
             else
             {
-                var listaActividadPorSegmento = buscardorServicio.GetActividadBySegmentoId(SegmentoId); //busco las actividades por ese segmento
+                var listaActividadPorSegmento = actividadServicio.GetAllActividadBySegmentoId(SegmentoId); //busco las actividades por ese segmento
                 if (listaActividadPorSegmento.Count == 0)//si no encontre deberia mostrar un mensaje
                 {
                     var segmento = segmentoServicio.Get(SegmentoId).Descripcion;

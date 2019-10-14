@@ -22,19 +22,19 @@
                         <div class="form-validation">
                             <form class="form-valide" action="CreacionEvento" method="POST">
                                 <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-username">
-                                        Título de la actividad<span class="text-danger">*</span>
+                                    <label class="col-lg-4 col-form-label" for="Titulo">
+                                        Título del evento<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-username" name="val-username" placeholder="Truco..">
+                                        <input type="text" class="form-control" id="Titulo" name="Titulo" placeholder="Habia una vez rock..">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-suggestions">
+                                    <label class="col-lg-4 col-form-label" for="Descripcion">
                                         Breve descripción <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <textarea class="form-control" id="val-suggestions" name="val-suggestions" rows="5" placeholder="Torneo de truco con premios..."></textarea>
+                                        <textarea class="form-control" id="Descripcion" name="Descripcion" rows="5" placeholder="Excursion sobre el inicio del rock and roll en Argentina, salida al museo del rock and roll, se presentara bandas de Buenos Aires....."></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -42,14 +42,16 @@
                                         Rubro <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <select class="form-control" id="val-skill" name="val-skill">
-                                            <option>Actividades al aire libre</option>
-                                            <option>Deportes</option>
-                                            <option>Cursos y Talleres</option>
-                                            <option>Entretenimientos</option>
-                                        </select>
+                                        @foreach (var item in ViewBag.ListaRubro)
+                                        {
+                                            <input type="checkbox" name="selectedCategoria" value="@item.Value" />
+                                            @item.Text
+                                        }
+
                                     </div>
                                 </div>
+                                
+                              
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="val-skill">
                                         Tipo de actividad <span class="text-danger">*</span>

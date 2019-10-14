@@ -27,6 +27,8 @@ namespace Vita.Controllers
             else
             {
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                List<Categoria> rubros = categoriaServicio.GetAllCategorias();
+                ViewBag.ListaRubro = new MultiSelectList(rubros, "id", "descripcion");
                 return View(buscarUsuarioLogueado);
 
             }
@@ -42,6 +44,8 @@ namespace Vita.Controllers
             else
             {
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+               // eventoServicio.CrearEvento(evento); HACER SERVICIO DE EVENTO
+               // usuarioServicio.CrearUsuarioCategoriaElegida(usuario.Id, selectedCategoria);
                 return RedirectToAction("PerfilEntidad", "Usuario", buscarUsuarioLogueado);
 
             }

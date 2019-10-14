@@ -9,16 +9,6 @@ namespace Vita.Servicios
     {
         private VitaEntities myDbContext = new VitaEntities();
 
-        public List<Actividad> GetActividadBySegmentoId(long id)
-        {
-            var listaActividad = new List<Actividad>();
-            var ListaActividadSegmento = myDbContext.ActividadSegmento.Where(x => x.SegmentoId == id).ToList();
-
-            foreach(var actividadsegmento in ListaActividadSegmento)
-            {
-                listaActividad.Add(myDbContext.Actividad.Where(x => x.Id == actividadsegmento.ActividadId).FirstOrDefault());
-            }
-            return listaActividad;
-        }
+      //ACA PARA MI TENDRIA QUE DIVIDIR EN POR SEGMENTO, POR POPULARIDAD, POR ZONA
     }
 }
