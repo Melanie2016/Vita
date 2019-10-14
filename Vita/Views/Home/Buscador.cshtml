@@ -28,7 +28,13 @@
                                         <div class="form-group">
                                             <div class="form-field">
                                                 <div class="icon"><span class="glyphicon glyphicon-search"></span></div>
-                                                <input type="text" class="form-control" placeholder="Busqueda particular">
+                                                <input type="text" class="form-control" placeholder="Busqueda particular" id="formulario" list="resultado" name="resultado">
+                                                  <datalist id="resultado">
+                                                    <!-- aca va el contenido del json -->
+                                                  </datalist>
+                                                
+                                                
+                                            
                                             </div>
                                         </div>
                                     </div>
@@ -36,10 +42,12 @@
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <div class="form-field">
-                                                <button type="submit" class="form-control btn btn-secondary">Buscar</button>
+                                                <button type="submit" class="form-control btn btn-secondary" id="botonBuscar">Buscar</button>
                                             </div>
                                         </div>
                                     </div>
+
+                                    
                                 </div>
                             </form>
                         </div>
@@ -88,6 +96,9 @@
                 </div>
             </div>
         </div>
+       
+
+
 
         <br><br>
         <div>
@@ -297,7 +308,7 @@
     </div>
 
         <!-- Modal: modalQuickView -->
-        <div class="modal fade" id="modalZumba" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="modalZumba" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
@@ -488,7 +499,7 @@
         </div>
 
 
-            <div class="modal fade" id="modalAquaGym" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <div class="modal fade" id="modalAquaGym" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog modal-xl" role="document">
                     <div class="modal-content">
@@ -654,9 +665,124 @@
                         </div>
                     </div>
                 </div>
-            </div>
+        </div>
 
+
+         <script type="text/javascript">
+            var productos = [];
+            var datosJson = '';
+            var requestURL = '../../Content/datos.json';
+
+            var request = new XMLHttpRequest();
+            request.open('GET', requestURL);
+            request.responseType = 'json';
+            request.send();
+
+            request.onload = function() {
+                datosJson = request.response;
+                console.log("json datosJson " + datosJson);
+                   
+                //productos.push(datosJson);
+                //ductos = JSON.parse(datosJson);
+                //console.log("json productos " + productos);
+               
+                filtrar();
+            }
+
+                       
+
+
+
+            const formulario = document.querySelector('#formulario');
+            const boton = document.querySelector('#botonBuscar');
+            const resultado = document.querySelector('#resultado');
+
+            const filtrar = ()=> {
+
+                resultado.innerHTML = '';
+                const texto = formulario.value.toLowerCase();
+
+               // console.log("json datosJson en filtrar " + datosJson);
+            /*
+                var keys = Object.keys(datosJson);
+                keys.forEach(function(key){
+                    productos.push(datosJson[key]);
+                    console.log("json productos key en filtrar " + productos);
+                });*/
+
+               
+                var keys = Object.keys(datosJson);
+                keys.forEach(function(key){
+                    productos.push(datosJson[key]);
+                    //console.log("json productos key en forEach 1 " + productos);
+                      datosJson[key].forEach(function(producto){
+                        //console.log("json productos y datosJson en forEach 2 " + producto.nombre);
+
+                        var nombre = producto.nombre.toLowerCase();
+                    
+                        if(nombre.indexOf(texto) !== -1){
+                            resultado.innerHTML += ` 
+                                <option style =" color: white;">${producto.nombre}</option>   
+                            `
+                        }
+
+                      })
+                      /*var produc = Object.keys(keys);
+                      produc.forEach(function(k){
+                        console.log("json productos en forEach 2 " + produc + k);
+                        var nombre = produc.nombre.toLowerCase();
+                    
+                        if(nombre.indexOf(texto) !== -1){
+                            resultado.innerHTML += ` 
+                                <li>${key.nombre} - Valor: ${key.valor}</li>   
+                            `
+                        }
+                      })*/
+                })
+
+
+                if(resultado.innerHTML === ''){
+                   resultado.innerHTML += ` 
+                            <option>producto no encontrado ...</option>   
+                        `
+                }
+
+/*
+                var keys = Object.keys(datosJson);
+                keys.forEach(function(key){
+                    productos.push(datosJson[key]);
+                });*/
+
+                /*
+                for (var i in json) {
+                    console.log(json[i].nameTable)
+                }
+                */
+
+                /*
+                for(var i in datosJson){
+                     productos.push([i]);
+                }
+                */
+                /*
+                const productos = [
+                {nombre: 'Banana',      valor: 50},
+                {nombre: 'Frutilla',    valor: 50},
+                {nombre: 'Kiwi',        valor: 50},
+                {nombre: 'Pera',        valor: 50},
+                {nombre: 'Manzana',     valor: 50},
+                ] */
+
+
+            }
+
+            boton.addEventListener('click',filtrar);
+            formulario.addEventListener('keyup',filtrar);
+
+             
+        </script>
         <script src="~/Content/js/popup.js"></script>
 
+        
     </section>
 
