@@ -49,13 +49,25 @@
                             <td>@i.EdadMinima - @i.EdadMaxima</td>
                             @*<td>@i.CantidadCupo</td>*@
                             <td>
+                                @*@foreach(UsuarioInscriptoActividad u in ViewBag.ListaUsuariosInscriptoActividad)*@
                                 <div class="progress" style="height: 10px">
                                     <div class="progress-bar gradient-1" style="width: 70%;" role="progressbar">
-                                        <span class="sr-only">@i.CantidadCupo - 45 COMPLETO
-                                        </span>
-                                    </div>
+                                        <span class="sr-only">
+                                            @i.CantidadCupo - 45 COMPLETO
+                                    </span>
                                 </div>
-                            </td>
+                            </div>
+                            @*}*@
+                        </td>
+                        <td>
+                            <span class="label gradient-1 btn-rounded">70%</span> @*habria que ver aca tambien el porcentaje*@
+                        </td>
+                        <td>
+                            <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
+                        </td>
+                        <td>
+                            <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
+                        </td>
                         </tr>
                             }
 

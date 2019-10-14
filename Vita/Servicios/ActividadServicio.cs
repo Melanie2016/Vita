@@ -27,6 +27,18 @@ namespace Vita.Servicios
             }
             return listaActividad;
         }
+        public List<Usuario> GetAllActividadUsuarioInscriptoByActividadId(int actividadId) //lista de activiades por usuario inscripto id
+        {
+            var listaActividad = new List<Usuario>();
+            var listaUsuarioInscriptoActividad = myDbContext.UsuarioInscriptoActividad.Where(x => x.ActividadId == actividadId).ToList();
+
+            foreach (var actividadInscriptoUser in listaUsuarioInscriptoActividad)
+            {
+                listaActividad.Add(myDbContext.Usuario.Where(x => x.Id == actividadInscriptoUser.ActividadId).FirstOrDefault());
+            }
+            return listaActividad;
+        }
+
         public List<Actividad> GetAllActividadBySegmentoId(long id)
         {
             var listaActividad = new List<Actividad>();
@@ -45,7 +57,7 @@ namespace Vita.Servicios
                 Titulo = actividad.Titulo,
                 Descripcion = actividad.Descripcion,
                 EdadMinima = actividad.EdadMinima,
-                EdadMaxima = actividad.EdadMinima,
+                EdadMaxima = actividad.EdadMaxima,
                 Precio = actividad.Precio,
                 FechaDesde = actividad.FechaDesde,
                 FechaHasta = actividad.FechaHasta,
