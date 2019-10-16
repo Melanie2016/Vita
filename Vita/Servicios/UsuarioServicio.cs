@@ -108,6 +108,7 @@ namespace Vita.Servicios
             usuarioModificar.Email = us.Email;
             usuarioModificar.LocalidadId = us.LocalidadId;
             usuarioModificar.Pass = us.Pass;
+   
 
             var segmentousuario = myDbContext.UsuarioSegmento.Where(x => x.UsuarioId == us.Id).ToList();
             var listaUsuarioSegmento = new List<UsuarioSegmento>();
@@ -115,7 +116,7 @@ namespace Vita.Servicios
             {
                 foreach (var segmento in selectedSegmento)//la lista con los segmento elegidos actualizados
                 {
-                    if (!(segmentoUser.SegmentoId == segmento))
+                    if (!(segmentoUser.SegmentoId== segmento))
                     {
                         var usuariosegmentoNuevo = new UsuarioSegmento
                         {
