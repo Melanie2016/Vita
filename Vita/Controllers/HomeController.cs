@@ -21,10 +21,12 @@ namespace Vita.Controllers
         private EventoServicio eventoServicio = new EventoServicio();
         private CategoriaServicio categoriaServicio = new CategoriaServicio();
         private UsuarioServicio usuarioServicio = new UsuarioServicio();
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
         } 
+        [HttpPost]
         public ActionResult Sugerencias()
         {
             //obtengo usuario logueado
@@ -51,7 +53,12 @@ namespace Vita.Controllers
                 return View(buscarUsuarioLogueado);
             }
         }
-
+        [HttpPost]
+        public ActionResult BuscadorAvanzado(string textoIngresado)
+        {
+            var lista = actividadServicio.GetBusquedaAvanzada(textoIngresado);
+            return View(lista);
+        }
         [HttpGet]
         public ActionResult Buscador()
         {

@@ -89,5 +89,12 @@ namespace Vita.Servicios
                 myDbContext.SaveChanges();
             }
         }
+
+        public List<Actividad> GetBusquedaAvanzada(string textoIngresado)
+        {
+            var lista = new List<Actividad>();
+            lista = myDbContext.Actividad.Where(x => x.Titulo.Contains(textoIngresado) || (x.Descripcion.Contains(textoIngresado))).ToList();
+            return lista;
+        }
     }
 }
