@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -92,19 +93,29 @@ namespace Vita.Servicios
 
         public List<Actividad> GetBusquedaAvanzada(string textoIngresado)
         {
+
             var lista = new List<Actividad>();
-            lista = myDbContext.Actividad.Where(
-                x => x.Titulo.Contains(textoIngresado) || 
-                (x.Descripcion.Contains(textoIngresado)) ||
-                (x.Categoria.Descripcion.Contains(textoIngresado)) ||
-                (x.SubCategoria.Descripcion.Contains(textoIngresado)) ||
-                (x.Localidad.Descripcion.Contains(textoIngresado)) ||
-
-                (x.EdadMinima.ToString().Contains(textoIngresado)) ||
-                (x.EdadMaxima.ToString().Contains(textoIngresado))
-
-                ).ToList();
-
+            var edad = 0;
+            Exception excepcion = null;
+            try
+            {
+                 edad = Convert.ToInt32(textoIngresado);
+            }
+            catch (Exception e) // si tiene una excepcion quiere decir que no es un numero solo 
+            {
+                excepcion = e;
+                lista = myDbContext.Actividad.Where(
+            x => x.Titulo.Contains(textoIngresado) ||
+            (x.Descripcion.Contains(textoIngresado)) ||
+            (x.Categoria.Descripcion.Contains(textoIngresado)) ||
+            (x.SubCategoria.Descripcion.Contains(textoIngresado)) ||
+            (x.Localidad.Descripcion.Contains(textoIngresado))).ToList();
+            }
+            
+            if(excepcion == null || excepcion == null) //quiere decir que es un numero solo
+            {
+                lista = myDbContext.Actividad.Where(x=> x.EdadMaxima >= edad && x.EdadMinima <= edad).ToList();
+            }
             return lista;
         }
     }
