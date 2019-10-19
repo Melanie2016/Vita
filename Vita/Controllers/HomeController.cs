@@ -76,6 +76,8 @@ namespace Vita.Controllers
             }
             else
             {
+                List<Segmento> segmentos = segmentoServicio.GetAllSegmento();
+                ViewBag.ListaSegmentos = new MultiSelectList(segmentos, "id", "descripcion");
                 var listaActividadPorSegmento = actividadServicio.GetAllActividadBySegmentoId(SegmentoId); //busco las actividades por ese segmento
                 if (listaActividadPorSegmento.Count == 0)//si no encontre deberia mostrar un mensaje
                 {
@@ -124,7 +126,7 @@ namespace Vita.Controllers
                     {
                         ViewBag.ListaMasPopulares = listaMasPopulares;
                     }
-                    return RedirectToAction("Buscador", "Home", listaActividadPorSegmento);//igual le pasamos todas las actividades por el segmento
+                    return View();//igual le pasamos todas las actividades por el segmento
                 }
 
             }
