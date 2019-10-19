@@ -93,13 +93,12 @@ namespace Vita.Servicios
 
         public List<Actividad> GetBusquedaAvanzada(string textoIngresado)
         {
-
             var lista = new List<Actividad>();
-            var edad = 0;
+            var edadOprecio = 0;
             Exception excepcion = null;
             try
             {
-                 edad = Convert.ToInt32(textoIngresado);
+                edadOprecio = Convert.ToInt32(textoIngresado);
             }
             catch (Exception e) // si tiene una excepcion quiere decir que no es un numero solo 
             {
@@ -114,7 +113,13 @@ namespace Vita.Servicios
             
             if(excepcion == null || excepcion == null) //quiere decir que es un numero solo
             {
-                lista = myDbContext.Actividad.Where(x=> x.EdadMaxima >= edad && x.EdadMinima <= edad).ToList();
+                var listaPrecio= new List<Actividad>();
+                var listaEdad = new List<Actividad>();
+
+                listaPrecio = myDbContext.Actividad.Where(x => x.Precio == edadOprecio).ToList();
+                listaEdad = myDbContext.Actividad.Where(x=> x.EdadMaxima >= edadOprecio && x.EdadMinima <= edadOprecio).ToList();
+                lista.AddRange(listaPrecio);//agrego a la lista las que coinciden, tuve que hacerlo separado porque no quiere el where todo junto :(
+                lista.AddRange(listaEdad);
             }
             return lista;
         }
