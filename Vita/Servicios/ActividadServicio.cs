@@ -97,7 +97,9 @@ namespace Vita.Servicios
                 x => x.Titulo.Contains(textoIngresado) || 
                 (x.Descripcion.Contains(textoIngresado)) ||
                 (x.Categoria.Descripcion.Contains(textoIngresado)) ||
-                (x.SubCategoria.Descripcion.Contains(textoIngresado))).ToList();
+                (x.SubCategoria.Descripcion.Contains(textoIngresado)) ||
+                (x.Localidad.Descripcion.Contains(textoIngresado))
+                ).ToList();
 
             return lista;
         }
