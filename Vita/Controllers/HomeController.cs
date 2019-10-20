@@ -53,12 +53,13 @@ namespace Vita.Controllers
                 return View(buscarUsuarioLogueado);
             }
         }
-        [HttpPost]
-        public ActionResult BuscadorAvanzado(string textoIngresado)
-        {
-            var lista = actividadServicio.GetBusquedaAvanzada(textoIngresado);
-            return View(lista);
-        }
+        //[HttpPost]
+        //public ActionResult BuscadorAvanzado(string textoIngresado)
+        //{
+        //    var lista = actividadServicio.GetBusquedaAvanzada(textoIngresado);
+        //    ViewBag.Lista = lista;
+        //    return RedirectToAction("Actividades", "Actividad");
+        //}
         [HttpGet]
         public ActionResult Buscador()
         {
