@@ -855,19 +855,19 @@ legend {
 
                     .s009 form .inner-form .input-field input.placeholder {
                         color: #999;
-                        font-size: 18px;
+                        font-size: 16px;
                         font-weight: 600;
                     }
 
                     .s009 form .inner-form .input-field input:-moz-placeholder {
                         color: #999;
-                        font-size: 18px;
+                        font-size: 16px;
                         font-weight: 600;
                     }
 
                     .s009 form .inner-form .input-field input::-webkit-input-placeholder {
                         color: #999;
-                        font-size: 18px;
+                        font-size: 16px;
                         font-weight: 600;
                     }
 
