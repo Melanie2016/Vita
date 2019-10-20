@@ -225,6 +225,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\Actividades.css" />
     <Content Include="Content\css\Calendario.css" />
     <Content Include="Content\css\ChatSimple.css" />
     <Content Include="Content\css\css\bootstrap-reboot.css" />
@@ -743,6 +744,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\js\Choises.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -932,7 +934,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Actividad\Actividades.cshtml" />
+    <Content Include="Views\Actividad\Actividades2.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
@@ -978,6 +980,8 @@
       <DependentUpon>VitaEntities.edmx</DependentUpon>
     </Content>
     <Content Include="Views\Usuario\IraModificarPerfilUsuario.cshtml" />
+    <Content Include="Views\Home\BuscadorAvanzado.cshtml" />
+    <Content Include="Views\Actividad\Actividades.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

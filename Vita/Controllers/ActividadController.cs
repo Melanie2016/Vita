@@ -16,7 +16,7 @@ namespace Vita.Controllers
         private SegmentoServicio segmentoServicio = new SegmentoServicio();
         private LocalidadServicio localidadServicio = new LocalidadServicio();
         private VitaEntities myDbContext = new VitaEntities();
-        public ActionResult Actividades()
+        public ActionResult Actividades2()
         {
             ViewBag.Message = "Ranking de los más populares";
 
@@ -111,7 +111,10 @@ namespace Vita.Controllers
             }
         }
 
-
+        public ActionResult Actividades()
+        {
+            return View();
+        }
 
     }
 }
