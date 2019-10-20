@@ -21,10 +21,12 @@ namespace Vita.Controllers
         private EventoServicio eventoServicio = new EventoServicio();
         private CategoriaServicio categoriaServicio = new CategoriaServicio();
         private UsuarioServicio usuarioServicio = new UsuarioServicio();
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
         } 
+        [HttpPost]
         public ActionResult Sugerencias()
         {
             //obtengo usuario logueado
@@ -51,7 +53,12 @@ namespace Vita.Controllers
                 return View(buscarUsuarioLogueado);
             }
         }
-
+        [HttpPost]
+        public ActionResult BuscadorAvanzado(string textoIngresado)
+        {
+            var lista = actividadServicio.GetBusquedaAvanzada(textoIngresado);
+            return View(lista);
+        }
         [HttpGet]
         public ActionResult Buscador()
         {
@@ -69,6 +76,8 @@ namespace Vita.Controllers
             }
             else
             {
+                List<Segmento> segmentos = segmentoServicio.GetAllSegmento();
+                ViewBag.ListaSegmentos = new MultiSelectList(segmentos, "id", "descripcion");
                 var listaActividadPorSegmento = actividadServicio.GetAllActividadBySegmentoId(SegmentoId); //busco las actividades por ese segmento
                 if (listaActividadPorSegmento.Count == 0)//si no encontre deberia mostrar un mensaje
                 {
@@ -117,7 +126,7 @@ namespace Vita.Controllers
                     {
                         ViewBag.ListaMasPopulares = listaMasPopulares;
                     }
-                    return RedirectToAction("Buscador", "Home", listaActividadPorSegmento);//igual le pasamos todas las actividades por el segmento
+                    return View();//igual le pasamos todas las actividades por el segmento
                 }
 
             }
