@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Actividades";
     Layout = "~/Views/Shared/_LayoutEventos.cshtml";
 }
@@ -188,7 +187,7 @@
                                     </div>
                                 </td>
                                 <td>Desde 50$</td>
-                                <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalZumba">+ Info</button> <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse"><span></span>Unirse</a></td>
+                                <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalZumba">+ Info</button> <a href="#" class="btn btn-success2 btn-xs" value="unirme" data-toggle="modal" data-target="#unirse"><span></span>Unirse</a></td>
                             </tr>
 
                             <tr>
@@ -203,7 +202,7 @@
                                     </div>
                                 </td>
                                 <td>Desde 150$</td>
-                                <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAquaGym">+ Info</button> <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse"><span></span>Unirse</a></td>
+                                <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAquaGym">+ Info</button> <a href="#" class="btn btn-success2 btn-xs" value="unirme" data-toggle="modal" data-target="#unirse"><span></span>Unirse</a></td>
                             </tr>
                             <tr>
                                 <td><img src="~/Content/images/3.jpg" class="mr-3" alt="">Bingo</td>
@@ -221,7 +220,7 @@
                                 <td class="text-center">
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalZumba">+ Info</button>
 
-                                    <a href="#" class="btn btn-success btn-xs" value="unirme" data-toggle="modal" data-target="#unirse"><span></span>Unirse</a>
+                                    <a href="#" class="btn btn-success2 btn-xs" value="unirme" data-toggle="modal" data-target="#unirse"><span></span>Unirse</a>
                                 </td>
 
                             </tr>
@@ -233,13 +232,15 @@
                         <div class="modal-dialog modal-notify modal-info" role="document">
                             <div class="modal-content text-center">
                                 <div class="modal-header d-flex justify-content-center">
-                                    <h4 class="modal-title" id="myModalLabel">¡Se ha unido a la actividad!</h4>
+                                    <!--<h4 class="modal-title" id="myModalLabel">¡Se ha unido a la actividad!</h4>--> <!--LOGUEADO-->
+                                    <h4 class="modal-title" id="myModalLabel">¡Tu actividad te espera!</h4> <!--SIN LOGUEARSE-->
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <h3>Puede ver si se unió satisfactoriamente en <a href="/Usuario/PerfilUsuario">su perfil </a></h3>
+                                    <!--<h3> <h3>Puede ver si se unió satisfactoriamente en <a href="/Usuario/PerfilUsuario">su perfil </a></h3>--> <!--LOGUEADO-->
+                                    <h3>Debe loguearse para unirse a la actividad </a></h3> <!--SIN LOGUEARSE-->
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -430,8 +431,9 @@
 
 
                                     <a href="#" class="btn btn-primary" value="¡Quiero Ayudar!" data-toggle="modal" data-target="#ayuda"> ¡Quiero Unirme!</a>
-                                    <a class="btn btn-success" href="/Actividad/FichaActividad">
-                                        Más Detalles
+                                    <a class="btn btn-success" href="#">
+                                    <!--<a class="btn btn-success" href="/Actividad/FichaActividad">-->
+                                     Más Detalles
 
                                     </a>
                                 </div>
@@ -615,7 +617,8 @@
 
                                 <div class="text-center">
                                     <a href="#" class="btn btn-primary" value="¡Quiero Ayudar!" data-toggle="modal" data-target="#ayuda1"> ¡Quiero Unirme!</a>
-                                    <a class="btn btn-success" href="/Actividad/FichaActividad">
+                                    <a class="btn btn-success" href=#">
+                                        <!--<a class="btn btn-success" href="/Actividad/FichaActividad">-->
                                         Más Detalles
 
                                     </a>

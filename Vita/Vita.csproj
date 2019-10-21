@@ -230,6 +230,7 @@
     <Content Include="Content\css\ChatSimple.css" />
     <Content Include="Content\css\css\bootstrap-reboot.css" />
     <Content Include="Content\css\css\mixins\_text-hide.css" />
+    <Content Include="Content\css\estiloPerfil.css" />
     <Content Include="Content\css\FotoPerfil.css" />
     <Content Include="Content\css\Sugerencias.css" />
     <Content Include="Content\fonts\flaticon\backup.txt" />

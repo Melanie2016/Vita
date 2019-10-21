@@ -1151,5 +1151,9 @@ legend {
 .input-select{
     text-align: left;
 }
-
+.btn-success2 {
+    color: #fff;
+    background-color: #69D385;
+    border-color: #69D385;
+}
 /*# sourceMappingURL=Searchs_009.css.map */
