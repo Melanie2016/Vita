@@ -136,5 +136,14 @@ namespace Vita.Servicios
             }
             return lista;
         }
+
+        public List<Actividad> GetBusquedaPorIdCategoria(string categoriaId)
+        {
+            int id = int.Parse(categoriaId);
+            var lista = new List<Actividad>();
+            lista = myDbContext.Actividad.Where(x => x.CategoriaId == id).ToList();
+
+            return lista;
+        }
     }
 }

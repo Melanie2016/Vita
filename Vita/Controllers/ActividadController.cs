@@ -115,11 +115,20 @@ namespace Vita.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Actividades(string textoIngresado)
         {
- 
             var lista = actividadServicio.GetBusquedaAvanzada(textoIngresado);
+            ViewBag.Lista = lista;
+            ViewBag.Contador = lista.Count();
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Actividades(string textoIngresado, string categoriaId)
+        {
+            var lista = actividadServicio.GetBusquedaPorIdCategoria(categoriaId);
             ViewBag.Lista = lista;
             ViewBag.Contador = lista.Count();
             return View();
