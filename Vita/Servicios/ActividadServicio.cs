@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -39,10 +40,10 @@ namespace Vita.Servicios
             return listaActividad;
         }
 
-        public List<Actividad> GetAllActividadBySegmentoId(long id)
+        public List<Actividad> GetAllActividadBySegmentoId(long SegmentoId)
         {
             var listaActividad = new List<Actividad>();
-            var ListaActividadSegmento = myDbContext.ActividadSegmento.Where(x => x.SegmentoId == id).ToList();
+            var ListaActividadSegmento = myDbContext.ActividadSegmento.Where(x => x.SegmentoId == SegmentoId).ToList();
 
             foreach (var actividadsegmento in ListaActividadSegmento)
             {
@@ -73,7 +74,7 @@ namespace Vita.Servicios
             myDbContext.Actividad.Add(actividadNueva);
             myDbContext.SaveChanges();
             this.CrearSegmentoActividad(actividadNueva.Id, selectedSegmento);
-           
+
         }
         public void CrearSegmentoActividad(int actividadId, int[] selectedSegmento)
         {
@@ -88,6 +89,52 @@ namespace Vita.Servicios
                 myDbContext.ActividadSegmento.Add(actvidadSegmento);
                 myDbContext.SaveChanges();
             }
+        }
+
+        public List<Actividad> GetBusquedaAvanzada(string textoIngresado)
+        {
+            var lista = new List<Actividad>();
+            var edadOprecio = 0;
+            Exception excepcion = null;
+            try
+            {
+                edadOprecio = Convert.ToInt32(textoIngresado);
+            }
+            catch (Exception e) // si tiene una excepcion quiere decir que no es un numero solo 
+            {
+                excepcion = e;
+                var listaActividadesPorSegmento = new List<Actividad>();
+                var listaPorOtrasCosas = new List<Actividad>();
+                var listaSegmento = new List<Segmento>();
+
+                listaSegmento = myDbContext.Segmento.Where(x => x.Descripcion.Contains(textoIngresado)).ToList();
+                foreach (var li in listaSegmento)
+                {
+                    listaActividadesPorSegmento = GetAllActividadBySegmentoId(li.Id);
+                }
+
+                lista.AddRange(listaActividadesPorSegmento);
+
+                listaPorOtrasCosas = myDbContext.Actividad.Where(
+                    x => x.Titulo.Contains(textoIngresado) ||
+                    (x.Descripcion.Contains(textoIngresado)) ||
+                    (x.Categoria.Descripcion.Contains(textoIngresado)) ||
+                    (x.SubCategoria.Descripcion.Contains(textoIngresado)) ||
+                    (x.Localidad.Descripcion.Contains(textoIngresado))
+                    ).ToList();
+                lista.AddRange(listaPorOtrasCosas);
+            }
+            if (excepcion == null || excepcion == null) //quiere decir que es un numero solo
+            {
+                var listaPrecio = new List<Actividad>();
+                var listaEdad = new List<Actividad>();
+
+                listaPrecio = myDbContext.Actividad.Where(x => x.Precio == edadOprecio).ToList();
+                listaEdad = myDbContext.Actividad.Where(x => x.EdadMaxima >= edadOprecio && x.EdadMinima <= edadOprecio).ToList();
+                lista.AddRange(listaPrecio);//agrego a la lista las que coinciden, tuve que hacerlo separado porque no quiere el where todo junto :(
+                lista.AddRange(listaEdad);
+            }
+            return lista;
         }
     }
 }
