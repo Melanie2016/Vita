@@ -151,7 +151,7 @@
 </section>
 <!--FIN BUSCADOR-->
 <!--RESULTADOS-->
-<section style="margin-top:-35px">
+<section style="margin-top:-55px">
 
     @if (ViewBag.Lista != null)
     {
@@ -161,29 +161,28 @@
     }
         @if (ViewBag.Lista != null)
         {
-
-            foreach (Actividad i in ViewBag.Lista)
-            {
-                <div class="row">
+               <div class="row">
                     <div class="col-md-12">
 
                         <div class="tab-content" id="nav-tabContent" style="border:none;">
                             <div class="tab-pane fade show active" id="populares" role="tabpanel" aria-labelledby="nav-home-tab">
 
-                                <table class="table header-border table-hover verticle-middle">
+                                <table class="table header-border table-hover verticle-middle" style="box-shadow: 3px 2px 3px #ccc; margin-top:50px;">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
                                             <th scope="col">Actividad</th>
-                                            <th scope="col">Zona</th>
+                                            <th scope="col"></th>
+                                            <th scope="col">Ubicación</th>
                                             <th scope="col">Edad</th>
                                             <th scope="col">Presentes</th>
+                                            <th scope="col">Precio</th>
                                             <th class="text-center">Acción</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody> 
 
-
+                                    @foreach (Actividad i in ViewBag.Lista)
+                                    { 
                                         <tr>
                                             <td><img src="../../Content/images/1.jpg"></td>
                                             <td>@i.Titulo</td>
@@ -200,38 +199,37 @@
                                                     </div>
                                                 </div>
                                                 @*}*@
-                                           
-                                                <span class="label gradient-1 btn-rounded">70%</span> @*habria que ver aca tambien el porcentaje*@
+
+                                                <span class="porcentaje">70%</span> @*habria que ver aca tambien el porcentaje*@
+                                            </td>
+                                            <td>$@i.Precio</td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalZumba" style="font-weight: bold">+ Info</button>
+
+                                                <a href="#" class="btn btn-success2 btn-xs" value="unirme" data-toggle="modal" data-target="#unirse" style="font-weight: bold"><span></span>Unirse</a>
                                             </td>
 
-                                            <td class="text-center">
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalZumba">+ Info</button>
+                                        </tr>
 
-                                    <a href="#" class="btn btn-success2 btn-xs" value="unirme" data-toggle="modal" data-target="#unirse"><span></span>Unirse</a>
-                                </td>
-
-                            </tr>
-
-
-                        </tbody>
-                    </table>
-                    <div class="modal fade" id="unirse" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                        <div class="modal-dialog modal-notify modal-info" role="document">
-                            <div class="modal-content text-center">
-                                <div class="modal-header d-flex justify-content-center">
-                                    <!--<h4 class="modal-title" id="myModalLabel">¡Se ha unido a la actividad!</h4>--> <!--LOGUEADO-->
-                                    <h4 class="modal-title" id="myModalLabel">¡Tu actividad te espera!</h4> <!--SIN LOGUEARSE-->
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <!--<h3> <h3>Puede ver si se unió satisfactoriamente en <a href="/Usuario/PerfilUsuario">su perfil </a></h3>--> <!--LOGUEADO-->
-                                    <h3>Debe loguearse para unirse a la actividad </a></h3> <!--SIN LOGUEARSE-->
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-
+                                     }
+                                    </tbody>
+                                </table>
+                                <div class="modal fade" id="unirse" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                    <div class="modal-dialog modal-notify modal-info" role="document">
+                                        <div class="modal-content text-center">
+                                            <div class="modal-header d-flex justify-content-center">
+                                                <!--<h4 class="modal-title" id="myModalLabel">¡Se ha unido a la actividad!</h4>--> <!--LOGUEADO-->
+                                                <h4 class="modal-title" id="myModalLabel">¡Tu actividad te espera!</h4> <!--SIN LOGUEARSE-->
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!--<h3> <h3>Puede ver si se unió satisfactoriamente en <a href="/Usuario/PerfilUsuario">su perfil </a></h3>--> <!--LOGUEADO-->
+                                                <h3>Debe loguearse para unirse a la actividad</h3> <!--SIN LOGUEARSE-->
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                             </div>
                                         </div>
                                     </div>
@@ -604,7 +602,7 @@
 
                                 <div class="text-center">
                                     <a href="#" class="btn btn-primary" value="¡Quiero Ayudar!" data-toggle="modal" data-target="#ayuda1"> ¡Quiero Unirme!</a>
-                                    <a class="btn btn-success" href=#">
+                                    <a class="btn btn-success" href="#">
                                         <!--<a class="btn btn-success" href="/Actividad/FichaActividad">-->
                                         Más Detalles
 
@@ -639,8 +637,8 @@
 
                     </div>
                 </div>
-            }
-        }
+         
+         }
 
-    </section>
+</section>
 <!--FIN RESULTADOS-->
