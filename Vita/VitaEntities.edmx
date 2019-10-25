@@ -27,6 +27,7 @@
           <Property Name="CreatedAt" Type="date" />
           <Property Name="UpdatedAt" Type="date" />
           <Property Name="DeletedAt" Type="date" />
+          <Property Name="Compleja" Type="bit" />
         </EntityType>
         <EntityType Name="ActividadSegmento">
           <Key>
@@ -46,46 +47,27 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="Evento">
+        <EntityType Name="Domicilio">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Titulo" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="200" />
-          <Property Name="UsuarioId" Type="int" />
-          <Property Name="Precio" Type="int" />
-          <Property Name="FechaDesde" Type="date" />
-          <Property Name="FechaHasta" Type="date" />
-          <Property Name="CantidadDias" Type="int" />
-          <Property Name="CantidadCupo" Type="int" />
+          <Property Name="NombreCalle" Type="varchar" MaxLength="100" />
+          <Property Name="NumeroCalle" Type="int" />
+          <Property Name="NumeroPiso" Type="int" />
+          <Property Name="NumeroDepartamento" Type="int" />
+          <Property Name="CodigoPostal" Type="varchar" MaxLength="14" />
           <Property Name="LocalidadId" Type="int" />
-          <Property Name="Foto" Type="image" />
-          <Property Name="CreatedAt" Type="date" />
-          <Property Name="UpdatedAt" Type="date" />
-          <Property Name="DeletedAt" Type="date" />
+          <Property Name="UsuarioId" Type="int" />
+          <Property Name="ActividadId" Type="int" />
+          <Property Name="FechaRegistroEnDb" Type="date" />
         </EntityType>
-        <EntityType Name="EventoActividad">
+        <EntityType Name="Estado">
           <Key>
-            <PropertyRef Name="ActividadId" />
-            <PropertyRef Name="EventoId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ActividadId" Type="int" Nullable="false" />
-          <Property Name="EventoId" Type="int" Nullable="false" />
-          <Property Name="CreatedAt" Type="date" />
-          <Property Name="UpdatedAt" Type="date" />
-          <Property Name="DeletedAt" Type="date" />
-        </EntityType>
-        <EntityType Name="EventoSegmento">
-          <Key>
-            <PropertyRef Name="EventoId" />
-            <PropertyRef Name="SegmentoId" />
-          </Key>
-          <Property Name="EventoId" Type="int" Nullable="false" />
-          <Property Name="SegmentoId" Type="int" Nullable="false" />
-          <Property Name="CreatedAt" Type="date" />
-          <Property Name="UpdatedAt" Type="date" />
-          <Property Name="DeletedAt" Type="date" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Localidad">
           <Key>
@@ -123,16 +105,6 @@
           <Property Name="Descripcion" Type="varchar" MaxLength="200" />
           <Property Name="CategoriaId" Type="int" />
         </EntityType>
-        <EntityType Name="TipoNecesidad">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
-          <Property Name="CreatedAt" Type="date" />
-          <Property Name="UpdatedAt" Type="date" />
-          <Property Name="DeletedAt" Type="date" />
-        </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="Id" />
@@ -159,60 +131,49 @@
         </EntityType>
         <EntityType Name="UsuarioCategoriaElegida">
           <Key>
-            <PropertyRef Name="UsuarioId" />
-            <PropertyRef Name="CategoriaId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="UsuarioId" Type="int" Nullable="false" />
-          <Property Name="CategoriaId" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UsuarioId" Type="int" />
+          <Property Name="CategoriaId" Type="int" />
+          <Property Name="CreatedAt" Type="date" />
+          <Property Name="UpdatedAt" Type="date" />
+          <Property Name="DeletedAt" Type="date" />
+        </EntityType>
+        <EntityType Name="UsuarioEstadoHistorico">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UsuarioId" Type="int" />
+          <Property Name="EstadoId" Type="int" />
           <Property Name="CreatedAt" Type="date" />
           <Property Name="UpdatedAt" Type="date" />
           <Property Name="DeletedAt" Type="date" />
         </EntityType>
         <EntityType Name="UsuarioInscriptoActividad">
           <Key>
-            <PropertyRef Name="ActividadId" />
-            <PropertyRef Name="UsuarioId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ActividadId" Type="int" Nullable="false" />
-          <Property Name="UsuarioId" Type="int" Nullable="false" />
-          <Property Name="CreatedAt" Type="date" />
-          <Property Name="UpdatedAt" Type="date" />
-          <Property Name="DeletedAt" Type="date" />
-        </EntityType>
-        <EntityType Name="UsuarioInscriptoEvento">
-          <Key>
-            <PropertyRef Name="EventoId" />
-            <PropertyRef Name="UsuarioId" />
-          </Key>
-          <Property Name="EventoId" Type="int" Nullable="false" />
-          <Property Name="UsuarioId" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActividadId" Type="int" />
+          <Property Name="UsuarioId" Type="int" />
+          <Property Name="EstadoId" Type="int" />
           <Property Name="CreatedAt" Type="date" />
           <Property Name="UpdatedAt" Type="date" />
           <Property Name="DeletedAt" Type="date" />
         </EntityType>
         <EntityType Name="UsuarioSegmento">
           <Key>
-            <PropertyRef Name="UsuarioId" />
-            <PropertyRef Name="SegmentoId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="UsuarioId" Type="int" Nullable="false" />
-          <Property Name="SegmentoId" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UsuarioId" Type="int" />
+          <Property Name="SegmentoId" Type="int" />
           <Property Name="CreatedAt" Type="date" />
           <Property Name="UpdatedAt" Type="date" />
           <Property Name="DeletedAt" Type="date" />
         </EntityType>
-        <Association Name="ActividadEventoId">
-          <End Role="Actividad" Type="Self.Actividad" Multiplicity="1" />
-          <End Role="EventoActividad" Type="Self.EventoActividad" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Actividad">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="EventoActividad">
-              <PropertyRef Name="ActividadId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="ActividadSegmentoId">
           <End Role="Actividad" Type="Self.Actividad" Multiplicity="1" />
           <End Role="ActividadSegmento" Type="Self.ActividadSegmento" Multiplicity="*" />
@@ -250,7 +211,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="ActividadUsuarioInsId">
-          <End Role="Actividad" Type="Self.Actividad" Multiplicity="1" />
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="0..1" />
           <End Role="UsuarioInscriptoActividad" Type="Self.UsuarioInscriptoActividad" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Actividad">
@@ -274,7 +235,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="CategoriaUsuarioId">
-          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
           <End Role="UsuarioCategoriaElegida" Type="Self.UsuarioCategoriaElegida" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Categoria">
@@ -285,63 +246,51 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="EventoActividadId">
-          <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
-          <End Role="EventoActividad" Type="Self.EventoActividad" Multiplicity="*" />
+        <Association Name="DomicilioActividadId">
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="0..1" />
+          <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Evento">
+            <Principal Role="Actividad">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="EventoActividad">
-              <PropertyRef Name="EventoId" />
+            <Dependent Role="Domicilio">
+              <PropertyRef Name="ActividadId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="EventoLocalidadId">
+        <Association Name="DomicilioLocalidadId">
           <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
-          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+          <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Localidad">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Evento">
+            <Dependent Role="Domicilio">
               <PropertyRef Name="LocalidadId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="EventoSegmentoId">
-          <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
-          <End Role="EventoSegmento" Type="Self.EventoSegmento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Evento">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="EventoSegmento">
-              <PropertyRef Name="EventoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="EventoUsuarioId">
+        <Association Name="DomicilioUsuarioId">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
-          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+          <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Evento">
+            <Dependent Role="Domicilio">
               <PropertyRef Name="UsuarioId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="EventoUsuarioInsId">
-          <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
-          <End Role="UsuarioInscriptoEvento" Type="Self.UsuarioInscriptoEvento" Multiplicity="*" />
+        <Association Name="EstadoUsuarioId">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+          <End Role="UsuarioEstadoHistorico" Type="Self.UsuarioEstadoHistorico" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Evento">
+            <Principal Role="Estado">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="UsuarioInscriptoEvento">
-              <PropertyRef Name="EventoId" />
+            <Dependent Role="UsuarioEstadoHistorico">
+              <PropertyRef Name="EstadoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -381,20 +330,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="SegmentoEventoId">
-          <End Role="Segmento" Type="Self.Segmento" Multiplicity="1" />
-          <End Role="EventoSegmento" Type="Self.EventoSegmento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Segmento">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="EventoSegmento">
-              <PropertyRef Name="SegmentoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="SegmentoUsuarioId">
-          <End Role="Segmento" Type="Self.Segmento" Multiplicity="1" />
+          <End Role="Segmento" Type="Self.Segmento" Multiplicity="0..1" />
           <End Role="UsuarioSegmento" Type="Self.UsuarioSegmento" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Segmento">
@@ -429,8 +366,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="UsuarioActividadEstadoInsId">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+          <End Role="UsuarioInscriptoActividad" Type="Self.UsuarioInscriptoActividad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsuarioInscriptoActividad">
+              <PropertyRef Name="EstadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="UsuarioActividadInsId">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="UsuarioInscriptoActividad" Type="Self.UsuarioInscriptoActividad" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
@@ -442,7 +391,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="UsuarioCategoriaId">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="UsuarioCategoriaElegida" Type="Self.UsuarioCategoriaElegida" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
@@ -453,14 +402,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="UsuarioEventoInsId">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="UsuarioInscriptoEvento" Type="Self.UsuarioInscriptoEvento" Multiplicity="*" />
+        <Association Name="UsuarioEstadoId">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="UsuarioEstadoHistorico" Type="Self.UsuarioEstadoHistorico" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="UsuarioInscriptoEvento">
+            <Dependent Role="UsuarioEstadoHistorico">
               <PropertyRef Name="UsuarioId" />
             </Dependent>
           </ReferentialConstraint>
@@ -478,7 +427,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="UsuarioSegmentoId">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="UsuarioSegmento" Type="Self.UsuarioSegmento" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
@@ -493,24 +442,18 @@
           <EntitySet Name="Actividad" EntityType="Self.Actividad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActividadSegmento" EntityType="Self.ActividadSegmento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Evento" EntityType="Self.Evento" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="EventoActividad" EntityType="Self.EventoActividad" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="EventoSegmento" EntityType="Self.EventoSegmento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Domicilio" EntityType="Self.Domicilio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Segmento" EntityType="Self.Segmento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sexo" EntityType="Self.Sexo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubCategoria" EntityType="Self.SubCategoria" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TipoNecesidad" EntityType="Self.TipoNecesidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsuarioCategoriaElegida" EntityType="Self.UsuarioCategoriaElegida" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsuarioEstadoHistorico" EntityType="Self.UsuarioEstadoHistorico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsuarioInscriptoActividad" EntityType="Self.UsuarioInscriptoActividad" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UsuarioInscriptoEvento" EntityType="Self.UsuarioInscriptoEvento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsuarioSegmento" EntityType="Self.UsuarioSegmento" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="ActividadEventoId" Association="Self.ActividadEventoId">
-            <End Role="Actividad" EntitySet="Actividad" />
-            <End Role="EventoActividad" EntitySet="EventoActividad" />
-          </AssociationSet>
           <AssociationSet Name="ActividadSegmentoId" Association="Self.ActividadSegmentoId">
             <End Role="Actividad" EntitySet="Actividad" />
             <End Role="ActividadSegmento" EntitySet="ActividadSegmento" />
@@ -535,25 +478,21 @@
             <End Role="Categoria" EntitySet="Categoria" />
             <End Role="UsuarioCategoriaElegida" EntitySet="UsuarioCategoriaElegida" />
           </AssociationSet>
-          <AssociationSet Name="EventoActividadId" Association="Self.EventoActividadId">
-            <End Role="Evento" EntitySet="Evento" />
-            <End Role="EventoActividad" EntitySet="EventoActividad" />
+          <AssociationSet Name="DomicilioActividadId" Association="Self.DomicilioActividadId">
+            <End Role="Actividad" EntitySet="Actividad" />
+            <End Role="Domicilio" EntitySet="Domicilio" />
           </AssociationSet>
-          <AssociationSet Name="EventoLocalidadId" Association="Self.EventoLocalidadId">
+          <AssociationSet Name="DomicilioLocalidadId" Association="Self.DomicilioLocalidadId">
             <End Role="Localidad" EntitySet="Localidad" />
-            <End Role="Evento" EntitySet="Evento" />
+            <End Role="Domicilio" EntitySet="Domicilio" />
           </AssociationSet>
-          <AssociationSet Name="EventoSegmentoId" Association="Self.EventoSegmentoId">
-            <End Role="Evento" EntitySet="Evento" />
-            <End Role="EventoSegmento" EntitySet="EventoSegmento" />
-          </AssociationSet>
-          <AssociationSet Name="EventoUsuarioId" Association="Self.EventoUsuarioId">
+          <AssociationSet Name="DomicilioUsuarioId" Association="Self.DomicilioUsuarioId">
             <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Evento" EntitySet="Evento" />
+            <End Role="Domicilio" EntitySet="Domicilio" />
           </AssociationSet>
-          <AssociationSet Name="EventoUsuarioInsId" Association="Self.EventoUsuarioInsId">
-            <End Role="Evento" EntitySet="Evento" />
-            <End Role="UsuarioInscriptoEvento" EntitySet="UsuarioInscriptoEvento" />
+          <AssociationSet Name="EstadoUsuarioId" Association="Self.EstadoUsuarioId">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="UsuarioEstadoHistorico" EntitySet="UsuarioEstadoHistorico" />
           </AssociationSet>
           <AssociationSet Name="LocalidadActividadId" Association="Self.LocalidadActividadId">
             <End Role="Localidad" EntitySet="Localidad" />
@@ -567,10 +506,6 @@
             <End Role="Segmento" EntitySet="Segmento" />
             <End Role="ActividadSegmento" EntitySet="ActividadSegmento" />
           </AssociationSet>
-          <AssociationSet Name="SegmentoEventoId" Association="Self.SegmentoEventoId">
-            <End Role="Segmento" EntitySet="Segmento" />
-            <End Role="EventoSegmento" EntitySet="EventoSegmento" />
-          </AssociationSet>
           <AssociationSet Name="SegmentoUsuarioId" Association="Self.SegmentoUsuarioId">
             <End Role="Segmento" EntitySet="Segmento" />
             <End Role="UsuarioSegmento" EntitySet="UsuarioSegmento" />
@@ -583,6 +518,10 @@
             <End Role="Categoria" EntitySet="Categoria" />
             <End Role="SubCategoria" EntitySet="SubCategoria" />
           </AssociationSet>
+          <AssociationSet Name="UsuarioActividadEstadoInsId" Association="Self.UsuarioActividadEstadoInsId">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="UsuarioInscriptoActividad" EntitySet="UsuarioInscriptoActividad" />
+          </AssociationSet>
           <AssociationSet Name="UsuarioActividadInsId" Association="Self.UsuarioActividadInsId">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="UsuarioInscriptoActividad" EntitySet="UsuarioInscriptoActividad" />
@@ -591,9 +530,9 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="UsuarioCategoriaElegida" EntitySet="UsuarioCategoriaElegida" />
           </AssociationSet>
-          <AssociationSet Name="UsuarioEventoInsId" Association="Self.UsuarioEventoInsId">
+          <AssociationSet Name="UsuarioEstadoId" Association="Self.UsuarioEstadoId">
             <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="UsuarioInscriptoEvento" EntitySet="UsuarioInscriptoEvento" />
+            <End Role="UsuarioEstadoHistorico" EntitySet="UsuarioEstadoHistorico" />
           </AssociationSet>
           <AssociationSet Name="usuarioRolId" Association="Self.usuarioRolId">
             <End Role="Rol" EntitySet="Rol" />
@@ -631,12 +570,13 @@
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <Property Name="DeletedAt" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="EventoActividad" Relationship="Self.ActividadEventoId" FromRole="Actividad" ToRole="EventoActividad" />
+          <Property Name="Compleja" Type="Boolean" />
           <NavigationProperty Name="ActividadSegmento" Relationship="Self.ActividadSegmentoId" FromRole="Actividad" ToRole="ActividadSegmento" />
           <NavigationProperty Name="SubCategoria" Relationship="Self.ActividadSubcategoriaId" FromRole="Actividad" ToRole="SubCategoria" />
           <NavigationProperty Name="Usuario" Relationship="Self.ActividadUsuarioId" FromRole="Actividad" ToRole="Usuario" />
           <NavigationProperty Name="UsuarioInscriptoActividad" Relationship="Self.ActividadUsuarioInsId" FromRole="Actividad" ToRole="UsuarioInscriptoActividad" />
           <NavigationProperty Name="Categoria" Relationship="Self.CategoriaActividadId" FromRole="Actividad" ToRole="Categoria" />
+          <NavigationProperty Name="Domicilio" Relationship="Self.DomicilioActividadId" FromRole="Actividad" ToRole="Domicilio" />
           <NavigationProperty Name="Localidad" Relationship="Self.LocalidadActividadId" FromRole="Actividad" ToRole="Localidad" />
         </EntityType>
         <EntityType Name="ActividadSegmento">
@@ -662,55 +602,32 @@
           <NavigationProperty Name="UsuarioCategoriaElegida" Relationship="Self.CategoriaUsuarioId" FromRole="Categoria" ToRole="UsuarioCategoriaElegida" />
           <NavigationProperty Name="SubCategoria" Relationship="Self.SubcategoriaCategoriaId" FromRole="Categoria" ToRole="SubCategoria" />
         </EntityType>
-        <EntityType Name="Evento">
+        <EntityType Name="Domicilio">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="UsuarioId" Type="Int32" />
-          <Property Name="Precio" Type="Int32" />
-          <Property Name="FechaDesde" Type="DateTime" Precision="0" />
-          <Property Name="FechaHasta" Type="DateTime" Precision="0" />
-          <Property Name="CantidadDias" Type="Int32" />
-          <Property Name="CantidadCupo" Type="Int32" />
+          <Property Name="NombreCalle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroCalle" Type="Int32" />
+          <Property Name="NumeroPiso" Type="Int32" />
+          <Property Name="NumeroDepartamento" Type="Int32" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
           <Property Name="LocalidadId" Type="Int32" />
-          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
-          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
-          <Property Name="DeletedAt" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="EventoActividad" Relationship="Self.EventoActividadId" FromRole="Evento" ToRole="EventoActividad" />
-          <NavigationProperty Name="Localidad" Relationship="Self.EventoLocalidadId" FromRole="Evento" ToRole="Localidad" />
-          <NavigationProperty Name="EventoSegmento" Relationship="Self.EventoSegmentoId" FromRole="Evento" ToRole="EventoSegmento" />
-          <NavigationProperty Name="Usuario" Relationship="Self.EventoUsuarioId" FromRole="Evento" ToRole="Usuario" />
-          <NavigationProperty Name="UsuarioInscriptoEvento" Relationship="Self.EventoUsuarioInsId" FromRole="Evento" ToRole="UsuarioInscriptoEvento" />
+          <Property Name="UsuarioId" Type="Int32" />
+          <Property Name="ActividadId" Type="Int32" />
+          <Property Name="FechaRegistroEnDb" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Actividad" Relationship="Self.DomicilioActividadId" FromRole="Domicilio" ToRole="Actividad" />
+          <NavigationProperty Name="Localidad" Relationship="Self.DomicilioLocalidadId" FromRole="Domicilio" ToRole="Localidad" />
+          <NavigationProperty Name="Usuario" Relationship="Self.DomicilioUsuarioId" FromRole="Domicilio" ToRole="Usuario" />
         </EntityType>
-        <EntityType Name="EventoActividad">
+        <EntityType Name="Estado">
           <Key>
-            <PropertyRef Name="ActividadId" />
-            <PropertyRef Name="EventoId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ActividadId" Type="Int32" Nullable="false" />
-          <Property Name="EventoId" Type="Int32" Nullable="false" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
-          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
-          <Property Name="DeletedAt" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Actividad" Relationship="Self.ActividadEventoId" FromRole="EventoActividad" ToRole="Actividad" />
-          <NavigationProperty Name="Evento" Relationship="Self.EventoActividadId" FromRole="EventoActividad" ToRole="Evento" />
-        </EntityType>
-        <EntityType Name="EventoSegmento">
-          <Key>
-            <PropertyRef Name="EventoId" />
-            <PropertyRef Name="SegmentoId" />
-          </Key>
-          <Property Name="EventoId" Type="Int32" Nullable="false" />
-          <Property Name="SegmentoId" Type="Int32" Nullable="false" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
-          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
-          <Property Name="DeletedAt" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Evento" Relationship="Self.EventoSegmentoId" FromRole="EventoSegmento" ToRole="Evento" />
-          <NavigationProperty Name="Segmento" Relationship="Self.SegmentoEventoId" FromRole="EventoSegmento" ToRole="Segmento" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UsuarioEstadoHistorico" Relationship="Self.EstadoUsuarioId" FromRole="Estado" ToRole="UsuarioEstadoHistorico" />
+          <NavigationProperty Name="UsuarioInscriptoActividad" Relationship="Self.UsuarioActividadEstadoInsId" FromRole="Estado" ToRole="UsuarioInscriptoActividad" />
         </EntityType>
         <EntityType Name="Localidad">
           <Key>
@@ -719,7 +636,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Actividad" Relationship="Self.LocalidadActividadId" FromRole="Localidad" ToRole="Actividad" />
-          <NavigationProperty Name="Evento" Relationship="Self.EventoLocalidadId" FromRole="Localidad" ToRole="Evento" />
+          <NavigationProperty Name="Domicilio" Relationship="Self.DomicilioLocalidadId" FromRole="Localidad" ToRole="Domicilio" />
           <NavigationProperty Name="Usuario" Relationship="Self.localidadUsuarioId" FromRole="Localidad" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Rol">
@@ -737,7 +654,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ActividadSegmento" Relationship="Self.SegmentoActividadId" FromRole="Segmento" ToRole="ActividadSegmento" />
-          <NavigationProperty Name="EventoSegmento" Relationship="Self.SegmentoEventoId" FromRole="Segmento" ToRole="EventoSegmento" />
           <NavigationProperty Name="UsuarioSegmento" Relationship="Self.SegmentoUsuarioId" FromRole="Segmento" ToRole="UsuarioSegmento" />
         </EntityType>
         <EntityType Name="Sexo">
@@ -757,16 +673,6 @@
           <Property Name="CategoriaId" Type="Int32" />
           <NavigationProperty Name="Actividad" Relationship="Self.ActividadSubcategoriaId" FromRole="SubCategoria" ToRole="Actividad" />
           <NavigationProperty Name="Categoria" Relationship="Self.SubcategoriaCategoriaId" FromRole="SubCategoria" ToRole="Categoria" />
-        </EntityType>
-        <EntityType Name="TipoNecesidad">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
-          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
-          <Property Name="DeletedAt" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -792,79 +698,69 @@
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <Property Name="DeletedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Actividad" Relationship="Self.ActividadUsuarioId" FromRole="Usuario" ToRole="Actividad" />
-          <NavigationProperty Name="Evento" Relationship="Self.EventoUsuarioId" FromRole="Usuario" ToRole="Evento" />
+          <NavigationProperty Name="Domicilio" Relationship="Self.DomicilioUsuarioId" FromRole="Usuario" ToRole="Domicilio" />
           <NavigationProperty Name="Localidad" Relationship="Self.localidadUsuarioId" FromRole="Usuario" ToRole="Localidad" />
           <NavigationProperty Name="Rol" Relationship="Self.usuarioRolId" FromRole="Usuario" ToRole="Rol" />
           <NavigationProperty Name="Sexo" Relationship="Self.sexoUsuarioId" FromRole="Usuario" ToRole="Sexo" />
           <NavigationProperty Name="UsuarioInscriptoActividad" Relationship="Self.UsuarioActividadInsId" FromRole="Usuario" ToRole="UsuarioInscriptoActividad" />
           <NavigationProperty Name="UsuarioCategoriaElegida" Relationship="Self.UsuarioCategoriaId" FromRole="Usuario" ToRole="UsuarioCategoriaElegida" />
-          <NavigationProperty Name="UsuarioInscriptoEvento" Relationship="Self.UsuarioEventoInsId" FromRole="Usuario" ToRole="UsuarioInscriptoEvento" />
+          <NavigationProperty Name="UsuarioEstadoHistorico" Relationship="Self.UsuarioEstadoId" FromRole="Usuario" ToRole="UsuarioEstadoHistorico" />
           <NavigationProperty Name="UsuarioSegmento" Relationship="Self.UsuarioSegmentoId" FromRole="Usuario" ToRole="UsuarioSegmento" />
         </EntityType>
         <EntityType Name="UsuarioCategoriaElegida">
           <Key>
-            <PropertyRef Name="UsuarioId" />
-            <PropertyRef Name="CategoriaId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
-          <Property Name="CategoriaId" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UsuarioId" Type="Int32" />
+          <Property Name="CategoriaId" Type="Int32" />
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <Property Name="DeletedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Categoria" Relationship="Self.CategoriaUsuarioId" FromRole="UsuarioCategoriaElegida" ToRole="Categoria" />
           <NavigationProperty Name="Usuario" Relationship="Self.UsuarioCategoriaId" FromRole="UsuarioCategoriaElegida" ToRole="Usuario" />
         </EntityType>
+        <EntityType Name="UsuarioEstadoHistorico">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UsuarioId" Type="Int32" />
+          <Property Name="EstadoId" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Estado" Relationship="Self.EstadoUsuarioId" FromRole="UsuarioEstadoHistorico" ToRole="Estado" />
+          <NavigationProperty Name="Usuario" Relationship="Self.UsuarioEstadoId" FromRole="UsuarioEstadoHistorico" ToRole="Usuario" />
+        </EntityType>
         <EntityType Name="UsuarioInscriptoActividad">
           <Key>
-            <PropertyRef Name="ActividadId" />
-            <PropertyRef Name="UsuarioId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ActividadId" Type="Int32" Nullable="false" />
-          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActividadId" Type="Int32" />
+          <Property Name="UsuarioId" Type="Int32" />
+          <Property Name="EstadoId" Type="Int32" />
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <Property Name="DeletedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Actividad" Relationship="Self.ActividadUsuarioInsId" FromRole="UsuarioInscriptoActividad" ToRole="Actividad" />
+          <NavigationProperty Name="Estado" Relationship="Self.UsuarioActividadEstadoInsId" FromRole="UsuarioInscriptoActividad" ToRole="Estado" />
           <NavigationProperty Name="Usuario" Relationship="Self.UsuarioActividadInsId" FromRole="UsuarioInscriptoActividad" ToRole="Usuario" />
-        </EntityType>
-        <EntityType Name="UsuarioInscriptoEvento">
-          <Key>
-            <PropertyRef Name="EventoId" />
-            <PropertyRef Name="UsuarioId" />
-          </Key>
-          <Property Name="EventoId" Type="Int32" Nullable="false" />
-          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
-          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
-          <Property Name="DeletedAt" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Evento" Relationship="Self.EventoUsuarioInsId" FromRole="UsuarioInscriptoEvento" ToRole="Evento" />
-          <NavigationProperty Name="Usuario" Relationship="Self.UsuarioEventoInsId" FromRole="UsuarioInscriptoEvento" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="UsuarioSegmento">
           <Key>
-            <PropertyRef Name="UsuarioId" />
-            <PropertyRef Name="SegmentoId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
-          <Property Name="SegmentoId" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UsuarioId" Type="Int32" />
+          <Property Name="SegmentoId" Type="Int32" />
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <Property Name="DeletedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Segmento" Relationship="Self.SegmentoUsuarioId" FromRole="UsuarioSegmento" ToRole="Segmento" />
           <NavigationProperty Name="Usuario" Relationship="Self.UsuarioSegmentoId" FromRole="UsuarioSegmento" ToRole="Usuario" />
         </EntityType>
-        <Association Name="ActividadEventoId">
-          <End Role="Actividad" Type="Self.Actividad" Multiplicity="1" />
-          <End Role="EventoActividad" Type="Self.EventoActividad" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Actividad">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="EventoActividad">
-              <PropertyRef Name="ActividadId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="ActividadSegmentoId">
           <End Role="Actividad" Type="Self.Actividad" Multiplicity="1" />
           <End Role="ActividadSegmento" Type="Self.ActividadSegmento" Multiplicity="*" />
@@ -902,7 +798,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="ActividadUsuarioInsId">
-          <End Role="Actividad" Type="Self.Actividad" Multiplicity="1" />
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="0..1" />
           <End Role="UsuarioInscriptoActividad" Type="Self.UsuarioInscriptoActividad" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Actividad">
@@ -922,6 +818,18 @@
             </Principal>
             <Dependent Role="Actividad">
               <PropertyRef Name="CategoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DomicilioActividadId">
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="0..1" />
+          <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actividad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Domicilio">
+              <PropertyRef Name="ActividadId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -950,7 +858,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="CategoriaUsuarioId">
-          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
           <End Role="UsuarioCategoriaElegida" Type="Self.UsuarioCategoriaElegida" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Categoria">
@@ -973,75 +881,51 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="EventoActividadId">
-          <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
-          <End Role="EventoActividad" Type="Self.EventoActividad" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Evento">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="EventoActividad">
-              <PropertyRef Name="EventoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="EventoLocalidadId">
+        <Association Name="DomicilioLocalidadId">
           <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
-          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+          <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Localidad">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Evento">
+            <Dependent Role="Domicilio">
               <PropertyRef Name="LocalidadId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="EventoSegmentoId">
-          <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
-          <End Role="EventoSegmento" Type="Self.EventoSegmento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Evento">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="EventoSegmento">
-              <PropertyRef Name="EventoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="EventoUsuarioId">
+        <Association Name="DomicilioUsuarioId">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
-          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+          <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Evento">
+            <Dependent Role="Domicilio">
               <PropertyRef Name="UsuarioId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="EventoUsuarioInsId">
-          <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
-          <End Role="UsuarioInscriptoEvento" Type="Self.UsuarioInscriptoEvento" Multiplicity="*" />
+        <Association Name="EstadoUsuarioId">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+          <End Role="UsuarioEstadoHistorico" Type="Self.UsuarioEstadoHistorico" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Evento">
+            <Principal Role="Estado">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="UsuarioInscriptoEvento">
-              <PropertyRef Name="EventoId" />
+            <Dependent Role="UsuarioEstadoHistorico">
+              <PropertyRef Name="EstadoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="SegmentoEventoId">
-          <End Role="Segmento" Type="Self.Segmento" Multiplicity="1" />
-          <End Role="EventoSegmento" Type="Self.EventoSegmento" Multiplicity="*" />
+        <Association Name="UsuarioActividadEstadoInsId">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+          <End Role="UsuarioInscriptoActividad" Type="Self.UsuarioInscriptoActividad" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Segmento">
+            <Principal Role="Estado">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="EventoSegmento">
-              <PropertyRef Name="SegmentoId" />
+            <Dependent Role="UsuarioInscriptoActividad">
+              <PropertyRef Name="EstadoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1070,7 +954,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="SegmentoUsuarioId">
-          <End Role="Segmento" Type="Self.Segmento" Multiplicity="1" />
+          <End Role="Segmento" Type="Self.Segmento" Multiplicity="0..1" />
           <End Role="UsuarioSegmento" Type="Self.UsuarioSegmento" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Segmento">
@@ -1094,7 +978,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="UsuarioActividadInsId">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="UsuarioInscriptoActividad" Type="Self.UsuarioInscriptoActividad" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
@@ -1106,7 +990,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="UsuarioCategoriaId">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="UsuarioCategoriaElegida" Type="Self.UsuarioCategoriaElegida" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
@@ -1117,20 +1001,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="UsuarioEventoInsId">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="UsuarioInscriptoEvento" Type="Self.UsuarioInscriptoEvento" Multiplicity="*" />
+        <Association Name="UsuarioEstadoId">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="UsuarioEstadoHistorico" Type="Self.UsuarioEstadoHistorico" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="UsuarioInscriptoEvento">
+            <Dependent Role="UsuarioEstadoHistorico">
               <PropertyRef Name="UsuarioId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="UsuarioSegmentoId">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="UsuarioSegmento" Type="Self.UsuarioSegmento" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
@@ -1145,24 +1029,18 @@
           <EntitySet Name="Actividad" EntityType="Self.Actividad" />
           <EntitySet Name="ActividadSegmento" EntityType="Self.ActividadSegmento" />
           <EntitySet Name="Categoria" EntityType="Self.Categoria" />
-          <EntitySet Name="Evento" EntityType="Self.Evento" />
-          <EntitySet Name="EventoActividad" EntityType="Self.EventoActividad" />
-          <EntitySet Name="EventoSegmento" EntityType="Self.EventoSegmento" />
+          <EntitySet Name="Domicilio" EntityType="Self.Domicilio" />
+          <EntitySet Name="Estado" EntityType="Self.Estado" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" />
           <EntitySet Name="Rol" EntityType="Self.Rol" />
           <EntitySet Name="Segmento" EntityType="Self.Segmento" />
           <EntitySet Name="Sexo" EntityType="Self.Sexo" />
           <EntitySet Name="SubCategoria" EntityType="Self.SubCategoria" />
-          <EntitySet Name="TipoNecesidad" EntityType="Self.TipoNecesidad" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <EntitySet Name="UsuarioCategoriaElegida" EntityType="Self.UsuarioCategoriaElegida" />
+          <EntitySet Name="UsuarioEstadoHistorico" EntityType="Self.UsuarioEstadoHistorico" />
           <EntitySet Name="UsuarioInscriptoActividad" EntityType="Self.UsuarioInscriptoActividad" />
-          <EntitySet Name="UsuarioInscriptoEvento" EntityType="Self.UsuarioInscriptoEvento" />
           <EntitySet Name="UsuarioSegmento" EntityType="Self.UsuarioSegmento" />
-          <AssociationSet Name="ActividadEventoId" Association="Self.ActividadEventoId">
-            <End Role="Actividad" EntitySet="Actividad" />
-            <End Role="EventoActividad" EntitySet="EventoActividad" />
-          </AssociationSet>
           <AssociationSet Name="ActividadSegmentoId" Association="Self.ActividadSegmentoId">
             <End Role="Actividad" EntitySet="Actividad" />
             <End Role="ActividadSegmento" EntitySet="ActividadSegmento" />
@@ -1183,6 +1061,10 @@
             <End Role="Categoria" EntitySet="Categoria" />
             <End Role="Actividad" EntitySet="Actividad" />
           </AssociationSet>
+          <AssociationSet Name="DomicilioActividadId" Association="Self.DomicilioActividadId">
+            <End Role="Actividad" EntitySet="Actividad" />
+            <End Role="Domicilio" EntitySet="Domicilio" />
+          </AssociationSet>
           <AssociationSet Name="LocalidadActividadId" Association="Self.LocalidadActividadId">
             <End Role="Localidad" EntitySet="Localidad" />
             <End Role="Actividad" EntitySet="Actividad" />
@@ -1199,29 +1081,21 @@
             <End Role="Categoria" EntitySet="Categoria" />
             <End Role="SubCategoria" EntitySet="SubCategoria" />
           </AssociationSet>
-          <AssociationSet Name="EventoActividadId" Association="Self.EventoActividadId">
-            <End Role="Evento" EntitySet="Evento" />
-            <End Role="EventoActividad" EntitySet="EventoActividad" />
-          </AssociationSet>
-          <AssociationSet Name="EventoLocalidadId" Association="Self.EventoLocalidadId">
+          <AssociationSet Name="DomicilioLocalidadId" Association="Self.DomicilioLocalidadId">
             <End Role="Localidad" EntitySet="Localidad" />
-            <End Role="Evento" EntitySet="Evento" />
+            <End Role="Domicilio" EntitySet="Domicilio" />
           </AssociationSet>
-          <AssociationSet Name="EventoSegmentoId" Association="Self.EventoSegmentoId">
-            <End Role="Evento" EntitySet="Evento" />
-            <End Role="EventoSegmento" EntitySet="EventoSegmento" />
-          </AssociationSet>
-          <AssociationSet Name="EventoUsuarioId" Association="Self.EventoUsuarioId">
+          <AssociationSet Name="DomicilioUsuarioId" Association="Self.DomicilioUsuarioId">
             <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Evento" EntitySet="Evento" />
+            <End Role="Domicilio" EntitySet="Domicilio" />
           </AssociationSet>
-          <AssociationSet Name="EventoUsuarioInsId" Association="Self.EventoUsuarioInsId">
-            <End Role="Evento" EntitySet="Evento" />
-            <End Role="UsuarioInscriptoEvento" EntitySet="UsuarioInscriptoEvento" />
+          <AssociationSet Name="EstadoUsuarioId" Association="Self.EstadoUsuarioId">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="UsuarioEstadoHistorico" EntitySet="UsuarioEstadoHistorico" />
           </AssociationSet>
-          <AssociationSet Name="SegmentoEventoId" Association="Self.SegmentoEventoId">
-            <End Role="Segmento" EntitySet="Segmento" />
-            <End Role="EventoSegmento" EntitySet="EventoSegmento" />
+          <AssociationSet Name="UsuarioActividadEstadoInsId" Association="Self.UsuarioActividadEstadoInsId">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="UsuarioInscriptoActividad" EntitySet="UsuarioInscriptoActividad" />
           </AssociationSet>
           <AssociationSet Name="localidadUsuarioId" Association="Self.localidadUsuarioId">
             <End Role="Localidad" EntitySet="Localidad" />
@@ -1247,9 +1121,9 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="UsuarioCategoriaElegida" EntitySet="UsuarioCategoriaElegida" />
           </AssociationSet>
-          <AssociationSet Name="UsuarioEventoInsId" Association="Self.UsuarioEventoInsId">
+          <AssociationSet Name="UsuarioEstadoId" Association="Self.UsuarioEstadoId">
             <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="UsuarioInscriptoEvento" EntitySet="UsuarioInscriptoEvento" />
+            <End Role="UsuarioEstadoHistorico" EntitySet="UsuarioEstadoHistorico" />
           </AssociationSet>
           <AssociationSet Name="UsuarioSegmentoId" Association="Self.UsuarioSegmentoId">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -1283,6 +1157,7 @@
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="Compleja" ColumnName="Compleja" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1305,45 +1180,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Evento">
-            <EntityTypeMapping TypeName="VitaModel.Evento">
-              <MappingFragment StoreEntitySet="Evento">
+          <EntitySetMapping Name="Domicilio">
+            <EntityTypeMapping TypeName="VitaModel.Domicilio">
+              <MappingFragment StoreEntitySet="Domicilio">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
-                <ScalarProperty Name="Precio" ColumnName="Precio" />
-                <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
-                <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
-                <ScalarProperty Name="CantidadDias" ColumnName="CantidadDias" />
-                <ScalarProperty Name="CantidadCupo" ColumnName="CantidadCupo" />
+                <ScalarProperty Name="NombreCalle" ColumnName="NombreCalle" />
+                <ScalarProperty Name="NumeroCalle" ColumnName="NumeroCalle" />
+                <ScalarProperty Name="NumeroPiso" ColumnName="NumeroPiso" />
+                <ScalarProperty Name="NumeroDepartamento" ColumnName="NumeroDepartamento" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
                 <ScalarProperty Name="LocalidadId" ColumnName="LocalidadId" />
-                <ScalarProperty Name="Foto" ColumnName="Foto" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EventoActividad">
-            <EntityTypeMapping TypeName="VitaModel.EventoActividad">
-              <MappingFragment StoreEntitySet="EventoActividad">
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
                 <ScalarProperty Name="ActividadId" ColumnName="ActividadId" />
-                <ScalarProperty Name="EventoId" ColumnName="EventoId" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="FechaRegistroEnDb" ColumnName="FechaRegistroEnDb" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="EventoSegmento">
-            <EntityTypeMapping TypeName="VitaModel.EventoSegmento">
-              <MappingFragment StoreEntitySet="EventoSegmento">
-                <ScalarProperty Name="EventoId" ColumnName="EventoId" />
-                <ScalarProperty Name="SegmentoId" ColumnName="SegmentoId" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+          <EntitySetMapping Name="Estado">
+            <EntityTypeMapping TypeName="VitaModel.Estado">
+              <MappingFragment StoreEntitySet="Estado">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1388,17 +1245,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TipoNecesidad">
-            <EntityTypeMapping TypeName="VitaModel.TipoNecesidad">
-              <MappingFragment StoreEntitySet="TipoNecesidad">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="VitaModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
@@ -1427,8 +1273,21 @@
           <EntitySetMapping Name="UsuarioCategoriaElegida">
             <EntityTypeMapping TypeName="VitaModel.UsuarioCategoriaElegida">
               <MappingFragment StoreEntitySet="UsuarioCategoriaElegida">
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
                 <ScalarProperty Name="CategoriaId" ColumnName="CategoriaId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsuarioEstadoHistorico">
+            <EntityTypeMapping TypeName="VitaModel.UsuarioEstadoHistorico">
+              <MappingFragment StoreEntitySet="UsuarioEstadoHistorico">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="EstadoId" ColumnName="EstadoId" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
@@ -1438,19 +1297,10 @@
           <EntitySetMapping Name="UsuarioInscriptoActividad">
             <EntityTypeMapping TypeName="VitaModel.UsuarioInscriptoActividad">
               <MappingFragment StoreEntitySet="UsuarioInscriptoActividad">
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ActividadId" ColumnName="ActividadId" />
                 <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UsuarioInscriptoEvento">
-            <EntityTypeMapping TypeName="VitaModel.UsuarioInscriptoEvento">
-              <MappingFragment StoreEntitySet="UsuarioInscriptoEvento">
-                <ScalarProperty Name="EventoId" ColumnName="EventoId" />
-                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="EstadoId" ColumnName="EstadoId" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
@@ -1460,6 +1310,7 @@
           <EntitySetMapping Name="UsuarioSegmento">
             <EntityTypeMapping TypeName="VitaModel.UsuarioSegmento">
               <MappingFragment StoreEntitySet="UsuarioSegmento">
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
                 <ScalarProperty Name="SegmentoId" ColumnName="SegmentoId" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />

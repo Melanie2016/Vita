@@ -12,18 +12,21 @@ namespace Vita
     using System;
     using System.Collections.Generic;
     
-    public partial class UsuarioInscriptoActividad
+    public partial class Domicilio
     {
         public int Id { get; set; }
-        public Nullable<int> ActividadId { get; set; }
+        public string NombreCalle { get; set; }
+        public Nullable<int> NumeroCalle { get; set; }
+        public Nullable<int> NumeroPiso { get; set; }
+        public Nullable<int> NumeroDepartamento { get; set; }
+        public string CodigoPostal { get; set; }
+        public Nullable<int> LocalidadId { get; set; }
         public Nullable<int> UsuarioId { get; set; }
-        public Nullable<int> EstadoId { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
-        public Nullable<System.DateTime> UpdatedAt { get; set; }
-        public Nullable<System.DateTime> DeletedAt { get; set; }
+        public Nullable<int> ActividadId { get; set; }
+        public Nullable<System.DateTime> FechaRegistroEnDb { get; set; }
     
         public virtual Actividad Actividad { get; set; }
-        public virtual Estado Estado { get; set; }
+        public virtual Localidad Localidad { get; set; }
         public virtual Usuario Usuario { get; set; }
     }
 }

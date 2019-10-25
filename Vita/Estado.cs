@@ -12,21 +12,21 @@ namespace Vita
     using System;
     using System.Collections.Generic;
     
-    public partial class Segmento
+    public partial class Estado
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Segmento()
+        public Estado()
         {
-            this.ActividadSegmento = new HashSet<ActividadSegmento>();
-            this.UsuarioSegmento = new HashSet<UsuarioSegmento>();
+            this.UsuarioEstadoHistorico = new HashSet<UsuarioEstadoHistorico>();
+            this.UsuarioInscriptoActividad = new HashSet<UsuarioInscriptoActividad>();
         }
     
         public int Id { get; set; }
         public string Descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ActividadSegmento> ActividadSegmento { get; set; }
+        public virtual ICollection<UsuarioEstadoHistorico> UsuarioEstadoHistorico { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UsuarioSegmento> UsuarioSegmento { get; set; }
+        public virtual ICollection<UsuarioInscriptoActividad> UsuarioInscriptoActividad { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace Vita
         public Localidad()
         {
             this.Actividad = new HashSet<Actividad>();
-            this.Evento = new HashSet<Evento>();
+            this.Domicilio = new HashSet<Domicilio>();
             this.Usuario = new HashSet<Usuario>();
         }
     
@@ -28,7 +28,7 @@ namespace Vita
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Actividad> Actividad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Evento> Evento { get; set; }
+        public virtual ICollection<Domicilio> Domicilio { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario> Usuario { get; set; }
     }

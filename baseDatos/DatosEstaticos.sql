@@ -63,12 +63,13 @@ INSERT INTO Segmento(Id, Descripcion) Values (3,'Adultos');
 INSERT INTO Segmento(Id, Descripcion) Values (4,'Adultos mayores');
 SET IDENTITY_INSERT Segmento OFF
 
-
-/***********************************************/
-/*TIPONECESIDAD*/
-SET IDENTITY_INSERT TipoNecesidad ON
-INSERT INTO TipoNecesidad(Id, Descripcion) Values (1,'Monetaria');
-INSERT INTO TipoNecesidad(Id, Descripcion) Values (2,'Logística');
-INSERT INTO TipoNecesidad(Id, Descripcion) Values (3,'Servicio');
-SET IDENTITY_INSERT TipoNecesidad OFF
+/********************************************************/
+/*ESTADO*/
+SET IDENTITY_INSERT Estado ON
+INSERT INTO Estado(Id, Descripcion) Values (1,'Aprobado');
+INSERT INTO Estado(Id, Descripcion) Values (2,'Pendiente');
+INSERT INTO Estado(Id, Descripcion) Values (3,'Cancelado');
+INSERT INTO Estado(Id, Descripcion) Values (4,'Rechazado');
+INSERT INTO Estado(Id, Descripcion) Values (5,'Finalizado');
+SET IDENTITY_INSERT Estado OFF
 

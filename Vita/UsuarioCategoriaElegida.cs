@@ -14,8 +14,9 @@ namespace Vita
     
     public partial class UsuarioCategoriaElegida
     {
-        public int UsuarioId { get; set; }
-        public int CategoriaId { get; set; }
+        public int Id { get; set; }
+        public Nullable<int> UsuarioId { get; set; }
+        public Nullable<int> CategoriaId { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }

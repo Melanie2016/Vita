@@ -18,10 +18,10 @@ namespace Vita
         public Usuario()
         {
             this.Actividad = new HashSet<Actividad>();
-            this.Evento = new HashSet<Evento>();
+            this.Domicilio = new HashSet<Domicilio>();
             this.UsuarioInscriptoActividad = new HashSet<UsuarioInscriptoActividad>();
             this.UsuarioCategoriaElegida = new HashSet<UsuarioCategoriaElegida>();
-            this.UsuarioInscriptoEvento = new HashSet<UsuarioInscriptoEvento>();
+            this.UsuarioEstadoHistorico = new HashSet<UsuarioEstadoHistorico>();
             this.UsuarioSegmento = new HashSet<UsuarioSegmento>();
         }
     
@@ -48,7 +48,7 @@ namespace Vita
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Actividad> Actividad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Evento> Evento { get; set; }
+        public virtual ICollection<Domicilio> Domicilio { get; set; }
         public virtual Localidad Localidad { get; set; }
         public virtual Rol Rol { get; set; }
         public virtual Sexo Sexo { get; set; }
@@ -57,7 +57,7 @@ namespace Vita
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsuarioCategoriaElegida> UsuarioCategoriaElegida { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UsuarioInscriptoEvento> UsuarioInscriptoEvento { get; set; }
+        public virtual ICollection<UsuarioEstadoHistorico> UsuarioEstadoHistorico { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsuarioSegmento> UsuarioSegmento { get; set; }
     }
