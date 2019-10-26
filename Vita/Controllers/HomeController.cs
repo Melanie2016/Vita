@@ -18,7 +18,6 @@ namespace Vita.Controllers
         private SegmentoServicio segmentoServicio = new SegmentoServicio();
         //private BuscardorServicio buscardorServicio = new BuscardorServicio();
         private ActividadServicio actividadServicio = new ActividadServicio();
-        private EventoServicio eventoServicio = new EventoServicio();
         private CategoriaServicio categoriaServicio = new CategoriaServicio();
         private UsuarioServicio usuarioServicio = new UsuarioServicio();
         [HttpGet]
