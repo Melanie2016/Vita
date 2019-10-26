@@ -142,8 +142,6 @@
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ActividadController.cs" />
-    <Compile Include="Controllers\ChatController.cs" />
-    <Compile Include="Controllers\ColaboracionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
