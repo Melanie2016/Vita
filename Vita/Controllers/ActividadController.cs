@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -80,15 +82,17 @@ namespace Vita.Controllers
         public ActionResult FichaActividad()
         {
             //obtengo usuario logueado
-            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
-            {
-                return RedirectToAction("Login", "Login");
-            }
-            else
-            {
-                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
-                return View(buscarUsuarioLogueado);
-            }
+            /* if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+             {
+                 return RedirectToAction("Login", "Login");
+             }
+             else
+             {
+                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                 return View(buscarUsuarioLogueado);
+             }*/
+
+            return View();
         }
         public ActionResult ListaActividades()
         {
@@ -122,6 +126,20 @@ namespace Vita.Controllers
             var lista = actividadServicio.GetBusquedaAvanzada(textoIngresado);
             ViewBag.Lista = lista;
             ViewBag.Contador = lista.Count();
+            ViewBag.Valor = textoIngresado;
+            
+
+            foreach (var item in lista)
+            {
+                
+                if (item.Foto != null && item.Foto.Length > 0)
+                {
+                    ViewBag.Url = "data:image;base64," + Convert.ToBase64String(item.Foto);
+                }
+
+            }
+            
+
             return View();
         }
 

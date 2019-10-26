@@ -1,147 +1,265 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Vita</title>
-    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900" rel="stylesheet">
-
-    <!--ESTILOS-->
-    <link rel="stylesheet" href="~/Content/css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="~/Content/css/animate.css">
-    <link rel="stylesheet" href="~/Content/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="~/Content/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="~/Content/css/magnific-popup.css">
-    <link rel="stylesheet" href="~/Content/css/aos.css">
-    <link rel="stylesheet" href="~/Content/css/ionicons.min.css">
-    <link rel="stylesheet" href="~/Content/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/Content/css/jquery.timepicker.css">
-    <link rel="stylesheet" href="~/Content/css/flaticon.css">
-    <link rel="stylesheet" href="~/Content/css/icomoon.css">
-    <link rel="stylesheet" href="~/Content/css/style.css">
-    <link rel="stylesheet" href="~/Content/theme/lib/font-awesome/css/font-awesome.min.css">
-    <!--FIN ESTILOS-->
-
-</head>
-<body>
-
-    <!--INICIO NAVEGACIÓN-->
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-        <div class="container">
-            <a class="navbar-brand" href="/Home/Index"><img id="logo" src="../../Content/images/iso.png" style="width:35px; height: 35px;"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
-            </button>
-
-            <div class="collapse navbar-collapse" id="ftco-nav">
-
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="index.html" class="nav-link"></a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link"></a></li>
-                    <li class="nav-item"><a href="/Home/Index" class="nav-link">Home</a></li> <!--HOME-->
-                    <li class="nav-item"><a href="/Actividad/Actividades" class="nav-link">Actividades</a></li> <!--ACTIIDADES-->
-                    <li class="nav-item"><a href="/Evento/Eventos" class="nav-link">Eventos</a></li> <!--EVENTOS-->
-                    <li class="nav-item cta mr-md-1"><a href="/Login/Login" class="nav-link">Login</a></li> <!--LOGIN-->
-                    <li class="nav-item cta cta-colored"><a href="/Usuario/Registro" class="nav-link">Registrarse</a></li> <!--REGISTRARSE-->
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!--FIN NAVEGACIÓN-->
+﻿    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Vita</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
 
 
-    @RenderBody()
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900" rel="stylesheet">
 
 
-    <!-- INICIO PIE DE PÁGINA-->
-    <hr />
-    <footer>
-        <div class="footer-area" style="padding: 40px 0; background: #f9f9f9">
+        <link href="~/Content/theme/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Libraries CSS Files -->
+        <link href="~/Content/theme/lib/nivo-slider/css/nivo-slider.css" rel="stylesheet">
+        <link href="~/Content/theme/lib/owlcarousel/owl.carousel.css" rel="stylesheet">
+        <link href="~/Content/theme/lib/owlcarousel/owl.transitions.css" rel="stylesheet">
+        <link href="~/Content/theme/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="~/Content/theme/lib/animate/animate.min.css" rel="stylesheet">
+        <link href="~/Content/theme/lib/venobox/venobox.css" rel="stylesheet">
+        <link href="~/Content/theme/css/grid-gallery.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
+
+
+        <!-- Nivo Slider Theme -->
+        <link href="~/Content/theme/css/nivo-slider-theme.css" rel="stylesheet">
+
+        <!-- Main Stylesheet File -->
+        <link href="~/Content/theme/css/style.css" rel="stylesheet">
+
+
+        <!-- Responsive Stylesheet File -->
+        <link href="~/Content/theme/css/responsive.css" rel="stylesheet">
+
+
+        <link rel="stylesheet" href="~/Content/css/open-iconic-bootstrap.min.css">
+        <link rel="stylesheet" href="~/Content/css/animate.css">
+
+        <link rel="stylesheet" href="~/Content/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="~/Content/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="~/Content/css/magnific-popup.css">
+
+        <link rel="stylesheet" href="~/Content/css/aos.css">
+
+        <link rel="stylesheet" href="~/Content/css/ionicons.min.css">
+
+        <link rel="stylesheet" href="~/Content/css/bootstrap-datepicker.css">
+        <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
+        <link rel="stylesheet" href="~/Content/css/jquery.timepicker.css">
+
+
+        <link rel="stylesheet" href="~/Content/css/flaticon.css">
+        <link rel="stylesheet" href="~/Content/css/icomoon.css">
+        <link rel="stylesheet" href="~/Content/css/style.css">
+
+
+
+
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <div class="footer-content">
-                            <div class="footer-head">
-                                <div class="footer-logo">
-                                    <h2>Vita</h2>
-                                </div>
-                                <p>"La página web que te hace mover" Todos los derechos reservados.</p>
-                                <div class="footer-icons">
-                                    <ul>
+                <a class="navbar-brand" href="/Home/Index"><img id="logo" src="../../Content/images/iconopng.png" style="width:40px; height: 40px;"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="oi oi-menu"></span> Menu
+                </button>
+
+                <div class="collapse navbar-collapse" id="ftco-nav">
+
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active"><a href="index.html" class="nav-link"></a></li>
+                        <li class="nav-item"><a href="about.html" class="nav-link"></a></li>
+                        <li class="nav-item"><a href="/Home/Index" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="/Actividad/Actividades?categoriaId=0" class="nav-link">Actividades</a></li>
+
+                        <li class="nav-item cta mr-md-1"><a href="/Login/Login" class="nav-link" style="text-decoration:underline">Iniciar sesión</a></li>
+                        <!--foto LOGUEADO-->
+                        <li class="icons dropdown" style="margin-left: 10px;">
+
+                            <div id="ContenedorLogueado" class="user-img c-pointer position-relative" data-toggle="dropdown" style="width:155px; height:48px; margin-right: -112px;">
+                                <a href="javascript:void(0)" class="log-user" data-toggle="dropdown">
+                                    <span style="color:#464a53; font-size: 14px;">Hola Arrieta91!</span> <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
+                                </a>
+                                <span class="activity active" style="height: 13px; width: 13px; border-radius: 50%; display: inline-block; position: absolute; border: 3px solid #fff; bottom: .9rem; right: 0rem; padding: 0; left: auto; background-image: linear-gradient(230deg, #AFEDC0, #69D385)"></span>
+                                <img src="../../Content/images/person_2.jpg" height="40" width="40" alt="" style="height: 40px; width: 40px; border: 3px solid #fff; border-radius: 50%; margin: 0; padding: 0; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);">
+                            </div>
+                            <div class="drop-down dropdown-profile animated fadeIn dropdown-menu" style="width: 12rem; box-shadow: 0px 1px 10px 0 rgba(0, 0, 0, 0.15); width: 192px; margin-left:-40px; height: 137px;">
+                                <div class="dropdown-content-body">
+                                    <ul style="padding: 20px;">
                                         <li>
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
+                                            <a href="/Usuario/PerfilUsuario" style="color:#007bff;"><i></i><img src="../../Content/images/icon1.png"/> <span style="font-size: 15px;">Perfil</span></a>
                                         </li>
                                         <li>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="fa fa-google"></i></a>
+                                            <a href="javascript:void()" style="color:#007bff;">
+                                                <i></i><img src="../../Content/images/icon2.png" /> <span style="font-size: 15px;">Inbox</span> <div class="badge gradient-3 badge-pill gradient-1">3</div>
+                                            </a>
                                         </li>
 
+                                        <hr class="my-2">
+                                        <li><a href="/Login/Logout" style="color:#007bff;"><i></i> <img src="../../Content/images/icon3.png" /> <span style="font-size: 15px;">Logout</span></a></li>
                                     </ul>
                                 </div>
                             </div>
+                        </li>
+                        <!---->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="content-body">
+
+
+            @RenderBody()
+            <hr />
+            <footer>
+                <div class="footer-area">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="footer-content">
+                                    <div class="footer-head">
+                                        <div class="footer-logo">
+                                            <h2>Vita</h2>
+                                        </div>
+
+                                        <p>"La página web que te hace mover" Todos los derechos reservados.</p>
+                                        <div class="footer-icons">
+                                            <ul>
+                                                <li>
+                                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="fa fa-google"></i></a>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end single footer -->
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="footer-content">
+                                    <div class="footer-head">
+                                        <h4>información</h4>
+                                        <p>
+                                            Para obervaciones, opiniones o quejas.. contáctemos ¡Continuamente estamos mejorando para usted!
+                                        </p>
+                                        <div class="footer-contacts">
+                                            <p><span>WhatsApp:</span> +011 4563 7896</p>
+                                            <p><span>Email:</span> InfoVita@gmail.com.ar</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end single footer -->
+
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <div class="footer-content">
-                            <div class="footer-head">
-                                <h4>información</h4>
-                                <p>
-                                    Para obervaciones, opiniones o quejas.. contáctemos ¡Continuamente estamos mejorando para usted!
-                                </p>
-                                <div class="footer-contacts">
-                                    <p><span>WhatsApp:</span> +011 4563 7896</p>
-                                    <p><span>Email:</span> InfoVita@gmail.com.ar</p>
+                </div>
+                <div class="footer-area-bottom">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="copyright text-center">
+
+                                    <p>&copy; @DateTime.Now.Year - VITA</p>
+
+                                </div>
+                                <div class="credits">
+                                    <!--
+                                      All the links in the footer should remain intact.
+                                      You can delete the links only if you purchased the pro version.
+                                      Licensing information: https://bootstrapmade.com/license/
+                                      Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=eBusiness
+                                    -->
 
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </footer>
+
+
+
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/bootstrap")
+            @RenderSection("scripts", required: false)
+
+
+            <!--**********************************
+                Content body end
+            ***********************************-->
+
+
+            <script src="~/Scripts/jquery.min.js"></script>
+            <script src="~/Scripts/jquery-migrate-3.0.1.min.js"></script>
+            <script src="~/Scripts/popper.min.js"></script>
+            <script src="~/Scripts/bootstrap.min.js"></script>
+            <script src="~/Scripts/bootstrap.js"></script>
+            <script src="~/Scripts/jquery.easing.1.3.js"></script>
+            <script src="~/Scripts/jquery.waypoints.min.js"></script>
+            <script src="~/Scripts/jquery.stellar.min.js"></script>
+            <script src="~/Scripts/owl.carousel.min.js"></script>
+            <script src="~/Scripts/jquery.magnific-popup.min.js"></script>
+            <script src="~/Scripts/aos.js"></script>
+            <script src="~/Scripts/jquery.animateNumber.min.js"></script>
+            <script src="~/Scripts/scrollax.min.js"></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+            <script src="~/Scripts/google-map.js"></script>
+            <script src="~/Scripts/main.js"></script>
+            <script src="~/Content/js/facebook.js"></script>
+
+
+            <script src="~/Content/theme/lib/jquery/jquery.min.js"></script>
+            <script src="~/Content/theme/lib/bootstrap/js/bootstrap.min.js"></script>
+            <script src="~/Content/theme/lib/owlcarousel/owl.carousel.min.js"></script>
+            <script src="~/Content/theme/lib/venobox/venobox.min.js"></script>
+            <script src="~/Content/theme/lib/knob/jquery.knob.js"></script>
+            <script src="~/Content/theme/lib/wow/wow.min.js"></script>
+            <script src="~/Content/theme/lib/parallax/parallax.js"></script>
+            <script src="~/Content/theme/lib/easing/easing.min.js"></script>
+            <script src="~/Content/theme/lib/nivo-slider/js/jquery.nivo.slider.js" type="text/javascript"></script>
+            <script src="~/Content/theme/lib/appear/jquery.appear.js"></script>
+            <script src="~/Content/theme/lib/isotope/isotope.pkgd.min.js"></script>
+
+
+
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+            <script>
+                baguetteBox.run('.grid-gallery', { animation: 'slideIn' });
+
+
+            </script>
+
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <!-- Bootstrap JS -->
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            <script src="~/Content/theme/js/countdown.jquery.js"></script>
+            <script>
+                $('#countdown').countdown({
+                    year: 2019,
+                    month: 11,
+                    day: 4,
+                });
+            </script>
+
         </div>
-    </footer>
-    <div class="footer-area-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="copyright text-center">
-                        <p>&copy; @DateTime.Now.Year - VITA</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- FIN PIE DE PÁGINA-->
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-
-
-    <!--INICIO SCRIPTS-->
-    <script src="~/Scripts/jquery.min.js"></script>
-    <script src="~/Scripts/jquery-migrate-3.0.1.min.js"></script>
-    <script src="~/Scripts/popper.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Scripts/jquery.easing.1.3.js"></script>
-    <script src="~/Scripts/jquery.waypoints.min.js"></script>
-    <script src="~/Scripts/jquery.stellar.min.js"></script>
-    <script src="~/Scripts/owl.carousel.min.js"></script>
-    <script src="~/Scripts/jquery.magnific-popup.min.js"></script>
-    <script src="~/Scripts/aos.js"></script>
-    <script src="~/Scripts/jquery.animateNumber.min.js"></script>
-    <script src="~/Scripts/scrollax.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-    <script src="~/Scripts/google-map.js"></script>
-    <script src="~/Scripts/main.js"></script>
-    <script src="~/Content/js/facebook.js"></script>
-    <!--FIN SCRIPTS-->
-</body>
-
+    </body>
 
 </html>
