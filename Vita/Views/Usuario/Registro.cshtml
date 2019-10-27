@@ -88,24 +88,6 @@
                                     </select>
                                 </div>
                             </div>
-                            <!--Sexo-->
-                            @*<div class="col-2">
-                                    <div class="input-group">
-                                        <label class="label">Sexo</label>
-                                        <div class="p-t-10">
-                                            <label class="radio-container m-r-45">
-                                                Masculino
-                                                <input type="radio" checked="checked" name="gender">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                            <label class="radio-container">
-                                                Femenino
-                                                <input type="radio" name="gender">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>*@
                         </div>
 
                         <div class="row row-space">
@@ -127,25 +109,17 @@
                         </div>
                         <div class="row row-space">
                             <div class="col-2">
-
-                                <!--Localidad-->
+                                <!--Provincia-->
                                 <label class="label">Seleccione Provincia</label>
                                 <div>
-                                    @*<select id="cmbPais" class="form-control">*@
-                                    <select class="selectpicker" id="filtroProvincia"
-                                            title="Seleccione provincia..">
-
-
+                                    <select class="selectpicker" id="filtroProvincia" title="Seleccione provincia..">
                                         @foreach (var item in ViewBag.ListaProvincia as MultiSelectList)
                                         {
                                             <option name="valorActual" value="@item.Value">@item.Text</option>
 
                                         }
-
                                     </select>
-
                                 </div>
-
                             </div>
 
 
@@ -154,8 +128,6 @@
                                     <!--Localidad-->
                                     <label class="label">Seleccione Departamento</label>
                                     <div>
-
-                                        <!-- Aca es donde aparecera el segundo select -->
                                         <div id="filtroDepartamento">Selecciona algo de lo de arriba</div>
                                         @*<select class="selectpicker" id="filtroDepartamento" onchange="changeOption(this)"
                                                     data-live-search="true" title="Seleccione departamento.." name="DepartamentoElegida">
@@ -176,7 +148,7 @@
                                 <div class="input-group">
                                     <!--Localidad-->
                                     <label class="label">Seleccione Localidad</label>
-                                    <div>
+                                    <div id="filtroLocalidad">Selecciona algo de lo de arriba</div>>
                                         @*<select class="selectpicker" id="LocalidadId" onchange="changeOption(this)"
                                                     data-live-search="true" title="Seleccione localidad.." name="LocalidadId">
 
@@ -378,6 +350,7 @@
 
 <!-- Aca es donde se arma la magia -->
 <script>
+    var depart = 0;
         //Todo siempre una vez cargada la página
         $(document).ready(function () {
 
@@ -407,7 +380,46 @@
                         $.getJSON("@Url.Action("Obtenersegundalista","Usuario")", { idPais: idPais }, function (data) {
                               let data2 = JSON.parse(data);
                              $.each(data2, function () {
-                                    $("#filtro2").append($("<option>").val(this.Id).text(this.Descripcion));
+                                 $("#filtro2").append($("<option>").val(this.Id).text(this.Descripcion));
+                                  });
+                             });
+                    }
+                });
+            });
+        });
+    </script>
+<script>
+        //Todo siempre una vez cargada la página
+        $(document).ready(function () {
+
+            //Esto corre cuando cambias de opción en el primer select
+            $('#filtroDepartamento').on('change', function () {
+
+                var idDepartamento = $(this).val();
+                var dp = this.Id;
+
+                //Si elegiste la opción de los guíones paramos aca para no hacer nada
+                if (idDepartamento === "---") {
+                    $("#filtroLocalidad").html("Selecciona una provincia");
+                    return;
+                }
+
+                //Ajax
+                $.ajax({
+                   url: "obtenerterceralista/" + idDepartamento,
+
+                    type: 'GET',
+                    dataType: "json",
+                    success: function (res) {
+                        //Por si queres ver una por una las cosas que vuelven descomenta el alert
+                        alert(res);
+
+                        //Creando el segundo select
+                        $("#filtroLocalidad").empty().append('<select id="filtro3">');
+                        $.getJSON("@Url.Action("Obtenerterceralista","Usuario")", { idDepartamento: idDepartamento }, function (data) {
+                              let data2 = JSON.parse(data);
+                             $.each(data2, function () {
+                                    $("#filtro3").append($("<option>").val(this.Id).text(this.Descripcion));
                                   });
                              });
                     }
@@ -415,5 +427,3 @@
             });
         });
 </script>
-
-

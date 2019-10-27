@@ -21,5 +21,9 @@ namespace Vita.Servicios
         {
             return myDbContext.Departamento.OrderBy(x => x.Descripcion).Where(x=>x.ProvinciaId== provinciaId).ToList();
         }
+        public List<Localidad> GetLocalidadesByDepartamentoId(int? departamentoId)
+        {
+            return myDbContext.Localidad.OrderBy(x => x.Descripcion).Where(x => x.DepartamentoId == departamentoId).ToList();
+        }
     }
 }

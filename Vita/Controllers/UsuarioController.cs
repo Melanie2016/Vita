@@ -56,6 +56,21 @@ namespace Vita.Controllers
 
             return Json(json, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        [Route("obtenerterceralista{idDepartamento}")]
+        public JsonResult ObtenerTerceraLista(int? idDepartamento)
+        {
+            if (idDepartamento == null)
+            {
+                idDepartamento = 3;
+            }
+            List<Localidad> localidades = localidadServicio.GetLocalidadesByDepartamentoId(idDepartamento);
+            var jsonSerialiser = new JavaScriptSerializer();
+            var json = jsonSerialiser.Serialize(localidades);
+
+            return Json(json, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         public ActionResult Registrar(Usuario usuario, int[] selectedSegmento, int[] selectedCategoria)
         {
