@@ -18,6 +18,7 @@ namespace Vita
         public VitaEntities()
             : base("name=VitaEntities")
         {
+            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
