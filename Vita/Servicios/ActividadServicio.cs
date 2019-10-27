@@ -13,6 +13,14 @@ namespace Vita.Servicios
         {
             return myDbContext.Actividad.Find(ActividadId);
         }
+
+        public List<Actividad> GetAllActividadByUsuario() //lista de activiades , solo la descripcion y fecha, MOMENTANEA
+        {
+            var fechaActividad = myDbContext.Actividad.Where(x => x.UsuarioId == 1).ToList();
+
+            return fechaActividad;
+        }
+
         public List<Actividad> GetAllActividadByRolEntidadId(int usuarioId) //lista de activiades por entidad id
         {
             return myDbContext.Actividad.Where(x => x.UsuarioId == usuarioId).ToList();
@@ -145,5 +153,22 @@ namespace Vita.Servicios
 
             return lista;
         }
+
+
+        // falta hacer query 
+        public List<Actividad> GetActividadesConDescripcionYFechaSegunUsuario(int usuarioId) 
+        {
+            var listaActividad = new List<Actividad>();
+            var listaUsuarioInscriptoActividad = myDbContext.UsuarioInscriptoActividad.Where(x => x.UsuarioId == usuarioId).ToList();
+
+            foreach (var actividadInscriptoUser in listaUsuarioInscriptoActividad)
+            {
+                listaActividad.Add(myDbContext.Actividad.Where(x => x.Id == actividadInscriptoUser.ActividadId).FirstOrDefault());
+            }
+            return listaActividad;
+        }
+
+
+
     }
 }
