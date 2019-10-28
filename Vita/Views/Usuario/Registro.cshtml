@@ -376,7 +376,7 @@
                         //alert(res);
 
                         //Creando el segundo select
-                        $("#filtroDepartamento").empty().append('<select id="filtro2">');
+                        $("#filtroDepartamento").empty().append('<select id="filtro2" class="selectpicker">');
                         $.getJSON("@Url.Action("Obtenersegundalista","Usuario")", { idPais: idPais }, function (data) {
                               let data2 = JSON.parse(data);
                              $.each(data2, function () {
@@ -396,7 +396,6 @@
             $('#filtroDepartamento').on('change', function () {
 
                 var idDepartamento = $(this).val();
-                var dp = this.Id;
 
                 //Si elegiste la opción de los guíones paramos aca para no hacer nada
                 if (idDepartamento === "---") {
