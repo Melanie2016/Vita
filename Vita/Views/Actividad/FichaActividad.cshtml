@@ -70,50 +70,65 @@
                         }
                         <!---->
 
-                            <!--Inicio Carousel-->
-                            <!--Carousel Wrapper-->
-                            <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
-                                <!--Slides-->
-                                <div class="carousel-inner" role="listbox">
-                                    <!--First slide-->
-                                    @if (ViewBag.Actividad.Foto != null && ViewBag.Actividad.Foto.Length > 0)
-                                    {
-                                        ViewBag.Url = "data:image;base64," + Convert.ToBase64String(ViewBag.Actividad.Foto);
-                                    }
-                                    else
-                                    {
-                                        ViewBag.Url = "";
-                                    }
+                        <!--Inicio Carousel-->
+                        <!--Carousel Wrapper-->
+                        <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
+                            <!--Slides-->
+                            <div class="carousel-inner" role="listbox">
+                                <!--First slide-->
+                                @if (ViewBag.Actividad.Foto != null && ViewBag.Actividad.Foto.Length > 0)
+                                {
+                                    ViewBag.Url = "data:image;base64," + Convert.ToBase64String(ViewBag.Actividad.Foto);
+                                }
+                                else
+                                {
+                                    ViewBag.Url = "";
+                                }
 
-                                    <div class="carousel-item active" style=" height: 70vh; min-height: 300px">
-                                        <img class="d-block w-100" src="@ViewBag.Url" style=" height: 500px !important; width: 100%;"
-                                             alt="First slide">
-                                    </div>
+                                <div class="carousel-item active" style=" height: 70vh; min-height: 300px">
+                                    <img class="d-block w-100" src="@ViewBag.Url" style=" height: 500px !important; width: 100%;"
+                                         alt="First slide">
                                 </div>
-                                <!--/.Slides-->
-                                <!--Controls-->
-                                <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                                <!--/.Controls-->
                             </div>
-                            <!--/.Carousel Wrapper-->
-                            <!--Fin Carousel-->
-
-                            <h4 class="h5 mb-4 text-black" style="font-size: 25px; color: #30e3ca;">@ViewBag.Actividad.Titulo</h4>
-                            <strong style="color: #666; font-size: 14px; font-weight:bold">Descripción</strong>
-                            <p>@ViewBag.Actividad.Descripcion</p>
-                            <strong style="color: #666; font-size: 14px; font-weight:bold">Edad </strong>
-                            <p>A partir de @ViewBag.Actividad.EdadMinima hasta @ViewBag.Actividad.EdadMaxima años</p>
-                            <strong style="color: #666; font-size: 14px; font-weight:bold">Precio</strong>
-                            <p>$@ViewBag.Actividad.Precio por clase, consultar precio por pase mensual</p>
-
+                            <!--/.Slides-->
+                            <!--Controls-->
+                            <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                            <!--/.Controls-->
                         </div>
+                        <!--/.Carousel Wrapper-->
+                        <!--Fin Carousel-->
+
+                        <h4 class="h5 mb-4 text-black" style="font-size: 25px; color: #30e3ca;">@ViewBag.Actividad.Titulo</h4>
+                        <strong style="color: #666; font-size: 14px; font-weight:bold">Descripción</strong>
+                        <p>@ViewBag.Actividad.Descripcion</p>
+                        <strong style="color: #666; font-size: 14px; font-weight:bold">Edad </strong>
+                        <p>A partir de @ViewBag.Actividad.EdadMinima hasta @ViewBag.Actividad.EdadMaxima años</p>
+                        <strong style="color: #666; font-size: 14px; font-weight:bold">Precio</strong>
+                        <p>$@ViewBag.Actividad.Precio por clase, consultar precio por pase mensual</p>
+
+                        <br />
+                        <!--MAPA-->
+                        @if (ViewBag.Domicilio != null)
+                        {
+                            <iframe src="https://maps.google.com/maps?q=@ViewBag.Domicilio.NombreCalle%20=@ViewBag.Domicilio.NumeroCalle%20=@ViewBag.Domicilio.CodigoPostal%20=@ViewBag.Actividad.Localidad.Descripcion%20Buenos%20Aires&t=&z=15&ie=UTF8&iwloc=&output=embed" width="550" height="398" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        }
+                        else
+                        {
+                            <iframe src="https://maps.google.com/maps?q=@ViewBag.Actividad.Localidad.Descripcion%20Buenos%20Aires&t=&z=15&ie=UTF8&iwloc=&output=embed" width="550" height="398" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        }
+                        <!--FIN MAPA-->
+
+                        <!--VIDEO-->
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/ccSk5gLadF8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                    </div>
                     <div class="col-lg-3 ml-auto">
 
                         <div class="mb-5">
@@ -122,12 +137,6 @@
                                     <a href="/Actividad/FichaActividad?idActividad=@ViewBag.Actividad.Id&inscribirse=true" class="nav-link" style=" background-color: #7D4BBC;font-weight: bold;text-align: center;color: white;border-radius: 5px;">Inscribirse</a>
                                 </div>
                                 <br />
-                                <div class="form-group">
-                                    <div class="wrap-icon">
-                                        <span class="icon icon-room" style="font-size:20px; color:#FF5A49"></span><span style="font-size:18px; color:black">Ubicación</span>
-                                        <p style="color:#8a8686">@ViewBag.Actividad.Localidad.Descripcion </p>
-                                    </div>
-                                </div>
                                 <div class="form-group">
                                     <div class="wrap-icon">
                                         <img src="~/Content/images/reloj.png" /><span style="font-size:18px;color:black">Fecha y Hora</span>
@@ -151,6 +160,20 @@
                                         <p style="color:#8a8686">
                                             Telefono:  @ViewBag.Actividad.Usuario.Telefono
                                         </p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="wrap-icon">
+                                        <span class="icon icon-room" style="font-size:20px; color:#FF5A49"></span><span style="font-size:18px; color:black">Ubicación</span>
+                                        @if (ViewBag.Domicilio != null)
+                                        {
+                                            <p style="color:#8a8686"> @ViewBag.Actividad.Localidad.Descripcion, @ViewBag.Domicilio.NombreCalle @ViewBag.Domicilio.NumeroCalle</p>
+                                        }
+                                        else
+                                        {
+                                            <p style="color:#8a8686"> @ViewBag.Actividad.Localidad.Descripcion </p>
+                                        }
+
                                     </div>
                                 </div>
 
