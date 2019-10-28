@@ -29,13 +29,11 @@ namespace Vita.Controllers
                         Session["Usuario"] = usuario;
                         if (usuario.RolId == 1)
                         {
-                            return RedirectToAction("PerfilUsuario", "Usuario");
-
+                            return RedirectToAction("Actividades", "Actividad");
                         }
                         else
                         {
                             return RedirectToAction("PerfilEntidad", "Usuario");
-
                         }
                     }
                     else
@@ -66,8 +64,7 @@ namespace Vita.Controllers
                 }
                 if (user.RolId == 1)
                 {
-                    
-                    return RedirectToAction("PerfilUsuario", "Usuario");
+                    return RedirectToAction("Actividades", "Actividad");
                 }
                 else
                 {
@@ -86,7 +83,7 @@ namespace Vita.Controllers
         public ActionResult Logout()
         {
             Session.Clear();
-            return RedirectToAction("Login", "Login");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

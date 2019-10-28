@@ -23,7 +23,17 @@ namespace Vita.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            //obtengo usuario logueado
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                var user = new Usuario();
+                return View(user);
+            }
+            else
+            {
+                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                return View(buscarUsuarioLogueado);
+            }
         } 
         [HttpPost]
         public ActionResult Sugerencias()

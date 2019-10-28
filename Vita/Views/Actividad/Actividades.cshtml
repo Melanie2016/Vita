@@ -191,9 +191,17 @@
                                     <tbody> 
 
                                     @foreach (Actividad i in ViewBag.Lista)
-                                    { 
+                                    {
                                         <tr>
-                                            <td><img src="../../Content/images/1.jpg"></td>
+                                            @if (i.Foto != null && i.Foto.Length > 0)
+                                            {
+                                                ViewBag.Url = "data:image;base64," + Convert.ToBase64String(i.Foto);
+                                            }
+                                            else
+                                            {
+                                                 ViewBag.Url = "";
+                                            }
+                                            <td><img src="@ViewBag.Url"></td>
                                             <td>@i.Titulo</td>
                                             <td>@i.Localidad.Descripcion</td>
                                             <td>@i.EdadMinima - @i.EdadMaxima</td>
@@ -426,7 +434,7 @@
 
                                     <a href="#" class="btn btn-primary" value="¡Quiero Ayudar!" data-toggle="modal" data-target="#ayuda"> ¡Quiero Unirme!</a>
                                     
-                                    <a class="btn btn-success" href="/Actividad/FichaActividad">
+                                    <a class="btn btn-success" href="#">
                                      Más Detalles
 
                                                 </a>

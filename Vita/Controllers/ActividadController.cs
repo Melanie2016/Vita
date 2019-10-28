@@ -18,12 +18,7 @@ namespace Vita.Controllers
         private SegmentoServicio segmentoServicio = new SegmentoServicio();
         private LocalidadServicio localidadServicio = new LocalidadServicio();
         private VitaEntities myDbContext = new VitaEntities();
-        public ActionResult Actividades2()
-        {
-            ViewBag.Message = "Ranking de los más populares";
 
-            return View();
-        }
 
         [HttpGet]
         public ActionResult CrearActividad()
@@ -103,8 +98,6 @@ namespace Vita.Controllers
             }
             else
             {
-
-                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 ViewBag.ListaActvidades = actividadServicio.GetAllActividadByRolEntidadId(buscarUsuarioLogueado.Id);
 
@@ -115,10 +108,6 @@ namespace Vita.Controllers
             }
         }
 
-        public ActionResult Actividades()
-        {
-            return View();
-        }
 
         [HttpPost]
         public ActionResult Actividades(string textoIngresado)
@@ -127,29 +116,52 @@ namespace Vita.Controllers
             ViewBag.Lista = lista;
             ViewBag.Contador = lista.Count();
             ViewBag.Valor = textoIngresado;
-            
 
-            foreach (var item in lista)
+            //obtengo usuario logueado
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
             {
-                
-                if (item.Foto != null && item.Foto.Length > 0)
-                {
-                    ViewBag.Url = "data:image;base64," + Convert.ToBase64String(item.Foto);
-                }
-
+                var user = new Usuario();
+                return View(user);
             }
-            
-
-            return View();
+            else
+            {
+                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                return View(buscarUsuarioLogueado);
+            }
         }
 
         [HttpGet]
-        public ActionResult Actividades(string textoIngresado, string categoriaId)
+        public ActionResult Actividades(Usuario usuario, string categoriaId)
         {
+            if (categoriaId == null)
+            {
+                categoriaId = "0";
+            }
+
             var lista = actividadServicio.GetBusquedaPorIdCategoria(categoriaId);
             ViewBag.Lista = lista;
             ViewBag.Contador = lista.Count();
-            return View();
+
+            var usuarioLogueado = usuario;
+            if (usuarioLogueado.Id == 0)
+            {
+                var buscarUsuarioLogueado = Session["Usuario"] as Usuario; //obtengo usuario logueado
+                if (buscarUsuarioLogueado == null)
+                {
+                    var user = new Usuario();
+                    return View(user);
+                }
+                else
+                {
+                    return View(buscarUsuarioLogueado);
+                }
+            }
+            else
+            {
+                usuarioLogueado = usuarioServicio.GetById(usuario.Id);
+                return View(usuarioLogueado);
+            }
+
         }
 
     }
