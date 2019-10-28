@@ -74,21 +74,47 @@ namespace Vita.Controllers
                 return View(buscarUsuarioLogueado);
             }
         }
-        public ActionResult FichaActividad()
+        public ActionResult FichaActividad(string idActividad, string inscribirse)
         {
+            ViewBag.Actividad = actividadServicio.GetActividad(int.Parse(idActividad));
+            ViewBag.Resultado = 0;
+            ViewBag.IniciarSesion = "false";
+
             //obtengo usuario logueado
-            /* if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
              {
-                 return RedirectToAction("Login", "Login");
-             }
+                var user = new Usuario();
+
+                if (inscribirse == "true")
+                {
+                    ViewBag.IniciarSesion = "true";
+                }
+
+                    return View(user);
+            }
              else
              {
                  buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
-                 return View(buscarUsuarioLogueado);
-             }*/
 
-            return View();
+                    if (inscribirse == "true")
+                    {
+                       var resultado = actividadServicio.InscribirUsuarioEnActividad(buscarUsuarioLogueado, idActividad, "1"); //Aprobado
+                        ViewBag.Resultado = resultado;
+
+                        if (resultado == 1)
+                        {
+                            ViewBag.Mensaje = "Su inscripción ha sido exitosa. Puede ir a su perfil para ver sus actividades";
+                        }
+                        else
+                        {
+                            ViewBag.Mensaje = "Hubo un error al realizar la inscripción";
+                        }
+                    }
+
+                return View(buscarUsuarioLogueado);
+             }
         }
+
         public ActionResult ListaActividades()
         {
             //obtengo usuario logueado
@@ -133,6 +159,7 @@ namespace Vita.Controllers
         [HttpGet]
         public ActionResult Actividades(Usuario usuario, string categoriaId)
         {
+         
             if (categoriaId == null)
             {
                 var lista1 = actividadServicio.GetAllActividades();

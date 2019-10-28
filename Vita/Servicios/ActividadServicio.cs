@@ -153,5 +153,21 @@ namespace Vita.Servicios
 
             return lista;
         }
+
+        public int InscribirUsuarioEnActividad(Usuario usuario, string actividadId, string estadoId)
+        {
+            UsuarioInscriptoActividad usuarioActividad = new UsuarioInscriptoActividad
+            {
+                ActividadId = int.Parse(actividadId),
+                UsuarioId = usuario.Id,
+                EstadoId = int.Parse(estadoId),
+                CreatedAt = DateTime.Now
+            };
+            myDbContext.UsuarioInscriptoActividad.Add(usuarioActividad);
+            var resultado= myDbContext.SaveChanges();
+
+            return resultado;
+        }
+
     }
 }
