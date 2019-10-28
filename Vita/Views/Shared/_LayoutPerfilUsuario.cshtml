@@ -177,7 +177,15 @@
                             </a>
                             <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="../../Content/images/person_2.jpg" height="40" width="40" alt="">
+                                @if (Model.Foto != null && Model.Foto.Length > 0)
+                                {
+                                    ViewBag.Url = "data:image;base64," + Convert.ToBase64String(Model.Foto);
+                                }
+                                else
+                                {
+                                    ViewBag.Url = "";
+                                }
+                                <img src="@ViewBag.Url" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">

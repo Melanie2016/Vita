@@ -16,25 +16,20 @@
                         <div class="col-12 text-center">
 
                             <div class="avatar-wrapper">
-                                <img class="profile-pic" src="~/Content/images/person_2.jpg" width="100" height="100" alt="">
+                                @if (Model.Foto != null && Model.Foto.Length > 0)
+                                {
+                                    ViewBag.Url = "data:image;base64," + Convert.ToBase64String(Model.Foto);
+                                }
+                                else
+                                {
+                                    ViewBag.Url = "";
+                                }
+                                <img class="profile-pic" src="@ViewBag.Url" width="100" height="100" alt="">
                                 <input class="file-upload" type="file" accept="image/*" />
                             </div>
                             <!---->
                         </div>
                         <br><br>
-                        <div class="col">
-                            <div class="card card-profile text-center">
-                                <span class="mb-1 text-primary"><i class="icon-people"></i></span>
-                                <h3 class="mb-0">263</h3>
-                                <p class="text-muted px-4">Amigos</p>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card card-profile text-center">
-                                <span class="mb-1 text-warning"><i class="icon-user-follow"></i></span>
-                                <p class="text-muted">Agregar amigo</p>
-                            </div>
-                        </div>
                         <div class="col-12 text-center">
                             <button class="btn btn-success px-4 upload-button">CAMBIAR FOTO</button>
                         </div>

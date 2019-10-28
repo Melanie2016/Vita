@@ -135,13 +135,17 @@ namespace Vita.Controllers
         {
             if (categoriaId == null)
             {
-                categoriaId = "0";
+                var lista1 = actividadServicio.GetAllActividades();
+                ViewBag.Lista = lista1;
+                ViewBag.Contador = lista1.Count();
             }
-
-            var lista = actividadServicio.GetBusquedaPorIdCategoria(categoriaId);
-            ViewBag.Lista = lista;
-            ViewBag.Contador = lista.Count();
-
+            else
+            {
+                var lista2 = actividadServicio.GetBusquedaPorIdCategoria(categoriaId);
+                ViewBag.Lista = lista2;
+                ViewBag.Contador = lista2.Count();
+            }
+           
             var usuarioLogueado = usuario;
             if (usuarioLogueado.Id == 0)
             {

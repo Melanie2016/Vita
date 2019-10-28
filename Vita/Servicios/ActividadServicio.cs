@@ -145,5 +145,13 @@ namespace Vita.Servicios
 
             return lista;
         }
+
+        public List<Actividad> GetAllActividades()
+        {
+            var lista = new List<Actividad>();
+            lista = myDbContext.Actividad.ToList();
+
+            return lista;
+        }
     }
 }
