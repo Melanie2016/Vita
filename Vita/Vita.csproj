@@ -192,6 +192,7 @@
     <Compile Include="UsuarioSegmento.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ActividadFechaViewModel.cs" />
     <Compile Include="VitaEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

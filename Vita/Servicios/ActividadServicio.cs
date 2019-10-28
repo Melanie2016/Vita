@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web;
+using Vita.ViewModels;
 
 namespace Vita.Servicios
 {
@@ -14,11 +15,31 @@ namespace Vita.Servicios
             return myDbContext.Actividad.Find(ActividadId);
         }
 
-        public List<Actividad> GetAllActividadByUsuario() //lista de activiades , solo la descripcion y fecha, MOMENTANEA
+        //va a devolver una lista del viewMoDEL que cree (que solo tiene fecha desde, fecha hasta y descripcion de la actividad)
+        public List<ActividadFechaViewModel> GetAllActividadByUsuario() //lista de activiades , solo la descripcion y fecha, MOMENTANEA
         {
-            var fechaActividad = myDbContext.Actividad.Where(x => x.UsuarioId == 1).ToList();
+            //hago una lista para las actividades de ese usuario
+            var listaActividadDelUsuario = myDbContext.Actividad.Where(x => x.UsuarioId == 1).ToList();
+           
+            //hago una lista del view model para guardar los datos que necesito de la otra lista
+            var lista = new List<ActividadFechaViewModel>();
 
-            return fechaActividad;
+            //recorro la primera lista
+            foreach (var actividad in listaActividadDelUsuario)
+            {
+                //creo un objeto del tipo de viewModel
+                var actividadFechaViewModel = new ActividadFechaViewModel()
+                {
+                    //y a cada atributo del viewModel lo lleno con el atributo que necesito de actividad
+                    FechaDesde = actividad.FechaDesde,
+                    FechaHasta = actividad.FechaHasta,
+                    Descripcion = actividad.Descripcion
+                };
+                //luego lo agrego a la lista del vieewModel
+                lista.Add(actividadFechaViewModel);
+            }
+            //y devuelvo la lista de viewModel
+            return lista;
         }
 
         public List<Actividad> GetAllActividadByRolEntidadId(int usuarioId) //lista de activiades por entidad id
