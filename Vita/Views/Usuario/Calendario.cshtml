@@ -4,12 +4,27 @@
     Layout = "~/Views/Shared/_LayoutPerfilUsuario.cshtml";
 
 }
+
+        
+
+</style>
 <link href="~/Content/css/FotoPerfil.css" rel="stylesheet" media="all">
 
-<div class="container-fluid">
-    <div class="row">
-        <div id="calender"></div>
-
+ <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="calender" ></div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!-- #/ container -->
@@ -101,11 +116,14 @@
 
 <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
 <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
 @section ScriptsFinal{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/locale-all.js"></script>
+ 
+    
+    
     <script>
         $(document).ready(function () {
             var events = [];
@@ -119,9 +137,9 @@
                     success: function (data) {
                         $.each(data, function (i, v) {
                             events.push({
-                                title: "HOLA MELCHUS",
+                                title: v.Titulo,
                                 start: moment(v.FechaDesde),
-                                end: v.FechaHasta != null ? moment(v.FechaHasta) : null,
+                                end: v.FechaHasta != null ? moment(v.FechaHasta) : null
                             });
                         })
 
@@ -136,6 +154,7 @@
             function GenerateCalender(events) {
                 $('#calender').fullCalendar('destroy');
                 $('#calender').fullCalendar({
+                    locale: 'es',
                     contentHeight: 400,
                     defaultDate: new Date(),
                     timeFormat: 'h(:mm)a',

@@ -18,22 +18,42 @@ namespace Vita.Servicios
         //va a devolver una lista del viewMoDEL que cree (que solo tiene fecha desde, fecha hasta y descripcion de la actividad)
         public List<ActividadFechaViewModel> GetAllActividadByUsuario() //lista de activiades , solo la descripcion y fecha, MOMENTANEA
         {
+            var idUsuario = 1;
             //hago una lista para las actividades de ese usuario
-            var listaActividadDelUsuario = myDbContext.Actividad.Where(x => x.UsuarioId == 1).ToList();
-           
+
+            var listaActividadDelUsuario = (from ua in myDbContext.UsuarioInscriptoActividad
+                         join a in myDbContext.Actividad
+                          on ua.ActividadId equals a.Id
+                         join u in myDbContext.Usuario
+                          on ua.UsuarioId equals idUsuario
+                          select ua).ToList();
+
+
+            /*
+            var qryPrl = (from prl in _db.prc_PR_Lines
+                          join prlLink in _db.prc_Requirement_PR_Line_Link
+                          on prl.PRLineID equals prlLink.PRLineID
+                          where prlLink.ReqID.Equals(id)
+                          where prl.PRID.Equals(idfield)
+                          select prl).ToList<prc_PR_Lines>();*/
+
+            //  List<UsuarioInscriptoActividad> listaActividadDelUsuario = myDbContext.UsuarioInscriptoActividad.Include("Actividad").Where(x => x.UsuarioId.Equals(idUsuario)).ToList();
+
             //hago una lista del view model para guardar los datos que necesito de la otra lista
             var lista = new List<ActividadFechaViewModel>();
 
             //recorro la primera lista
-            foreach (var actividad in listaActividadDelUsuario)
+            foreach (var aux in listaActividadDelUsuario)
             {
                 //creo un objeto del tipo de viewModel
                 var actividadFechaViewModel = new ActividadFechaViewModel()
                 {
                     //y a cada atributo del viewModel lo lleno con el atributo que necesito de actividad
-                    FechaDesde = actividad.FechaDesde,
-                    FechaHasta = actividad.FechaHasta,
-                    Descripcion = actividad.Descripcion
+                    Titulo = aux.Actividad.Titulo,
+                    Descripcion = aux.Actividad.Titulo,
+                    FechaDesde = aux.Actividad.FechaDesde,
+                    FechaHasta = aux.Actividad.FechaHasta
+
                 };
                 //luego lo agrego a la lista del vieewModel
                 lista.Add(actividadFechaViewModel);
