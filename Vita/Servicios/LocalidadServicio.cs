@@ -9,6 +9,10 @@ namespace Vita.Servicios
     {
         private VitaEntities myDbContext = new VitaEntities();
 
+        public Localidad GetLocalidadById(int localidadId)
+        {
+            return myDbContext.Localidad.Where(x => x.Id == localidadId).FirstOrDefault();
+        }
         public List<Localidad> GetAllLocalidades()
         {
             return myDbContext.Localidad.OrderBy(x => x.Descripcion).ToList();

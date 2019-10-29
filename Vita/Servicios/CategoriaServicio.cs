@@ -9,6 +9,11 @@ namespace Vita.Servicios
     {
         private VitaEntities myDbContext = new VitaEntities();
 
+        public Categoria GetCategoriaById(int categoriaId)
+        {
+            var cate= myDbContext.Categoria.Where(x => x.Id == categoriaId).FirstOrDefault();
+            return cate;
+        }
         public List<Categoria> GetAllCategorias()
         {
             return myDbContext.Categoria.OrderBy(x=>x.Id).ToList();

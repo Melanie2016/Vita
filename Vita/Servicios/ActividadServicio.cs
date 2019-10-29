@@ -9,6 +9,8 @@ namespace Vita.Servicios
 {
     public class ActividadServicio
     {
+        private CategoriaServicio categoriaServicio = new CategoriaServicio();
+        private LocalidadServicio localidadServicio = new LocalidadServicio();
         private VitaEntities myDbContext = new VitaEntities();
         public Actividad GetActividad(int ActividadId)//por id de actividad
         {
@@ -189,18 +191,44 @@ namespace Vita.Servicios
         public List<Actividad> GetBusquedaPorIdCategoria(string categoriaId)
         {
             int id = int.Parse(categoriaId);
-            var lista = new List<Actividad>();
-            lista = myDbContext.Actividad.Where(x => x.CategoriaId == id).ToList();
+            var lista2 = new List<Actividad>();
+            var lista = myDbContext.Actividad.Where(x => x.CategoriaId == id).ToList();
+            foreach(var li in lista)
+            {
+                if(li.Localidad == null)
+                {
+                    li.Localidad = localidadServicio.GetLocalidadById(li.LocalidadId);
 
-            return lista;
+                }
+                if(li.Categoria == null)
+                {
+                    li.Categoria = categoriaServicio.GetCategoriaById(li.CategoriaId);
+                }
+                lista2.Add(li);
+            }
+
+            return lista2;
         }
 
         public List<Actividad> GetAllActividades()
         {
-            var lista = new List<Actividad>();
-            lista = myDbContext.Actividad.ToList();
+            var lista2 = new List<Actividad>();
+            var lista = myDbContext.Actividad.ToList();
+            foreach (var li in lista)
+            {
+                if (li.Localidad == null)
+                {
+                    li.Localidad = localidadServicio.GetLocalidadById(li.LocalidadId);
 
-            return lista;
+                }
+                if (li.Categoria == null)
+                {
+                    li.Categoria = categoriaServicio.GetCategoriaById(li.CategoriaId);
+                }
+                lista2.Add(li);
+            }
+
+            return lista2;
         }
 
         public int InscribirUsuarioEnActividad(Usuario usuario, string actividadId, string estadoId)
