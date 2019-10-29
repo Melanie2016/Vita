@@ -13,6 +13,10 @@ namespace Vita.Servicios
         {
             return myDbContext.Categoria.OrderBy(x=>x.Id).ToList();
         }
+        public List<SubCategoria> GetAllSubCategoriasByCategoriaId(int? categoriaId)
+        {
+            return myDbContext.SubCategoria.Where(x => x.CategoriaId == categoriaId).ToList();
+        }
         public List<SubCategoria> GetAllSubCategorias()
         {
             return myDbContext.SubCategoria.OrderBy(x => x.Id).ToList();

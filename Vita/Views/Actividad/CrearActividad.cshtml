@@ -55,14 +55,14 @@
                                     <label class="col-lg-4 col-form-label" for="val-skill">
                                         Rubro <span class="text-danger">*</span>
                                     </label>
-                                    <div class="col-lg-6">
-                                        <select class="form-control" id="categoriaId" onchange="changeOption(this)"
+                                    <div class="col-lg-6" id="filtroSubcategoria" name="CategoriaId">
+                                        @*<select class="form-control" id="filtroCategoria"
                                                 data-live-search="true" title="Seleccione tipo de categoria de la actividad.." name="CategoriaId">
                                             @foreach (var item in ViewBag.ListaRubro as MultiSelectList)
                                             {
                                                 <option value="@item.Value">@item.Text</option>
                                             }
-                                        </select>
+                                        </select>*@
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -175,4 +175,42 @@
 </body>
 
 </html>
+<script>
+ //Todo siempre una vez cargada la página
+        $(document).ready(function () {
+
+            //Esto corre cuando cambias de opción en el primer select
+            $('#filtroCategoria').on('change', function () {
+
+               var idCategoria = $(this).val();
+
+                //Si elegiste la opción de los guíones paramos aca para no hacer nada
+                if (idCategoria === 0) {
+                    $("#filtroSubcategoria").html("Selecciona una categoria");
+                    return;
+                }
+
+                //Ajax
+                $.ajax({
+                   url: "obtenersubcategoria/" + idCategoria,
+
+                    type: 'GET',
+                    dataType: "json",
+                    success: function (res) {
+                        //Por si queres ver una por una las cosas que vuelven descomenta el alert
+                        alert(res);
+
+                        //Creando el segundo select
+                        $("#filtroSubcategoria").empty().append('<select id="filtroeligecategoria" class="selectpicker">');
+                        $.getJSON("@Url.Action("ObtenerSubcategoria","Actividad")", { idCategoria: idCategoria }, function (data) {
+                              let data2 = JSON.parse(data);
+                             $.each(data2, function () {
+                                 $("#filtroeligecategoria").append($("<option>").val(this.Id).text(this.Descripcion));
+                                  });
+                             });
+                    }
+                });
+            });
+        });
+</script>
 

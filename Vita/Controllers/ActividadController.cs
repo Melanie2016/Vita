@@ -5,11 +5,12 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using Vita.Servicios;
 
 namespace Vita.Controllers
 {
-    public class ActividadController: Controller
+    public class ActividadController : Controller
     {
         private UsuarioServicio usuarioServicio = new UsuarioServicio();
         private ActividadServicio actividadServicio = new ActividadServicio();
@@ -25,7 +26,7 @@ namespace Vita.Controllers
         {
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
-            { return RedirectToAction("Login", "Login");}
+            { return RedirectToAction("Login", "Login"); }
             else
             {
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
@@ -40,7 +41,7 @@ namespace Vita.Controllers
                 return View(buscarUsuarioLogueado);
 
             }
-         
+
         }
 
         [HttpPost]
@@ -53,10 +54,10 @@ namespace Vita.Controllers
             }
             else
             {
-                
+
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 actividadServicio.CrearActividad(actividad, buscarUsuarioLogueado, selectedSegmento);
-               
+
                 return RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
 
             }
@@ -101,10 +102,10 @@ namespace Vita.Controllers
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 ViewBag.ListaActvidades = actividadServicio.GetAllActividadByRolEntidadId(buscarUsuarioLogueado.Id);
 
-              //  ViewBag.ListaUsuariosInscriptoActividad = actividadServicio.GetAllActividadUsuarioInscriptoByActividadId( tiene que recibir la actividad id para poder hacerlo, hay que porbar)
-                    
+                //  ViewBag.ListaUsuariosInscriptoActividad = actividadServicio.GetAllActividadUsuarioInscriptoByActividadId( tiene que recibir la actividad id para poder hacerlo, hay que porbar)
+
                 return View(buscarUsuarioLogueado);
-               // return View(actividades);
+                // return View(actividades);
             }
         }
 
@@ -164,5 +165,17 @@ namespace Vita.Controllers
 
         }
 
+
+        [HttpGet]
+        [Route("obtenersubcategoria{idCategoria}")]
+        public JsonResult ObtenerSubcategoria(int? idCategoria)
+        {
+            List<SubCategoria> subCategorias = categoriaServicio.GetAllSubCategoriasByCategoriaId(idCategoria);
+
+            var jsonSerialiser = new JavaScriptSerializer();
+            var json = jsonSerialiser.Serialize(subCategorias);
+            return Json(json, JsonRequestBehavior.AllowGet);
+
+        }
     }
 }

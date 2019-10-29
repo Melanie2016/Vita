@@ -63,7 +63,7 @@ namespace Vita.Controllers
         {
             if (idDepartamento == null)
             {
-                idDepartamento = 3;
+                idDepartamento = 3;//esto porque ni funciona de departamento a localidad
             }
             List<Localidad> localidades = localidadServicio.GetLocalidadesByDepartamentoId(idDepartamento);
             var jsonSerialiser = new JavaScriptSerializer();

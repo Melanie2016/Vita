@@ -113,8 +113,11 @@
                                 <label class="label">Seleccione Provincia</label>
                                 <div>
                                     <select class="selectpicker" id="filtroProvincia" title="Seleccione provincia..">
+                                        
+                                        <option>Seleccionar provincia</option>
                                         @foreach (var item in ViewBag.ListaProvincia as MultiSelectList)
                                         {
+
                                             <option name="valorActual" value="@item.Value">@item.Text</option>
 
                                         }
@@ -128,7 +131,9 @@
                                     <!--Localidad-->
                                     <label class="label">Seleccione Departamento</label>
                                     <div>
-                                        <div id="filtroDepartamento">Selecciona algo de lo de arriba</div>
+                                        <div id="filtroDepartamento">
+                                           
+                                       </div>
                                         @*<select class="selectpicker" id="filtroDepartamento" onchange="changeOption(this)"
                                                     data-live-search="true" title="Seleccione departamento.." name="DepartamentoElegida">
 
@@ -148,7 +153,7 @@
                                 <div class="input-group">
                                     <!--Localidad-->
                                     <label class="label">Seleccione Localidad</label>
-                                    <div id="filtroLocalidad">Selecciona algo de lo de arriba</div>>
+                                    <div id="filtroLocalidad" name="LocalidadId"></div>
                                         @*<select class="selectpicker" id="LocalidadId" onchange="changeOption(this)"
                                                     data-live-search="true" title="Seleccione localidad.." name="LocalidadId">
 
@@ -169,7 +174,7 @@
                                     <input class="input--style-4" type="number" name="Celular">
                                 </div>
                             </div>
-                        </div>
+                        
 
 
                         <div class="input-group">
@@ -230,7 +235,7 @@
 
                         </div>
                     </div>
-
+               
                 </form>
                 <form action="/Usuario/Registrar" method="Post" class="formu-entidad" id="form-rol-entidad">
 
@@ -350,7 +355,6 @@
 
 <!-- Aca es donde se arma la magia -->
 <script>
-    var depart = 0;
         //Todo siempre una vez cargada la página
         $(document).ready(function () {
 
@@ -360,7 +364,7 @@
                var idPais = $(this).val();
 
                 //Si elegiste la opción de los guíones paramos aca para no hacer nada
-                if (idPais === "---") {
+                if (idPais === 0) {
                     $("#filtroDepartamento").html("Selecciona una provincia");
                     return;
                 }
@@ -387,7 +391,7 @@
                 });
             });
         });
-    </script>
+ </script>
 <script>
         //Todo siempre una vez cargada la página
         $(document).ready(function () {
@@ -398,7 +402,7 @@
                 var idDepartamento = $(this).val();
 
                 //Si elegiste la opción de los guíones paramos aca para no hacer nada
-                if (idDepartamento === "---") {
+                if (idDepartamento === 0) {
                     $("#filtroLocalidad").html("Selecciona una provincia");
                     return;
                 }
@@ -411,10 +415,10 @@
                     dataType: "json",
                     success: function (res) {
                         //Por si queres ver una por una las cosas que vuelven descomenta el alert
-                        alert(res);
+                       // alert(res);
 
                         //Creando el segundo select
-                        $("#filtroLocalidad").empty().append('<select id="filtro3">');
+                        $("#filtroLocalidad").empty().append('<select id="filtro3" class="selectpicker" name="LocalidadId">');
                         $.getJSON("@Url.Action("Obtenerterceralista","Usuario")", { idDepartamento: idDepartamento }, function (data) {
                               let data2 = JSON.parse(data);
                              $.each(data2, function () {
