@@ -12,26 +12,18 @@ namespace Vita
     using System;
     using System.Collections.Generic;
     
-    public partial class Localidad
+    public partial class Provincia
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Localidad()
+        public Provincia()
         {
-            this.Actividad = new HashSet<Actividad>();
-            this.Domicilio = new HashSet<Domicilio>();
-            this.Usuario = new HashSet<Usuario>();
+            this.Departamento = new HashSet<Departamento>();
         }
     
         public int Id { get; set; }
         public string Descripcion { get; set; }
-        public Nullable<int> DepartamentoId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Actividad> Actividad { get; set; }
-        public virtual Departamento Departamento { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Domicilio> Domicilio { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario> Usuario { get; set; }
+        public virtual ICollection<Departamento> Departamento { get; set; }
     }
 }

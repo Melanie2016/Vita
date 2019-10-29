@@ -43,6 +43,7 @@ GO
 
 Update Actividad set Foto = 
 (SELECT BulkColumn 
-FROM Openrowset( Bulk 'C:\Users\A307508\Source\Repos\Vita\Vita\Content\images\Zumba-kids.jpg', Single_Blob) as img)
+/*FROM Openrowset( Bulk 'C:\Users\A307508\Source\Repos\Vita\Vita\Content\images\Zumba-kids.jpg', Single_Blob) as img)*/ /*Para VALE*/
+FROM Openrowset( Bulk 'C:\Proyecto final\tp final posta\Vita\Vita\Content\images\Zumba-kids.jpg', Single_Blob) as img) /*Para Angie*/
 where Id=1
 

@@ -5,10 +5,25 @@ GO
 USE Vita
 GO
 
-create table Localidad(
+create table Provincia(
 Id int identity(1,1) primary key,
 Descripcion varchar(100)
 );
+create table Departamento(
+Id int identity(1,1) primary key,
+Descripcion varchar(300),
+ProvinciaId int,
+CONSTRAINT ProvinciaDepartamentoId FOREIGN KEY(ProvinciaId)
+REFERENCES Provincia (Id));
+
+create table Localidad(
+Id int identity(1,1) primary key,
+Descripcion varchar(100),
+DepartamentoId int,
+CONSTRAINT LocalidadDepartamentoId FOREIGN KEY(DepartamentoId)
+REFERENCES Departamento (Id)
+);
+
 
 create table Estado(
 Id int identity(1,1) primary key,

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using Vita.Servicios;
 
 namespace Vita.Controllers
@@ -20,7 +21,16 @@ namespace Vita.Controllers
         [HttpGet]
         public ActionResult Registro()
         {
-            List<Sexo> sexos = sexoServicio.GetAllSexo();
+            /*List < Ciudades > ciudades = CiudadDao.ObtenerCiudadesFiltradasPorProvincia(seleccion);
+             *var jsonSerialiser = new JavaScriptSerializer();
+             *var json = jsonSerialiser.Serialize(ciudades);
+             * return localidades; */
+            List<Provincia> provincias = localidadServicio.GetAllProvincias();
+            ViewBag.ListaProvincia = new MultiSelectList(provincias, "id", "descripcion");
+
+
+
+            List <Sexo> sexos = sexoServicio.GetAllSexo();
             ViewBag.ListaSexo = new MultiSelectList(sexos, "id", "descripcion");
 
             List<Segmento> segmentos = segmentoServicio.GetAllSegmento();
@@ -35,6 +45,33 @@ namespace Vita.Controllers
             return View();
         }
 
+
+   
+        [HttpGet]
+        [Route("obtenersegundalista{idPais}")]
+        public JsonResult ObtenerSegundaLista(int ? idPais)
+        {          
+            List<Departamento> departamentos = localidadServicio.GetDepartamentosByProvinciaId(idPais);
+            var jsonSerialiser = new JavaScriptSerializer();
+            var json = jsonSerialiser.Serialize(departamentos);
+
+            return Json(json, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [Route("obtenerterceralista{idDepartamento}")]
+        public JsonResult ObtenerTerceraLista(int? idDepartamento)
+        {
+            if (idDepartamento == null)
+            {
+                idDepartamento = 3;//esto porque ni funciona de departamento a localidad
+            }
+            List<Localidad> localidades = localidadServicio.GetLocalidadesByDepartamentoId(idDepartamento);
+            var jsonSerialiser = new JavaScriptSerializer();
+            var json = jsonSerialiser.Serialize(localidades);
+
+            return Json(json, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         public ActionResult Registrar(Usuario usuario, int[] selectedSegmento, int[] selectedCategoria)
         {
