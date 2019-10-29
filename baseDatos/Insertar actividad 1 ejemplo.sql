@@ -44,5 +44,5 @@ GO
 Update Actividad set Foto = 
 (SELECT BulkColumn 
 FROM Openrowset( Bulk 'C:\Users\A307508\Source\Repos\Vita\Vita\Content\images\Zumba-kids.jpg', Single_Blob) as img)
-where Id=1
+where Id=1 ;
 
