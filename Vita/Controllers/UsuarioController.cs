@@ -173,6 +173,7 @@ namespace Vita.Controllers
                 }
                 else
                 {
+                    buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
                     return View(buscarUsuarioLogueado);
                 }
 

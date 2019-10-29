@@ -8,8 +8,9 @@ namespace Vita.Servicios
     public class UsuarioServicio
     {
         private VitaEntities myDbContext = new VitaEntities();
+        private LocalidadServicio localidadServicio = new LocalidadServicio();
         private SegmentoServicio segmentoServicio = new SegmentoServicio();
-
+        private SexoServicio sexoServicio = new SexoServicio();
         public Usuario GetUsuarioById(long id)
         {
             return myDbContext.Usuario.Find(id);
@@ -26,7 +27,17 @@ namespace Vita.Servicios
         }
         public Usuario GetById(int id)
         {
-            return myDbContext.Usuario.FirstOrDefault(x => x.Id == id);
+            var usuario= myDbContext.Usuario.FirstOrDefault(x => x.Id == id);
+            
+            if(usuario.Localidad == null)
+            {
+                usuario.Localidad = localidadServicio.GetLocalidadById(usuario.LocalidadId.Value);
+            }
+            if(usuario.Sexo == null && usuario.RolId == 1)
+            {
+                usuario.Sexo = sexoServicio.GetSexoId(usuario.SexoId.Value);
+            }
+            return usuario;
         }
         public Usuario VerificarLogin(Usuario u)
         {
@@ -131,7 +142,6 @@ namespace Vita.Servicios
                 }       
             }
             myDbContext.UsuarioSegmento.AddRange(listaUsuarioSegmento);
-            myDbContext.SaveChanges();
             myDbContext.SaveChanges();
         }
 
