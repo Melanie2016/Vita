@@ -49,19 +49,7 @@ namespace Vita.Controllers
                 return View(buscarUsuarioLogueado);
             }
         }
-        public ActionResult Calendario()
-        {
-            //obtengo usuario logueado
-            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
-            {
-                return RedirectToAction("Login", "Login");
-            }
-            else
-            {
-                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
-                return View(buscarUsuarioLogueado);
-            }
-        }
+     
         //[HttpPost]
         //public ActionResult BuscadorAvanzado(string textoIngresado)
         //{

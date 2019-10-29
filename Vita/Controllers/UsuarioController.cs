@@ -14,6 +14,7 @@ namespace Vita.Controllers
         private SexoServicio sexoServicio = new SexoServicio();
         private SegmentoServicio segmentoServicio = new SegmentoServicio();
         private LocalidadServicio localidadServicio = new LocalidadServicio();
+        private ActividadServicio actividadServicio = new ActividadServicio();
         private VitaEntities myDbContext = new VitaEntities();
 
         [HttpGet]
@@ -170,5 +171,27 @@ namespace Vita.Controllers
             }
         }
 
+        public JsonResult GetEvents()
+        {
+            
+            {
+                var events = actividadServicio.GetAllActividadByUsuario();
+                return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+        }
+
+        public ActionResult Calendario()
+        {
+            //obtengo usuario logueado
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                return View(buscarUsuarioLogueado);
+            }
+        }
     }
 }

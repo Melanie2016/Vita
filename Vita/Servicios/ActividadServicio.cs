@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web;
+using Vita.ViewModels;
 
 namespace Vita.Servicios
 {
@@ -13,6 +14,54 @@ namespace Vita.Servicios
         {
             return myDbContext.Actividad.Find(ActividadId);
         }
+
+        //va a devolver una lista del viewMoDEL que cree (que solo tiene fecha desde, fecha hasta y descripcion de la actividad)
+        public List<ActividadFechaViewModel> GetAllActividadByUsuario() //lista de activiades , solo la descripcion y fecha, MOMENTANEA
+        {
+            var idUsuario = 1;
+            //hago una lista para las actividades de ese usuario
+
+            var listaActividadDelUsuario = (from ua in myDbContext.UsuarioInscriptoActividad
+                         join a in myDbContext.Actividad
+                          on ua.ActividadId equals a.Id
+                         join u in myDbContext.Usuario
+                          on ua.UsuarioId equals idUsuario
+                          select ua).ToList();
+
+
+            /*
+            var qryPrl = (from prl in _db.prc_PR_Lines
+                          join prlLink in _db.prc_Requirement_PR_Line_Link
+                          on prl.PRLineID equals prlLink.PRLineID
+                          where prlLink.ReqID.Equals(id)
+                          where prl.PRID.Equals(idfield)
+                          select prl).ToList<prc_PR_Lines>();*/
+
+            //  List<UsuarioInscriptoActividad> listaActividadDelUsuario = myDbContext.UsuarioInscriptoActividad.Include("Actividad").Where(x => x.UsuarioId.Equals(idUsuario)).ToList();
+
+            //hago una lista del view model para guardar los datos que necesito de la otra lista
+            var lista = new List<ActividadFechaViewModel>();
+
+            //recorro la primera lista
+            foreach (var aux in listaActividadDelUsuario)
+            {
+                //creo un objeto del tipo de viewModel
+                var actividadFechaViewModel = new ActividadFechaViewModel()
+                {
+                    //y a cada atributo del viewModel lo lleno con el atributo que necesito de actividad
+                    Titulo = aux.Actividad.Titulo,
+                    Descripcion = aux.Actividad.Titulo,
+                    FechaDesde = aux.Actividad.FechaDesde,
+                    FechaHasta = aux.Actividad.FechaHasta
+
+                };
+                //luego lo agrego a la lista del vieewModel
+                lista.Add(actividadFechaViewModel);
+            }
+            //y devuelvo la lista de viewModel
+            return lista;
+        }
+
         public List<Actividad> GetAllActividadByRolEntidadId(int usuarioId) //lista de activiades por entidad id
         {
             return myDbContext.Actividad.Where(x => x.UsuarioId == usuarioId).ToList();
@@ -164,10 +213,26 @@ namespace Vita.Servicios
                 CreatedAt = DateTime.Now
             };
             myDbContext.UsuarioInscriptoActividad.Add(usuarioActividad);
-            var resultado= myDbContext.SaveChanges();
+            var resultado = myDbContext.SaveChanges();
 
             return resultado;
         }
+
+
+        // falta hacer query 
+        public List<Actividad> GetActividadesConDescripcionYFechaSegunUsuario(int usuarioId) 
+        {
+            var listaActividad = new List<Actividad>();
+            var listaUsuarioInscriptoActividad = myDbContext.UsuarioInscriptoActividad.Where(x => x.UsuarioId == usuarioId).ToList();
+
+            foreach (var actividadInscriptoUser in listaUsuarioInscriptoActividad)
+            {
+                listaActividad.Add(myDbContext.Actividad.Where(x => x.Id == actividadInscriptoUser.ActividadId).FirstOrDefault());
+            }
+            return listaActividad;
+        }
+
+
 
     }
 }

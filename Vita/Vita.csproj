@@ -192,6 +192,7 @@
     <Compile Include="UsuarioSegmento.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ActividadFechaViewModel.cs" />
     <Compile Include="VitaEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -957,6 +958,7 @@
     <Content Include="Views\Usuario\IraModificarPerfilUsuario.cshtml" />
     <Content Include="Views\Home\BuscadorAvanzado.cshtml" />
     <Content Include="Views\Actividad\Actividades.cshtml" />
+    <Content Include="Views\Usuario\Calendario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
