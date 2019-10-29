@@ -20,15 +20,9 @@ namespace Vita.Controllers
 
         [HttpGet]
         public ActionResult Registro()
-        {
-            /*List < Ciudades > ciudades = CiudadDao.ObtenerCiudadesFiltradasPorProvincia(seleccion);
-             *var jsonSerialiser = new JavaScriptSerializer();
-             *var json = jsonSerialiser.Serialize(ciudades);
-             * return localidades; */
+        {       
             List<Provincia> provincias = localidadServicio.GetAllProvincias();
             ViewBag.ListaProvincia = new MultiSelectList(provincias, "id", "descripcion");
-
-
 
             List <Sexo> sexos = sexoServicio.GetAllSexo();
             ViewBag.ListaSexo = new MultiSelectList(sexos, "id", "descripcion");
@@ -48,8 +42,8 @@ namespace Vita.Controllers
 
    
         [HttpGet]
-        [Route("obtenersegundalista{idPais}")]
-        public JsonResult ObtenerSegundaLista(int ? idPais)
+        [Route("obtenerselectpaisusuario{idPais}")]
+        public JsonResult ObtenerSelectPaisUsuario(int ? idPais)
         {          
             List<Departamento> departamentos = localidadServicio.GetDepartamentosByProvinciaId(idPais);
             var jsonSerialiser = new JavaScriptSerializer();
@@ -59,8 +53,8 @@ namespace Vita.Controllers
         }
 
         [HttpGet]
-        [Route("obtenerterceralista{idDepartamento}")]
-        public JsonResult ObtenerTerceraLista(int? idDepartamento)
+        [Route("obtenerselectdepartamentousuario{idDepartamento}")]
+        public JsonResult ObtenerSelectDepartamentoUsuario(int? idDepartamento)
         {
             if (idDepartamento == null)
             {
@@ -72,6 +66,33 @@ namespace Vita.Controllers
 
             return Json(json, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        [Route("obtenerselectpaisentidad{idPais}")]
+        public JsonResult ObtenerSelectPaisEntidad(int? idPais)
+        {
+            List<Departamento> departamentos = localidadServicio.GetDepartamentosByProvinciaId(idPais);
+            var jsonSerialiser = new JavaScriptSerializer();
+            var json = jsonSerialiser.Serialize(departamentos);
+
+            return Json(json, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [Route("obtenerselectdepartamentoentidad{idDepartamento}")]
+        public JsonResult ObtenerSelectDepartamentoEntidad(int? idDepartamento)
+        {
+            if (idDepartamento == null)
+            {
+                idDepartamento = 3;//esto porque ni funciona de departamento a localidad
+            }
+            List<Localidad> localidades = localidadServicio.GetLocalidadesByDepartamentoId(idDepartamento);
+            var jsonSerialiser = new JavaScriptSerializer();
+            var json = jsonSerialiser.Serialize(localidades);
+
+            return Json(json, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult Registrar(Usuario usuario, int[] selectedSegmento, int[] selectedCategoria)
         {

@@ -113,7 +113,7 @@
                                 <label class="label">Seleccione Provincia</label>
                                 <div>
                                     <select class="selectpicker" id="filtroProvincia" title="Seleccione provincia..">
-                                        
+
                                         <option>Seleccionar provincia</option>
                                         @foreach (var item in ViewBag.ListaProvincia as MultiSelectList)
                                         {
@@ -132,8 +132,8 @@
                                     <label class="label">Seleccione Departamento</label>
                                     <div>
                                         <div id="filtroDepartamento">
-                                           
-                                       </div>
+
+                                        </div>
                                         @*<select class="selectpicker" id="filtroDepartamento" onchange="changeOption(this)"
                                                     data-live-search="true" title="Seleccione departamento.." name="DepartamentoElegida">
 
@@ -154,27 +154,27 @@
                                     <!--Localidad-->
                                     <label class="label">Seleccione Localidad</label>
                                     <div id="filtroLocalidad" name="LocalidadId"></div>
-                                        @*<select class="selectpicker" id="LocalidadId" onchange="changeOption(this)"
-                                                    data-live-search="true" title="Seleccione localidad.." name="LocalidadId">
+                                    @*<select class="selectpicker" id="LocalidadId" onchange="changeOption(this)"
+                                                data-live-search="true" title="Seleccione localidad.." name="LocalidadId">
 
 
-                                                @foreach (var item in ViewBag.ListaLocalidades as MultiSelectList)
-                                                {
-                                                    <option value="@item.Value">@item.Text</option>
-                                                }
+                                            @foreach (var item in ViewBag.ListaLocalidades as MultiSelectList)
+                                            {
+                                                <option value="@item.Value">@item.Text</option>
+                                            }
 
-                                            </select>*@
-                                    </div>
+                                        </select>*@
                                 </div>
                             </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <!--Celular-->
-                                    <label class="label">Celular</label>
-                                    <input class="input--style-4" type="number" name="Celular">
-                                </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <!--Celular-->
+                                <label class="label">Celular</label>
+                                <input class="input--style-4" type="number" name="Celular">
                             </div>
-                        
+                        </div>
+
 
 
                         <div class="input-group">
@@ -235,7 +235,7 @@
 
                         </div>
                     </div>
-               
+
                 </form>
                 <form action="/Usuario/Registrar" method="Post" class="formu-entidad" id="form-rol-entidad">
 
@@ -261,24 +261,46 @@
                         </div>
                         <div class="row row-space">
                             <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Seleccione Localidad</label>
-                                    <div>
-                                        <select class="selectpicker" id="LocalidadId" onchange="changeOption(this)"
-                                                data-live-search="true" title="Seleccione localidad.." name="LocalidadId">
+                                <!--Provincia-->
+                                <label class="label">Seleccione Provincia</label>
+                                <div>
+                                    <select class="selectpicker" id="filtroProvinciaEntidad" title="Seleccione provincia..">
 
+                                        <option>Seleccionar provincia</option>
+                                        @foreach (var item in ViewBag.ListaProvincia as MultiSelectList)
+                                        {
 
-                                            @foreach (var item in ViewBag.ListaLocalidades as MultiSelectList)
-                                            {
-                                                <option value="@item.Value">@item.Text</option>
-                                            }
+                                            <option name="valorActual" value="@item.Value">@item.Text</option>
 
-                                        </select>
-
-                                    </div>
-
+                                        }
+                                    </select>
                                 </div>
                             </div>
+
+
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--departamento-->
+                                    <label class="label">Seleccione Departamento</label>
+                                    <div>
+                                        <div id="filtroDepartamentoEntidad">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Localidad-->
+                                    <label class="label">Seleccione Localidad</label>
+                                    <div id="filtroLocalidadEntidad" name="LocalidadId"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                  
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Telefono de la empresa-->
@@ -371,7 +393,7 @@
 
                 //Ajax
                 $.ajax({
-                   url: "obtenersegundalista/" + idPais,
+                   url: "obtenerselectpaisusuario/" + idPais,
 
                     type: 'GET',
                     dataType: "json",
@@ -381,7 +403,7 @@
 
                         //Creando el segundo select
                         $("#filtroDepartamento").empty().append('<select id="filtro2" class="selectpicker">');
-                        $.getJSON("@Url.Action("Obtenersegundalista","Usuario")", { idPais: idPais }, function (data) {
+                        $.getJSON("@Url.Action("ObtenerSelectPaisUsuario","Usuario")", { idPais: idPais }, function (data) {
                               let data2 = JSON.parse(data);
                              $.each(data2, function () {
                                  $("#filtro2").append($("<option>").val(this.Id).text(this.Descripcion));
@@ -391,7 +413,7 @@
                 });
             });
         });
- </script>
+</script>
 <script>
         //Todo siempre una vez cargada la página
         $(document).ready(function () {
@@ -409,7 +431,7 @@
 
                 //Ajax
                 $.ajax({
-                   url: "obtenerterceralista/" + idDepartamento,
+                   url: "obtenerselectdepartamentousuario/" + idDepartamento,
 
                     type: 'GET',
                     dataType: "json",
@@ -419,10 +441,89 @@
 
                         //Creando el segundo select
                         $("#filtroLocalidad").empty().append('<select id="filtro3" class="selectpicker" name="LocalidadId">');
-                        $.getJSON("@Url.Action("Obtenerterceralista","Usuario")", { idDepartamento: idDepartamento }, function (data) {
+                        $.getJSON("@Url.Action("ObtenerSelectDepartamentoUsuario","Usuario")", { idDepartamento: idDepartamento }, function (data) {
                               let data2 = JSON.parse(data);
                              $.each(data2, function () {
                                     $("#filtro3").append($("<option>").val(this.Id).text(this.Descripcion));
+                                  });
+                             });
+                    }
+                });
+            });
+        });
+</script>
+
+
+<!-- Aca es donde se arma la magia -->
+<script>
+        //Todo siempre una vez cargada la página
+        $(document).ready(function () {
+
+            //Esto corre cuando cambias de opción en el primer select
+            $('#filtroProvinciaEntidad').on('change', function () {
+
+               var idPais = $(this).val();
+
+                //Si elegiste la opción de los guíones paramos aca para no hacer nada
+                if (idPais === 0) {
+                    $("#filtroDepartamentoEntidad").html("Selecciona una provincia");
+                    return;
+                }
+
+                //Ajax
+                $.ajax({
+                   url: "obtenerselectpaisentidad/" + idPais,
+
+                    type: 'GET',
+                    dataType: "json",
+                    success: function (res) {
+                        //Por si queres ver una por una las cosas que vuelven descomenta el alert
+                        //alert(res);
+
+                        //Creando el segundo select
+                        $("#filtroDepartamentoEntidad").empty().append('<select id="filtroentidad2" class="selectpicker">');
+                        $.getJSON("@Url.Action("ObtenerSelectPaisEntidad","Usuario")", { idPais: idPais }, function (data) {
+                              let data2 = JSON.parse(data);
+                             $.each(data2, function () {
+                                 $("#filtroentidad2").append($("<option>").val(this.Id).text(this.Descripcion));
+                                  });
+                             });
+                    }
+                });
+            });
+        });
+</script>
+<script>
+        //Todo siempre una vez cargada la página
+        $(document).ready(function () {
+
+            //Esto corre cuando cambias de opción en el primer select
+            $('#filtroDepartamentoEntidad').on('change', function () {
+
+                var idDepartamento = $(this).val();
+
+                //Si elegiste la opción de los guíones paramos aca para no hacer nada
+                if (idDepartamento === 0) {
+                    $("#filtroLocalidadEntidad").html("Selecciona una provincia");
+                    return;
+                }
+
+                //Ajax
+                $.ajax({
+                   url: "obtenerselectdepartamentoentidad/" + idDepartamento,
+
+                    type: 'GET',
+                    dataType: "json",
+                    success: function (res) {
+                        //Por si queres ver una por una las cosas que vuelven descomenta el alert
+                       // alert(res);
+
+                        //Creando el segundo select
+                        $("#filtroLocalidadEntidad").empty().append('<select id="filtroentidad3" class="selectpicker" name="LocalidadId">');
+                        $.getJSON("@Url.Action("ObtenerSelectDepartamentoEntidad","Usuario")", { idDepartamento: idDepartamento }, function (data) {
+                              let data2 = JSON.parse(data);
+                             $.each(data2, function () {
+                                    $("#filtroentidad3").append($("<option>").val(this.Id).text(this.Descripcion));
                                   });
                              });
                     }
