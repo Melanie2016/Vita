@@ -31,6 +31,8 @@ namespace Vita.Controllers
             else
             {
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                List<Provincia> provincias = localidadServicio.GetAllProvincias();
+                ViewBag.ListaProvincia = new MultiSelectList(provincias, "id", "descripcion");
                 List<Categoria> rubros = categoriaServicio.GetAllCategorias();
                 ViewBag.ListaRubro = new MultiSelectList(rubros, "id", "descripcion");
                 List<SubCategoria> tipoActividad = categoriaServicio.GetAllSubCategorias();//hacer que le pase el id de categoria
@@ -202,18 +204,58 @@ namespace Vita.Controllers
 
         [HttpGet]
         [Route("obtenersubcategoria{idCategoria}")]
-        public string ObtenerSubcategoria(int? id)
+       
+        public JsonResult ObtenerSubcategoria(int? id)
         {
+           if(id == null)
+            {
+                id = 3;
+            }
             List<SubCategoria> subCategorias = categoriaServicio.GetAllSubCategoriasByCategoriaId(id);
+            var jsonSerialiser = new JavaScriptSerializer();
+            var json = jsonSerialiser.Serialize(subCategorias);
 
-            string result = JsonConvert.SerializeObject(subCategorias,
-                  new JsonSerializerSettings
-                  {
-                      ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                  });
+            return Json(json, JsonRequestBehavior.AllowGet);
+        }
+        //public string ObtenerSubcategoria(int? id)
+        //{
+        //    List<SubCategoria> subCategorias = categoriaServicio.GetAllSubCategoriasByCategoriaId(id);
+
+        //    string result = JsonConvert.SerializeObject(subCategorias,
+        //          new JsonSerializerSettings
+        //          {
+        //              ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        //          });
+
+        //    return result;
+
+        //}
+        [HttpGet]
+        [Route("obtenerselectpaisusuario{idPais}")]
+        public string ObtenerSelectPaisUsuario(int? id)
+        {
+            List<Departamento> departamentos = localidadServicio.GetDepartamentosByProvinciaId(id);
+
+            string result = JsonConvert.SerializeObject(departamentos,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
 
             return result;
+        }
+        [HttpGet]
+        [Route("obtenerselectdepartamentousuario{idDepartamento}")]
+        public string ObtenerSelectDepartamentoUsuario(int? id)
+        {
+            List<Localidad> localidades = localidadServicio.GetLocalidadesByDepartamentoId(id);
+            string result = JsonConvert.SerializeObject(localidades,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
 
+            return result;
         }
     }
 }

@@ -472,7 +472,7 @@
                                 //Creando el tercer select
                                 $("#filtroLocalidadEntidad").empty().append('<select id="filtroentidad3" class="selectpicker" name="LocalidadId">');
                                 $.each(res, function () {
-                                    $("#filtroentidad3").append($("<option>").val(this.Id).text(this.Descripcion));
+                                    $("#filtroLocalidadEntidad").append($("<option>").val(this.Id).text(this.Descripcion));
                                 });
                             }
                         });
