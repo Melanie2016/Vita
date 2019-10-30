@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Vita.Servicios;
+using Vita.ViewModels;
 
 namespace Vita.Controllers
 {
@@ -48,7 +49,7 @@ namespace Vita.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreacionActividad(Actividad actividad, int[] selectedSegmento)
+        public ActionResult CreacionActividad(ActividadViewModel actividad, int[] selectedSegmento)
         {
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))

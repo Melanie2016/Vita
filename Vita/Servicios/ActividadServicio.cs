@@ -102,27 +102,42 @@ namespace Vita.Servicios
             }
             return listaActividad;
         }
-        public void CrearActividad(Actividad actividad, Usuario usuario, int[] selectedSegmento)
+        public void CrearActividad(ActividadViewModel actividadViewModel, Usuario usuario, int[] selectedSegmento)
         {
             Actividad actividadNueva = new Actividad
             {
-                Titulo = actividad.Titulo,
-                Descripcion = actividad.Descripcion,
-                EdadMinima = actividad.EdadMinima,
-                EdadMaxima = actividad.EdadMaxima,
-                Precio = actividad.Precio,
-                FechaDesde = actividad.FechaDesde,
-                FechaHasta = actividad.FechaHasta,
-                CantidadDias = actividad.CantidadDias,
-                CantidadCupo = actividad.CantidadCupo,
-                CategoriaId = actividad.CategoriaId,
-                SubcategoriaId = actividad.SubcategoriaId,
-                LocalidadId = actividad.LocalidadId,
+                Titulo = actividadViewModel.Titulo,
+                Descripcion = actividadViewModel.Descripcion,
+                EdadMinima = actividadViewModel.EdadMinima,
+                EdadMaxima = actividadViewModel.EdadMaxima,
+                Precio = actividadViewModel.Precio,
+                FechaDesde = actividadViewModel.FechaDesde,
+                FechaHasta = actividadViewModel.FechaHasta,
+                CantidadDias = actividadViewModel.CantidadDias,
+                CantidadCupo = actividadViewModel.CantidadCupo,
+                CategoriaId = actividadViewModel.CategoriaId,
+                SubcategoriaId = actividadViewModel.SubCategoriaId,
+                LocalidadId = actividadViewModel.LocalidadId,
                 UsuarioId = usuario.Id,
                 // Foto= actividad.Foto una actividad puede tener varias fotos
                 CreatedAt = DateTime.Now
             };
             myDbContext.Actividad.Add(actividadNueva);
+            Domicilio domicilioNuevo = new Domicilio
+            {
+                Id = actividadViewModel.IdDomicilio,
+                NombreCalle = actividadViewModel.NombreCalle,
+                NumeroCalle = actividadViewModel.NumeroCalle,
+                NumeroPiso = actividadViewModel.NumeroPiso,
+                NumeroDepartamento = actividadViewModel.NumeroDepartamento,
+                CodigoPostal = actividadViewModel.CodigoPostal,
+                LocalidadId = actividadViewModel.DomicilioLocalidadId,
+                UsuarioId = actividadViewModel.DomicilioUsuarioId,
+                ActividadId = actividadViewModel.DomicilioActividadId,
+                FechaRegistroEnDb = actividadViewModel.FechaRegistroEnDb
+            };
+           
+            myDbContext.Domicilio.Add(domicilioNuevo);
             myDbContext.SaveChanges();
             this.CrearSegmentoActividad(actividadNueva.Id, selectedSegmento);
 
