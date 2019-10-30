@@ -30,9 +30,6 @@ namespace Vita.Controllers
             List<Segmento> segmentos = segmentoServicio.GetAllSegmento();
             ViewBag.ListaSegmentos = new MultiSelectList(segmentos, "id", "descripcion");
 
-            List<Localidad> localidades = localidadServicio.GetAllLocalidades();
-            ViewBag.ListaLocalidades = new MultiSelectList(localidades, "id", "descripcion");
-
             List<Categoria> intereses = categoriaServicio.GetAllCategorias();
             ViewBag.ListaIntereses = new MultiSelectList(intereses, "id", "descripcion");
 
@@ -138,6 +135,7 @@ namespace Vita.Controllers
                 }
                 else
                 {
+                    buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
                     List<Categoria> categoriasElegidas = categoriaServicio.GetAllCategoriasDelUsuario(buscarUsuarioLogueado);
                     ViewBag.ListacategoriasElegidas = new MultiSelectList(categoriasElegidas, "id", "descripcion");
                     List<Segmento> segmentoElegidos = segmentoServicio.GetAllSegmentosDelUsuario(buscarUsuarioLogueado);
