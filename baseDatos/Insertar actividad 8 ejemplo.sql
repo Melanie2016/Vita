@@ -43,11 +43,6 @@ GO
 
 Update Actividad set Foto = 
 (SELECT BulkColumn 
-<<<<<<< HEAD
-FROM Openrowset( Bulk 'C:\Users\melan\source\repos\Vita\Vita\Content\images\truco.jpg', Single_Blob) as img)
---FROM Openrowset( Bulk 'C:\Users\A307508\Source\Repos\Vita\Vita\Content\images\truco.jpg', Single_Blob) as img)
-=======
 FROM Openrowset( Bulk 'C:\Users\A307508\Source\Repos\Vita\Vita\Content\images\truco.jpg', Single_Blob) as img)
->>>>>>> 879b8cca0edaf12be423c96c3e6f076d9f70373d
 where Id=8
 
