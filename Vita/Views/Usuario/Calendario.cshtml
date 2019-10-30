@@ -5,9 +5,7 @@
 
 }
 
-        
-
-</style>
+<section class="ftco-section">
 <link href="~/Content/css/FotoPerfil.css" rel="stylesheet" media="all">
 
  <div class="container-fluid">
@@ -17,7 +15,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <div id="calender" ></div>
+                                <div id="calender"></div>
                             </div>
                         </div>
                         
@@ -32,16 +30,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title"><span id="eventTitle"></span></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                
             </div>
             <div class="modal-body">
-                <button id="btnDelete" class="btn btn-default btn-sm pull-right">
-                    <span class="glyphicon glyphicon-remove"></span> Remove
+                <button id="btnRedirect" class="btn btn-default btn-sm pull-right">
+                    <span class="glyphicon glyphicon-remove"></span> Ver actividad
                 </button>
-                <button id="btnEdit" class="btn btn-default btn-sm pull-right" style="margin-right:5px;">
-                    <span class="glyphicon glyphicon-pencil"></span> Edit
-                </button>
+                
                 <p id="pDetails"></p>
             </div>
             <div class="modal-footer">
@@ -51,7 +48,7 @@
     </div>
 </div>
 
-
+<!--
 <div id="myModalSave" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -110,7 +107,7 @@
         </div>
     </div>
 </div>
-
+-->
 <script src="~/vendor/jquery/jquery.min.js"></script>
 <script src="~/Content/js/FotoPerfil.js"></script>
 
@@ -118,10 +115,10 @@
 <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
 
 @section ScriptsFinal{
+    <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/locale-all.js"></script>
-       <script src="~/Scripts/bootstrap.min.js"></script>
+     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/locale-all.js"></script>
     
     
     <script>
@@ -137,9 +134,13 @@
                     success: function (data) {
                         $.each(data, function (i, v) {
                             events.push({
+                                eventID: v.ActividadId,
+                                inscripto: false,
                                 title: v.Titulo,
+                                descripcion: v.Descripcion,
                                 start: moment(v.FechaDesde),
-                                end: v.FechaHasta != null ? moment(v.FechaHasta) : null
+                                end: v.FechaHasta != null ? moment(v.FechaHasta) : null,
+                                color: '#69D49A '
                             });
                         })
 
@@ -164,17 +165,17 @@
                         right: 'month,basicWeek,basicDay,agenda'
                     },
                     eventLimit: true,
-                    eventColor: '#378006',
+                    eventColor: '#69D49A ',
                     events: events,
                     eventClick: function (calEvent, jsEvent, view) {
                         selectedEvent = calEvent;
                         $('#myModal #eventTitle').text(calEvent.title);
                         var $description = $('<div/>');
-                        $description.append($('<p/>').html('<b>Start:</b>' + calEvent.start.format("DD-MMM-YYYY HH:mm a")));
+                        $description.append($('<p/>').html('<b>Fecha: </b>' + calEvent.start.format("DD-MMM-YYYY HH:mm a")));
                         if (calEvent.end != null) {
                             $description.append($('<p/>').html('<b>End:</b>' + calEvent.end.format("DD-MMM-YYYY HH:mm a")));
                         }
-                        $description.append($('<p/>').html('<b>Description:</b>' + calEvent.description));
+                        $description.append($('<p/>').html('<b>Descripcion: </b>' + calEvent.descripcion));
                         $('#myModal #pDetails').empty().html($description);
 
                         $('#myModal').modal();
@@ -213,24 +214,9 @@
                 //Open modal dialog for edit event
                 openAddEditForm();
             })
-            $('#btnDelete').click(function () {
-                if (selectedEvent != null && confirm('Are you sure?')) {
-                    $.ajax({
-                        type: "POST",
-                        url: '/Usuario/DeleteEvent',
-                        data: { 'eventID': selectedEvent.eventID },
-                        success: function (data) {
-                            if (data.status) {
-                                //Refresh the calender
-                                FetchEventAndRenderCalendar();
-                                $('#myModal').modal('hide');
-                            }
-                        },
-                        error: function () {
-                            alert('Failed');
-                        }
-                    })
-                }
+            $('#btnRedirect').click(function () {
+                
+                window.location.href='/Actividad/FichaActividad?idActividad=' + selectedEvent.eventID + '&inscribirse=false'                
             })
 
             $('#dtp1,#dtp2').datetimepicker({
@@ -317,3 +303,5 @@
         })
     </script>
 }
+
+</section>

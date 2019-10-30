@@ -7,6 +7,7 @@ namespace Vita.ViewModels
 {
     public class ActividadFechaViewModel
     {
+        public int ActividadId { get; set; }
         public string Titulo { get; set; }
         public string Descripcion { get; set; }
         public DateTime FechaDesde { get; set; }
