@@ -86,7 +86,7 @@
                                     </div>
                                 </div>
 
-                             
+
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="CantidadDias">
                                         Cantidad de dias que va a estar la actividad<span class="text-danger">*</span>
@@ -95,6 +95,7 @@
                                         <input type="text" class="form-control" id="val-number" name="CantidadDias" placeholder="5">
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
                                     <!--DESDE-->
                                     <label class="col-lg-4 col-form-label" for="RangoFecha">
@@ -108,17 +109,17 @@
                                     </div>
                                 </div>
                                 @*<div class="form-group row">
-                                   
-                                    <label class="col-lg-4 col-form-label" for="CantidadDias">
-                                        Hasta que dia y horario <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <div class="example">
 
-                                            <input type="text" class="form-control input-daterange-timepicker" name="FechaHasta" value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM">
-                                        </div>
-                                    </div>
-                                </div>*@
+            <label class="col-lg-4 col-form-label" for="FechaHasta">
+                Hasta que dia y horario <span class="text-danger">*</span>
+            </label>
+            <div class="col-lg-6">
+                <div class="example">
+
+                    <input type="text" class="form-control input-daterange-timepicker" name="FechaHasta" value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM">
+                </div>
+            </div>
+        </div>*@
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="CantidadCupo">
                                         Cantidad de cupos disponibles<span class="text-danger">*</span>
@@ -233,7 +234,19 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="Compleja">
+                                        La actividad va a tener que aprobar a los usuarios que se quieran inscribir, 
+                                        esto quiere decir que se le va mandar un formulario para que complete antes de poder inscribirse, 
+                                        el mismo lo vera usted.
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <label><input type="radio" id="cbox1" name="Compleja" value="true"> Si</label><br>
+                                        <label><input type="radio" id="cbox1" name="Compleja" value="false"> NO</label><br>
 
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <div class="col-lg-8 ml-auto">
                                         <button type="submit" class="btn btn-primary">Crear Actividad</button>

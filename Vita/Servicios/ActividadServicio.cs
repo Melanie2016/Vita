@@ -145,6 +145,7 @@ namespace Vita.Servicios
                 CategoriaId = actividadViewModel.CategoriaId,
                 SubcategoriaId = actividadViewModel.SubCategoriaId,
                 LocalidadId = actividadViewModel.DomicilioLocalidadId,
+                Compleja = actividadViewModel.Compleja,
                 UsuarioId = usuario.Id,
 
                 // Foto= actividad.Foto una actividad puede tener varias fotos
