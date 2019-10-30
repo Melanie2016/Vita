@@ -51,6 +51,7 @@ namespace Vita.Servicios
                 var actividadFechaViewModel = new ActividadFechaViewModel()
                 {
                     //y a cada atributo del viewModel lo lleno con el atributo que necesito de actividad
+                    ActividadId = aux.Actividad.Id,
                     Titulo = aux.Actividad.Titulo,
                     Descripcion = aux.Actividad.Titulo,
                     FechaDesde = aux.Actividad.FechaDesde,
@@ -134,7 +135,7 @@ namespace Vita.Servicios
                 LocalidadId = actividadViewModel.DomicilioLocalidadId,
                 UsuarioId = actividadViewModel.DomicilioUsuarioId,
                 ActividadId = actividadViewModel.DomicilioActividadId,
-                FechaRegistroEnDb = actividadViewModel.FechaRegistroEnDb
+                FechaRegistroEnDb = CreatedAt = DateTime.Now
             };
            
             myDbContext.Domicilio.Add(domicilioNuevo);

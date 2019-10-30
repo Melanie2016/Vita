@@ -8,6 +8,18 @@
 
 <head>
     <meta charset="utf-8">
+        <!-- Custom Stylesheet -->
+    <link href="../../Content/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
+    <!-- Page plugins css -->
+    <link href="../../Content/plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
+    <!-- Color picker plugins css -->
+    <link href="../../Content/plugins/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet">
+    <!-- Date picker plugins css -->
+    <link href="../../Content/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!-- Daterange picker plugins css -->
+    <link href="../../Content/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+    <link href="../../Content/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
 
 </head>
 
@@ -125,19 +137,27 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <!--Fecha de nacimiento-->
-                                    <label class="label">Desde que fecha esta disponible la actividad</label>
-                                    <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="text" name="FechaNacimiento">
-                                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                    <!--DESDE-->
+                                    <label class="col-lg-4 col-form-label" for="CantidadDias">
+                                       Desde que dia y horario <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <div class="example">
+                                            
+                                            <input type="text" class="form-control input-daterange-timepicker" name="daterange" value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <!--Fecha de nacimiento-->
-                                    <label class="label">Fecha en la que se termina la actividad</label>
-                                    <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="text" name="FechaNacimiento">
-                                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                    <!--HASTA-->
+                                    <label class="col-lg-4 col-form-label" for="CantidadDias">
+                                       Hasta que dia y horario <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <div class="example">
+                                            
+                                            <input type="text" class="form-control input-daterange-timepicker" name="daterange" value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -186,16 +206,32 @@
             </div>
         </div>
     </div>
-    <script src="~/vendor/jquery/jquery.min.js"></script>
-    <script src="plugins/common/common.min.js"></script>
-    <script src="js/custom.min.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/gleek.js"></script>
-    <script src="js/styleSwitcher.js"></script>
-    <script src="./plugins/validation/jquery.validate.min.js"></script>
-    <script src="./plugins/validation/jquery.validate-init.js"></script>
-    <script src="./vendor/datepicker/moment.min.js"></script>
-    <script src="./vendor/datepicker/daterangepicker.js"></script>
+
+
+    <script src="../../Content/plugins/common/common.min.js"></script>
+    <script src="../../Content/js/custom.min.js"></script>
+    <script src="../../Content/js/settings.js"></script>
+    <script src="../../Content/js/gleek.js"></script>
+    <script src="../../Content/js/styleSwitcher.js"></script>
+
+    <script src="../../Content/plugins/moment/moment.js"></script>
+    <script src="../../Content/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <!-- Clock Plugin JavaScript -->
+    <script src="../../Content/plugins/clockpicker/dist/jquery-clockpicker.min.js"></script>
+    <!-- Color Picker Plugin JavaScript -->
+    <script src="../../Content/plugins/jquery-asColorPicker-master/libs/jquery-asColor.js"></script>
+    <script src="../../Content/plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js"></script>
+    <script src="../../Content/plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js"></script>
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="../../Content/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <!-- Date range Plugin JavaScript -->
+    <script src="../../Content/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <script src="../../Content/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <script src="../../Content/js/plugins-init/form-pickers-init.js"></script>
+    <script src="../../Content/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+
 </body>
 
 </html>
