@@ -69,7 +69,6 @@
                             </div>
                         }
                         <!---->
-
                         <!--Inicio Carousel-->
                         <!--Carousel Wrapper-->
                         <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
@@ -111,7 +110,14 @@
                         <strong style="color: #666; font-size: 14px; font-weight:bold">Edad </strong>
                         <p>A partir de @ViewBag.Actividad.EdadMinima hasta @ViewBag.Actividad.EdadMaxima años</p>
                         <strong style="color: #666; font-size: 14px; font-weight:bold">Precio</strong>
-                        <p>$@ViewBag.Actividad.Precio por clase, consultar precio por pase mensual</p>
+                        @if (@ViewBag.Actividad.Precio != null)
+                        {
+                            <p>$@ViewBag.Actividad.Precio</p>
+                        }
+                        else
+                        {
+                            <p>Gratuito</p>
+                        }
 
                         <br />
                         <!--MAPA-->
@@ -124,7 +130,6 @@
                             <iframe src="https://maps.google.com/maps?q=@ViewBag.Actividad.Localidad.Descripcion%20Buenos%20Aires&t=&z=15&ie=UTF8&iwloc=&output=embed" width="550" height="398" frameborder="0" style="border:0" allowfullscreen></iframe>
                         }
                         <!--FIN MAPA-->
-
                         <!--VIDEO-->
                         <iframe width="560" height="315" src="https://www.youtube.com/embed/ccSk5gLadF8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 

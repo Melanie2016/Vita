@@ -13,6 +13,7 @@ INSERT INTO Categoria(Id, Descripcion) VALUES (2, 'Campeonatos/Torneos de juegos
 INSERT INTO Categoria(Id, Descripcion) VALUES (3, 'Deportes');
 INSERT INTO Categoria(Id, Descripcion) VALUES (4, 'Talleres/Capacitaciones/Cursos');
 INSERT INTO Categoria(Id, Descripcion) VALUES (5, 'Actividades de interés cultural');
+INSERT INTO Categoria(Id, Descripcion) VALUES (6, 'Excursiones');
 SET IDENTITY_INSERT Categoria OFF
 
 /*SubCategoria*/
@@ -45,6 +46,7 @@ INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (22,'Teatro',5);
 INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (23,'Cine',5);
 INSERT INTO SubCategoria(id, Descripcion, CategoriaId) Values (24,'Leer cuentos/ escribir/ cantar',5);
 
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (25,'Excursión',6);
 SET IDENTITY_INSERT SubCategoria OFF
 
 /***********************************************/
