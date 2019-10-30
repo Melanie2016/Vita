@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -201,13 +202,17 @@ namespace Vita.Controllers
 
         [HttpGet]
         [Route("obtenersubcategoria{idCategoria}")]
-        public JsonResult ObtenerSubcategoria(int? idCategoria)
+        public string ObtenerSubcategoria(int? id)
         {
-            List<SubCategoria> subCategorias = categoriaServicio.GetAllSubCategoriasByCategoriaId(idCategoria);
+            List<SubCategoria> subCategorias = categoriaServicio.GetAllSubCategoriasByCategoriaId(id);
 
-            var jsonSerialiser = new JavaScriptSerializer();
-            var json = jsonSerialiser.Serialize(subCategorias);
-            return Json(json, JsonRequestBehavior.AllowGet);
+            string result = JsonConvert.SerializeObject(subCategorias,
+                  new JsonSerializerSettings
+                  {
+                      ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                  });
+
+            return result;
 
         }
     }
