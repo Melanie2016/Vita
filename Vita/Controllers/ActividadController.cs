@@ -131,7 +131,7 @@ namespace Vita.Controllers
             }
             else
             {
-                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
                 ViewBag.ListaActvidades = actividadServicio.GetAllActividadByRolEntidadId(buscarUsuarioLogueado.Id);
 
                 //  ViewBag.ListaUsuariosInscriptoActividad = actividadServicio.GetAllActividadUsuarioInscriptoByActividadId( tiene que recibir la actividad id para poder hacerlo, hay que porbar)

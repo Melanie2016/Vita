@@ -14,6 +14,12 @@ namespace Vita.Servicios
             var cate= myDbContext.Categoria.Where(x => x.Id == categoriaId).FirstOrDefault();
             return cate;
         }
+        public SubCategoria GetSubCategoriaById(int subcategoriaId)
+        {
+            var subCategoria = myDbContext.SubCategoria.Where(x => x.Id == subcategoriaId).FirstOrDefault();
+            return subCategoria;
+        }
+        
         public List<Categoria> GetAllCategorias()
         {
             return myDbContext.Categoria.OrderBy(x=>x.Id).ToList();

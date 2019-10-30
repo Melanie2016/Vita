@@ -85,7 +85,115 @@
 
                                     </div>
                                 </div>
-                           
+
+                             
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="CantidadDias">
+                                        Cantidad de dias que va a estar la actividad<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="val-number" name="CantidadDias" placeholder="5">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <!--DESDE-->
+                                    <label class="col-lg-4 col-form-label" for="RangoFecha">
+                                        Desde  y hasta que dia y horario <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <div class="example">
+
+                                            <input type="text" class="form-control input-daterange-timepicker" name="RangoFecha" value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM">
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="form-group row">
+                                   
+                                    <label class="col-lg-4 col-form-label" for="CantidadDias">
+                                        Hasta que dia y horario <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <div class="example">
+
+                                            <input type="text" class="form-control input-daterange-timepicker" name="FechaHasta" value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM">
+                                        </div>
+                                    </div>
+                                </div>*@
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="CantidadCupo">
+                                        Cantidad de cupos disponibles<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="val-number" name="CantidadCupo" placeholder="100">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="EdadMinima">
+                                        Edad mínima<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="val-number" name="EdadMinima" placeholder="25">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="EdadMaxima">
+                                        Edad máxima<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="val-number" name="EdadMaxima" placeholder="70">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="Precio">
+                                        Precio (en caso de no tener, poner cero en número) <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="val-currency" name="Precio" placeholder="21.60">
+                                    </div>
+                                </div>
+                                <div>Cargar domicilio de la actividad</div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="NombreCalle">
+                                        Ingrese nombre de la calle<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="val-username" name="NombreCalle" placeholder="Nombre de la calle">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="NumeroCalle">
+                                        Ingrese el numero de la calle<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="val-number" name="NumeroCalle" placeholder="Numero de la calle">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="NumeroPiso">
+                                        Ingrese el numero del piso (si es planta baja, ingresar cero)
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="val-number" name="NumeroPiso" placeholder="0">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="NumeroDepartamento">
+                                        Ingrese el numero y letra del departamento
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" name="NumeroDepartamento" placeholder="1c">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="CodigoPostal">
+                                        Ingrese el codigo postal<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" name="CodigoPostal" placeholder="1716">
+                                    </div>
+                                </div>
+
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="ProvinciaId">
                                         Seleccione provincia <span class="text-danger">*</span>
@@ -126,81 +234,13 @@
                                     </div>
                                 </div>
 
-
-                              
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="CantidadDias">
-                                        Cantidad de dias que va a estar la actividad<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-number" name="CantidadDias" placeholder="5">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <!--DESDE-->
-                                    <label class="col-lg-4 col-form-label" for="CantidadDias">
-                                       Desde que dia y horario <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <div class="example">
-                                            
-                                            <input type="text" class="form-control input-daterange-timepicker" name="daterange" value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <!--HASTA-->
-                                    <label class="col-lg-4 col-form-label" for="CantidadDias">
-                                       Hasta que dia y horario <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <div class="example">
-                                            
-                                            <input type="text" class="form-control input-daterange-timepicker" name="daterange" value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="CantidadCupo">
-                                        Cantidad de cupos disponibles<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-number" name="CantidadCupo" placeholder="100">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="EdadMinima">
-                                        Edad mínima<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-number" name="EdadMinima" placeholder="25">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="EdadMaxima">
-                                        Edad máxima<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-number" name="EdadMaxima" placeholder="70">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="Precio">
-                                        Precio (en caso de no tener, poner cero en número) <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-currency" name="Precio" placeholder="21.60">
-                                    </div>
-                                </div>
-
                                 <div class="form-group row">
                                     <div class="col-lg-8 ml-auto">
                                         <button type="submit" class="btn btn-primary">Crear Actividad</button>
                                     </div>
                                 </div>
                             </form>
-                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -323,7 +363,7 @@
                             success: function (res) {
                                 // alert(res);
                                 //Creando el tercer select
-                                $("#filtroLocalidad").empty().append('<select id="filtro3" class="form-control" name="LocalidadId">');
+                                $("#filtroLocalidad").empty().append('<select id="filtro3" class="form-control" name="DomicilioLocalidadId">');
                                 $.each(res, function () {
                                     $("#filtro3").append($("<option>").val(this.Id).text(this.Descripcion));
                                 });

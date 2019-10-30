@@ -14,6 +14,7 @@ namespace Vita.ViewModels
         public int EdadMaxima { get; set; }
         public int Precio { get; set; }
         public DateTime FechaDesde { get; set; }
+        public DateTime RangoFecha { get; set; }
         public DateTime FechaHasta { get; set; }
         public int CantidadDias { get; set; }
         public int CantidadCupo { get; set; }

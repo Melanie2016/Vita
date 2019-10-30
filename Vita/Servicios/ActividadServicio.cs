@@ -67,7 +67,29 @@ namespace Vita.Servicios
 
         public List<Actividad> GetAllActividadByRolEntidadId(int usuarioId) //lista de activiades por entidad id
         {
-            return myDbContext.Actividad.Where(x => x.UsuarioId == usuarioId).ToList();
+            var actividades= myDbContext.Actividad.Where(x => x.UsuarioId == usuarioId).ToList();
+            var actividadConTodo = new List<Actividad>();
+           foreach(var act in actividades)
+           {
+                if(act.Localidad == null)
+                {
+                    act.Localidad = localidadServicio.GetLocalidadById(act.LocalidadId);
+                }
+                if(act.Categoria == null)
+                {
+                    act.Categoria = categoriaServicio.GetCategoriaById(act.CategoriaId);
+                }
+                if(act.SubCategoria == null)
+                {
+                    act.SubCategoria = categoriaServicio.GetSubCategoriaById(act.SubcategoriaId);
+                }
+                
+                actividadConTodo.Add(act);
+
+            }
+
+            return actividadConTodo;
+
         }
         public List<Actividad> GetAllActividadByRolUsuarioId(int usuarioId) //lista de activiades por usuario inscripto id
         {
@@ -105,6 +127,10 @@ namespace Vita.Servicios
         }
         public void CrearActividad(ActividadViewModel actividadViewModel, Usuario usuario, int[] selectedSegmento)
         {
+            if(actividadViewModel.SubCategoriaId == 0) //por ahora
+            {
+                actividadViewModel.SubCategoriaId = 3;
+            }
             Actividad actividadNueva = new Actividad
             {
                 Titulo = actividadViewModel.Titulo,
@@ -112,30 +138,32 @@ namespace Vita.Servicios
                 EdadMinima = actividadViewModel.EdadMinima,
                 EdadMaxima = actividadViewModel.EdadMaxima,
                 Precio = actividadViewModel.Precio,
-                FechaDesde = actividadViewModel.FechaDesde,
-                FechaHasta = actividadViewModel.FechaHasta,
+                FechaDesde = actividadViewModel.RangoFecha,
+                FechaHasta = actividadViewModel.RangoFecha,
                 CantidadDias = actividadViewModel.CantidadDias,
                 CantidadCupo = actividadViewModel.CantidadCupo,
                 CategoriaId = actividadViewModel.CategoriaId,
                 SubcategoriaId = actividadViewModel.SubCategoriaId,
-                LocalidadId = actividadViewModel.LocalidadId,
+                LocalidadId = actividadViewModel.DomicilioLocalidadId,
                 UsuarioId = usuario.Id,
+
                 // Foto= actividad.Foto una actividad puede tener varias fotos
                 CreatedAt = DateTime.Now
             };
+
             myDbContext.Actividad.Add(actividadNueva);
+            myDbContext.SaveChanges();
             Domicilio domicilioNuevo = new Domicilio
             {
-                Id = actividadViewModel.IdDomicilio,
                 NombreCalle = actividadViewModel.NombreCalle,
                 NumeroCalle = actividadViewModel.NumeroCalle,
                 NumeroPiso = actividadViewModel.NumeroPiso,
                 NumeroDepartamento = actividadViewModel.NumeroDepartamento,
                 CodigoPostal = actividadViewModel.CodigoPostal,
                 LocalidadId = actividadViewModel.DomicilioLocalidadId,
-                UsuarioId = actividadViewModel.DomicilioUsuarioId,
-                ActividadId = actividadViewModel.DomicilioActividadId,
-                FechaRegistroEnDb = CreatedAt = DateTime.Now
+                UsuarioId = usuario.Id,
+                ActividadId = actividadNueva.Id,
+                FechaRegistroEnDb = DateTime.Now
             };
            
             myDbContext.Domicilio.Add(domicilioNuevo);
