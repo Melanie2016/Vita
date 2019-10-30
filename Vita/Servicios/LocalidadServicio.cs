@@ -29,5 +29,9 @@ namespace Vita.Servicios
         {
             return myDbContext.Localidad.OrderBy(x => x.Descripcion).Where(x => x.DepartamentoId == departamentoId).ToList();
         }
+        public Domicilio GetDomicilioByActividadId(int actividadId)
+        {
+            return myDbContext.Domicilio.Where(x => x.ActividadId == actividadId).FirstOrDefault();
+        }
     }
 }

@@ -11,10 +11,33 @@ namespace Vita.Servicios
     {
         private CategoriaServicio categoriaServicio = new CategoriaServicio();
         private LocalidadServicio localidadServicio = new LocalidadServicio();
+        private UsuarioServicio usuarioServicio = new UsuarioServicio();
         private VitaEntities myDbContext = new VitaEntities();
         public Actividad GetActividad(int ActividadId)//por id de actividad
         {
-            return myDbContext.Actividad.Find(ActividadId);
+            var act= myDbContext.Actividad.Find(ActividadId);
+            if (act.Localidad == null)
+            {
+                act.Localidad = localidadServicio.GetLocalidadById(act.LocalidadId);
+            }
+            if (act.Categoria == null)
+            {
+                act.Categoria = categoriaServicio.GetCategoriaById(act.CategoriaId);
+            }
+            if (act.SubCategoria == null)
+            {
+                act.SubCategoria = categoriaServicio.GetSubCategoriaById(act.SubcategoriaId);
+            }
+            if(act.Usuario == null)
+            {
+                act.Usuario = usuarioServicio.GetById(act.UsuarioId.Value);
+            }
+            if(act.Domicilio == null || act.Domicilio.Count== 0)
+            {
+                var domi= localidadServicio.GetDomicilioByActividadId(act.Id);
+                act.Domicilio.Add(domi);
+            }
+            return act;
         }
 
         //va a devolver una lista del viewMoDEL que cree (que solo tiene fecha desde, fecha hasta y descripcion de la actividad)
@@ -82,8 +105,16 @@ namespace Vita.Servicios
                 if(act.SubCategoria == null)
                 {
                     act.SubCategoria = categoriaServicio.GetSubCategoriaById(act.SubcategoriaId);
+                }            
+                if (act.Usuario == null)
+                {
+                    act.Usuario = usuarioServicio.GetById(act.UsuarioId.Value);
                 }
-                
+                if (act.Domicilio == null)
+                {
+                    var domi = localidadServicio.GetDomicilioByActividadId(act.Id);
+                    act.Domicilio.Add(domi);
+                }
                 actividadConTodo.Add(act);
 
             }
@@ -189,6 +220,7 @@ namespace Vita.Servicios
 
         public List<Actividad> GetBusquedaAvanzada(string textoIngresado)
         {
+            var listaVali = new List<Actividad>();
             var lista = new List<Actividad>();
             var edadOprecio = 0;
             Exception excepcion = null;
@@ -230,7 +262,13 @@ namespace Vita.Servicios
                 lista.AddRange(listaPrecio);//agrego a la lista las que coinciden, tuve que hacerlo separado porque no quiere el where todo junto :(
                 lista.AddRange(listaEdad);
             }
-            return lista;
+            
+            foreach(var act in lista)
+            {
+                var actividadValidad = GetActividad(act.Id);
+                listaVali.Add(actividadValidad);
+            }
+            return listaVali;
         }
 
         public List<Actividad> GetBusquedaPorIdCategoria(string categoriaId)
@@ -238,18 +276,30 @@ namespace Vita.Servicios
             int id = int.Parse(categoriaId);
             var lista2 = new List<Actividad>();
             var lista = myDbContext.Actividad.Where(x => x.CategoriaId == id).ToList();
-            foreach(var li in lista)
+            foreach(var act in lista)
             {
-                if(li.Localidad == null)
+                if (act.Localidad == null)
                 {
-                    li.Localidad = localidadServicio.GetLocalidadById(li.LocalidadId);
-
+                    act.Localidad = localidadServicio.GetLocalidadById(act.LocalidadId);
                 }
-                if(li.Categoria == null)
+                if (act.Categoria == null)
                 {
-                    li.Categoria = categoriaServicio.GetCategoriaById(li.CategoriaId);
+                    act.Categoria = categoriaServicio.GetCategoriaById(act.CategoriaId);
                 }
-                lista2.Add(li);
+                if (act.SubCategoria == null)
+                {
+                    act.SubCategoria = categoriaServicio.GetSubCategoriaById(act.SubcategoriaId);
+                }
+                if (act.Usuario == null)
+                {
+                    act.Usuario = usuarioServicio.GetById(act.UsuarioId.Value);
+                }
+                if (act.Domicilio == null)
+                {
+                    var domi = localidadServicio.GetDomicilioByActividadId(act.Id);
+                    act.Domicilio.Add(domi);
+                }
+                lista2.Add(act);
             }
 
             return lista2;
@@ -259,18 +309,30 @@ namespace Vita.Servicios
         {
             var lista2 = new List<Actividad>();
             var lista = myDbContext.Actividad.ToList();
-            foreach (var li in lista)
+            foreach (var act in lista)
             {
-                if (li.Localidad == null)
+                if (act.Localidad == null)
                 {
-                    li.Localidad = localidadServicio.GetLocalidadById(li.LocalidadId);
-
+                    act.Localidad = localidadServicio.GetLocalidadById(act.LocalidadId);
                 }
-                if (li.Categoria == null)
+                if (act.Categoria == null)
                 {
-                    li.Categoria = categoriaServicio.GetCategoriaById(li.CategoriaId);
+                    act.Categoria = categoriaServicio.GetCategoriaById(act.CategoriaId);
                 }
-                lista2.Add(li);
+                if (act.SubCategoria == null)
+                {
+                    act.SubCategoria = categoriaServicio.GetSubCategoriaById(act.SubcategoriaId);
+                }
+                if (act.Usuario == null)
+                {
+                    act.Usuario = usuarioServicio.GetById(act.UsuarioId.Value);
+                }
+                if (act.Domicilio == null)
+                {
+                    var domi = localidadServicio.GetDomicilioByActividadId(act.Id);
+                    act.Domicilio.Add(domi);
+                }
+                lista2.Add(act);
             }
 
             return lista2;
@@ -305,7 +367,28 @@ namespace Vita.Servicios
             return listaActividad;
         }
 
+        public List<Actividad> GetByEstadoId(int estadoId, int actividadId)
+        {
+            var listaActividad = new List<Actividad>();
+            var listaUsuarioInscriptoActividad = myDbContext.UsuarioInscriptoActividad.Where(x => x.ActividadId == actividadId && x.EstadoId==estadoId).ToList();
+            foreach(var li in listaUsuarioInscriptoActividad)
+            {
+                listaActividad.Add(li.Actividad);
+            }
 
+            return listaActividad;
+        }
+        public List<Usuario> GetUsuariosByEstadoId(int estadoId, int actividadId)
+        {
+            var listaUsuarios = new List<Usuario>();
+            var listaUsuarioInscriptoActividad = myDbContext.UsuarioInscriptoActividad.Where(x => x.ActividadId == actividadId && x.EstadoId == estadoId).ToList();
+            foreach (var li in listaUsuarioInscriptoActividad)
+            {
+                listaUsuarios.Add(li.Usuario);
+            }
+
+            return listaUsuarios;
+        }
 
     }
 }

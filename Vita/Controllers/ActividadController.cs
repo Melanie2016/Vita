@@ -82,7 +82,7 @@ namespace Vita.Controllers
         public ActionResult FichaActividad(string idActividad, string inscribirse)
         {
             var actividad = actividadServicio.GetActividad(int.Parse(idActividad));
-            ViewBag.Actividad = actividadServicio.GetActividad(int.Parse(idActividad));
+            ViewBag.Actividad = actividad;
             ViewBag.Resultado = 0;
             ViewBag.IniciarSesion = "false";
             ViewBag.Domicilio = actividad.Domicilio.FirstOrDefault();
@@ -257,6 +257,24 @@ namespace Vita.Controllers
                 });
 
             return result;
+        }
+        [HttpGet]
+        public ActionResult ListaEstado(int estadoId, int actividadId)
+        {
+            //obtengo usuario logueado
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
+              //  var actividadesPorEstado = actividadServicio.GetByEstadoId(estadoId, actividadId);
+                ViewBag.ListaUsuario = actividadServicio.GetUsuariosByEstadoId(estadoId, actividadId);
+
+                return View(buscarUsuarioLogueado);
+                // return View(actividades);
+            }
         }
     }
 }

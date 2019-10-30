@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "ListaActividades";
+    Layout = "~/Views/Shared/_LayoutPerfilEntidad.cshtml";
+}
+@model Usuario
+<section class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Mis actividades</h4>
+
+            <div class="table-responsive">
+                <div class="header-left" style="margin-left:80%;">
+                    <div class="input-group icons">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
+                        </div>
+                        <input type="search" class="form-control" placeholder="Buscar categoria" aria-label="Search Dashboard">
+                        <div class="drop-down animated flipInX d-md-none">
+                            <form action="#">
+                                <input type="text" class="form-control" placeholder="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <br><br><br><br><br>
+                <table class="table header-border table-hover verticle-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Nombre y apellido</th>
+                            <th scope="col">Zona</th>
+                            <th scope="col">Edad</th>
+                            <th scope="col">Sexo</th>
+                            @*<th scope="col">Usuarios pendientes</th>
+                            <th scope="col">Usuarios Cancelados por usted</th>
+                            <th scope="col">Cupo</th>
+                            <th scope="colgroup">Accion</th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @*@foreach (Actividad i in Model)*@
+                        @foreach (Usuario i in ViewBag.ListaUsuario)
+                        {
+                            if (i.Foto != null && i.Foto.Length > 0)
+                            {
+                                ViewBag.Url = "data:image;base64," + Convert.ToBase64String(i.Foto);
+                            }
+                            else
+                            {
+                                ViewBag.Url = "";
+                            }
+                            <tr>
+                                <td><img src="@ViewBag.Url" style="width: 190px; height: 120px;"></td>
+                                <td>@i.Nombre @i.Apellido</td>
+                                <td>@i.Localidad.Descripcion</td>
+                                <td>@Convert.ToInt32(@DateTime.Now.Year - @i.FechaNacimiento.Value.Year)</td>
+                                <td>@i.Sexo.Descripcion</td>
+                                @*<td>
+
+                                    <span><a href="/Actividad/ListaEstado?estadoId=1&actividadId=@i.Id"> @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count()</a></span>
+                                </td>
+                                <td>
+                                    @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Pendiente" && x.ActividadId == i.Id).Count()
+                                </td>
+                                <td>
+                                    @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Cancelado" && x.ActividadId == i.Id).Count()
+                                </td>
+                                <td>
+                                    @Convert.ToInt32(@i.CantidadCupo - @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count())
+                                </td>
+                                <td>
+                                    <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span>
+                                </td>
+                                <td>
+                                    <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
+                                </td>*@
+                            </tr>
+                        }
+
+                   
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
