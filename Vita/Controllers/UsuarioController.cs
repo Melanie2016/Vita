@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -36,58 +37,62 @@ namespace Vita.Controllers
             return View();
         }
 
-
-   
         [HttpGet]
         [Route("obtenerselectpaisusuario{idPais}")]
-        public JsonResult ObtenerSelectPaisUsuario(int ? idPais)
-        {          
-            List<Departamento> departamentos = localidadServicio.GetDepartamentosByProvinciaId(idPais);
-            var jsonSerialiser = new JavaScriptSerializer();
-            var json = jsonSerialiser.Serialize(departamentos);
+        public string ObtenerSelectPaisUsuario(int? id)
+        {
+            List<Departamento> departamentos = localidadServicio.GetDepartamentosByProvinciaId(id);
 
-            return Json(json, JsonRequestBehavior.AllowGet);
+            string result = JsonConvert.SerializeObject(departamentos,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+
+            return result;
         }
-
         [HttpGet]
         [Route("obtenerselectdepartamentousuario{idDepartamento}")]
-        public JsonResult ObtenerSelectDepartamentoUsuario(int? idDepartamento)
+        public string ObtenerSelectDepartamentoUsuario(int? id)
         {
-            if (idDepartamento == null)
-            {
-                idDepartamento = 3;//esto porque ni funciona de departamento a localidad
-            }
-            List<Localidad> localidades = localidadServicio.GetLocalidadesByDepartamentoId(idDepartamento);
-            var jsonSerialiser = new JavaScriptSerializer();
-            var json = jsonSerialiser.Serialize(localidades);
+            List<Localidad> localidades = localidadServicio.GetLocalidadesByDepartamentoId(id);
+            string result = JsonConvert.SerializeObject(localidades,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
 
-            return Json(json, JsonRequestBehavior.AllowGet);
+            return result;
         }
 
+        
         [HttpGet]
-        [Route("obtenerselectpaisentidad{idPais}")]
-        public JsonResult ObtenerSelectPaisEntidad(int? idPais)
+        [Route("obtenerselectprovinciaentidad/{idPais}")]
+        public string ObtenerSelectProvinciaEntidad(int? id)
         {
-            List<Departamento> departamentos = localidadServicio.GetDepartamentosByProvinciaId(idPais);
-            var jsonSerialiser = new JavaScriptSerializer();
-            var json = jsonSerialiser.Serialize(departamentos);
+            List<Departamento> departamentos = localidadServicio.GetDepartamentosByProvinciaId(id);
 
-            return Json(json, JsonRequestBehavior.AllowGet);
+            string result = JsonConvert.SerializeObject(departamentos,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+
+            return result;
         }
 
         [HttpGet]
         [Route("obtenerselectdepartamentoentidad{idDepartamento}")]
-        public JsonResult ObtenerSelectDepartamentoEntidad(int? idDepartamento)
+        public string ObtenerSelectDepartamentoEntidad(int? id)
         {
-            if (idDepartamento == null)
-            {
-                idDepartamento = 3;//esto porque ni funciona de departamento a localidad
-            }
-            List<Localidad> localidades = localidadServicio.GetLocalidadesByDepartamentoId(idDepartamento);
-            var jsonSerialiser = new JavaScriptSerializer();
-            var json = jsonSerialiser.Serialize(localidades);
+            List<Localidad> localidades = localidadServicio.GetLocalidadesByDepartamentoId(id);
+            string result = JsonConvert.SerializeObject(localidades,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
 
-            return Json(json, JsonRequestBehavior.AllowGet);
+            return result;
         }
 
         [HttpPost]

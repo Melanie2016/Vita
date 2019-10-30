@@ -153,7 +153,7 @@
                                 <div class="input-group">
                                     <!--Localidad-->
                                     <label class="label">Seleccione Localidad</label>
-                                    <div id="filtroLocalidad" name="LocalidadId"></div>
+                                    <div id="filtroLocalidad"></div>
                                     @*<select class="selectpicker" id="LocalidadId" onchange="changeOption(this)"
                                                 data-live-search="true" title="Seleccione localidad.." name="LocalidadId">
 
@@ -300,7 +300,7 @@
                             </div>
                         </div>
                         <div class="row row-space">
-                  
+
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Telefono de la empresa-->
@@ -370,164 +370,118 @@
 <script src="~/vendor/datepicker/daterangepicker.js"></script>
 <script src="/Content/js/registro.js"></script>
 
-
-
-<!-- Jquery es necesario por una cuestión de simplicidad -->
-@*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>*@
-
 <!-- Aca es donde se arma la magia -->
 <script>
-        //Todo siempre una vez cargada la página
-        $(document).ready(function () {
+    //Todo siempre una vez cargada la página
+    $(document).ready(function () {
 
-            //Esto corre cuando cambias de opción en el primer select
-            $('#filtroProvincia').on('change', function () {
+        //Esto corre cuando cambias de opción en el primer select
+        $('#filtroProvincia').on('change', function () {
 
-               var idPais = $(this).val();
+            var idProvincia = this.value;
+            // var idPais = $(this).val();
 
-                //Si elegiste la opción de los guíones paramos aca para no hacer nada
-                if (idPais === 0) {
-                    $("#filtroDepartamento").html("Selecciona una provincia");
-                    return;
-                }
+            //Si elegiste la opción de los guíones paramos aca para no hacer nada
+            if (idProvincia === 0) {
+                $("#filtroDepartamento").html("Selecciona una provincia");
+                return;
+            }
 
-                //Ajax
-                $.ajax({
-                   url: "obtenerselectpaisusuario/" + idPais,
+            //Ajax
+            $.ajax({
+                //   url: "obtenerselectpaisusuario/" + idPais,
+                url: "obtenerselectpaisusuario/" + this.value,
+                type: 'GET',
+                dataType: "json",
+                success: function (res) {
+                    //Por si queres ver una por una las cosas que vuelven descomenta el alert
+                    // alert(res);
 
-                    type: 'GET',
-                    dataType: "json",
-                    success: function (res) {
-                        //Por si queres ver una por una las cosas que vuelven descomenta el alert
-                        //alert(res);
+                    //Creando el segundo select
+                    $("#filtroDepartamento").empty().append('<select id="filtro2" class="selectpicker" name="DepartamentoId">');
 
-                        //Creando el segundo select
-                        $("#filtroDepartamento").empty().append('<select id="filtro2" class="selectpicker">');
-                        $.getJSON("@Url.Action("ObtenerSelectPaisUsuario","Usuario")", { idPais: idPais }, function (data) {
-                              let data2 = JSON.parse(data);
-                             $.each(data2, function () {
-                                 $("#filtro2").append($("<option>").val(this.Id).text(this.Descripcion));
-                                  });
-                             });
-                    }
-                });
-            });
-        });
-</script>
-<script>
-        //Todo siempre una vez cargada la página
-        $(document).ready(function () {
+                    $.each(res, function () {
+                        $("#filtro2").append($("<option>").val(this.Id).text(this.Descripcion));
+                    });
+                    //Esto corre cuando cambias de opción en el segundo select
+                    $('#filtro2').on('change', function () {
+                        //Ajax
+                        $.ajax({
+                            url: "obtenerselectdepartamentousuario/" + this.value,
 
-            //Esto corre cuando cambias de opción en el primer select
-            $('#filtroDepartamento').on('change', function () {
-
-                var idDepartamento = $(this).val();
-
-                //Si elegiste la opción de los guíones paramos aca para no hacer nada
-                if (idDepartamento === 0) {
-                    $("#filtroLocalidad").html("Selecciona una provincia");
-                    return;
-                }
-
-                //Ajax
-                $.ajax({
-                   url: "obtenerselectdepartamentousuario/" + idDepartamento,
-
-                    type: 'GET',
-                    dataType: "json",
-                    success: function (res) {
-                        //Por si queres ver una por una las cosas que vuelven descomenta el alert
-                       // alert(res);
-
-                        //Creando el segundo select
-                        $("#filtroLocalidad").empty().append('<select id="filtro3" class="selectpicker" name="LocalidadId">');
-                        $.getJSON("@Url.Action("ObtenerSelectDepartamentoUsuario","Usuario")", { idDepartamento: idDepartamento }, function (data) {
-                              let data2 = JSON.parse(data);
-                             $.each(data2, function () {
+                            type: 'GET',
+                            dataType: "json",
+                            success: function (res) {
+                                // alert(res);
+                                //Creando el tercer select
+                                $("#filtroLocalidad").empty().append('<select id="filtro3" class="selectpicker" name="LocalidadId">');
+                                $.each(res, function () {
                                     $("#filtro3").append($("<option>").val(this.Id).text(this.Descripcion));
-                                  });
-                             });
-                    }
-                });
+                                });
+                            }
+                        });
+                    });
+                }
             });
         });
+    });
 </script>
 
 
 <!-- Aca es donde se arma la magia -->
 <script>
-        //Todo siempre una vez cargada la página
-        $(document).ready(function () {
+    //Todo siempre una vez cargada la página
+    $(document).ready(function () {
 
-            //Esto corre cuando cambias de opción en el primer select
-            $('#filtroProvinciaEntidad').on('change', function () {
+        //Esto corre cuando cambias de opción en el primer select
+        $('#filtroProvinciaEntidad').on('change', function () {
 
-               var idPais = $(this).val();
+            var idProvincia = this.value;
 
-                //Si elegiste la opción de los guíones paramos aca para no hacer nada
-                if (idPais === 0) {
-                    $("#filtroDepartamentoEntidad").html("Selecciona una provincia");
-                    return;
-                }
+            //Si elegiste la opción de los guíones paramos aca para no hacer nada
+            if (idProvincia === 0) {
+                $("#filtroDepartamentoEntidad").html("Selecciona una provincia");
+                return;
+            }
 
-                //Ajax
-                $.ajax({
-                   url: "obtenerselectpaisentidad/" + idPais,
+            //Ajax
+            $.ajax({
+                url: "obtenerselectprovinciaentidad/" + this.value,
+                type: 'GET',
+                dataType: "json",
+                success: function (res) {
+                    //Por si queres ver una por una las cosas que vuelven descomenta el alert
+                     alert(res);
 
-                    type: 'GET',
-                    dataType: "json",
-                    success: function (res) {
-                        //Por si queres ver una por una las cosas que vuelven descomenta el alert
-                        //alert(res);
+                    //Creando el segundo select
+                    $("#filtroDepartamentoEntidad").empty().append('<select id="filtroentidad2" class="selectpicker" name="DepartamentoId">');
 
-                        //Creando el segundo select
-                        $("#filtroDepartamentoEntidad").empty().append('<select id="filtroentidad2" class="selectpicker">');
-                        $.getJSON("@Url.Action("ObtenerSelectPaisEntidad","Usuario")", { idPais: idPais }, function (data) {
-                              let data2 = JSON.parse(data);
-                             $.each(data2, function () {
-                                 $("#filtroentidad2").append($("<option>").val(this.Id).text(this.Descripcion));
-                                  });
-                             });
-                    }
-                });
-            });
-        });
-</script>
-<script>
-        //Todo siempre una vez cargada la página
-        $(document).ready(function () {
+                    $.each(res, function () {
+                        $("#filtroentidad2").append($("<option>").val(this.Id).text(this.Descripcion));
+                    });
+                    //Esto corre cuando cambias de opción en el segundo select
+                    $('#filtroentidad2').on('change', function () {
+                        //Ajax
+                        $.ajax({
+                            url: "obtenerselectdepartamentoentidad/" + this.value,
 
-            //Esto corre cuando cambias de opción en el primer select
-            $('#filtroDepartamentoEntidad').on('change', function () {
-
-                var idDepartamento = $(this).val();
-
-                //Si elegiste la opción de los guíones paramos aca para no hacer nada
-                if (idDepartamento === 0) {
-                    $("#filtroLocalidadEntidad").html("Selecciona una provincia");
-                    return;
-                }
-
-                //Ajax
-                $.ajax({
-                   url: "obtenerselectdepartamentoentidad/" + idDepartamento,
-
-                    type: 'GET',
-                    dataType: "json",
-                    success: function (res) {
-                        //Por si queres ver una por una las cosas que vuelven descomenta el alert
-                       // alert(res);
-
-                        //Creando el segundo select
-                        $("#filtroLocalidadEntidad").empty().append('<select id="filtroentidad3" class="selectpicker" name="LocalidadId">');
-                        $.getJSON("@Url.Action("ObtenerSelectDepartamentoEntidad","Usuario")", { idDepartamento: idDepartamento }, function (data) {
-                              let data2 = JSON.parse(data);
-                             $.each(data2, function () {
+                            type: 'GET',
+                            dataType: "json",
+                            success: function (res) {
+                                // alert(res);
+                                //Creando el tercer select
+                                $("#filtroLocalidadEntidad").empty().append('<select id="filtroentidad3" class="selectpicker" name="LocalidadId">');
+                                $.each(res, function () {
                                     $("#filtroentidad3").append($("<option>").val(this.Id).text(this.Descripcion));
-                                  });
-                             });
-                    }
-                });
+                                });
+                            }
+                        });
+                    });
+                }
             });
         });
+    });
 </script>
+
+
+
