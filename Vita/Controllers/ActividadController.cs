@@ -202,8 +202,8 @@ namespace Vita.Controllers
 
         }
 
-
-        [HttpGet]
+        //Lo comento porque no me funciona no eliminar
+      /*  [HttpGet]
         [Route("obtenersubcategoria{idCategoria}")]
        
         public JsonResult ObtenerSubcategoria(int? id)
@@ -217,7 +217,7 @@ namespace Vita.Controllers
             var json = jsonSerialiser.Serialize(subCategorias);
 
             return Json(json, JsonRequestBehavior.AllowGet);
-        }
+        }*/
         //public string ObtenerSubcategoria(int? id)
         //{
         //    List<SubCategoria> subCategorias = categoriaServicio.GetAllSubCategoriasByCategoriaId(id);
