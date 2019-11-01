@@ -75,3 +75,21 @@ INSERT INTO Estado(Id, Descripcion) Values (4,'Rechazado');
 INSERT INTO Estado(Id, Descripcion) Values (5,'Finalizado');
 SET IDENTITY_INSERT Estado OFF
 
+
+/********************************************************/
+/*TIPOPREGUNTA*/
+SET IDENTITY_INSERT TipoPregunta ON
+INSERT INTO TipoPregunta(Id, Titulo, Descripcion) VALUES (1,'Consigna con texto a ingresar', 'Es para que la persona ingrese la respuesta escrita.');
+INSERT INTO TipoPregunta(Id, Titulo, Descripcion) VALUES (2,'Consigna con elección de una sola opción', 'Usted creará varias opciones (mínimo 3 y máximo 10) y la persona que reciba el formulario, deberá elegir sola una.');
+INSERT INTO TipoPregunta(Id, Titulo, Descripcion) VALUES (3,'Consigna con elección de una a varias opciones', 'Usted creará varias opciones (mínimo 3 y máximo 10) y la persona que reciba el formulario deberá elegir una o más opciones.');
+INSERT INTO TipoPregunta(Id, Titulo, Descripcion) VALUES (4,'Consigna para la elección obligatoria entre dos opciones', 'Usted creará dos opciones de las cuales la persona que lo complete, deberá seleccionar si o si una de ellas, ejemplo "si o no".');
+INSERT INTO TipoPregunta(Id, Titulo, Descripcion) VALUES (5,'Consigna para ingresar archivo', 'La persona deberá subir el archivo que usted requiera, ejemplo fotocopia del DNI.');
+SET IDENTITY_INSERT TipoPregunta OFF
+
+
+/*TIPOPREGUNTA*/
+SET IDENTITY_INSERT TipoDatoIngresado ON
+INSERT INTO TipoDatoIngresado(Id, Descripcion) VALUES (1,'Texto');
+INSERT INTO TipoDatoIngresado(Id, Descripcion) VALUES (2,'Número');
+INSERT INTO TipoDatoIngresado(Id, Descripcion) VALUES (3,'Fecha');
+SET IDENTITY_INSERT TipoDatoIngresado ON
