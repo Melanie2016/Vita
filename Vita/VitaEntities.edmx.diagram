@@ -4,22 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e3f179d5704142089043db99c59690d1" Name="Diagram1">
-        <EntityTypeShape EntityType="VitaModel.Actividad" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="VitaModel.ActividadSegmento" Width="1.5" PointX="8.25" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="VitaModel.Categoria" Width="1.5" PointX="1.5" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="VitaModel.Domicilio" Width="1.5" PointX="11.25" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="VitaModel.Estado" Width="1.5" PointX="6" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="VitaModel.Localidad" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="VitaModel.Rol" Width="1.5" PointX="3.75" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="VitaModel.Segmento" Width="1.5" PointX="6" PointY="16.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="VitaModel.Sexo" Width="1.5" PointX="3.75" PointY="16.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="VitaModel.SubCategoria" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="VitaModel.Usuario" Width="1.5" PointX="6" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="VitaModel.UsuarioCategoriaElegida" Width="1.5" PointX="8.25" PointY="14.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="VitaModel.UsuarioEstadoHistorico" Width="1.5" PointX="11.25" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="VitaModel.UsuarioInscriptoActividad" Width="1.5" PointX="8.25" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="VitaModel.UsuarioSegmento" Width="1.5" PointX="11.25" PointY="14.625" IsExpanded="true" />
+      <Diagram DiagramId="6b2ec7f82f98467690de9cb4b05ccecf" Name="Diagram1">
+        <EntityTypeShape EntityType="VitaModel.Actividad" Width="1.5" PointX="7.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="VitaModel.ActividadSegmento" Width="1.5" PointX="12.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VitaModel.Categoria" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="VitaModel.Departamento" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="VitaModel.Domicilio" Width="1.5" PointX="15.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="VitaModel.Estado" Width="1.5" PointX="10.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VitaModel.Localidad" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VitaModel.Provincia" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VitaModel.Rol" Width="1.5" PointX="8.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="VitaModel.Segmento" Width="1.5" PointX="10.5" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VitaModel.Sexo" Width="1.5" PointX="8.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="VitaModel.SubCategoria" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="VitaModel.Usuario" Width="1.5" PointX="10.5" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VitaModel.UsuarioCategoriaElegida" Width="1.5" PointX="12.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="VitaModel.UsuarioEstadoHistorico" Width="1.5" PointX="15.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="VitaModel.UsuarioInscriptoActividad" Width="1.5" PointX="12.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="VitaModel.UsuarioSegmento" Width="1.5" PointX="15.75" PointY="14.625" IsExpanded="true" />
         <AssociationConnector Association="VitaModel.ActividadSegmentoId" ManuallyRouted="false" />
         <AssociationConnector Association="VitaModel.ActividadSubcategoriaId" ManuallyRouted="false" />
         <AssociationConnector Association="VitaModel.ActividadUsuarioId" ManuallyRouted="false" />
@@ -30,6 +32,8 @@
         <AssociationConnector Association="VitaModel.SegmentoActividadId" ManuallyRouted="false" />
         <AssociationConnector Association="VitaModel.CategoriaUsuarioId" ManuallyRouted="false" />
         <AssociationConnector Association="VitaModel.SubcategoriaCategoriaId" ManuallyRouted="false" />
+        <AssociationConnector Association="VitaModel.LocalidadDepartamentoId" ManuallyRouted="false" />
+        <AssociationConnector Association="VitaModel.ProvinciaDepartamentoId" ManuallyRouted="false" />
         <AssociationConnector Association="VitaModel.DomicilioLocalidadId" ManuallyRouted="false" />
         <AssociationConnector Association="VitaModel.DomicilioUsuarioId" ManuallyRouted="false" />
         <AssociationConnector Association="VitaModel.EstadoUsuarioId" ManuallyRouted="false" />

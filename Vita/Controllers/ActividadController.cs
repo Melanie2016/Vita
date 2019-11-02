@@ -1,18 +1,21 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using Vita.Servicios;
+using Vita.ViewModels;
 
 using Twilio.Rest.Api.V2010.Account;
 using Twilio;
 
 namespace Vita.Controllers
 {
-    public class ActividadController: Controller
+    public class ActividadController : Controller
     {
         private UsuarioServicio usuarioServicio = new UsuarioServicio();
         private ActividadServicio actividadServicio = new ActividadServicio();
@@ -28,10 +31,12 @@ namespace Vita.Controllers
         {
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
-            { return RedirectToAction("Login", "Login");}
+            { return RedirectToAction("Login", "Login"); }
             else
             {
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                List<Provincia> provincias = localidadServicio.GetAllProvincias();
+                ViewBag.ListaProvincia = new MultiSelectList(provincias, "id", "descripcion");
                 List<Categoria> rubros = categoriaServicio.GetAllCategorias();
                 ViewBag.ListaRubro = new MultiSelectList(rubros, "id", "descripcion");
                 List<SubCategoria> tipoActividad = categoriaServicio.GetAllSubCategorias();//hacer que le pase el id de categoria
@@ -43,11 +48,11 @@ namespace Vita.Controllers
                 return View(buscarUsuarioLogueado);
 
             }
-         
+
         }
 
         [HttpPost]
-        public ActionResult CreacionActividad(Actividad actividad, int[] selectedSegmento)
+        public ActionResult CreacionActividad(ActividadViewModel actividad, int[] selectedSegmento)
         {
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -56,10 +61,10 @@ namespace Vita.Controllers
             }
             else
             {
-                
+
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 actividadServicio.CrearActividad(actividad, buscarUsuarioLogueado, selectedSegmento);
-               
+
                 return RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
 
             }
@@ -80,7 +85,7 @@ namespace Vita.Controllers
         public ActionResult FichaActividad(string idActividad, string inscribirse)
         {
             var actividad = actividadServicio.GetActividad(int.Parse(idActividad));
-            ViewBag.Actividad = actividadServicio.GetActividad(int.Parse(idActividad));
+            ViewBag.Actividad = actividad;
             ViewBag.Resultado = 0;
             ViewBag.IniciarSesion = "false";
             ViewBag.Domicilio = actividad.Domicilio.FirstOrDefault();
@@ -145,13 +150,13 @@ namespace Vita.Controllers
             }
             else
             {
-                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
                 ViewBag.ListaActvidades = actividadServicio.GetAllActividadByRolEntidadId(buscarUsuarioLogueado.Id);
 
-              //  ViewBag.ListaUsuariosInscriptoActividad = actividadServicio.GetAllActividadUsuarioInscriptoByActividadId( tiene que recibir la actividad id para poder hacerlo, hay que porbar)
-                    
+                //  ViewBag.ListaUsuariosInscriptoActividad = actividadServicio.GetAllActividadUsuarioInscriptoByActividadId( tiene que recibir la actividad id para poder hacerlo, hay que porbar)
+
                 return View(buscarUsuarioLogueado);
-               // return View(actividades);
+                // return View(actividades);
             }
         }
 
@@ -216,5 +221,79 @@ namespace Vita.Controllers
 
         }
 
+        //Lo comento porque no me funciona no eliminar
+      /*  [HttpGet]
+        [Route("obtenersubcategoria{idCategoria}")]
+       
+        public JsonResult ObtenerSubcategoria(int? id)
+        {
+           if(id == null)
+            {
+                id = 3;
+            }
+            List<SubCategoria> subCategorias = categoriaServicio.GetAllSubCategoriasByCategoriaId(id);
+            var jsonSerialiser = new JavaScriptSerializer();
+            var json = jsonSerialiser.Serialize(subCategorias);
+
+            return Json(json, JsonRequestBehavior.AllowGet);
+        }*/
+        //public string ObtenerSubcategoria(int? id)
+        //{
+        //    List<SubCategoria> subCategorias = categoriaServicio.GetAllSubCategoriasByCategoriaId(id);
+
+        //    string result = JsonConvert.SerializeObject(subCategorias,
+        //          new JsonSerializerSettings
+        //          {
+        //              ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        //          });
+
+        //    return result;
+
+        //}
+        [HttpGet]
+        [Route("obtenerselectpaisusuario{idPais}")]
+        public string ObtenerSelectPaisUsuario(int? id)
+        {
+            List<Departamento> departamentos = localidadServicio.GetDepartamentosByProvinciaId(id);
+
+            string result = JsonConvert.SerializeObject(departamentos,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+
+            return result;
+        }
+        [HttpGet]
+        [Route("obtenerselectdepartamentousuario{idDepartamento}")]
+        public string ObtenerSelectDepartamentoUsuario(int? id)
+        {
+            List<Localidad> localidades = localidadServicio.GetLocalidadesByDepartamentoId(id);
+            string result = JsonConvert.SerializeObject(localidades,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+
+            return result;
+        }
+        [HttpGet]
+        public ActionResult ListaEstado(int estadoId, int actividadId)
+        {
+            //obtengo usuario logueado
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
+              //  var actividadesPorEstado = actividadServicio.GetByEstadoId(estadoId, actividadId);
+                ViewBag.ListaUsuario = actividadServicio.GetUsuariosByEstadoId(estadoId, actividadId);
+
+                return View(buscarUsuarioLogueado);
+                // return View(actividades);
+            }
+        }
     }
 }

@@ -18,6 +18,7 @@ namespace Vita
         public VitaEntities()
             : base("name=VitaEntities")
         {
+            //this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -28,9 +29,11 @@ namespace Vita
         public virtual DbSet<Actividad> Actividad { get; set; }
         public virtual DbSet<ActividadSegmento> ActividadSegmento { get; set; }
         public virtual DbSet<Categoria> Categoria { get; set; }
+        public virtual DbSet<Departamento> Departamento { get; set; }
         public virtual DbSet<Domicilio> Domicilio { get; set; }
         public virtual DbSet<Estado> Estado { get; set; }
         public virtual DbSet<Localidad> Localidad { get; set; }
+        public virtual DbSet<Provincia> Provincia { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
         public virtual DbSet<Segmento> Segmento { get; set; }
         public virtual DbSet<Sexo> Sexo { get; set; }

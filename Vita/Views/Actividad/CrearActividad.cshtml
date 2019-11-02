@@ -8,6 +8,18 @@
 
 <head>
     <meta charset="utf-8">
+        <!-- Custom Stylesheet -->
+    <link href="../../Content/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
+    <!-- Page plugins css -->
+    <link href="../../Content/plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
+    <!-- Color picker plugins css -->
+    <link href="../../Content/plugins/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet">
+    <!-- Date picker plugins css -->
+    <link href="../../Content/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!-- Daterange picker plugins css -->
+    <link href="../../Content/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+    <link href="../../Content/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
 
 </head>
 
@@ -56,7 +68,8 @@
                                         Rubro <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <select class="form-control" id="categoriaId" onchange="changeOption(this)"
+                                        <select class="form-control" id="filtroCategoria"
+                                  
                                                 data-live-search="true" title="Seleccione tipo de categoria de la actividad.." name="CategoriaId">
                                             @foreach (var item in ViewBag.ListaRubro as MultiSelectList)
                                             {
@@ -66,12 +79,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="SubCategoriaId">
+                                    <label class="col-lg-4 col-form-label" for="val-skill">
                                         Tipo de actividad <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <select class="form-control" id="SubCategoriaId" onchange="changeOption(this)"
-                                                data-live-search="true" title="Seleccione tipo de actividad.." name="SubCategoriaId">
+                                        <select class="form-control" id="filtroCategoria"
+                                                data-live-search="true" title="Seleccione tipo de actividad.." name="SubcategoriaId">
                                             @foreach (var item in ViewBag.ListaTipoActividad as MultiSelectList)
                                             {
                                                 <option value="@item.Value">@item.Text</option>
@@ -79,20 +92,16 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="SubCategoriaId">
-                                        Seleccione Localidad <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <select class="form-control" id="LocalidadId" onchange="changeOption(this)"
-                                                data-live-search="true" title="Seleccione localidad.." name="LocalidadId">
-                                            @foreach (var item in ViewBag.ListaLocalidades as MultiSelectList)
-                                            {
-                                                <option value="@item.Value">@item.Text</option>
-                                            }
-                                        </select>
-                                    </div>
-                                </div>
+                                @*<div class="form-group row">
+            <label class="col-lg-4 col-form-label" for="SubCategoriaId">
+                Tipo de actividad <span class="text-danger">*</span>
+            </label>
+            <div class="col-lg-6" id="filtroSubcategoria">
+
+            </div>
+        </div>*@
+
+
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="CantidadDias">
                                         Cantidad de dias que va a estar la actividad<span class="text-danger">*</span>
@@ -101,22 +110,31 @@
                                         <input type="text" class="form-control" id="val-number" name="CantidadDias" placeholder="5">
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
-                                    <!--Fecha de nacimiento-->
-                                    <label class="label">Desde que fecha esta disponible la actividad</label>
-                                    <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="text" name="FechaNacimiento">
-                                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                    <!--DESDE-->
+                                    <label class="col-lg-4 col-form-label" for="RangoFecha">
+                                        Desde  y hasta que dia y horario <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <div class="example">
+
+                                            <input type="text" class="form-control input-daterange-timepicker" name="RangoFecha" value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <!--Fecha de nacimiento-->
-                                    <label class="label">Fecha en la que se termina la actividad</label>
-                                    <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="text" name="FechaNacimiento">
-                                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
-                                    </div>
-                                </div>
+                                @*<div class="form-group row">
+
+            <label class="col-lg-4 col-form-label" for="FechaHasta">
+                Hasta que dia y horario <span class="text-danger">*</span>
+            </label>
+            <div class="col-lg-6">
+                <div class="example">
+
+                    <input type="text" class="form-control input-daterange-timepicker" name="FechaHasta" value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM">
+                </div>
+            </div>
+        </div>*@
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="CantidadCupo">
                                         Cantidad de cupos disponibles<span class="text-danger">*</span>
@@ -150,29 +168,233 @@
                                         <input type="text" class="form-control" id="val-currency" name="Precio" placeholder="21.60">
                                     </div>
                                 </div>
+                                <div>Cargar domicilio de la actividad</div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="NombreCalle">
+                                        Ingrese nombre de la calle<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="val-username" name="NombreCalle" placeholder="Nombre de la calle">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="NumeroCalle">
+                                        Ingrese el numero de la calle<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="val-number" name="NumeroCalle" placeholder="Numero de la calle">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="NumeroPiso">
+                                        Ingrese el numero del piso (si es planta baja, ingresar cero)
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="val-number" name="NumeroPiso" placeholder="0">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="NumeroDepartamento">
+                                        Ingrese el numero y letra del departamento
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" name="NumeroDepartamento" placeholder="1c">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="CodigoPostal">
+                                        Ingrese el codigo postal<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" name="CodigoPostal" placeholder="1716">
+                                    </div>
+                                </div>
 
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="ProvinciaId">
+                                        Seleccione provincia <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <!--Provincia-->
+
+                                        <select class="form-control" id="filtroProvincia" name="ProvinciaId" title="Seleccione provincia..">
+
+                                            <option>Seleccionar provincia</option>
+                                            @foreach (var item in ViewBag.ListaProvincia as MultiSelectList)
+                                            {
+
+                                                <option name="valorActual" value="@item.Value">@item.Text</option>
+
+                                            }
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="DepartamentoId">
+                                        Seleccione departamento <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <div id="filtroDepartamento">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="DepartamentoId">
+                                        Seleccione localidad <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <div id="filtroLocalidad">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="Compleja">
+                                        La actividad va a tener que aprobar a los usuarios que se quieran inscribir,
+                                        esto quiere decir que se le va mandar un formulario para que complete antes de poder inscribirse,
+                                        el mismo lo vera usted.
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <label><input type="radio" id="cbox1" name="Compleja" value="true"> Si</label><br>
+                                        <label><input type="radio" id="cbox1" name="Compleja" value="false"> NO</label><br>
+
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <div class="col-lg-8 ml-auto">
                                         <button type="submit" class="btn btn-primary">Crear Actividad</button>
                                     </div>
                                 </div>
                             </form>
-                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="plugins/common/common.min.js"></script>
-    <script src="js/custom.min.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/gleek.js"></script>
-    <script src="js/styleSwitcher.js"></script>
-    <script src="./plugins/validation/jquery.validate.min.js"></script>
-    <script src="./plugins/validation/jquery.validate-init.js"></script>
-    <script src="./vendor/datepicker/moment.min.js"></script>
-    <script src="./vendor/datepicker/daterangepicker.js"></script>
+
+
+    <script src="../../Content/plugins/common/common.min.js"></script>
+    <script src="../../Content/js/custom.min.js"></script>
+    <script src="../../Content/js/settings.js"></script>
+    <script src="../../Content/js/gleek.js"></script>
+    <script src="../../Content/js/styleSwitcher.js"></script>
+
+    <script src="../../Content/plugins/moment/moment.js"></script>
+    <script src="../../Content/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <!-- Clock Plugin JavaScript -->
+    <script src="../../Content/plugins/clockpicker/dist/jquery-clockpicker.min.js"></script>
+    <!-- Color Picker Plugin JavaScript -->
+    <script src="../../Content/plugins/jquery-asColorPicker-master/libs/jquery-asColor.js"></script>
+    <script src="../../Content/plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js"></script>
+    <script src="../../Content/plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js"></script>
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="../../Content/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <!-- Date range Plugin JavaScript -->
+    <script src="../../Content/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <script src="../../Content/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <script src="../../Content/js/plugins-init/form-pickers-init.js"></script>
+    <script src="../../Content/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+
 </body>
 
 </html>
+@*Lo comento ahora porque no funciona,  no eliminar*@
+@*<script>
+        $(document).ready(function () {
+
+            $('#filtroCategoria').on('change', function () {
+
+                var idCategoria = $(this).val();;
+
+                if (idCategoria === 0) {
+                    $("#filtroSubcategoria").html("Selecciona una categoria");
+                    return;
+                }
+
+                
+                $.ajax({
+                    url: "obtenersubcategoria/" + idCategoria,
+
+                    type: 'GET',
+                    dataType: "json",
+                    success: function (res) {
+                        
+                        $("#filtroSubcategoria").empty().append('<select id="filtroSubcategoria2" class="selectpicker" name="SubCategoriaId">');
+                        $.getJSON("@Url.Action("ObtenerSubcategoria","Actividad")", { idCategoria: idCategoria }, function (data) {
+                            let data2 = JSON.parse(data);
+
+                             $.each(data2, function () {
+                                    $("#filtroSubcategoria").append($("<option>").val(this.Id).text(this.Descripcion));
+                                  });
+                             });
+                      
+
+                    }
+                });
+            });
+        });
+</script>*@
+
+<!-- Aca es donde se arma la magia -->
+<script>
+    //Todo siempre una vez cargada la página
+    $(document).ready(function () {
+
+        //Esto corre cuando cambias de opción en el primer select
+        $('#filtroProvincia').on('change', function () {
+
+            var idProvincia = this.value;
+            // var idPais = $(this).val();
+
+            //Si elegiste la opción de los guíones paramos aca para no hacer nada
+            if (idProvincia === 0) {
+                $("#filtroDepartamento").html("Selecciona una provincia");
+                return;
+            }
+
+            //Ajax
+            $.ajax({
+                //   url: "obtenerselectpaisusuario/" + idPais,
+                url: "obtenerselectpaisusuario/" + this.value,
+                type: 'GET',
+                dataType: "json",
+                success: function (res) {
+                    //Por si queres ver una por una las cosas que vuelven descomenta el alert
+                    // alert(res);
+
+                    //Creando el segundo select
+                    $("#filtroDepartamento").empty().append('<select id="filtro2"class="form-control" name="DepartamentoId">');
+
+                    $.each(res, function () {
+                        $("#filtro2").append($("<option>").val(this.Id).text(this.Descripcion));
+                    });
+                    //Esto corre cuando cambias de opción en el segundo select
+                    $('#filtro2').on('change', function () {
+                        //Ajax
+                        $.ajax({
+                            url: "obtenerselectdepartamentousuario/" + this.value,
+
+                            type: 'GET',
+                            dataType: "json",
+                            success: function (res) {
+                                // alert(res);
+                                //Creando el tercer select
+                                $("#filtroLocalidad").empty().append('<select id="filtro3" class="form-control" name="DomicilioLocalidadId">');
+                                $.each(res, function () {
+                                    $("#filtro3").append($("<option>").val(this.Id).text(this.Descripcion));
+                                });
+                            }
+                        });
+                    });
+                }
+            });
+        });
+    });
+</script>
+
 

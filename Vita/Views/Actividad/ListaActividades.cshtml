@@ -3,7 +3,7 @@
     ViewBag.Title = "ListaActividades";
     Layout = "~/Views/Shared/_LayoutPerfilEntidad.cshtml";
 }
-@*@model List<Actividad>*@
+
 @model Usuario
 <section class="container-fluid">
     <div class="card">
@@ -34,9 +34,9 @@
                             <th scope="col">Edad</th>
                             <th scope="col">Usuarios aprobados</th>
                             <th scope="col">Usuarios pendientes</th>
+                            <th scope="col">Usuarios Cancelados por usted</th>
                             <th scope="col">Cupo</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
+                             <th scope="colgroup">Accion</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,14 +58,20 @@
                             <td>@i.Localidad.Descripcion</td>
                             <td>@i.EdadMinima - @i.EdadMaxima</td>
                             <td>
-                                <!--Aprobados-->
+
+                                <span><a href="/Actividad/ListaEstado?estadoId=1&actividadId=@i.Id"> @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count()</a></span>
                             </td>
                             <td>
-                                <!--Pendientes-->
+                                @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Pendiente" && x.ActividadId == i.Id).Count()
                             </td>
-                            <td> @i.CantidadCupo </td>
                             <td>
-                                <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
+                                @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Cancelado" && x.ActividadId == i.Id).Count()
+                            </td>
+                            <td>
+                                @Convert.ToInt32(@i.CantidadCupo - @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count())
+                            </td>
+                            <td>
+                                <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span>
                             </td>
                             <td>
                                 <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>

@@ -9,9 +9,24 @@ namespace Vita.Servicios
     {
         private VitaEntities myDbContext = new VitaEntities();
 
+        public Categoria GetCategoriaById(int categoriaId)
+        {
+            var cate= myDbContext.Categoria.Where(x => x.Id == categoriaId).FirstOrDefault();
+            return cate;
+        }
+        public SubCategoria GetSubCategoriaById(int subcategoriaId)
+        {
+            var subCategoria = myDbContext.SubCategoria.Where(x => x.Id == subcategoriaId).FirstOrDefault();
+            return subCategoria;
+        }
+        
         public List<Categoria> GetAllCategorias()
         {
             return myDbContext.Categoria.OrderBy(x=>x.Id).ToList();
+        }
+        public List<SubCategoria> GetAllSubCategoriasByCategoriaId(int? categoriaId)
+        {
+            return myDbContext.SubCategoria.Where(x => x.CategoriaId == categoriaId).ToList();
         }
         public List<SubCategoria> GetAllSubCategorias()
         {

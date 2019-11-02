@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="VitaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="VitaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Actividad">
           <Key>
             <PropertyRef Name="Id" />
@@ -47,6 +47,14 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="300" />
+          <Property Name="ProvinciaId" Type="int" />
+        </EntityType>
         <EntityType Name="Domicilio">
           <Key>
             <PropertyRef Name="Id" />
@@ -70,6 +78,14 @@
           <Property Name="Descripcion" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Localidad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="DepartamentoId" Type="int" />
+        </EntityType>
+        <EntityType Name="Provincia">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -306,6 +322,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="LocalidadDepartamentoId">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Localidad">
+              <PropertyRef Name="DepartamentoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="localidadUsuarioId">
           <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
@@ -315,6 +343,18 @@
             </Principal>
             <Dependent Role="Usuario">
               <PropertyRef Name="LocalidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProvinciaDepartamentoId">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Departamento">
+              <PropertyRef Name="ProvinciaId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -442,9 +482,11 @@
           <EntitySet Name="Actividad" EntityType="Self.Actividad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActividadSegmento" EntityType="Self.ActividadSegmento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Domicilio" EntityType="Self.Domicilio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Segmento" EntityType="Self.Segmento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sexo" EntityType="Self.Sexo" Schema="dbo" store:Type="Tables" />
@@ -498,9 +540,17 @@
             <End Role="Localidad" EntitySet="Localidad" />
             <End Role="Actividad" EntitySet="Actividad" />
           </AssociationSet>
+          <AssociationSet Name="LocalidadDepartamentoId" Association="Self.LocalidadDepartamentoId">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Localidad" EntitySet="Localidad" />
+          </AssociationSet>
           <AssociationSet Name="localidadUsuarioId" Association="Self.localidadUsuarioId">
             <End Role="Localidad" EntitySet="Localidad" />
             <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="ProvinciaDepartamentoId" Association="Self.ProvinciaDepartamentoId">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Departamento" EntitySet="Departamento" />
           </AssociationSet>
           <AssociationSet Name="SegmentoActividadId" Association="Self.SegmentoActividadId">
             <End Role="Segmento" EntitySet="Segmento" />
@@ -543,7 +593,8 @@
             <End Role="UsuarioSegmento" EntitySet="UsuarioSegmento" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="VitaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -601,6 +652,16 @@
           <NavigationProperty Name="UsuarioCategoriaElegida" Relationship="Self.CategoriaUsuarioId" FromRole="Categoria" ToRole="UsuarioCategoriaElegida" />
           <NavigationProperty Name="SubCategoria" Relationship="Self.SubcategoriaCategoriaId" FromRole="Categoria" ToRole="SubCategoria" />
         </EntityType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="ProvinciaId" Type="Int32" />
+          <NavigationProperty Name="Localidad" Relationship="Self.LocalidadDepartamentoId" FromRole="Departamento" ToRole="Localidad" />
+          <NavigationProperty Name="Provincia" Relationship="Self.ProvinciaDepartamentoId" FromRole="Departamento" ToRole="Provincia" />
+        </EntityType>
         <EntityType Name="Domicilio">
           <Key>
             <PropertyRef Name="Id" />
@@ -634,9 +695,19 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DepartamentoId" Type="Int32" />
           <NavigationProperty Name="Actividad" Relationship="Self.LocalidadActividadId" FromRole="Localidad" ToRole="Actividad" />
+          <NavigationProperty Name="Departamento" Relationship="Self.LocalidadDepartamentoId" FromRole="Localidad" ToRole="Departamento" />
           <NavigationProperty Name="Domicilio" Relationship="Self.DomicilioLocalidadId" FromRole="Localidad" ToRole="Domicilio" />
           <NavigationProperty Name="Usuario" Relationship="Self.localidadUsuarioId" FromRole="Localidad" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Departamento" Relationship="Self.ProvinciaDepartamentoId" FromRole="Provincia" ToRole="Departamento" />
         </EntityType>
         <EntityType Name="Rol">
           <Key>
@@ -880,6 +951,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="LocalidadDepartamentoId">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Localidad">
+              <PropertyRef Name="DepartamentoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProvinciaDepartamentoId">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Departamento">
+              <PropertyRef Name="ProvinciaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="DomicilioLocalidadId">
           <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
           <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="*" />
@@ -1028,9 +1123,11 @@
           <EntitySet Name="Actividad" EntityType="Self.Actividad" />
           <EntitySet Name="ActividadSegmento" EntityType="Self.ActividadSegmento" />
           <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" />
           <EntitySet Name="Domicilio" EntityType="Self.Domicilio" />
           <EntitySet Name="Estado" EntityType="Self.Estado" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" />
+          <EntitySet Name="Provincia" EntityType="Self.Provincia" />
           <EntitySet Name="Rol" EntityType="Self.Rol" />
           <EntitySet Name="Segmento" EntityType="Self.Segmento" />
           <EntitySet Name="Sexo" EntityType="Self.Sexo" />
@@ -1079,6 +1176,14 @@
           <AssociationSet Name="SubcategoriaCategoriaId" Association="Self.SubcategoriaCategoriaId">
             <End Role="Categoria" EntitySet="Categoria" />
             <End Role="SubCategoria" EntitySet="SubCategoria" />
+          </AssociationSet>
+          <AssociationSet Name="LocalidadDepartamentoId" Association="Self.LocalidadDepartamentoId">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Localidad" EntitySet="Localidad" />
+          </AssociationSet>
+          <AssociationSet Name="ProvinciaDepartamentoId" Association="Self.ProvinciaDepartamentoId">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Departamento" EntitySet="Departamento" />
           </AssociationSet>
           <AssociationSet Name="DomicilioLocalidadId" Association="Self.DomicilioLocalidadId">
             <End Role="Localidad" EntitySet="Localidad" />
@@ -1179,6 +1284,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Departamento">
+            <EntityTypeMapping TypeName="VitaModel.Departamento">
+              <MappingFragment StoreEntitySet="Departamento">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ProvinciaId" ColumnName="ProvinciaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Domicilio">
             <EntityTypeMapping TypeName="VitaModel.Domicilio">
               <MappingFragment StoreEntitySet="Domicilio">
@@ -1206,6 +1320,15 @@
           <EntitySetMapping Name="Localidad">
             <EntityTypeMapping TypeName="VitaModel.Localidad">
               <MappingFragment StoreEntitySet="Localidad">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="DepartamentoId" ColumnName="DepartamentoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provincia">
+            <EntityTypeMapping TypeName="VitaModel.Provincia">
+              <MappingFragment StoreEntitySet="Provincia">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
               </MappingFragment>

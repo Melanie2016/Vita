@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using Vita.Servicios;
 
 namespace Vita.Controllers
@@ -19,20 +21,78 @@ namespace Vita.Controllers
 
         [HttpGet]
         public ActionResult Registro()
-        {
-            List<Sexo> sexos = sexoServicio.GetAllSexo();
+        {       
+            List<Provincia> provincias = localidadServicio.GetAllProvincias();
+            ViewBag.ListaProvincia = new MultiSelectList(provincias, "id", "descripcion");
+
+            List <Sexo> sexos = sexoServicio.GetAllSexo();
             ViewBag.ListaSexo = new MultiSelectList(sexos, "id", "descripcion");
 
             List<Segmento> segmentos = segmentoServicio.GetAllSegmento();
             ViewBag.ListaSegmentos = new MultiSelectList(segmentos, "id", "descripcion");
 
-            List<Localidad> localidades = localidadServicio.GetAllLocalidades();
-            ViewBag.ListaLocalidades = new MultiSelectList(localidades, "id", "descripcion");
-
             List<Categoria> intereses = categoriaServicio.GetAllCategorias();
             ViewBag.ListaIntereses = new MultiSelectList(intereses, "id", "descripcion");
 
             return View();
+        }
+
+        [HttpGet]
+        [Route("obtenerselectpaisusuario{idPais}")]
+        public string ObtenerSelectPaisUsuario(int? id)
+        {
+            List<Departamento> departamentos = localidadServicio.GetDepartamentosByProvinciaId(id);
+
+            string result = JsonConvert.SerializeObject(departamentos,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+
+            return result;
+        }
+        [HttpGet]
+        [Route("obtenerselectdepartamentousuario{idDepartamento}")]
+        public string ObtenerSelectDepartamentoUsuario(int? id)
+        {
+            List<Localidad> localidades = localidadServicio.GetLocalidadesByDepartamentoId(id);
+            string result = JsonConvert.SerializeObject(localidades,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+
+            return result;
+        }
+
+        
+        [HttpGet]
+        [Route("obtenerselectprovinciaentidad/{idPais}")]
+        public string ObtenerSelectProvinciaEntidad(int? id)
+        {
+            List<Departamento> departamentos = localidadServicio.GetDepartamentosByProvinciaId(id);
+
+            string result = JsonConvert.SerializeObject(departamentos,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+
+            return result;
+        }
+
+        [HttpGet]
+        [Route("obtenerselectdepartamentoentidad{idDepartamento}")]
+        public string ObtenerSelectDepartamentoEntidad(int? id)
+        {
+            List<Localidad> localidades = localidadServicio.GetLocalidadesByDepartamentoId(id);
+            string result = JsonConvert.SerializeObject(localidades,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+
+            return result;
         }
 
         [HttpPost]
@@ -80,6 +140,7 @@ namespace Vita.Controllers
                 }
                 else
                 {
+                    buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
                     List<Categoria> categoriasElegidas = categoriaServicio.GetAllCategoriasDelUsuario(buscarUsuarioLogueado);
                     ViewBag.ListacategoriasElegidas = new MultiSelectList(categoriasElegidas, "id", "descripcion");
                     List<Segmento> segmentoElegidos = segmentoServicio.GetAllSegmentosDelUsuario(buscarUsuarioLogueado);
@@ -115,6 +176,7 @@ namespace Vita.Controllers
                 }
                 else
                 {
+                    buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
                     return View(buscarUsuarioLogueado);
                 }
 

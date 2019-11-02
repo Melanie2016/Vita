@@ -73,10 +73,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.1.2\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -85,6 +84,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -157,6 +159,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Categoria.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
@@ -164,6 +167,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Departamento.cs">
+      <DependentUpon>VitaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domicilio.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
@@ -177,6 +183,9 @@
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provincia.cs">
+      <DependentUpon>VitaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Rol.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
@@ -212,6 +221,7 @@
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ActividadFechaViewModel.cs" />
+    <Compile Include="ViewModels\ActividadViewModel.cs" />
     <Compile Include="VitaEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -619,6 +629,7 @@
     <Content Include="Content\images\company-2.jpg" />
     <Content Include="Content\images\company-3.jpg" />
     <Content Include="Content\images\comuni.png" />
+    <Content Include="Content\images\crossfit.png" />
     <Content Include="Content\images\cultural.png" />
     <Content Include="Content\images\cursos.png" />
     <Content Include="Content\images\custom-select.png" />
@@ -967,6 +978,9 @@
     <Content Include="Views\Usuario\PerfilUsuario.cshtml" />
     <Content Include="Views\Usuario\Registro.cshtml" />
     <Content Include="Views\Home\Sugerencias.cshtml" />
+    <Content Include="Views\Usuario\IraModificarPerfilUsuario.cshtml" />
+    <Content Include="Views\Home\BuscadorAvanzado.cshtml" />
+    <Content Include="Views\Actividad\Actividades.cshtml" />
     <EntityDeploy Include="VitaEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>VitaEntities.Designer.cs</LastGenOutput>
@@ -974,10 +988,7 @@
     <Content Include="VitaEntities.edmx.diagram">
       <DependentUpon>VitaEntities.edmx</DependentUpon>
     </Content>
-    <Content Include="Views\Usuario\IraModificarPerfilUsuario.cshtml" />
-    <Content Include="Views\Home\BuscadorAvanzado.cshtml" />
-    <Content Include="Views\Actividad\Actividades.cshtml" />
-    <Content Include="Views\Usuario\Calendario.cshtml" />
+    <Content Include="Views\Actividad\ListaEstado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
