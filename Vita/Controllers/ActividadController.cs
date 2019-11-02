@@ -7,6 +7,9 @@ using System.Web;
 using System.Web.Mvc;
 using Vita.Servicios;
 
+using Twilio.Rest.Api.V2010.Account;
+using Twilio;
+
 namespace Vita.Controllers
 {
     public class ActividadController: Controller
@@ -105,7 +108,23 @@ namespace Vita.Controllers
 
                         if (resultado == 1)
                         {
-                            ViewBag.Mensaje = "Su inscripción ha sido exitosa. Puede ir a su perfil para ver sus actividades";
+                            var mensaje = "Su inscripción ha sido exitosa. Puede ir a su perfil para ver sus actividades";
+                            ViewBag.Mensaje = mensaje;
+
+                            //Notificaciones de whatsap
+                            var accountSid = "ACe4ace95ec1876ed6708c1005e641c841";
+                            var authToken = "d64586e41962636783566d12ef4c103e";
+
+                            TwilioClient.Init(accountSid, authToken);
+
+                            var message = MessageResource.Create(
+                                from: new Twilio.Types.PhoneNumber("whatsapp:+14155238886"),
+                                body: "Su inscripción ha sido exitosa",
+                                to: new Twilio.Types.PhoneNumber("whatsapp:+5491127814553")
+                            );
+
+
+                            var respuestaApi = message.Sid;
                         }
                         else
                         {

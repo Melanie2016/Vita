@@ -93,7 +93,7 @@
                                 <a href="javascript:void(0)" class="log-user" data-toggle="dropdown">
                                     <span style="color:#464a53; font-size: 14px;">Hola @Model.UsuarioName</span> <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
                                 </a>
-                                <span class="activity active" style="height: 13px; width: 13px; border-radius: 50%; display: inline-block; position: absolute; border: 3px solid #fff; bottom: .9rem; right: 0rem; padding: 0; left: auto; background-image: linear-gradient(230deg, #AFEDC0, #69D385)"></span>
+                                <span class="activity active" style="height: 13px; width: 13px; border-radius: 50%; display: inline-block; position: absolute; border: 3px solid #fff; bottom: .9rem; right: 0rem; left: auto; background-image: linear-gradient(230deg, #AFEDC0, #69D385); margin-right: 14px; margin-bottom: 2px;"></span>
                                 @if (Model.Foto != null && Model.Foto.Length > 0)
                                 {
                                     ViewBag.Url = "data:image;base64," + Convert.ToBase64String(Model.Foto);
