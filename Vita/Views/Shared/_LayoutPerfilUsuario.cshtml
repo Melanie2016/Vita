@@ -183,7 +183,22 @@
                                 }
                                 else
                                 {
-                                    ViewBag.Url = "";
+                                     if(Model.Sexo.Descripcion == "Masculino")
+                                    {
+                                        ViewBag.Url = "/Content/images/hombre.png";
+                                    }
+                                    else
+                                    {
+                                        if(Model.Sexo.Descripcion == "Femenino")
+                                        {
+                                            ViewBag.Url = "/Content/images/mujer.jpg";
+                                        }
+                                        else
+                                        {
+                                             ViewBag.Url = "/Content/images/desconocido.png";
+                                        }
+                                    }
+
                                 }
                                 <img src="@ViewBag.Url" height="40" width="40" alt="">
                             </div>

@@ -110,7 +110,7 @@ REFERENCES Categoria (Id));
 create Table Actividad(
 Id int identity(1,1) primary key,
 Titulo varchar(100) not null,
-Descripcion varchar(200) not null,
+Descripcion varchar(1000) not null,
 EdadMinima int not null,
 EdadMaxima int,
 Precio int null,
