@@ -129,7 +129,15 @@
                                 <div class="dropdown-content-body">
                                     <ul style="padding: 20px;">
                                         <li>
-                                            <a href="/Usuario/PerfilUsuario" style="color:#007bff;"><i></i><img src="../../Content/images/icon1.png" /> <span style="font-size: 15px;">Perfil</span></a>
+                                            @if (Model.Rol.Id == 2) //Entidad
+                                            {
+                                                ViewBag.Perfil = "/Usuario/PerfilEntidad";
+                                            }
+                                            else //Usuario
+                                            {
+                                                ViewBag.Perfil = "/Usuario/PerfilUsuario";
+                                            }
+                                            <a href="@ViewBag.Perfil" style="color:#007bff;"><i></i><img src="../../Content/images/icon1.png" /> <span style="font-size: 15px;">Perfil</span></a>
                                         </li>
                                         <li>
                                             <a href="javascript:void()" style="color:#007bff;">
