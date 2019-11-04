@@ -122,12 +122,12 @@ namespace Vita.Controllers
 
                             TwilioClient.Init(accountSid, authToken);
 
-                            var descripcionActividad = actividad.Descripcion;
+                            var tituloActividad = actividad.Titulo;
                             var fechaActividad = actividad.FechaDesde.ToString();
 
                             var message = MessageResource.Create(
                                 from: new Twilio.Types.PhoneNumber("whatsapp:+14155238886"),
-                                body: "Your " + descripcionActividad + " appointment is coming up on " + fechaActividad,
+                                body: "Your " + tituloActividad + " appointment is coming up on " + fechaActividad,
                                 to: new Twilio.Types.PhoneNumber("whatsapp:+5491127814553")
                             );
 
@@ -165,14 +165,15 @@ namespace Vita.Controllers
 
 
         [HttpPost]
-        public ActionResult Actividades(string textoIngresado)
+        public ActionResult Actividades(string textoIngresado, int idCategoria, int idSubcategoria, int idSegmento, int idProvincia, int idDepartamento, int idLocalidad)
         {
             var lista = actividadServicio.GetBusquedaAvanzada(textoIngresado);
             ViewBag.Lista = lista;
             ViewBag.Contador = lista.Count();
             ViewBag.Valor = textoIngresado;
-            ViewBag.Categorias = categoriaServicio.GetAllCategorias(); //obtengo todas las categorias
-            ViewBag.Segmento = segmentoServicio.GetAllSegmento(); //obtengo todos los segmentos
+            ViewBag.Categorias = categoriaServicio.GetAllCategorias(); //obtengo todas las categorias para el filtro
+            ViewBag.Segmentos   = segmentoServicio.GetAllSegmento(); //obtengo todos los segmentos para el filtro
+            ViewBag.Provincias = localidadServicio.GetAllProvincias(); //obtengo todas las provincias para el filtro
 
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -190,8 +191,9 @@ namespace Vita.Controllers
         [HttpGet]
         public ActionResult Actividades(Usuario usuario, string categoriaId)
         {
-            ViewBag.Categorias = categoriaServicio.GetAllCategorias(); //obtengo todas las categorias
-            ViewBag.Segmento = segmentoServicio.GetAllSegmento(); //obtengo todos los segmentos
+            ViewBag.Categorias = categoriaServicio.GetAllCategorias(); //obtengo todas las categorias para el filtro
+            ViewBag.Segmentos   = segmentoServicio.GetAllSegmento(); //obtengo todos los segmentos para el filtro
+            ViewBag.Provincias = localidadServicio.GetAllProvincias(); //obtengo todas las provincias para el filtro
 
             if (categoriaId == null)
             {
@@ -274,8 +276,8 @@ namespace Vita.Controllers
         }
 
         [HttpGet]
-        [Route("obtenerselectpaisusuario{idPais}")]
-        public string ObtenerSelectPaisUsuario(int? id)
+        [Route("obtenerDepartamentos{idProvincia}")]
+        public string ObtenerDepartamentos(int? id)
         {
             List<Departamento> departamentos = localidadServicio.GetDepartamentosByProvinciaId(id);
 
@@ -289,10 +291,11 @@ namespace Vita.Controllers
         }
 
         [HttpGet]
-        [Route("obtenerselectdepartamentousuario{idDepartamento}")]
-        public string ObtenerSelectDepartamentoUsuario(int? id)
+        [Route("obtenerLocalidades{idDepartamento}")]
+        public string ObtenerLocalidades(int? id)
         {
             List<Localidad> localidades = localidadServicio.GetLocalidadesByDepartamentoId(id);
+         
             string result = JsonConvert.SerializeObject(localidades,
                 new JsonSerializerSettings
                 {

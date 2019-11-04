@@ -508,7 +508,6 @@ legend {
         }
 
         .choices[data-type*="select-one"] .choices__button {
-            background-image: url("../../icons/cross-inverse.svg");
             padding: 0;
             background-size: 8px;
             height: 100%;
@@ -984,7 +983,7 @@ legend {
                 }
 
                     .s009 form .inner-form .advance-search .row.second {
-                        margin-bottom: 46px;
+                        margin-bottom: 20px;
                     }
 
                     .s009 form .inner-form .advance-search .row.third {

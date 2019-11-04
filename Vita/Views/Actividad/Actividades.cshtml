@@ -60,15 +60,19 @@
 
                                                     <!--Subcategoria-->
                                                     <div class="input-field">
-                                                        <div id="filtroSubcategoria">
+                                                        <div class="input-select" id="filtroSubcategoria">
+                                                            <select data-trigger="" id="vistaSub" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+                                                                <option placeholder="" value="">Subcategoría</option>
+                                                            </select>
                                                         </div>
                                                     </div>
 
+                                                    <!--Segmento-->
                                                     <div class="input-field">
                                                         <div class="input-select">
                                                             <select data-trigger="" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1)">
                                                                 <option placeholder="" value="">Segmento</option>
-                                                                @foreach (var item in  ViewBag.Segmento)
+                                                                @foreach (var item in  ViewBag.Segmentos)
                                                                 {
                                                                     <option value="@item.Id">@item.Descripcion</option>
                                                                 }
@@ -78,23 +82,32 @@
                                                 </div>
 
                                                 <div class="row second">
+                                                    <!--Provincia-->
                                                     <div class="input-field">
                                                         <div class="input-select" style="width: 220px; margin-left: 10px;">
-                                                            <select data-trigger="" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1);">
+                                                            <select data-trigger="" id="filtroProvincia" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1);">
                                                                 <option placeholder="" value="">Provincia</option>
+                                                                @foreach (var item in ViewBag.Provincias)
+                                                                {
+                                                                    <option value="@item.Id">@item.Descripcion</option>
+                                                                }
                                                             </select>
                                                         </div>
                                                     </div>
+
                                                     <div class="input-field">
-                                                        <div class="input-select">
-                                                            <select data-trigger="" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+                                                        <!--Departamento-->
+                                                        <div class="input-select" id="filtroDepartamento">
+                                                            <select data-trigger="" id="vistaDep" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1)">
                                                                 <option placeholder="" value="">Departamento</option>
                                                             </select>
                                                         </div>
                                                     </div>
+
                                                     <div class="input-field">
-                                                        <div class="input-select">
-                                                            <select data-trigger="" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+                                                        <!--Localidad-->
+                                                        <div class="input-select" id="filtroLocalidad">
+                                                            <select data-trigger="" id="vistaLoc" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1)">
                                                                 <option placeholder="" value="">Localidad</option>
                                                             </select>
                                                         </div>
@@ -191,7 +204,7 @@
                         }
                         else
                         {
-                            ViewBag.Url = "";
+                           ViewBag.Url = "/Content/images/sin_foto.png";
                         }
                         <div class="col-lg-6">
 
@@ -246,18 +259,73 @@
                     return;
                 }
 
-                //Ajax
+                //Ajax SUBCATEGORIAS
                 $.ajax({
                     url: "obtenerSubcategorias/" + this.value,
                     type: 'GET',
                     dataType: "json",
                     success: function (res) {
                         //Creando el segundo select
+                        $("#vistaSub").hide();
                         $("#filtroSubcategoria").empty().append('<select id="filtroSub"  data-trigger="" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1); width: 239px; color: #00bbec; padding: 13px 0; font-weight: bold; font-size: 13px; padding-left: 10px; cursor: pointer; background-image: url(/Content/images/flecha.png); -webkit-appearance: none; background-repeat: no-repeat;background-position: right center; background-position-x: 94%;">');
-                        $('#filtroSub').append("<option style='width: 239px; color: #c3bbbb; padding: 11px 0; font-weight: bold; font-size: 12px; padding-left: 10px;'>Subcategoria</option>");
+                        $('#filtroSub').append("<option style='color: #c3bbbb; font-weight: bold; font-size: 12px;'>Subcategoria</option>");
                         $.each(res, function () {
-                            $('#filtroSub').append("<option style='width: 239px; color: #666; padding: 11px 0; font-weight: bold; font-size: 12px; padding-left: 10px;' value=" + this.Id + '>' + this.Descripcion + "</option>");
+                            $('#filtroSub').append("<option style='color: #666; font-weight: bold; font-size: 12px;' value=" + this.Id + '>' + this.Descripcion + "</option>");
                         });
+                    }
+                });
+            });
+
+            $('#filtroProvincia').on('change', function () {
+
+                var idProvincia = this.value;
+
+                //Si elegiste la opción de los guíones paramos aca para no hacer nada
+                if (idProvincia === 0) {
+                    return;
+                }
+
+                //Ajax DEPARTAMENTOS
+                $.ajax({
+                    url: "obtenerDepartamentos/" + this.value,
+                    type: 'GET',
+                    dataType: "json",
+                    success: function (res) {
+                        //Creando el segundo select
+                        $("#vistaDep").hide();
+                        $("#filtroDepartamento").empty().append('<select id="filtroDep"  data-trigger="" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1); width: 239px; color: #00bbec; padding: 13px 0; font-weight: bold; font-size: 13px; padding-left: 10px; cursor: pointer; background-image: url(/Content/images/flecha.png); -webkit-appearance: none; background-repeat: no-repeat;background-position: right center; background-position-x: 94%;">');
+                        $('#filtroDep').append("<option style='color: #c3bbbb; font-weight: bold; font-size: 12px;'>Departamento</option>");
+                        $.each(res, function () {
+                            $('#filtroDep').append("<option style='color: #666; font-weight: bold; font-size: 12px;' value=" + this.Id + '>' + this.Descripcion + "</option>");
+                        });
+
+                        //Esto corre cuando cambias de opción en el primer select
+                        $('#filtroDep').on('change', function () {
+
+                            var idDepartamento = this.value;
+
+                            //Si elegiste la opción de los guíones paramos aca para no hacer nada
+                            if (idDepartamento === 0) {
+                                return;
+                            }
+
+                            //Ajax LOCALIDADES
+                            $.ajax({
+                                url: "obtenerLocalidades/" + this.value,
+                                type: 'GET',
+                                dataType: "json",
+                                success: function (res) {
+                                    //Creando el segundo select
+                                    $("#vistaLoc").hide();
+                                    $("#filtroLocalidad").empty().append('<select id="filtroLoc"  data-trigger="" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1); width: 239px; color: #00bbec; padding: 13px 0; font-weight: bold; font-size: 13px; padding-left: 10px; cursor: pointer; background-image: url(/Content/images/flecha.png); -webkit-appearance: none; background-repeat: no-repeat;background-position: right center; background-position-x: 94%;">');
+                                    $('#filtroLoc').append("<option style='color: #c3bbbb; font-weight: bold; font-size: 12px;'>Localidad</option>");
+                                    $.each(res, function () {
+                                        $('#filtroLoc').append("<option style='color: #666; font-weight: bold; font-size: 12px;' value=" + this.Id + '>' + this.Descripcion + "</option>");
+                                    });
+                                }
+                            });
+                        });
+
                     }
                 });
             });
