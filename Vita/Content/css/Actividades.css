@@ -1071,6 +1071,7 @@ legend {
                         height: 100%;
                         color: #00bbec;
                         font-weight: bold;
+                        font-size:13px;
                     }
 
                 .s009 form .inner-form .advance-search .choices__list.choices__list--dropdown {
@@ -1096,6 +1097,7 @@ legend {
                     min-height: 20px;
                     padding: 8px 0;
                     font-weight: bold;
+                    font-size: 12px;
                 }
 
                 .s009 form .inner-form .advance-search .choices[data-type*="select-one"]:after {

@@ -89,7 +89,7 @@
                     {
                         <li class="icons dropdown" style="margin-left: 10px;">
 
-                            <div id="ContenedorLogueado" class="user-img c-pointer position-relative" data-toggle="dropdown" style="width:155px; height:48px; margin-right: -112px;">
+                            <div id="ContenedorLogueado" class="user-img c-pointer position-relative" data-toggle="dropdown" style="width:162px; height:48px; margin-right: -112px;">
                                 <a href="javascript:void(0)" class="log-user" data-toggle="dropdown">
                                     <span style="color:#464a53; font-size: 14px;">Hola @Model.UsuarioName</span> <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
                                 </a>
@@ -100,19 +100,26 @@
                                 }
                                 else
                                 {
-                                    if(Model.Sexo.Descripcion == "Masculino")
+                                    if (Model.Rol.Id == 2) //Entidad
                                     {
-                                        ViewBag.Url = "/Content/images/hombre.png";
+                                        ViewBag.Url = "/Content/images/desconocido2.png";
                                     }
-                                    else
+                                    else //Usuario
                                     {
-                                        if(Model.Sexo.Descripcion == "Femenino")
+                                        if(Model.Sexo.Descripcion == "Masculino")
                                         {
-                                            ViewBag.Url = "/Content/images/mujer.jpg";
+                                            ViewBag.Url = "/Content/images/hombre.png";
                                         }
                                         else
                                         {
-                                             ViewBag.Url = "/Content/images/desconocido.png";
+                                            if(Model.Sexo.Descripcion == "Femenino")
+                                            {
+                                                ViewBag.Url = "/Content/images/mujer.jpg";
+                                            }
+                                            else
+                                            {
+                                                ViewBag.Url = "/Content/images/desconocido.png";
+                                            }
                                         }
                                     }
                                 }

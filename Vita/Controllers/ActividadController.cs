@@ -122,9 +122,12 @@ namespace Vita.Controllers
 
                             TwilioClient.Init(accountSid, authToken);
 
+                            var descripcionActividad = actividad.Descripcion;
+                            var fechaActividad = actividad.FechaDesde.ToString();
+
                             var message = MessageResource.Create(
                                 from: new Twilio.Types.PhoneNumber("whatsapp:+14155238886"),
-                                body: "Su inscripción ha sido exitosa",
+                                body: "Your " + descripcionActividad + " appointment is coming up on " + fechaActividad,
                                 to: new Twilio.Types.PhoneNumber("whatsapp:+5491127814553")
                             );
 
@@ -168,6 +171,8 @@ namespace Vita.Controllers
             ViewBag.Lista = lista;
             ViewBag.Contador = lista.Count();
             ViewBag.Valor = textoIngresado;
+            ViewBag.Categorias = categoriaServicio.GetAllCategorias(); //obtengo todas las categorias
+            ViewBag.Segmento = segmentoServicio.GetAllSegmento(); //obtengo todos los segmentos
 
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -185,16 +190,18 @@ namespace Vita.Controllers
         [HttpGet]
         public ActionResult Actividades(Usuario usuario, string categoriaId)
         {
-         
+            ViewBag.Categorias = categoriaServicio.GetAllCategorias(); //obtengo todas las categorias
+            ViewBag.Segmento = segmentoServicio.GetAllSegmento(); //obtengo todos los segmentos
+
             if (categoriaId == null)
             {
-                var lista1 = actividadServicio.GetAllActividades();
+                var lista1 = actividadServicio.GetAllActividades(); //obtiene todas las actividades
                 ViewBag.Lista = lista1;
                 ViewBag.Contador = lista1.Count();
             }
             else
             {
-                var lista2 = actividadServicio.GetBusquedaPorIdCategoria(categoriaId);
+                var lista2 = actividadServicio.GetBusquedaPorIdCategoria(categoriaId); //obtiene las actividades por categoria
                 ViewBag.Lista = lista2;
                 ViewBag.Contador = lista2.Count();
             }
@@ -206,11 +213,11 @@ namespace Vita.Controllers
                 if (buscarUsuarioLogueado == null)
                 {
                     var user = new Usuario();
-                    return View(user);
+                    return View(user); //no logueado
                 }
                 else
                 {
-                    return View(buscarUsuarioLogueado);
+                    return View(buscarUsuarioLogueado); //logueado
                 }
             }
             else
@@ -222,21 +229,21 @@ namespace Vita.Controllers
         }
 
         //Lo comento porque no me funciona no eliminar
-      /*  [HttpGet]
-        [Route("obtenersubcategoria{idCategoria}")]
-       
-        public JsonResult ObtenerSubcategoria(int? id)
-        {
-           if(id == null)
-            {
-                id = 3;
-            }
-            List<SubCategoria> subCategorias = categoriaServicio.GetAllSubCategoriasByCategoriaId(id);
-            var jsonSerialiser = new JavaScriptSerializer();
-            var json = jsonSerialiser.Serialize(subCategorias);
+        /*  [HttpGet]
+          [Route("obtenersubcategoria{idCategoria}")]
 
-            return Json(json, JsonRequestBehavior.AllowGet);
-        }*/
+          public JsonResult ObtenerSubcategoria(int? id)
+          {
+             if(id == null)
+              {
+                  id = 3;
+              }
+              List<SubCategoria> subCategorias = categoriaServicio.GetAllSubCategoriasByCategoriaId(id);
+              var jsonSerialiser = new JavaScriptSerializer();
+              var json = jsonSerialiser.Serialize(subCategorias);
+
+              return Json(json, JsonRequestBehavior.AllowGet);
+          }*/
         //public string ObtenerSubcategoria(int? id)
         //{
         //    List<SubCategoria> subCategorias = categoriaServicio.GetAllSubCategoriasByCategoriaId(id);
@@ -250,6 +257,22 @@ namespace Vita.Controllers
         //    return result;
 
         //}
+
+        [HttpGet]
+        [Route("obtenerSubcategorias{idCategoria}")]
+        public string ObtenerSubcategorias(int? id)
+        {
+            List<SubCategoria> subCategorias = categoriaServicio.GetAllSubCategoriasByCategoriaId(id);
+
+            string result = JsonConvert.SerializeObject(subCategorias,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+
+            return result;
+        }
+
         [HttpGet]
         [Route("obtenerselectpaisusuario{idPais}")]
         public string ObtenerSelectPaisUsuario(int? id)
@@ -264,6 +287,7 @@ namespace Vita.Controllers
 
             return result;
         }
+
         [HttpGet]
         [Route("obtenerselectdepartamentousuario{idDepartamento}")]
         public string ObtenerSelectDepartamentoUsuario(int? id)
