@@ -123,12 +123,12 @@ namespace Vita.Controllers
                             TwilioClient.Init(accountSid, authToken);
 
                             var tituloActividad = actividad.Titulo;
-                            var fechaActividad = actividad.FechaDesde.ToString();
+                         //   var fechaActividad = actividad.FechaDesde.ToString();
 
                             var message = MessageResource.Create(
                                 from: new Twilio.Types.PhoneNumber("whatsapp:+14155238886"),
-                                body: "Your " + tituloActividad + " appointment is coming up on " + fechaActividad,
-                                to: new Twilio.Types.PhoneNumber("whatsapp:+5491127814553")
+                                body: "Your " + tituloActividad + " te inscribiste a la actividad " ,//+ fechaActividad,
+                                to: new Twilio.Types.PhoneNumber("whatsapp:+5491154972671")
                             );
 
 

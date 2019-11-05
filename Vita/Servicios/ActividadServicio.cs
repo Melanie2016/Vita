@@ -77,8 +77,8 @@ namespace Vita.Servicios
                     ActividadId = aux.Actividad.Id,
                     Titulo = aux.Actividad.Titulo,
                     Descripcion = aux.Actividad.Titulo,
-                    FechaDesde = aux.Actividad.FechasActividad,      //  LO COMENTO PORQUE ME DA ERROR VALE
-                    FechaHasta = aux.Actividad.FechaHasta
+                   // FechaDesde = aux.Actividad.FechasActividad,      //  LO COMENTO PORQUE ME DA ERROR VALE
+                  //  FechaHasta = aux.Actividad.FechaHasta
 
                 };
                 //luego lo agrego a la lista del vieewModel
