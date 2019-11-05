@@ -11,13 +11,10 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Titulo" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="EdadMinima" Type="int" Nullable="false" />
           <Property Name="EdadMaxima" Type="int" />
           <Property Name="Precio" Type="int" />
-          <Property Name="FechaDesde" Type="date" Nullable="false" />
-          <Property Name="FechaHasta" Type="date" Nullable="false" />
-          <Property Name="CantidadDias" Type="int" />
           <Property Name="CantidadCupo" Type="int" Nullable="false" />
           <Property Name="CategoriaId" Type="int" Nullable="false" />
           <Property Name="SubcategoriaId" Type="int" Nullable="false" />
@@ -46,6 +43,20 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Consigna">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="100" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="500" />
+          <Property Name="TipoPreguntaId" Type="int" />
+          <Property Name="FormularioDinamicoId" Type="int" />
+          <Property Name="TipoDatoIngresado" Type="int" />
+          <Property Name="CreatedAt" Type="date" />
+          <Property Name="UpdatedAt" Type="date" />
+          <Property Name="DeletedAt" Type="date" />
         </EntityType>
         <EntityType Name="Departamento">
           <Key>
@@ -77,6 +88,47 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="FechasActividad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaDesde" Type="date" />
+          <Property Name="FechaHasta" Type="date" />
+          <Property Name="LunesHorario" Type="date" />
+          <Property Name="MartesHorario" Type="date" />
+          <Property Name="MiercolesHorario" Type="date" />
+          <Property Name="JuevesHorario" Type="date" />
+          <Property Name="ViernesHorario" Type="date" />
+          <Property Name="SabadoHorario" Type="date" />
+          <Property Name="DomingoHorario" Type="date" />
+          <Property Name="ActividadId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormularioDinamico">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="200" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="500" />
+          <Property Name="ActividadId" Type="int" />
+          <Property Name="UsuarioEntidadId" Type="int" />
+          <Property Name="CreatedAt" Type="date" />
+          <Property Name="UpdatedAt" Type="date" />
+          <Property Name="DeletedAt" Type="date" />
+        </EntityType>
+        <EntityType Name="FormularioLleno">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntidadId" Type="int" />
+          <Property Name="UsuarioId" Type="int" />
+          <Property Name="FormularioDinamicoId" Type="int" />
+          <Property Name="CreatedAt" Type="date" />
+          <Property Name="UpdatedAt" Type="date" />
+          <Property Name="DeletedAt" Type="date" />
+        </EntityType>
         <EntityType Name="Localidad">
           <Key>
             <PropertyRef Name="Id" />
@@ -85,12 +137,48 @@
           <Property Name="Descripcion" Type="varchar" MaxLength="100" />
           <Property Name="DepartamentoId" Type="int" />
         </EntityType>
+        <EntityType Name="Opcion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DescripcionOpcion" Type="varchar" MaxLength="200" />
+          <Property Name="ConsignaId" Type="int" />
+          <Property Name="FormularioDinamicoId" Type="int" />
+          <Property Name="CreatedAt" Type="date" />
+          <Property Name="UpdatedAt" Type="date" />
+          <Property Name="DeletedAt" Type="date" />
+        </EntityType>
         <EntityType Name="Provincia">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="RespuestaConOpcion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConsignaId" Type="int" />
+          <Property Name="OpcionId" Type="int" />
+          <Property Name="FormularioLlenoId" Type="int" />
+          <Property Name="CreatedAt" Type="date" />
+          <Property Name="UpdatedAt" Type="date" />
+          <Property Name="DeletedAt" Type="date" />
+        </EntityType>
+        <EntityType Name="RespuestasInput">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FormularioLlenoId" Type="int" />
+          <Property Name="Respuesta" Type="varchar" MaxLength="500" />
+          <Property Name="TipoDatoIngresadoId" Type="int" />
+          <Property Name="CreatedAt" Type="date" />
+          <Property Name="UpdatedAt" Type="date" />
+          <Property Name="DeletedAt" Type="date" />
         </EntityType>
         <EntityType Name="Rol">
           <Key>
@@ -120,6 +208,21 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="200" />
           <Property Name="CategoriaId" Type="int" />
+        </EntityType>
+        <EntityType Name="TipoDatoIngresado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TipoPregunta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="100" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="300" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -190,6 +293,30 @@
           <Property Name="UpdatedAt" Type="date" />
           <Property Name="DeletedAt" Type="date" />
         </EntityType>
+        <Association Name="ActividadFechasId">
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="1" />
+          <End Role="FechasActividad" Type="Self.FechasActividad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actividad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FechasActividad">
+              <PropertyRef Name="ActividadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ActividadFormularioId">
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="0..1" />
+          <End Role="FormularioDinamico" Type="Self.FormularioDinamico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actividad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormularioDinamico">
+              <PropertyRef Name="ActividadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="ActividadSegmentoId">
           <End Role="Actividad" Type="Self.Actividad" Multiplicity="1" />
           <End Role="ActividadSegmento" Type="Self.ActividadSegmento" Multiplicity="*" />
@@ -262,6 +389,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="ConsignaOpcionId">
+          <End Role="Consigna" Type="Self.Consigna" Multiplicity="0..1" />
+          <End Role="Opcion" Type="Self.Opcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consigna">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Opcion">
+              <PropertyRef Name="ConsignaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="DomicilioActividadId">
           <End Role="Actividad" Type="Self.Actividad" Multiplicity="0..1" />
           <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="*" />
@@ -298,6 +437,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="EntidadFormularioLlenoId">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="FormularioLleno" Type="Self.FormularioLleno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormularioLleno">
+              <PropertyRef Name="EntidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="EstadoUsuarioId">
           <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
           <End Role="UsuarioEstadoHistorico" Type="Self.UsuarioEstadoHistorico" Multiplicity="*" />
@@ -307,6 +458,54 @@
             </Principal>
             <Dependent Role="UsuarioEstadoHistorico">
               <PropertyRef Name="EstadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FormuDinaFormularioLlenoId">
+          <End Role="FormularioDinamico" Type="Self.FormularioDinamico" Multiplicity="0..1" />
+          <End Role="FormularioLleno" Type="Self.FormularioLleno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormularioDinamico">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormularioLleno">
+              <PropertyRef Name="FormularioDinamicoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FormularioConsignaId">
+          <End Role="FormularioDinamico" Type="Self.FormularioDinamico" Multiplicity="0..1" />
+          <End Role="Consigna" Type="Self.Consigna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormularioDinamico">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Consigna">
+              <PropertyRef Name="FormularioDinamicoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FormularioDinamicocId">
+          <End Role="FormularioDinamico" Type="Self.FormularioDinamico" Multiplicity="0..1" />
+          <End Role="Opcion" Type="Self.Opcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormularioDinamico">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Opcion">
+              <PropertyRef Name="FormularioDinamicoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FormularioLlenoRespuestaId">
+          <End Role="FormularioLleno" Type="Self.FormularioLleno" Multiplicity="0..1" />
+          <End Role="RespuestasInput" Type="Self.RespuestasInput" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormularioLleno">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RespuestasInput">
+              <PropertyRef Name="FormularioLlenoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -358,6 +557,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="RespuestaConsignaOpcionFormularioLlenoId">
+          <End Role="FormularioLleno" Type="Self.FormularioLleno" Multiplicity="0..1" />
+          <End Role="RespuestaConOpcion" Type="Self.RespuestaConOpcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormularioLleno">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RespuestaConOpcion">
+              <PropertyRef Name="FormularioLlenoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RespuestaConsignaOpcionId">
+          <End Role="Consigna" Type="Self.Consigna" Multiplicity="0..1" />
+          <End Role="RespuestaConOpcion" Type="Self.RespuestaConOpcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consigna">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RespuestaConOpcion">
+              <PropertyRef Name="ConsignaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RespuestaInputTipoDatod">
+          <End Role="TipoDatoIngresado" Type="Self.TipoDatoIngresado" Multiplicity="0..1" />
+          <End Role="RespuestasInput" Type="Self.RespuestasInput" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDatoIngresado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RespuestasInput">
+              <PropertyRef Name="TipoDatoIngresadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RespuestaOpcionConsignaId">
+          <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
+          <End Role="RespuestaConOpcion" Type="Self.RespuestaConOpcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Opcion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RespuestaConOpcion">
+              <PropertyRef Name="OpcionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="SegmentoActividadId">
           <End Role="Segmento" Type="Self.Segmento" Multiplicity="1" />
           <End Role="ActividadSegmento" Type="Self.ActividadSegmento" Multiplicity="*" />
@@ -406,6 +653,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="TipoPreguntaConsignaId">
+          <End Role="TipoPregunta" Type="Self.TipoPregunta" Multiplicity="0..1" />
+          <End Role="Consigna" Type="Self.Consigna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPregunta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Consigna">
+              <PropertyRef Name="TipoPreguntaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="UsuarioActividadEstadoInsId">
           <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
           <End Role="UsuarioInscriptoActividad" Type="Self.UsuarioInscriptoActividad" Multiplicity="*" />
@@ -442,6 +701,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="UsuarioEntidadFormularioId">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="FormularioDinamico" Type="Self.FormularioDinamico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormularioDinamico">
+              <PropertyRef Name="UsuarioEntidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="UsuarioEstadoId">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="UsuarioEstadoHistorico" Type="Self.UsuarioEstadoHistorico" Multiplicity="*" />
@@ -450,6 +721,18 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="UsuarioEstadoHistorico">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UsuarioFormularioLlenoId">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="FormularioLleno" Type="Self.FormularioLleno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormularioLleno">
               <PropertyRef Name="UsuarioId" />
             </Dependent>
           </ReferentialConstraint>
@@ -482,20 +765,37 @@
           <EntitySet Name="Actividad" EntityType="Self.Actividad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActividadSegmento" EntityType="Self.ActividadSegmento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Consigna" EntityType="Self.Consigna" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Domicilio" EntityType="Self.Domicilio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FechasActividad" EntityType="Self.FechasActividad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormularioDinamico" EntityType="Self.FormularioDinamico" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormularioLleno" EntityType="Self.FormularioLleno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Opcion" EntityType="Self.Opcion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RespuestaConOpcion" EntityType="Self.RespuestaConOpcion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RespuestasInput" EntityType="Self.RespuestasInput" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Segmento" EntityType="Self.Segmento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sexo" EntityType="Self.Sexo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubCategoria" EntityType="Self.SubCategoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoDatoIngresado" EntityType="Self.TipoDatoIngresado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoPregunta" EntityType="Self.TipoPregunta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsuarioCategoriaElegida" EntityType="Self.UsuarioCategoriaElegida" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsuarioEstadoHistorico" EntityType="Self.UsuarioEstadoHistorico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsuarioInscriptoActividad" EntityType="Self.UsuarioInscriptoActividad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsuarioSegmento" EntityType="Self.UsuarioSegmento" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="ActividadFechasId" Association="Self.ActividadFechasId">
+            <End Role="Actividad" EntitySet="Actividad" />
+            <End Role="FechasActividad" EntitySet="FechasActividad" />
+          </AssociationSet>
+          <AssociationSet Name="ActividadFormularioId" Association="Self.ActividadFormularioId">
+            <End Role="Actividad" EntitySet="Actividad" />
+            <End Role="FormularioDinamico" EntitySet="FormularioDinamico" />
+          </AssociationSet>
           <AssociationSet Name="ActividadSegmentoId" Association="Self.ActividadSegmentoId">
             <End Role="Actividad" EntitySet="Actividad" />
             <End Role="ActividadSegmento" EntitySet="ActividadSegmento" />
@@ -520,6 +820,10 @@
             <End Role="Categoria" EntitySet="Categoria" />
             <End Role="UsuarioCategoriaElegida" EntitySet="UsuarioCategoriaElegida" />
           </AssociationSet>
+          <AssociationSet Name="ConsignaOpcionId" Association="Self.ConsignaOpcionId">
+            <End Role="Consigna" EntitySet="Consigna" />
+            <End Role="Opcion" EntitySet="Opcion" />
+          </AssociationSet>
           <AssociationSet Name="DomicilioActividadId" Association="Self.DomicilioActividadId">
             <End Role="Actividad" EntitySet="Actividad" />
             <End Role="Domicilio" EntitySet="Domicilio" />
@@ -532,9 +836,29 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Domicilio" EntitySet="Domicilio" />
           </AssociationSet>
+          <AssociationSet Name="EntidadFormularioLlenoId" Association="Self.EntidadFormularioLlenoId">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="FormularioLleno" EntitySet="FormularioLleno" />
+          </AssociationSet>
           <AssociationSet Name="EstadoUsuarioId" Association="Self.EstadoUsuarioId">
             <End Role="Estado" EntitySet="Estado" />
             <End Role="UsuarioEstadoHistorico" EntitySet="UsuarioEstadoHistorico" />
+          </AssociationSet>
+          <AssociationSet Name="FormuDinaFormularioLlenoId" Association="Self.FormuDinaFormularioLlenoId">
+            <End Role="FormularioDinamico" EntitySet="FormularioDinamico" />
+            <End Role="FormularioLleno" EntitySet="FormularioLleno" />
+          </AssociationSet>
+          <AssociationSet Name="FormularioConsignaId" Association="Self.FormularioConsignaId">
+            <End Role="FormularioDinamico" EntitySet="FormularioDinamico" />
+            <End Role="Consigna" EntitySet="Consigna" />
+          </AssociationSet>
+          <AssociationSet Name="FormularioDinamicocId" Association="Self.FormularioDinamicocId">
+            <End Role="FormularioDinamico" EntitySet="FormularioDinamico" />
+            <End Role="Opcion" EntitySet="Opcion" />
+          </AssociationSet>
+          <AssociationSet Name="FormularioLlenoRespuestaId" Association="Self.FormularioLlenoRespuestaId">
+            <End Role="FormularioLleno" EntitySet="FormularioLleno" />
+            <End Role="RespuestasInput" EntitySet="RespuestasInput" />
           </AssociationSet>
           <AssociationSet Name="LocalidadActividadId" Association="Self.LocalidadActividadId">
             <End Role="Localidad" EntitySet="Localidad" />
@@ -552,6 +876,22 @@
             <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Departamento" EntitySet="Departamento" />
           </AssociationSet>
+          <AssociationSet Name="RespuestaConsignaOpcionFormularioLlenoId" Association="Self.RespuestaConsignaOpcionFormularioLlenoId">
+            <End Role="FormularioLleno" EntitySet="FormularioLleno" />
+            <End Role="RespuestaConOpcion" EntitySet="RespuestaConOpcion" />
+          </AssociationSet>
+          <AssociationSet Name="RespuestaConsignaOpcionId" Association="Self.RespuestaConsignaOpcionId">
+            <End Role="Consigna" EntitySet="Consigna" />
+            <End Role="RespuestaConOpcion" EntitySet="RespuestaConOpcion" />
+          </AssociationSet>
+          <AssociationSet Name="RespuestaInputTipoDatod" Association="Self.RespuestaInputTipoDatod">
+            <End Role="TipoDatoIngresado" EntitySet="TipoDatoIngresado" />
+            <End Role="RespuestasInput" EntitySet="RespuestasInput" />
+          </AssociationSet>
+          <AssociationSet Name="RespuestaOpcionConsignaId" Association="Self.RespuestaOpcionConsignaId">
+            <End Role="Opcion" EntitySet="Opcion" />
+            <End Role="RespuestaConOpcion" EntitySet="RespuestaConOpcion" />
+          </AssociationSet>
           <AssociationSet Name="SegmentoActividadId" Association="Self.SegmentoActividadId">
             <End Role="Segmento" EntitySet="Segmento" />
             <End Role="ActividadSegmento" EntitySet="ActividadSegmento" />
@@ -568,6 +908,10 @@
             <End Role="Categoria" EntitySet="Categoria" />
             <End Role="SubCategoria" EntitySet="SubCategoria" />
           </AssociationSet>
+          <AssociationSet Name="TipoPreguntaConsignaId" Association="Self.TipoPreguntaConsignaId">
+            <End Role="TipoPregunta" EntitySet="TipoPregunta" />
+            <End Role="Consigna" EntitySet="Consigna" />
+          </AssociationSet>
           <AssociationSet Name="UsuarioActividadEstadoInsId" Association="Self.UsuarioActividadEstadoInsId">
             <End Role="Estado" EntitySet="Estado" />
             <End Role="UsuarioInscriptoActividad" EntitySet="UsuarioInscriptoActividad" />
@@ -580,9 +924,17 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="UsuarioCategoriaElegida" EntitySet="UsuarioCategoriaElegida" />
           </AssociationSet>
+          <AssociationSet Name="UsuarioEntidadFormularioId" Association="Self.UsuarioEntidadFormularioId">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="FormularioDinamico" EntitySet="FormularioDinamico" />
+          </AssociationSet>
           <AssociationSet Name="UsuarioEstadoId" Association="Self.UsuarioEstadoId">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="UsuarioEstadoHistorico" EntitySet="UsuarioEstadoHistorico" />
+          </AssociationSet>
+          <AssociationSet Name="UsuarioFormularioLlenoId" Association="Self.UsuarioFormularioLlenoId">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="FormularioLleno" EntitySet="FormularioLleno" />
           </AssociationSet>
           <AssociationSet Name="usuarioRolId" Association="Self.usuarioRolId">
             <End Role="Rol" EntitySet="Rol" />
@@ -604,13 +956,10 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="EdadMinima" Type="Int32" Nullable="false" />
           <Property Name="EdadMaxima" Type="Int32" />
           <Property Name="Precio" Type="Int32" />
-          <Property Name="FechaDesde" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="FechaHasta" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CantidadDias" Type="Int32" />
           <Property Name="CantidadCupo" Type="Int32" Nullable="false" />
           <Property Name="CategoriaId" Type="Int32" Nullable="false" />
           <Property Name="SubcategoriaId" Type="Int32" Nullable="false" />
@@ -621,6 +970,8 @@
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <Property Name="DeletedAt" Type="DateTime" Precision="0" />
           <Property Name="Compleja" Type="Boolean" />
+          <NavigationProperty Name="FechasActividad" Relationship="Self.ActividadFechasId" FromRole="Actividad" ToRole="FechasActividad" />
+          <NavigationProperty Name="FormularioDinamico" Relationship="Self.ActividadFormularioId" FromRole="Actividad" ToRole="FormularioDinamico" />
           <NavigationProperty Name="ActividadSegmento" Relationship="Self.ActividadSegmentoId" FromRole="Actividad" ToRole="ActividadSegmento" />
           <NavigationProperty Name="SubCategoria" Relationship="Self.ActividadSubcategoriaId" FromRole="Actividad" ToRole="SubCategoria" />
           <NavigationProperty Name="Usuario" Relationship="Self.ActividadUsuarioId" FromRole="Actividad" ToRole="Usuario" />
@@ -651,6 +1002,24 @@
           <NavigationProperty Name="Actividad" Relationship="Self.CategoriaActividadId" FromRole="Categoria" ToRole="Actividad" />
           <NavigationProperty Name="UsuarioCategoriaElegida" Relationship="Self.CategoriaUsuarioId" FromRole="Categoria" ToRole="UsuarioCategoriaElegida" />
           <NavigationProperty Name="SubCategoria" Relationship="Self.SubcategoriaCategoriaId" FromRole="Categoria" ToRole="SubCategoria" />
+        </EntityType>
+        <EntityType Name="Consigna">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TipoPreguntaId" Type="Int32" />
+          <Property Name="FormularioDinamicoId" Type="Int32" />
+          <Property Name="TipoDatoIngresado" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Opcion" Relationship="Self.ConsignaOpcionId" FromRole="Consigna" ToRole="Opcion" />
+          <NavigationProperty Name="FormularioDinamico" Relationship="Self.FormularioConsignaId" FromRole="Consigna" ToRole="FormularioDinamico" />
+          <NavigationProperty Name="RespuestaConOpcion" Relationship="Self.RespuestaConsignaOpcionId" FromRole="Consigna" ToRole="RespuestaConOpcion" />
+          <NavigationProperty Name="TipoPregunta" Relationship="Self.TipoPreguntaConsignaId" FromRole="Consigna" ToRole="TipoPregunta" />
         </EntityType>
         <EntityType Name="Departamento">
           <Key>
@@ -689,6 +1058,58 @@
           <NavigationProperty Name="UsuarioEstadoHistorico" Relationship="Self.EstadoUsuarioId" FromRole="Estado" ToRole="UsuarioEstadoHistorico" />
           <NavigationProperty Name="UsuarioInscriptoActividad" Relationship="Self.UsuarioActividadEstadoInsId" FromRole="Estado" ToRole="UsuarioInscriptoActividad" />
         </EntityType>
+        <EntityType Name="FechasActividad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaDesde" Type="DateTime" Precision="0" />
+          <Property Name="FechaHasta" Type="DateTime" Precision="0" />
+          <Property Name="LunesHorario" Type="DateTime" Precision="0" />
+          <Property Name="MartesHorario" Type="DateTime" Precision="0" />
+          <Property Name="MiercolesHorario" Type="DateTime" Precision="0" />
+          <Property Name="JuevesHorario" Type="DateTime" Precision="0" />
+          <Property Name="ViernesHorario" Type="DateTime" Precision="0" />
+          <Property Name="SabadoHorario" Type="DateTime" Precision="0" />
+          <Property Name="DomingoHorario" Type="DateTime" Precision="0" />
+          <Property Name="ActividadId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Actividad" Relationship="Self.ActividadFechasId" FromRole="FechasActividad" ToRole="Actividad" />
+        </EntityType>
+        <EntityType Name="FormularioDinamico">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ActividadId" Type="Int32" />
+          <Property Name="UsuarioEntidadId" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Actividad" Relationship="Self.ActividadFormularioId" FromRole="FormularioDinamico" ToRole="Actividad" />
+          <NavigationProperty Name="Consigna" Relationship="Self.FormularioConsignaId" FromRole="FormularioDinamico" ToRole="Consigna" />
+          <NavigationProperty Name="FormularioLleno" Relationship="Self.FormuDinaFormularioLlenoId" FromRole="FormularioDinamico" ToRole="FormularioLleno" />
+          <NavigationProperty Name="Opcion" Relationship="Self.FormularioDinamicocId" FromRole="FormularioDinamico" ToRole="Opcion" />
+          <NavigationProperty Name="Usuario" Relationship="Self.UsuarioEntidadFormularioId" FromRole="FormularioDinamico" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="FormularioLleno">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntidadId" Type="Int32" />
+          <Property Name="UsuarioId" Type="Int32" />
+          <Property Name="FormularioDinamicoId" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="FormularioDinamico" Relationship="Self.FormuDinaFormularioLlenoId" FromRole="FormularioLleno" ToRole="FormularioDinamico" />
+          <NavigationProperty Name="Usuario" Relationship="Self.EntidadFormularioLlenoId" FromRole="FormularioLleno" ToRole="Usuario" />
+          <NavigationProperty Name="RespuestasInput" Relationship="Self.FormularioLlenoRespuestaId" FromRole="FormularioLleno" ToRole="RespuestasInput" />
+          <NavigationProperty Name="RespuestaConOpcion" Relationship="Self.RespuestaConsignaOpcionFormularioLlenoId" FromRole="FormularioLleno" ToRole="RespuestaConOpcion" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.UsuarioFormularioLlenoId" FromRole="FormularioLleno" ToRole="Usuario" />
+        </EntityType>
         <EntityType Name="Localidad">
           <Key>
             <PropertyRef Name="Id" />
@@ -701,6 +1122,21 @@
           <NavigationProperty Name="Domicilio" Relationship="Self.DomicilioLocalidadId" FromRole="Localidad" ToRole="Domicilio" />
           <NavigationProperty Name="Usuario" Relationship="Self.localidadUsuarioId" FromRole="Localidad" ToRole="Usuario" />
         </EntityType>
+        <EntityType Name="Opcion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescripcionOpcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ConsignaId" Type="Int32" />
+          <Property Name="FormularioDinamicoId" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Consigna" Relationship="Self.ConsignaOpcionId" FromRole="Opcion" ToRole="Consigna" />
+          <NavigationProperty Name="FormularioDinamico" Relationship="Self.FormularioDinamicocId" FromRole="Opcion" ToRole="FormularioDinamico" />
+          <NavigationProperty Name="RespuestaConOpcion" Relationship="Self.RespuestaOpcionConsignaId" FromRole="Opcion" ToRole="RespuestaConOpcion" />
+        </EntityType>
         <EntityType Name="Provincia">
           <Key>
             <PropertyRef Name="Id" />
@@ -708,6 +1144,35 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Departamento" Relationship="Self.ProvinciaDepartamentoId" FromRole="Provincia" ToRole="Departamento" />
+        </EntityType>
+        <EntityType Name="RespuestaConOpcion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConsignaId" Type="Int32" />
+          <Property Name="OpcionId" Type="Int32" />
+          <Property Name="FormularioLlenoId" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Consigna" Relationship="Self.RespuestaConsignaOpcionId" FromRole="RespuestaConOpcion" ToRole="Consigna" />
+          <NavigationProperty Name="FormularioLleno" Relationship="Self.RespuestaConsignaOpcionFormularioLlenoId" FromRole="RespuestaConOpcion" ToRole="FormularioLleno" />
+          <NavigationProperty Name="Opcion" Relationship="Self.RespuestaOpcionConsignaId" FromRole="RespuestaConOpcion" ToRole="Opcion" />
+        </EntityType>
+        <EntityType Name="RespuestasInput">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FormularioLlenoId" Type="Int32" />
+          <Property Name="Respuesta" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TipoDatoIngresadoId" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="FormularioLleno" Relationship="Self.FormularioLlenoRespuestaId" FromRole="RespuestasInput" ToRole="FormularioLleno" />
+          <NavigationProperty Name="TipoDatoIngresado" Relationship="Self.RespuestaInputTipoDatod" FromRole="RespuestasInput" ToRole="TipoDatoIngresado" />
         </EntityType>
         <EntityType Name="Rol">
           <Key>
@@ -744,6 +1209,23 @@
           <NavigationProperty Name="Actividad" Relationship="Self.ActividadSubcategoriaId" FromRole="SubCategoria" ToRole="Actividad" />
           <NavigationProperty Name="Categoria" Relationship="Self.SubcategoriaCategoriaId" FromRole="SubCategoria" ToRole="Categoria" />
         </EntityType>
+        <EntityType Name="TipoDatoIngresado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RespuestasInput" Relationship="Self.RespuestaInputTipoDatod" FromRole="TipoDatoIngresado" ToRole="RespuestasInput" />
+        </EntityType>
+        <EntityType Name="TipoPregunta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Consigna" Relationship="Self.TipoPreguntaConsignaId" FromRole="TipoPregunta" ToRole="Consigna" />
+        </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="Id" />
@@ -769,6 +1251,9 @@
           <Property Name="DeletedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Actividad" Relationship="Self.ActividadUsuarioId" FromRole="Usuario" ToRole="Actividad" />
           <NavigationProperty Name="Domicilio" Relationship="Self.DomicilioUsuarioId" FromRole="Usuario" ToRole="Domicilio" />
+          <NavigationProperty Name="FormularioDinamico" Relationship="Self.UsuarioEntidadFormularioId" FromRole="Usuario" ToRole="FormularioDinamico" />
+          <NavigationProperty Name="FormularioLleno" Relationship="Self.EntidadFormularioLlenoId" FromRole="Usuario" ToRole="FormularioLleno" />
+          <NavigationProperty Name="FormularioLleno1" Relationship="Self.UsuarioFormularioLlenoId" FromRole="Usuario" ToRole="FormularioLleno" />
           <NavigationProperty Name="Localidad" Relationship="Self.localidadUsuarioId" FromRole="Usuario" ToRole="Localidad" />
           <NavigationProperty Name="Rol" Relationship="Self.usuarioRolId" FromRole="Usuario" ToRole="Rol" />
           <NavigationProperty Name="Sexo" Relationship="Self.sexoUsuarioId" FromRole="Usuario" ToRole="Sexo" />
@@ -831,6 +1316,30 @@
           <NavigationProperty Name="Segmento" Relationship="Self.SegmentoUsuarioId" FromRole="UsuarioSegmento" ToRole="Segmento" />
           <NavigationProperty Name="Usuario" Relationship="Self.UsuarioSegmentoId" FromRole="UsuarioSegmento" ToRole="Usuario" />
         </EntityType>
+        <Association Name="ActividadFechasId">
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="1" />
+          <End Role="FechasActividad" Type="Self.FechasActividad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actividad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FechasActividad">
+              <PropertyRef Name="ActividadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ActividadFormularioId">
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="0..1" />
+          <End Role="FormularioDinamico" Type="Self.FormularioDinamico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actividad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormularioDinamico">
+              <PropertyRef Name="ActividadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="ActividadSegmentoId">
           <End Role="Actividad" Type="Self.Actividad" Multiplicity="1" />
           <End Role="ActividadSegmento" Type="Self.ActividadSegmento" Multiplicity="*" />
@@ -951,6 +1460,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="ConsignaOpcionId">
+          <End Role="Consigna" Type="Self.Consigna" Multiplicity="0..1" />
+          <End Role="Opcion" Type="Self.Opcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consigna">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Opcion">
+              <PropertyRef Name="ConsignaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FormularioConsignaId">
+          <End Role="FormularioDinamico" Type="Self.FormularioDinamico" Multiplicity="0..1" />
+          <End Role="Consigna" Type="Self.Consigna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormularioDinamico">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Consigna">
+              <PropertyRef Name="FormularioDinamicoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RespuestaConsignaOpcionId">
+          <End Role="Consigna" Type="Self.Consigna" Multiplicity="0..1" />
+          <End Role="RespuestaConOpcion" Type="Self.RespuestaConOpcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consigna">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RespuestaConOpcion">
+              <PropertyRef Name="ConsignaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TipoPreguntaConsignaId">
+          <End Role="TipoPregunta" Type="Self.TipoPregunta" Multiplicity="0..1" />
+          <End Role="Consigna" Type="Self.Consigna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPregunta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Consigna">
+              <PropertyRef Name="TipoPreguntaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="LocalidadDepartamentoId">
           <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
           <End Role="Localidad" Type="Self.Localidad" Multiplicity="*" />
@@ -1023,6 +1580,90 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FormuDinaFormularioLlenoId">
+          <End Role="FormularioDinamico" Type="Self.FormularioDinamico" Multiplicity="0..1" />
+          <End Role="FormularioLleno" Type="Self.FormularioLleno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormularioDinamico">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormularioLleno">
+              <PropertyRef Name="FormularioDinamicoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FormularioDinamicocId">
+          <End Role="FormularioDinamico" Type="Self.FormularioDinamico" Multiplicity="0..1" />
+          <End Role="Opcion" Type="Self.Opcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormularioDinamico">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Opcion">
+              <PropertyRef Name="FormularioDinamicoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UsuarioEntidadFormularioId">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="FormularioDinamico" Type="Self.FormularioDinamico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormularioDinamico">
+              <PropertyRef Name="UsuarioEntidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EntidadFormularioLlenoId">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="FormularioLleno" Type="Self.FormularioLleno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormularioLleno">
+              <PropertyRef Name="EntidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FormularioLlenoRespuestaId">
+          <End Role="FormularioLleno" Type="Self.FormularioLleno" Multiplicity="0..1" />
+          <End Role="RespuestasInput" Type="Self.RespuestasInput" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormularioLleno">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RespuestasInput">
+              <PropertyRef Name="FormularioLlenoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RespuestaConsignaOpcionFormularioLlenoId">
+          <End Role="FormularioLleno" Type="Self.FormularioLleno" Multiplicity="0..1" />
+          <End Role="RespuestaConOpcion" Type="Self.RespuestaConOpcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormularioLleno">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RespuestaConOpcion">
+              <PropertyRef Name="FormularioLlenoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UsuarioFormularioLlenoId">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="FormularioLleno" Type="Self.FormularioLleno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormularioLleno">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="localidadUsuarioId">
           <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
@@ -1032,6 +1673,30 @@
             </Principal>
             <Dependent Role="Usuario">
               <PropertyRef Name="LocalidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RespuestaOpcionConsignaId">
+          <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
+          <End Role="RespuestaConOpcion" Type="Self.RespuestaConOpcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Opcion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RespuestaConOpcion">
+              <PropertyRef Name="OpcionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RespuestaInputTipoDatod">
+          <End Role="TipoDatoIngresado" Type="Self.TipoDatoIngresado" Multiplicity="0..1" />
+          <End Role="RespuestasInput" Type="Self.RespuestasInput" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDatoIngresado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RespuestasInput">
+              <PropertyRef Name="TipoDatoIngresadoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1123,20 +1788,37 @@
           <EntitySet Name="Actividad" EntityType="Self.Actividad" />
           <EntitySet Name="ActividadSegmento" EntityType="Self.ActividadSegmento" />
           <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="Consigna" EntityType="Self.Consigna" />
           <EntitySet Name="Departamento" EntityType="Self.Departamento" />
           <EntitySet Name="Domicilio" EntityType="Self.Domicilio" />
           <EntitySet Name="Estado" EntityType="Self.Estado" />
+          <EntitySet Name="FechasActividad" EntityType="Self.FechasActividad" />
+          <EntitySet Name="FormularioDinamico" EntityType="Self.FormularioDinamico" />
+          <EntitySet Name="FormularioLleno" EntityType="Self.FormularioLleno" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" />
+          <EntitySet Name="Opcion" EntityType="Self.Opcion" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" />
+          <EntitySet Name="RespuestaConOpcion" EntityType="Self.RespuestaConOpcion" />
+          <EntitySet Name="RespuestasInput" EntityType="Self.RespuestasInput" />
           <EntitySet Name="Rol" EntityType="Self.Rol" />
           <EntitySet Name="Segmento" EntityType="Self.Segmento" />
           <EntitySet Name="Sexo" EntityType="Self.Sexo" />
           <EntitySet Name="SubCategoria" EntityType="Self.SubCategoria" />
+          <EntitySet Name="TipoDatoIngresado" EntityType="Self.TipoDatoIngresado" />
+          <EntitySet Name="TipoPregunta" EntityType="Self.TipoPregunta" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <EntitySet Name="UsuarioCategoriaElegida" EntityType="Self.UsuarioCategoriaElegida" />
           <EntitySet Name="UsuarioEstadoHistorico" EntityType="Self.UsuarioEstadoHistorico" />
           <EntitySet Name="UsuarioInscriptoActividad" EntityType="Self.UsuarioInscriptoActividad" />
           <EntitySet Name="UsuarioSegmento" EntityType="Self.UsuarioSegmento" />
+          <AssociationSet Name="ActividadFechasId" Association="Self.ActividadFechasId">
+            <End Role="Actividad" EntitySet="Actividad" />
+            <End Role="FechasActividad" EntitySet="FechasActividad" />
+          </AssociationSet>
+          <AssociationSet Name="ActividadFormularioId" Association="Self.ActividadFormularioId">
+            <End Role="Actividad" EntitySet="Actividad" />
+            <End Role="FormularioDinamico" EntitySet="FormularioDinamico" />
+          </AssociationSet>
           <AssociationSet Name="ActividadSegmentoId" Association="Self.ActividadSegmentoId">
             <End Role="Actividad" EntitySet="Actividad" />
             <End Role="ActividadSegmento" EntitySet="ActividadSegmento" />
@@ -1177,6 +1859,22 @@
             <End Role="Categoria" EntitySet="Categoria" />
             <End Role="SubCategoria" EntitySet="SubCategoria" />
           </AssociationSet>
+          <AssociationSet Name="ConsignaOpcionId" Association="Self.ConsignaOpcionId">
+            <End Role="Consigna" EntitySet="Consigna" />
+            <End Role="Opcion" EntitySet="Opcion" />
+          </AssociationSet>
+          <AssociationSet Name="FormularioConsignaId" Association="Self.FormularioConsignaId">
+            <End Role="FormularioDinamico" EntitySet="FormularioDinamico" />
+            <End Role="Consigna" EntitySet="Consigna" />
+          </AssociationSet>
+          <AssociationSet Name="RespuestaConsignaOpcionId" Association="Self.RespuestaConsignaOpcionId">
+            <End Role="Consigna" EntitySet="Consigna" />
+            <End Role="RespuestaConOpcion" EntitySet="RespuestaConOpcion" />
+          </AssociationSet>
+          <AssociationSet Name="TipoPreguntaConsignaId" Association="Self.TipoPreguntaConsignaId">
+            <End Role="TipoPregunta" EntitySet="TipoPregunta" />
+            <End Role="Consigna" EntitySet="Consigna" />
+          </AssociationSet>
           <AssociationSet Name="LocalidadDepartamentoId" Association="Self.LocalidadDepartamentoId">
             <End Role="Departamento" EntitySet="Departamento" />
             <End Role="Localidad" EntitySet="Localidad" />
@@ -1201,9 +1899,45 @@
             <End Role="Estado" EntitySet="Estado" />
             <End Role="UsuarioInscriptoActividad" EntitySet="UsuarioInscriptoActividad" />
           </AssociationSet>
+          <AssociationSet Name="FormuDinaFormularioLlenoId" Association="Self.FormuDinaFormularioLlenoId">
+            <End Role="FormularioDinamico" EntitySet="FormularioDinamico" />
+            <End Role="FormularioLleno" EntitySet="FormularioLleno" />
+          </AssociationSet>
+          <AssociationSet Name="FormularioDinamicocId" Association="Self.FormularioDinamicocId">
+            <End Role="FormularioDinamico" EntitySet="FormularioDinamico" />
+            <End Role="Opcion" EntitySet="Opcion" />
+          </AssociationSet>
+          <AssociationSet Name="UsuarioEntidadFormularioId" Association="Self.UsuarioEntidadFormularioId">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="FormularioDinamico" EntitySet="FormularioDinamico" />
+          </AssociationSet>
+          <AssociationSet Name="EntidadFormularioLlenoId" Association="Self.EntidadFormularioLlenoId">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="FormularioLleno" EntitySet="FormularioLleno" />
+          </AssociationSet>
+          <AssociationSet Name="FormularioLlenoRespuestaId" Association="Self.FormularioLlenoRespuestaId">
+            <End Role="FormularioLleno" EntitySet="FormularioLleno" />
+            <End Role="RespuestasInput" EntitySet="RespuestasInput" />
+          </AssociationSet>
+          <AssociationSet Name="RespuestaConsignaOpcionFormularioLlenoId" Association="Self.RespuestaConsignaOpcionFormularioLlenoId">
+            <End Role="FormularioLleno" EntitySet="FormularioLleno" />
+            <End Role="RespuestaConOpcion" EntitySet="RespuestaConOpcion" />
+          </AssociationSet>
+          <AssociationSet Name="UsuarioFormularioLlenoId" Association="Self.UsuarioFormularioLlenoId">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="FormularioLleno" EntitySet="FormularioLleno" />
+          </AssociationSet>
           <AssociationSet Name="localidadUsuarioId" Association="Self.localidadUsuarioId">
             <End Role="Localidad" EntitySet="Localidad" />
             <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="RespuestaOpcionConsignaId" Association="Self.RespuestaOpcionConsignaId">
+            <End Role="Opcion" EntitySet="Opcion" />
+            <End Role="RespuestaConOpcion" EntitySet="RespuestaConOpcion" />
+          </AssociationSet>
+          <AssociationSet Name="RespuestaInputTipoDatod" Association="Self.RespuestaInputTipoDatod">
+            <End Role="TipoDatoIngresado" EntitySet="TipoDatoIngresado" />
+            <End Role="RespuestasInput" EntitySet="RespuestasInput" />
           </AssociationSet>
           <AssociationSet Name="usuarioRolId" Association="Self.usuarioRolId">
             <End Role="Rol" EntitySet="Rol" />
@@ -1249,9 +1983,6 @@
                 <ScalarProperty Name="EdadMinima" ColumnName="EdadMinima" />
                 <ScalarProperty Name="EdadMaxima" ColumnName="EdadMaxima" />
                 <ScalarProperty Name="Precio" ColumnName="Precio" />
-                <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
-                <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
-                <ScalarProperty Name="CantidadDias" ColumnName="CantidadDias" />
                 <ScalarProperty Name="CantidadCupo" ColumnName="CantidadCupo" />
                 <ScalarProperty Name="CategoriaId" ColumnName="CategoriaId" />
                 <ScalarProperty Name="SubcategoriaId" ColumnName="SubcategoriaId" />
@@ -1281,6 +2012,21 @@
               <MappingFragment StoreEntitySet="Categoria">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Consigna">
+            <EntityTypeMapping TypeName="VitaModel.Consigna">
+              <MappingFragment StoreEntitySet="Consigna">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="TipoPreguntaId" ColumnName="TipoPreguntaId" />
+                <ScalarProperty Name="FormularioDinamicoId" ColumnName="FormularioDinamicoId" />
+                <ScalarProperty Name="TipoDatoIngresado" ColumnName="TipoDatoIngresado" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1317,6 +2063,50 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="FechasActividad">
+            <EntityTypeMapping TypeName="VitaModel.FechasActividad">
+              <MappingFragment StoreEntitySet="FechasActividad">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
+                <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
+                <ScalarProperty Name="LunesHorario" ColumnName="LunesHorario" />
+                <ScalarProperty Name="MartesHorario" ColumnName="MartesHorario" />
+                <ScalarProperty Name="MiercolesHorario" ColumnName="MiercolesHorario" />
+                <ScalarProperty Name="JuevesHorario" ColumnName="JuevesHorario" />
+                <ScalarProperty Name="ViernesHorario" ColumnName="ViernesHorario" />
+                <ScalarProperty Name="SabadoHorario" ColumnName="SabadoHorario" />
+                <ScalarProperty Name="DomingoHorario" ColumnName="DomingoHorario" />
+                <ScalarProperty Name="ActividadId" ColumnName="ActividadId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormularioDinamico">
+            <EntityTypeMapping TypeName="VitaModel.FormularioDinamico">
+              <MappingFragment StoreEntitySet="FormularioDinamico">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ActividadId" ColumnName="ActividadId" />
+                <ScalarProperty Name="UsuarioEntidadId" ColumnName="UsuarioEntidadId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormularioLleno">
+            <EntityTypeMapping TypeName="VitaModel.FormularioLleno">
+              <MappingFragment StoreEntitySet="FormularioLleno">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EntidadId" ColumnName="EntidadId" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="FormularioDinamicoId" ColumnName="FormularioDinamicoId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Localidad">
             <EntityTypeMapping TypeName="VitaModel.Localidad">
               <MappingFragment StoreEntitySet="Localidad">
@@ -1326,11 +2116,50 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Opcion">
+            <EntityTypeMapping TypeName="VitaModel.Opcion">
+              <MappingFragment StoreEntitySet="Opcion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DescripcionOpcion" ColumnName="DescripcionOpcion" />
+                <ScalarProperty Name="ConsignaId" ColumnName="ConsignaId" />
+                <ScalarProperty Name="FormularioDinamicoId" ColumnName="FormularioDinamicoId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Provincia">
             <EntityTypeMapping TypeName="VitaModel.Provincia">
               <MappingFragment StoreEntitySet="Provincia">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RespuestaConOpcion">
+            <EntityTypeMapping TypeName="VitaModel.RespuestaConOpcion">
+              <MappingFragment StoreEntitySet="RespuestaConOpcion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConsignaId" ColumnName="ConsignaId" />
+                <ScalarProperty Name="OpcionId" ColumnName="OpcionId" />
+                <ScalarProperty Name="FormularioLlenoId" ColumnName="FormularioLlenoId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RespuestasInput">
+            <EntityTypeMapping TypeName="VitaModel.RespuestasInput">
+              <MappingFragment StoreEntitySet="RespuestasInput">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FormularioLlenoId" ColumnName="FormularioLlenoId" />
+                <ScalarProperty Name="Respuesta" ColumnName="Respuesta" />
+                <ScalarProperty Name="TipoDatoIngresadoId" ColumnName="TipoDatoIngresadoId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1364,6 +2193,23 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="CategoriaId" ColumnName="CategoriaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoDatoIngresado">
+            <EntityTypeMapping TypeName="VitaModel.TipoDatoIngresado">
+              <MappingFragment StoreEntitySet="TipoDatoIngresado">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoPregunta">
+            <EntityTypeMapping TypeName="VitaModel.TipoPregunta">
+              <MappingFragment StoreEntitySet="TipoPregunta">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

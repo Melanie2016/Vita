@@ -77,7 +77,7 @@ namespace Vita.Servicios
                     ActividadId = aux.Actividad.Id,
                     Titulo = aux.Actividad.Titulo,
                     Descripcion = aux.Actividad.Titulo,
-                    FechaDesde = aux.Actividad.FechaDesde,
+                    FechaDesde = aux.Actividad.FechasActividad,      //  LO COMENTO PORQUE ME DA ERROR VALE
                     FechaHasta = aux.Actividad.FechaHasta
 
                 };
@@ -169,9 +169,6 @@ namespace Vita.Servicios
                 EdadMinima = actividadViewModel.EdadMinima,
                 EdadMaxima = actividadViewModel.EdadMaxima,
                 Precio = actividadViewModel.Precio,
-                FechaDesde = actividadViewModel.RangoFecha,
-                FechaHasta = actividadViewModel.RangoFecha,
-                CantidadDias = actividadViewModel.CantidadDias,
                 CantidadCupo = actividadViewModel.CantidadCupo,
                 CategoriaId = actividadViewModel.CategoriaId,
                 SubcategoriaId = actividadViewModel.SubCategoriaId,
