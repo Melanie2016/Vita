@@ -71,19 +71,21 @@
         $("#average").on("click", function () { //Si es empresa
             $('#persona').hide(); //oculto el formulario de persona
             $('#empresa').show(); //muestro el formulario de empresa
-            $('#avatar').hide(); //oculto la foto de perfil
+            $("#average").prop('checked', true);
+            $("#newbie").prop('checked', false);
+            
         });
 
         $("#newbie").on("click", function () { //Si es persona
             $('#persona').show(); //muestro el formulario de persona
             $('#empresa').hide(); //oculto el formulario de empresa
-            $('#avatar').show(); //muestro la foto de perfil
+            $("#newbie").prop('checked', true);
+            $("#average").prop('checked', false);
         });
 
         if ($('#newbie').prop('checked')) { //Si está seleccionado persona
             $('#empresa').hide(); //oculto el formulario de empresa
         }
-
         //FOTO DE PERFIL
         var readURL = function (input) {
             if (input.files && input.files[0]) {

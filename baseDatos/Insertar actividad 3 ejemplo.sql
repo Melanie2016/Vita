@@ -33,7 +33,7 @@ INSERT INTO [dbo].[Actividad]
            ,3
            ,3
            ,5176
-           ,1
+           ,1 /*UsuarioId*/
            ,NULL
            ,'2019-10-26'
            ,NULL
@@ -45,5 +45,26 @@ Update Actividad set Foto =
 (SELECT BulkColumn 
 /*FROM Openrowset( Bulk 'C:\Users\A307508\Source\Repos\Vita\Vita\Content\images\Zumba-adultos.jpg', Single_Blob) as img)*/ /*PARA VALE*/
 FROM Openrowset( Bulk 'C:\Proyecto final\tp final posta\Vita\Vita\Content\images\Zumba-adultos.jpg', Single_Blob) as img) /*PARA ANGIE*/
-where Id=3
+where Id=3 /*ActividadId*/
 
+INSERT INTO [dbo].[Domicilio]
+           ([NombreCalle]
+           ,[NumeroCalle]
+           ,[NumeroPiso]
+           ,[NumeroDepartamento]
+           ,[CodigoPostal]
+           ,[LocalidadId]
+           ,[UsuarioId]
+           ,[ActividadId]
+           ,[FechaRegistroEnDb])
+     VALUES
+           ('Rincón'
+           ,3170
+           ,null
+           ,null
+           ,'B1754'
+           ,5176
+           ,1 /*UsuarioId*/
+           ,3 /*ActividadId*/
+           ,null)
+GO

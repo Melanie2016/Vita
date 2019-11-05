@@ -11,7 +11,7 @@ SET IDENTITY_INSERT Categoria ON
 INSERT INTO Categoria(Id, Descripcion) VALUES (1, 'Actividades al aire libre');
 INSERT INTO Categoria(Id, Descripcion) VALUES (2, 'Campeonatos/Torneos de juegos de mesa');
 INSERT INTO Categoria(Id, Descripcion) VALUES (3, 'Deportes');
-INSERT INTO Categoria(Id, Descripcion) VALUES (4, 'Talleres/Capacitaciones/Cursos');
+INSERT INTO Categoria(Id, Descripcion) VALUES (4, 'Talleres /Capacitaciones /Cursos');
 INSERT INTO Categoria(Id, Descripcion) VALUES (5, 'Actividades de interés cultural');
 INSERT INTO Categoria(Id, Descripcion) VALUES (6, 'Excursiones');
 SET IDENTITY_INSERT Categoria OFF
@@ -19,7 +19,7 @@ SET IDENTITY_INSERT Categoria OFF
 /*SubCategoria*/
 SET IDENTITY_INSERT SubCategoria ON
 INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (1,'Caminata',1);
-INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (2,'Gimnasia de mantenimiento (de bajo impacto)',1);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (2,'Gimnasia de mantenimiento',1);
 INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (3,'Zumba al aire libre',1);
 INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (4,'Excursión',1);
 
@@ -35,7 +35,7 @@ INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (12,'Gimnasia',3);
 INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (13,'Baile, tango, zumba',3);
 INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (14,'Pilates',3);
 
-INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (15,'Taller de manualidades, dibujo, pintura',4);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (15,'Manualidades, dibujo, pintura',4);
 INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (17,'Idiomas',4);
 INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (18,'Música, folclore, coros',4);
 INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (19,'Reciclado',4);

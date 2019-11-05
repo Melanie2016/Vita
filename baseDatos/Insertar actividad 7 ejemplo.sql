@@ -33,7 +33,7 @@ INSERT INTO [dbo].[Actividad]
            ,5
            ,22
            ,570
-           ,1
+           ,1 /*UsuarioId*/
            ,NULL
            ,'2019-10-29'
            ,NULL
@@ -44,5 +44,27 @@ GO
 Update Actividad set Foto = 
 (SELECT BulkColumn 
 FROM Openrowset( Bulk 'C:\Users\A307508\Source\Repos\Vita\Vita\Content\images\teatro.jpg', Single_Blob) as img)
-where Id=7
+where Id=7 /*ActividadId*/
 
+
+INSERT INTO [dbo].[Domicilio]
+           ([NombreCalle]
+           ,[NumeroCalle]
+           ,[NumeroPiso]
+           ,[NumeroDepartamento]
+           ,[CodigoPostal]
+           ,[LocalidadId]
+           ,[UsuarioId]
+           ,[ActividadId]
+           ,[FechaRegistroEnDb])
+     VALUES
+           ('Av. Pres. Hipólito Yrigoyen'
+           ,9437
+           ,null
+           ,null
+           ,'B1828'
+           ,570
+           ,1 /*UsuarioId*/
+           ,7 /*ActividadId*/
+           ,null)
+GO
