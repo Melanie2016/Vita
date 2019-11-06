@@ -974,6 +974,7 @@
       <DependentUpon>VitaEntities.edmx</DependentUpon>
     </Content>
     <Content Include="Views\Actividad\ListaEstado.cshtml" />
+    <Content Include="Views\Usuario\RegistrarFacebook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

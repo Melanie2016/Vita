@@ -130,7 +130,9 @@ namespace Vita.Controllers
             }
         }
 
-/* Facebook controller, no borrar por ahora!
+
+        //Facebook Controller
+
         private Uri RediredtUri
 
         {
@@ -161,6 +163,7 @@ namespace Vita.Controllers
         public ActionResult Facebook()
 
         {
+
 
             var fb = new FacebookClient();
 
@@ -212,7 +215,6 @@ namespace Vita.Controllers
 
 
 
-
             });
 
             var accessToken = result.access_token;
@@ -221,8 +223,11 @@ namespace Vita.Controllers
 
             fb.AccessToken = accessToken;
 
+
             dynamic me = fb.Get("me?fields=link,first_name,currency,last_name,email,gender,locale,timezone,verified,picture,age_range");
             string email = me.email;
+
+
             TempData["email"] = me.email;
 
             TempData["first_name"] = me.first_name;
@@ -233,9 +238,9 @@ namespace Vita.Controllers
 
             FormsAuthentication.SetAuthCookie(email, false);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("RegistrarFacebook", "Usuario");
 
-        }*/
+        }
 
 
     }

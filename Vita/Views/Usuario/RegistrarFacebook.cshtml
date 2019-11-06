@@ -21,7 +21,8 @@
                 @using (Html.BeginForm("Registrar", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
 
-                    <h2 id="tipo_usuario" class="form-title">¿Qué tipo de persona eres?</h2>
+                   
+                <h2 id="tipo_usuario" class="form-title">¡Hola @TempData["first_name"]@TempData["lastname"]! ¿Qué tipo de persona eres?</h2>
 
                     <!--Tipo de persona-->
                     <center>
@@ -36,7 +37,7 @@
 
                     <!--FOTO DE PERFIL-->
                     <div class="avatar-wrapper" id="avatar">
-                        <img class="profile-pic" src="" />
+                        <img class="profile-pic" src="@TempData["picture"]" />
                         <div class="upload-button">
                             <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
                         </div>
@@ -53,14 +54,14 @@
                                 <div class="input-group">
                                     <!--Nombre-->
                                     <label class="label">Nombre</label>
-                                    <input class="input--style-4" type="text" name="Nombre">
+                                    <input class="input--style-4" type="text" name="Nombre" value="@TempData["first_name"] ">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Apellido-->
                                     <label class="label">Apellido</label>
-                                    <input class="input--style-4" type="text" name="Apellido">
+                                    <input class="input--style-4" type="text" name="Apellido" value="@TempData["lastname"] ">
                                 </div>
                             </div>
                         </div>
@@ -106,7 +107,7 @@
                                 <div class="input-group">
                                     <!--Email-->
                                     <label class="label">Email</label>
-                                    <input class="input--style-4" type="email" name="Email">
+                                    <input class="input--style-4" type="email" name="Email" value=" @TempData["email"]">
                                 </div>
                             </div>
                         </div>
@@ -234,8 +235,6 @@
                                 <a href="/Home/Index"><button class="btn btn--radius-2 btn--blue" type="button">Cancelar</button></a>
 
                             </div>
-
-
                         </div>
                     </div>
                 }
@@ -251,14 +250,14 @@
                                 <div class="input-group">
                                     <!--Nombre de la empresa-->
                                     <label class="label">Nombre</label>
-                                    <input class="input--style-4" type="text" name="Nombre">
+                                    <input class="input--style-4" type="text" name="Nombre" value="@TempData["first_name"] ">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Email de la empresa-->
                                     <label class="label">Email</label>
-                                    <input class="input--style-4" type="text" name="Email">
+                                    <input class="input--style-4" type="text" name="Email" value="@TempData["email"]">
                                 </div>
                             </div>
                         </div>
@@ -357,8 +356,6 @@
                         <div class="p-t-15">
                             <button class="btn btn--radius-2 btn--blue" type="submit">Aceptar</button>
                             <a href="/Home/Index"><button class="btn btn--radius-2 btn--blue" type="button">Cancelar</button></a>
-
-
 
 
                         </div>
@@ -488,5 +485,3 @@
         });
     });
 </script>
-
-

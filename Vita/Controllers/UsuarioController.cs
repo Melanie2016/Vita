@@ -163,6 +163,29 @@ namespace Vita.Controllers
 
         }
 
+
+        [HttpGet]
+        public ActionResult RegistrarFacebook(Usuario usuario)
+        {
+
+
+            List<Provincia> provincias = localidadServicio.GetAllProvincias();
+            ViewBag.ListaProvincia = new MultiSelectList(provincias, "id", "descripcion");
+
+            List<Sexo> sexos = sexoServicio.GetAllSexo();
+            ViewBag.ListaSexo = new MultiSelectList(sexos, "id", "descripcion");
+
+            List<Segmento> segmentos = segmentoServicio.GetAllSegmento();
+            ViewBag.ListaSegmentos = new MultiSelectList(segmentos, "id", "descripcion");
+
+            List<Categoria> intereses = categoriaServicio.GetAllCategorias();
+            ViewBag.ListaIntereses = new MultiSelectList(intereses, "id", "descripcion");
+
+            return View();
+
+        }
+
+
         [HttpGet]
         public ActionResult PerfilEntidad(Usuario usuario)
         {
