@@ -386,6 +386,9 @@ namespace Vita.Servicios
 
             return listaUsuarios;
         }
-
+        public List<TipoPregunta> GetAllTipoPreguntas()
+        {
+          return  myDbContext.TipoPregunta.OrderBy(x=>x.Descripcion).ToList();
+        }
     }
 }

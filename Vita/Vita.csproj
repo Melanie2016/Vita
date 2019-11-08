@@ -253,6 +253,8 @@
     </Compile>
     <Compile Include="ViewModels\ActividadFechaViewModel.cs" />
     <Compile Include="ViewModels\ActividadViewModel.cs" />
+    <Compile Include="ViewModels\ConsignaViewModel.cs" />
+    <Compile Include="ViewModels\FormularioDinamicoViewModel.cs" />
     <Compile Include="VitaEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1020,6 +1022,7 @@
     <Content Include="VitaEntities.edmx.diagram">
       <DependentUpon>VitaEntities.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\Actividad\CrearFormularioDinamico.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
