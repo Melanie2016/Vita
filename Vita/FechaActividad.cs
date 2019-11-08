@@ -29,6 +29,7 @@ namespace Vita
         public int ActividadId { get; set; }
     
         public virtual Actividad Actividad { get; set; }
+        public virtual DiaSemana DiaSemana { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InscripcionFecha> InscripcionFecha { get; set; }
     }

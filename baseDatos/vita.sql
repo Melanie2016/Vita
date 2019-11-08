@@ -146,6 +146,8 @@ FinEvento date  null,
 HoraInicio time not null,
 HoraFin time not null,
 ActividadId int not null,
+CONSTRAINT DiaSemanaIdfk FOREIGN KEY(DiaSemanaId)
+REFERENCES DiaSemana (id),
 CONSTRAINT ActividadFechasId FOREIGN KEY(ActividadId)
 REFERENCES Actividad (id));
 

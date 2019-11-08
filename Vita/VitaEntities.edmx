@@ -367,6 +367,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="DiaSemanaIdfk">
+          <End Role="DiaSemana" Type="Self.DiaSemana" Multiplicity="0..1" />
+          <End Role="FechaActividad" Type="Self.FechaActividad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiaSemana">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FechaActividad">
+              <PropertyRef Name="DiaSemanaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="DomicilioActividadId">
           <End Role="Actividad" Type="Self.Actividad" Multiplicity="0..1" />
           <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="*" />
@@ -716,6 +728,10 @@
             <End Role="Categoria" EntitySet="Categoria" />
             <End Role="UsuarioCategoriaElegida" EntitySet="UsuarioCategoriaElegida" />
           </AssociationSet>
+          <AssociationSet Name="DiaSemanaIdfk" Association="Self.DiaSemanaIdfk">
+            <End Role="DiaSemana" EntitySet="DiaSemana" />
+            <End Role="FechaActividad" EntitySet="FechaActividad" />
+          </AssociationSet>
           <AssociationSet Name="DomicilioActividadId" Association="Self.DomicilioActividadId">
             <End Role="Actividad" EntitySet="Actividad" />
             <End Role="Domicilio" EntitySet="Domicilio" />
@@ -903,6 +919,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FechaActividad" Relationship="Self.DiaSemanaIdfk" FromRole="DiaSemana" ToRole="FechaActividad" />
         </EntityType>
         <EntityType Name="Domicilio">
           <Key>
@@ -943,6 +960,7 @@
           <Property Name="HoraFin" Type="Time" Nullable="false" Precision="7" />
           <Property Name="ActividadId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Actividad" Relationship="Self.ActividadFechasId" FromRole="FechaActividad" ToRole="Actividad" />
+          <NavigationProperty Name="DiaSemana" Relationship="Self.DiaSemanaIdfk" FromRole="FechaActividad" ToRole="DiaSemana" />
           <NavigationProperty Name="InscripcionFecha" Relationship="Self.FechaActividadIdFk" FromRole="FechaActividad" ToRole="InscripcionFecha" />
         </EntityType>
         <EntityType Name="FormularioDinamico">
@@ -1342,6 +1360,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="DiaSemanaIdfk">
+          <End Role="DiaSemana" Type="Self.DiaSemana" Multiplicity="0..1" />
+          <End Role="FechaActividad" Type="Self.FechaActividad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiaSemana">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FechaActividad">
+              <PropertyRef Name="DiaSemanaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="DomicilioLocalidadId">
           <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
           <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="*" />
@@ -1626,6 +1656,10 @@
           <AssociationSet Name="ProvinciaDepartamentoId" Association="Self.ProvinciaDepartamentoId">
             <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Departamento" EntitySet="Departamento" />
+          </AssociationSet>
+          <AssociationSet Name="DiaSemanaIdfk" Association="Self.DiaSemanaIdfk">
+            <End Role="DiaSemana" EntitySet="DiaSemana" />
+            <End Role="FechaActividad" EntitySet="FechaActividad" />
           </AssociationSet>
           <AssociationSet Name="DomicilioLocalidadId" Association="Self.DomicilioLocalidadId">
             <End Role="Localidad" EntitySet="Localidad" />
