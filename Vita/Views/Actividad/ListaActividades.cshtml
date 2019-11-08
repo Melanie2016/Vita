@@ -68,7 +68,7 @@
                                 @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Cancelado" && x.ActividadId == i.Id).Count()
                             </td>
                             <td>
-                                @Convert.ToInt32(@i.CantidadCupo - @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count())
+                                @Convert.ToInt32(@i.CantidadCupo - @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count()) disponible de @i.CantidadCupo
                             </td>
                             <td>
                                 <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span>

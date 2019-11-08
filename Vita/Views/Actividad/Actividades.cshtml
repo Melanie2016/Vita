@@ -25,16 +25,16 @@
                                             <div class="input-field">
                                                 @if (ViewBag.Valor != "")
                                                 {
-                                                    <input id="button-search" type="text" name="textoIngresado" placeholder="Introduce el nombre de una Actividad..." value="@ViewBag.Valor" onkeypress="if (event.keyCode == 13) activarSubmit()"/>
+                                                    <input id="button-search" type="text" name="textoIngresado" placeholder="Introduce el nombre de una Actividad..." value="@ViewBag.Valor" onkeypress="if (event.keyCode == 13) activarSubmit()" />
                                                 }
                                                 else
                                                 {
-                                                    <input id="button-search" type="text" name="textoIngresado" placeholder="Introduce el nombre de una Actividad..." onkeypress="if (event.keyCode == 13) activarSubmit()"/>
+                                                    <input id="button-search" type="text" name="textoIngresado" placeholder="Introduce el nombre de una Actividad..." onkeypress="if (event.keyCode == 13) activarSubmit()" />
                                                 }
 
 
                                                 <div class="icon-wrap">
-                                                    <svg class="svg-inline--fa fa-search fa-w-16" fill="#ccc" aria-hidden="true" data-prefix="fas" data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" >
+                                                    <svg class="svg-inline--fa fa-search fa-w-16" fill="#ccc" aria-hidden="true" data-prefix="fas" data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                                         <path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
                                                     </svg>
                                                 </div>
@@ -44,54 +44,71 @@
                                             <span class="desc" id="busqueda" style="margin-right: 540px; cursor: pointer; color: #69D385; text-decoration: underline;">BÚSQUEDA AVANZADA</span>
                                             <div id="busqueda_avanzada" style="display:none">
                                                 <div class="row">
+                                                    <!--Categoria-->
                                                     <div class="input-field" style="padding: 10px">
                                                         <div class="input-select">
-                                                            <select data-trigger="" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+                                                            <select data-trigger="" id="filtroCategoria" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1)">
                                                                 <option placeholder="" value="" style="color:#00bbec;">Categoria</option>
-                                                                <option>Actividades al aire libre</option>
+                                                                @foreach (var item in ViewBag.Categorias)
+                                                                {
+                                                                    <option value="@item.Id">@item.Descripcion</option>
+                                                                }
+
                                                             </select>
                                                         </div>
                                                     </div>
+
+                                                    <!--Subcategoria-->
                                                     <div class="input-field">
-                                                        <div class="input-select">
-                                                            <select data-trigger="" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-                                                                <option placeholder="" value="">SubCategoria</option>
-                                                                <option>Caminata</option>
+                                                        <div class="input-select" id="filtroSubcategoria">
+                                                            <select data-trigger="" id="vistaSub" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+                                                                <option placeholder="" value="">Subcategoría</option>
                                                             </select>
                                                         </div>
                                                     </div>
+
+                                                    <!--Segmento-->
                                                     <div class="input-field">
                                                         <div class="input-select">
                                                             <select data-trigger="" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1)">
                                                                 <option placeholder="" value="">Segmento</option>
-                                                                <option>Jóvenes</option>
+                                                                @foreach (var item in  ViewBag.Segmentos)
+                                                                {
+                                                                    <option value="@item.Id">@item.Descripcion</option>
+                                                                }
                                                             </select>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="row second">
+                                                    <!--Provincia-->
                                                     <div class="input-field">
                                                         <div class="input-select" style="width: 220px; margin-left: 10px;">
-                                                            <select data-trigger="" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1);">
+                                                            <select data-trigger="" id="filtroProvincia" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1);">
+                                                                <option placeholder="" value="">Provincia</option>
+                                                                @foreach (var item in ViewBag.Provincias)
+                                                                {
+                                                                    <option value="@item.Id">@item.Descripcion</option>
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="input-field">
+                                                        <!--Departamento-->
+                                                        <div class="input-select" id="filtroDepartamento">
+                                                            <select data-trigger="" id="vistaDep" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+                                                                <option placeholder="" value="">Departamento</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="input-field">
+                                                        <!--Localidad-->
+                                                        <div class="input-select" id="filtroLocalidad">
+                                                            <select data-trigger="" id="vistaLoc" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1)">
                                                                 <option placeholder="" value="">Localidad</option>
-                                                                <option>San Justo</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="input-field">
-                                                        <div class="input-select">
-                                                            <select data-trigger="" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-                                                                <option placeholder="" value="">Precio</option>
-                                                                <option>Gratuitas</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="input-field">
-                                                        <div class="input-select">
-                                                            <select data-trigger="" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-                                                                <option placeholder="" value="">Edad</option>
-                                                                <option>20-30 años</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -163,8 +180,6 @@
     </script>
 </section>
 <!--FIN BUSCADOR-->
-
-
 <!--RESULTADOS-->
 <section style="margin-top:-55px">
 
@@ -189,7 +204,7 @@
                         }
                         else
                         {
-                            ViewBag.Url = "";
+                           ViewBag.Url = "/Content/images/sin_foto.png";
                         }
                         <div class="col-lg-6">
 
@@ -211,18 +226,109 @@
                                     </p>
                                 </div>
                             </div>
-                       </div>
+                        </div>
                     }
                 }
             </div>
-         </div>
+        </div>
     </div>
 </section>
 <!--FIN RESULTADOS-->
 <script>
-function activarSubmit(){
-   document.formulario1.submit()
-}
+    function activarSubmit() {
+        document.formulario1.submit()
+    }
 </script>
 <script src="~/vendor/jquery/jquery.min.js"></script>
 <script src="~/Content/js/Buscador.js"></script>
+
+
+<!-- FILTROS DE BÚSQUEDA AVANZADA -->
+@section scripts {
+    <script>
+        //Todo siempre una vez cargada la página
+        $(document).ready(function () {
+
+            //Esto corre cuando cambias de opción en el primer select
+            $('#filtroCategoria').on('change', function () {
+
+                var idCategoria = this.value;
+
+                //Si elegiste la opción de los guíones paramos aca para no hacer nada
+                if (idCategoria === 0) {
+                    return;
+                }
+
+                //Ajax SUBCATEGORIAS
+                $.ajax({
+                    url: "obtenerSubcategorias/" + this.value,
+                    type: 'GET',
+                    dataType: "json",
+                    success: function (res) {
+                        //Creando el segundo select
+                        $("#vistaSub").hide();
+                        $("#filtroSubcategoria").empty().append('<select id="filtroSub"  data-trigger="" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1); width: 239px; color: #00bbec; padding: 13px 0; font-weight: bold; font-size: 13px; padding-left: 10px; cursor: pointer; background-image: url(/Content/images/flecha.png); -webkit-appearance: none; background-repeat: no-repeat;background-position: right center; background-position-x: 94%;">');
+                        $('#filtroSub').append("<option style='color: #c3bbbb; font-weight: bold; font-size: 12px;'>Subcategoria</option>");
+                        $.each(res, function () {
+                            $('#filtroSub').append("<option style='color: #666; font-weight: bold; font-size: 12px;' value=" + this.Id + '>' + this.Descripcion + "</option>");
+                        });
+                    }
+                });
+            });
+
+            $('#filtroProvincia').on('change', function () {
+
+                var idProvincia = this.value;
+
+                //Si elegiste la opción de los guíones paramos aca para no hacer nada
+                if (idProvincia === 0) {
+                    return;
+                }
+
+                //Ajax DEPARTAMENTOS
+                $.ajax({
+                    url: "obtenerDepartamentos/" + this.value,
+                    type: 'GET',
+                    dataType: "json",
+                    success: function (res) {
+                        //Creando el segundo select
+                        $("#vistaDep").hide();
+                        $("#filtroDepartamento").empty().append('<select id="filtroDep"  data-trigger="" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1); width: 239px; color: #00bbec; padding: 13px 0; font-weight: bold; font-size: 13px; padding-left: 10px; cursor: pointer; background-image: url(/Content/images/flecha.png); -webkit-appearance: none; background-repeat: no-repeat;background-position: right center; background-position-x: 94%;">');
+                        $('#filtroDep').append("<option style='color: #c3bbbb; font-weight: bold; font-size: 12px;'>Departamento</option>");
+                        $.each(res, function () {
+                            $('#filtroDep').append("<option style='color: #666; font-weight: bold; font-size: 12px;' value=" + this.Id + '>' + this.Descripcion + "</option>");
+                        });
+
+                        //Esto corre cuando cambias de opción en el primer select
+                        $('#filtroDep').on('change', function () {
+
+                            var idDepartamento = this.value;
+
+                            //Si elegiste la opción de los guíones paramos aca para no hacer nada
+                            if (idDepartamento === 0) {
+                                return;
+                            }
+
+                            //Ajax LOCALIDADES
+                            $.ajax({
+                                url: "obtenerLocalidades/" + this.value,
+                                type: 'GET',
+                                dataType: "json",
+                                success: function (res) {
+                                    //Creando el segundo select
+                                    $("#vistaLoc").hide();
+                                    $("#filtroLocalidad").empty().append('<select id="filtroLoc"  data-trigger="" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1); width: 239px; color: #00bbec; padding: 13px 0; font-weight: bold; font-size: 13px; padding-left: 10px; cursor: pointer; background-image: url(/Content/images/flecha.png); -webkit-appearance: none; background-repeat: no-repeat;background-position: right center; background-position-x: 94%;">');
+                                    $('#filtroLoc').append("<option style='color: #c3bbbb; font-weight: bold; font-size: 12px;'>Localidad</option>");
+                                    $.each(res, function () {
+                                        $('#filtroLoc').append("<option style='color: #666; font-weight: bold; font-size: 12px;' value=" + this.Id + '>' + this.Descripcion + "</option>");
+                                    });
+                                }
+                            });
+                        });
+
+                    }
+                });
+            });
+        });
+    </script>
+}

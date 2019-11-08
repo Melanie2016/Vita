@@ -89,18 +89,39 @@
                     {
                         <li class="icons dropdown" style="margin-left: 10px;">
 
-                            <div id="ContenedorLogueado" class="user-img c-pointer position-relative" data-toggle="dropdown" style="width:155px; height:48px; margin-right: -112px;">
+                            <div id="ContenedorLogueado" class="user-img c-pointer position-relative" data-toggle="dropdown" style="width:162px; height:48px; margin-right: -112px;">
                                 <a href="javascript:void(0)" class="log-user" data-toggle="dropdown">
                                     <span style="color:#464a53; font-size: 14px;">Hola @Model.UsuarioName</span> <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
                                 </a>
-                                <span class="activity active" style="height: 13px; width: 13px; border-radius: 50%; display: inline-block; position: absolute; border: 3px solid #fff; bottom: .9rem; right: 0rem; padding: 0; left: auto; background-image: linear-gradient(230deg, #AFEDC0, #69D385)"></span>
+                                <span class="activity active" style="height: 13px; width: 13px; border-radius: 50%; display: inline-block; position: absolute; border: 3px solid #fff; bottom: .9rem; right: 0rem; left: auto; background-image: linear-gradient(230deg, #AFEDC0, #69D385); margin-right: 14px; margin-bottom: 2px;"></span>
                                 @if (Model.Foto != null && Model.Foto.Length > 0)
                                 {
                                     ViewBag.Url = "data:image;base64," + Convert.ToBase64String(Model.Foto);
                                 }
                                 else
                                 {
-                                    ViewBag.Url = "";
+                                    if (Model.Rol.Id == 2) //Entidad
+                                    {
+                                        ViewBag.Url = "/Content/images/desconocido2.png";
+                                    }
+                                    else //Usuario
+                                    {
+                                        if(Model.Sexo.Descripcion == "Masculino")
+                                        {
+                                            ViewBag.Url = "/Content/images/hombre.png";
+                                        }
+                                        else
+                                        {
+                                            if(Model.Sexo.Descripcion == "Femenino")
+                                            {
+                                                ViewBag.Url = "/Content/images/mujer.jpg";
+                                            }
+                                            else
+                                            {
+                                                ViewBag.Url = "/Content/images/desconocido.png";
+                                            }
+                                        }
+                                    }
                                 }
                                 <img src="@ViewBag.Url" height="40" width="40" alt="" style="height: 40px; width: 40px; border: 3px solid #fff; border-radius: 50%; margin: 0; padding: 0; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);">
                             </div>
@@ -108,7 +129,15 @@
                                 <div class="dropdown-content-body">
                                     <ul style="padding: 20px;">
                                         <li>
-                                            <a href="/Usuario/PerfilUsuario" style="color:#007bff;"><i></i><img src="../../Content/images/icon1.png" /> <span style="font-size: 15px;">Perfil</span></a>
+                                            @if (Model.Rol.Id == 2) //Entidad
+                                            {
+                                                ViewBag.Perfil = "/Usuario/PerfilEntidad";
+                                            }
+                                            else //Usuario
+                                            {
+                                                ViewBag.Perfil = "/Usuario/PerfilUsuario";
+                                            }
+                                            <a href="@ViewBag.Perfil" style="color:#007bff;"><i></i><img src="../../Content/images/icon1.png" /> <span style="font-size: 15px;">Perfil</span></a>
                                         </li>
                                         <li>
                                             <a href="javascript:void()" style="color:#007bff;">
