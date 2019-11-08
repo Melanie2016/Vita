@@ -14,6 +14,12 @@ namespace Vita
     
     public partial class UsuarioInscriptoActividad
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public UsuarioInscriptoActividad()
+        {
+            this.InscripcionFecha = new HashSet<InscripcionFecha>();
+        }
+    
         public int Id { get; set; }
         public Nullable<int> ActividadId { get; set; }
         public Nullable<int> UsuarioId { get; set; }
@@ -24,6 +30,8 @@ namespace Vita
     
         public virtual Actividad Actividad { get; set; }
         public virtual Estado Estado { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InscripcionFecha> InscripcionFecha { get; set; }
         public virtual Usuario Usuario { get; set; }
     }
 }

@@ -4,6 +4,9 @@ Create Database Vita
 GO
 USE Vita
 GO
+create table DiaSemana(
+Id int identity(1,1) primary key,
+Descripcion varchar(30)); 
 
 create table Provincia(
 Id int identity(1,1) primary key,
@@ -111,8 +114,8 @@ REFERENCES Categoria (Id));
 
 create Table Actividad(
 Id int identity(1,1) primary key,
-Titulo varchar(100) not null,
-Descripcion varchar(1000) not null,
+Titulo varchar(500) not null,
+Descripcion varchar(max) not null,
 EdadMinima int not null,
 EdadMaxima int,
 Precio int null,
@@ -135,22 +138,16 @@ REFERENCES Usuario (id),
 CONSTRAINT ActividadSubcategoriaId FOREIGN KEY(subcategoriaId)
 REFERENCES SubCategoria (id)
 );
-
-create table FechasActividad(
+create table FechaActividad(
 Id int identity(1,1) primary key,
-FechaDesde date null, 
-FechaHasta date null,
-LunesHorario date null,
-MartesHorario date null,
-MiercolesHorario date null,
-JuevesHorario date null,
-ViernesHorario date null,
-SabadoHorario date null,
-DomingoHorario date null,
+DiaSemanaId int null,
+InicioEvento date  null,
+FinEvento date  null,
+HoraInicio time not null,
+HoraFin time not null,
 ActividadId int not null,
 CONSTRAINT ActividadFechasId FOREIGN KEY(ActividadId)
-REFERENCES Actividad (id),
-);
+REFERENCES Actividad (id));
 
 create Table Domicilio(
 Id int identity(1,1) primary key,
@@ -199,6 +196,16 @@ REFERENCES Usuario (Id),
 CONSTRAINT UsuarioActividadEstadoInsId FOREIGN KEY(EstadoId)
 REFERENCES Estado (Id));
 
+create Table InscripcionFecha(
+Id int identity(1,1) primary key,
+UsuarioInscriptoActividadId int,
+FechaActividadId int,
+CONSTRAINT UsuarioInscriptoActividadIdFk FOREIGN KEY(UsuarioInscriptoActividadId)
+REFERENCES UsuarioInscriptoActividad (Id),
+CONSTRAINT FechaActividadIdFk FOREIGN KEY(FechaActividadId)
+REFERENCES FechaActividad (Id));
+
+
 create Table UsuarioEstadoHistorico(
 Id int identity(1,1) primary key,
 UsuarioId int,
@@ -212,101 +219,52 @@ CONSTRAINT EstadoUsuarioId FOREIGN KEY(EstadoId)
 REFERENCES Estado (Id));
 
 
-create table TipoPregunta(
-Id int identity(1,1) primary key,
-Titulo varchar(100),
-Descripcion Varchar(300)
-);
-
 create table FormularioDinamico(
 Id int identity(1,1) primary key,
 Titulo varchar(200),
 Descripcion varchar(500),
 ActividadId int,
-UsuarioEntidadId int,
+EntidadId int,
 CreatedAt Date null,
 UpdatedAt Date null, 
 DeletedAt Date null, 
 CONSTRAINT ActividadFormularioId FOREIGN KEY(ActividadId)
 REFERENCES Actividad (Id),
-CONSTRAINT UsuarioEntidadFormularioId FOREIGN KEY(UsuarioEntidadId)
+CONSTRAINT EntidadFormularioId FOREIGN KEY(EntidadId)
 REFERENCES Usuario (Id));
 
-create table TipoDatoIngresado(
+create table TipoDatoCampo(
 Id int identity(1,1) primary key,
 Descripcion varchar(20) /* Numero, texto, fecha, opcion */
 );
-create table Consigna(
+create table Campos(
 Id int identity(1,1) primary key,
-Titulo varchar(100),
-Descripcion varchar(500) null,
-TipoPreguntaId int,
+Nombre varchar(max) null,
 FormularioDinamicoId int,
-TipoDatoIngresado int null,
+TipoDatoCampoId int null,
+Obligatorio bit null,
 CreatedAt Date null,
 UpdatedAt Date null, 
 DeletedAt Date null, 
-CONSTRAINT TipoPreguntaConsignaId FOREIGN KEY(TipoPreguntaId)
-REFERENCES TipoPregunta (Id),
-CONSTRAINT FormularioConsignaId FOREIGN KEY(FormularioDinamicoId)
+CONSTRAINT TipoDatoCampoIdFk FOREIGN KEY(TipoDatoCampoId)
+REFERENCES TipoDatoCampo (Id),
+CONSTRAINT FormularioDinamicoIdpk FOREIGN KEY(FormularioDinamicoId)
 REFERENCES FormularioDinamico (Id));
 
-create table Opcion(     
-Id int identity(1,1) primary key,
-DescripcionOpcion varchar(200),
-ConsignaId int,
-FormularioDinamicoId int, 
-CreatedAt Date null,
-UpdatedAt Date null, 
-DeletedAt Date null, 
-CONSTRAINT ConsignaOpcionId FOREIGN KEY(ConsignaId)
-REFERENCES Consigna (Id),
-CONSTRAINT FormularioDinamicocId FOREIGN KEY(FormularioDinamicoId)
-REFERENCES FormularioDinamico (Id));
 
-create table FormularioLleno(
+create table Respuesta(
 Id int identity(1,1) primary key,
-EntidadId int,
+CamposId int,
 UsuarioId int, 
-FormularioDinamicoId int,
+Respuesta varchar(max),
 CreatedAt Date null,
 UpdatedAt Date null, 
-DeletedAt Date null,
-CONSTRAINT FormuDinaFormularioLlenoId FOREIGN KEY(FormularioDinamicoId)
-REFERENCES FormularioDinamico (Id),
-CONSTRAINT EntidadFormularioLlenoId FOREIGN KEY(EntidadId)
-REFERENCES Usuario (Id),
-CONSTRAINT UsuarioFormularioLlenoId FOREIGN KEY(UsuarioId)
+DeletedAt Date null, 
+CONSTRAINT CamposIdFk FOREIGN KEY(CamposId)
+REFERENCES Campos (Id),
+CONSTRAINT UsuarioIdfk FOREIGN KEY(UsuarioId)
 REFERENCES Usuario (Id));
 
-create table RespuestaConOpcion(
-Id int identity(1,1) primary key,
-ConsignaId int,
-OpcionId int,
-FormularioLlenoId int,
-CreatedAt Date null,
-UpdatedAt Date null, 
-DeletedAt Date null,
-CONSTRAINT RespuestaConsignaOpcionFormularioLlenoId FOREIGN KEY(FormularioLlenoId)
-REFERENCES FormularioLleno (Id),
-CONSTRAINT RespuestaConsignaOpcionId FOREIGN KEY(ConsignaId)
-REFERENCES Consigna (Id),
-CONSTRAINT RespuestaOpcionConsignaId FOREIGN KEY(OpcionId)
-REFERENCES Opcion (Id));
-
-
-create table RespuestasInput(
-Id int identity(1,1) primary key,
-FormularioLlenoId int,
-Respuesta varchar(500), 
-TipoDatoIngresadoId int,
-CreatedAt Date null,
-UpdatedAt Date null, 
-DeletedAt Date null
-CONSTRAINT FormularioLlenoRespuestaId FOREIGN KEY(FormularioLlenoId)
-REFERENCES FormularioLleno (Id),
-CONSTRAINT RespuestaInputTipoDatod FOREIGN KEY(TipoDatoIngresadoId)
-REFERENCES TipoDatoIngresado (Id));
 
 
 

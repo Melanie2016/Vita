@@ -17,7 +17,7 @@ namespace Vita
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Actividad()
         {
-            this.FechasActividad = new HashSet<FechasActividad>();
+            this.FechaActividad = new HashSet<FechaActividad>();
             this.FormularioDinamico = new HashSet<FormularioDinamico>();
             this.ActividadSegmento = new HashSet<ActividadSegmento>();
             this.UsuarioInscriptoActividad = new HashSet<UsuarioInscriptoActividad>();
@@ -42,7 +42,7 @@ namespace Vita
         public Nullable<bool> Compleja { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FechasActividad> FechasActividad { get; set; }
+        public virtual ICollection<FechaActividad> FechaActividad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FormularioDinamico> FormularioDinamico { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

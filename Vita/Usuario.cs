@@ -20,8 +20,7 @@ namespace Vita
             this.Actividad = new HashSet<Actividad>();
             this.Domicilio = new HashSet<Domicilio>();
             this.FormularioDinamico = new HashSet<FormularioDinamico>();
-            this.FormularioLleno = new HashSet<FormularioLleno>();
-            this.FormularioLleno1 = new HashSet<FormularioLleno>();
+            this.Respuesta = new HashSet<Respuesta>();
             this.UsuarioInscriptoActividad = new HashSet<UsuarioInscriptoActividad>();
             this.UsuarioCategoriaElegida = new HashSet<UsuarioCategoriaElegida>();
             this.UsuarioEstadoHistorico = new HashSet<UsuarioEstadoHistorico>();
@@ -54,11 +53,9 @@ namespace Vita
         public virtual ICollection<Domicilio> Domicilio { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FormularioDinamico> FormularioDinamico { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FormularioLleno> FormularioLleno { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FormularioLleno> FormularioLleno1 { get; set; }
         public virtual Localidad Localidad { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Respuesta> Respuesta { get; set; }
         public virtual Rol Rol { get; set; }
         public virtual Sexo Sexo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

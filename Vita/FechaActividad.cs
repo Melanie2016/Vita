@@ -12,18 +12,24 @@ namespace Vita
     using System;
     using System.Collections.Generic;
     
-    public partial class TipoDatoIngresado
+    public partial class FechaActividad
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TipoDatoIngresado()
+        public FechaActividad()
         {
-            this.RespuestasInput = new HashSet<RespuestasInput>();
+            this.InscripcionFecha = new HashSet<InscripcionFecha>();
         }
     
         public int Id { get; set; }
-        public string Descripcion { get; set; }
+        public Nullable<int> DiaSemanaId { get; set; }
+        public Nullable<System.DateTime> InicioEvento { get; set; }
+        public Nullable<System.DateTime> FinEvento { get; set; }
+        public System.TimeSpan HoraInicio { get; set; }
+        public System.TimeSpan HoraFin { get; set; }
+        public int ActividadId { get; set; }
     
+        public virtual Actividad Actividad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RespuestasInput> RespuestasInput { get; set; }
+        public virtual ICollection<InscripcionFecha> InscripcionFecha { get; set; }
     }
 }

@@ -17,27 +17,21 @@ namespace Vita
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public FormularioDinamico()
         {
-            this.Consigna = new HashSet<Consigna>();
-            this.FormularioLleno = new HashSet<FormularioLleno>();
-            this.Opcion = new HashSet<Opcion>();
+            this.Campos = new HashSet<Campos>();
         }
     
         public int Id { get; set; }
         public string Titulo { get; set; }
         public string Descripcion { get; set; }
         public Nullable<int> ActividadId { get; set; }
-        public Nullable<int> UsuarioEntidadId { get; set; }
+        public Nullable<int> EntidadId { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
     
         public virtual Actividad Actividad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Consigna> Consigna { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FormularioLleno> FormularioLleno { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Opcion> Opcion { get; set; }
+        public virtual ICollection<Campos> Campos { get; set; }
         public virtual Usuario Usuario { get; set; }
     }
 }

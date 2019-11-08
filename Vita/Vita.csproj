@@ -164,10 +164,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Categoria.cs">
+    <Compile Include="Campos.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Consigna.cs">
+    <Compile Include="Categoria.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ActividadController.cs" />
@@ -177,38 +177,35 @@
     <Compile Include="Departamento.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DiaSemana.cs">
+      <DependentUpon>VitaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domicilio.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Estado.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="FechasActividad.cs">
+    <Compile Include="FechaActividad.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="FormularioDinamico.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="FormularioLleno.cs">
-      <DependentUpon>VitaEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Localidad.cs">
+    <Compile Include="InscripcionFecha.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Opcion.cs">
+    <Compile Include="Localidad.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provincia.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="RespuestaConOpcion.cs">
-      <DependentUpon>VitaEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RespuestasInput.cs">
+    <Compile Include="Respuesta.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Rol.cs">
@@ -230,10 +227,7 @@
     <Compile Include="SubCategoria.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="TipoDatoIngresado.cs">
-      <DependentUpon>VitaEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TipoPregunta.cs">
+    <Compile Include="TipoDatoCampo.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Usuario.cs">
@@ -1013,6 +1007,8 @@
     <Content Include="Views\Home\BuscadorAvanzado.cshtml" />
     <Content Include="Views\Actividad\Actividades.cshtml" />
     <Content Include="Views\Actividad\ListaEstado.cshtml" />
+    <Content Include="Views\Actividad\ListaEstado.cshtml" />
+    <Content Include="Views\Usuario\RegistrarFacebook.cshtml" />
     <EntityDeploy Include="VitaEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>VitaEntities.Designer.cs</LastGenOutput>
@@ -1020,8 +1016,6 @@
     <Content Include="VitaEntities.edmx.diagram">
       <DependentUpon>VitaEntities.edmx</DependentUpon>
     </Content>
-    <Content Include="Views\Actividad\ListaEstado.cshtml" />
-    <Content Include="Views\Usuario\RegistrarFacebook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

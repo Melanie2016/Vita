@@ -12,19 +12,17 @@ namespace Vita
     using System;
     using System.Collections.Generic;
     
-    public partial class TipoPregunta
+    public partial class Respuesta
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TipoPregunta()
-        {
-            this.Consigna = new HashSet<Consigna>();
-        }
-    
         public int Id { get; set; }
-        public string Titulo { get; set; }
-        public string Descripcion { get; set; }
+        public Nullable<int> CamposId { get; set; }
+        public Nullable<int> UsuarioId { get; set; }
+        public string Respuesta1 { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public Nullable<System.DateTime> DeletedAt { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Consigna> Consigna { get; set; }
+        public virtual Campos Campos { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

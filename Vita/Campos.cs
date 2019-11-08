@@ -12,25 +12,26 @@ namespace Vita
     using System;
     using System.Collections.Generic;
     
-    public partial class Opcion
+    public partial class Campos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Opcion()
+        public Campos()
         {
-            this.RespuestaConOpcion = new HashSet<RespuestaConOpcion>();
+            this.Respuesta = new HashSet<Respuesta>();
         }
     
         public int Id { get; set; }
-        public string DescripcionOpcion { get; set; }
-        public Nullable<int> ConsignaId { get; set; }
+        public string Nombre { get; set; }
         public Nullable<int> FormularioDinamicoId { get; set; }
+        public Nullable<int> TipoDatoCampoId { get; set; }
+        public Nullable<bool> Obligatorio { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
     
-        public virtual Consigna Consigna { get; set; }
-        public virtual FormularioDinamico FormularioDinamico { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RespuestaConOpcion> RespuestaConOpcion { get; set; }
+        public virtual ICollection<Respuesta> Respuesta { get; set; }
+        public virtual FormularioDinamico FormularioDinamico { get; set; }
+        public virtual TipoDatoCampo TipoDatoCampo { get; set; }
     }
 }

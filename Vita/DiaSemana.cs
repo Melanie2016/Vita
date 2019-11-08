@@ -12,17 +12,9 @@ namespace Vita
     using System;
     using System.Collections.Generic;
     
-    public partial class RespuestasInput
+    public partial class DiaSemana
     {
         public int Id { get; set; }
-        public Nullable<int> FormularioLlenoId { get; set; }
-        public string Respuesta { get; set; }
-        public Nullable<int> TipoDatoIngresadoId { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
-        public Nullable<System.DateTime> UpdatedAt { get; set; }
-        public Nullable<System.DateTime> DeletedAt { get; set; }
-    
-        public virtual FormularioLleno FormularioLleno { get; set; }
-        public virtual TipoDatoIngresado TipoDatoIngresado { get; set; }
+        public string Descripcion { get; set; }
     }
 }

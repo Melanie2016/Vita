@@ -27,25 +27,23 @@ namespace Vita
     
         public virtual DbSet<Actividad> Actividad { get; set; }
         public virtual DbSet<ActividadSegmento> ActividadSegmento { get; set; }
+        public virtual DbSet<Campos> Campos { get; set; }
         public virtual DbSet<Categoria> Categoria { get; set; }
-        public virtual DbSet<Consigna> Consigna { get; set; }
         public virtual DbSet<Departamento> Departamento { get; set; }
+        public virtual DbSet<DiaSemana> DiaSemana { get; set; }
         public virtual DbSet<Domicilio> Domicilio { get; set; }
         public virtual DbSet<Estado> Estado { get; set; }
-        public virtual DbSet<FechasActividad> FechasActividad { get; set; }
+        public virtual DbSet<FechaActividad> FechaActividad { get; set; }
         public virtual DbSet<FormularioDinamico> FormularioDinamico { get; set; }
-        public virtual DbSet<FormularioLleno> FormularioLleno { get; set; }
+        public virtual DbSet<InscripcionFecha> InscripcionFecha { get; set; }
         public virtual DbSet<Localidad> Localidad { get; set; }
-        public virtual DbSet<Opcion> Opcion { get; set; }
         public virtual DbSet<Provincia> Provincia { get; set; }
-        public virtual DbSet<RespuestaConOpcion> RespuestaConOpcion { get; set; }
-        public virtual DbSet<RespuestasInput> RespuestasInput { get; set; }
+        public virtual DbSet<Respuesta> Respuesta { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
         public virtual DbSet<Segmento> Segmento { get; set; }
         public virtual DbSet<Sexo> Sexo { get; set; }
         public virtual DbSet<SubCategoria> SubCategoria { get; set; }
-        public virtual DbSet<TipoDatoIngresado> TipoDatoIngresado { get; set; }
-        public virtual DbSet<TipoPregunta> TipoPregunta { get; set; }
+        public virtual DbSet<TipoDatoCampo> TipoDatoCampo { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<UsuarioCategoriaElegida> UsuarioCategoriaElegida { get; set; }
         public virtual DbSet<UsuarioEstadoHistorico> UsuarioEstadoHistorico { get; set; }
