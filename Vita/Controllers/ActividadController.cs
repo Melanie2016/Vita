@@ -1,17 +1,11 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
 using Vita.Servicios;
 using Vita.ViewModels;
-
-using Twilio.Rest.Api.V2010.Account;
-using Twilio;
 
 namespace Vita.Controllers
 {
@@ -91,8 +85,8 @@ namespace Vita.Controllers
             ViewBag.Domicilio = actividad.Domicilio.FirstOrDefault();
 
             //obtengo usuario logueado
-                if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
-             {
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
                 var user = new Usuario();
 
                 if (inscribirse == "true")
@@ -100,48 +94,47 @@ namespace Vita.Controllers
                     ViewBag.IniciarSesion = "true";
                 }
 
-                    return View(user);
+                return View(user);
             }
-             else
-             {
-                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+            else
+            {
+                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
 
-                    if (inscribirse == "true")
+                if (inscribirse == "true")
+                {
+                    var resultado = actividadServicio.InscribirUsuarioEnActividad(buscarUsuarioLogueado, idActividad, "1"); //Aprobado
+                    ViewBag.Resultado = resultado;
+
+                    if (resultado == 1)
                     {
-                       var resultado = actividadServicio.InscribirUsuarioEnActividad(buscarUsuarioLogueado, idActividad, "1"); //Aprobado
-                        ViewBag.Resultado = resultado;
+                        var mensaje = "Su inscripción ha sido exitosa. Puede ir a su perfil para ver sus actividades";
+                        ViewBag.Mensaje = mensaje;
 
-                        if (resultado == 1)
-                        {
-                            var mensaje = "Su inscripción ha sido exitosa. Puede ir a su perfil para ver sus actividades";
-                            ViewBag.Mensaje = mensaje;
+                        //Notificaciones de whatsap
+                       /* var accountSid = "ACe4ace95ec1876ed6708c1005e641c841";
+                        var authToken = "";
 
-                            //Notificaciones de whatsap
-                            var accountSid = "ACe4ace95ec1876ed6708c1005e641c841";
-                            var authToken = "d64586e41962636783566d12ef4c103e";
+                        TwilioClient.Init(accountSid, authToken);
 
-                            TwilioClient.Init(accountSid, authToken);
+                        var tituloActividad = actividad.Titulo;
 
-                            var tituloActividad = actividad.Titulo;
-                         //   var fechaActividad = actividad.FechaDesde.ToString();
-
-                            var message = MessageResource.Create(
-                                from: new Twilio.Types.PhoneNumber("whatsapp:+14155238886"),
-                                body: "Your " + tituloActividad + " te inscribiste a la actividad " ,//+ fechaActividad,
-                                to: new Twilio.Types.PhoneNumber("whatsapp:+5491154972671")
-                            );
+                        var message = MessageResource.Create(
+                            from: new Twilio.Types.PhoneNumber("whatsapp:+14155238886"),
+                            body: "Tu inscripción a la actividad " + tituloActividad + " ha sido exitosa! ",
+                            to: new Twilio.Types.PhoneNumber("whatsapp:+5491127814553")
+                        );
 
 
-                            var respuestaApi = message.Sid;
-                        }
-                        else
-                        {
-                            ViewBag.Mensaje = "Hubo un error al realizar la inscripción";
-                        }
+                        var respuestaApi = message.Sid;*/
                     }
+                    else
+                    {
+                        ViewBag.Mensaje = "Hubo un error al realizar la inscripción";
+                    }
+                }
 
                 return View(buscarUsuarioLogueado);
-             }
+            }
         }
 
         public ActionResult ListaActividades()
@@ -172,7 +165,7 @@ namespace Vita.Controllers
             ViewBag.Contador = lista.Count();
             ViewBag.Valor = textoIngresado;
             ViewBag.Categorias = categoriaServicio.GetAllCategorias(); //obtengo todas las categorias para el filtro
-            ViewBag.Segmentos   = segmentoServicio.GetAllSegmento(); //obtengo todos los segmentos para el filtro
+            ViewBag.Segmentos = segmentoServicio.GetAllSegmento(); //obtengo todos los segmentos para el filtro
             ViewBag.Provincias = localidadServicio.GetAllProvincias(); //obtengo todas las provincias para el filtro
 
             //obtengo usuario logueado
@@ -192,7 +185,7 @@ namespace Vita.Controllers
         public ActionResult Actividades(Usuario usuario, string categoriaId)
         {
             ViewBag.Categorias = categoriaServicio.GetAllCategorias(); //obtengo todas las categorias para el filtro
-            ViewBag.Segmentos   = segmentoServicio.GetAllSegmento(); //obtengo todos los segmentos para el filtro
+            ViewBag.Segmentos = segmentoServicio.GetAllSegmento(); //obtengo todos los segmentos para el filtro
             ViewBag.Provincias = localidadServicio.GetAllProvincias(); //obtengo todas las provincias para el filtro
 
             if (categoriaId == null)
@@ -207,7 +200,7 @@ namespace Vita.Controllers
                 ViewBag.Lista = lista2;
                 ViewBag.Contador = lista2.Count();
             }
-           
+
             var usuarioLogueado = usuario;
             if (usuarioLogueado.Id == 0)
             {
@@ -295,7 +288,7 @@ namespace Vita.Controllers
         public string ObtenerLocalidades(int? id)
         {
             List<Localidad> localidades = localidadServicio.GetLocalidadesByDepartamentoId(id);
-         
+
             string result = JsonConvert.SerializeObject(localidades,
                 new JsonSerializerSettings
                 {
@@ -315,7 +308,7 @@ namespace Vita.Controllers
             else
             {
                 buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
-              //  var actividadesPorEstado = actividadServicio.GetByEstadoId(estadoId, actividadId);
+                //  var actividadesPorEstado = actividadServicio.GetByEstadoId(estadoId, actividadId);
                 ViewBag.ListaUsuario = actividadServicio.GetUsuariosByEstadoId(estadoId, actividadId);
 
                 return View(buscarUsuarioLogueado);

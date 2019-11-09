@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Web;
 using Vita.ViewModels;
 
 namespace Vita.Servicios
@@ -15,7 +14,7 @@ namespace Vita.Servicios
         private VitaEntities myDbContext = new VitaEntities();
         public Actividad GetActividad(int ActividadId)//por id de actividad
         {
-            var act= myDbContext.Actividad.Find(ActividadId);
+            var act = myDbContext.Actividad.Find(ActividadId);
             if (act.Localidad == null)
             {
                 act.Localidad = localidadServicio.GetLocalidadById(act.LocalidadId);
@@ -28,13 +27,13 @@ namespace Vita.Servicios
             {
                 act.SubCategoria = categoriaServicio.GetSubCategoriaById(act.SubcategoriaId);
             }
-            if(act.Usuario == null)
+            if (act.Usuario == null)
             {
                 act.Usuario = usuarioServicio.GetById(act.UsuarioId.Value);
             }
-            if(act.Domicilio == null || act.Domicilio.Count== 0)
+            if (act.Domicilio == null || act.Domicilio.Count == 0)
             {
-                var domi= localidadServicio.GetDomicilioByActividadId(act.Id);
+                var domi = localidadServicio.GetDomicilioByActividadId(act.Id);
                 act.Domicilio.Add(domi);
             }
             return act;
@@ -47,11 +46,11 @@ namespace Vita.Servicios
             //hago una lista para las actividades de ese usuario
 
             var listaActividadDelUsuario = (from ua in myDbContext.UsuarioInscriptoActividad
-                         join a in myDbContext.Actividad
-                          on ua.ActividadId equals a.Id
-                         join u in myDbContext.Usuario
-                          on ua.UsuarioId equals idUsuario
-                          select ua).ToList();
+                                            join a in myDbContext.Actividad
+                                             on ua.ActividadId equals a.Id
+                                            join u in myDbContext.Usuario
+                                             on ua.UsuarioId equals idUsuario
+                                            select ua).ToList();
 
 
             /*
@@ -77,8 +76,8 @@ namespace Vita.Servicios
                     ActividadId = aux.Actividad.Id,
                     Titulo = aux.Actividad.Titulo,
                     Descripcion = aux.Actividad.Titulo,
-                   // FechaDesde = aux.Actividad.FechasActividad,      //  LO COMENTO PORQUE ME DA ERROR VALE
-                  //  FechaHasta = aux.Actividad.FechaHasta
+                    // FechaDesde = aux.Actividad.FechasActividad,      //  LO COMENTO PORQUE ME DA ERROR VALE
+                    //  FechaHasta = aux.Actividad.FechaHasta
 
                 };
                 //luego lo agrego a la lista del vieewModel
@@ -90,22 +89,22 @@ namespace Vita.Servicios
 
         public List<Actividad> GetAllActividadByRolEntidadId(int usuarioId) //lista de activiades por entidad id
         {
-            var actividades= myDbContext.Actividad.Where(x => x.UsuarioId == usuarioId).ToList();
+            var actividades = myDbContext.Actividad.Where(x => x.UsuarioId == usuarioId).ToList();
             var actividadConTodo = new List<Actividad>();
-           foreach(var act in actividades)
-           {
-                if(act.Localidad == null)
+            foreach (var act in actividades)
+            {
+                if (act.Localidad == null)
                 {
                     act.Localidad = localidadServicio.GetLocalidadById(act.LocalidadId);
                 }
-                if(act.Categoria == null)
+                if (act.Categoria == null)
                 {
                     act.Categoria = categoriaServicio.GetCategoriaById(act.CategoriaId);
                 }
-                if(act.SubCategoria == null)
+                if (act.SubCategoria == null)
                 {
                     act.SubCategoria = categoriaServicio.GetSubCategoriaById(act.SubcategoriaId);
-                }            
+                }
                 if (act.Usuario == null)
                 {
                     act.Usuario = usuarioServicio.GetById(act.UsuarioId.Value);
@@ -158,10 +157,6 @@ namespace Vita.Servicios
         }
         public void CrearActividad(ActividadViewModel actividadViewModel, Usuario usuario, int[] selectedSegmento)
         {
-            if(actividadViewModel.SubCategoriaId == 0) //por ahora
-            {
-                actividadViewModel.SubCategoriaId = 3;
-            }
             Actividad actividadNueva = new Actividad
             {
                 Titulo = actividadViewModel.Titulo,
@@ -172,16 +167,16 @@ namespace Vita.Servicios
                 CantidadCupo = actividadViewModel.CantidadCupo,
                 CategoriaId = actividadViewModel.CategoriaId,
                 SubcategoriaId = actividadViewModel.SubCategoriaId,
-                LocalidadId = actividadViewModel.DomicilioLocalidadId,
-                Compleja = actividadViewModel.Compleja,
+                LocalidadId = actividadViewModel.LocalidadId,
                 UsuarioId = usuario.Id,
-
                 // Foto= actividad.Foto una actividad puede tener varias fotos
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                Compleja = actividadViewModel.Compleja,
             };
 
             myDbContext.Actividad.Add(actividadNueva);
             myDbContext.SaveChanges();
+
             Domicilio domicilioNuevo = new Domicilio
             {
                 NombreCalle = actividadViewModel.NombreCalle,
@@ -189,17 +184,143 @@ namespace Vita.Servicios
                 NumeroPiso = actividadViewModel.NumeroPiso,
                 NumeroDepartamento = actividadViewModel.NumeroDepartamento,
                 CodigoPostal = actividadViewModel.CodigoPostal,
-                LocalidadId = actividadViewModel.DomicilioLocalidadId,
+                LocalidadId = actividadViewModel.LocalidadId,
                 UsuarioId = usuario.Id,
                 ActividadId = actividadNueva.Id,
                 FechaRegistroEnDb = DateTime.Now
             };
-           
+
             myDbContext.Domicilio.Add(domicilioNuevo);
             myDbContext.SaveChanges();
             this.CrearSegmentoActividad(actividadNueva.Id, selectedSegmento);
 
+            //Tiene una fecha de inicio y fin
+            if (actividadViewModel.InicioEvento != null)
+            {
+                FechaActividad fechasActividadNuevo = new FechaActividad
+                {
+                    InicioEvento = Convert.ToDateTime(actividadViewModel.InicioEvento),
+                    FinEvento = Convert.ToDateTime(actividadViewModel.FinEvento),
+                    HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicio),
+                    HoraFin = TimeSpan.Parse(actividadViewModel.HoraFin),
+                    ActividadId = actividadNueva.Id
+                };
+
+                myDbContext.FechaActividad.Add(fechasActividadNuevo);
+                myDbContext.SaveChanges();
+            }
+            else
+            {
+                //Tiene varios dias a la semana con horarios
+
+                //Tiene Lunes
+                if (actividadViewModel.HoraInicioLunes != null)
+                {
+                    FechaActividad fechasActividadLunes = new FechaActividad
+                    {
+                        DiaSemanaId = 1,
+                        HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioLunes),
+                        HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinLunes),
+                        ActividadId = actividadNueva.Id
+                    };
+
+                    myDbContext.FechaActividad.Add(fechasActividadLunes);
+                    myDbContext.SaveChanges();
+                }
+
+                //Tiene Martes
+                if (actividadViewModel.HoraInicioMartes != null)
+                {
+                    FechaActividad fechasActividadMartes = new FechaActividad
+                    {
+                        DiaSemanaId = 2,
+                        HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMartes),
+                        HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMartes),
+                        ActividadId = actividadNueva.Id
+                    };
+
+                    myDbContext.FechaActividad.Add(fechasActividadMartes);
+                    myDbContext.SaveChanges();
+                }
+
+                //Tiene Miércoles
+                if (actividadViewModel.HoraInicioMiercoles != null)
+                {
+                    FechaActividad fechasActividadMiercoles = new FechaActividad
+                    {
+                        DiaSemanaId = 3,
+                        HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMiercoles),
+                        HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMiercoles),
+                        ActividadId = actividadNueva.Id
+                    };
+
+                    myDbContext.FechaActividad.Add(fechasActividadMiercoles);
+                    myDbContext.SaveChanges();
+                }
+
+                //Tiene Jueves
+                if (actividadViewModel.HoraInicioJueves != null)
+                {
+                    FechaActividad fechasActividadJueves = new FechaActividad
+                    {
+                        DiaSemanaId = 4,
+                        HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioJueves),
+                        HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinJueves),
+                        ActividadId = actividadNueva.Id
+                    };
+
+                    myDbContext.FechaActividad.Add(fechasActividadJueves);
+                    myDbContext.SaveChanges();
+                }
+
+                //Tiene Viernes
+                if (actividadViewModel.HoraInicioViernes != null)
+                {
+                    FechaActividad fechasActividadViernes = new FechaActividad
+                    {
+                        DiaSemanaId = 5,
+                        HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioViernes),
+                        HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinViernes),
+                        ActividadId = actividadNueva.Id
+                    };
+
+                    myDbContext.FechaActividad.Add(fechasActividadViernes);
+                    myDbContext.SaveChanges();
+                }
+
+                //Tiene Sábado
+                if (actividadViewModel.HoraInicioSabado != null)
+                {
+                    FechaActividad fechasActividadSabado = new FechaActividad
+                    {
+                        DiaSemanaId = 6,
+                        HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioSabado),
+                        HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinSabado),
+                        ActividadId = actividadNueva.Id
+                    };
+
+                    myDbContext.FechaActividad.Add(fechasActividadSabado);
+                    myDbContext.SaveChanges();
+                }
+
+                //Tiene Domingo
+                if (actividadViewModel.HoraInicioDomingo != null)
+                {
+                    FechaActividad fechasActividadDomingo = new FechaActividad
+                    {
+                        DiaSemanaId = 7,
+                        HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioDomingo),
+                        HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinDomingo),
+                        ActividadId = actividadNueva.Id
+                    };
+
+                    myDbContext.FechaActividad.Add(fechasActividadDomingo);
+                    myDbContext.SaveChanges();
+                }
+
+            }
         }
+
         public void CrearSegmentoActividad(int actividadId, int[] selectedSegmento)
         {
             foreach (var segmento in selectedSegmento)
@@ -259,8 +380,8 @@ namespace Vita.Servicios
                 lista.AddRange(listaPrecio);//agrego a la lista las que coinciden, tuve que hacerlo separado porque no quiere el where todo junto :(
                 lista.AddRange(listaEdad);
             }
-            
-            foreach(var act in lista)
+
+            foreach (var act in lista)
             {
                 var actividadValidad = GetActividad(act.Id);
                 listaVali.Add(actividadValidad);
@@ -273,7 +394,7 @@ namespace Vita.Servicios
             int id = int.Parse(categoriaId);
             var lista2 = new List<Actividad>();
             var lista = myDbContext.Actividad.Where(x => x.CategoriaId == id).ToList();
-            foreach(var act in lista)
+            foreach (var act in lista)
             {
                 if (act.Localidad == null)
                 {
@@ -352,7 +473,7 @@ namespace Vita.Servicios
 
 
         // falta hacer query 
-        public List<Actividad> GetActividadesConDescripcionYFechaSegunUsuario(int usuarioId) 
+        public List<Actividad> GetActividadesConDescripcionYFechaSegunUsuario(int usuarioId)
         {
             var listaActividad = new List<Actividad>();
             var listaUsuarioInscriptoActividad = myDbContext.UsuarioInscriptoActividad.Where(x => x.UsuarioId == usuarioId).ToList();
@@ -367,8 +488,8 @@ namespace Vita.Servicios
         public List<Actividad> GetByEstadoId(int estadoId, int actividadId)
         {
             var listaActividad = new List<Actividad>();
-            var listaUsuarioInscriptoActividad = myDbContext.UsuarioInscriptoActividad.Where(x => x.ActividadId == actividadId && x.EstadoId==estadoId).ToList();
-            foreach(var li in listaUsuarioInscriptoActividad)
+            var listaUsuarioInscriptoActividad = myDbContext.UsuarioInscriptoActividad.Where(x => x.ActividadId == actividadId && x.EstadoId == estadoId).ToList();
+            foreach (var li in listaUsuarioInscriptoActividad)
             {
                 listaActividad.Add(li.Actividad);
             }

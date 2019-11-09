@@ -7,9 +7,6 @@ INSERT INTO [dbo].[Actividad]
            ,[EdadMinima]
            ,[EdadMaxima]
            ,[Precio]
-           ,[FechaDesde]
-           ,[FechaHasta]
-           ,[CantidadDias]
            ,[CantidadCupo]
            ,[CategoriaId]
            ,[SubcategoriaId]
@@ -23,29 +20,28 @@ INSERT INTO [dbo].[Actividad]
      VALUES
            ('Taller de Arte'
            ,'Pintura-Dibujo-Chicos-Adultos. Un espacio pensado y equipado para disfrutar, jugar, explorar y experimentar con ideas, objetos y situaciones.'
-           ,18
+           ,11
            ,70
-           ,100
-           ,'2019-10-29'
-           ,'2019-10-30'
-           ,2
-           ,25
+           ,150
+           ,20
            ,4
            ,15
-           ,5475
-           ,1 /*UsuarioId*/
+           ,5475 /*LocalidadId Villa Devoto*/
+           ,3 /*UsuarioId*/
            ,NULL
-           ,'2019-10-29'
+           ,'2019-11-08'
            ,NULL
            ,NULL
            ,NULL)
 GO
 
+/*FOTO*/
 Update Actividad set Foto = 
 (SELECT BulkColumn 
 FROM Openrowset( Bulk 'C:\Users\A307508\Source\Repos\Vita\Vita\Content\images\taller_arte.jpg', Single_Blob) as img)
 where Id=5 /*ActividadId*/
 
+/*DOMICILIO*/
 INSERT INTO [dbo].[Domicilio]
            ([NombreCalle]
            ,[NumeroCalle]
@@ -63,7 +59,42 @@ INSERT INTO [dbo].[Domicilio]
            ,null
            ,null
            ,5475
-           ,1 /*UsuarioId*/
+           ,3 /*UsuarioId*/
            ,5 /*ActividadId*/
            ,null)
+GO
+
+
+/*FECHAS*/
+INSERT INTO [dbo].[FechaActividad]
+           ([DiaSemanaId] 
+           ,[InicioEvento]
+           ,[FinEvento]
+           ,[HoraInicio]
+           ,[HoraFin]
+           ,[ActividadId])
+     VALUES
+           (1 /*Lunes*/
+           ,null
+           ,null
+           ,'15:00:00'
+           ,'16:00:00'
+           ,5) /*ActividadId*/
+GO
+
+/*FECHAS*/
+INSERT INTO [dbo].[FechaActividad]
+           ([DiaSemanaId] 
+           ,[InicioEvento]
+           ,[FinEvento]
+           ,[HoraInicio]
+           ,[HoraFin]
+           ,[ActividadId])
+     VALUES
+           (5 /*Viernes*/
+           ,null
+           ,null
+           ,'11:00:00'
+           ,'12:00:00'
+           ,5) /*ActividadId*/
 GO
