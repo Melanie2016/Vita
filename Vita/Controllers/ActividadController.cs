@@ -80,9 +80,11 @@ namespace Vita.Controllers
         {
             var actividad = actividadServicio.GetActividad(int.Parse(idActividad));
             ViewBag.Actividad = actividad;
+            ViewBag.FechasActividad = actividad.FechaActividad;
             ViewBag.Resultado = 0;
             ViewBag.IniciarSesion = "false";
             ViewBag.Domicilio = actividad.Domicilio.FirstOrDefault();
+            ViewBag.Logueado = false;
 
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -99,6 +101,7 @@ namespace Vita.Controllers
             else
             {
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                ViewBag.Logueado = true;
 
                 if (inscribirse == "true")
                 {
