@@ -1,6 +1,5 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-
 }
 
 
@@ -145,12 +144,46 @@
                                 <div class="form-group">
                                     <div class="wrap-icon">
                                         <img src="~/Content/images/reloj.png" /><span style="font-size:18px;color:black">Fecha y Hora</span>
-                                        <p style="color:#8a8686">
-                                            lunes a viernes 7:00-21:00
-                                        </p>
-                                        <p style="color:#8a8686">
-                                            sábado 9:00-13:00
-                                        </p>
+                                        @foreach (var item in ViewBag.FechasActividad)
+                                        {
+                                            if (item.InicioEvento != null) //Es una actividad con una fecha desde y hasta
+                                            {
+                                                if (item.InicioEvento == item.FinEvento) //mismo dia de comienzo y fin
+                                                {
+                                                    <p style="color:#8a8686">
+                                                        @item.InicioEvento.ToString().Remove(10)  @item.HoraInicio.ToString().Remove(5) - @item.HoraFin.ToString().Remove(5)
+                                                    </p>
+                                                }
+                                                else //distinto dia de comienzo y fin
+                                                {
+                                                    <p style="color:#8a8686">
+                                                        @item.InicioEvento.ToString().Remove(10)  @item.HoraInicio.ToString().Remove(5)
+                                                    </p>
+                                                    <p style="color:#8a8686">
+                                                        @item.FinEvento.ToString().Remove(10)  @item.HoraFin.ToString().Remove(5)
+                                                    </p>
+                                                }
+
+                                            }
+                                            else
+                                            {
+                                                if (ViewBag.Logueado) //Esta logueado y son distintos dias y horarios
+                                                {
+                                                    <div>
+                                                        <input type="checkbox" name="FechaActividadId" value="@item.Id" style="opacity:1; width:15px; margin-top: -2px;" />
+                                                        <p style="color:#8a8686; margin-left: 20px;">
+                                                            @item.DiaSemana.Descripcion  @item.HoraInicio.ToString().Remove(5) - @item.HoraFin.ToString().Remove(5)
+                                                        </p>
+                                                    </div>
+                                                }
+                                                else//No está logueado y son distintos dias y horarios
+                                                {
+                                                    <p style="color:#8a8686">
+                                                        @item.DiaSemana.Descripcion  @item.HoraInicio.ToString().Remove(5) - @item.HoraFin.ToString().Remove(5)
+                                                    </p>
+                                                }
+                                            }
+                                        }
                                     </div>
                                 </div>
                                 <div class="form-group">
