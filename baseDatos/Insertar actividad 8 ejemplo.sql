@@ -7,9 +7,6 @@ INSERT INTO [dbo].[Actividad]
            ,[EdadMinima]
            ,[EdadMaxima]
            ,[Precio]
-           ,[FechaDesde]
-           ,[FechaHasta]
-           ,[CantidadDias]
            ,[CantidadCupo]
            ,[CategoriaId]
            ,[SubcategoriaId]
@@ -26,9 +23,6 @@ INSERT INTO [dbo].[Actividad]
            ,28
 		   ,70
            ,200
-           ,'2019-11-02'
-           ,'2019-11-02'
-           ,1
            ,60
            ,2
            ,9

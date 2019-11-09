@@ -1,5 +1,3 @@
-use master
-GO
 Create Database Vita
 GO
 USE Vita

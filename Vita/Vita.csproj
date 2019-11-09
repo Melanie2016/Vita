@@ -773,6 +773,7 @@
     <Content Include="Content\images\z3.jpg" />
     <Content Include="Content\js\Buscador.js" />
     <Content Include="Content\js\Calendario.js" />
+    <Content Include="Content\js\CrearActividad.js" />
     <Content Include="Content\js\FotoPerfil.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />

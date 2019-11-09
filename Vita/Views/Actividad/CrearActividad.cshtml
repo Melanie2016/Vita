@@ -8,7 +8,7 @@
 
 <head>
     <meta charset="utf-8">
-        <!-- Custom Stylesheet -->
+    <!-- Custom Stylesheet -->
     <link href="../../Content/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
     <!-- Page plugins css -->
     <link href="../../Content/plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
@@ -34,6 +34,7 @@
                         <div class="form-validation">
                             <form class="form-valide" action="CreacionActividad" method="POST">
                                 <div class="form-group row">
+                                    <!--Titulo-->
                                     <label class="col-lg-4 col-form-label" for="Titulo">
                                         Título de la actividad<span class="text-danger">*</span>
                                     </label>
@@ -41,7 +42,9 @@
                                         <input type="text" class="form-control" id="val-username" name="Titulo" placeholder="Truco..">
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
+                                    <!--Descripcion-->
                                     <label class="col-lg-4 col-form-label" for="Descripcion">
                                         Breve descripción <span class="text-danger">*</span>
                                     </label>
@@ -49,28 +52,32 @@
                                         <textarea class="form-control" id="val-suggestions" name="Descripcion" rows="5" placeholder="Torneo de truco con premios..."></textarea>
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
+                                    <!--Segmento-->
                                     <label class="col-lg-4 col-form-label" for="val-skill">
                                         Segmento <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <div class="form-control">
+                                        <div>
                                             @foreach (var item in ViewBag.ListaSegmentos)
                                             {
-                                                <input type="checkbox" name="selectedSegmento" value="@item.Value" />
+                                                <input type="checkbox" name="selectedSegmento" value="@item.Value" style="margin-left: 10px;" />
                                                 @item.Text
                                             }
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
+                                    <!--Categorias-->
                                     <label class="col-lg-4 col-form-label" for="val-skill">
                                         Rubro <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <select class="form-control" id="filtroCategoria"
-                                  
-                                                data-live-search="true" title="Seleccione tipo de categoria de la actividad.." name="CategoriaId">
+                                        <select class="form-control" id="filtroCategoria" data-live-search="true" title="Seleccionar rubro..." name="CategoriaId">
+                                            <option>Seleccionar rubro...</option>
+
                                             @foreach (var item in ViewBag.ListaRubro as MultiSelectList)
                                             {
                                                 <option value="@item.Value">@item.Text</option>
@@ -78,64 +85,293 @@
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
+                                    <!--Subcategorias-->
                                     <label class="col-lg-4 col-form-label" for="val-skill">
                                         Tipo de actividad <span class="text-danger">*</span>
                                     </label>
-                                    <div class="col-lg-6">
-                                        <select class="form-control" id="filtroCategoria"
-                                                data-live-search="true" title="Seleccione tipo de actividad.." name="SubcategoriaId">
-                                            @foreach (var item in ViewBag.ListaTipoActividad as MultiSelectList)
-                                            {
-                                                <option value="@item.Value">@item.Text</option>
-                                            }
-                                        </select>
-                                    </div>
-                                </div>
-                                @*<div class="form-group row">
-            <label class="col-lg-4 col-form-label" for="SubCategoriaId">
-                Tipo de actividad <span class="text-danger">*</span>
-            </label>
-            <div class="col-lg-6" id="filtroSubcategoria">
-
-            </div>
-        </div>*@
-
-
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="CantidadDias">
-                                        Cantidad de dias que va a estar la actividad<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-number" name="CantidadDias" placeholder="5">
+                                    <div class="col-lg-6" id="filtroSubcategoria">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <!--DESDE-->
-                                    <label class="col-lg-4 col-form-label" for="RangoFecha">
-                                        Desde  y hasta que dia y horario <span class="text-danger">*</span>
+                                    <!--PREGUNTA SI TIENE FECHA INICIO Y FIN-->
+                                    <label class="col-lg-4 col-form-label">
+                                        ¿La actividad va a tener una fecha de inicio y una fecha de fin?
+                                        <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <div class="example">
+                                        <label><input type="radio" id="cbox1" name="fecha" value="true" title="Si escoge esta opción deberá ingresar dias y horario de inicio y fin de la actividad"> Si</label><br>
+                                        <label><input type="radio" id="cbox2" name="fecha" value="false" title="Si escoge esta opción deberá seleccionar los días de la semana en los cuales estará disponible la actividad"> No</label><br>
+                                    </div>
+                                </div>
 
-                                            <input type="text" class="form-control input-daterange-timepicker" name="RangoFecha" value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM">
+                                <div id="fechas" style="display:none">
+                                    <div class="form-group row">
+                                        <!--Fecha Desde-->
+                                        <label class="col-lg-4 col-form-label" for="RangoFecha">
+                                            Fecha desde <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <div class="input-group date" style="width:200px;">
+                                                <input type="text" class="form-control" placeholder="01/12/2019" name="InicioEvento"  data-provide="datepicker" data-date-format="dd/mm/yyyy">
+                                                <div class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-th"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <!--Hora Inicio-->
+                                        <label class="col-lg-4 col-form-label">
+                                            Hora de inicio <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="time" class="form-control" id="val-number" name="HoraInicio" style="width:200px;">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <!--Fecha Hasta-->
+                                        <label class="col-lg-4 col-form-label" for="RangoFecha">
+                                            Fecha hasta <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <div class="input-group date" style="width:200px;">
+                                                <input type="text" class="form-control" placeholder="02/12/2019" name="FinEvento" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+                                                <div class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-th"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <!--Hora Fin-->
+                                        <label class="col-lg-4 col-form-label">
+                                            Hora de fin <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="time" class="form-control" id="val-number" name="HoraFin" style="width:200px;">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group row" id="dias" style="display:none">
+                                    <!--Dias de la semana-->
+                                    <label class="col-lg-4 col-form-label">
+                                        Seleccione los dias en los cuales la actividad estará disponible<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="checkbox" id="Lunes" style="margin-left: 10px;"> Lunes
+                                        <input type="checkbox" id="Martes" style="margin-left: 10px;"> Martes
+                                        <input type="checkbox" id="Miercoles" style="margin-left: 10px;"> Miércoles
+                                        <input type="checkbox" id="Jueves" style="margin-left: 10px;"> Jueves
+                                        <input type="checkbox" id="Viernes" style="margin-left: 10px;"> Viernes
+                                        <input type="checkbox" id="Sabado" style="margin-left: 10px;"> Sábado
+                                        <input type="checkbox" id="Domingo" style="margin-left: 10px;"> Domingo
+                                    </div>
+                                </div>
+
+                                <div class="form-group row" id="horarios" style="display:none">
+                                    <!--PREGUNTA SI TIENE UN MISMO HORARIO PARA TODOS LOS DIAS DE LA SEMANA QUE ESCOGIÓ-->
+                                    <label class="col-lg-4 col-form-label">
+                                        ¿La actividad va a tener la misma hora de inicio y fin en los dias de la semana que seleccionó?
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <label><input type="radio" id="cbox3" name="horario" value="true" title="Si escoge esta opción deberá ingresar la hora de inicio y fin que será la misma para todos los diás que seleccionó"> Si</label><br>
+                                        <label><input type="radio" id="cbox4" name="horario" value="false" title="Si escoge esta opción deberá ingresar la hora de inicio y fin de cada día de la semana en forma particular"> No</label><br>
+                                    </div>
+                                </div>
+
+                                <div id="mismoHorario" style="display:none">
+                                    <div class="form-group row">
+                                        <!--Hora Inicio-->
+                                        <label class="col-lg-4 col-form-label">
+                                            Hora de inicio <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="time" class="form-control" id="val-number" name="HoraInicio"  style="width:200px;">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <!--Hora Fin-->
+                                        <label class="col-lg-4 col-form-label">
+                                            Hora de fin <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="time" class="form-control" id="val-number" name="HoraFin" style="width:200px;">
                                         </div>
                                     </div>
                                 </div>
-                                @*<div class="form-group row">
 
-            <label class="col-lg-4 col-form-label" for="FechaHasta">
-                Hasta que dia y horario <span class="text-danger">*</span>
-            </label>
-            <div class="col-lg-6">
-                <div class="example">
+                                <!--Horario Lunes-->
+                                <div id="horarioLunes" style="display:none">
+                                    <div class="form-group row">
+                                        <!--Inicio-->
+                                        <label class="col-lg-4 col-form-label">
+                                            Hora de inicio <b>Lunes</b><span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="time" class="form-control" id="val-number" name="HoraInicioLunes" style="width:200px;">
+                                        </div>
+                                    </div>
 
-                    <input type="text" class="form-control input-daterange-timepicker" name="FechaHasta" value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM">
-                </div>
-            </div>
-        </div>*@
+                                    <div class="form-group row">
+                                        <!--Fin-->
+                                        <label class="col-lg-4 col-form-label">
+                                            Hora de fin <b>Lunes</b><span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="time" class="form-control" id="val-number" name="HoraFinLunes" style="width:200px;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Horario Martes-->
+                                <div id="horarioMartes" style="display:none">
+                                    <div class="form-group row">
+                                        <!--Inicio-->
+                                        <label class="col-lg-4 col-form-label">
+                                            Hora de inicio <b>Martes</b><span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="time" class="form-control" id="val-number" name="HoraInicioMartes" style="width:200px;">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <!--Fin-->
+                                        <label class="col-lg-4 col-form-label">
+                                            Hora de fin <b>Martes</b><span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="time" class="form-control" id="val-number" name="HoraFinMartes" style="width:200px;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Horario Miercoles-->
+                                <div id="horarioMiercoles" style="display:none">
+                                    <div class="form-group row">
+                                        <!--Inicio-->
+                                        <label class="col-lg-4 col-form-label">
+                                            Hora de inicio <b>Miercoles</b><span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="time" class="form-control" id="val-number" name="HoraInicioMiercoles" style="width:200px;">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <!--Fin-->
+                                        <label class="col-lg-4 col-form-label">
+                                            Hora de fin <b>Miercoles</b><span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="time" class="form-control" id="val-number" name="HoraFinMiercoles" style="width:200px;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Horario Jueves-->
+                                <div id="horarioJueves" style="display:none">
+                                    <div class="form-group row">
+                                        <!--Inicio-->
+                                        <label class="col-lg-4 col-form-label">
+                                            Hora de inicio <b>Jueves</b><span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="time" class="form-control" id="val-number" name="HoraInicioJueves" style="width:200px;">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <!--Fin-->
+                                        <label class="col-lg-4 col-form-label">
+                                            Hora de fin <b>Jueves</b><span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="time" class="form-control" id="val-number" name="HoraFinJueves" style="width:200px;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Horario Viernes-->
+                                <div id="horarioViernes" style="display:none">
+                                    <div class="form-group row">
+                                        <!--Inicio-->
+                                        <label class="col-lg-4 col-form-label">
+                                            Hora de inicio <b>Viernes</b><span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="time" class="form-control" id="val-number" name="HoraInicioViernes" style="width:200px;">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <!--Fin-->
+                                        <label class="col-lg-4 col-form-label">
+                                            Hora de fin <b>Viernes</b><span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="time" class="form-control" id="val-number" name="HoraFinViernes" style="width:200px;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Horario Sabado-->
+                                <div id="horarioSabado" style="display:none">
+                                    <div class="form-group row">
+                                        <!--Inicio-->
+                                        <label class="col-lg-4 col-form-label">
+                                            Hora de inicio <b>Sabado</b><span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="time" class="form-control" id="val-number" name="HoraInicioSabado" style="width:200px;">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <!--Fin-->
+                                        <label class="col-lg-4 col-form-label">
+                                            Hora de fin <b>Sabado</b><span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="time" class="form-control" id="val-number" name="HoraFinSabado" style="width:200px;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Horario Domingo-->
+                                <div id="horarioDomingo" style="display:none">
+                                    <div class="form-group row">
+                                        <!--Inicio-->
+                                        <label class="col-lg-4 col-form-label">
+                                            Hora de inicio <b>Domingo</b><span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="time" class="form-control" id="val-number" name="HoraInicioDomingo" style="width:200px;">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <!--Fin-->
+                                        <label class="col-lg-4 col-form-label">
+                                            Hora de fin <b>Domingo</b><span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="time" class="form-control" id="val-number" name="HoraFinDomingo" style="width:200px;">
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="form-group row">
+                                    <!--Cupo-->
                                     <label class="col-lg-4 col-form-label" for="CantidadCupo">
                                         Cantidad de cupos disponibles<span class="text-danger">*</span>
                                     </label>
@@ -143,7 +379,9 @@
                                         <input type="text" class="form-control" id="val-number" name="CantidadCupo" placeholder="100">
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
+                                    <!--Edad minima-->
                                     <label class="col-lg-4 col-form-label" for="EdadMinima">
                                         Edad mínima<span class="text-danger">*</span>
                                     </label>
@@ -152,6 +390,7 @@
                                     </div>
                                 </div>
 
+                                <!--Edad maxima-->
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="EdadMaxima">
                                         Edad máxima<span class="text-danger">*</span>
@@ -160,7 +399,9 @@
                                         <input type="text" class="form-control" id="val-number" name="EdadMaxima" placeholder="70">
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
+                                    <!--Precio-->
                                     <label class="col-lg-4 col-form-label" for="Precio">
                                         Precio (en caso de no tener, poner cero en número) <span class="text-danger">*</span>
                                     </label>
@@ -168,8 +409,11 @@
                                         <input type="text" class="form-control" id="val-currency" name="Precio" placeholder="21.60">
                                     </div>
                                 </div>
+
+                                <!--DOMICILIO-->
                                 <div>Cargar domicilio de la actividad</div>
                                 <div class="form-group row">
+                                    <!--Calle-->
                                     <label class="col-lg-4 col-form-label" for="NombreCalle">
                                         Ingrese nombre de la calle<span class="text-danger">*</span>
                                     </label>
@@ -177,7 +421,9 @@
                                         <input type="text" class="form-control" id="val-username" name="NombreCalle" placeholder="Nombre de la calle">
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
+                                    <!--Nro calle-->
                                     <label class="col-lg-4 col-form-label" for="NumeroCalle">
                                         Ingrese el numero de la calle<span class="text-danger">*</span>
                                     </label>
@@ -185,7 +431,9 @@
                                         <input type="text" class="form-control" id="val-number" name="NumeroCalle" placeholder="Numero de la calle">
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
+                                    <!--Piso-->
                                     <label class="col-lg-4 col-form-label" for="NumeroPiso">
                                         Ingrese el numero del piso (si es planta baja, ingresar cero)
                                     </label>
@@ -193,7 +441,9 @@
                                         <input type="text" class="form-control" id="val-number" name="NumeroPiso" placeholder="0">
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
+                                    <!--Departamento-->
                                     <label class="col-lg-4 col-form-label" for="NumeroDepartamento">
                                         Ingrese el numero y letra del departamento
                                     </label>
@@ -201,7 +451,9 @@
                                         <input type="text" class="form-control" name="NumeroDepartamento" placeholder="1c">
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
+                                    <!--Codigo postal-->
                                     <label class="col-lg-4 col-form-label" for="CodigoPostal">
                                         Ingrese el codigo postal<span class="text-danger">*</span>
                                     </label>
@@ -211,15 +463,13 @@
                                 </div>
 
                                 <div class="form-group row">
+                                    <!--Provincia-->
                                     <label class="col-lg-4 col-form-label" for="ProvinciaId">
                                         Seleccione provincia <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <!--Provincia-->
-
-                                        <select class="form-control" id="filtroProvincia" name="ProvinciaId" title="Seleccione provincia..">
-
-                                            <option>Seleccionar provincia</option>
+                                        <select class="form-control" id="filtroProvincia" name="ProvinciaId" title="Seleccionar provincia...">
+                                            <option>Seleccionar provincia...</option>
                                             @foreach (var item in ViewBag.ListaProvincia as MultiSelectList)
                                             {
 
@@ -232,24 +482,25 @@
                                 </div>
 
                                 <div class="form-group row">
+                                    <!--Departamento-->
                                     <label class="col-lg-4 col-form-label" for="DepartamentoId">
                                         Seleccione departamento <span class="text-danger">*</span>
                                     </label>
-                                    <div class="col-lg-6">
-                                        <div id="filtroDepartamento">
-                                        </div>
+                                    <div class="col-lg-6" id="filtroDepartamento">
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
+                                    <!--Localidad-->
                                     <label class="col-lg-4 col-form-label" for="DepartamentoId">
                                         Seleccione localidad <span class="text-danger">*</span>
                                     </label>
-                                    <div class="col-lg-6">
-                                        <div id="filtroLocalidad">
-                                        </div>
+                                    <div class="col-lg-6" id="filtroLocalidad">
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
+                                    <!--Aprobación-->
                                     <label class="col-lg-4 col-form-label" for="Compleja">
                                         ¿La actividad necesita de su aprobación?
                                         Si es asi, se le va mandar un formulario a los usuarios para que completen antes de poder inscribirse.
@@ -258,23 +509,25 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <label><input type="radio" id="cbox1" name="Compleja" value="true"> Si</label><br>
-                                        <label><input type="radio" id="cbox1" name="Compleja" value="false"> NO</label><br>
-
+                                        <label><input type="radio" id="cbox1" name="Compleja" value="false"> No</label><br>
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
                                     <div class="col-lg-8 ml-auto">
                                         <button type="submit" class="btn btn-primary">Crear Actividad</button>
                                     </div>
                                 </div>
                             </form>
-                    </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/js/CrearActividad.js"></script>
 
     <script src="../../Content/plugins/common/common.min.js"></script>
     <script src="../../Content/js/custom.min.js"></script>
@@ -303,98 +556,90 @@
 </body>
 
 </html>
-@*Lo comento ahora porque no funciona,  no eliminar*@
-@*<script>
+
+
+    <script>
+        //Todo siempre una vez cargada la página
         $(document).ready(function () {
 
+            //Esto corre cuando cambias de opción en el primer select
             $('#filtroCategoria').on('change', function () {
 
-                var idCategoria = $(this).val();;
+                var idCategoria = this.value;
 
+                //Si elegiste la opción de los guíones paramos aca para no hacer nada
                 if (idCategoria === 0) {
-                    $("#filtroSubcategoria").html("Selecciona una categoria");
                     return;
                 }
 
-                
+                //Ajax SUBCATEGORIAS
                 $.ajax({
-                    url: "obtenersubcategoria/" + idCategoria,
-
+                    url: "obtenerSubcategorias/" + this.value,
                     type: 'GET',
                     dataType: "json",
                     success: function (res) {
-                        
-                        $("#filtroSubcategoria").empty().append('<select id="filtroSubcategoria2" class="selectpicker" name="SubCategoriaId">');
-                        $.getJSON("@Url.Action("ObtenerSubcategoria","Actividad")", { idCategoria: idCategoria }, function (data) {
-                            let data2 = JSON.parse(data);
+                        //Creando el segundo select
+                        $("#filtroSubcategoria").empty().append('<select class="form-control" id="filtroSub" data-live-search="true" title="Seleccionar tipo de actividad..." name="SubcategoriaId">');
+                        $('#filtroSub').append("<option> Seleccionar tipo de Actividad... </option>");
+                        $.each(res, function () {
+                            $('#filtroSub').append("<option value=" + this.Id + '>' + this.Descripcion + "</option>");
+                        });
+                    }
+                });
+            });
 
-                             $.each(data2, function () {
-                                    $("#filtroSubcategoria").append($("<option>").val(this.Id).text(this.Descripcion));
-                                  });
-                             });
-                      
+            $('#filtroProvincia').on('change', function () {
+
+                var idProvincia = this.value;
+
+                //Si elegiste la opción de los guíones paramos aca para no hacer nada
+                if (idProvincia === 0) {
+                    return;
+                }
+
+                //Ajax DEPARTAMENTOS
+                $.ajax({
+                    url: "obtenerDepartamentos/" + this.value,
+                    type: 'GET',
+                    dataType: "json",
+                    success: function (res) {
+                        //Creando el segundo select
+                        $("#filtroDepartamento").empty().append('<select class="form-control" id="filtroDep" data-live-search="true" title="Seleccionar departamento..." name="DepartamentoId">');
+                        $('#filtroDep').append("<option>Seleccionar departamento...</option>");
+                        $.each(res, function () {
+                            $('#filtroDep').append("<option value=" + this.Id + '>' + this.Descripcion + "</option>");
+                        });
+
+                        //Esto corre cuando cambias de opción en el primer select
+                        $('#filtroDep').on('change', function () {
+
+                            var idDepartamento = this.value;
+
+                            //Si elegiste la opción de los guíones paramos aca para no hacer nada
+                            if (idDepartamento === 0) {
+                                return;
+                            }
+
+                            //Ajax LOCALIDADES
+                            $.ajax({
+                                url: "obtenerLocalidades/" + this.value,
+                                type: 'GET',
+                                dataType: "json",
+                                success: function (res) {
+                                    //Creando el segundo select
+                                    $("#filtroLocalidad").empty().append('<select class="form-control" id="filtroLoc" data-live-search="true" title="Seleccionar localidad..." name="LocalidadId">');
+                                    $('#filtroLoc').append("<option>Seleccionar localidad...</option>");
+                                    $.each(res, function () {
+                                        $('#filtroLoc').append("<option value=" + this.Id + '>' + this.Descripcion + "</option>");
+                                    });
+                                }
+                            });
+                        });
 
                     }
                 });
             });
         });
-</script>*@
-
-<!-- Aca es donde se arma la magia -->
-<script>
-    //Todo siempre una vez cargada la página
-    $(document).ready(function () {
-
-        //Esto corre cuando cambias de opción en el primer select
-        $('#filtroProvincia').on('change', function () {
-
-            var idProvincia = this.value;
-            // var idPais = $(this).val();
-
-            //Si elegiste la opción de los guíones paramos aca para no hacer nada
-            if (idProvincia === 0) {
-                $("#filtroDepartamento").html("Selecciona una provincia");
-                return;
-            }
-
-            //Ajax
-            $.ajax({
-                //   url: "obtenerselectpaisusuario/" + idPais,
-                url: "obtenerselectpaisusuario/" + this.value,
-                type: 'GET',
-                dataType: "json",
-                success: function (res) {
-                    //Por si queres ver una por una las cosas que vuelven descomenta el alert
-                    // alert(res);
-
-                    //Creando el segundo select
-                    $("#filtroDepartamento").empty().append('<select id="filtro2"class="form-control" name="DepartamentoId">');
-
-                    $.each(res, function () {
-                        $("#filtro2").append($("<option>").val(this.Id).text(this.Descripcion));
-                    });
-                    //Esto corre cuando cambias de opción en el segundo select
-                    $('#filtro2').on('change', function () {
-                        //Ajax
-                        $.ajax({
-                            url: "obtenerselectdepartamentousuario/" + this.value,
-
-                            type: 'GET',
-                            dataType: "json",
-                            success: function (res) {
-                                // alert(res);
-                                //Creando el tercer select
-                                $("#filtroLocalidad").empty().append('<select id="filtro3" class="form-control" name="DomicilioLocalidadId">');
-                                $.each(res, function () {
-                                    $("#filtro3").append($("<option>").val(this.Id).text(this.Descripcion));
-                                });
-                            }
-                        });
-                    });
-                }
-            });
-        });
-    });
-</script>
+    </script>
 
 
