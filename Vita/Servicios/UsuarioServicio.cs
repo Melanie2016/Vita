@@ -20,6 +20,10 @@ namespace Vita.Servicios
         public void CrearUsuario(Usuario usuario)
         {
             //falta validar tooodo
+            if(usuario.LocalidadId== null)
+            {
+                usuario.LocalidadId = 3;
+            }
             Usuario usuarioNuevo = usuario;
             usuarioNuevo.CreatedAt = DateTime.Now;
             myDbContext.Usuario.Add(usuarioNuevo);

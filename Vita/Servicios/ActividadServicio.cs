@@ -507,6 +507,9 @@ namespace Vita.Servicios
 
             return listaUsuarios;
         }
-
+        public List<TipoDatoCampo> GetAllTipoDatoCampo()
+        {
+            return myDbContext.TipoDatoCampo.OrderBy(x => x.Descripcion).ToList();
+        }
     }
 }

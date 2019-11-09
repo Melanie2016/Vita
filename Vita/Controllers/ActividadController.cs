@@ -315,5 +315,21 @@ namespace Vita.Controllers
                 // return View(actividades);
             }
         }
+        [HttpGet]
+        public ActionResult CrearFormularioDinamico()
+        {
+            //obtengo usuario logueado
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            { return RedirectToAction("Login", "Login"); }
+            else
+            {
+                List<TipoDatoCampo> listaTipoDatoCampo = actividadServicio.GetAllTipoDatoCampo();
+                ViewBag.ListaTipoPregunta = new MultiSelectList(listaTipoDatoCampo, "id", "descripcion");
+                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                //   return View();
+                return View(buscarUsuarioLogueado);
+            }
+
+        }
     }
 }

@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "CrearFormularioDinamico";
+    Layout = "~/Views/Shared/_LayoutPerfilEntidad.cshtml";
+}
+
+@*@model Vita.ViewModels.FormularioDinamicoViewModel*@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <!-- Custom Stylesheet -->
+    <link href="../../Content/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
+    <!-- Page plugins css -->
+    <link href="../../Content/plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
+    <!-- Color picker plugins css -->
+    <link href="../../Content/plugins/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet">
+    <!-- Date picker plugins css -->
+    <link href="../../Content/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!-- Daterange picker plugins css -->
+    <link href="../../Content/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+    <link href="../../Content/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h3>Crear Formulario dinamico</h3>
+                        <div class="form-validation">
+                            <form class="form-valide" action="CreacionActividad" method="POST">
+
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="TituloFormulario">
+                                        Título del formulario<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="val-username" name="TituloFormulario" placeholder="Formulario para completar la actividad..">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="DescripcionFormulario">
+                                        Breve descripción para explicar al usuario <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <textarea class="form-control" id="val-suggestions" name="DescripcionFormulario" rows="5" placeholder="El siguiente formulario es de caracter obligatorio para poder....."></textarea>
+                                    </div>
+                                </div>
+                                <div><h4>Agregar las consignas:</h4></div>
+
+
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="val-skill">
+                                        Elegir tipo de consigna <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <select class="form-control" id="filtroCategoria"
+                                                data-live-search="true" title="Seleccione tipo de categoria de la actividad.." name="TipoPreguntaId">
+                                            @foreach (var item in ViewBag.ListaTipoPregunta as MultiSelectList)
+                                            {
+                                                <option value="@item.Value">@item.Text</option>
+                                                @item.Value
+                                            }
+                                        </select>
+                                        <div>Con cada una de las consignas, aca va a parecer la descripcion de la misma</div>
+
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-8 ml-auto">
+
+                                        <button type="button" formaction="agregarTipoConsigna(TipoPregunta)" class="btn btn-primary">Agregar consigna</button>
+                                    </div>
+                                </div>
+                                @*@if (@Model.consignas.Count != 0)
+                                    {
+                                        while (@Model.consignas.Count != 0)
+                                        {
+                                            if (@Model.TipoPreguntaId == 1)
+                                            {
+                                            <input type="number" value=1 hidden name="TipoPreguntaIdConsigna" /> //tipo de pregunta
+                                            <div class="form-group row">
+                                                <label class="col-lg-4 col-form-label" for="Titulo">
+                                                    Ingresar titulo de la consigna<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="val-username" name="TituloConsigna" placeholder="Alergias..">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-lg-4 col-form-label" for="Descripcion">
+                                                    Breve descripción de la consigna <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-lg-6">
+                                                    <textarea class="form-control" id="val-suggestions" name="Descripcion" rows="5" placeholder="Ingrese la alergia....."></textarea>
+                                                </div>
+                                            </div>
+                                            }
+                                        }
+                                    }*@
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
