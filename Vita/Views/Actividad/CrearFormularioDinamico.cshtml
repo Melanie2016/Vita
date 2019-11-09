@@ -51,59 +51,76 @@
                                         <textarea class="form-control" id="val-suggestions" name="DescripcionFormulario" rows="5" placeholder="El siguiente formulario es de caracter obligatorio para poder....."></textarea>
                                     </div>
                                 </div>
+
                                 <div><h4>Agregar las consignas:</h4></div>
 
 
+
+                                @*<div class="form-group row">
+                                    <div class="col-lg-8 ml-auto">
+
+                                        <button type="button" formaction="agregarTipoConsigna(TipoPregunta)" class="btn btn-primary">Agregar consigna</button>
+                                    </div>
+                                </div>*@
+
+
+                                @*<div class="form-group row">
+            <label class="col-lg-4 col-form-label" for="Titulo">
+                Ingresar titulo de la consigna<span class="text-danger">*</span>
+            </label>
+            <div class="col-lg-6">
+                <input type="text" class="form-control" id="val-username" name="TituloConsigna" placeholder="Alergias..">
+            </div>
+        </div>*@
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="Descripcion">
+                                        Ingresar titulo de la consigna <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <textarea class="form-control" id="val-suggestions" name="Descripcion" rows="5" placeholder="Tienes problemas para correr o ejercitarse?...."></textarea>
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="val-skill">
-                                        Elegir tipo de consigna <span class="text-danger">*</span>
+                                        Elegir tipo de respuesta que tiene que ingresar el cliente<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
                                         <select class="form-control" id="filtroCategoria"
                                                 data-live-search="true" title="Seleccione tipo de categoria de la actividad.." name="TipoPreguntaId">
+                                            <option value=0>Elegir tipo de respuesta</option>
                                             @foreach (var item in ViewBag.ListaTipoPregunta as MultiSelectList)
                                             {
                                                 <option value="@item.Value">@item.Text</option>
                                                 @item.Value
                                             }
                                         </select>
-                                        <div>Con cada una de las consignas, aca va a parecer la descripcion de la misma</div>
 
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-lg-8 ml-auto">
+                                    <!--Aprobación-->
+                                    <label class="col-lg-4 col-form-label" for="Compleja">
+                                        ¿Está consigna va a ser obligatoria?
+                                        Si es asi, los usuarios deberán completarla si o si.
 
-                                        <button type="button" formaction="agregarTipoConsigna(TipoPregunta)" class="btn btn-primary">Agregar consigna</button>
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <label><input type="radio" id="cbox1" name="Compleja" value="true"> Si</label><br>
+                                        <label><input type="radio" id="cbox1" name="Compleja" value="false"> No</label><br>
                                     </div>
                                 </div>
-                                @*@if (@Model.consignas.Count != 0)
-                                    {
-                                        while (@Model.consignas.Count != 0)
-                                        {
-                                            if (@Model.TipoPreguntaId == 1)
-                                            {
-                                            <input type="number" value=1 hidden name="TipoPreguntaIdConsigna" /> //tipo de pregunta
-                                            <div class="form-group row">
-                                                <label class="col-lg-4 col-form-label" for="Titulo">
-                                                    Ingresar titulo de la consigna<span class="text-danger">*</span>
-                                                </label>
-                                                <div class="col-lg-6">
-                                                    <input type="text" class="form-control" id="val-username" name="TituloConsigna" placeholder="Alergias..">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-lg-4 col-form-label" for="Descripcion">
-                                                    Breve descripción de la consigna <span class="text-danger">*</span>
-                                                </label>
-                                                <div class="col-lg-6">
-                                                    <textarea class="form-control" id="val-suggestions" name="Descripcion" rows="5" placeholder="Ingrese la alergia....."></textarea>
-                                                </div>
-                                            </div>
-                                            }
-                                        }
-                                    }*@
+
+
+                                <div class="form-group row">
+                                    <div class="col-lg-8 ml-auto">
+
+                                        <button type="button" formaction="agregarTipoConsigna(TipoPregunta)" class="btn btn-primary">Agregarla</button>
+                                    </div>
+                                </div>
                             </form>
+                            <div>Formulario como va quedando:</div>
+
                         </div>
                     </div>
                 </div>
