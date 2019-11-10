@@ -80,9 +80,11 @@ namespace Vita.Controllers
         {
             var actividad = actividadServicio.GetActividad(int.Parse(idActividad));
             ViewBag.Actividad = actividad;
+            ViewBag.FechasActividad = actividad.FechaActividad;
             ViewBag.Resultado = 0;
             ViewBag.IniciarSesion = "false";
             ViewBag.Domicilio = actividad.Domicilio.FirstOrDefault();
+            ViewBag.Logueado = false;
 
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -99,6 +101,7 @@ namespace Vita.Controllers
             else
             {
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                ViewBag.Logueado = true;
 
                 if (inscribirse == "true")
                 {
@@ -258,8 +261,16 @@ namespace Vita.Controllers
         public string ObtenerSubcategorias(int? id)
         {
             List<SubCategoria> subCategorias = categoriaServicio.GetAllSubCategoriasByCategoriaId(id);
+            List<ListaViewModel> listaSubcategorias = new List<ListaViewModel>();
+            var i = 0;
 
-            string result = JsonConvert.SerializeObject(subCategorias,
+            foreach (var item in subCategorias)
+            {
+                listaSubcategorias.Insert(i, new ListaViewModel() { Id = item.Id, Descripcion = item.Descripcion});
+                i++;
+            }
+
+            string result = JsonConvert.SerializeObject(listaSubcategorias,
                 new JsonSerializerSettings
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
@@ -273,8 +284,16 @@ namespace Vita.Controllers
         public string ObtenerDepartamentos(int? id)
         {
             List<Departamento> departamentos = localidadServicio.GetDepartamentosByProvinciaId(id);
+            List<ListaViewModel> listaDepartamentos = new List<ListaViewModel>();
+            var i = 0;
 
-            string result = JsonConvert.SerializeObject(departamentos,
+            foreach (var item in departamentos)
+            {
+                listaDepartamentos.Insert(i, new ListaViewModel() { Id = item.Id, Descripcion = item.Descripcion });
+                i++;
+            }
+
+            string result = JsonConvert.SerializeObject(listaDepartamentos,
                 new JsonSerializerSettings
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
@@ -288,8 +307,16 @@ namespace Vita.Controllers
         public string ObtenerLocalidades(int? id)
         {
             List<Localidad> localidades = localidadServicio.GetLocalidadesByDepartamentoId(id);
+            List<ListaViewModel> listaLocalidades = new List<ListaViewModel>();
+            var i = 0;
 
-            string result = JsonConvert.SerializeObject(localidades,
+            foreach (var item in localidades)
+            {
+                listaLocalidades.Insert(i, new ListaViewModel() { Id = item.Id, Descripcion = item.Descripcion });
+                i++;
+            }
+
+            string result = JsonConvert.SerializeObject(listaLocalidades,
                 new JsonSerializerSettings
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore

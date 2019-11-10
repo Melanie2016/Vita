@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Vita.Servicios;
+using Vita.ViewModels;
 
 namespace Vita.Controllers
 {
@@ -38,12 +39,20 @@ namespace Vita.Controllers
         }
 
         [HttpGet]
-        [Route("obtenerselectpaisusuario{idPais}")]
-        public string ObtenerSelectPaisUsuario(int? id)
+        [Route("obtenerDepartamentos{idProvincia}")]
+        public string ObtenerDepartamentos(int? id)
         {
             List<Departamento> departamentos = localidadServicio.GetDepartamentosByProvinciaId(id);
+            List<ListaViewModel> listaDepartamentos = new List<ListaViewModel>();
+            var i = 0;
 
-            string result = JsonConvert.SerializeObject(departamentos,
+            foreach (var item in departamentos)
+            {
+                listaDepartamentos.Insert(i, new ListaViewModel() { Id = item.Id, Descripcion = item.Descripcion });
+                i++;
+            }
+
+            string result = JsonConvert.SerializeObject(listaDepartamentos,
                 new JsonSerializerSettings
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
@@ -52,11 +61,20 @@ namespace Vita.Controllers
             return result;
         }
         [HttpGet]
-        [Route("obtenerselectdepartamentousuario{idDepartamento}")]
-        public string ObtenerSelectDepartamentoUsuario(int? id)
+        [Route("obtenerLocalidades{idDepartamento}")]
+        public string ObtenerLocalidades(int? id)
         {
             List<Localidad> localidades = localidadServicio.GetLocalidadesByDepartamentoId(id);
-            string result = JsonConvert.SerializeObject(localidades,
+            List<ListaViewModel> listaLocalidades = new List<ListaViewModel>();
+            var i = 0;
+
+            foreach (var item in localidades)
+            {
+                listaLocalidades.Insert(i, new ListaViewModel() { Id = item.Id, Descripcion = item.Descripcion });
+                i++;
+            }
+
+            string result = JsonConvert.SerializeObject(listaLocalidades,
                 new JsonSerializerSettings
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
@@ -65,35 +83,6 @@ namespace Vita.Controllers
             return result;
         }
 
-        
-        [HttpGet]
-        [Route("obtenerselectprovinciaentidad/{idPais}")]
-        public string ObtenerSelectProvinciaEntidad(int? id)
-        {
-            List<Departamento> departamentos = localidadServicio.GetDepartamentosByProvinciaId(id);
-
-            string result = JsonConvert.SerializeObject(departamentos,
-                new JsonSerializerSettings
-                {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                });
-
-            return result;
-        }
-
-        [HttpGet]
-        [Route("obtenerselectdepartamentoentidad{idDepartamento}")]
-        public string ObtenerSelectDepartamentoEntidad(int? id)
-        {
-            List<Localidad> localidades = localidadServicio.GetLocalidadesByDepartamentoId(id);
-            string result = JsonConvert.SerializeObject(localidades,
-                new JsonSerializerSettings
-                {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                });
-
-            return result;
-        }
 
         [HttpPost]
         public ActionResult Registrar(Usuario usuario, int[] selectedSegmento, int[] selectedCategoria)
