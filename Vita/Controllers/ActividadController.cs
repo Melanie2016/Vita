@@ -58,8 +58,18 @@ namespace Vita.Controllers
 
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 actividadServicio.CrearActividad(actividad, buscarUsuarioLogueado, selectedSegmento);
+                var activdadCreada = actividadServicio.GetUltimaActividadPorUsuarioCreadaId(buscarUsuarioLogueado.Id);
+                if (activdadCreada.Compleja.HasValue == true)
+                {
+                    return RedirectToAction("CrearFormularioDinamico", "Actividad", activdadCreada);
 
-                return RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
+                }
+                else
+                {
+                    return RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
+
+                }
+
 
             }
         }
@@ -343,7 +353,7 @@ namespace Vita.Controllers
             }
         }
         [HttpGet]
-        public ActionResult CrearFormularioDinamico()
+        public ActionResult CrearFormularioDinamico(Actividad actividad)
         {
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))

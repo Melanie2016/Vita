@@ -155,6 +155,11 @@ namespace Vita.Servicios
             }
             return listaActividad;
         }
+        public Actividad GetUltimaActividadPorUsuarioCreadaId(long usuarioId)
+        {
+            var actividad = myDbContext.Actividad.Where(x => x.UsuarioId == usuarioId).OrderByDescending(x => x.Id).FirstOrDefault();
+            return actividad;
+        }
         public void CrearActividad(ActividadViewModel actividadViewModel, Usuario usuario, int[] selectedSegmento)
         {
             Actividad actividadNueva = new Actividad

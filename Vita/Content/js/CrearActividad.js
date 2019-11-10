@@ -197,16 +197,16 @@
   
 
 
-    $("#complejaTrue").on("click", function () {
-        $('#botonEnviar').hide();
-        $('#formFormu').show(); //muestro las fechas desde y hasta
+    //$("#complejaTrue").on("click", function () {
+    //    $('#botonEnviar').hide();
+    //    $('#formFormu').show(); 
        
-    });
-    $("#complejaFalse").on("click", function () {
-        $('#botonEnviar').show();
-        $('#formFormu').hide(); //muestro las fechas desde y hasta
+    //});
+    //$("#complejaFalse").on("click", function () {
+    //    $('#botonEnviar').show();
+    //    $('#formFormu').hide();
 
-    });
+    //});
 
 
 })(jQuery);
