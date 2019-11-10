@@ -53,26 +53,7 @@
                                 </div>
 
                                 <div><h4>Agregar las consignas:</h4></div>
-
-
-
-                                @*<div class="form-group row">
-                                    <div class="col-lg-8 ml-auto">
-
-                                        <button type="button" formaction="agregarTipoConsigna(TipoPregunta)" class="btn btn-primary">Agregar consigna</button>
-                                    </div>
-                                </div>*@
-
-
-                                @*<div class="form-group row">
-            <label class="col-lg-4 col-form-label" for="Titulo">
-                Ingresar titulo de la consigna<span class="text-danger">*</span>
-            </label>
-            <div class="col-lg-6">
-                <input type="text" class="form-control" id="val-username" name="TituloConsigna" placeholder="Alergias..">
-            </div>
-        </div>*@
-                                <div class="form-group row">
+                                      <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="Descripcion">
                                         Ingresar titulo de la consigna <span class="text-danger">*</span>
                                     </label>
@@ -115,11 +96,12 @@
                                 <div class="form-group row">
                                     <div class="col-lg-8 ml-auto">
 
-                                        <button type="button" formaction="agregarTipoConsigna(TipoPregunta)" class="btn btn-primary">Agregarla</button>
+                                        <button type="button" ng-click="agregarTipoConsigna()" class="btn btn-primary">Agregarla</button>
                                     </div>
                                 </div>
                             </form>
                             <div>Formulario como va quedando:</div>
+                            <div>Consigna: </div>
 
                         </div>
                     </div>
