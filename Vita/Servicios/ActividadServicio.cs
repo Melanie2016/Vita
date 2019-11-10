@@ -90,6 +90,32 @@ namespace Vita.Servicios
         public List<Actividad> GetAllActividadByRolEntidadId(int usuarioId) //lista de activiades por entidad id
         {
             var actividades = myDbContext.Actividad.Where(x => x.UsuarioId == usuarioId).ToList();
+
+            /*
+            var estadosPorActividad = (from e in myDbContext.Estado
+                                            join ua in myDbContext.UsuarioInscriptoActividad
+                                             on e.Id equals ua.EstadoId
+                                            join a in myDbContext.Actividad
+                                             on ua.ActividadId equals a.Id
+                                             group e by e.Descripcion into grupo
+                                            select new
+                                            {key = grupo.Key, cnt = grupo.Count()
+                                            }).ToList();
+*/
+            /*
+                        var pl = from r in info
+                                 orderby r.metric
+                                 group r by r.metric into grp
+                                 select new { key = grp.Key, cnt = grp.Count() };
+
+            */
+            /*
+            Select e.Descripcion, count(e.Descripcion) Cantidad
+            from UsuarioInscriptoActividad ua join actividad a on ua.ActividadId = a.Id join Estado e on ua.EstadoId = e.Id
+            where a.UsuarioId = 1
+            group by e.Descripcion
+            */
+
             var actividadConTodo = new List<Actividad>();
             foreach (var act in actividades)
             {
