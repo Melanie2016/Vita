@@ -7,6 +7,7 @@ namespace Vita.ViewModels
 {
     public class FormularioDinamicoViewModel
     {
+        public int Id { get; set; }
         public string Titulo { get; set; }
         public string Descripcion { get; set; }
         public int ActividadId { get; set; }
@@ -17,7 +18,7 @@ namespace Vita.ViewModels
         public int TipoDatoCampoId { get; set; }
         public bool Obligatorio { get; set; }
 
-     //   public List<Campos> Camposvi { get; set; }
+     //   public List<CampoViewModel> Campo { get; set; }
 
        
 

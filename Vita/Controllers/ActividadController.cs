@@ -353,7 +353,7 @@ namespace Vita.Controllers
             }
         }
         [HttpGet]
-        public ActionResult CrearFormularioDinamico(Actividad actividad)
+        public ActionResult CrearFormularioDinamico(Actividad actividad )
         {
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -381,12 +381,48 @@ namespace Vita.Controllers
 
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 var activdadCreada = actividadServicio.GetUltimaActividadPorUsuarioCreadaId(buscarUsuarioLogueado.Id);
-                actividadServicio.CrearFormularioDinamico(formularioDinamicoViewModel, activdadCreada);
-              
-                return RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
+                 var formu= actividadServicio.CrearFormularioDinamico(formularioDinamicoViewModel, activdadCreada);
+                return RedirectToAction("VolverVistaCreacionFormularioDinamico", "Actividad", formu);
+             //  return RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
 
 
             }
+        }
+        [HttpPost]
+        public ActionResult CrearCampo(FormularioDinamicoViewModel campoView)
+        {
+            //obtengo usuario logueado
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+
+                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                var formularioCreada = actividadServicio.GetUltimoFormularioDinamicoPorUsuarioCreadaId(buscarUsuarioLogueado.Id);
+                var formu = actividadServicio.CrearCampo(campoView, formularioCreada);
+                return RedirectToAction("VolverVistaCreacionFormularioDinamico", "Actividad", formu);
+                //  return RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
+
+
+            }
+        }
+
+        [HttpGet]
+        public ActionResult VolverVistaCreacionFormularioDinamico(FormularioDinamico formularioDinamico)
+        {
+            FormularioDinamicoViewModel nuevodinamico = new FormularioDinamicoViewModel
+            {
+                Titulo = formularioDinamico.Titulo,
+                Descripcion = formularioDinamico.Descripcion,
+                ActividadId = formularioDinamico.ActividadId.Value,
+                Id = formularioDinamico.Id
+
+            };
+            List<TipoDatoCampo> listaTipoDatoCampo = actividadServicio.GetAllTipoDatoCampo();
+            ViewBag.ListaTipoPregunta = new MultiSelectList(listaTipoDatoCampo, "id", "descripcion");
+            return View(nuevodinamico);
         }
     }
 }

@@ -186,8 +186,13 @@ namespace Vita.Servicios
             var actividad = myDbContext.Actividad.Where(x => x.UsuarioId == usuarioId).OrderByDescending(x => x.Id).FirstOrDefault();
             return actividad;
         }
-
-        public void CrearFormularioDinamico(FormularioDinamicoViewModel formViewModel, Actividad actividad)
+        public FormularioDinamico GetUltimoFormularioDinamicoPorUsuarioCreadaId(long usuarioId)
+        {
+            var actividad = myDbContext.FormularioDinamico.Where(x => x.EntidadId == usuarioId).OrderByDescending(x => x.Id).FirstOrDefault();
+            return actividad;
+        }
+        
+        public FormularioDinamico CrearFormularioDinamico(FormularioDinamicoViewModel formViewModel, Actividad actividad)
         {
             FormularioDinamico formularioDinamicoNuevo = new FormularioDinamico
             {
@@ -199,16 +204,18 @@ namespace Vita.Servicios
             };
             myDbContext.FormularioDinamico.Add(formularioDinamicoNuevo);
             myDbContext.SaveChanges();
-            Campos camposNuevo = new Campos
-            {
-                Nombre = formViewModel.Nombre,
-                FormularioDinamicoId = formularioDinamicoNuevo.Id,
-                TipoDatoCampoId = formViewModel.TipoDatoCampoId,
-                Obligatorio = formViewModel.Obligatorio,
-                CreatedAt = DateTime.Now
-            };
-                myDbContext.Campos.Add(camposNuevo);
-            myDbContext.SaveChanges();
+
+            return formularioDinamicoNuevo;
+            //Campos camposNuevo = new Campos
+            //{
+            //    Nombre = formViewModel.Nombre,
+            //    FormularioDinamicoId = formularioDinamicoNuevo.Id,
+            //    TipoDatoCampoId = formViewModel.TipoDatoCampoId,
+            //    Obligatorio = formViewModel.Obligatorio,
+            //    CreatedAt = DateTime.Now
+            //};
+            //    myDbContext.Campos.Add(camposNuevo);
+            //myDbContext.SaveChanges();
 
 
             //foreach(var ca in formViewModel.Campos)
@@ -226,7 +233,20 @@ namespace Vita.Servicios
             //}
         }
 
-
+        public Campos CrearCampo(FormularioDinamicoViewModel campo, FormularioDinamico form)
+        {
+            Campos camposNuevo = new Campos
+            {
+                Nombre = campo.Nombre,
+                FormularioDinamicoId = form.Id,
+                TipoDatoCampoId = campo.TipoDatoCampoId,
+                Obligatorio = campo.Obligatorio,
+                CreatedAt = DateTime.Now
+            };
+            myDbContext.Campos.Add(camposNuevo);
+            myDbContext.SaveChanges();
+            return camposNuevo;
+        }
         public void CrearActividad(ActividadViewModel actividadViewModel, Usuario usuario, int[] selectedSegmento)
         {
             Actividad actividadNueva = new Actividad

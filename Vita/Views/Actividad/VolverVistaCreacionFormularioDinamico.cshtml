@@ -33,14 +33,13 @@
 
                         <h3>Crear Formulario dinamico</h3>
                         <div class="form-validation">
-                            <form class="form-valide" action=/Actividad/CreacionFormularioDinamico method=POST>
 
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="Titulo">
                                         Título del formulario<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-username" name="Titulo" placeholder="Formulario para completar la actividad..">
+                                        <input type="text" class="form-control" id="val-username" name="Titulo" placeholder=Titulo>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -48,27 +47,22 @@
                                         Breve descripción para explicar al usuario <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <textarea class="form-control" id="val-suggestions" name="Descripcion" rows="5" placeholder="El siguiente formulario es de caracter obligatorio para poder....."></textarea>
+                                        <textarea class="form-control" id="val-suggestions" name="Descripcion" rows="5" placeholder=Descripcion></textarea>
                                     </div>
                                 </div>
-                                <div class="form-group row" id="botonEnviar">
-                                    <div class="col-lg-8 ml-auto">
-                                        <button type="submit" class="btn btn-primary">Agregar primera consigna</button>
-                                    </div>
-                                </div>
+                                
+                            
 
-                            </form>
-
-                            @*<form class="form-valide" action=/Actividad/CrearCampo method=POST>
+                            <form class="form-valide" action=/Actividad/CrearCampo method=POST>
 
 
                                 <div><h4>Agregar las consignas:</h4></div>
                                 <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="Campo.Nombre">
+                                    <label class="col-lg-4 col-form-label" for="Nombre">
                                         Ingresar titulo de la consigna <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <textarea class="form-control" id="val-suggestions" name="Campo.Nombre" rows="5" placeholder="Tienes problemas para correr o ejercitarse?...."></textarea>
+                                        <textarea class="form-control" id="val-suggestions" name="Nombre" rows="5" placeholder="Tienes problemas para correr o ejercitarse?...."></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -77,7 +71,7 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <select class="form-control" id="filtroCategoria"
-                                                data-live-search="true" title="Seleccione tipo de categoria de la actividad.." name="Campo.TipoDatoCampoId">
+                                                data-live-search="true" title="Seleccione tipo de categoria de la actividad.." name="TipoDatoCampoId">
                                             <option value=0>Elegir tipo de respuesta</option>
                                             @foreach (var item in ViewBag.ListaTipoPregunta as MultiSelectList)
                                             {
@@ -97,8 +91,8 @@
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <label><input type="radio" id="cbox1" name="Campo.Obligatorio" value="true"> Si</label><br>
-                                        <label><input type="radio" id="cbox1" name="Campo.Obligatorio" value="false"> No</label><br>
+                                        <label><input type="radio" id="cbox1" name="Obligatorio" value="true"> Si</label><br>
+                                        <label><input type="radio" id="cbox1" name="Obligatorio" value="false"> No</label><br>
                                     </div>
                                 </div>
                                 <div class="form-group row" id="botonEnviar">
@@ -106,22 +100,14 @@
                                         <button id="botonAgregarCampo" type="submit" class="btn btn-primary">Agregar nueva consigna</button>
                                     </div>
                                 </div>
-                            </form>*@
+                            </form>
 
                             @*<div class="form-group row" id="botonEnviar">
                                 <div class="col-lg-8 ml-auto">
                                     <button type="submit" class="btn btn-primary">Crear Formulario</button>
                                 </div>
                             </div>*@
-                            @*<div class="form-group row">
-            <div class="col-lg-8 ml-auto">
-
-                <button type="button" ng-click="" class="btn btn-primary">Agregarla</button>
-            </div>
-        </div>*@
-
-
-
+                          
                         </div>
                     </div>
                 </div>
@@ -130,5 +116,7 @@
     </div>
 </body>
 </html>
+
+
 
 
