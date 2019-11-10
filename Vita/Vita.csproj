@@ -247,6 +247,8 @@
     </Compile>
     <Compile Include="ViewModels\ActividadFechaViewModel.cs" />
     <Compile Include="ViewModels\ActividadViewModel.cs" />
+    <Compile Include="ViewModels\CampoViewModel.cs" />
+    <Compile Include="ViewModels\FormularioDinamicoViewModel.cs" />
     <Compile Include="ViewModels\ListaViewModel.cs" />
     <Compile Include="VitaEntities.Context.cs">
       <AutoGen>True</AutoGen>
