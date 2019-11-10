@@ -32,11 +32,11 @@
                             <th scope="col">Titulo actividad</th>
                             <th scope="col">Zona</th>
                             <th scope="col">Edad</th>
-                            <th scope="col">Usuarios aprobados</th>
-                            <th scope="col">Usuarios pendientes</th>
-                            <th scope="col">Usuarios Cancelados por usted</th>
+                            <th scope="col">Aprobados</th>
+                            <th scope="col">Pendientes</th>
+                            <th scope="col">Cancelados</th>
                             <th scope="col">Cupo</th>
-                             <th scope="colgroup">Accion</th>
+                            <th scope="colgroup">Accion</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,23 +52,24 @@
                                 {
                                     ViewBag.Url = "/Content/images/sin_foto.png";
                                 }
-                        <tr>
-                            <td><img src="@ViewBag.Url" style="width: 190px; height: 120px;"></td>
+                        <tr >
+                            <td><a href="/Actividad/FichaActividad/?idActividad=@i.Id&inscribirse=false"><img src="@ViewBag.Url" style="width: 190px; height: 120px;"> </a></td>
                             <td>@i.Titulo</td>
                             <td>@i.Localidad.Descripcion</td>
                             <td>@i.EdadMinima - @i.EdadMaxima</td>
-                            <td>
-
-                                <span><a href="/Actividad/ListaEstado?estadoId=1&actividadId=@i.Id"> @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count()</a></span>
+                            <td style="text-align: center;" >
+                                <a href="/Actividad/ListaEstado?estadoId=1&actividadId=@i.Id"><span class="label gradient-3 rounded" style="font-size: 15px !important;" >@i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count() </span></a>
+                            </td>
+                            <td style="text-align: center;">
+                                <a href="/Actividad/ListaEstado?estadoId=2&actividadId=@i.Id"><span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Pendiente" && x.ActividadId == i.Id).Count() </span></a>
+                            </td>
+                            <td style="text-align: center;">
+                                <a href="/Actividad/ListaEstado?estadoId=3&actividadId=@i.Id"><span class="label gradient-1 rounded" style="font-size: 15px !important;">
+                                @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Cancelado" && x.ActividadId == i.Id).Count()</span> </a>
                             </td>
                             <td>
-                                @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Pendiente" && x.ActividadId == i.Id).Count()
-                            </td>
-                            <td>
-                                @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Cancelado" && x.ActividadId == i.Id).Count()
-                            </td>
-                            <td>
-                                @Convert.ToInt32(@i.CantidadCupo - @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count()) disponible de @i.CantidadCupo
+                                @Convert.ToInt32(@i.CantidadCupo - @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count()) de @i.CantidadCupo
                             </td>
                             <td>
                                 <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span>
@@ -76,7 +77,8 @@
                             <td>
                                 <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
                             </td>
-                        </tr>
+
+                        </tr> 
                             }
 
                             @*<tr>
