@@ -385,8 +385,6 @@ namespace Vita.Controllers
               
                 return RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
 
-                
-
 
             }
         }

@@ -11,7 +11,16 @@ namespace Vita.ViewModels
         public string Descripcion { get; set; }
         public int ActividadId { get; set; }
         public int EntidadId { get; set; }
-        public List<CampoViewModel> Campos {get; set;}
+
+        public string Nombre { get; set; }
+        public int FormularioDinamicoId { get; set; }
+        public int TipoDatoCampoId { get; set; }
+        public bool Obligatorio { get; set; }
+
+     //   public List<Campos> Camposvi { get; set; }
+
+       
+
 
     }
 }
