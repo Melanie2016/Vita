@@ -32,7 +32,7 @@
 
                         <h3>Crear actividad</h3>
                         <div class="form-validation">
-                            <form class="form-valide" action="CreacionActividad" method="POST">
+                            <form class="form-valide" action=CreacionActividad method=POST>
                                 <div class="form-group row">
                                     <!--Titulo-->
                                     <label class="col-lg-4 col-form-label" for="Titulo">
@@ -115,7 +115,7 @@
                                         </label>
                                         <div class="col-lg-6">
                                             <div class="input-group date" style="width:200px;">
-                                                <input type="text" class="form-control" placeholder="01/12/2019" name="InicioEvento"  data-provide="datepicker" data-date-format="dd/mm/yyyy">
+                                                <input type="text" class="form-control" placeholder="01/12/2019" name="InicioEvento" data-provide="datepicker" data-date-format="dd/mm/yyyy">
                                                 <div class="input-group-addon">
                                                     <span class="glyphicon glyphicon-th"></span>
                                                 </div>
@@ -195,7 +195,7 @@
                                             Hora de inicio <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="time" class="form-control" id="val-number" name="HoraInicio"  style="width:200px;">
+                                            <input type="time" class="form-control" id="val-number" name="HoraInicio" style="width:200px;">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -507,18 +507,24 @@
                                         El mismo lo vera usted.
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <div class="col-lg-6">
-                                        <label><input type="radio" id="cbox1" name="Compleja" value="true"> Si</label><br>
-                                        <label><input type="radio" id="cbox1" name="Compleja" value="false"> No</label><br>
+                                    <div class="col-lg-6" id="aprobacionCompleja">
+                                        <label><input type="radio" id="complejaTrue" name="Compleja" value="true"> Si</label><br>
+                                        <label><input type="radio" id="complejaFalse" name="Compleja" value="false"> No</label><br>
                                     </div>
                                 </div>
-
-                                <div class="form-group row">
+                                <div class="form-group row" id="botonEnviar">
                                     <div class="col-lg-8 ml-auto">
                                         <button type="submit" class="btn btn-primary">Crear Actividad</button>
                                     </div>
                                 </div>
                             </form>
+                            @*<form class="form-valide" action="CrearFormularioDinamico" method="Get" id="formFormu">
+                                <div class="form-group row">
+                                    <div class="col-lg-8 ml-auto">
+                                        <button type="submit" class="btn btn-primary">Crear formulario</button>
+                                    </div>
+                                </div>
+                            </form>*@
                         </div>
                     </div>
                 </div>
@@ -641,5 +647,7 @@
             });
         });
     </script>
+
+
 
 

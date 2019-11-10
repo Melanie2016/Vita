@@ -389,7 +389,6 @@
         $('#filtroProvincia').on('change', function () {
 
             var idProvincia = this.value;
-            // var idPais = $(this).val();
 
             //Si elegiste la opción de los guíones paramos aca para no hacer nada
             if (idProvincia === 0) {
@@ -399,8 +398,8 @@
 
             //Ajax
             $.ajax({
-                //   url: "obtenerselectpaisusuario/" + idPais,
-                url: "obtenerselectpaisusuario/" + this.value,
+                //   url: "obtenerDepartamentosUsuario/" + idProvincia,
+                url: "obtenerDepartamentos/" + this.value,
                 type: 'GET',
                 dataType: "json",
                 success: function (res) {
@@ -417,7 +416,7 @@
                     $('#filtro2').on('change', function () {
                         //Ajax
                         $.ajax({
-                            url: "obtenerselectdepartamentousuario/" + this.value,
+                            url: "obtenerLocalidades/" + this.value,
 
                             type: 'GET',
                             dataType: "json",
@@ -456,7 +455,7 @@
 
             //Ajax
             $.ajax({
-                url: "obtenerselectprovinciaentidad/" + this.value,
+                url: "obtenerDepartamentos/" + this.value,
                 type: 'GET',
                 dataType: "json",
                 success: function (res) {
@@ -473,7 +472,7 @@
                     $('#filtroentidad2').on('change', function () {
                         //Ajax
                         $.ajax({
-                            url: "obtenerselectdepartamentoentidad/" + this.value,
+                            url: "obtenerLocalidades/" + this.value,
 
                             type: 'GET',
                             dataType: "json",
