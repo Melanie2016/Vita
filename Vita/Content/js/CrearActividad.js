@@ -194,4 +194,19 @@
         }
     });
 
+  
+
+
+    $("#complejaTrue").on("click", function () {
+        $('#botonEnviar').hide();
+        $('#formFormu').show(); //muestro las fechas desde y hasta
+       
+    });
+    $("#complejaFalse").on("click", function () {
+        $('#botonEnviar').show();
+        $('#formFormu').hide(); //muestro las fechas desde y hasta
+
+    });
+
+
 })(jQuery);

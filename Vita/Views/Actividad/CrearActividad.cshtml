@@ -32,7 +32,7 @@
 
                         <h3>Crear actividad</h3>
                         <div class="form-validation">
-                            <form class="form-valide" action="CreacionActividad" method="POST">
+                            <form class="form-valide" action=CreacionActividad method=POST>
                                 <div class="form-group row">
                                     <!--Titulo-->
                                     <label class="col-lg-4 col-form-label" for="Titulo">
@@ -507,22 +507,21 @@
                                         El mismo lo vera usted.
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <div class="col-lg-6">
-                                        <label><input type="radio" id="cbox1" name="Compleja" value="true"> Si</label><br>
-                                        <label><input type="radio" id="cbox1" name="Compleja" value="false"> No</label><br>
+                                    <div class="col-lg-6" id="aprobacionCompleja">
+                                        <label><input type="radio" id="complejaTrue" name="Compleja" value="true"> Si</label><br>
+                                        <label><input type="radio" id="complejaFalse" name="Compleja" value="false"> No</label><br>
                                     </div>
                                 </div>
-
-                                <div class="form-group row">
+                                <div class="form-group row" id="botonEnviar">
                                     <div class="col-lg-8 ml-auto">
                                         <button type="submit" class="btn btn-primary">Crear Actividad</button>
                                     </div>
                                 </div>
                             </form>
-                            <form class="form-valide" action="CrearFormularioDinamico" method="Get">
+                            <form class="form-valide" action="CrearFormularioDinamico" method="Get" id="formFormu">
                                 <div class="form-group row">
                                     <div class="col-lg-8 ml-auto">
-                                        Crear formulario para enviar al usuario para que complete
+                                        @*Crear formulario para enviar al usuario para que complete*@
                                         <button type="submit" class="btn btn-primary">Crear formulario</button>
                                     </div>
                                 </div>
@@ -649,5 +648,24 @@
             });
         });
     </script>
+
+<script>
+
+    var metodo = '';
+    var accionDelMetodo = '';
+    var descripcion = '';
+    if (valor == true) {
+        metodo = 'GET';
+        accionDelMetodo = 'CrearFormularioDinamico';
+        descripcionBoton='formulario'
+        
+    } else {
+        metodo = 'POST',
+        accionDelMetodo = 'CreacionActividad';
+        descripcionBoton = 'actividad';
+    }
+   
+
+</script>
 
 
