@@ -186,6 +186,47 @@ namespace Vita.Servicios
             var actividad = myDbContext.Actividad.Where(x => x.UsuarioId == usuarioId).OrderByDescending(x => x.Id).FirstOrDefault();
             return actividad;
         }
+
+        public void CrearFormularioDinamico(FormularioDinamicoViewModel formViewModel, Actividad actividad)
+        {
+            FormularioDinamico formularioDinamicoNuevo = new FormularioDinamico
+            {
+                Titulo = formViewModel.Titulo,
+                Descripcion = formViewModel.Descripcion,
+                ActividadId = actividad.Id,
+                EntidadId = actividad.UsuarioId,
+                CreatedAt = DateTime.Now
+            };
+            myDbContext.FormularioDinamico.Add(formularioDinamicoNuevo);
+            myDbContext.SaveChanges();
+            Campos camposNuevo = new Campos
+            {
+                Nombre = formViewModel.Nombre,
+                FormularioDinamicoId = formularioDinamicoNuevo.Id,
+                TipoDatoCampoId = formViewModel.TipoDatoCampoId,
+                Obligatorio = formViewModel.Obligatorio,
+                CreatedAt = DateTime.Now
+            };
+                myDbContext.Campos.Add(camposNuevo);
+            myDbContext.SaveChanges();
+
+
+            //foreach(var ca in formViewModel.Campos)
+            //{
+            //    Campos camposNuevo = new Campos
+            //    {
+            //        Nombre = ca.Nombre,
+            //        FormularioDinamicoId = formularioDinamicoNuevo.Id,
+            //        TipoDatoCampoId = ca.TipoDatoCampoId,
+            //        Obligatorio = ca.Obligatorio,
+            //        CreatedAt = DateTime.Now
+            //    };
+            //    myDbContext.Campos.Add(camposNuevo);
+
+            //}
+        }
+
+
         public void CrearActividad(ActividadViewModel actividadViewModel, Usuario usuario, int[] selectedSegmento)
         {
             Actividad actividadNueva = new Actividad
