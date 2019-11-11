@@ -373,6 +373,7 @@ namespace Vita.Controllers
             {
                 buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
                 ViewBag.ListaUsuario = actividadServicio.GetUsuariosByEstadoId(estadoId, actividadId);
+                ViewBag.Actividad = actividadServicio.GetActividad(actividadId);
 
                 return View(buscarUsuarioLogueado);
             }
@@ -424,5 +425,19 @@ namespace Vita.Controllers
                 return View(buscarUsuarioLogueado);
             }
         }
+        [HttpPost]
+        public ActionResult AprobarUsuario(UsuarioEstado usuarioEstado)
+        {
+       
+       //   foreach(var us in usuarioEstado.Usuarios)
+       //   {
+                actividadServicio.CambiarEstadoUsuarioInscripto(usuarioEstado.Estado, usuarioEstado.UsuarioId,
+                    usuarioEstado.ActividadId);
+
+        //  }
+            return RedirectToAction("ListaActividades", "Actividad");
+         // return RedirectToActionPermanent("ListaEstado", "Actividad",usuarioEstado.EstadoAnterior, usuarioEstado.ActividadId);
+        }
+
     }
 }

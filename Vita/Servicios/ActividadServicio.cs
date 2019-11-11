@@ -607,5 +607,20 @@ namespace Vita.Servicios
             return inscripto;
 
         }
+
+        public void CambiarEstadoUsuarioInscripto(bool estado, int usuarioId, int actividadId)
+        {
+            var usuarioIns=myDbContext.UsuarioInscriptoActividad.Where(x => x.UsuarioId == usuarioId && x.ActividadId == actividadId).FirstOrDefault();
+             if(estado== true)
+            {
+                usuarioIns.EstadoId = 1;//aceptado
+            }
+            else
+            {
+                usuarioIns.EstadoId = 4;//rechazado
+            }
+            usuarioIns.UpdatedAt = DateTime.Now;
+            myDbContext.SaveChanges();
+        }
     }
 }

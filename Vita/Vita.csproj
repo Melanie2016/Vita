@@ -250,6 +250,7 @@
     <Compile Include="ViewModels\CampoViewModel.cs" />
     <Compile Include="ViewModels\FormularioDinamicoViewModel.cs" />
     <Compile Include="ViewModels\ListaViewModel.cs" />
+    <Compile Include="ViewModels\UsuarioEstado.cs" />
     <Compile Include="VitaEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
