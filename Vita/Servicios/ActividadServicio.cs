@@ -520,7 +520,7 @@ namespace Vita.Servicios
             return lista2;
         }
 
-        public int InscribirUsuarioEnActividad(Usuario usuario, string actividadId, string estadoId)
+        public int InscribirUsuarioEnActividad(Usuario usuario, string actividadId, string estadoId, int[] FechaActividadId)
         {
             UsuarioInscriptoActividad usuarioActividad = new UsuarioInscriptoActividad
             {
@@ -531,6 +531,24 @@ namespace Vita.Servicios
             };
             myDbContext.UsuarioInscriptoActividad.Add(usuarioActividad);
             var resultado = myDbContext.SaveChanges();
+
+            if (resultado == 1) //Inscribo al usuario a la actividad
+            {
+                //Ahora incribo al usuario en las fechas de la actividad
+                foreach (var item in FechaActividadId)
+                {
+                    InscripcionFecha inscripcionFecha = new InscripcionFecha
+                    {
+                        UsuarioInscriptoActividadId = usuarioActividad.Id,
+                        FechaActividadId = item,
+                        FechaActividad = myDbContext.FechaActividad.Find(item),
+                        UsuarioInscriptoActividad = myDbContext.UsuarioInscriptoActividad.Find(usuarioActividad.Id)
+                    };
+
+                    myDbContext.InscripcionFecha.Add(inscripcionFecha);
+                    myDbContext.SaveChanges();
+                }
+            }
 
             return resultado;
         }
@@ -574,6 +592,20 @@ namespace Vita.Servicios
         public List<TipoDatoCampo> GetAllTipoDatoCampo()
         {
             return myDbContext.TipoDatoCampo.OrderBy(x => x.Descripcion).ToList();
+        } 
+
+        public bool BuscarUsuarioInscriptoEnActividad (int usuarioId, int actividadId)
+        {
+            var usuarioInscriptoActividad = myDbContext.UsuarioInscriptoActividad.Where(x => x.ActividadId == actividadId && x.UsuarioId == usuarioId).FirstOrDefault();
+           bool inscripto = false; 
+
+           if (usuarioInscriptoActividad != null)
+            {
+                inscripto = true;
+            }
+
+            return inscripto;
+
         }
     }
 }
