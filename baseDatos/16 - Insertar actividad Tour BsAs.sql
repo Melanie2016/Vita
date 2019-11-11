@@ -40,7 +40,7 @@ En seguida, circularemos por el sofisticado barrio de La Recoleta, una zona de e
            ,'2019-11-11'
            ,NULL
            ,NULL
-           ,NULL)
+           ,1)/*Compleja*/
 GO
 
 Update Actividad set Foto = 

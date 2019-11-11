@@ -1024,6 +1024,7 @@
     <Content Include="Views\Actividad\CrearFormularioDinamico.cshtml" />
     <Content Include="Views\Actividad\ActividadesDelUsuarioInscripto.cshtml" />
     <Content Include="Views\Usuario\Calendario.cshtml" />
+    <Content Include="Views\Actividad\CompletarFormularioDinamicoUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

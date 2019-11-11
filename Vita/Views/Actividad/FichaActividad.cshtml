@@ -172,10 +172,18 @@
                                         {
                                             <input type="submit" class="nav-link" style=" background-color: #7D4BBC;font-weight: bold;text-align: center;color: white;border-radius: 5px; width: 250px; height: 38px; padding-top: 5px; margin-bottom: 35px;" value="Inscribirse" />
                                         }
+                                        else //se inscribió recién y debe completar el formulario
+                                        {
+                                            if (ViewBag.Compleja)//tiene formulario
+                                            {
+                                                <div class="form-group">
+                                                    <a href="/Actividad/CompletarFormularioDinamicoUsuario" class="nav-link" style=" background-color: #7D4BBC;font-weight: bold;text-align: center;color: white;border-radius: 5px;">Completar formulario</a>
+                                                </div>
+                                            }
+                                        }
                                     }
 
                                 }
-
 
                                 <br />
                                 <div class="form-group">
