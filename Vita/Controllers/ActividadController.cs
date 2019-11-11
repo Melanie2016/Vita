@@ -160,7 +160,16 @@ namespace Vita.Controllers
                     }
                     else
                     {
-                        var resultado = actividadServicio.InscribirUsuarioEnActividad(buscarUsuarioLogueado, idActividad, "1", FechaActividadId); //Aprobado
+                        var estadoString= ""; //aca se guarda el estado
+                        if (actividad.Compleja == true)
+                        {
+                            estadoString = "2"; //pendiente
+                        }
+                        else
+                        {
+                            estadoString = "1";//aprobado
+                        }
+                        var resultado = actividadServicio.InscribirUsuarioEnActividad(buscarUsuarioLogueado, idActividad, estadoString, FechaActividadId); //Aprobado
                         ViewBag.Resultado = resultado;
 
                         if (resultado == 1)
@@ -398,6 +407,21 @@ namespace Vita.Controllers
                 return RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
 
 
+            }
+        }
+        [HttpGet]
+        public ActionResult ActividadesDelUsuarioInscripto()
+        {
+            //obtengo usuario logueado
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                ViewBag.ListaActividades = actividadServicio.GetAllActividadByRolUsuarioId(buscarUsuarioLogueado.Id);
+                return View(buscarUsuarioLogueado);
             }
         }
     }
