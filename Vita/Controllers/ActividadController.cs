@@ -282,35 +282,7 @@ namespace Vita.Controllers
 
         }
 
-        //Lo comento porque no me funciona no eliminar
-        /*  [HttpGet]
-          [Route("obtenersubcategoria{idCategoria}")]
-
-          public JsonResult ObtenerSubcategoria(int? id)
-          {
-             if(id == null)
-              {
-                  id = 3;
-              }
-              List<SubCategoria> subCategorias = categoriaServicio.GetAllSubCategoriasByCategoriaId(id);
-              var jsonSerialiser = new JavaScriptSerializer();
-              var json = jsonSerialiser.Serialize(subCategorias);
-
-              return Json(json, JsonRequestBehavior.AllowGet);
-          }*/
-        //public string ObtenerSubcategoria(int? id)
-        //{
-        //    List<SubCategoria> subCategorias = categoriaServicio.GetAllSubCategoriasByCategoriaId(id);
-
-        //    string result = JsonConvert.SerializeObject(subCategorias,
-        //          new JsonSerializerSettings
-        //          {
-        //              ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-        //          });
-
-        //    return result;
-
-        //}
+    
 
         [HttpGet]
         [Route("obtenerSubcategorias{idCategoria}")]
@@ -391,11 +363,9 @@ namespace Vita.Controllers
             else
             {
                 buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
-                //  var actividadesPorEstado = actividadServicio.GetByEstadoId(estadoId, actividadId);
                 ViewBag.ListaUsuario = actividadServicio.GetUsuariosByEstadoId(estadoId, actividadId);
 
                 return View(buscarUsuarioLogueado);
-                // return View(actividades);
             }
         }
         [HttpGet]
@@ -406,10 +376,7 @@ namespace Vita.Controllers
             { return RedirectToAction("Login", "Login"); }
             else
             {
-                List<TipoDatoCampo> listaTipoDatoCampo = actividadServicio.GetAllTipoDatoCampo();
-                ViewBag.ListaTipoPregunta = new MultiSelectList(listaTipoDatoCampo, "id", "descripcion");
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
-                //   return View();
                 return View(buscarUsuarioLogueado);
             }
 
@@ -427,8 +394,7 @@ namespace Vita.Controllers
 
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 var activdadCreada = actividadServicio.GetUltimaActividadPorUsuarioCreadaId(buscarUsuarioLogueado.Id);
-                actividadServicio.CrearFormularioDinamico(formularioDinamicoViewModel, activdadCreada);
-              
+                actividadServicio.CrearFormularioDinamico(formularioDinamicoViewModel, activdadCreada);              
                 return RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
 
 

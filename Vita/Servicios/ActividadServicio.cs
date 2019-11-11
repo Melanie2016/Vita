@@ -199,31 +199,23 @@ namespace Vita.Servicios
             };
             myDbContext.FormularioDinamico.Add(formularioDinamicoNuevo);
             myDbContext.SaveChanges();
-            Campos camposNuevo = new Campos
+        
+
+            foreach (var ca in formViewModel.CamposVm)
             {
-                Nombre = formViewModel.Nombre,
-                FormularioDinamicoId = formularioDinamicoNuevo.Id,
-                TipoDatoCampoId = formViewModel.TipoDatoCampoId,
-                Obligatorio = formViewModel.Obligatorio,
-                CreatedAt = DateTime.Now
-            };
+               
+                Campos camposNuevo = new Campos
+                {
+                    Nombre = ca.Nombre,
+                    FormularioDinamicoId = formularioDinamicoNuevo.Id,
+                    TipoDatoCampoId = ca.TipoDatoCampoId,
+                    Obligatorio = ca.Obligatorio,
+                    CreatedAt = DateTime.Now
+                };
                 myDbContext.Campos.Add(camposNuevo);
-            myDbContext.SaveChanges();
+                myDbContext.SaveChanges();
 
-
-            //foreach(var ca in formViewModel.Campos)
-            //{
-            //    Campos camposNuevo = new Campos
-            //    {
-            //        Nombre = ca.Nombre,
-            //        FormularioDinamicoId = formularioDinamicoNuevo.Id,
-            //        TipoDatoCampoId = ca.TipoDatoCampoId,
-            //        Obligatorio = ca.Obligatorio,
-            //        CreatedAt = DateTime.Now
-            //    };
-            //    myDbContext.Campos.Add(camposNuevo);
-
-            //}
+            }
         }
 
 
