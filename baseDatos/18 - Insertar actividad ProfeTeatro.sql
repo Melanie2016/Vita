@@ -50,7 +50,7 @@ Para el armado del taller me baso en mi experiencia como actriz y docente. A lo 
            ,'2019-11-11'
            ,NULL
            ,NULL
-           ,NULL)
+           ,1) /*Compleja*/
 GO
 
 Update Actividad set Foto = 

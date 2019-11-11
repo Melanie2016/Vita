@@ -97,6 +97,7 @@ namespace Vita.Controllers
             ViewBag.Logueado = false;
             ViewBag.ElegirDia = false;
             ViewBag.Inscripto = false;
+            ViewBag.Compleja = false;
 
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -134,6 +135,7 @@ namespace Vita.Controllers
             ViewBag.Logueado = false;
             ViewBag.ElegirDia = false;
             ViewBag.Inscripto = false;
+            ViewBag.Compleja = false;
 
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -172,23 +174,36 @@ namespace Vita.Controllers
                         var resultado = actividadServicio.InscribirUsuarioEnActividad(buscarUsuarioLogueado, idActividad, estadoString, FechaActividadId); //Aprobado
                         ViewBag.Resultado = resultado;
 
-                        if (resultado == 1)
+                        if (resultado == 1) //quedó inscripto en la actividad
                         {
-                            var mensaje = "Su inscripción ha sido exitosa. Puede ir a su perfil para ver sus actividades";
+                            var mensaje="";
+                            var body = "";
+                            var tituloActividad = actividad.Titulo;
+                            var celular = "whatsapp:+549" + buscarUsuarioLogueado.Celular;
+
+                            if (actividad.Compleja == true) //Su inscripción queda pendiente
+                            {
+                                ViewBag.Compleja = true; //debe completar el formulario
+                                mensaje = "Su inscripción está en estado PENDIENTE. A continuación debe completar un formulario con los requisitos solicitados para poder realizar esta actividad. Se le informará cuando su inscripción este aprobada.";
+                                body = "Tu inscripción a la actividad " + tituloActividad + " está en estado pendiente de aprobación. Te avisaremos cuando esté aprobada. Gracias! "; //Mensaje whatsApp
+                            }
+                            else //Queda aprobado de una
+                            {
+                                mensaje = "Su inscripción ha sido exitosa. Puede ir a su perfil para ver sus actividades";
+                                body = "Tu inscripción a la actividad " + tituloActividad + " ha sido exitosa! "; //Mensaje whatsApp
+                            }
+                               
                             ViewBag.Mensaje = mensaje;
 
                             //Notificaciones de whatsap
-                            /* var accountSid = "ACe4ace95ec1876ed6708c1005e641c841";
+                             /*var accountSid = "";
                              var authToken = "";
 
                              TwilioClient.Init(accountSid, authToken);
-
-                             var tituloActividad = actividad.Titulo;
-
                              var message = MessageResource.Create(
                                  from: new Twilio.Types.PhoneNumber("whatsapp:+14155238886"),
-                                 body: "Tu inscripción a la actividad " + tituloActividad + " ha sido exitosa! ",
-                                 to: new Twilio.Types.PhoneNumber("whatsapp:+5491127814553")
+                                 body: body,
+                                 to: new Twilio.Types.PhoneNumber(celular)
                              );
 
 
@@ -437,6 +452,21 @@ namespace Vita.Controllers
         //  }
             return RedirectToAction("ListaActividades", "Actividad");
          // return RedirectToActionPermanent("ListaEstado", "Actividad",usuarioEstado.EstadoAnterior, usuarioEstado.ActividadId);
+        }
+
+
+        public ActionResult CompletarFormularioDinamicoUsuario()
+        {
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                var user = new Usuario();
+                return View(user);
+            }
+            else
+            {
+                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                return View(buscarUsuarioLogueado);
+            }
         }
 
     }

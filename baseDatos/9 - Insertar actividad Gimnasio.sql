@@ -32,7 +32,7 @@ INSERT INTO [dbo].[Actividad]
            ,'2019-11-08'
            ,NULL
            ,NULL
-           ,NULL)
+           ,1) /*Compleja*/
 GO
 
 /*FOTO*/
