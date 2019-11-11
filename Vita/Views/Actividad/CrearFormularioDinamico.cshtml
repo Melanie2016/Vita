@@ -35,7 +35,6 @@
                         <div class="form-validation">
                             <form class="form-valide" action=/Actividad/CreacionFormularioDinamico method=POST>
 
-                                <input type="number" value="ActividadId" hidden />
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="Titulo">
                                         Título del formulario<span class="text-danger">*</span>
@@ -52,61 +51,67 @@
                                         <textarea class="form-control" id="val-suggestions" name="Descripcion" rows="5" placeholder="El siguiente formulario es de caracter obligatorio para poder....."></textarea>
                                     </div>
                                 </div>
-                                
+
 
                                 <div><h4>Agregar las consignas:</h4></div>
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="Nombre">
-                                        Ingresar titulo de la consigna <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <textarea class="form-control" id="val-suggestions" name="Nombre" rows="5" placeholder="Tienes problemas para correr o ejercitarse?...."></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-skill">
-                                        Elegir tipo de respuesta que tiene que ingresar el cliente<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <select class="form-control" id="filtroCategoria"
-                                                data-live-search="true" title="Seleccione tipo de categoria de la actividad.." name="TipoDatoCampoId">
-                                            <option value=0>Elegir tipo de respuesta</option>
-                                            @foreach (var item in ViewBag.ListaTipoPregunta as MultiSelectList)
-                                            {
-                                                <option value="@item.Value">@item.Text</option>
-                                                @item.Value
-                                            }
-                                        </select>
-
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-
-                                    <label class="col-lg-4 col-form-label" for="Obligatorio">
-                                        ¿Está consigna va a ser obligatoria?
-                                        Si es asi, los usuarios deberán completarla si o si.
-
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <label><input type="radio" id="cbox1" name="Obligatorio" value="true"> Si</label><br>
-                                        <label><input type="radio" id="cbox1" name="Obligatorio" value="false"> No</label><br>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row" id="botonEnviar">
-                                    <div class="col-lg-8 ml-auto">
-                                        <button type="submit" class="btn btn-primary">Crear Formulario</button>
-                                    </div>
-                                </div>
+                                <p><a class="btn btn-success" id="btnAgregarEmpleado">Agregar Nueva consigna</a></p>
+                                <hr />
+                                <div id="ContenedorEmpleados"></div>
                                 @*<div class="form-group row">
-                                    <div class="col-lg-8 ml-auto">
+            <label class="col-lg-4 col-form-label" for="Nombre">
+                Ingresar titulo de la consigna <span class="text-danger">*</span>
+            </label>
+            <div class="col-lg-6">
+                <textarea class="form-control" id="val-suggestions" name="Nombre" rows="5" placeholder="Tienes problemas para correr o ejercitarse?...."></textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-4 col-form-label" for="val-skill">
+                Elegir tipo de respuesta que tiene que ingresar el cliente<span class="text-danger">*</span>
+            </label>
+            <div class="col-lg-6">
+                <select class="form-control" id="filtroCategoria"
+                        data-live-search="true" title="Seleccione tipo de categoria de la actividad.." name="TipoDatoCampoId">
+                    <option value=0>Elegir tipo de respuesta</option>
+                    @foreach (var item in ViewBag.ListaTipoPregunta as MultiSelectList)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                        @item.Value
+                    }
+                </select>
 
-                                        <button type="button" ng-click="" class="btn btn-primary">Agregarla</button>
-                                    </div>
-                                </div>*@
+            </div>
+        </div>
+        <div class="form-group row">
+
+            <label class="col-lg-4 col-form-label" for="Obligatorio">
+                ¿Está consigna va a ser obligatoria?
+                Si es asi, los usuarios deberán completarla si o si.
+
+                <span class="text-danger">*</span>
+            </label>
+            <div class="col-lg-6">
+                <label><input type="radio" id="cbox1" name="Obligatorio" value="true"> Si</label><br>
+                <label><input type="radio" id="cbox1" name="Obligatorio" value="false"> No</label><br>
+            </div>
+        </div>
+
+        <div class="form-group row" id="botonEnviar">
+            <div class="col-lg-8 ml-auto">
+                <button type="submit" class="btn btn-primary">Crear Formulario</button>
+            </div>
+        </div>*@
+
+
+
+                                @*<div class="form-group row">
+            <div class="col-lg-8 ml-auto">
+
+                <button type="button" ng-click="" class="btn btn-primary">Agregarla</button>
+            </div>
+        </div>*@
                             </form>
-                           
+                        
 
                         </div>
                     </div>
@@ -117,3 +122,70 @@
 </body>
 </html>
 
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+       // alert("JQuery OK");
+        var index = 0;
+
+        $("#btnAgregarEmpleado").click(function () {
+        //    alert("Botón presionado");
+            $("#ContenedorEmpleados").append(
+                //'<div>Nueva consigna</div><hr/>' +
+                //'<div>' +
+                //'Nombre:<br/>' +
+                //'<input type="Text" name="CamposVm[' + index + '].Nombre">' +
+                //'</div>' +
+                //'<div>' +
+                //'Apellido:<br/>' +
+                //'<input type="Text" name="CamposVm[' + index + '].TipoDatoCampoId">' +
+                //'</div>'
+                '<div>'+
+                '<div class="form-group row">' +
+                ' <label class="col-lg-4 col-form-label" for="CamposVm[' + index + '].Nombre">' +
+                ' Ingresar titulo de la consigna <span class="text-danger">*</span>' +
+                ' </label>' +
+                ' <div class="col-lg-6">' +
+                '<textarea class="form-control" id="val-suggestions" name="CamposVm[' + index + '].Nombre" rows="5" placeholder="Tienes problemas para correr o ejercitarse?...."></textarea>' +
+                '</div>' +
+                ' </div>' +
+                ' <div class="form-group row">' +
+                ' <label class="col-lg-4 col-form-label" for="val-skill">' +
+                '  Elegir tipo de respuesta que tiene que ingresar el cliente<span class="text-danger">*</span>' +
+                '  </label>' +
+                '  <div class="col-lg-6">' +
+                '  <select class="form-control" id="filtroCategoria" data-live-search="true" title="Seleccione tipo de categoria de la actividad.." name="CamposVm[' + index + '].TipoDatoCampoId">' +
+                ' <option value=0>Elegir tipo de respuesta</option>' +
+                //*
+                '  </select>' +
+
+                ' </div>' +
+                '</div>' +
+                '  <div class="form-group row">' +
+
+                ' <label class="col-lg-4 col-form-label" for="CamposVm[' + index + '].Obligatorio">' +
+                ' ¿Está consigna va a ser obligatoria?' +
+                ' Si es asi, los usuarios deberán completarla si o si.' +
+
+                ' <span class="text-danger">*</span>' +
+                '</label>' +
+                '<div class="col-lg-6">' +
+                ' <label><input type="radio" id="cbox1" name="CamposVm[' + index + '].Obligatorio"  value="true"> Si</label><br>' +
+                ' <label><input type="radio" id="cbox1" name="CamposVm[' + index + '].Obligatorio" value="false"> No</label><br>' +
+                ' </div>' +
+                ' </div>' + 
+                '<br>' +
+                '<br>' +
+                '</div>'+
+              '<hr />'
+                
+
+            );
+            index++;
+        });
+    });
+</script>
+
+@*'   @foreach (var item in ViewBag.ListaTipoPregunta as MultiSelectList)
+    {<option value="@item.Value">@item.Text</option>}  @item.Value}'+*@
