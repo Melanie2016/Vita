@@ -51,6 +51,15 @@
                                 @ViewBag.Mensaje
                             </div>
                         }
+
+                        <!--Ya se encuentra inscripto en la actividad-->
+                        @if (ViewBag.Inscripto)
+                        {
+                            <div class="alert alert-success" role="alert">
+                                Ya te encuentras inscripto en esta actividad!
+                            </div>
+                        }
+
                         <!---->
                         <!--Mensaje debe loguearse-->
                         @if (ViewBag.IniciarSesion == "true")
@@ -60,6 +69,14 @@
                             </div>
                         }
                         <!---->
+                        <!--Debe elgir un dia y horario de la actividad-->
+                        @if (ViewBag.ElegirDia)
+                        {
+                            <div class="alert alert-warning" role="alert">
+                                Debe elegir un día para inscribirse en la actividad
+                            </div>
+                        }
+
                         <!--Mensaje error al inscribirse-->
                         @if (ViewBag.Resultado != 0 && ViewBag.Resultado != 1)
                         {
@@ -136,10 +153,30 @@
                     <div class="col-lg-3 ml-auto">
 
                         <div class="mb-5">
-                            <form action="#" method="post">
-                                <div class="form-group">
-                                    <a href="/Actividad/FichaActividad?idActividad=@ViewBag.Actividad.Id&inscribirse=true" class="nav-link" style=" background-color: #7D4BBC;font-weight: bold;text-align: center;color: white;border-radius: 5px;">Inscribirse</a>
-                                </div>
+                            @using (Html.BeginForm("FichaActividad", "Actividad", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                if (!ViewBag.Logueado)//No está logueado
+                                {
+                                    <div class="form-group">
+                                        <a href="/Actividad/FichaActividad?idActividad=@ViewBag.Actividad.Id&inscribirse=true" class="nav-link" style=" background-color: #7D4BBC;font-weight: bold;text-align: center;color: white;border-radius: 5px;">Inscribirse</a>
+                                    </div>
+                                }
+                                else //está logueado
+                                {
+                                    <input type="hidden" value="@ViewBag.Actividad.Id" name="idActividad" />
+                                    <input type="hidden" value="true" name="inscribirse" />
+
+                                    if (!ViewBag.Inscripto) //Si no está inscripto en la actividad, puede inscribirse
+                                    {
+                                        if (ViewBag.Resultado != 1) //puede ser que justo se inscribió recién y hay que ocultarle el botón
+                                        {
+                                            <input type="submit" class="nav-link" style=" background-color: #7D4BBC;font-weight: bold;text-align: center;color: white;border-radius: 5px; width: 250px; height: 38px; padding-top: 5px; margin-bottom: 35px;" value="Inscribirse" />
+                                        }
+                                    }
+
+                                }
+
+
                                 <br />
                                 <div class="form-group">
                                     <div class="wrap-icon">
@@ -148,6 +185,8 @@
                                         {
                                             if (item.InicioEvento != null) //Es una actividad con una fecha desde y hasta
                                             {
+                                                <input type="hidden" value="@item.Id" name="FechaActividadId" />
+
                                                 if (item.InicioEvento == item.FinEvento) //mismo dia de comienzo y fin
                                                 {
                                                     <p style="color:#8a8686">
@@ -169,12 +208,31 @@
                                             {
                                                 if (ViewBag.Logueado) //Esta logueado y son distintos dias y horarios
                                                 {
-                                                    <div>
-                                                        <input type="checkbox" name="FechaActividadId" value="@item.Id" style="opacity:1; width:15px; margin-top: -2px;" />
-                                                        <p style="color:#8a8686; margin-left: 20px;">
+                                                    if (!ViewBag.Inscripto) //Si no está inscripto en la actividad, puede inscribirse
+                                                    {
+                                                        if (ViewBag.Resultado != 1) //puede ser que justo se inscribió recién y hay que ocultarle las opciones
+                                                        {
+                                                            <div>
+                                                                <input type="checkbox" name="FechaActividadId" value="@item.Id" style="opacity:1; width:15px; margin-top: -2px;" />
+                                                                <p style="color:#8a8686; margin-left: 20px;">
+                                                                    @item.DiaSemana.Descripcion  @item.HoraInicio.ToString().Remove(5) - @item.HoraFin.ToString().Remove(5)
+                                                                </p>
+                                                            </div>
+                                                        }
+                                                        else //Se inscribió recién en la actividad
+                                                        {
+                                                            <p style="color:#8a8686">
+                                                                @item.DiaSemana.Descripcion  @item.HoraInicio.ToString().Remove(5) - @item.HoraFin.ToString().Remove(5)
+                                                            </p>
+                                                        }
+
+                                                    }
+                                                    else //está inscripto en la actividad
+                                                    {
+                                                        <p style="color:#8a8686">
                                                             @item.DiaSemana.Descripcion  @item.HoraInicio.ToString().Remove(5) - @item.HoraFin.ToString().Remove(5)
                                                         </p>
-                                                    </div>
+                                                    }
                                                 }
                                                 else//No está logueado y son distintos dias y horarios
                                                 {
@@ -214,8 +272,7 @@
 
                                     </div>
                                 </div>
-
-                            </form>
+                            }
                         </div>
 
                         <!--Franja Horaria-->
