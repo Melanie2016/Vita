@@ -58,60 +58,60 @@
                                 <hr />
                                 <div id="ContenedorEmpleados"></div>
                                 @*<div class="form-group row">
-            <label class="col-lg-4 col-form-label" for="Nombre">
-                Ingresar titulo de la consigna <span class="text-danger">*</span>
-            </label>
-            <div class="col-lg-6">
-                <textarea class="form-control" id="val-suggestions" name="Nombre" rows="5" placeholder="Tienes problemas para correr o ejercitarse?...."></textarea>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-lg-4 col-form-label" for="val-skill">
-                Elegir tipo de respuesta que tiene que ingresar el cliente<span class="text-danger">*</span>
-            </label>
-            <div class="col-lg-6">
-                <select class="form-control" id="filtroCategoria"
-                        data-live-search="true" title="Seleccione tipo de categoria de la actividad.." name="TipoDatoCampoId">
-                    <option value=0>Elegir tipo de respuesta</option>
-                    @foreach (var item in ViewBag.ListaTipoPregunta as MultiSelectList)
-                    {
-                        <option value="@item.Value">@item.Text</option>
-                        @item.Value
-                    }
-                </select>
+                                        <label class="col-lg-4 col-form-label" for="Nombre">
+                                            Ingresar titulo de la consigna <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <textarea class="form-control" id="val-suggestions" name="Nombre" rows="5" placeholder="Tienes problemas para correr o ejercitarse?...."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" for="val-skill">
+                                            Elegir tipo de respuesta que tiene que ingresar el cliente<span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <select class="form-control" id="filtroCategoria"
+                                                    data-live-search="true" title="Seleccione tipo de categoria de la actividad.." name="TipoDatoCampoId">
+                                                <option value=0>Elegir tipo de respuesta</option>
+                                                @foreach (var item in ViewBag.ListaTipoPregunta as MultiSelectList)
+                                                {
+                                                    <option value="@item.Value">@item.Text</option>
+                                                    @item.Value
+                                                }
+                                            </select>
 
-            </div>
-        </div>
-        <div class="form-group row">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
 
-            <label class="col-lg-4 col-form-label" for="Obligatorio">
-                ¿Está consigna va a ser obligatoria?
-                Si es asi, los usuarios deberán completarla si o si.
+                                        <label class="col-lg-4 col-form-label" for="Obligatorio">
+                                            ¿Está consigna va a ser obligatoria?
+                                            Si es asi, los usuarios deberán completarla si o si.
 
-                <span class="text-danger">*</span>
-            </label>
-            <div class="col-lg-6">
-                <label><input type="radio" id="cbox1" name="Obligatorio" value="true"> Si</label><br>
-                <label><input type="radio" id="cbox1" name="Obligatorio" value="false"> No</label><br>
-            </div>
-        </div>
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <label><input type="radio" id="cbox1" name="Obligatorio" value="true"> Si</label><br>
+                                            <label><input type="radio" id="cbox1" name="Obligatorio" value="false"> No</label><br>
+                                        </div>
+                                    </div>
 
-        <div class="form-group row" id="botonEnviar">
-            <div class="col-lg-8 ml-auto">
-                <button type="submit" class="btn btn-primary">Crear Formulario</button>
-            </div>
-        </div>*@
+                                    <div class="form-group row" id="botonEnviar">
+                                        <div class="col-lg-8 ml-auto">
+                                            <button type="submit" class="btn btn-primary">Crear Formulario</button>
+                                        </div>
+                                    </div>*@
 
 
 
-                                @*<div class="form-group row">
-            <div class="col-lg-8 ml-auto">
+                                <div class="form-group row">
+                                        <div class="col-lg-8 ml-auto">
 
-                <button type="button" ng-click="" class="btn btn-primary">Agregarla</button>
-            </div>
-        </div>*@
+                                            <button type="submit" ng-click="" class="btn btn-primary">Guardar</button>
+                                        </div>
+                                    </div>
                             </form>
-                        
+
 
                         </div>
                     </div>
@@ -126,11 +126,11 @@
 
 <script>
     $(document).ready(function () {
-       // alert("JQuery OK");
+        // alert("JQuery OK");
         var index = 0;
 
         $("#btnAgregarEmpleado").click(function () {
-        //    alert("Botón presionado");
+            //    alert("Botón presionado");
             $("#ContenedorEmpleados").append(
                 //'<div>Nueva consigna</div><hr/>' +
                 //'<div>' +
@@ -141,7 +141,7 @@
                 //'Apellido:<br/>' +
                 //'<input type="Text" name="CamposVm[' + index + '].TipoDatoCampoId">' +
                 //'</div>'
-                '<div>'+
+                '<div id="campo + index ">' +
                 '<div class="form-group row">' +
                 ' <label class="col-lg-4 col-form-label" for="CamposVm[' + index + '].Nombre">' +
                 ' Ingresar titulo de la consigna <span class="text-danger">*</span>' +
@@ -174,18 +174,36 @@
                 ' <label><input type="radio" id="cbox1" name="CamposVm[' + index + '].Obligatorio"  value="true"> Si</label><br>' +
                 ' <label><input type="radio" id="cbox1" name="CamposVm[' + index + '].Obligatorio" value="false"> No</label><br>' +
                 ' </div>' +
-                ' </div>' + 
+                ' </div>' +
                 '<br>' +
                 '<br>' +
-                '</div>'+
-              '<hr />'
-                
+
+                '<div class="form-group row">' +
+                '<div class="col-lg-8 ml-auto">' +
+
+                //'  <button type="button" id="eliminarPregunta" class="btn btn-primary">Eliminar pregunta</button>' +
+                '<p><a class="btn btn-success" id="eliminarPregunta">eliminar pregunta</a></p>' +
+                '</div>' +
+                ' </div >' +
+                '</div>' +
+                '<hr />'
+
 
             );
             index++;
         });
+
     });
 </script>
+<script>
+    (function ($) {
+        $("#eliminarPregunta").on("click", function () { //no andaaaa
+            alert("Botón presionado");
 
+        });
+
+    });
+
+</script>
 @*'   @foreach (var item in ViewBag.ListaTipoPregunta as MultiSelectList)
     {<option value="@item.Value">@item.Text</option>}  @item.Value}'+*@

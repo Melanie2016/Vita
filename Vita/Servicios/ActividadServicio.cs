@@ -211,19 +211,24 @@ namespace Vita.Servicios
             //myDbContext.SaveChanges();
 
 
-            //foreach(var ca in formViewModel.Campos)
-            //{
-            //    Campos camposNuevo = new Campos
-            //    {
-            //        Nombre = ca.Nombre,
-            //        FormularioDinamicoId = formularioDinamicoNuevo.Id,
-            //        TipoDatoCampoId = ca.TipoDatoCampoId,
-            //        Obligatorio = ca.Obligatorio,
-            //        CreatedAt = DateTime.Now
-            //    };
-            //    myDbContext.Campos.Add(camposNuevo);
+            foreach (var ca in formViewModel.CamposVm)
+            {
+                if (ca.TipoDatoCampoId == 0)
+                {
+                    ca.TipoDatoCampoId = 1;
+                }
+                Campos camposNuevo = new Campos
+                {
+                    Nombre = ca.Nombre,
+                    FormularioDinamicoId = formularioDinamicoNuevo.Id,
+                    TipoDatoCampoId = ca.TipoDatoCampoId,
+                    Obligatorio = ca.Obligatorio,
+                    CreatedAt = DateTime.Now
+                };
+                myDbContext.Campos.Add(camposNuevo);
+                myDbContext.SaveChanges();
 
-            //}
+            }
         }
 
 
