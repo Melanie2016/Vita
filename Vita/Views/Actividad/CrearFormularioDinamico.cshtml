@@ -126,21 +126,15 @@
 
 <script>
     $(document).ready(function () {
-        // alert("JQuery OK");
+
         var index = 0;
+    
+               
 
         $("#btnAgregarEmpleado").click(function () {
-            //    alert("Botón presionado");
+        
             $("#ContenedorEmpleados").append(
-                //'<div>Nueva consigna</div><hr/>' +
-                //'<div>' +
-                //'Nombre:<br/>' +
-                //'<input type="Text" name="CamposVm[' + index + '].Nombre">' +
-                //'</div>' +
-                //'<div>' +
-                //'Apellido:<br/>' +
-                //'<input type="Text" name="CamposVm[' + index + '].TipoDatoCampoId">' +
-                //'</div>'
+      
                 '<div id="campo + index ">' +
                 '<div class="form-group row">' +
                 ' <label class="col-lg-4 col-form-label" for="CamposVm[' + index + '].Nombre">' +
@@ -157,7 +151,9 @@
                 '  <div class="col-lg-6">' +
                 '  <select class="form-control" id="filtroCategoria" data-live-search="true" title="Seleccione tipo de categoria de la actividad.." name="CamposVm[' + index + '].TipoDatoCampoId">' +
                 ' <option value=0>Elegir tipo de respuesta</option>' +
-                //*
+                ' <option value=1>Texto</option>' +
+                ' <option value=2>Número</option>' +
+                ' <option value=3>Fecha</option>' +
                 '  </select>' +
 
                 ' </div>' +
