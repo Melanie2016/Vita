@@ -95,6 +95,45 @@ namespace Vita.Controllers
             ViewBag.IniciarSesion = "false";
             ViewBag.Domicilio = actividad.Domicilio.FirstOrDefault();
             ViewBag.Logueado = false;
+            ViewBag.ElegirDia = false;
+            ViewBag.Inscripto = false;
+
+            //obtengo usuario logueado
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                var user = new Usuario();
+
+                if (inscribirse == "true")
+                {
+                    ViewBag.IniciarSesion = "true";
+                }
+
+                return View(user);
+            }
+            else
+            {
+                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                bool inscripto = actividadServicio.BuscarUsuarioInscriptoEnActividad(buscarUsuarioLogueado.Id, int.Parse(idActividad));
+                ViewBag.Inscripto = inscripto;
+
+                ViewBag.Logueado = true;
+
+                return View(buscarUsuarioLogueado);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult FichaActividad(string idActividad, string inscribirse, int[] FechaActividadId)
+        {
+            var actividad = actividadServicio.GetActividad(int.Parse(idActividad));
+            ViewBag.Actividad = actividad;
+            ViewBag.FechasActividad = actividad.FechaActividad;
+            ViewBag.Resultado = 0;
+            ViewBag.IniciarSesion = "false";
+            ViewBag.Domicilio = actividad.Domicilio.FirstOrDefault();
+            ViewBag.Logueado = false;
+            ViewBag.ElegirDia = false;
+            ViewBag.Inscripto = false;
 
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -115,35 +154,42 @@ namespace Vita.Controllers
 
                 if (inscribirse == "true")
                 {
-                    var resultado = actividadServicio.InscribirUsuarioEnActividad(buscarUsuarioLogueado, idActividad, "1"); //Aprobado
-                    ViewBag.Resultado = resultado;
-
-                    if (resultado == 1)
+                    if(FechaActividadId == null) //No eligió ningún dia y horario
                     {
-                        var mensaje = "Su inscripción ha sido exitosa. Puede ir a su perfil para ver sus actividades";
-                        ViewBag.Mensaje = mensaje;
-
-                        //Notificaciones de whatsap
-                       /* var accountSid = "ACe4ace95ec1876ed6708c1005e641c841";
-                        var authToken = "";
-
-                        TwilioClient.Init(accountSid, authToken);
-
-                        var tituloActividad = actividad.Titulo;
-
-                        var message = MessageResource.Create(
-                            from: new Twilio.Types.PhoneNumber("whatsapp:+14155238886"),
-                            body: "Tu inscripción a la actividad " + tituloActividad + " ha sido exitosa! ",
-                            to: new Twilio.Types.PhoneNumber("whatsapp:+5491127814553")
-                        );
-
-
-                        var respuestaApi = message.Sid;*/
+                        ViewBag.ElegirDia = true;
                     }
                     else
                     {
-                        ViewBag.Mensaje = "Hubo un error al realizar la inscripción";
-                    }
+                        var resultado = actividadServicio.InscribirUsuarioEnActividad(buscarUsuarioLogueado, idActividad, "1", FechaActividadId); //Aprobado
+                        ViewBag.Resultado = resultado;
+
+                        if (resultado == 1)
+                        {
+                            var mensaje = "Su inscripción ha sido exitosa. Puede ir a su perfil para ver sus actividades";
+                            ViewBag.Mensaje = mensaje;
+
+                            //Notificaciones de whatsap
+                            /* var accountSid = "ACe4ace95ec1876ed6708c1005e641c841";
+                             var authToken = "";
+
+                             TwilioClient.Init(accountSid, authToken);
+
+                             var tituloActividad = actividad.Titulo;
+
+                             var message = MessageResource.Create(
+                                 from: new Twilio.Types.PhoneNumber("whatsapp:+14155238886"),
+                                 body: "Tu inscripción a la actividad " + tituloActividad + " ha sido exitosa! ",
+                                 to: new Twilio.Types.PhoneNumber("whatsapp:+5491127814553")
+                             );
+
+
+                             var respuestaApi = message.Sid;*/
+                        }
+                        else
+                        {
+                            ViewBag.Mensaje = "Hubo un error al realizar la inscripción";
+                        }
+                    } 
                 }
 
                 return View(buscarUsuarioLogueado);
