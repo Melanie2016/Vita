@@ -507,8 +507,8 @@ namespace Vita.Controllers
          // return RedirectToActionPermanent("ListaEstado", "Actividad",usuarioEstado.EstadoAnterior, usuarioEstado.ActividadId);
         }
 
-
-        public ActionResult CompletarFormularioDinamicoUsuario()
+        [HttpGet]
+        public ActionResult CompletarFormularioDinamicoUsuario(int actividadId)
         {
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
             {
@@ -518,6 +518,8 @@ namespace Vita.Controllers
             else
             {
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                ViewBag.Formulario = actividadServicio.GetFormularioDinamicoByActividadId(actividadId);
+                
                 return View(buscarUsuarioLogueado);
             }
         }

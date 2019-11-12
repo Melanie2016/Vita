@@ -741,5 +741,12 @@ namespace Vita.Servicios
             usuarioIns.UpdatedAt = DateTime.Now;
             myDbContext.SaveChanges();
         }
+        public FormularioDinamico GetFormularioDinamicoByActividadId(int actividadId)
+        {
+            var formu = myDbContext.FormularioDinamico.Where(x => x.ActividadId == actividadId).FirstOrDefault();
+            var campos = myDbContext.Campos.Where(x => x.FormularioDinamicoId == formu.Id).ToList();
+            formu.Campos = campos;
+            return formu;
+        }
     }
 }
