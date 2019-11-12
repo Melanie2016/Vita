@@ -83,114 +83,128 @@
     });
 
     //Lunes
-    $("#Lunes").on("click", function () { 
+    $("#Lunes").on("click", function () {
         if (this.checked == true) {
+            $(this).val("1");
             var mismoHorario = document.getElementById("cbox3");
             var distintoHorario = document.getElementById("cbox4");
             if (mismoHorario.checked == false) {
-                if (distintoHorario.checked == true) {
+                if (distintoHorario.checked == true) {//distinto horario
                     $('#horarioLunes').show(); //muestro la hora de inicio y fin del lunes
                 }
             }
         }
         else {
             $('#horarioLunes').hide(); //oculto la hora de inicio y fin del lunes
+            $(this).val("0");
         }
     });
 
     //Martes
     $("#Martes").on("click", function () {
         if (this.checked == true) {
+            $(this).val("1");
             var mismoHorario = document.getElementById("cbox3");
             var distintoHorario = document.getElementById("cbox4");
             if (mismoHorario.checked == false) { 
-                if (distintoHorario.checked == true) {
+                if (distintoHorario.checked == true) {//distinto horario
                     $('#horarioMartes').show(); //muestro la hora de inicio y fin del Martes
                 }
             }
         }
         else {
             $('#horarioMartes').hide(); //oculto la hora de inicio y fin del Martes
+            $(this).val("0");
         }
     });
 
     //Miercoles
     $("#Miercoles").on("click", function () {
         if (this.checked == true) {
+            $(this).val("1");
             var mismoHorario = document.getElementById("cbox3");
             var distintoHorario = document.getElementById("cbox4");
             if (mismoHorario.checked == false) {
-                if (distintoHorario.checked == true) {
+                if (distintoHorario.checked == true) {//dinstinto horario
                     $('#horarioMiercoles').show(); //muestro la hora de inicio y fin del Miercoles
                 }
             }
         }
         else {
             $('#horarioMiercoles').hide(); //oculto la hora de inicio y fin del Miercoles
+            $(this).val("0");
         }
     });
 
     //Jueves
     $("#Jueves").on("click", function () {
         if (this.checked == true) {
+            $(this).val("1");
             var mismoHorario = document.getElementById("cbox3");
             var distintoHorario = document.getElementById("cbox4");
             if (mismoHorario.checked == false) {
-                if (distintoHorario.checked == true) {
+                if (distintoHorario.checked == true) {//distinto horario
                     $('#horarioJueves').show(); //muestro la hora de inicio y fin del Jueves
                 }
             }
         }
         else {
             $('#horarioJueves').hide(); //oculto la hora de inicio y fin del Jueves
+            $(this).val("0");
         }
     });
 
     //Viernes
     $("#Viernes").on("click", function () {
         if (this.checked == true) {
+            $(this).val("1");
             var mismoHorario = document.getElementById("cbox3");
             var distintoHorario = document.getElementById("cbox4");
             if (mismoHorario.checked == false) {
-                if (distintoHorario.checked == true) {
+                if (distintoHorario.checked == true) {//dinstinto horario
                     $('#horarioViernes').show(); //muestro la hora de inicio y fin del Viernes
                 }
             }
         }
         else {
             $('#horarioViernes').hide(); //oculto la hora de inicio y fin del Viernes
+            $(this).val("0");
         }
     });
 
     //Sabado
     $("#Sabado").on("click", function () {
         if (this.checked == true) {
+            $(this).val("1");
             var mismoHorario = document.getElementById("cbox3");
             var distintoHorario = document.getElementById("cbox4");
             if (mismoHorario.checked == false) {
-                if (distintoHorario.checked == true) {
+                if (distintoHorario.checked == true) {//dinstinto horario
                     $('#horarioSabado').show(); //muestro la hora de inicio y fin del Sabado
                 }
             }
         }
         else {
             $('#horarioSabado').hide(); //oculto la hora de inicio y fin del Sabado
+            $(this).val("0");
         }
     });
 
     //Domingo
     $("#Domingo").on("click", function () {
         if (this.checked == true) {
+            $(this).val("1");
             var mismoHorario = document.getElementById("cbox3");
             var distintoHorario = document.getElementById("cbox4");
             if (mismoHorario.checked == false) {
-                if (distintoHorario.checked == true) {
+                if (distintoHorario.checked == true) {//distinto horario
                     $('#horarioDomingo').show(); //muestro la hora de inicio y fin del Domingo
                 }
             }
         }
         else {
             $('#horarioDomingo').hide(); //oculto la hora de inicio y fin del Domingo
+            $(this).val("0");
         }
     });
 
