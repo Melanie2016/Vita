@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -27,6 +28,24 @@ namespace Vita.Controllers
             ViewBag.ListaProvincia = new MultiSelectList(provincias, "id", "descripcion");
 
             List <Sexo> sexos = sexoServicio.GetAllSexo();
+            ViewBag.ListaSexo = new MultiSelectList(sexos, "id", "descripcion");
+
+            List<Segmento> segmentos = segmentoServicio.GetAllSegmento();
+            ViewBag.ListaSegmentos = new MultiSelectList(segmentos, "id", "descripcion");
+
+            List<Categoria> intereses = categoriaServicio.GetAllCategorias();
+            ViewBag.ListaIntereses = new MultiSelectList(intereses, "id", "descripcion");
+
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult RegistroEntidad()
+        {
+            List<Provincia> provincias = localidadServicio.GetAllProvincias();
+            ViewBag.ListaProvincia = new MultiSelectList(provincias, "id", "descripcion");
+
+            List<Sexo> sexos = sexoServicio.GetAllSexo();
             ViewBag.ListaSexo = new MultiSelectList(sexos, "id", "descripcion");
 
             List<Segmento> segmentos = segmentoServicio.GetAllSegmento();
@@ -83,10 +102,18 @@ namespace Vita.Controllers
             return result;
         }
 
-
         [HttpPost]
-        public ActionResult Registrar(Usuario usuario, int[] selectedSegmento, int[] selectedCategoria)
+        public ActionResult Registrar(Usuario usuario, int[] selectedSegmento, int[] selectedCategoria, HttpPostedFileBase Foto)
         {
+            string path = uploadimage(Foto);
+            if (path.Equals("-1"))
+            {
+
+            }
+            else
+            {
+                usuario.Foto = path;
+            }
             var nombreDeUsuarioExiste = usuarioServicio.VerificarExistenciaUsuarioNombre(usuario);
             var existeElUsuario = usuarioServicio.VerificarExistenciaDelUsuario(usuario);
             if (nombreDeUsuarioExiste != null)
@@ -115,6 +142,48 @@ namespace Vita.Controllers
             }
 
         }
+
+
+        public string uploadimage(HttpPostedFileBase file)
+        {
+            Random r = new Random();
+            string path = "-1";
+            int random = r.Next();
+            if (file != null && file.ContentLength > 0)
+
+            {
+                string extension = Path.GetExtension(file.FileName);
+                if (extension.ToLower().Equals(".jpg") || extension.ToLower().Equals(".jpeg") || extension.ToLower().Equals(".png") || extension.ToLower().Equals(".JPEG"))
+
+                {
+                    try
+
+                    {
+
+                        path = Path.Combine(Server.MapPath("~/Content/imagenes"), random + Path.GetFileName(file.FileName));
+                        file.SaveAs(path);
+                        path = "~/Content/imagenes/" + random + Path.GetFileName(file.FileName);
+                    }
+                    catch (Exception)
+                    {
+                        path = "-1";
+                    }
+                }
+                else
+
+                {
+                    Response.Write("<script>alert('Sólo jpg ,jpeg o png son aceptables....'); </script>");
+                }
+            }
+            else
+            {
+
+                Response.Write("<script>alert('Por Favor seleccione una imagen'); </script>");
+                path = "-1";
+            }
+            return path;
+        }
+
 
         [HttpGet]
         public ActionResult PerfilUsuario(Usuario usuario)

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4809275359184b95b600b5d6d431d889" Name="Diagram1">
+      <Diagram DiagramId="11831a4d66a74e639a152d4ce42d33ca" Name="Diagram1">
         <EntityTypeShape EntityType="VitaModel.Actividad" Width="1.5" PointX="7.5" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="VitaModel.ActividadSegmento" Width="1.5" PointX="12.75" PointY="15" IsExpanded="true" />
         <EntityTypeShape EntityType="VitaModel.Campos" Width="1.5" PointX="18" PointY="18.625" IsExpanded="true" />

@@ -18,15 +18,15 @@ INSERT INTO [dbo].[Actividad]
            ,[DeletedAt]
            ,[Compleja])
      VALUES
-           ('Zumba Kids'
-           ,'Las clases de Zumba® Kids ofrecen rutinas pensadas para niños sobre la base de las coreografías originales de Zumba®. Los pasos se aprenden poco a poco, y agregamos juegos, actividades y elementos de exploración cultural a la estructura de la clase. Ayuda a desarrollar un estilo de vida saludable e incorpora el ejercicio físico como una parte natural de la vida de los niños al hacer que el ejercicio sea divertido. Las clases incorporan elementos clave de desarrollo infantil como liderazgo, respeto, trabajo en equipo, confianza, autoestima, memoria, creatividad, coordinación, conciencia cultural.'
-           ,7
-           ,11
-           ,100
+           ('Clases de Crossfit'
+           ,'El crossfit es una disciplina deportiva que se basa en ejercicios intensos para mejorar la condición física. Al tratarse de un entrenamiento funcional, se basa en movimientos multiarticulares o compuestos, muy diferentes a los típicos que se hacen en un gimnasio tradicional, que se concentran en un músculo o grupo muscular concreto. Es un programa de acondicionamiento físico basado en un entrenamiento constantemente variado de movimientos funcionales, y que se desarrolla con una alta intensidad”.'
+           ,18
+           ,45
+           ,200
            ,30
            ,3
            ,3
-           ,552 /*LocalidadId*/
+           ,552
            ,1 /*UsuarioId*/
            ,NULL
            ,'2019-11-08'
@@ -38,9 +38,9 @@ GO
 /*FOTO*/
 Update Actividad set Foto = 
 (SELECT BulkColumn 
-/*FROM Openrowset( Bulk 'C:\Users\A307508\Source\Repos\Vita\Vita\Content\images\Zumba-kids.jpg', Single_Blob) as img)*/ /*Para VALE*/
-FROM Openrowset( Bulk 'C:\Proyecto final\tp final posta\Vita\Vita\Content\images\Zumba-kids.jpg', Single_Blob) as img) /*Para Angie*/
-where Id=1 /*ActividadId*/
+/*FROM Openrowset( Bulk 'C:\Users\A307508\Source\Repos\Vita\Vita\Content\images\crossfit.png', Single_Blob) as img)*/ /*PARA VALE*/
+FROM Openrowset( Bulk 'C:\Proyecto final\tp final posta\Vita\Vita\Content\images\crossfit.png', Single_Blob) as img) /*PARA ANGIE*/
+where Id=3 /*ActividadId*/
 
 /*DOMICILIO*/
 INSERT INTO [dbo].[Domicilio]
@@ -61,7 +61,7 @@ INSERT INTO [dbo].[Domicilio]
            ,'B1836'
            ,552 /*LocalidadId*/
            ,1 /*UsuarioId*/
-           ,1 /*ActividadId*/
+           ,3 /*ActividadId*/
            ,null)
 GO
 
@@ -74,12 +74,12 @@ INSERT INTO [dbo].[FechaActividad]
            ,[HoraFin]
            ,[ActividadId])
      VALUES
-           (1 /*Lunes*/
+           (2 /*Martes*/
            ,null
            ,null
-           ,'14:00:00'
-           ,'15:00:00'
-           ,1) /*ActividadId*/
+           ,'10:30:00'
+           ,'11:30:00'
+           ,3) /*ActividadId*/
 GO
 
 INSERT INTO [dbo].[FechaActividad]
@@ -90,10 +90,10 @@ INSERT INTO [dbo].[FechaActividad]
            ,[HoraFin]
            ,[ActividadId])
      VALUES
-           (3 /*Miercoles*/
+           (4 /*Jueves*/
            ,null
            ,null
-           ,'14:00:00'
-           ,'15:00:00'
-           ,1) /*ActividadId*/
+           ,'20:00:00'
+           ,'21:00:00'
+           ,3) /*ActividadId*/
 GO

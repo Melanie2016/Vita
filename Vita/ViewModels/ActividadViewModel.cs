@@ -27,6 +27,15 @@ namespace Vita.ViewModels
         public string HoraFinSabado { get; set; }
         public string HoraInicioDomingo { get; set; }
         public string HoraFinDomingo { get; set; }
+        public string HoraInicioMismoDia { get; set; }
+        public string HoraFinMismoDia { get; set; }
+        public string Lunes { get; set; }
+        public string Martes { get; set; }
+        public string Miercoles { get; set; }
+        public string Jueves { get; set; }
+        public string Viernes { get; set; }
+        public string Sabado { get; set; }
+        public string Domingo { get; set; }
         public int CantidadCupo { get; set; }
         public int EdadMinima { get; set; }
         public int EdadMaxima { get; set; }
@@ -40,7 +49,7 @@ namespace Vita.ViewModels
         public int DepartamentoId { get; set; }
         public int LocalidadId { get; set; }
         public int UsuarioId { get; set; }
-        public byte[] Foto { get; set; }
+        public string Foto { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime DeletedAt { get; set; }

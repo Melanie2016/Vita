@@ -25,8 +25,8 @@
                 <a href="/Home"><img id="logo" src="../../Content/images/logo_.png" style="width: 130px; height: 180px;"></a>
                 <br /> <br />
                 <!--<span class="login100-form-title p-b-49">
-                    Login
-                </span> -->
+        Login
+    </span> -->
 
                 <div class="wrap-input100 validate-input m-b-23" data-validate="Falta ingresar el usuario">
                     <span class="label-input100">Usuario</span>
@@ -83,9 +83,45 @@
 
                 <div class="flex-col-c ">
                     <span class="txt1 p-b-17">¿Aún no está registrado?</span>
-                    <a href="/Usuario/Registro" class="txt2"><u>Registrarse</u></a>
-                    <br /><a href="/Home/Index" class="nav-link">Volver</a>
+                    <div class="p-t-15">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPush">Registrate</button>
+                        <a href="/Home/Index" class="btn btn-primary">Volver</a>
+                    </div>
                 </div>
+
+                <!--Modal: modalPush-->
+                <div class="modal fade" id="modalPush" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-notify modal-info" role="document">
+                        <!--Content-->
+                        <div class="modal-content text-center">
+                            <!--Header-->
+                            <div class="modal-header d-flex justify-content-center">
+                                <p class="heading">¿Cómo quieres registrarte?</p>
+                            </div>
+
+                            <!--Body-->
+                            <div class="modal-body">
+
+                                <img id="logo" src="../../Content/images/iconopng.png" style="width:60px; height: 60px;">
+                                </br>
+
+                                <p>Bienvenido/a a VITA ¡Sólo estás a un paso!</p>
+
+                            </div>
+
+                            <!--Footer-->
+                            <div class="p-t-15">
+                                <a href="/Usuario/Registro" class="btn btn-info">Soy un Usuario</a>
+                                <a href="/Usuario/RegistroEntidad" class="btn btn-info">Soy una Empresa</a>
+                                <a href="#" type="button" class="btn btn-outline-info waves-effect" data-dismiss="modal">Cerrar</a>
+                            </div>
+                            <span class="txt1 p-b-17"></span>
+                        </div>
+                        <!--/.Content-->
+                    </div>
+                </div>
+
             </form>
         </div>
     </div>

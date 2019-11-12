@@ -35,7 +35,7 @@ namespace Vita
         public int SubcategoriaId { get; set; }
         public int LocalidadId { get; set; }
         public Nullable<int> UsuarioId { get; set; }
-        public byte[] Foto { get; set; }
+        public string Foto { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }

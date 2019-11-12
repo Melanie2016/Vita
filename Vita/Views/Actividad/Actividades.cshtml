@@ -200,7 +200,7 @@
                     {
                         if (i.Foto != null && i.Foto.Length > 0)
                         {
-                            ViewBag.Url = "data:image;base64," + Convert.ToBase64String(i.Foto);
+                          ViewBag.Url = i.Foto;
                         }
                         else
                         {
@@ -209,7 +209,9 @@
                         <div class="col-lg-6">
 
                             <div class="d-block d-md-flex listing">
-                                <a href="/Actividad/FichaActividad/?idActividad=@i.Id&inscribirse=false" class="img d-block" style="background-image: url('@ViewBag.Url')"></a>
+                                <a href="/Actividad/FichaActividad/?idActividad=@i.Id&inscribirse=false" class="img d-block" style="background-image: url('@Url.Content(ViewBag.Url)');   background-repeat: no-repeat;  background-size: 130px 100px;">
+                                   
+                                </a>
                                 <div class="lh-content" style="overflow:hidden; text-overflow:ellipsis; white-space: nowrap; ">
                                     <span class="category">@i.Categoria.Descripcion</span>
                                     <a href="#" class="bookmark"><span class="icon-heart"></span></a>

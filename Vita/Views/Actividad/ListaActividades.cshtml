@@ -28,7 +28,7 @@
                 <table class="table header-border table-hover verticle-middle">
                     <thead>
                         <tr>
-                            <th scope="col"></th>
+                            <th scope="col">Imagen</th>
                             <th scope="col">Titulo actividad</th>
                             <th scope="col">Zona</th>
                             <th scope="col">Edad</th>
@@ -42,152 +42,161 @@
                     <tbody>
 
                         @*@foreach (Actividad i in Model)*@
-                            @foreach (Actividad i in ViewBag.ListaActvidades)
+
+                        @foreach (Actividad i in ViewBag.ListaActvidades)
+                        {
+                            if (i.Foto != null && i.Foto.Length > 0)
                             {
-                                if (i.Foto != null && i.Foto.Length > 0)
-                                {
-                                    ViewBag.Url = "data:image;base64," + Convert.ToBase64String(i.Foto);
-                                }
-                                else
-                                {
-                                    ViewBag.Url = "/Content/images/sin_foto.png";
-                                }
-                        <tr >
-                            <td><a href="/Actividad/FichaActividad/?idActividad=@i.Id&inscribirse=false"><img src="@ViewBag.Url" style="width: 190px; height: 120px;"> </a></td>
-                            <td>@i.Titulo</td>
-                            <td>@i.Localidad.Descripcion</td>
-                            <td>@i.EdadMinima - @i.EdadMaxima</td>
-                            <td style="text-align: center;" >
-                                <a href="/Actividad/ListaEstado?estadoId=1&actividadId=@i.Id"><span class="label gradient-3 rounded" style="font-size: 15px !important;" >@i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count() </span></a>
-                            </td>
-                            <td style="text-align: center;">
-                                <a href="/Actividad/ListaEstado?estadoId=2&actividadId=@i.Id"><span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Pendiente" && x.ActividadId == i.Id).Count() </span></a>
-                            </td>
-                            <td style="text-align: center;">
-                                <a href="/Actividad/ListaEstado?estadoId=3&actividadId=@i.Id"><span class="label gradient-1 rounded" style="font-size: 15px !important;">
-                                @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Cancelado" && x.ActividadId == i.Id).Count()</span> </a>
-                            </td>
-                            <td>
-                                @Convert.ToInt32(@i.CantidadCupo - @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count()) de @i.CantidadCupo
-                            </td>
-                            <td>
-                                <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span>
-                            </td>
-                            <td>
-                                <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                            </td>
-
-                        </tr> 
+                                ViewBag.Url = i.Foto;
                             }
+                            else
+                            {
+                                ViewBag.Url = "/Content/images/sin_foto.png";
+                    
+                            }
+                            <tr>
+                                <td><a href="/Actividad/FichaActividad/?idActividad=@i.Id&inscribirse=false"><img src="@Url.Content(ViewBag.Url)" style="width: 190px; height: 120px;"> </a></td>
+                                <td>@i.Titulo</td>
+                                <td>@i.Localidad.Descripcion</td>
+                                <td>@i.EdadMinima - @i.EdadMaxima</td>
+                                <td style="text-align: center;">
+                                    <a href="/Actividad/ListaEstado?estadoId=1&actividadId=@i.Id"><span class="label gradient-3 rounded" style="font-size: 15px !important;">@i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count() </span></a>
+                                </td>
+                                <td style="text-align: center;">
+                                    <a href="/Actividad/ListaEstado?estadoId=2&actividadId=@i.Id">
+                                        <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                            @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Pendiente" && x.ActividadId == i.Id).Count()
+                                        </span>
+                                    </a>
+                                </td>
+                                <td style="text-align: center;">
+                                    <a href="/Actividad/ListaEstado?estadoId=3&actividadId=@i.Id">
+                                        <span class="label gradient-1 rounded" style="font-size: 15px !important;">
+                                            @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Cancelado" && x.ActividadId == i.Id).Count()
+                                        </span>
+                                    </a>
+                                </td>
+                                <td>
+                                    @Convert.ToInt32(@i.CantidadCupo - @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count()) de @i.CantidadCupo
+                                </td>
+                                <td>
+                                    <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span>
+                                </td>
+                                <td>
+                                    <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
+                                </td>
 
-                            @*<tr>
-                                <th><img src="../../Content/images/1.jpg"></th>
-                                <td>Air Conditioner</td>
-                                <td>Air Conditioner</td>
-                                <td>Air Conditioner</td>
-                                <td>
-                                    <div class="progress" style="height: 10px">
-                                        <div class="progress-bar gradient-1" style="width: 70%;" role="progressbar">
-                                            <span class="sr-only">70% Complete</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="label gradient-1 btn-rounded">70%</span>
-                                </td>
-                                <td>
-                                    <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
-                                </td>
-                                <td>
-                                    <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                </td>
                             </tr>
-                            <tr>
-                                <th><img src="../../Content/images/2.jpg"></th>
-                                <td>Textiles</td>
-                                <td>Textiles</td>
-                                <td>Textiles</td>
-                                <td>
-                                    <div class="progress" style="height: 10px">
-                                        <div class="progress-bar gradient-2" style="width: 70%;" role="progressbar">
-                                            <span class="sr-only">70% Complete</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><span class="label btn-rounded gradient-2">70%</span></td>
-                                <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i></a></td>
-                                <td>
-                                    <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><img src="../../Content/images/5.jpg"></th>
-                                <td>Milk Powder</td>
-                                <td>Milk Powder</td>
-                                <td>Milk Powder</td>
-                                <td>
-                                    <div class="progress" style="height: 10px">
-                                        <div class="progress-bar gradient-3" style="width: 70%;" role="progressbar">
-                                            <span class="sr-only">70% Complete</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="label btn-rounded gradient-3">70%</span>
-                                </td>
-                                <td>
-                                    <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
-                                </td>
-                                <td>
-                                    <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><img src="../../Content/images/4.jpg"></th>
-                                <td>Vehicles</td>
-                                <td>Vehicles</td>
-                                <td>Vehicles</td>
-                                <td>
-                                    <div class="progress" style="height: 10px">
-                                        <div class="progress-bar gradient-8" style="width: 70%;" role="progressbar">
-                                            <span class="sr-only">70% Complete</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="label gradient-8 btn-rounded">70%</span>
-                                </td>
-                                <td>
-                                    <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
-                                </td>
-                                <td>
-                                    <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><img src="../../Content/images/3.jpg"></th>
-                                <td>Boats</td>
-                                <td>Boats</td>
-                                <td>Boats</td>
-                                <td>
-                                    <div class="progress" style="height: 10px">
-                                        <div class="progress-bar gradient-1" style="width: 70%;" role="progressbar">
-                                            <span class="sr-only">70% Complete</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="label gradient-1 btn-rounded">70%</span>
-                                </td>
-                                <td>
-                                    <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
-                                </td>
-                                <td>
-                                    <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                </td>
-                            </tr>*@
-                        </tbody>
+
+                        }
+
+                        @*<tr>
+            <th><img src="../../Content/images/1.jpg"></th>
+            <td>Air Conditioner</td>
+            <td>Air Conditioner</td>
+            <td>Air Conditioner</td>
+            <td>
+                <div class="progress" style="height: 10px">
+                    <div class="progress-bar gradient-1" style="width: 70%;" role="progressbar">
+                        <span class="sr-only">70% Complete</span>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <span class="label gradient-1 btn-rounded">70%</span>
+            </td>
+            <td>
+                <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
+            </td>
+            <td>
+                <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
+            </td>
+        </tr>
+        <tr>
+            <th><img src="../../Content/images/2.jpg"></th>
+            <td>Textiles</td>
+            <td>Textiles</td>
+            <td>Textiles</td>
+            <td>
+                <div class="progress" style="height: 10px">
+                    <div class="progress-bar gradient-2" style="width: 70%;" role="progressbar">
+                        <span class="sr-only">70% Complete</span>
+                    </div>
+                </div>
+            </td>
+            <td><span class="label btn-rounded gradient-2">70%</span></td>
+            <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i></a></td>
+            <td>
+                <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
+            </td>
+        </tr>
+        <tr>
+            <th><img src="../../Content/images/5.jpg"></th>
+            <td>Milk Powder</td>
+            <td>Milk Powder</td>
+            <td>Milk Powder</td>
+            <td>
+                <div class="progress" style="height: 10px">
+                    <div class="progress-bar gradient-3" style="width: 70%;" role="progressbar">
+                        <span class="sr-only">70% Complete</span>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <span class="label btn-rounded gradient-3">70%</span>
+            </td>
+            <td>
+                <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
+            </td>
+            <td>
+                <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
+            </td>
+        </tr>
+        <tr>
+            <th><img src="../../Content/images/4.jpg"></th>
+            <td>Vehicles</td>
+            <td>Vehicles</td>
+            <td>Vehicles</td>
+            <td>
+                <div class="progress" style="height: 10px">
+                    <div class="progress-bar gradient-8" style="width: 70%;" role="progressbar">
+                        <span class="sr-only">70% Complete</span>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <span class="label gradient-8 btn-rounded">70%</span>
+            </td>
+            <td>
+                <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
+            </td>
+            <td>
+                <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
+            </td>
+        </tr>
+        <tr>
+            <th><img src="../../Content/images/3.jpg"></th>
+            <td>Boats</td>
+            <td>Boats</td>
+            <td>Boats</td>
+            <td>
+                <div class="progress" style="height: 10px">
+                    <div class="progress-bar gradient-1" style="width: 70%;" role="progressbar">
+                        <span class="sr-only">70% Complete</span>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <span class="label gradient-1 btn-rounded">70%</span>
+            </td>
+            <td>
+                <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
+            </td>
+            <td>
+                <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
+            </td>
+        </tr>*@
+                    </tbody>
                 </table>
             </div>
         </div>

@@ -21,21 +21,6 @@
                 @using (Html.BeginForm("Registrar", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
 
-                    <h2 id="tipo_usuario" class="form-title">¿Qué tipo de persona eres?</h2>
-
-                    <!--Tipo de persona-->
-                    <center>
-                        <div class="form-radio">
-                            <input type="radio" id="newbie" checked="checked" />
-                            <label for="newbie">Usuario</label>
-
-                            <input type="radio" id="average" />
-                            <label for="average">Empresa</label>
-                        </div>
-                    </center>
-
-                    <!--Formulario de persona-->
-                    <div id="persona">
 
                         <!--FOTO DE PERFIL-->
                         <div class="avatar-wrapper" id="avatar">
@@ -43,7 +28,7 @@
                             <div class="upload-button">
                                 <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
                             </div>
-                            <input class="file-upload" type="file" accept="image/*" name="" />
+                            <input class="file-upload" type="file" id="Foto" name="Foto"/>
                         </div>
 
                         <div class="input-group" hidden>
@@ -232,138 +217,9 @@
                         </div>
 
 
-                    </div>
+                
                 }
-                <!--EMPRESA-->
-                <form action="/Usuario/Registrar" method="Post" class="formu-entidad" id="form-rol-entidad">
-                    <div id="empresa">
-                        <div class="input-group" hidden>
-                            <input class="input--style-4" type="number" value="2" name="RolId">
-                        </div>
-
-                        <!--FOTO DE PERFIL-->
-                        <div class="avatar-wrapper" id="avatar">
-                            <img class="profile-pic" src="" />
-                            <div class="upload-button">
-                                <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
-                            </div>
-                            <input class="file-upload" type="file" accept="image/*" name="" />
-                        </div>
-
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <!--Nombre de la empresa-->
-                                    <label class="label">Nombre</label>
-                                    <input class="input--style-4" type="text" name="Nombre">
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <!--Email de la empresa-->
-                                    <label class="label">Email</label>
-                                    <input class="input--style-4" type="text" name="Email" placeholder="ejemplo@gmail.com">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <!--Provincia-->
-                                <label class="label">Seleccione Provincia</label>
-                                <div>
-                                    <select class="input--style-4" id="filtroProvinciaEntidad" title="Seleccione provincia.." style="width: 260px; height: 50px; border: 0;">
-
-                                        <option>Seleccionar provincia</option>
-                                        @foreach (var item in ViewBag.ListaProvincia as MultiSelectList)
-                                        {
-
-                                            <option name="valorActual" value="@item.Value">@item.Text</option>
-
-                                        }
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <!--departamento-->
-                                    <label class="label">Seleccione Departamento</label>
-                                    <div>
-                                        <div id="filtroDepartamentoEntidad"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <!--Localidad-->
-                                    <label class="label">Seleccione Localidad</label>
-                                    <div id="filtroLocalidadEntidad" name="LocalidadId"></div>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <!--Telefono de la empresa-->
-                                    <label class="label">Teléfono</label>
-                                    <input class="input--style-4" type="number" name="Telefono">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <!--Celular de la empresa-->
-                                    <label class="label">Celular</label>
-                                    <input class="input--style-4" type="number" name="Celular" placeholder="1143424456">
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <!--Sitio web personal de la empresa-->
-                                    <label class="label">Sitio web personal</label>
-                                    <input class="input--style-4" type="text" name="SitioWeb">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="label" for="SobreMi">
-                                Breve descripción sobre tu entidad <span class="text-danger">*</span>
-                            </label><br /><br />
-                            <div class="col-2">
-                                <textarea class="form-control" id="val-suggestions" name="SobreMi" rows="10" cols="70" placeholder="Ingresa tu descripción personal..."></textarea>
-                            </div>
-                        </div>
-
-                        <br />
-
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <!--Usuario-->
-                                    <label class="label">Usuario</label>
-                                    <input class="input--style-4" type="text" name="UsuarioName">
-                                </div>
-                            </div>
-
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <!--Contraseña-->
-                                    <label class="label">Contraseña</label>
-                                    <input class="input--style-4" type="password" name="Pass">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" type="submit">Aceptar</button>
-                            <a href="/Home/Index"><button class="btn btn--radius-2 btn--blue" type="button">Cancelar</button></a>
-
-                        </div>
-                    </div>
-                </form>
+            
             </div>
                   
                 

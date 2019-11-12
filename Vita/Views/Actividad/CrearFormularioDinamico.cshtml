@@ -3,7 +3,6 @@
     Layout = "~/Views/Shared/_LayoutPerfilEntidad.cshtml";
 }
 
-@*@model Vita.ViewModels.FormularioDinamicoViewModel*@
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,75 +32,40 @@
 
                         <h3>Crear Formulario dinamico</h3>
                         <div class="form-validation">
-                            <form class="form-valide" action="CreacionActividad" method="POST">
+                            <form class="form-valide" action=/Actividad/CreacionFormularioDinamico method=POST>
 
                                 <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="TituloFormulario">
+                                    <label class="col-lg-4 col-form-label" for="Titulo">
                                         Título del formulario<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-username" name="TituloFormulario" placeholder="Formulario para completar la actividad..">
+                                        <input type="text" class="form-control" id="val-username" name="Titulo" placeholder="Formulario para completar la actividad..">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="DescripcionFormulario">
+                                    <label class="col-lg-4 col-form-label" for="Descripcion">
                                         Breve descripción para explicar al usuario <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <textarea class="form-control" id="val-suggestions" name="DescripcionFormulario" rows="5" placeholder="El siguiente formulario es de caracter obligatorio para poder....."></textarea>
+                                        <textarea class="form-control" id="val-suggestions" name="Descripcion" rows="5" placeholder="El siguiente formulario es de caracter obligatorio para poder....."></textarea>
                                     </div>
                                 </div>
+
 
                                 <div><h4>Agregar las consignas:</h4></div>
-                                      <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="Descripcion">
-                                        Ingresar titulo de la consigna <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <textarea class="form-control" id="val-suggestions" name="Descripcion" rows="5" placeholder="Tienes problemas para correr o ejercitarse?...."></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-skill">
-                                        Elegir tipo de respuesta que tiene que ingresar el cliente<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <select class="form-control" id="filtroCategoria"
-                                                data-live-search="true" title="Seleccione tipo de categoria de la actividad.." name="TipoPreguntaId">
-                                            <option value=0>Elegir tipo de respuesta</option>
-                                            @foreach (var item in ViewBag.ListaTipoPregunta as MultiSelectList)
-                                            {
-                                                <option value="@item.Value">@item.Text</option>
-                                                @item.Value
-                                            }
-                                        </select>
-
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <!--Aprobación-->
-                                    <label class="col-lg-4 col-form-label" for="Compleja">
-                                        ¿Está consigna va a ser obligatoria?
-                                        Si es asi, los usuarios deberán completarla si o si.
-
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <label><input type="radio" id="cbox1" name="Compleja" value="true"> Si</label><br>
-                                        <label><input type="radio" id="cbox1" name="Compleja" value="false"> No</label><br>
-                                    </div>
-                                </div>
-
+                                <p><a class="btn btn-success" id="btnAgregarEmpleado">Agregar Nueva consigna</a></p>
+                                <hr />
+                                <div id="ContenedorEmpleados"></div>
+                               
 
                                 <div class="form-group row">
-                                    <div class="col-lg-8 ml-auto">
+                                        <div class="col-lg-8 ml-auto">
 
-                                        <button type="button" ng-click="agregarTipoConsigna()" class="btn btn-primary">Agregarla</button>
+                                            <button type="submit" ng-click="" class="btn btn-primary">Guardar formulario</button>
+                                        </div>
                                     </div>
-                                </div>
                             </form>
-                            <div>Formulario como va quedando:</div>
-                            <div>Consigna: </div>
+
 
                         </div>
                     </div>
@@ -112,3 +76,72 @@
 </body>
 </html>
 
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        var index = 0;
+    
+               
+
+        $("#btnAgregarEmpleado").click(function () {
+        
+            $("#ContenedorEmpleados").append(
+      
+                '<div id="campo + index ">' +
+                '<div class="form-group row">' +
+                ' <label class="col-lg-4 col-form-label" for="CamposVm[' + index + '].Nombre">' +
+                ' Ingresar titulo de la consigna <span class="text-danger">*</span>' +
+                ' </label>' +
+                ' <div class="col-lg-6">' +
+                '<textarea class="form-control" id="val-suggestions" name="CamposVm[' + index + '].Nombre" rows="5" placeholder="Tienes problemas para correr o ejercitarse?...."></textarea>' +
+                '</div>' +
+                ' </div>' +
+                ' <div class="form-group row">' +
+                ' <label class="col-lg-4 col-form-label" for="val-skill">' +
+                '  Elegir tipo de respuesta que tiene que ingresar el cliente<span class="text-danger">*</span>' +
+                '  </label>' +
+                '  <div class="col-lg-6">' +
+                '  <select class="form-control" id="filtroCategoria" data-live-search="true" title="Seleccione tipo de categoria de la actividad.." name="CamposVm[' + index + '].TipoDatoCampoId">' +
+                ' <option value=0>Elegir tipo de respuesta</option>' +
+                ' <option value=1>Texto</option>' +
+                ' <option value=2>Número</option>' +
+                ' <option value=3>Fecha</option>' +
+                '  </select>' +
+
+                ' </div>' +
+                '</div>' +
+                '  <div class="form-group row">' +
+
+                ' <label class="col-lg-4 col-form-label" for="CamposVm[' + index + '].Obligatorio">' +
+                ' ¿Está consigna va a ser obligatoria?' +
+                ' Si es asi, los usuarios deberán completarla si o si.' +
+
+                ' <span class="text-danger">*</span>' +
+                '</label>' +
+                '<div class="col-lg-6">' +
+                ' <label><input type="radio" id="cbox1" name="CamposVm[' + index + '].Obligatorio"  value="true"> Si</label><br>' +
+                ' <label><input type="radio" id="cbox1" name="CamposVm[' + index + '].Obligatorio" value="false"> No</label><br>' +
+                ' </div>' +
+                ' </div>' +
+                '<br>' +
+                '<br>' +
+
+                '<div class="form-group row">' +
+                '<div class="col-lg-8 ml-auto">' +
+
+                //'  <button type="button" id="eliminarPregunta" class="btn btn-primary">Eliminar pregunta</button>' +
+                '<p><a class="btn btn-success" id="eliminarPregunta">eliminar pregunta</a></p>' +
+                '</div>' +
+                ' </div >' +
+                '</div>' +
+                '<hr />'
+
+
+            );
+            index++;
+        });
+
+    });
+</script>
