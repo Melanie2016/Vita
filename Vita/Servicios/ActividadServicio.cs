@@ -69,7 +69,7 @@ namespace Vita.Servicios
                     ActividadId = aux.UsuarioInscriptoActividad.Actividad.Id,
                     Titulo = aux.UsuarioInscriptoActividad.Actividad.Titulo,
                     Descripcion = aux.UsuarioInscriptoActividad.Actividad.Descripcion,
-                    DiaSemana = aux.FechaActividad.DiaSemanaId != null ? aux.FechaActividad.DiaSemana.Id : 0,
+                    DiaSemana = aux.FechaActividad.DiaSemanaId != null ? aux.FechaActividad.DiaSemana.Id : -1,
                     InicioEvento = aux.FechaActividad.InicioEvento.ToString(),
                     FinEvento = aux.FechaActividad.FinEvento.ToString(),
                     HoraInicio = aux.FechaActividad.HoraInicio.ToString(),
