@@ -44,11 +44,12 @@
     ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index.html">
-                    <b class="logo-abbr"><img src="~/Content/images/logo.png" alt=""> </b>
+                <a href="/Home/Index" style="text-decoration:none;">
+                    <b class="logo-abbr"><span style="color: white;">V</span></b>
                     <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="images/logo-text.png" alt="">
+                        <h2 style="color: white;text-align: center">Vita</h2>
+                        <!-- <img src="images/logo-text.png" alt=""> -->
                     </span>
                 </a>
             </div>
@@ -183,13 +184,14 @@
                                 <span class="activity active"></span>
                                 @if (Model.Foto != null && Model.Foto.Length > 0)
                                 {
-                                    ViewBag.Url = "data:image;base64," + Convert.ToBase64String(Model.Foto);
+                                    <img src="@Url.Content(Model.Foto)">
                                 }
                                 else
                                 {
                                     ViewBag.Url = "/Content/images/desconocido2.png";
+                                    <img src="@ViewBag.Url" height="40" width="40" alt="">
                                 }
-                                <img src="@ViewBag.Url" height="40" width="40" alt="">
+
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">

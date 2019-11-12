@@ -96,7 +96,7 @@
                                 <span class="activity active" style="height: 13px; width: 13px; border-radius: 50%; display: inline-block; position: absolute; border: 3px solid #fff; bottom: .9rem; right: 0rem; left: auto; background-image: linear-gradient(230deg, #AFEDC0, #69D385); margin-right: 14px; margin-bottom: 2px;"></span>
                                 @if (Model.Foto != null && Model.Foto.Length > 0)
                                 {
-                                    ViewBag.Url = "data:image;base64," + Convert.ToBase64String(Model.Foto);
+                                    <img src="@Url.Content(Model.Foto)" height="40" width="40" alt="" style="height: 40px; width: 40px; border: 3px solid #fff; border-radius: 50%; margin: 0; padding: 0; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);">
                                 }
                                 else
                                 {
@@ -106,24 +106,27 @@
                                     }
                                     else //Usuario
                                     {
-                                        if(Model.Sexo.Descripcion == "Masculino")
+                                        if (Model.Sexo.Descripcion == "Masculino")
                                         {
                                             ViewBag.Url = "/Content/images/hombre.png";
+                                            <img src="@ViewBag.Url" height="40" width="40" alt="" style="height: 40px; width: 40px; border: 3px solid #fff; border-radius: 50%; margin: 0; padding: 0; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);">
                                         }
                                         else
                                         {
-                                            if(Model.Sexo.Descripcion == "Femenino")
+                                            if (Model.Sexo.Descripcion == "Femenino")
                                             {
                                                 ViewBag.Url = "/Content/images/mujer.jpg";
+                                                <img src="@ViewBag.Url" height="40" width="40" alt="" style="height: 40px; width: 40px; border: 3px solid #fff; border-radius: 50%; margin: 0; padding: 0; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);">
                                             }
                                             else
                                             {
                                                 ViewBag.Url = "/Content/images/desconocido.png";
+                                                <img src="@ViewBag.Url" height="40" width="40" alt="" style="height: 40px; width: 40px; border: 3px solid #fff; border-radius: 50%; margin: 0; padding: 0; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);">
                                             }
                                         }
                                     }
                                 }
-                                <img src="@ViewBag.Url" height="40" width="40" alt="" style="height: 40px; width: 40px; border: 3px solid #fff; border-radius: 50%; margin: 0; padding: 0; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);">
+                          
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu" style="width: 12rem; box-shadow: 0px 1px 10px 0 rgba(0, 0, 0, 0.15); width: 192px; margin-left:-40px; height: 137px;">
                                 <div class="dropdown-content-body">

@@ -200,7 +200,7 @@
                     {
                         if (i.Foto != null && i.Foto.Length > 0)
                         {
-                            ViewBag.Url = "data:image;base64," + Convert.ToBase64String(i.Foto);
+                          <img src="@Url.Content(i.Foto)">
                         }
                         else
                         {

@@ -42,7 +42,7 @@ namespace Vita
         public string SitioWeb { get; set; }
         public string SobreMi { get; set; }
         public Nullable<int> RolId { get; set; }
-        public byte[] Foto { get; set; }
+        public string Foto { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }

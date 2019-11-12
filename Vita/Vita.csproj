@@ -1014,6 +1014,10 @@
     <Content Include="Views\Actividad\ListaEstado.cshtml" />
     <Content Include="Views\Actividad\ListaEstado.cshtml" />
     <Content Include="Views\Usuario\RegistrarFacebook.cshtml" />
+    <Content Include="Views\Actividad\CrearFormularioDinamico.cshtml" />
+    <Content Include="Views\Actividad\ActividadesDelUsuarioInscripto.cshtml" />
+    <Content Include="Views\Usuario\Calendario.cshtml" />
+    <Content Include="Views\Actividad\CompletarFormularioDinamicoUsuario.cshtml" />
     <EntityDeploy Include="VitaEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>VitaEntities.Designer.cs</LastGenOutput>
@@ -1021,13 +1025,11 @@
     <Content Include="VitaEntities.edmx.diagram">
       <DependentUpon>VitaEntities.edmx</DependentUpon>
     </Content>
-    <Content Include="Views\Actividad\CrearFormularioDinamico.cshtml" />
-    <Content Include="Views\Actividad\ActividadesDelUsuarioInscripto.cshtml" />
-    <Content Include="Views\Usuario\Calendario.cshtml" />
-    <Content Include="Views\Actividad\CompletarFormularioDinamicoUsuario.cshtml" />
+    <Content Include="Views\Usuario\RegistroEntidad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\imagenes\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

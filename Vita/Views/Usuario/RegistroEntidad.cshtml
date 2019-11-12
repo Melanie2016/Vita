@@ -1,0 +1,284 @@
+﻿@{
+    Layout = null;
+}
+
+<!-- Estilo del Registro -->
+<link href="~/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+<link href="~/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+<link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+<link href="~/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+<link href="~/vendor/select2/select2_registro.min.css" rel="stylesheet" media="all">
+<link href="~/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+<link href="~/Content/css/registro.css" rel="stylesheet" media="all">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+<div class="page-wrapper  font-poppins">
+    <div class="wrapper wrapper--w680">
+        <div class="card card-4">
+            <div class="card-body">
+                <!--  <form action="/Usuario/Registrar" method="Post" class="formu-usuario" id="form-rol-usuario">-->
+                <!--EMPRESA: <form action="/Usuario/Registrar" method="Post" class="formu-entidad" id="form-rol-entidad">-->
+
+                @using (Html.BeginForm("Registrar", "Usuario", new { id = "form-rol-entidad", @class = "formu-entidad" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+
+                    <div class="input-group" hidden>
+                        <input class="input--style-4" type="number" value="2" name="RolId">
+                    </div>
+
+                    <!--FOTO DE PERFIL-->
+                    <div class="avatar-wrapper" id="avatar">
+                        <img class="profile-pic" src="" />
+                        <div class="upload-button">
+                            <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+                        </div>
+                        <input class="file-upload" type="file" id="Foto" name="Foto" />
+                    </div>
+
+
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <!--Nombre de la empresa-->
+                                <label class="label">Nombre</label>
+                                <input class="input--style-4" type="text" name="Nombre">
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <!--Email de la empresa-->
+                                <label class="label">Email</label>
+                                <input class="input--style-4" type="text" name="Email" placeholder="ejemplo@gmail.com">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <!--Provincia-->
+                            <label class="label">Seleccione Provincia</label>
+                            <div>
+                                <select class="input--style-4" id="filtroProvinciaEntidad" title="Seleccione provincia.." style="width: 260px; height: 50px; border: 0;">
+
+                                    <option>Seleccionar provincia</option>
+                                    @foreach (var item in ViewBag.ListaProvincia as MultiSelectList)
+                                    {
+
+                                        <option name="valorActual" value="@item.Value">@item.Text</option>
+
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <!--departamento-->
+                                <label class="label">Seleccione Departamento</label>
+                                <div>
+                                    <div id="filtroDepartamentoEntidad"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <!--Localidad-->
+                                <label class="label">Seleccione Localidad</label>
+                                <div id="filtroLocalidadEntidad" name="LocalidadId"></div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <!--Telefono de la empresa-->
+                                <label class="label">Teléfono</label>
+                                <input class="input--style-4" type="number" name="Telefono">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <!--Celular de la empresa-->
+                                <label class="label">Celular</label>
+                                <input class="input--style-4" type="number" name="Celular" placeholder="1143424456">
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <!--Sitio web personal de la empresa-->
+                                <label class="label">Sitio web personal</label>
+                                <input class="input--style-4" type="text" name="SitioWeb">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="label" for="SobreMi">
+                            Breve descripción sobre tu entidad <span class="text-danger">*</span>
+                        </label><br /><br />
+                        <div class="col-2">
+                            <textarea class="form-control" id="val-suggestions" name="SobreMi" rows="10" cols="70" placeholder="Ingresa tu descripción personal..."></textarea>
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <!--Usuario-->
+                                <label class="label">Usuario</label>
+                                <input class="input--style-4" type="text" name="UsuarioName">
+                            </div>
+                        </div>
+
+                        <div class="col-2">
+                            <div class="input-group">
+                                <!--Contraseña-->
+                                <label class="label">Contraseña</label>
+                                <input class="input--style-4" type="password" name="Pass">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-t-15">
+
+                        <button class="btn btn--radius-2 btn--blue" type="submit">Aceptar</button>
+                        <a href="/Home/Index" class="btn btn--radius-2 btn--blue" type="button">Cancelar</a>
+
+                    </div>
+
+                }
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+<!-- Scripts del Login-->
+<script src="~/vendor/jquery/jquery.min.js"></script>
+<script src="~/vendor/select2/select2.min.js"></script>
+<script src="~/vendor/datepicker/moment.min.js"></script>
+<script src="~/vendor/datepicker/daterangepicker.js"></script>
+<script src="/Content/js/registro.js"></script>
+
+<!-- Aca es donde se arma la magia -->
+<script>
+    //Todo siempre una vez cargada la página
+    $(document).ready(function () {
+
+        //Esto corre cuando cambias de opción en el primer select
+        $('#filtroProvincia').on('change', function () {
+
+            var idProvincia = this.value;
+
+            //Si elegiste la opción de los guíones paramos aca para no hacer nada
+            if (idProvincia === 0) {
+                $("#filtroDepartamento").html("Selecciona una provincia");
+                return;
+            }
+
+            //Ajax
+            $.ajax({
+                //   url: "obtenerDepartamentosUsuario/" + idProvincia,
+                url: "obtenerDepartamentos/" + this.value,
+                type: 'GET',
+                dataType: "json",
+                success: function (res) {
+                    //Por si queres ver una por una las cosas que vuelven descomenta el alert
+                    // alert(res);
+
+                    //Creando el segundo select
+                    $("#filtroDepartamento").empty().append('<select id="filtro2" class="input--style-4" name="DepartamentoId" style="width: 260px; height: 50px; border: 0;">');
+
+                    $.each(res, function () {
+                        $("#filtro2").append($("<option>").val(this.Id).text(this.Descripcion));
+                    });
+                    //Esto corre cuando cambias de opción en el segundo select
+                    $('#filtro2').on('change', function () {
+                        //Ajax
+                        $.ajax({
+                            url: "obtenerLocalidades/" + this.value,
+
+                            type: 'GET',
+                            dataType: "json",
+                            success: function (res) {
+                                // alert(res);
+                                //Creando el tercer select
+                                $("#filtroLocalidad").empty().append('<select id="filtro3" class="input--style-4" name="LocalidadId" style="width: 260px; height: 50px; border: 0;">');
+                                $.each(res, function () {
+                                    $("#filtro3").append($("<option>").val(this.Id).text(this.Descripcion));
+                                });
+                            }
+                        });
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+
+<!-- Aca es donde se arma la magia -->
+<script>
+    //Todo siempre una vez cargada la página
+    $(document).ready(function () {
+
+        //Esto corre cuando cambias de opción en el primer select
+        $('#filtroProvinciaEntidad').on('change', function () {
+
+            var idProvincia = this.value;
+
+            //Si elegiste la opción de los guíones paramos aca para no hacer nada
+            if (idProvincia === 0) {
+                $("#filtroDepartamentoEntidad").html("Selecciona una provincia");
+                return;
+            }
+
+            //Ajax
+            $.ajax({
+                url: "obtenerDepartamentos/" + this.value,
+                type: 'GET',
+                dataType: "json",
+                success: function (res) {
+                    //Por si queres ver una por una las cosas que vuelven descomenta el alert
+                     //alert(res);
+
+                    //Creando el segundo select
+                    $("#filtroDepartamentoEntidad").empty().append('<select id="filtroentidad2" class="input--style-4" name="DepartamentoId" style="width: 260px; height: 50px; border: 0;">');
+
+                    $.each(res, function () {
+                        $("#filtroentidad2").append($("<option>").val(this.Id).text(this.Descripcion));
+                    });
+                    //Esto corre cuando cambias de opción en el segundo select
+                    $('#filtroentidad2').on('change', function () {
+                        //Ajax
+                        $.ajax({
+                            url: "obtenerLocalidades/" + this.value,
+
+                            type: 'GET',
+                            dataType: "json",
+                            success: function (res) {
+                                // alert(res);
+                                //Creando el tercer select
+                                $("#filtroLocalidadEntidad").empty().append('<select id="filtroentidad3" class="input--style-4" name="LocalidadId" style="width: 260px; height: 50px; border: 0;">');
+                                $.each(res, function () {
+                                    $("#filtroentidad3").append($("<option>").val(this.Id).text(this.Descripcion));
+                                });
+                            }
+                        });
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+
+

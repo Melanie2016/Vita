@@ -20,7 +20,7 @@
           <Property Name="SubcategoriaId" Type="int" Nullable="false" />
           <Property Name="LocalidadId" Type="int" Nullable="false" />
           <Property Name="UsuarioId" Type="int" />
-          <Property Name="Foto" Type="image" />
+          <Property Name="Foto" Type="nvarchar(max)" />
           <Property Name="CreatedAt" Type="date" />
           <Property Name="UpdatedAt" Type="date" />
           <Property Name="DeletedAt" Type="date" />
@@ -209,7 +209,7 @@
           <Property Name="SitioWeb" Type="varchar" MaxLength="200" />
           <Property Name="SobreMi" Type="varchar" MaxLength="500" />
           <Property Name="RolId" Type="int" />
-          <Property Name="Foto" Type="image" />
+          <Property Name="Foto" Type="nvarchar(max)" />
           <Property Name="CreatedAt" Type="date" />
           <Property Name="UpdatedAt" Type="date" />
           <Property Name="DeletedAt" Type="date" />
@@ -849,7 +849,7 @@
           <Property Name="SubcategoriaId" Type="Int32" Nullable="false" />
           <Property Name="LocalidadId" Type="Int32" Nullable="false" />
           <Property Name="UsuarioId" Type="Int32" />
-          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Foto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <Property Name="DeletedAt" Type="DateTime" Precision="0" />
@@ -1085,7 +1085,7 @@
           <Property Name="SitioWeb" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="SobreMi" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="RolId" Type="Int32" />
-          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Foto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <Property Name="DeletedAt" Type="DateTime" Precision="0" />

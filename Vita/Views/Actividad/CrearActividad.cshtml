@@ -32,7 +32,9 @@
 
                         <h3>Crear actividad</h3>
                         <div class="form-validation">
-                            <form class="form-valide" action=CreacionActividad method=POST>
+                            <!--Titulo  <form class="form-valide" action=CreacionActividad method=POST>-->
+                            @using (Html.BeginForm("CreacionActividad", "Actividades", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
                                 <div class="form-group row">
                                     <!--Titulo-->
                                     <label class="col-lg-4 col-form-label" for="Titulo">
@@ -166,13 +168,13 @@
                                         Seleccione los dias en los cuales la actividad estará disponible<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="checkbox" id="Lunes"     name="Lunes"      style="margin-left: 10px;"> Lunes
-                                        <input type="checkbox" id="Martes"    name="Martes"     style="margin-left: 10px;"> Martes
-                                        <input type="checkbox" id="Miercoles" name="Miercoles"  style="margin-left: 10px;"> Miércoles
-                                        <input type="checkbox" id="Jueves"    name="Jueves"     style="margin-left: 10px;"> Jueves
-                                        <input type="checkbox" id="Viernes"   name="Viernes"    style="margin-left: 10px;"> Viernes
-                                        <input type="checkbox" id="Sabado"    name="Sabado"     style="margin-left: 10px;"> Sábado
-                                        <input type="checkbox" id="Domingo"   name="Domingo"    style="margin-left: 10px;"> Domingo
+                                        <input type="checkbox" id="Lunes" name="Lunes" style="margin-left: 10px;"> Lunes
+                                        <input type="checkbox" id="Martes" name="Martes" style="margin-left: 10px;"> Martes
+                                        <input type="checkbox" id="Miercoles" name="Miercoles" style="margin-left: 10px;"> Miércoles
+                                        <input type="checkbox" id="Jueves" name="Jueves" style="margin-left: 10px;"> Jueves
+                                        <input type="checkbox" id="Viernes" name="Viernes" style="margin-left: 10px;"> Viernes
+                                        <input type="checkbox" id="Sabado" name="Sabado" style="margin-left: 10px;"> Sábado
+                                        <input type="checkbox" id="Domingo" name="Domingo" style="margin-left: 10px;"> Domingo
                                     </div>
                                 </div>
 
@@ -517,14 +519,14 @@
                                         <button type="submit" class="btn btn-primary">Crear Actividad</button>
                                     </div>
                                 </div>
-                            </form>
+                            }
                             @*<form class="form-valide" action="CrearFormularioDinamico" method="Get" id="formFormu">
-                                <div class="form-group row">
-                                    <div class="col-lg-8 ml-auto">
-                                        <button type="submit" class="btn btn-primary">Crear formulario</button>
-                                    </div>
-                                </div>
-                            </form>*@
+            <div class="form-group row">
+                <div class="col-lg-8 ml-auto">
+                    <button type="submit" class="btn btn-primary">Crear formulario</button>
+                </div>
+            </div>
+        </form>*@
                         </div>
                     </div>
                 </div>

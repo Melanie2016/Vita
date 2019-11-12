@@ -18,7 +18,7 @@
                             <div class="avatar-wrapper">
                                 @if (Model.Foto != null && Model.Foto.Length > 0)
                                 {
-                                    ViewBag.Url = "data:image;base64," + Convert.ToBase64String(Model.Foto);
+                                <img src="@Url.Content(Model.Foto)">
                                 }
                                 else
                                 {
@@ -39,7 +39,7 @@
                                     }
                                 }
                                 <img class="profile-pic" src="@ViewBag.Url" width="100" height="100" alt="">
-                                <input class="file-upload" type="file" accept="image/*" />
+                                <input class="file-upload" type="file" id="Foto" name="Foto" />
                             </div>
                             <!---->
                         </div>
