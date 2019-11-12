@@ -239,150 +239,268 @@ namespace Vita.Servicios
             };
 
             myDbContext.Actividad.Add(actividadNueva);
-            myDbContext.SaveChanges();
+            var resultado = myDbContext.SaveChanges();
 
-            Domicilio domicilioNuevo = new Domicilio
+            if (resultado == 1) //Se creó la actividad
             {
-                NombreCalle = actividadViewModel.NombreCalle,
-                NumeroCalle = actividadViewModel.NumeroCalle,
-                NumeroPiso = actividadViewModel.NumeroPiso,
-                NumeroDepartamento = actividadViewModel.NumeroDepartamento,
-                CodigoPostal = actividadViewModel.CodigoPostal,
-                LocalidadId = actividadViewModel.LocalidadId,
-                UsuarioId = usuario.Id,
-                ActividadId = actividadNueva.Id,
-                FechaRegistroEnDb = DateTime.Now
-            };
-
-            myDbContext.Domicilio.Add(domicilioNuevo);
-            myDbContext.SaveChanges();
-            this.CrearSegmentoActividad(actividadNueva.Id, selectedSegmento);
-
-            //Tiene una fecha de inicio y fin
-            if (actividadViewModel.InicioEvento != null)
-            {
-                FechaActividad fechasActividadNuevo = new FechaActividad
+                Domicilio domicilioNuevo = new Domicilio
                 {
-                    InicioEvento = Convert.ToDateTime(actividadViewModel.InicioEvento),
-                    FinEvento = Convert.ToDateTime(actividadViewModel.FinEvento),
-                    HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicio),
-                    HoraFin = TimeSpan.Parse(actividadViewModel.HoraFin),
-                    ActividadId = actividadNueva.Id
+                    NombreCalle = actividadViewModel.NombreCalle,
+                    NumeroCalle = actividadViewModel.NumeroCalle,
+                    NumeroPiso = actividadViewModel.NumeroPiso,
+                    NumeroDepartamento = actividadViewModel.NumeroDepartamento,
+                    CodigoPostal = actividadViewModel.CodigoPostal,
+                    LocalidadId = actividadViewModel.LocalidadId,
+                    UsuarioId = usuario.Id,
+                    ActividadId = actividadNueva.Id,
+                    FechaRegistroEnDb = DateTime.Now
                 };
 
-                myDbContext.FechaActividad.Add(fechasActividadNuevo);
+                myDbContext.Domicilio.Add(domicilioNuevo);
                 myDbContext.SaveChanges();
+                this.CrearSegmentoActividad(actividadNueva.Id, selectedSegmento);
+
+                //Tiene una fecha de inicio y fin
+                if (actividadViewModel.InicioEvento != null)
+                {
+                    FechaActividad fechasActividadNuevo = new FechaActividad
+                    {
+                        InicioEvento = Convert.ToDateTime(actividadViewModel.InicioEvento),
+                        FinEvento = Convert.ToDateTime(actividadViewModel.FinEvento),
+                        HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicio),
+                        HoraFin = TimeSpan.Parse(actividadViewModel.HoraFin),
+                        ActividadId = actividadNueva.Id
+                    };
+
+                    myDbContext.FechaActividad.Add(fechasActividadNuevo);
+                    myDbContext.SaveChanges();
+                }
+                else
+                {
+                    //Tiene varios dias a la semana con horarios
+
+                    //LUNES
+                    //Tiene el mismo horario que otros dias
+                    if (actividadViewModel.Lunes == "1" && actividadViewModel.HoraInicioLunes == null)
+                    {
+                        FechaActividad fechasActividadLunes = new FechaActividad
+                        {
+                            DiaSemanaId = 1,
+                            HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMismoDia),
+                            HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMismoDia),
+                            ActividadId = actividadNueva.Id
+                        };
+
+                        myDbContext.FechaActividad.Add(fechasActividadLunes);
+                        myDbContext.SaveChanges();
+                    }
+
+                    //Tiene su propio horario
+                    if (actividadViewModel.HoraInicioLunes != null)
+                    {
+                        FechaActividad fechasActividadLunes = new FechaActividad
+                        {
+                            DiaSemanaId = 1,
+                            HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioLunes),
+                            HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinLunes),
+                            ActividadId = actividadNueva.Id
+                        };
+
+                        myDbContext.FechaActividad.Add(fechasActividadLunes);
+                        myDbContext.SaveChanges();
+                    }
+
+                    //MARTES
+                    //Tiene el mismo horario que otros dias
+                    if (actividadViewModel.Martes == "1" && actividadViewModel.HoraInicioMartes == null)
+                    {
+                        FechaActividad fechasActividadMartes = new FechaActividad
+                        {
+                            DiaSemanaId = 2,
+                            HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMismoDia),
+                            HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMismoDia),
+                            ActividadId = actividadNueva.Id
+                        };
+
+                        myDbContext.FechaActividad.Add(fechasActividadMartes);
+                        myDbContext.SaveChanges();
+                    }
+
+                    //Tiene su propio horario
+                    if (actividadViewModel.HoraInicioMartes != null)
+                    {
+                        FechaActividad fechasActividadMartes = new FechaActividad
+                        {
+                            DiaSemanaId = 2,
+                            HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMartes),
+                            HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMartes),
+                            ActividadId = actividadNueva.Id
+                        };
+
+                        myDbContext.FechaActividad.Add(fechasActividadMartes);
+                        myDbContext.SaveChanges();
+                    }
+
+
+
+                    //MIERCOLES
+                    //Tiene el mismo horario que otros dias
+                    if (actividadViewModel.Miercoles == "1" && actividadViewModel.HoraInicioMiercoles == null)
+                    {
+                        FechaActividad fechasActividadMiercoles = new FechaActividad
+                        {
+                            DiaSemanaId = 3,
+                            HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMismoDia),
+                            HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMismoDia),
+                            ActividadId = actividadNueva.Id
+                        };
+
+                        myDbContext.FechaActividad.Add(fechasActividadMiercoles);
+                        myDbContext.SaveChanges();
+                    }
+
+                    //Tiene su propio horario
+                    if (actividadViewModel.HoraInicioMiercoles != null)
+                    {
+                        FechaActividad fechasActividadMiercoles = new FechaActividad
+                        {
+                            DiaSemanaId = 3,
+                            HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMiercoles),
+                            HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMiercoles),
+                            ActividadId = actividadNueva.Id
+                        };
+
+                        myDbContext.FechaActividad.Add(fechasActividadMiercoles);
+                        myDbContext.SaveChanges();
+                    }
+
+                    //JUEVES
+                    //Tiene el mismo horario que otros dias
+                    if (actividadViewModel.Jueves == "1" && actividadViewModel.HoraInicioJueves == null)
+                    {
+                        FechaActividad fechasActividadJueves = new FechaActividad
+                        {
+                            DiaSemanaId = 4,
+                            HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMismoDia),
+                            HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMismoDia),
+                            ActividadId = actividadNueva.Id
+                        };
+
+                        myDbContext.FechaActividad.Add(fechasActividadJueves);
+                        myDbContext.SaveChanges();
+                    }
+
+                    //Tiene su propio horario
+                    if (actividadViewModel.HoraInicioJueves != null)
+                    {
+                        FechaActividad fechasActividadJueves = new FechaActividad
+                        {
+                            DiaSemanaId = 4,
+                            HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioJueves),
+                            HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinJueves),
+                            ActividadId = actividadNueva.Id
+                        };
+
+                        myDbContext.FechaActividad.Add(fechasActividadJueves);
+                        myDbContext.SaveChanges();
+                    }
+
+                    //VIERNES
+                    //Tiene el mismo horario que otros dias
+                    if (actividadViewModel.Viernes == "1" && actividadViewModel.HoraInicioViernes == null)
+                    {
+                        FechaActividad fechasActividadViernes = new FechaActividad
+                        {
+                            DiaSemanaId = 5,
+                            HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMismoDia),
+                            HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMismoDia),
+                            ActividadId = actividadNueva.Id
+                        };
+
+                        myDbContext.FechaActividad.Add(fechasActividadViernes);
+                        myDbContext.SaveChanges();
+                    }
+
+                    //Tiene su propio horario
+                    if (actividadViewModel.HoraInicioViernes != null)
+                    {
+                        FechaActividad fechasActividadViernes = new FechaActividad
+                        {
+                            DiaSemanaId = 5,
+                            HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioViernes),
+                            HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinViernes),
+                            ActividadId = actividadNueva.Id
+                        };
+
+                        myDbContext.FechaActividad.Add(fechasActividadViernes);
+                        myDbContext.SaveChanges();
+                    }
+
+                    //SABADO
+                    //Tiene el mismo horario que otros dias
+                    if (actividadViewModel.Sabado == "1" && actividadViewModel.HoraInicioSabado == null)
+                    {
+                        FechaActividad fechasActividadSabado = new FechaActividad
+                        {
+                            DiaSemanaId = 6,
+                            HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMismoDia),
+                            HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMismoDia),
+                            ActividadId = actividadNueva.Id
+                        };
+
+                        myDbContext.FechaActividad.Add(fechasActividadSabado);
+                        myDbContext.SaveChanges();
+                    }
+
+                    //Tiene su propio horario
+                    if (actividadViewModel.HoraInicioSabado != null)
+                    {
+                        FechaActividad fechasActividadSabado = new FechaActividad
+                        {
+                            DiaSemanaId = 6,
+                            HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioSabado),
+                            HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinSabado),
+                            ActividadId = actividadNueva.Id
+                        };
+
+                        myDbContext.FechaActividad.Add(fechasActividadSabado);
+                        myDbContext.SaveChanges();
+                    }
+
+                    //DOMINGO
+                    //Tiene el mismo horario que otros dias
+                    if (actividadViewModel.Domingo == "1" && actividadViewModel.HoraInicioDomingo == null)
+                    {
+                        FechaActividad fechasActividadDomingo = new FechaActividad
+                        {
+                            DiaSemanaId = 7,
+                            HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMismoDia),
+                            HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMismoDia),
+                            ActividadId = actividadNueva.Id
+                        };
+
+                        myDbContext.FechaActividad.Add(fechasActividadDomingo);
+                        myDbContext.SaveChanges();
+                    }
+
+                    //Tiene su propio horario
+                    if (actividadViewModel.HoraInicioDomingo != null)
+                    {
+                        FechaActividad fechasActividadDomingo = new FechaActividad
+                        {
+                            DiaSemanaId = 7,
+                            HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioDomingo),
+                            HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinDomingo),
+                            ActividadId = actividadNueva.Id
+                        };
+
+                        myDbContext.FechaActividad.Add(fechasActividadDomingo);
+                        myDbContext.SaveChanges();
+                    }
+
+                }
             }
-            else
-            {
-                //Tiene varios dias a la semana con horarios
-
-                //Tiene Lunes
-                if (actividadViewModel.HoraInicioLunes != null)
-                {
-                    FechaActividad fechasActividadLunes = new FechaActividad
-                    {
-                        DiaSemanaId = 1,
-                        HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioLunes),
-                        HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinLunes),
-                        ActividadId = actividadNueva.Id
-                    };
-
-                    myDbContext.FechaActividad.Add(fechasActividadLunes);
-                    myDbContext.SaveChanges();
-                }
-
-                //Tiene Martes
-                if (actividadViewModel.HoraInicioMartes != null)
-                {
-                    FechaActividad fechasActividadMartes = new FechaActividad
-                    {
-                        DiaSemanaId = 2,
-                        HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMartes),
-                        HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMartes),
-                        ActividadId = actividadNueva.Id
-                    };
-
-                    myDbContext.FechaActividad.Add(fechasActividadMartes);
-                    myDbContext.SaveChanges();
-                }
-
-                //Tiene Miércoles
-                if (actividadViewModel.HoraInicioMiercoles != null)
-                {
-                    FechaActividad fechasActividadMiercoles = new FechaActividad
-                    {
-                        DiaSemanaId = 3,
-                        HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMiercoles),
-                        HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMiercoles),
-                        ActividadId = actividadNueva.Id
-                    };
-
-                    myDbContext.FechaActividad.Add(fechasActividadMiercoles);
-                    myDbContext.SaveChanges();
-                }
-
-                //Tiene Jueves
-                if (actividadViewModel.HoraInicioJueves != null)
-                {
-                    FechaActividad fechasActividadJueves = new FechaActividad
-                    {
-                        DiaSemanaId = 4,
-                        HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioJueves),
-                        HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinJueves),
-                        ActividadId = actividadNueva.Id
-                    };
-
-                    myDbContext.FechaActividad.Add(fechasActividadJueves);
-                    myDbContext.SaveChanges();
-                }
-
-                //Tiene Viernes
-                if (actividadViewModel.HoraInicioViernes != null)
-                {
-                    FechaActividad fechasActividadViernes = new FechaActividad
-                    {
-                        DiaSemanaId = 5,
-                        HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioViernes),
-                        HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinViernes),
-                        ActividadId = actividadNueva.Id
-                    };
-
-                    myDbContext.FechaActividad.Add(fechasActividadViernes);
-                    myDbContext.SaveChanges();
-                }
-
-                //Tiene Sábado
-                if (actividadViewModel.HoraInicioSabado != null)
-                {
-                    FechaActividad fechasActividadSabado = new FechaActividad
-                    {
-                        DiaSemanaId = 6,
-                        HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioSabado),
-                        HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinSabado),
-                        ActividadId = actividadNueva.Id
-                    };
-
-                    myDbContext.FechaActividad.Add(fechasActividadSabado);
-                    myDbContext.SaveChanges();
-                }
-
-                //Tiene Domingo
-                if (actividadViewModel.HoraInicioDomingo != null)
-                {
-                    FechaActividad fechasActividadDomingo = new FechaActividad
-                    {
-                        DiaSemanaId = 7,
-                        HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioDomingo),
-                        HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinDomingo),
-                        ActividadId = actividadNueva.Id
-                    };
-
-                    myDbContext.FechaActividad.Add(fechasActividadDomingo);
-                    myDbContext.SaveChanges();
-                }
-
-            }
+            
         }
 
         public void CrearSegmentoActividad(int actividadId, int[] selectedSegmento)
