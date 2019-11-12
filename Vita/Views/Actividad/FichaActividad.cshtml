@@ -93,7 +93,7 @@
                                 <!--First slide-->
                                 @if (ViewBag.Actividad.Foto != null && ViewBag.Actividad.Foto.Length > 0)
                                 {
-                                    ViewBag.Url = "data:image;base64," + Convert.ToBase64String(ViewBag.Actividad.Foto);
+                                    ViewBag.Url = ViewBag.Actividad.Foto;
                                 }
                                 else
                                 {
@@ -101,7 +101,7 @@
                                 }
 
                                 <div class="carousel-item active" style=" height: 70vh; min-height: 300px">
-                                    <img class="d-block w-100" src="@ViewBag.Url" style=" height: 500px !important; width: 100%;"
+                                    <img class="d-block w-100" src="@Url.Content(ViewBag.Url)" style=" height: 500px !important; width: 100%;"
                                          alt="First slide">
                                 </div>
                             </div>

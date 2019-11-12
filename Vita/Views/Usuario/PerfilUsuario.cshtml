@@ -18,23 +18,23 @@
                             <div class="avatar-wrapper">
                                 @if (Model.Foto != null && Model.Foto.Length > 0)
                                 {
-                                <img src="@Url.Content(Model.Foto)">
+                                <img src="@Url.Content(Model.Foto)" alt="" style="height: 200px; width: 200px; border: 3px solid #fff; border-radius: 50%; margin: 0; padding: 0; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);">
                                 }
                                 else
                                 {
-                                   if(Model.Sexo.Descripcion == "Masculino")
+                                    if (Model.Sexo.Descripcion == "Masculino")
                                     {
                                         ViewBag.Url = "/Content/images/hombre.png";
                                     }
                                     else
                                     {
-                                        if(Model.Sexo.Descripcion == "Femenino")
+                                        if (Model.Sexo.Descripcion == "Femenino")
                                         {
                                             ViewBag.Url = "/Content/images/mujer.jpg";
                                         }
                                         else
                                         {
-                                             ViewBag.Url = "/Content/images/desconocido.png";
+                                            ViewBag.Url = "/Content/images/desconocido.png";
                                         }
                                     }
                                 }

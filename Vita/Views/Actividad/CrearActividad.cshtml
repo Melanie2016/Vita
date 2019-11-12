@@ -33,7 +33,7 @@
                         <h3>Crear actividad</h3>
                         <div class="form-validation">
                             <!--Titulo  <form class="form-valide" action=CreacionActividad method=POST>-->
-                            @using (Html.BeginForm("CreacionActividad", "Actividades", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            @using (Html.BeginForm("CreacionActividad", "Actividad", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
                                 <div class="form-group row">
                                     <!--Titulo-->
@@ -461,6 +461,16 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <input type="text" class="form-control" name="CodigoPostal" placeholder="B1704">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <!--Nro calle-->
+                                    <label class="col-lg-4 col-form-label" for="Foto">
+                                        Ingrese una foto de la Actividad<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input class="file-upload" type="file" id="Foto" name="Foto" />
                                     </div>
                                 </div>
 

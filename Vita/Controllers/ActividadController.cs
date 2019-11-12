@@ -1,6 +1,9 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
@@ -46,8 +49,18 @@ namespace Vita.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreacionActividad(ActividadViewModel actividad, int[] selectedSegmento)
+        public ActionResult CreacionActividad(ActividadViewModel actividad, int[] selectedSegmento, HttpPostedFileBase Foto)
         {
+
+            string path = uploadimage(Foto);
+            if (path.Equals("-1"))
+            {
+
+            }
+            else
+            {
+                actividad.Foto = path;
+            }
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
             {
@@ -55,7 +68,7 @@ namespace Vita.Controllers
             }
             else
             {
-
+                
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 actividadServicio.CrearActividad(actividad, buscarUsuarioLogueado, selectedSegmento);
                 var activdadCreada = actividadServicio.GetUltimaActividadPorUsuarioCreadaId(buscarUsuarioLogueado.Id);
@@ -73,6 +86,46 @@ namespace Vita.Controllers
 
             }
         }
+
+
+        public string uploadimage(HttpPostedFileBase file)
+        {
+            Random r = new Random();
+            string path = "-1";
+            int random = r.Next();
+            if (file != null && file.ContentLength > 0)
+
+            {
+                string extension = Path.GetExtension(file.FileName);
+                if (extension.ToLower().Equals(".jpg") || extension.ToLower().Equals(".jpeg") || extension.ToLower().Equals(".png") || extension.ToLower().Equals(".JPEG"))
+
+                {
+                    try
+
+                    {
+
+                        path = Path.Combine(Server.MapPath("~/Content/imagenes"), random + Path.GetFileName(file.FileName));
+                        file.SaveAs(path);
+                        path = "~/Content/imagenes/" + random + Path.GetFileName(file.FileName);
+                    }
+                    catch (Exception)
+                    {
+                        path = "-1";
+                    }
+                }
+                else
+                {
+                    Response.Write("<script>alert('Sólo jpg ,jpeg o png son aceptables....'); </script>");
+                }
+            }
+            else
+            {
+                Response.Write("<script>alert('Por Favor seleccione una imagen'); </script>");
+                path = "-1";
+            }
+            return path;
+        }
+
         public ActionResult ModificarActividad()
         {
             //obtengo usuario logueado

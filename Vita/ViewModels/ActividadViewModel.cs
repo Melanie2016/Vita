@@ -49,7 +49,7 @@ namespace Vita.ViewModels
         public int DepartamentoId { get; set; }
         public int LocalidadId { get; set; }
         public int UsuarioId { get; set; }
-        public byte[] Foto { get; set; }
+        public string Foto { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime DeletedAt { get; set; }
