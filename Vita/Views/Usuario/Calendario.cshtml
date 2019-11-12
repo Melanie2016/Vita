@@ -138,8 +138,9 @@
                                 inscripto: false,
                                 title: v.Titulo,
                                 descripcion: v.Descripcion,
-                                start: moment(v.FechaDesde),
-                                end: v.FechaHasta != null ? moment(v.FechaHasta) : null,
+                                start: v.DiaSemana == 0 ? v.InicioEvento : v.HoraInicio,
+                                end: v.DiaSemana == 0 ? v.FinEvento : v.HoraFin,
+                                dow: [ v.DiaSemana ],
                                 color: '#69D49A '
                             });
                         })
@@ -147,7 +148,7 @@
                         GenerateCalender(events);
                     },
                     error: function (error) {
-                        alert('failed');
+                        alert('En este momento no se pueden mostrar sus actividades, perdone las molestias');
                     }
                 })
             }
