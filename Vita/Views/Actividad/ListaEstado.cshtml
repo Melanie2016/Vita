@@ -44,7 +44,7 @@
                             {
                                 if (i.Foto != null && i.Foto.Length > 0)
                                 {
-                                    ViewBag.Url = "data:image;base64," + Convert.ToBase64String(i.Foto);
+                                    ViewBag.Url = i.Foto;
                                 }
                                 else
                                 {
@@ -57,7 +57,7 @@
                                 <tr>
 
                                     <td><input type="checkbox" class="case" name="case" /></td>
-                                    <td><img src="@ViewBag.Url" style="width: 190px; height: 120px;"></td>
+                                    <td><img src="@Url.Content(ViewBag.Url)" style="width: 190px; height: 120px;"></td>
                                     <td>@i.Nombre @i.Apellido</td>
                                     <td>@i.Localidad.Descripcion</td>
                                     <td>@Convert.ToInt32(@DateTime.Now.Year - @i.FechaNacimiento.Value.Year)</td>
