@@ -58,7 +58,8 @@ namespace Vita.Servicios
 
             //hago una lista del view model para guardar los datos que necesito de la otra lista
             var lista = new List<ActividadFechaViewModel>();
-
+            TimeSpan ts = new TimeSpan();
+            DateTime date = new DateTime();
             //recorro la primera lista
             foreach (var aux in listaActividadDelUsuario)
             {
@@ -70,8 +71,10 @@ namespace Vita.Servicios
                     Titulo = aux.UsuarioInscriptoActividad.Actividad.Titulo,
                     Descripcion = aux.UsuarioInscriptoActividad.Actividad.Descripcion,
                     DiaSemana = aux.FechaActividad.DiaSemanaId != null ? aux.FechaActividad.DiaSemana.Id : -1,
-                    InicioEvento = aux.FechaActividad.InicioEvento.ToString(),
-                    FinEvento = aux.FechaActividad.FinEvento.ToString(),
+                    //     InicioEvento = (aux.FechaActividad.InicioEvento + ts.Add(aux.FechaActividad.HoraInicio)).ToString(),
+                    //     FinEvento = (aux.FechaActividad.FinEvento + ts.Add(aux.FechaActividad.HoraFin)).ToString(),
+                    InicioEvento = aux.FechaActividad.InicioEvento != null ? aux.FechaActividad.InicioEvento.Value : date,
+                    FinEvento = aux.FechaActividad.FinEvento != null ? aux.FechaActividad.FinEvento.Value : date,
                     HoraInicio = aux.FechaActividad.HoraInicio.ToString(),
                     HoraFin = aux.FechaActividad.HoraFin.ToString()
 

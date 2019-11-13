@@ -11,8 +11,8 @@ namespace Vita.ViewModels
         public string Titulo { get; set; }
         public string Descripcion { get; set; }
         public int DiaSemana { get; set; }
-        public string InicioEvento { get; set; }
-        public string FinEvento { get; set; }
+        public DateTime InicioEvento { get; set; }
+        public DateTime FinEvento { get; set; }
         public string HoraInicio { get; set; }
         public string HoraFin { get; set; }
 
