@@ -15,10 +15,19 @@
             <form action="/Actividad/AprobarUsuario" method="post">
                 <input type="number" value="@ViewBag.Actividad.Id" name="ActividadId" hidden/>
                 <div class="table-responsive">
-                    <div class="header-left" style="margin-left:80%;">
-                        <a href=#><button type="submit" class="btn mb-1 gradient-3" id="btnAprobar" name=Estado value=true>Aprobar</button> </a>
-                        <a href=#><button type="submit" class="btn mb-1 gradient-1" id="btnRechazar" name=Estado value=false>Rechazar</button> </a>
-                    </div>
+                    @if (ViewBag.Estado == "2") //Sólo en el estado PENDIENTE muestro los botones de aprobar y rechazar
+                    {
+                        <div class="header-left" style="margin-left:80%;">
+                            <a href=#><button type="submit" class="btn mb-1 gradient-3" id="btnAprobar" name=Estado value=true>Aprobar</button> </a>
+                            <a href=#><button type="submit" class="btn mb-1 gradient-1" id="btnRechazar" name=Estado value=false>Rechazar</button> </a>
+                        </div>
+                    }
+                    @if (ViewBag.Estado == "1") //Sólo en el estado APROBADO puede rechazar
+                    {
+                        <div class="header-left" style="margin-left:80%;">
+                            <a href=#><button type="submit" class="btn mb-1 gradient-1" id="btnRechazar" name=Estado value=false>Rechazar</button> </a>
+                        </div>
+                    }
                     <br><br><br><br><br>
 
 
@@ -79,7 +88,7 @@
                         </tbody>
                     </table>
 
-            </form>
+</form>
             </div>
         </div>
     </div>
