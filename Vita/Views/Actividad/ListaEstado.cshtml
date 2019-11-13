@@ -43,6 +43,10 @@
                                 <th scope="col">Edad</th>
                                 <th scope="col">Sexo</th>
                                 <th scope="col">Estado</th>
+                                @if (ViewBag.Estado == "2") //Pendiente
+                                {
+                                    <th scope="colgroup">Formulario</th>
+                                }
                                 <th scope="colgroup">Accion</th>
                             </tr>
                         </thead>
@@ -51,6 +55,8 @@
                             @*@foreach (Actividad i in Model)*@
                             @foreach (Usuario i in ViewBag.ListaUsuario)
                             {
+                                var estado = i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == i.Id).FirstOrDefault().Estado.Descripcion;
+
                                 if (i.Foto != null && i.Foto.Length > 0)
                                 {
                                     ViewBag.Url = i.Foto;
@@ -72,10 +78,15 @@
                                     <td>@Convert.ToInt32(@DateTime.Now.Year - @i.FechaNacimiento.Value.Year)</td>
                                     <td>@i.Sexo.Descripcion</td>
                                     <td>
-                                        @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == i.Id).FirstOrDefault().Estado.Descripcion
+                                        @estado
                                         @*@i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion*@
                                     </td>
-
+                                    @if (ViewBag.Estado == "2") //Pendiente
+                                    {
+                                        <td>
+                                            <span><a href="/Actividad/RespuestasFormularioDinamico?actividadId=@ViewBag.Actividad.Id&usuarioRespuestaId=@i.Id" data-toggle="tooltip" data-placement="top"  title="Ver respuestas del formulario"   style="color: #f97197; font-weight: bold; text-decoration: underline;">Ver respuestas</a></span>
+                                        </td>
+                                    }
 
                                     <td>
                                         <span><a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span>
