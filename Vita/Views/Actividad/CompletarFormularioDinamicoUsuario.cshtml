@@ -34,13 +34,11 @@
                         <h3>Completar formulario de la Actividad @ViewBag.Formulario.Actividad.Titulo</h3>
                         <h4>@ViewBag.Formulario.Actividad.Descripcion</h4>
 
-                        <h5>@ViewBag.Formulario.Titulo</h5>
-                        <h5>@ViewBag.Formulario.Descripcion</h5>
-
                         <div class="form-validation">
-                            <form class="form-valide" id="form" action=/Actividad/GuardarFormularioUsuario method=POST>
+                            @using (Html.BeginForm("GuardarFormularioUsuario", "Actividad", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
                                 <div id="ContenedorEmpleados"></div>
-                                @{ var index = -1;
+                                { var index = -1;
                                     foreach (var cam in ViewBag.Formulario.Campos)
                                     {
                                         index++;
@@ -49,7 +47,7 @@
 
                                             <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
                                             <div class="form-group row">
-                                                <label class="col-lg-4 col-form-label" for="Descripcion">
+                                                <label class="col-lg-4 col-form-label">
                                                     @cam.Nombre  @if (cam.Obligatorio)
                                                     {<span class="text-danger">*</span>}
                                                 </label>
@@ -63,7 +61,7 @@
                                         {
                                             <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
                                             <div class="form-group row">
-                                                <label class="col-lg-4 col-form-label" for="Nombre">
+                                                <label class="col-lg-4 col-form-label">
                                                     @cam.Nombre  @if (cam.Obligatorio)
                                                     {<span class="text-danger">*</span>}
                                                 </label>
@@ -78,13 +76,13 @@
                                             <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
                                             <div class="form-group row">
                                                 <!--Fecha Hasta-->
-                                                <label class="col-lg-4 col-form-label" for="RangoFecha">
+                                                <label class="col-lg-4 col-form-label">
                                                     @cam.Nombre  @if (cam.Obligatorio)
                                                     {<span class="text-danger">*</span>}
                                                 </label>
                                                 <div class="col-lg-6">
                                                     <div class="input-group date" style="width:200px;">
-                                                        <input type="text" class="form-control" placeholder="02/12/2019" name="CamposVm[@index].RespuestaFecha" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+                                                        <input type="text" class="form-control" placeholder="02/12/2019" name="CamposVm[@index].RespuestaDate" data-provide="datepicker" data-date-format="dd/mm/yyyy">
                                                         <div class="input-group-addon">
 
                                                             <span class="glyphicon glyphicon-th"></span>
@@ -105,7 +103,7 @@
                                     </div>
                                 </div>
 
-                            </form>
+                            }
 
 
                         </div>
@@ -114,6 +112,32 @@
             </div>
         </div>
     </div>
+
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/js/CrearActividad.js"></script>
+
+    <script src="../../Content/plugins/common/common.min.js"></script>
+    <script src="../../Content/js/custom.min.js"></script>
+    <script src="../../Content/js/settings.js"></script>
+    <script src="../../Content/js/gleek.js"></script>
+    <script src="../../Content/js/styleSwitcher.js"></script>
+
+    <script src="../../Content/plugins/moment/moment.js"></script>
+    <script src="../../Content/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <!-- Clock Plugin JavaScript -->
+    <script src="../../Content/plugins/clockpicker/dist/jquery-clockpicker.min.js"></script>
+    <!-- Color Picker Plugin JavaScript -->
+    <script src="../../Content/plugins/jquery-asColorPicker-master/libs/jquery-asColor.js"></script>
+    <script src="../../Content/plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js"></script>
+    <script src="../../Content/plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js"></script>
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="../../Content/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <!-- Date range Plugin JavaScript -->
+    <script src="../../Content/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <script src="../../Content/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <script src="../../Content/js/plugins-init/form-pickers-init.js"></script>
+    <script src="../../Content/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
 </body>
 </html>
 

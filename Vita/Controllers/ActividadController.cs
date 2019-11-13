@@ -539,9 +539,10 @@ namespace Vita.Controllers
                     c.UsuarioId = buscarUsuarioLogueado.Id;
                 }
 
-                actividadServicio.GuardarFormularioUsuario(formu);
+               actividadServicio.GuardarFormularioUsuario(formu);
+                
 
-                return View(buscarUsuarioLogueado);
+                return RedirectToAction("ActividadesDelUsuarioInscripto", "Actividad", buscarUsuarioLogueado);
             }
         }
 
