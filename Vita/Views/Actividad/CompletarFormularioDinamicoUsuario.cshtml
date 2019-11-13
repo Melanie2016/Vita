@@ -43,10 +43,10 @@
 
                                 @foreach (var cam in ViewBag.Formulario.Campos)
                                 {
-                                    <input name="Index" value="@ViewBag.Formulario.Campos.Count"/>
+                                   
                                     if (cam.TipoDatoCampoId == 1)
                                     {
-                                        <input name="Index" />
+                                   
                                         <input name="CamposVm.CamposId" value="@cam.Id" hidden />
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="Descripcion">
