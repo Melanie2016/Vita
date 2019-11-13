@@ -119,7 +119,7 @@
 
 <script>
     $(document).ready(function () {
-         var index = 0;
+       
         // indicamos que se ejecuta la funcion a los 5 segundos de haberse
         // cargado la pagina
         setTimeout(clickbutton, 1000);
@@ -127,15 +127,26 @@
         function clickbutton() {
             // simulamos el click del mouse en el boton del formulario
             $("#action-button").click();
-            var cant =   @ViewBag.Formulario.Campos.Count
+         
+            var cant =   @ViewBag.Formulario.Campos.Count;
                 //$("#ContenedorEmpleados").append(
+                  
+          //  var miArray = [];
+          //  miArray.push(@ViewBag.Formulario.Campos);
+                  //if (cam.TipoDatoCampoId == 1)
+                       //{
+                       //    alert("Hola");
+                       //}
+                   
+           
 
-                alert(@ViewBag.Formulario.Campos.Count);
-                         
-            alert("Aqui llega"); //Debugger
-        }
+
+                       alert(@ViewBag.Formulario.Campos.Count);
+
+                       alert("Aqui llega"); //Debugger
+                   }
         $('#action-button').on('click', function () {
-            console.log('action button clicked');
-        });
-    });
+                           console.log('action button clicked');
+                       });
+                   });
 </script>
