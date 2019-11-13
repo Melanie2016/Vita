@@ -33,7 +33,7 @@
                                                     <td>
                                                         @foreach (var res in item.Respuesta)
                                                         {
-                                                            if (res.UsuadioId == ViewBag.UsuarioRespuestaId)
+                                                            if (res.UsuarioId == ViewBag.UsuarioRespuestaId)
                                                             {
                                                                 ViewBag.Respuesta = res.Respuesta1.ToString();
                                                             }
