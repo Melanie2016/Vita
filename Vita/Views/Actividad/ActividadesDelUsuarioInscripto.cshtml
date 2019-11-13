@@ -56,33 +56,73 @@
 
                             @if (i.Compleja == true)
                             {
-
-                        <td style="text-align: center;">
+                                var estado = @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion;
+                            <td style="text-align: center;">
                             <!-- <a href="/Actividad/ListaEstado?estadoId=2&actividadId=@i.Id"> -->
-                            <a href="/Actividad/CompletarFomularioDinamicoUsuario">
-                                <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                    Completar Form
-                                </span>
-                            </a>
-                            <p>
-                            </p>
 
-                            <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion
-                            </span>
+
+                                @if (estado == "Pendiente")
+                                {
+                                    <a href="/Actividad/CompletarFomularioDinamicoUsuario">
+                                        <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                            Completar Form
+                                        </span>
+                                    </a>
+
+                                    <p>
+                                    </p>
+
+
+                                    <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                        @estado
+                                    </span>
+                                }
+                                else
+                                {
+                                    <p>
+                                    </p>
+
+                                    if (estado == "Aprobado")
+                                    {
+                                        <span class="label gradient-3 rounded" style="font-size: 15px !important;">
+                                            @estado
+                                        </span>
+                                    }
+                                    else //rechazado
+                                    {
+                                        <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                            @estado
+                                        </span>
+                                    }
+
+                                }
+
+
+
                         </td>
 
                             }
 
                             else
                             {
-                                    <td style="text-align: center;">
+                                var estado = @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion;
+                        <td style="text-align: center;">
 
-                                        <span class="label gradient-3 rounded" style="font-size: 15px !important;">
-                                            @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion
-                                        </span>
-                                    </td>
-                                    }
+                                @if (estado == "Aprobado")
+                                {
+                                    <span class="label gradient-3 rounded" style="font-size: 15px !important;">
+                                        @estado
+                                    </span>
+                                }
+                                else //rechazado
+                                {
+                                    <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                        @estado
+                                    </span>
+                                }
+
+                        </td>
+                            }
 
 
 
