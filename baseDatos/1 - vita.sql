@@ -3,7 +3,7 @@ GO
 USE Vita
 GO
 create table DiaSemana(
-Id int identity(1,1) primary key,
+Id int identity(0,1) primary key,
 Descripcion varchar(30)); 
 
 create table Provincia(

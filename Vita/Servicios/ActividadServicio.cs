@@ -40,26 +40,19 @@ namespace Vita.Servicios
         }
 
         //va a devolver una lista del viewMoDEL que cree (que solo tiene fecha desde, fecha hasta y descripcion de la actividad)
-        public List<ActividadFechaViewModel> GetAllActividadByUsuario() //lista de activiades , solo la descripcion y fecha, MOMENTANEA
+        public List<ActividadFechaViewModel> GetAllActividadByUsuario(Usuario usuario) //lista de activiades , solo la descripcion y fecha, MOMENTANEA
         {
-            var idUsuario = 1;
             //hago una lista para las actividades de ese usuario
 
+            List<InscripcionFecha> listaActividadDelUsuario = myDbContext.InscripcionFecha.Where(x => x.UsuarioInscriptoActividad.UsuarioId == usuario.Id).ToList();
+            /*
             var listaActividadDelUsuario = (from ua in myDbContext.UsuarioInscriptoActividad
                                             join a in myDbContext.Actividad
                                              on ua.ActividadId equals a.Id
                                             join u in myDbContext.Usuario
                                              on ua.UsuarioId equals idUsuario
-                                            select ua).ToList();
+                                            select ua).ToList();*/
 
-
-            /*
-            var qryPrl = (from prl in _db.prc_PR_Lines
-                          join prlLink in _db.prc_Requirement_PR_Line_Link
-                          on prl.PRLineID equals prlLink.PRLineID
-                          where prlLink.ReqID.Equals(id)
-                          where prl.PRID.Equals(idfield)
-                          select prl).ToList<prc_PR_Lines>();*/
 
             //  List<UsuarioInscriptoActividad> listaActividadDelUsuario = myDbContext.UsuarioInscriptoActividad.Include("Actividad").Where(x => x.UsuarioId.Equals(idUsuario)).ToList();
 
@@ -73,11 +66,14 @@ namespace Vita.Servicios
                 var actividadFechaViewModel = new ActividadFechaViewModel()
                 {
                     //y a cada atributo del viewModel lo lleno con el atributo que necesito de actividad
-                    ActividadId = aux.Actividad.Id,
-                    Titulo = aux.Actividad.Titulo,
-                    Descripcion = aux.Actividad.Titulo,
-                    // FechaDesde = aux.Actividad.FechasActividad,      //  LO COMENTO PORQUE ME DA ERROR VALE
-                    //  FechaHasta = aux.Actividad.FechaHasta
+                    ActividadId = aux.UsuarioInscriptoActividad.Actividad.Id,
+                    Titulo = aux.UsuarioInscriptoActividad.Actividad.Titulo,
+                    Descripcion = aux.UsuarioInscriptoActividad.Actividad.Descripcion,
+                    DiaSemana = aux.FechaActividad.DiaSemanaId != null ? aux.FechaActividad.DiaSemana.Id : -1,
+                    InicioEvento = aux.FechaActividad.InicioEvento.ToString(),
+                    FinEvento = aux.FechaActividad.FinEvento.ToString(),
+                    HoraInicio = aux.FechaActividad.HoraInicio.ToString(),
+                    HoraFin = aux.FechaActividad.HoraFin.ToString()
 
                 };
                 //luego lo agrego a la lista del vieewModel
@@ -474,7 +470,7 @@ namespace Vita.Servicios
                     {
                         FechaActividad fechasActividadDomingo = new FechaActividad
                         {
-                            DiaSemanaId = 7,
+                            DiaSemanaId = 0,
                             HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMismoDia),
                             HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMismoDia),
                             ActividadId = actividadNueva.Id
@@ -489,7 +485,7 @@ namespace Vita.Servicios
                     {
                         FechaActividad fechasActividadDomingo = new FechaActividad
                         {
-                            DiaSemanaId = 7,
+                            DiaSemanaId = 0,
                             HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioDomingo),
                             HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinDomingo),
                             ActividadId = actividadNueva.Id

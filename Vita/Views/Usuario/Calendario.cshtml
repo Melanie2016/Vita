@@ -133,21 +133,36 @@
                     url: "/Usuario/GetEvents",
                     success: function (data) {
                         $.each(data, function (i, v) {
-                            events.push({
-                                eventID: v.ActividadId,
-                                inscripto: false,
-                                title: v.Titulo,
-                                descripcion: v.Descripcion,
-                                start: moment(v.FechaDesde),
-                                end: v.FechaHasta != null ? moment(v.FechaHasta) : null,
-                                color: '#69D49A '
-                            });
+                            if(v.DiaSemana == -1){
+                                events.push({
+                                    eventID: v.ActividadId,
+                                    inscripto: false,
+                                    title: v.Titulo,
+                                    descripcion: v.Descripcion,
+                                    start: '2019-11-24 15:30:00',
+                                    end: '2019-11-24 17:30:00',
+                                    color: '#7D4BBC'
+                                });
+                            }else{
+                                events.push({
+                                    eventID: v.ActividadId,
+                                    inscripto: false,
+                                    title: v.Titulo,
+                                    descripcion: v.Descripcion,
+                                    start: v.HoraInicio,
+                                    end: v.HoraFin,
+                                    dow: [ v.DiaSemana ],
+                                    color: '#69D49A'
+                                });
+                                
+                            }
+
                         })
 
                         GenerateCalender(events);
                     },
                     error: function (error) {
-                        alert('failed');
+                        alert('En este momento no se pueden mostrar sus actividades, perdone las molestias');
                     }
                 })
             }
