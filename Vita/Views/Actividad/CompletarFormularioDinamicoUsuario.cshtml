@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/_LayoutPerfilEntidad.cshtml";
 }
 
-@*@model Vita.ViewModels.FormularioDinamicoViewModel*@
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,62 +40,64 @@
                         <div class="form-validation">
                             <form class="form-valide" id="form" action=/Actividad/GuardarFormularioUsuario method=POST>
                                 <div id="ContenedorEmpleados"></div>
-
-                                @foreach (var cam in ViewBag.Formulario.Campos)
-                                {
-
-                                    if (cam.TipoDatoCampoId == 1)
+                                @{ var index = -1;
+                                    foreach (var cam in ViewBag.Formulario.Campos)
                                     {
+                                        index++;
+                                        if (cam.TipoDatoCampoId == 1)
+                                        {
 
-                                        <input name="CamposVm.CamposId" value="@cam.Id" hidden />
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="Descripcion">
-                                                @cam.Nombre  @if (cam.Obligatorio)
-                                                {<span class="text-danger">*</span>}
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <textarea class="form-control" id="val-suggestions" name="RespuestaDate" rows="5"></textarea>
+                                            <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
+                                            <div class="form-group row">
+                                                <label class="col-lg-4 col-form-label" for="Descripcion">
+                                                    @cam.Nombre  @if (cam.Obligatorio)
+                                                    {<span class="text-danger">*</span>}
+                                                </label>
+                                                <div class="col-lg-6">
+                                                    <textarea class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaTexto" rows="5"></textarea>
+                                                </div>
                                             </div>
-                                        </div>
-                                    }
-                                    if (cam.TipoDatoCampoId == 2)
-                                    {
-                                        <input name="CamposId" value="@cam.Id" hidden />
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="Nombre">
-                                                @cam.Nombre  @if (cam.Obligatorio)
-                                                {<span class="text-danger">*</span>}
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="number" class="form-control" id="val-suggestions" name="RespuestaNumero" />
+                                        }
 
+                                        if (cam.TipoDatoCampoId == 2)
+                                        {
+                                            <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
+                                            <div class="form-group row">
+                                                <label class="col-lg-4 col-form-label" for="Nombre">
+                                                    @cam.Nombre  @if (cam.Obligatorio)
+                                                    {<span class="text-danger">*</span>}
+                                                </label>
+                                                <div class="col-lg-6">
+                                                    <input type="number" class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaNumero" />
+
+                                                </div>
                                             </div>
-                                        </div>
-                                    }
-                                    if (cam.TipoDatoCampoId == 3)
-                                    {
-                                        <input name="CamposId" value="@cam.Id" hidden />
-                                        <div class="form-group row">
-                                            <!--Fecha Hasta-->
-                                            <label class="col-lg-4 col-form-label" for="RangoFecha">
-                                                @cam.Nombre  @if (cam.Obligatorio)
-                                                {<span class="text-danger">*</span>}
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <div class="input-group date" style="width:200px;">
-                                                    <input type="text" class="form-control" placeholder="02/12/2019" name="RespuestaTexto" data-provide="datepicker" data-date-format="dd/mm/yyyy">
-                                                    <div class="input-group-addon">
-                                                        <span class="glyphicon glyphicon-th"></span>
+                                        }
+                                        if (cam.TipoDatoCampoId == 3)
+                                        {
+                                            <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
+                                            <div class="form-group row">
+                                                <!--Fecha Hasta-->
+                                                <label class="col-lg-4 col-form-label" for="RangoFecha">
+                                                    @cam.Nombre  @if (cam.Obligatorio)
+                                                    {<span class="text-danger">*</span>}
+                                                </label>
+                                                <div class="col-lg-6">
+                                                    <div class="input-group date" style="width:200px;">
+                                                        <input type="text" class="form-control" placeholder="02/12/2019" name="CamposVm[@index].RespuestaFecha" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+                                                        <div class="input-group-addon">
+
+                                                            <span class="glyphicon glyphicon-th"></span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        }
                                     }
+
+
+
                                 }
-
-
-
-
 
                                 <div class="form-group row" id="botonEnviar">
                                     <div class="col-lg-8 ml-auto">
@@ -115,38 +116,4 @@
     </div>
 </body>
 </html>
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 
-<script>
-    $(document).ready(function () {
-       
-        // indicamos que se ejecuta la funcion a los 5 segundos de haberse
-        // cargado la pagina
-        setTimeout(clickbutton, 1000);
-
-        function clickbutton() {
-            // simulamos el click del mouse en el boton del formulario
-            $("#action-button").click();
-         
-            var cant =   @ViewBag.Formulario.Campos.Count;
-                //$("#ContenedorEmpleados").append(
-                  
-          //  var miArray = [];
-          //  miArray.push(@ViewBag.Formulario.Campos);
-                  //if (cam.TipoDatoCampoId == 1)
-                       //{
-                       //    alert("Hola");
-                       //}
-                   
-           
-
-
-                       alert(@ViewBag.Formulario.Campos.Count);
-
-                       alert("Aqui llega"); //Debugger
-                   }
-        $('#action-button').on('click', function () {
-                           console.log('action button clicked');
-                       });
-                   });
-</script>

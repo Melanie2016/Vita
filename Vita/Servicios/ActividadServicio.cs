@@ -199,11 +199,11 @@ namespace Vita.Servicios
             };
             myDbContext.FormularioDinamico.Add(formularioDinamicoNuevo);
             myDbContext.SaveChanges();
-        
+
 
             foreach (var ca in formViewModel.CamposVm)
             {
-               
+
                 Campos camposNuevo = new Campos
                 {
                     Nombre = ca.Nombre,
@@ -501,7 +501,7 @@ namespace Vita.Servicios
 
                 }
             }
-            
+
         }
 
         public void CrearSegmentoActividad(int actividadId, int[] selectedSegmento)
@@ -711,14 +711,14 @@ namespace Vita.Servicios
         public List<TipoDatoCampo> GetAllTipoDatoCampo()
         {
             return myDbContext.TipoDatoCampo.OrderBy(x => x.Descripcion).ToList();
-        } 
+        }
 
-        public bool BuscarUsuarioInscriptoEnActividad (int usuarioId, int actividadId)
+        public bool BuscarUsuarioInscriptoEnActividad(int usuarioId, int actividadId)
         {
             var usuarioInscriptoActividad = myDbContext.UsuarioInscriptoActividad.Where(x => x.ActividadId == actividadId && x.UsuarioId == usuarioId).FirstOrDefault();
-           bool inscripto = false; 
+            bool inscripto = false;
 
-           if (usuarioInscriptoActividad != null)
+            if (usuarioInscriptoActividad != null)
             {
                 inscripto = true;
             }
@@ -729,8 +729,8 @@ namespace Vita.Servicios
 
         public void CambiarEstadoUsuarioInscripto(bool estado, int usuarioId, int actividadId)
         {
-            var usuarioIns=myDbContext.UsuarioInscriptoActividad.Where(x => x.UsuarioId == usuarioId && x.ActividadId == actividadId).FirstOrDefault();
-             if(estado== true)
+            var usuarioIns = myDbContext.UsuarioInscriptoActividad.Where(x => x.UsuarioId == usuarioId && x.ActividadId == actividadId).FirstOrDefault();
+            if (estado == true)
             {
                 usuarioIns.EstadoId = 1;//aceptado
             }
@@ -750,25 +750,30 @@ namespace Vita.Servicios
         }
         public void GuardarFormularioUsuario(FormularioLlenoViewModel formu)
         {
-            int numero = 10;
-            Respuesta respuestaNueva = new Respuesta();
-            //respuestaNueva.CamposId = formu.CamposId;
-            //respuestaNueva.UsuarioId = formu.UsuarioId;
-            //if(formu.RespuestaTexto!= null)
-            //{
-            //    respuestaNueva.Respuesta1 = formu.RespuestaTexto;
-            //}
-            //if(formu.RespuestaTexto ==null && formu.RespuestaNumero.Equals(numero.GetType()))
-            //{
-            
-            //    respuestaNueva.Respuesta1 = formu.RespuestaNumero.ToString();
-            //}if(formu.RespuestaTexto == null && (!formu.RespuestaNumero.Equals(numero.GetType())))
-            //{
-            //    respuestaNueva.Respuesta1 = formu.RespuestaDate.ToString();
-            //}
-            respuestaNueva.CreatedAt = DateTime.Now;
-            myDbContext.Respuesta.Add(respuestaNueva);
-            myDbContext.SaveChanges();
+            DateTime fecha = new DateTime(978361200);//esto es fecha null
+           
+            foreach (var f in formu.CamposVm)
+            {
+                Respuesta respuestaNueva = new Respuesta();
+                respuestaNueva.CamposId = f.CamposId;
+                respuestaNueva.UsuarioId = f.UsuarioId;
+                if (f.RespuestaTexto != null)
+                {
+                    respuestaNueva.Respuesta1 = f.RespuestaTexto;
+                }
+
+                if (f.RespuestaTexto == null && f.RespuestaDate.Date != fecha.Date)
+                {
+                    respuestaNueva.Respuesta1 = f.RespuestaDate.ToString();
+                }
+                if(f.RespuestaTexto == null && f.RespuestaDate.Date == fecha.Date)
+                {
+                    respuestaNueva.Respuesta1 = f.RespuestaNumero.ToString();
+                }
+                respuestaNueva.CreatedAt = DateTime.Now;
+                myDbContext.Respuesta.Add(respuestaNueva);
+                myDbContext.SaveChanges();
+            }
         }
     }
 }
