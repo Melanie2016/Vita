@@ -39,8 +39,9 @@
                         <h5>@ViewBag.Formulario.Descripcion</h5>
                     
                         <div class="form-validation">
-                            <form class="form-valide" action=/Actividad/GuardarFormularioUsuario method=POST>
+                            <form class="form-valide" id="form" action=/Actividad/GuardarFormularioUsuario method=POST>
 
+                                <input type="button" checked hidden id="botonPrecionado" />
                                 @foreach (var cam in ViewBag.Formulario.Campos)
                                 {
                                     <input name="Index" value="@ViewBag.Formulario.Campos.Count"/>
@@ -114,4 +115,20 @@
         </div>
     </body>
 </html>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+          alert("Entro1");
+        var index = 0;
 
+
+
+        $("#botonPrecionado").click(function () {
+            alert("Entro");
+        });
+
+          
+        
+
+    });
+</script>
