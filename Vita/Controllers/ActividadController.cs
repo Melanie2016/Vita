@@ -522,5 +522,34 @@ namespace Vita.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult RespuestasFormularioDinamico(int actividadId, int usuarioRespuestaId)
+        {
+            //obtengo usuario logueado
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
+                var actividad = actividadServicio.GetActividad(actividadId);
+                ViewBag.UsuarioRespuestaId = usuarioRespuestaId;
+
+                foreach (var item in actividad.FormularioDinamico)
+                {
+                    if(item.ActividadId == actividadId)
+                    {
+                        ViewBag.Campos = item.Campos; //consignas
+                        ViewBag.IdFormularioDinamico = item.Id; //id formulario dinamico
+                        ViewBag.NombreFormulario= item.Titulo; //titulo
+                        ViewBag.DescripcionFormulario = item.Descripcion; //descripcion
+                    }
+                }
+
+                return View(buscarUsuarioLogueado);
+            }
+        }
+
     }
 }
