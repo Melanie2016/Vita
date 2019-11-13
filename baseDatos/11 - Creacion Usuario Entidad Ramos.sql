@@ -35,15 +35,8 @@ INSERT INTO [dbo].[Usuario]
            ,'www.ramosmejia.com/'
            ,'La actividad física saludable no se detiene en la Dirección de Deporte y Recreación Ramos Mejia'
            ,2
-           ,null
+           ,'~/Content/images/ramos-mejia.jpg'
            ,'2019-11-08'
            ,null
            ,null)
 GO
-
-Update Usuario set Foto = 
-(SELECT BulkColumn 
-FROM Openrowset( Bulk 'C:\Users\A307508\Source\Repos\Vita\Vita\Content\images\ramos-mejia.jpg', Single_Blob) as img)
-/*FROM Openrowset( Bulk 'C:\Proyecto final\tp final posta\Vita\Vita\Content\images\ramos-mejia.jpg', Single_Blob) as img) Para Angie*/
-where Id=2 /*UsuarioId*/
-

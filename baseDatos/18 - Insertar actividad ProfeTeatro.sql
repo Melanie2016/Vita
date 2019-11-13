@@ -46,18 +46,12 @@ Para el armado del taller me baso en mi experiencia como actriz y docente. A lo 
            ,22
            ,570
            ,5 /*UsuarioId*/
-           ,NULL
+           ,'~/Content/images/teatro.jpg'
            ,'2019-11-11'
            ,NULL
            ,NULL
            ,1) /*Compleja*/
 GO
-
-Update Actividad set Foto = 
-(SELECT BulkColumn 
-FROM Openrowset( Bulk 'C:\Users\A307508\Source\Repos\Vita\Vita\Content\images\teatro.jpg', Single_Blob) as img)
-where Id=7 /*ActividadId*/
-
 
 /*DOMICILIO*/
 INSERT INTO [dbo].[Domicilio]

@@ -28,18 +28,12 @@ INSERT INTO [dbo].[Actividad]
            ,9
            ,896 /*IdLocalidad Tigre*/
            ,6 /*UsuarioId*/
-           ,NULL
+           ,'~/Content/images/truco.jpg'
            ,'2019-11-11'
            ,NULL
            ,NULL
            ,1) /*Compleja*/
 GO
-
-/*FOTO*/
-Update Actividad set Foto = 
-(SELECT BulkColumn 
-FROM Openrowset( Bulk 'C:\Users\A307508\Source\Repos\Vita\Vita\Content\images\truco.jpg', Single_Blob) as img)
-where Id=8 /*ActividadId*/
 
 
 /*DOMICILIO*/

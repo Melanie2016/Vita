@@ -35,15 +35,8 @@ INSERT INTO [dbo].[Usuario]
            ,'www.buenosairesrowing.com.ar'
            ,'El Buenos Aires Rowing es un club de familias o de personas solas a las que les guste la vida sana, que amen la naturaleza y cultiven la amistad en un marco de tradición y mesura.'
            ,2
-           ,null
+           ,'~/Content/images/club.jpg'
            ,'2019-11-11'
            ,null
            ,null)
 GO
-
-Update Usuario set Foto = 
-(SELECT BulkColumn 
-FROM Openrowset( Bulk 'C:\Users\A307508\Source\Repos\Vita\Vita\Content\images\club.jpg', Single_Blob) as img)
-/*FROM Openrowset( Bulk 'C:\Proyecto final\tp final posta\Vita\Vita\Content\images\club.jpg', Single_Blob) as img) Para Angie*/
-where Id=6 /*UsuarioId*/
-

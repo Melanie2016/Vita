@@ -35,16 +35,9 @@ INSERT INTO [dbo].[Usuario]
            ,null
            ,'Profesora con más de 10 años de experiencia dando clases de arte y dibujo para todas las edades'
            ,2
-           ,null
+           ,'~/Content/images/person_5.jpg'
            ,'2019-11-08'
            ,null
            ,null)
 GO
-
-/*FOTO*/
-Update Usuario set Foto = 
-(SELECT BulkColumn 
-FROM Openrowset( Bulk 'C:\Users\A307508\Source\Repos\Vita\Vita\Content\images\person_5.jpg', Single_Blob) as img)
-/*FROM Openrowset( Bulk 'C:\Proyecto final\tp final posta\Vita\Vita\Content\images\person_5.jpg', Single_Blob) as img) Para Angie*/
-where Id=3 /*UsuarioId*/
 

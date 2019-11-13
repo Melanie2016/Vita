@@ -314,11 +314,13 @@ namespace Vita.Controllers
             }
         }
 
+        [HttpGet]
         public JsonResult GetEvents()
-        {
-            
+        {            
             {
-                var events = actividadServicio.GetAllActividadByUsuario();
+
+                var usuario = Session["Usuario"] as Usuario;
+                var events = actividadServicio.GetAllActividadByUsuario(usuario);
                 return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }
         }

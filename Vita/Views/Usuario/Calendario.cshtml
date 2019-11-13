@@ -127,27 +127,42 @@
             var selectedEvent = null;
             FetchEventAndRenderCalendar();
             function FetchEventAndRenderCalendar() {
+                var dateFormat = "YYYY-M-D H:m"; //<-------- This part will get rid of the warning.
+                var region = 'Australia/Sydney';
                 events = [];
                 $.ajax({
                     type: "GET",
                     url: "/Usuario/GetEvents",
                     success: function (data) {
                         $.each(data, function (i, v) {
-                            events.push({
-                                eventID: v.ActividadId,
-                                inscripto: false,
-                                title: v.Titulo,
-                                descripcion: v.Descripcion,
-                                start: moment(v.FechaDesde),
-                                end: v.FechaHasta != null ? moment(v.FechaHasta) : null,
-                                color: '#69D49A '
-                            });
+                            if(v.DiaSemana != -1){
+                                events.push({
+                                    eventID: v.ActividadId,
+                                    inscripto: false,
+                                    title: v.Titulo,
+                                    descripcion: v.Descripcion,
+                                    start: v.HoraInicio,
+                                    end: v.HoraFin,
+                                    dow: [ v.DiaSemana ],
+                                    color: '#9DF3C4'
+                                });
+                            }else{
+                                events.push({
+                                    eventID: v.ActividadId,
+                                    inscripto: false,
+                                    title: v.Titulo,
+                                    descripcion: v.Descripcion,
+                                    start: moment(v.InicioEvento),
+                                    end: v.FinEvento != null ? moment(v.FinEvento) : null,
+                                    color: '#CFB1DB'
+                                });
+                            }
                         })
 
                         GenerateCalender(events);
                     },
                     error: function (error) {
-                        alert('failed');
+                        alert('En este momento no se pueden mostrar sus actividades, perdone las molestias');
                     }
                 })
             }
@@ -156,7 +171,7 @@
                 $('#calender').fullCalendar('destroy');
                 $('#calender').fullCalendar({
                     locale: 'es',
-                    contentHeight: 400,
+                    contentHeight: 500,
                     defaultDate: new Date(),
                     timeFormat: 'h(:mm)a',
                     header: {

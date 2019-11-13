@@ -35,15 +35,9 @@ INSERT INTO [dbo].[Usuario]
            ,'www.tourbuenosaires.com/'
            ,'Ofrecemos visitas guiadas por distintos lugares de la ciudad de Bs As. Las posibilidades incluyen tanto a los atractivos tradicionales a los que acostumbramos a llamar “clásicos” como así también a los rincones menos transitados de la ciudad, aquellos que guardan un particular encanto que los hace únicos. Sencillamente, ¡elegí el que más te guste y descubrí Buenos Aires!'
            ,2
-           ,null
+           ,'~/Content/images/bsas.jpg'
            ,'2019-11-11'
            ,null
            ,null)
 GO
-
-Update Usuario set Foto = 
-(SELECT BulkColumn 
-FROM Openrowset( Bulk 'C:\Users\A307508\Source\Repos\Vita\Vita\Content\images\bsas.jpg', Single_Blob) as img)
-/*FROM Openrowset( Bulk 'C:\Proyecto final\tp final posta\Vita\Vita\Content\images\gym_llavallol.jpg', Single_Blob) as img) Para Angie*/
-where Id=4 /*UsuarioId*/
 
