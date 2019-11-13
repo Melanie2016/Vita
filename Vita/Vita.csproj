@@ -249,7 +249,9 @@
     <Compile Include="ViewModels\ActividadViewModel.cs" />
     <Compile Include="ViewModels\CampoViewModel.cs" />
     <Compile Include="ViewModels\FormularioDinamicoViewModel.cs" />
+    <Compile Include="ViewModels\FormularioLlenoViewModel.cs" />
     <Compile Include="ViewModels\ListaViewModel.cs" />
+    <Compile Include="ViewModels\RespuestaViewModel.cs" />
     <Compile Include="ViewModels\UsuarioEstado.cs" />
     <Compile Include="VitaEntities.Context.cs">
       <AutoGen>True</AutoGen>

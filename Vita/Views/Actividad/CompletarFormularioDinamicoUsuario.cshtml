@@ -39,37 +39,42 @@
                         <h5>@ViewBag.Formulario.Descripcion</h5>
                     
                         <div class="form-validation">
-                            <form class="form-valide" action=/Actividad/CreacionFormularioDinamico method=POST>
+                            <form class="form-valide" action=/Actividad/GuardarFormularioUsuario method=POST>
 
                                 @foreach (var cam in ViewBag.Formulario.Campos)
                                 {
+                                    <input name="Index" value="@ViewBag.Formulario.Campos.Count"/>
                                     if (cam.TipoDatoCampoId == 1)
                                     {
-
+                                        <input name="Index" />
+                                        <input name="CamposVm.CamposId" value="@cam.Id" hidden />
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="Descripcion">
-                                                @cam.Nombre  @if (cam.Obligatorio) {<span class="text-danger">*</span> } 
+                                                @cam.Nombre  @if (cam.Obligatorio)
+                                                {<span class="text-danger">*</span>}
                                             </label>
                                             <div class="col-lg-6">
-                                                <textarea class="form-control" id="val-suggestions" name="Respuesta" rows="5"></textarea>
+                                                <textarea class="form-control" id="val-suggestions" name="RespuestaDate" rows="5"></textarea>
                                             </div>
                                         </div>
                                     }
                                     if (cam.TipoDatoCampoId == 2)
                                     {
+                                        <input name="CamposId" value="@cam.Id" hidden />
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="Nombre">
                                                 @cam.Nombre  @if (cam.Obligatorio)
                                                 {<span class="text-danger">*</span>}
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="number" class="form-control" id="val-suggestions" name="Respuesta" />
+                                                <input type="number" class="form-control" id="val-suggestions" name="RespuestaNumero" />
 
                                             </div>
                                         </div>
                                     }
                                     if (cam.TipoDatoCampoId == 3)
                                     {
+                                        <input name="CamposId" value="@cam.Id" hidden />
                                         <div class="form-group row">
                                             <!--Fecha Hasta-->
                                             <label class="col-lg-4 col-form-label" for="RangoFecha">
@@ -78,7 +83,7 @@
                                             </label>
                                             <div class="col-lg-6">
                                                 <div class="input-group date" style="width:200px;">
-                                                    <input type="text" class="form-control" placeholder="02/12/2019" name="FinEvento" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+                                                    <input type="text" class="form-control" placeholder="02/12/2019" name="RespuestaTexto" data-provide="datepicker" data-date-format="dd/mm/yyyy">
                                                     <div class="input-group-addon">
                                                         <span class="glyphicon glyphicon-th"></span>
                                                     </div>
@@ -90,14 +95,14 @@
 
 
 
-                                
+
 
                                 <div class="form-group row" id="botonEnviar">
                                     <div class="col-lg-8 ml-auto">
                                         <button type="submit" class="btn btn-primary">Guardar respuestas</button>
                                     </div>
                                 </div>
-                
+
                             </form>
 
 
@@ -109,3 +114,4 @@
         </div>
     </body>
 </html>
+

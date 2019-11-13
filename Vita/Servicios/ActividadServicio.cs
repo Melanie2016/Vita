@@ -748,5 +748,27 @@ namespace Vita.Servicios
             formu.Campos = campos;
             return formu;
         }
+        public void GuardarFormularioUsuario(FormularioLlenoViewModel formu)
+        {
+            int numero = 10;
+            Respuesta respuestaNueva = new Respuesta();
+            //respuestaNueva.CamposId = formu.CamposId;
+            //respuestaNueva.UsuarioId = formu.UsuarioId;
+            //if(formu.RespuestaTexto!= null)
+            //{
+            //    respuestaNueva.Respuesta1 = formu.RespuestaTexto;
+            //}
+            //if(formu.RespuestaTexto ==null && formu.RespuestaNumero.Equals(numero.GetType()))
+            //{
+            
+            //    respuestaNueva.Respuesta1 = formu.RespuestaNumero.ToString();
+            //}if(formu.RespuestaTexto == null && (!formu.RespuestaNumero.Equals(numero.GetType())))
+            //{
+            //    respuestaNueva.Respuesta1 = formu.RespuestaDate.ToString();
+            //}
+            respuestaNueva.CreatedAt = DateTime.Now;
+            myDbContext.Respuesta.Add(respuestaNueva);
+            myDbContext.SaveChanges();
+        }
     }
 }

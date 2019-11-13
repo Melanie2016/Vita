@@ -68,7 +68,7 @@ namespace Vita.Controllers
             }
             else
             {
-                
+
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 actividadServicio.CrearActividad(actividad, buscarUsuarioLogueado, selectedSegmento);
                 var activdadCreada = actividadServicio.GetUltimaActividadPorUsuarioCreadaId(buscarUsuarioLogueado.Id);
@@ -209,13 +209,13 @@ namespace Vita.Controllers
 
                 if (inscribirse == "true")
                 {
-                    if(FechaActividadId == null) //No eligió ningún dia y horario
+                    if (FechaActividadId == null) //No eligió ningún dia y horario
                     {
                         ViewBag.ElegirDia = true;
                     }
                     else
                     {
-                        var estadoString= ""; //aca se guarda el estado
+                        var estadoString = ""; //aca se guarda el estado
                         if (actividad.Compleja == true)
                         {
                             estadoString = "2"; //pendiente
@@ -229,7 +229,7 @@ namespace Vita.Controllers
 
                         if (resultado == 1) //quedó inscripto en la actividad
                         {
-                            var mensaje="";
+                            var mensaje = "";
                             var body = "";
                             var tituloActividad = actividad.Titulo;
                             var celular = "whatsapp:+549" + buscarUsuarioLogueado.Celular;
@@ -245,28 +245,28 @@ namespace Vita.Controllers
                                 mensaje = "Su inscripción ha sido exitosa. Puede ir a su perfil para ver sus actividades";
                                 body = "Tu inscripción a la actividad " + tituloActividad + " ha sido exitosa! "; //Mensaje whatsApp
                             }
-                               
+
                             ViewBag.Mensaje = mensaje;
 
                             //Notificaciones de whatsap
-                             /*var accountSid = "";
-                             var authToken = "";
+                            /*var accountSid = "";
+                            var authToken = "";
 
-                             TwilioClient.Init(accountSid, authToken);
-                             var message = MessageResource.Create(
-                                 from: new Twilio.Types.PhoneNumber("whatsapp:+14155238886"),
-                                 body: body,
-                                 to: new Twilio.Types.PhoneNumber(celular)
-                             );
+                            TwilioClient.Init(accountSid, authToken);
+                            var message = MessageResource.Create(
+                                from: new Twilio.Types.PhoneNumber("whatsapp:+14155238886"),
+                                body: body,
+                                to: new Twilio.Types.PhoneNumber(celular)
+                            );
 
 
-                             var respuestaApi = message.Sid;*/
+                            var respuestaApi = message.Sid;*/
                         }
                         else
                         {
                             ViewBag.Mensaje = "Hubo un error al realizar la inscripción";
                         }
-                    } 
+                    }
                 }
 
                 return View(buscarUsuarioLogueado);
@@ -359,7 +359,7 @@ namespace Vita.Controllers
 
         }
 
-    
+
 
         [HttpGet]
         [Route("obtenerSubcategorias{idCategoria}")]
@@ -371,7 +371,7 @@ namespace Vita.Controllers
 
             foreach (var item in subCategorias)
             {
-                listaSubcategorias.Insert(i, new ListaViewModel() { Id = item.Id, Descripcion = item.Descripcion});
+                listaSubcategorias.Insert(i, new ListaViewModel() { Id = item.Id, Descripcion = item.Descripcion });
                 i++;
             }
 
@@ -472,7 +472,7 @@ namespace Vita.Controllers
 
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 var activdadCreada = actividadServicio.GetUltimaActividadPorUsuarioCreadaId(buscarUsuarioLogueado.Id);
-                actividadServicio.CrearFormularioDinamico(formularioDinamicoViewModel, activdadCreada);              
+                actividadServicio.CrearFormularioDinamico(formularioDinamicoViewModel, activdadCreada);
                 return RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
 
 
@@ -496,15 +496,15 @@ namespace Vita.Controllers
         [HttpPost]
         public ActionResult AprobarUsuario(UsuarioEstado usuarioEstado)
         {
-       
-       //   foreach(var us in usuarioEstado.Usuarios)
-       //   {
-                actividadServicio.CambiarEstadoUsuarioInscripto(usuarioEstado.Estado, usuarioEstado.UsuarioId,
-                    usuarioEstado.ActividadId);
 
-        //  }
+            //   foreach(var us in usuarioEstado.Usuarios)
+            //   {
+            actividadServicio.CambiarEstadoUsuarioInscripto(usuarioEstado.Estado, usuarioEstado.UsuarioId,
+                usuarioEstado.ActividadId);
+
+            //  }
             return RedirectToAction("ListaActividades", "Actividad");
-         // return RedirectToActionPermanent("ListaEstado", "Actividad",usuarioEstado.EstadoAnterior, usuarioEstado.ActividadId);
+            // return RedirectToActionPermanent("ListaEstado", "Actividad",usuarioEstado.EstadoAnterior, usuarioEstado.ActividadId);
         }
 
         [HttpGet]
@@ -519,10 +519,32 @@ namespace Vita.Controllers
             {
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 ViewBag.Formulario = actividadServicio.GetFormularioDinamicoByActividadId(actividadId);
-                
+
                 return View(buscarUsuarioLogueado);
             }
         }
+        [HttpPost]
+        public ActionResult GuardarFormularioUsuario(FormularioLlenoViewModel formu)
+        {
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                var user = new Usuario();
+                return View(user);
+            }
+            else
+            {
+                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                foreach (var c in formu.CamposVm)
+                {
+                    c.UsuarioId= buscarUsuarioLogueado.Id;
+                }
+           
+                actividadServicio.GuardarFormularioUsuario(formu);
 
+                return View(buscarUsuarioLogueado);
+            }
+
+
+        }
     }
 }
