@@ -473,7 +473,7 @@ namespace Vita.Servicios
                     {
                         FechaActividad fechasActividadDomingo = new FechaActividad
                         {
-                            DiaSemanaId = 7,
+                            DiaSemanaId = 0,
                             HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMismoDia),
                             HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMismoDia),
                             ActividadId = actividadNueva.Id
@@ -488,7 +488,7 @@ namespace Vita.Servicios
                     {
                         FechaActividad fechasActividadDomingo = new FechaActividad
                         {
-                            DiaSemanaId = 7,
+                            DiaSemanaId = 0,
                             HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioDomingo),
                             HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinDomingo),
                             ActividadId = actividadNueva.Id

@@ -28,19 +28,13 @@ INSERT INTO [dbo].[Actividad]
            ,3
            ,552 /*LocalidadId*/
            ,1 /*UsuarioId Gimnasio*/
-           ,NULL
+           ,'~/Content/images/Zumba-adultos.jpg'
            ,'2019-11-08'
            ,NULL
            ,NULL
            ,1) /*Compleja*/
 GO
 
-/*FOTO*/
-Update Actividad set Foto = 
-(SELECT BulkColumn 
-/*FROM Openrowset( Bulk 'C:\Users\A307508\Source\Repos\Vita\Vita\Content\images\Zumba-adultos.jpg', Single_Blob) as img)*/ /*PARA VALE*/
-FROM Openrowset( Bulk 'C:\Proyecto final\tp final posta\Vita\Vita\Content\images\Zumba-adultos.jpg', Single_Blob) as img) /*PARA ANGIE*/
-where Id=2 /*ActividadId*/
 
 /*DOMICILIO*/
 INSERT INTO [dbo].[Domicilio]
