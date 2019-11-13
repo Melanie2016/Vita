@@ -144,7 +144,7 @@
                                     start: v.HoraInicio,
                                     end: v.HoraFin,
                                     dow: [ v.DiaSemana ],
-                                    color: '#69D49A'
+                                    color: '#9DF3C4'
                                 });
                             }else{
                                 events.push({
@@ -154,12 +154,9 @@
                                     descripcion: v.Descripcion,
                                     start: moment(v.InicioEvento),
                                     end: v.FinEvento != null ? moment(v.FinEvento) : null,
-                                    color: '#7D4BBC'
+                                    color: '#CFB1DB'
                                 });
-
-                                
                             }
-
                         })
 
                         GenerateCalender(events);
@@ -174,7 +171,7 @@
                 $('#calender').fullCalendar('destroy');
                 $('#calender').fullCalendar({
                     locale: 'es',
-                    contentHeight: 400,
+                    contentHeight: 500,
                     defaultDate: new Date(),
                     timeFormat: 'h(:mm)a',
                     header: {
