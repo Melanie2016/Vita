@@ -237,7 +237,7 @@ namespace Vita.Controllers
                             if (actividad.Compleja == true) //Su inscripción queda pendiente
                             {
                                 ViewBag.Compleja = true; //debe completar el formulario
-                                mensaje = "Su inscripción está en estado PENDIENTE. Debe completar el formulario con los requisitos solicitados para poder realizar esta actividad. El mismo lo podrá ver en su perfil en la sección MIS ACTIVIDADES. Se le informará cuando su inscripción este aprobada.";
+                                mensaje = "Su inscripción está en estado PENDIENTE. Debe completar el formulario con los requisitos solicitados para poder realizar esta actividad. El mismo lo podrá ver en su perfil en la sección MIS ACTIVIDADES INSCRIPTAS. Se le informará cuando su inscripción este aprobada.";
                                 body = "Tu inscripción a la actividad " + tituloActividad + " está en estado pendiente de aprobación. Te avisaremos cuando esté aprobada. Gracias! "; //Mensaje whatsApp
                             }
                             else //Queda aprobado de una
@@ -294,7 +294,7 @@ namespace Vita.Controllers
 
 
         [HttpPost]
-        public ActionResult Actividades(string textoIngresado, int idCategoria, int idSubcategoria, int idSegmento, int idProvincia, int idDepartamento, int idLocalidad)
+        public ActionResult Actividades(string textoIngresado)
         {
             var lista = actividadServicio.GetBusquedaAvanzada(textoIngresado);
             ViewBag.Lista = lista;
@@ -442,7 +442,7 @@ namespace Vita.Controllers
                 buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
                 ViewBag.ListaUsuario = actividadServicio.GetUsuariosByEstadoId(estadoId, actividadId);
                 ViewBag.Actividad = actividadServicio.GetActividad(actividadId);
-
+                ViewBag.Estado = estadoId.ToString();
                 return View(buscarUsuarioLogueado);
             }
         }
