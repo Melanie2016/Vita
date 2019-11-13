@@ -36,18 +36,12 @@ En seguida, circularemos por el sofisticado barrio de La Recoleta, una zona de e
            ,25
            ,5467 /*Recoleta*/
            ,4 /*UsuarioId*/
-           ,NULL
+           ,'~/Content/images/casa-rosada.jpg'
            ,'2019-11-11'
            ,NULL
            ,NULL
            ,1)/*Compleja*/
 GO
-
-Update Actividad set Foto = 
-(SELECT BulkColumn 
-FROM Openrowset( Bulk 'C:\Users\A307508\Source\Repos\Vita\Vita\Content\images\casa-rosada.jpg', Single_Blob) as img)
-where Id=6 /*ActividadId*/
-
 
 /*FECHAS*/
 INSERT INTO [dbo].[FechaActividad]

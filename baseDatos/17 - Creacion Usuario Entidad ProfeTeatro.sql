@@ -35,15 +35,9 @@ INSERT INTO [dbo].[Usuario]
            ,'www.tallerdeteatro.com.ar'
            ,'Cada maestro tiene su enfoque personal respecto del trabajo con el futuro actor. No hay una "única manera" de guiar al otro en el camino de la actuación, por eso quizás lo más importante sea lo que cada alumno "trae a la clase" y la fuerza de su deseo. Mi objetivo es lograr que cada cual se encuentre con sus potencialidades y logre crear, con ellas, en la escena. Para esto confío en cuatro aspectos que estimulo y trabajo en mis clases: sabiduría,capacidad,sensibilidad y fuerza de la acción'
            ,2
-           ,null
+           ,'~/Content/images/carla.jpg'
            ,'2019-11-11'
            ,null
            ,null)
 GO
-
-Update Usuario set Foto = 
-(SELECT BulkColumn 
-FROM Openrowset( Bulk 'C:\Users\A307508\Source\Repos\Vita\Vita\Content\images\carla.jpg', Single_Blob) as img)
-/*FROM Openrowset( Bulk 'C:\Proyecto final\tp final posta\Vita\Vita\Content\images\gym_llavallol.jpg', Single_Blob) as img) Para Angie*/
-where Id=5 /*UsuarioId*/
 
