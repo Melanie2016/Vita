@@ -127,23 +127,15 @@
             var selectedEvent = null;
             FetchEventAndRenderCalendar();
             function FetchEventAndRenderCalendar() {
+                var dateFormat = "YYYY-M-D H:m"; //<-------- This part will get rid of the warning.
+                var region = 'Australia/Sydney';
                 events = [];
                 $.ajax({
                     type: "GET",
                     url: "/Usuario/GetEvents",
                     success: function (data) {
                         $.each(data, function (i, v) {
-                            if(v.DiaSemana == -1){
-                                events.push({
-                                    eventID: v.ActividadId,
-                                    inscripto: false,
-                                    title: v.Titulo,
-                                    descripcion: v.Descripcion,
-                                    start: '2019-11-24 15:30:00',
-                                    end: '2019-11-24 17:30:00',
-                                    color: '#7D4BBC'
-                                });
-                            }else{
+                            if(v.DiaSemana != -1){
                                 events.push({
                                     eventID: v.ActividadId,
                                     inscripto: false,
@@ -154,6 +146,17 @@
                                     dow: [ v.DiaSemana ],
                                     color: '#69D49A'
                                 });
+                            }else{
+                                events.push({
+                                    eventID: v.ActividadId,
+                                    inscripto: false,
+                                    title: v.Titulo,
+                                    descripcion: v.Descripcion,
+                                    start: moment(v.InicioEvento),
+                                    end: v.FinEvento != null ? moment(v.FinEvento) : null,
+                                    color: '#7D4BBC'
+                                });
+
                                 
                             }
 
