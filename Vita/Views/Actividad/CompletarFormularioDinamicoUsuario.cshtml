@@ -37,17 +37,17 @@
 
                         <h5>@ViewBag.Formulario.Titulo</h5>
                         <h5>@ViewBag.Formulario.Descripcion</h5>
-                    
+
                         <div class="form-validation">
                             <form class="form-valide" id="form" action=/Actividad/GuardarFormularioUsuario method=POST>
+                                <div id="ContenedorEmpleados"></div>
 
-                                <input type="button" checked hidden id="botonPrecionado" />
                                 @foreach (var cam in ViewBag.Formulario.Campos)
                                 {
-                                   
+
                                     if (cam.TipoDatoCampoId == 1)
                                     {
-                                   
+
                                         <input name="CamposVm.CamposId" value="@cam.Id" hidden />
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="Descripcion">
@@ -107,28 +107,35 @@
                             </form>
 
 
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
 <script>
     $(document).ready(function () {
-          alert("Entro1");
-        var index = 0;
+         var index = 0;
+        // indicamos que se ejecuta la funcion a los 5 segundos de haberse
+        // cargado la pagina
+        setTimeout(clickbutton, 1000);
 
+        function clickbutton() {
+            // simulamos el click del mouse en el boton del formulario
+            $("#action-button").click();
+            var cant =   @ViewBag.Formulario.Campos.Count
+                //$("#ContenedorEmpleados").append(
 
-
-        $("#botonPrecionado").click(function () {
-            alert("Entro");
+                alert(@ViewBag.Formulario.Campos.Count);
+                         
+            alert("Aqui llega"); //Debugger
+        }
+        $('#action-button').on('click', function () {
+            console.log('action button clicked');
         });
-
-          
-        
-
     });
 </script>
