@@ -34,7 +34,7 @@
                             <th scope="col">Edad</th>
                             <th scope="col">Aprobados</th>
                             <th scope="col">Pendientes</th>
-                            <th scope="col">Cancelados</th>
+                            <th scope="col">Rechazados</th>
                             <th scope="col">Cupo</th>
                             <th scope="colgroup">Accion</th>
                         </tr>
@@ -70,9 +70,9 @@
                                     </a>
                                 </td>
                                 <td style="text-align: center;">
-                                    <a href="/Actividad/ListaEstado?estadoId=3&actividadId=@i.Id">
+                                    <a href="/Actividad/ListaEstado?estadoId=4&actividadId=@i.Id">
                                         <span class="label gradient-1 rounded" style="font-size: 15px !important;">
-                                            @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Cancelado" && x.ActividadId == i.Id).Count()
+                                            @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Rechazado" && x.ActividadId == i.Id).Count()
                                         </span>
                                     </a>
                                 </td>
