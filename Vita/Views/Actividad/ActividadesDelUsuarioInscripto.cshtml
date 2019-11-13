@@ -48,21 +48,44 @@
                             {
                                 ViewBag.Url = "/Content/images/sin_foto.png";
                             }
-                            <tr>
-                                <td><a href="/Actividad/FichaActividad/?idActividad=@i.Id&inscribirse=false"><img src="@Url.Content(ViewBag.Url)" style="width: 190px; height: 120px;"> </a></td>
-                                <td>@i.Titulo</td>
-                                <td>@i.Localidad.Descripcion</td>
-                                <td>@i.EdadMinima - @i.EdadMaxima</td>
-                               
-                                <td style="text-align: center;">
-                                    <a href="/Actividad/ListaEstado?estadoId=2&actividadId=@i.Id">
-                                        <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                        <tr>
+                            <td><a href="/Actividad/FichaActividad/?idActividad=@i.Id&inscribirse=false"><img src="@Url.Content(ViewBag.Url)" style="width: 190px; height: 120px;"> </a></td>
+                            <td>@i.Titulo</td>
+                            <td>@i.Localidad.Descripcion</td>
+                            <td>@i.EdadMinima - @i.EdadMaxima</td>
+
+                            @if (i.Compleja == true)
+                            {
+
+                        <td style="text-align: center;">
+                            <!-- <a href="/Actividad/ListaEstado?estadoId=2&actividadId=@i.Id"> -->
+                            <a href="/Actividad/CompletarFomularioDinamicoUsuario">
+                                <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                    Completar Form
+                                </span>
+                            </a>
+                            <p>
+                            </p>
+
+                            <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion
+                            </span>
+                        </td>
+
+                            }
+
+                            else
+                            {
+                                    <td style="text-align: center;">
+
+                                        <span class="label gradient-3 rounded" style="font-size: 15px !important;">
                                             @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion
                                         </span>
-                                    </a>
-                                </td>
-                           
-                               
+                                    </td>
+                                    }
+
+
+
                                 <td>
                                     <span><a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span>
                                 </td>
