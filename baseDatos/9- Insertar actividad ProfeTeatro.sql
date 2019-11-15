@@ -16,7 +16,8 @@ INSERT INTO [dbo].[Actividad]
            ,[CreatedAt]
            ,[UpdatedAt]
            ,[DeletedAt]
-           ,[Compleja])
+           ,[ConUsuarioPendiente]
+		   ,[EstadoId])
      VALUES
            ('Clases de teatro'
            ,'En las clases de teatro el alumno tiene la posibilidad de explorar una nueva forma de ver el mundo y de relacionarse con él, sobre el escenario y debajo de él. La clase se divide en dos partes.
@@ -50,7 +51,8 @@ Para el armado del taller me baso en mi experiencia como actriz y docente. A lo 
            ,'2019-11-11'
            ,NULL
            ,NULL
-           ,1) /*Compleja*/
+           ,1
+		   ,6) /*Compleja*/
 GO
 
 /*DOMICILIO*/

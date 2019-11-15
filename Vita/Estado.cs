@@ -17,6 +17,7 @@ namespace Vita
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Estado()
         {
+            this.Actividad = new HashSet<Actividad>();
             this.UsuarioEstadoHistorico = new HashSet<UsuarioEstadoHistorico>();
             this.UsuarioInscriptoActividad = new HashSet<UsuarioInscriptoActividad>();
         }
@@ -24,6 +25,8 @@ namespace Vita
         public int Id { get; set; }
         public string Descripcion { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Actividad> Actividad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsuarioEstadoHistorico> UsuarioEstadoHistorico { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

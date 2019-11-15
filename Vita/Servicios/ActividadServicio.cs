@@ -235,7 +235,7 @@ namespace Vita.Servicios
                 UsuarioId = usuario.Id,
                 // Foto= actividad.Foto una actividad puede tener varias fotos
                 CreatedAt = DateTime.Now,
-                Compleja = actividadViewModel.Compleja,
+                ConUsuarioPendiente = actividadViewModel.ConUsuarioPendiente,
             };
 
             myDbContext.Actividad.Add(actividadNueva);

@@ -39,7 +39,8 @@ namespace Vita
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
-        public Nullable<bool> Compleja { get; set; }
+        public Nullable<bool> ConUsuarioPendiente { get; set; }
+        public int EstadoId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FechaActividad> FechaActividad { get; set; }
@@ -54,6 +55,7 @@ namespace Vita
         public virtual Categoria Categoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Domicilio> Domicilio { get; set; }
+        public virtual Estado Estado { get; set; }
         public virtual Localidad Localidad { get; set; }
     }
 }

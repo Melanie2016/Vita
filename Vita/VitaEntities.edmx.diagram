@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="11831a4d66a74e639a152d4ce42d33ca" Name="Diagram1">
-        <EntityTypeShape EntityType="VitaModel.Actividad" Width="1.5" PointX="7.5" PointY="13.375" IsExpanded="true" />
+      <Diagram DiagramId="63c246a8f7a542bc893b4678611e6987" Name="Diagram1">
+        <EntityTypeShape EntityType="VitaModel.Actividad" Width="1.5" PointX="7.5" PointY="13.125" IsExpanded="true" />
         <EntityTypeShape EntityType="VitaModel.ActividadSegmento" Width="1.5" PointX="12.75" PointY="15" IsExpanded="true" />
         <EntityTypeShape EntityType="VitaModel.Campos" Width="1.5" PointX="18" PointY="18.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="VitaModel.Categoria" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VitaModel.Categoria" Width="1.5" PointX="3" PointY="18.25" IsExpanded="true" />
         <EntityTypeShape EntityType="VitaModel.Departamento" Width="1.5" PointX="3" PointY="15.25" IsExpanded="true" />
         <EntityTypeShape EntityType="VitaModel.DiaSemana" Width="1.5" PointX="10.5" PointY="10.375" IsExpanded="true" />
         <EntityTypeShape EntityType="VitaModel.Domicilio" Width="1.5" PointX="15.75" PointY="14.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="VitaModel.Estado" Width="1.5" PointX="13.5" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="VitaModel.Estado" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
         <EntityTypeShape EntityType="VitaModel.FechaActividad" Width="1.5" PointX="12.75" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="VitaModel.FormularioDinamico" Width="1.5" PointX="12.75" PointY="18.625" IsExpanded="true" />
         <EntityTypeShape EntityType="VitaModel.InscripcionFecha" Width="1.5" PointX="18" PointY="7.75" IsExpanded="true" />
@@ -22,7 +22,7 @@
         <EntityTypeShape EntityType="VitaModel.Rol" Width="1.5" PointX="8.25" PointY="10.25" IsExpanded="true" />
         <EntityTypeShape EntityType="VitaModel.Segmento" Width="1.5" PointX="10.5" PointY="21.375" IsExpanded="true" />
         <EntityTypeShape EntityType="VitaModel.Sexo" Width="1.5" PointX="8.25" PointY="20.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="VitaModel.SubCategoria" Width="1.5" PointX="5.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VitaModel.SubCategoria" Width="1.5" PointX="5.25" PointY="18.25" IsExpanded="true" />
         <EntityTypeShape EntityType="VitaModel.TipoDatoCampo" Width="1.5" PointX="15.75" PointY="22.375" IsExpanded="true" />
         <EntityTypeShape EntityType="VitaModel.Usuario" Width="1.5" PointX="10.5" PointY="12.875" IsExpanded="true" />
         <EntityTypeShape EntityType="VitaModel.UsuarioCategoriaElegida" Width="1.5" PointX="15.75" PointY="19" IsExpanded="true" />
@@ -37,6 +37,7 @@
         <AssociationConnector Association="VitaModel.ActividadUsuarioInsId" ManuallyRouted="false" />
         <AssociationConnector Association="VitaModel.CategoriaActividadId" ManuallyRouted="false" />
         <AssociationConnector Association="VitaModel.DomicilioActividadId" ManuallyRouted="false" />
+        <AssociationConnector Association="VitaModel.EstadoIdFkActividad" ManuallyRouted="false" />
         <AssociationConnector Association="VitaModel.LocalidadActividadId" ManuallyRouted="false" />
         <AssociationConnector Association="VitaModel.SegmentoActividadId" ManuallyRouted="false" />
         <AssociationConnector Association="VitaModel.CamposIdFk" ManuallyRouted="false" />

@@ -73,6 +73,10 @@ INSERT INTO Estado(Id, Descripcion) Values (2,'Pendiente');
 INSERT INTO Estado(Id, Descripcion) Values (3,'Cancelado');
 INSERT INTO Estado(Id, Descripcion) Values (4,'Rechazado');
 INSERT INTO Estado(Id, Descripcion) Values (5,'Finalizado');
+INSERT INTO Estado(Id, Descripcion) Values (6,'Creada');
+INSERT INTO Estado(Id, Descripcion) Values (7,'Publicada');
+
+
 SET IDENTITY_INSERT Estado OFF
 
 
@@ -84,4 +88,15 @@ SET IDENTITY_INSERT TipoDatoCampo ON
 INSERT INTO TipoDatoCampo(Id, Descripcion) VALUES (1,'Texto');
 INSERT INTO TipoDatoCampo(Id, Descripcion) VALUES (2,'Número');
 INSERT INTO TipoDatoCampo(Id, Descripcion) VALUES (3,'Fecha');
-SET IDENTITY_INSERT TipoDatoCampo ON
+SET IDENTITY_INSERT TipoDatoCampo Off
+
+/*DIASEMANA*/
+SET IDENTITY_INSERT DiaSemana ON
+INSERT INTO DiaSemana(Id, Descripcion) Values (0,'Domingo');
+INSERT INTO DiaSemana(Id, Descripcion) Values (1,'Lunes');
+INSERT INTO DiaSemana(Id, Descripcion) Values (2,'Martes');
+INSERT INTO DiaSemana(Id, Descripcion) Values (3,'Miércoles');
+INSERT INTO DiaSemana(Id, Descripcion) Values (4,'Jueves');
+INSERT INTO DiaSemana(Id, Descripcion) Values (5,'Viernes');
+INSERT INTO DiaSemana(Id, Descripcion) Values (6,'Sábado');
+SET IDENTITY_INSERT DiaSemana OFF

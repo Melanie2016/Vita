@@ -1,3 +1,5 @@
+/*Insertar actividad RAMOS---------------------------------------------------------------------------------*/
+
 USE [Vita]
 GO
 
@@ -16,7 +18,8 @@ INSERT INTO [dbo].[Actividad]
            ,[CreatedAt]
            ,[UpdatedAt]
            ,[DeletedAt]
-           ,[Compleja])
+             ,[ConUsuarioPendiente]
+		   ,[EstadoId])
      VALUES
            ('Zumba al aire libre'
            ,'Zumba al aire libre y gratuito. Actividad física de bajo impacto con la combinación de baile y gimnasia localizada que combate el estrés y mejora la salud. La clase de zumba está pensada para todo el mundo, mamás, papás y niños. El principal objetivo de esta clase aparte de quemar calorías, es que vengamos todos y en esa hora que asistamos, seamos felices; así que la invitación está abierta para todos los que deseen sumarse'
@@ -32,7 +35,8 @@ INSERT INTO [dbo].[Actividad]
            ,'2019-11-08'
            ,NULL
            ,NULL
-           ,NULL)
+           ,1
+		   ,6)
 GO
 
 /*DOMICILIO*/
@@ -74,3 +78,5 @@ INSERT INTO [dbo].[FechaActividad]
            ,'11:00:00'
            ,4) /*ActividadId*/
 GO
+
+/*1era---------------------------------------------------------------------------------*/

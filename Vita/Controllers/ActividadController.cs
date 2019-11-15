@@ -72,7 +72,7 @@ namespace Vita.Controllers
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 actividadServicio.CrearActividad(actividad, buscarUsuarioLogueado, selectedSegmento);
                 var activdadCreada = actividadServicio.GetUltimaActividadPorUsuarioCreadaId(buscarUsuarioLogueado.Id);
-                if (activdadCreada.Compleja == true)
+                if (activdadCreada.ConUsuarioPendiente == true)
                 {
                     return RedirectToAction("CrearFormularioDinamico", "Actividad", activdadCreada);
 
@@ -216,7 +216,7 @@ namespace Vita.Controllers
                     else
                     {
                         var estadoString = ""; //aca se guarda el estado
-                        if (actividad.Compleja == true)
+                        if (actividad.ConUsuarioPendiente == true)
                         {
                             estadoString = "2"; //pendiente
                         }
@@ -234,7 +234,7 @@ namespace Vita.Controllers
                             var tituloActividad = actividad.Titulo;
                             var celular = "whatsapp:+549" + buscarUsuarioLogueado.Celular;
 
-                            if (actividad.Compleja == true) //Su inscripción queda pendiente
+                            if (actividad.ConUsuarioPendiente == true) //Su inscripción queda pendiente
                             {
                                 ViewBag.Compleja = true; //debe completar el formulario
                                 mensaje = "Su inscripción está en estado PENDIENTE. Debe completar el formulario con los requisitos solicitados para poder realizar esta actividad. El mismo lo podrá ver en su perfil en la sección MIS ACTIVIDADES INSCRIPTAS. Se le informará cuando su inscripción este aprobada.";

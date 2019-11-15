@@ -126,7 +126,8 @@ Foto nvarchar(max),
 CreatedAt Date null,
 UpdatedAt Date null, 
 DeletedAt Date null, 
-Compleja bit null,
+ConUsuarioPendiente bit null,
+EstadoId int not null,
 CONSTRAINT CategoriaActividadId FOREIGN KEY(categoriaId)
 REFERENCES Categoria (id),
 CONSTRAINT LocalidadActividadId FOREIGN KEY(localidadId)
@@ -134,7 +135,9 @@ REFERENCES Localidad (id),
 CONSTRAINT ActividadUsuarioId FOREIGN KEY(UsuarioId)
 REFERENCES Usuario (id),
 CONSTRAINT ActividadSubcategoriaId FOREIGN KEY(subcategoriaId)
-REFERENCES SubCategoria (id)
+REFERENCES SubCategoria (id),
+CONSTRAINT EstadoIdFkActividad FOREIGN KEY(EstadoId)
+REFERENCES Estado (id)
 );
 create table FechaActividad(
 Id int identity(1,1) primary key,

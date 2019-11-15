@@ -24,7 +24,8 @@
           <Property Name="CreatedAt" Type="date" />
           <Property Name="UpdatedAt" Type="date" />
           <Property Name="DeletedAt" Type="date" />
-          <Property Name="Compleja" Type="bit" />
+          <Property Name="ConUsuarioPendiente" Type="bit" />
+          <Property Name="EstadoId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ActividadSegmento">
           <Key>
@@ -427,6 +428,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="EstadoIdFkActividad">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Actividad">
+              <PropertyRef Name="EstadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="EstadoUsuarioId">
           <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
           <End Role="UsuarioEstadoHistorico" Type="Self.UsuarioEstadoHistorico" Multiplicity="*" />
@@ -748,6 +761,10 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="FormularioDinamico" EntitySet="FormularioDinamico" />
           </AssociationSet>
+          <AssociationSet Name="EstadoIdFkActividad" Association="Self.EstadoIdFkActividad">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Actividad" EntitySet="Actividad" />
+          </AssociationSet>
           <AssociationSet Name="EstadoUsuarioId" Association="Self.EstadoUsuarioId">
             <End Role="Estado" EntitySet="Estado" />
             <End Role="UsuarioEstadoHistorico" EntitySet="UsuarioEstadoHistorico" />
@@ -853,7 +870,8 @@
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <Property Name="DeletedAt" Type="DateTime" Precision="0" />
-          <Property Name="Compleja" Type="Boolean" />
+          <Property Name="ConUsuarioPendiente" Type="Boolean" />
+          <Property Name="EstadoId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="FechaActividad" Relationship="Self.ActividadFechasId" FromRole="Actividad" ToRole="FechaActividad" />
           <NavigationProperty Name="FormularioDinamico" Relationship="Self.ActividadFormularioId" FromRole="Actividad" ToRole="FormularioDinamico" />
           <NavigationProperty Name="ActividadSegmento" Relationship="Self.ActividadSegmentoId" FromRole="Actividad" ToRole="ActividadSegmento" />
@@ -862,6 +880,7 @@
           <NavigationProperty Name="UsuarioInscriptoActividad" Relationship="Self.ActividadUsuarioInsId" FromRole="Actividad" ToRole="UsuarioInscriptoActividad" />
           <NavigationProperty Name="Categoria" Relationship="Self.CategoriaActividadId" FromRole="Actividad" ToRole="Categoria" />
           <NavigationProperty Name="Domicilio" Relationship="Self.DomicilioActividadId" FromRole="Actividad" ToRole="Domicilio" />
+          <NavigationProperty Name="Estado" Relationship="Self.EstadoIdFkActividad" FromRole="Actividad" ToRole="Estado" />
           <NavigationProperty Name="Localidad" Relationship="Self.LocalidadActividadId" FromRole="Actividad" ToRole="Localidad" />
         </EntityType>
         <EntityType Name="ActividadSegmento">
@@ -945,6 +964,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Actividad" Relationship="Self.EstadoIdFkActividad" FromRole="Estado" ToRole="Actividad" />
           <NavigationProperty Name="UsuarioEstadoHistorico" Relationship="Self.EstadoUsuarioId" FromRole="Estado" ToRole="UsuarioEstadoHistorico" />
           <NavigationProperty Name="UsuarioInscriptoActividad" Relationship="Self.UsuarioActividadEstadoInsId" FromRole="Estado" ToRole="UsuarioInscriptoActividad" />
         </EntityType>
@@ -1249,6 +1269,18 @@
             </Principal>
             <Dependent Role="Domicilio">
               <PropertyRef Name="ActividadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EstadoIdFkActividad">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Actividad">
+              <PropertyRef Name="EstadoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1621,6 +1653,10 @@
             <End Role="Actividad" EntitySet="Actividad" />
             <End Role="Domicilio" EntitySet="Domicilio" />
           </AssociationSet>
+          <AssociationSet Name="EstadoIdFkActividad" Association="Self.EstadoIdFkActividad">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Actividad" EntitySet="Actividad" />
+          </AssociationSet>
           <AssociationSet Name="LocalidadActividadId" Association="Self.LocalidadActividadId">
             <End Role="Localidad" EntitySet="Localidad" />
             <End Role="Actividad" EntitySet="Actividad" />
@@ -1750,7 +1786,8 @@
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
-                <ScalarProperty Name="Compleja" ColumnName="Compleja" />
+                <ScalarProperty Name="ConUsuarioPendiente" ColumnName="ConUsuarioPendiente" />
+                <ScalarProperty Name="EstadoId" ColumnName="EstadoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

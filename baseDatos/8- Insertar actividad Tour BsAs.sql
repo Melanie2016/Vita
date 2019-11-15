@@ -16,7 +16,8 @@ INSERT INTO [dbo].[Actividad]
            ,[CreatedAt]
            ,[UpdatedAt]
            ,[DeletedAt]
-           ,[Compleja])
+            ,[ConUsuarioPendiente]
+		   ,[EstadoId])
      VALUES
            ('Visita guiada por Buenos Aires'
            ,'En este tour recorreremos Buenos Aires al completo, disfrutando de los principales barrios, avenidas y monumentos de la ciudad. Esta visita es la forma ideal de comenzar a conocer la Ciudad del Tango. el primer lugar del recorrido será la Avenida 9 de Julio, la más importante de Buenos Aires, donde veremos el Teatro Colón y el Obelisco, el monumento más emblemático de la ciudad.
@@ -40,7 +41,8 @@ En seguida, circularemos por el sofisticado barrio de La Recoleta, una zona de e
            ,'2019-11-11'
            ,NULL
            ,NULL
-           ,1)/*Compleja*/
+           ,1
+		   ,6)/*Compleja*/
 GO
 
 /*FECHAS*/

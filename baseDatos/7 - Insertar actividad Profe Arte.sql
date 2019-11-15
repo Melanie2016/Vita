@@ -1,5 +1,7 @@
+/*Insertar actividad Profe Arte--------------------------------------------------------------------------------*/
 USE [Vita]
 GO
+
 
 INSERT INTO [dbo].[Actividad]
            ([Titulo]
@@ -16,23 +18,25 @@ INSERT INTO [dbo].[Actividad]
            ,[CreatedAt]
            ,[UpdatedAt]
            ,[DeletedAt]
-           ,[Compleja])
+           ,[ConUsuarioPendiente]
+		   ,[EstadoId])
      VALUES
-           ('Zumba Kids'
-           ,'Las clases de Zumba® Kids ofrecen rutinas pensadas para niños sobre la base de las coreografías originales de Zumba®. Los pasos se aprenden poco a poco, y agregamos juegos, actividades y elementos de exploración cultural a la estructura de la clase. Ayuda a desarrollar un estilo de vida saludable e incorpora el ejercicio físico como una parte natural de la vida de los niños al hacer que el ejercicio sea divertido. Las clases incorporan elementos clave de desarrollo infantil como liderazgo, respeto, trabajo en equipo, confianza, autoestima, memoria, creatividad, coordinación, conciencia cultural.'
-           ,7
+           ('Taller de Arte'
+           ,'Pintura-Dibujo-Chicos-Adultos. Un espacio pensado y equipado para disfrutar, jugar, explorar y experimentar con ideas, objetos y situaciones.'
            ,11
-           ,100
-           ,30
-           ,3
-           ,3
-           ,552 /*LocalidadId*/
-           ,1 /*UsuarioId*/
-           ,'~/Content/images/Zumba-kids.jpg'
+           ,70
+           ,150
+           ,20
+           ,4
+           ,15
+           ,5475 /*LocalidadId Villa Devoto*/
+           ,3 /*UsuarioId*/
+           ,'~/Content/images/taller_arte.jpg'
            ,'2019-11-08'
            ,NULL
            ,NULL
-           ,1) /*Compleja*/
+           ,1
+		   ,6)
 GO
 
 /*DOMICILIO*/
@@ -47,16 +51,17 @@ INSERT INTO [dbo].[Domicilio]
            ,[ActividadId]
            ,[FechaRegistroEnDb])
      VALUES
-           ('Luzuriaga'
-           ,15
+           ('Av. Lincoln'
+           ,1986
            ,null
            ,null
-           ,'B1836'
-           ,552 /*LocalidadId*/
-           ,1 /*UsuarioId*/
-           ,1 /*ActividadId*/
+           ,null
+           ,5475
+           ,3 /*UsuarioId*/
+           ,5 /*ActividadId*/
            ,null)
 GO
+
 
 /*FECHAS*/
 INSERT INTO [dbo].[FechaActividad]
@@ -70,11 +75,12 @@ INSERT INTO [dbo].[FechaActividad]
            (1 /*Lunes*/
            ,null
            ,null
-           ,'14:00:00'
            ,'15:00:00'
-           ,1) /*ActividadId*/
+           ,'16:00:00'
+           ,5) /*ActividadId*/
 GO
 
+/*FECHAS*/
 INSERT INTO [dbo].[FechaActividad]
            ([DiaSemanaId] 
            ,[InicioEvento]
@@ -83,10 +89,10 @@ INSERT INTO [dbo].[FechaActividad]
            ,[HoraFin]
            ,[ActividadId])
      VALUES
-           (3 /*Miercoles*/
+           (5 /*Viernes*/
            ,null
            ,null
-           ,'14:00:00'
-           ,'15:00:00'
-           ,1) /*ActividadId*/
+           ,'11:00:00'
+           ,'12:00:00'
+           ,5) /*ActividadId*/
 GO

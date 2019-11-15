@@ -16,7 +16,8 @@ INSERT INTO [dbo].[Actividad]
            ,[CreatedAt]
            ,[UpdatedAt]
            ,[DeletedAt]
-           ,[Compleja])
+           ,[ConUsuarioPendiente]
+		   ,[EstadoId])
      VALUES
            ('Torneo de truco'
            ,'Habrá premios para los tríos que finalicen en el primer, segundo y tercer lugar del torneo. Será para recaudar fondos para el hospital de niños'
@@ -32,7 +33,8 @@ INSERT INTO [dbo].[Actividad]
            ,'2019-11-11'
            ,NULL
            ,NULL
-           ,1) /*Compleja*/
+           ,1
+		   ,6) /*Compleja*/
 GO
 
 
