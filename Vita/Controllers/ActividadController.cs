@@ -234,9 +234,10 @@ namespace Vita.Controllers
                         if (resultado == 1) //quedó inscripto en la actividad
                         {
 
+                            //Parte del Mail
+
                             MailAddress to = new MailAddress(buscarUsuarioLogueado.Email);
                             MailAddress from = new MailAddress("vita.contactanos@gmail.com");
-                            //Parte del Mail
                             MailMessage mm = new MailMessage(from, to);
           
 
@@ -259,8 +260,8 @@ namespace Vita.Controllers
                                 mensaje = "Su inscripción ha sido exitosa. Puede ir a su perfil para ver sus actividades";
                                 body = "Tu inscripción a la actividad " + tituloActividad + " ha sido exitosa! "; //Mensaje whatsApp
                                                                                                                   //Parte Email
-                                mm.Subject = "Inscripción exitosa en VITA";
-                                mm.Body = "Tu inscripción a la actividad " + tituloActividad + " ha sido exitosa! ";
+                                mm.Subject = "Inscripción a" + tituloActividad + "exitosa";
+                                mm.Body = "¡Hola! A partir de ahora, Comienza tu nueva actividad -" + tituloActividad + " - VITA Espera que sea de tu agrado y lo más importante... ¡Que te diviertas! ";
                                 mm.IsBodyHtml = true;
 
                                 SmtpClient smtp = new SmtpClient();
