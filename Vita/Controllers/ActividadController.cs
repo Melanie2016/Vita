@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Twilio;
@@ -177,8 +179,10 @@ namespace Vita.Controllers
         }
 
         [HttpPost]
-        public ActionResult FichaActividad(string idActividad, string inscribirse, int[] FechaActividadId)
+        public ActionResult FichaActividad(string idActividad, string inscribirse, int[] FechaActividadId, ViewModels.Gmail model)
         {
+            
+
             var actividad = actividadServicio.GetActividad(int.Parse(idActividad));
             ViewBag.Actividad = actividad;
             ViewBag.FechasActividad = actividad.FechaActividad;
@@ -229,21 +233,45 @@ namespace Vita.Controllers
 
                         if (resultado == 1) //quedó inscripto en la actividad
                         {
+
+                            MailAddress to = new MailAddress(buscarUsuarioLogueado.Email);
+                            MailAddress from = new MailAddress("vita.contactanos@gmail.com");
+                            //Parte del Mail
+                            MailMessage mm = new MailMessage(from, to);
+          
+
                             var mensaje = "";
                             var body = "";
                             var tituloActividad = actividad.Titulo;
                             var celular = "whatsapp:+549" + buscarUsuarioLogueado.Celular;
+                            var mail = buscarUsuarioLogueado.Email;
 
                             if (actividad.ConUsuarioPendiente == true) //Su inscripción queda pendiente
                             {
                                 ViewBag.Compleja = true; //debe completar el formulario
                                 mensaje = "Su inscripción está en estado PENDIENTE. Debe completar el formulario con los requisitos solicitados para poder realizar esta actividad. El mismo lo podrá ver en su perfil en la sección MIS ACTIVIDADES INSCRIPTAS. Se le informará cuando su inscripción este aprobada.";
                                 body = "Tu inscripción a la actividad " + tituloActividad + " está en estado pendiente de aprobación. Te avisaremos cuando esté aprobada. Gracias! "; //Mensaje whatsApp
+
+                     
                             }
                             else //Queda aprobado de una
                             {
                                 mensaje = "Su inscripción ha sido exitosa. Puede ir a su perfil para ver sus actividades";
                                 body = "Tu inscripción a la actividad " + tituloActividad + " ha sido exitosa! "; //Mensaje whatsApp
+                                                                                                                  //Parte Email
+                                mm.Subject = "Inscripción exitosa en VITA";
+                                mm.Body = "Tu inscripción a la actividad " + tituloActividad + " ha sido exitosa! ";
+                                mm.IsBodyHtml = true;
+
+                                SmtpClient smtp = new SmtpClient();
+                                smtp.Host = "smtp.gmail.com";
+                                smtp.Port = 587;
+                                smtp.EnableSsl = true;
+
+                                NetworkCredential nc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
+                                smtp.UseDefaultCredentials = true;
+                                smtp.Credentials = nc;
+                                smtp.Send(mm);
                             }
 
                             ViewBag.Mensaje = mensaje;
