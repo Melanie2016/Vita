@@ -55,7 +55,7 @@
                             <td>@i.EdadMinima - @i.EdadMaxima</td>
                            
 
-                            @if (i.Compleja == true)
+                            @if (i.ConUsuarioPendiente == true)
                             {
                                 var estado = @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion;
                             <td style="text-align: center;">

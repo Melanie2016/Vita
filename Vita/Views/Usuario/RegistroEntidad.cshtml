@@ -17,10 +17,8 @@
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
             <div class="card-body">
-                <!--  <form action="/Usuario/Registrar" method="Post" class="formu-usuario" id="form-rol-usuario">-->
-                <!--EMPRESA: <form action="/Usuario/Registrar" method="Post" class="formu-entidad" id="form-rol-entidad">-->
 
-                @using (Html.BeginForm("Registrar", "Usuario", new { id = "form-rol-entidad", @class = "formu-entidad" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("Registro", "Usuario", new { id = "form-rol-entidad", @class = "formu-entidad" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
 
                     <div class="input-group" hidden>
@@ -36,6 +34,15 @@
                         <input class="file-upload" type="file" id="Foto" name="Foto" />
                     </div>
 
+                    //Validaciones
+                    <div class="row row-space">
+                        @if (ViewBag.HayValidaciones)
+                        {
+                            <div role="alert" style="color: #856404; background-color: #fff3cd; border-color: #ffeeba; width: 100%; height: 45px; margin-bottom: 1rem;  padding-top: 11px; padding-left: 10px;  border-radius: 0.25rem;">
+                                @ViewBag.Mensaje
+                            </div>
+                        }
+                    </div>
 
                     <div class="row row-space">
                         <div class="col-2">

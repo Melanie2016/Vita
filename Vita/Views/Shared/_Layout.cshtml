@@ -100,20 +100,21 @@
                                 }
                                 else
                                 {
-                                    if (Model.Rol.Id == 2) //Entidad
+                                    if (Model.RolId == 2) //Entidad
                                     {
                                         ViewBag.Url = "/Content/images/desconocido2.png";
+                                        <img src="@ViewBag.Url" height="40" width="40" alt="" style="height: 40px; width: 40px; border: 3px solid #fff; border-radius: 50%; margin: 0; padding: 0; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);">
                                     }
                                     else //Usuario
                                     {
-                                        if (Model.Sexo.Descripcion == "Masculino")
+                                        if (Model.SexoId == 2) //Masculino
                                         {
                                             ViewBag.Url = "/Content/images/hombre.png";
                                             <img src="@ViewBag.Url" height="40" width="40" alt="" style="height: 40px; width: 40px; border: 3px solid #fff; border-radius: 50%; margin: 0; padding: 0; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);">
                                         }
                                         else
                                         {
-                                            if (Model.Sexo.Descripcion == "Femenino")
+                                            if (Model.SexoId == 1) //Femenino
                                             {
                                                 ViewBag.Url = "/Content/images/mujer.jpg";
                                                 <img src="@ViewBag.Url" height="40" width="40" alt="" style="height: 40px; width: 40px; border: 3px solid #fff; border-radius: 50%; margin: 0; padding: 0; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);">
@@ -126,13 +127,13 @@
                                         }
                                     }
                                 }
-                          
+
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu" style="width: 12rem; box-shadow: 0px 1px 10px 0 rgba(0, 0, 0, 0.15); width: 192px; margin-left:-40px; height: 137px;">
                                 <div class="dropdown-content-body">
                                     <ul style="padding: 20px;">
                                         <li>
-                                            @if (Model.Rol.Id == 2) //Entidad
+                                            @if (Model.RolId == 2) //Entidad
                                             {
                                                 ViewBag.Perfil = "/Usuario/PerfilEntidad";
                                             }

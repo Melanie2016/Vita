@@ -17,12 +17,11 @@
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
             <div class="card-body">
-                <!--  <form action="/Usuario/Registrar" method="Post" class="formu-usuario" id="form-rol-usuario">-->
-                @using (Html.BeginForm("Registrar", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("Registro", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
 
-                   
-                <h2 id="tipo_usuario" class="form-title">¡Hola @TempData["first_name"]@TempData["lastname"]! ¿Qué tipo de persona eres?</h2>
+
+                    <h2 id="tipo_usuario" class="form-title">¡Hola @TempData["first_name"]@TempData["lastname"]! <br /> ¿Qué tipo de persona eres?</h2>
 
                     <!--Tipo de persona-->
                     <center>
@@ -77,19 +76,22 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="input-group">
-                                <label class="label">Seleccione sexo</label>
-                                <div>
-                                    <select class="selectpicker" id="sexoId" onchange="changeOption(this)"
-                                            data-live-search="true" title="Seleccione sexo.." name="SexoId">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Sexo-->
+                                    <label class="label">Seleccione sexo</label>
+                                    <div>
+                                        <select class="input--style-4" id="sexoId" onchange="changeOption(this)"
+                                                data-live-search="true" title="Seleccione sexo.." name="SexoId" style="width: 260px; height: 50px; border: 0;">
 
 
-                                        @foreach (var item in ViewBag.ListaSexo as MultiSelectList)
-                                        {
-                                            <option value="@item.Value">@item.Text</option>
-                                        }
+                                            @foreach (var item in ViewBag.ListaSexo as MultiSelectList)
+                                            {
+                                                <option value="@item.Value">@item.Text</option>
+                                            }
 
-                                    </select>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -111,12 +113,13 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row row-space">
                             <div class="col-2">
                                 <!--Provincia-->
                                 <label class="label">Seleccione Provincia</label>
                                 <div>
-                                    <select class="selectpicker" id="filtroProvincia" title="Seleccione provincia..">
+                                    <select class="input--style-4" id="filtroProvincia" title="Seleccione provincia.." style="width: 260px; height: 50px; border: 0;">
 
                                         <option>Seleccionar provincia</option>
                                         @foreach (var item in ViewBag.ListaProvincia as MultiSelectList)
@@ -128,123 +131,113 @@
                                     </select>
                                 </div>
                             </div>
-
-
                             <div class="col-2">
                                 <div class="input-group">
-                                    <!--Localidad-->
+                                    <!--Departamento-->
                                     <label class="label">Seleccione Departamento</label>
                                     <div>
-                                        <div id="filtroDepartamento">
-
-                                        </div>
-                                        @*<select class="selectpicker" id="filtroDepartamento" onchange="changeOption(this)"
-                                                    data-live-search="true" title="Seleccione departamento.." name="DepartamentoElegida">
-
-
-                                                @foreach (var item in ViewBag.ListaDepartamento as MultiSelectList)
-                                                {
-                                                    <option value="@item.Value">@item.Text</option>
-                                                }
-
-                                            </select>*@
+                                        <div id="filtroDepartamento"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Localidad-->
                                     <label class="label">Seleccione Localidad</label>
                                     <div id="filtroLocalidad"></div>
-                                    @*<select class="selectpicker" id="LocalidadId" onchange="changeOption(this)"
-                                                data-live-search="true" title="Seleccione localidad.." name="LocalidadId">
+                                </div>
+                            </div>
 
-
-                                            @foreach (var item in ViewBag.ListaLocalidades as MultiSelectList)
-                                            {
-                                                <option value="@item.Value">@item.Text</option>
-                                            }
-
-                                        </select>*@
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Celular-->
+                                    <label class="label">Celular</label>
+                                    <input class="input--style-4" type="number" name="Celular" placeholder="1143424456">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-2">
-                            <div class="input-group">
-                                <!--Celular-->
-                                <label class="label">Celular</label>
-                                <input class="input--style-4" type="number" name="Celular">
-                            </div>
-                        </div>
 
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <!--Intereses-->
+                                <div class="input-group">
+                                    <label class="label">Seleccione intereses</label>
+                                    <div>
+                                        @foreach (var item in ViewBag.ListaIntereses)
+                                        {
+                                            <input type="checkbox" name="selectedCategoria" value="@item.Value" style="width: 5%;" />
+                                            <label style="color: #666;">@item.Text</label>
+                                            <br />
+                                        }
 
-
-                        <div class="input-group">
-                            <label class="label">Seleccione intereses</label>
-                            <div>
-                                @foreach (var item in ViewBag.ListaIntereses)
-                                {
-                                    <input type="checkbox" name="selectedCategoria" value="@item.Value" />
-                                    @item.Text
-                                }
-
-                            </div>
-                        </div>
-
-                        <!--Segmento-->
-
-                        <div class="input-group">
-                            <label class="label">¿A qué segmento perteneces?</label>
-                            <div>
-                                @foreach (var item in ViewBag.ListaSegmentos)
-                                {
-                                    <input type="checkbox" name="selectedSegmento" value="@item.Value" />
-                                    @item.Text
-                                }
-
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-4 col-form-label" for="SobreMi">
-                                    Breve descripción sobre vos y tus gustos <span class="text-danger">*</span>
-                                </label><br /><br />
-                                <div class="col-2">
-                                    <textarea class="form-control" id="val-suggestions" name="SobreMi" rows="10" cols="70" placeholder="Me gusta leer y soy apasionado con los juegos de mesa..."></textarea>
-                                </div>
-                            </div>
-                            <div class="row row-space">
-                                <div class="col-2">
-                                    <div class="input-group">
-                                        <!--Usuario-->
-                                        <label class="label">Usuario</label>
-                                        <input class="input--style-4" type="text" name="UsuarioName">
-                                    </div>
-                                </div>
-
-                                <div class="col-2">
-                                    <div class="input-group">
-                                        <!--Contraseña-->
-                                        <label class="label">Contraseña</label>
-                                        <input class="input--style-4" type="password" name="Pass">
                                     </div>
                                 </div>
                             </div>
-                            <div class="p-t-15">
-                                <button class="btn btn--radius-2 btn--blue" type="submit">Aceptar</button>
-                                <a href="/Home/Index"><button class="btn btn--radius-2 btn--blue" type="button">Cancelar</button></a>
 
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Segmento-->
+                                    <label class="label">¿A qué segmento perteneces?</label>
+                                    <div>
+                                        @foreach (var item in ViewBag.ListaSegmentos)
+                                        {
+                                            <input type="checkbox" name="selectedSegmento" value="@item.Value" style="width: 5%;" />
+                                            <label style="color: #666;">@item.Text</label>
+                                            <br />
+                                        }
+                                    </div>
+                                </div>
                             </div>
+                         </div>
+                        
+                        <div class="form-group row">
+                            <!--Descripción sobre mi-->
+                            <label class="label" for="SobreMi">
+                                Breve descripción sobre vos y tus gustos <span class="text-danger">*</span>
+                            </label><br /><br />
+                            <div class="col-2">
+                                <textarea class="form-control" id="val-suggestions" name="SobreMi" rows="10" cols="70" placeholder="Ingresa tu descripción personal..."></textarea>
+                            </div>
+                        </div>
+
+                         <br />
+
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Usuario-->
+                                    <label class="label">Usuario</label>
+                                    <input class="input--style-4" type="text" name="UsuarioName">
+                                </div>
+                            </div>
+
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!--Contraseña-->
+                                    <label class="label">Contraseña</label>
+                                    <input class="input--style-4" type="password" name="Pass">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--blue" type="submit">Aceptar</button>
+                            <a href="/Home/Index"><button class="btn btn--radius-2 btn--blue" type="button">Cancelar</button></a>
+
                         </div>
                     </div>
                 }
 
-                <form action="/Usuario/Registrar" method="Post" class="formu-entidad" id="form-rol-entidad">
+                <form action="/Usuario/Registro" method="Post" class="formu-entidad" id="form-rol-entidad">
 
                     <div id="empresa">
                         <div class="input-group" hidden>
                             <input class="input--style-4" type="number" value="2" name="RolId">
                         </div>
+
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
@@ -261,12 +254,13 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row row-space">
                             <div class="col-2">
                                 <!--Provincia-->
                                 <label class="label">Seleccione Provincia</label>
                                 <div>
-                                    <select class="selectpicker" id="filtroProvinciaEntidad" title="Seleccione provincia..">
+                                    <select class="input--style-4" id="filtroProvinciaEntidad" title="Seleccione provincia.." style="width: 260px; height: 50px; border: 0;">
 
                                         <option>Seleccionar provincia</option>
                                         @foreach (var item in ViewBag.ListaProvincia as MultiSelectList)
@@ -278,20 +272,17 @@
                                     </select>
                                 </div>
                             </div>
-
-
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--departamento-->
                                     <label class="label">Seleccione Departamento</label>
                                     <div>
-                                        <div id="filtroDepartamentoEntidad">
-
-                                        </div>
+                                        <div id="filtroDepartamentoEntidad"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
@@ -300,9 +291,6 @@
                                     <div id="filtroLocalidadEntidad" name="LocalidadId"></div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row row-space">
-
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Telefono de la empresa-->
@@ -311,6 +299,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
@@ -328,14 +317,17 @@
                             </div>
                         </div>
 
-                        <div class="col-2">
-                            <label class="col-lg-4 col-form-label" for="SobreMi">
+                        <div class="form-group row">
+                            <label class="label" for="SobreMi">
                                 Breve descripción sobre tu entidad <span class="text-danger">*</span>
                             </label><br /><br />
                             <div class="col-2">
-                                <textarea class="form-control" id="val-suggestions" name="SobreMi" rows="10" cols="70" placeholder="El Centro de Jubilados Alí es un espacio para..."></textarea>
+                                <textarea class="form-control" id="val-suggestions" name="SobreMi" rows="10" cols="70" placeholder="Ingresa tu descripción personal..."></textarea>
                             </div>
                         </div>
+
+                        <br />
+
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
@@ -382,7 +374,6 @@
         $('#filtroProvincia').on('change', function () {
 
             var idProvincia = this.value;
-            // var idPais = $(this).val();
 
             //Si elegiste la opción de los guíones paramos aca para no hacer nada
             if (idProvincia === 0) {
@@ -392,8 +383,8 @@
 
             //Ajax
             $.ajax({
-                //   url: "obtenerselectpaisusuario/" + idPais,
-                url: "obtenerselectpaisusuario/" + this.value,
+                //   url: "obtenerDepartamentosUsuario/" + idProvincia,
+                url: "obtenerDepartamentos/" + this.value,
                 type: 'GET',
                 dataType: "json",
                 success: function (res) {
@@ -401,7 +392,7 @@
                     // alert(res);
 
                     //Creando el segundo select
-                    $("#filtroDepartamento").empty().append('<select id="filtro2" class="selectpicker" name="DepartamentoId">');
+                    $("#filtroDepartamento").empty().append('<select id="filtro2" class="input--style-4" name="DepartamentoId" style="width: 260px; height: 50px; border: 0;">');
 
                     $.each(res, function () {
                         $("#filtro2").append($("<option>").val(this.Id).text(this.Descripcion));
@@ -410,14 +401,14 @@
                     $('#filtro2').on('change', function () {
                         //Ajax
                         $.ajax({
-                            url: "obtenerselectdepartamentousuario/" + this.value,
+                            url: "obtenerLocalidades/" + this.value,
 
                             type: 'GET',
                             dataType: "json",
                             success: function (res) {
                                 // alert(res);
                                 //Creando el tercer select
-                                $("#filtroLocalidad").empty().append('<select id="filtro3" class="selectpicker" name="LocalidadId">');
+                                $("#filtroLocalidad").empty().append('<select id="filtro3" class="input--style-4" name="LocalidadId" style="width: 260px; height: 50px; border: 0;">');
                                 $.each(res, function () {
                                     $("#filtro3").append($("<option>").val(this.Id).text(this.Descripcion));
                                 });
@@ -449,15 +440,15 @@
 
             //Ajax
             $.ajax({
-                url: "obtenerselectprovinciaentidad/" + this.value,
+                url: "obtenerDepartamentos/" + this.value,
                 type: 'GET',
                 dataType: "json",
                 success: function (res) {
                     //Por si queres ver una por una las cosas que vuelven descomenta el alert
-                    alert(res);
+                    //alert(res);
 
                     //Creando el segundo select
-                    $("#filtroDepartamentoEntidad").empty().append('<select id="filtroentidad2" class="selectpicker" name="DepartamentoId">');
+                    $("#filtroDepartamentoEntidad").empty().append('<select id="filtroentidad2" class="input--style-4" name="DepartamentoId" style="width: 260px; height: 50px; border: 0;">');
 
                     $.each(res, function () {
                         $("#filtroentidad2").append($("<option>").val(this.Id).text(this.Descripcion));
@@ -466,16 +457,16 @@
                     $('#filtroentidad2').on('change', function () {
                         //Ajax
                         $.ajax({
-                            url: "obtenerselectdepartamentoentidad/" + this.value,
+                            url: "obtenerLocalidades/" + this.value,
 
                             type: 'GET',
                             dataType: "json",
                             success: function (res) {
                                 // alert(res);
                                 //Creando el tercer select
-                                $("#filtroLocalidadEntidad").empty().append('<select id="filtroentidad3" class="selectpicker" name="LocalidadId">');
+                                $("#filtroLocalidadEntidad").empty().append('<select id="filtroentidad3" class="input--style-4" name="LocalidadId" style="width: 260px; height: 50px; border: 0;">');
                                 $.each(res, function () {
-                                    $("#filtroLocalidadEntidad").append($("<option>").val(this.Id).text(this.Descripcion));
+                                    $("#filtroentidad3").append($("<option>").val(this.Id).text(this.Descripcion));
                                 });
                             }
                         });
