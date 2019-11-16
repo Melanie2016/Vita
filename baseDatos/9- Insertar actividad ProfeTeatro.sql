@@ -51,8 +51,8 @@ Para el armado del taller me baso en mi experiencia como actriz y docente. A lo 
            ,'2019-11-11'
            ,NULL
            ,NULL
-           ,1
-		   ,6) /*Compleja*/
+           ,1  /*TieneFormularioDinamico*/
+		   ,6) /*EstadoId*/
 GO
 
 /*DOMICILIO*/
@@ -74,7 +74,7 @@ INSERT INTO [dbo].[Domicilio]
            ,'B1828'
            ,570
            ,5 /*UsuarioId*/
-           ,7 /*ActividadId*/
+           ,5 /*ActividadId*/
            ,null)
 GO
 
@@ -94,7 +94,7 @@ INSERT INTO [dbo].[FechaActividad]
            ,null
            ,'09:00:00'
            ,'11:00:00'
-           ,7) /*ActividadId*/
+           ,5) /*ActividadId*/
 GO
 
 INSERT INTO [dbo].[FechaActividad]
@@ -110,7 +110,7 @@ INSERT INTO [dbo].[FechaActividad]
            ,null
            ,'13:00:00'
            ,'15:00:00'
-           ,7) /*ActividadId*/
+           ,5) /*ActividadId*/
 GO
 
 INSERT INTO [dbo].[FechaActividad]
@@ -126,5 +126,5 @@ INSERT INTO [dbo].[FechaActividad]
            ,null
            ,'09:00:00'
            ,'11:00:00'
-           ,7) /*ActividadId*/
+           ,5) /*ActividadId*/
 GO
