@@ -208,19 +208,4 @@
         }
     });
 
-  
-
-
-    //$("#complejaTrue").on("click", function () {
-    //    $('#botonEnviar').hide();
-    //    $('#formFormu').show(); 
-       
-    //});
-    //$("#complejaFalse").on("click", function () {
-    //    $('#botonEnviar').show();
-    //    $('#formFormu').hide();
-
-    //});
-
-
 })(jQuery);

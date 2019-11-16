@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using System.Web.Script.Serialization;
 using Vita.Servicios;
 using Vita.ViewModels;
@@ -23,7 +24,9 @@ namespace Vita.Controllers
 
         [HttpGet]
         public ActionResult Registro()
-        {       
+        {
+            ViewBag.HayValidaciones = false;
+
             List<Provincia> provincias = localidadServicio.GetAllProvincias();
             ViewBag.ListaProvincia = new MultiSelectList(provincias, "id", "descripcion");
 
@@ -40,8 +43,17 @@ namespace Vita.Controllers
         }
 
         [HttpGet]
-        public ActionResult RegistroEntidad()
+        public ActionResult RegistroEntidad(string HayValidaciones)
         {
+            ViewBag.HayValidaciones = false;
+
+            if (HayValidaciones == "True")
+            {
+                ViewBag.HayValidaciones = true;
+                ViewBag.Mensaje = "El nombre de usuario ya se encuentra registrado. Ingrese otro";
+
+            }
+
             List<Provincia> provincias = localidadServicio.GetAllProvincias();
             ViewBag.ListaProvincia = new MultiSelectList(provincias, "id", "descripcion");
 
@@ -103,8 +115,22 @@ namespace Vita.Controllers
         }
 
         [HttpPost]
-        public ActionResult Registrar(Usuario usuario, int[] selectedSegmento, int[] selectedCategoria, HttpPostedFileBase Foto)
+        public ActionResult Registro(Usuario usuario, int[] selectedSegmento, int[] selectedCategoria, HttpPostedFileBase Foto)
         {
+            ViewBag.HayValidaciones = false;
+
+            List<Provincia> provincias = localidadServicio.GetAllProvincias();
+            ViewBag.ListaProvincia = new MultiSelectList(provincias, "id", "descripcion");
+
+            List<Sexo> sexos = sexoServicio.GetAllSexo();
+            ViewBag.ListaSexo = new MultiSelectList(sexos, "id", "descripcion");
+
+            List<Segmento> segmentos = segmentoServicio.GetAllSegmento();
+            ViewBag.ListaSegmentos = new MultiSelectList(segmentos, "id", "descripcion");
+
+            List<Categoria> intereses = categoriaServicio.GetAllCategorias();
+            ViewBag.ListaIntereses = new MultiSelectList(intereses, "id", "descripcion");
+
             string path = uploadimage(Foto);
             if (path.Equals("-1"))
             {
@@ -118,13 +144,26 @@ namespace Vita.Controllers
             var existeElUsuario = usuarioServicio.VerificarExistenciaDelUsuario(usuario);
             if (nombreDeUsuarioExiste != null)
             {
-                //ACA DEBERIA DECIR, SU El nombre de usuario ya existe ingrese otro nombre de usuario  
-                return RedirectToAction("Login", "Login");
+                //ACA DEBERIA DECIR, Si el nombre de usuario ya existe ingrese otro nombre de usuario 
+                ViewBag.HayValidaciones = true;
+                ViewBag.Mensaje = "El nombre de usuario ya se encuentra registrado. Ingrese otro";
+
+                if(usuario.RolId == 1) //Persona
+                {
+                    return View();
+                }
+                else //Entidad
+                {
+                    return RedirectToAction("RegistroEntidad", new RouteValueDictionary( new { controller = "Usuario", action = "RegistroEntidad", HayValidaciones = true }));
+                }
+                
             }
             else if (existeElUsuario != null)
             {
                 //ACA DEBERIA DECIR, su usuario ya existe 
-                return RedirectToAction("Login", "Login");
+                ViewBag.HayValidaciones = true;
+                ViewBag.Mensaje = "Ya existe un usuario registrado con el número de documento " + usuario.Dni;
+                return View();
             }
             else
             {
@@ -133,10 +172,12 @@ namespace Vita.Controllers
                 {
                     usuarioServicio.CrearUsuarioSegmento(usuario.Id, selectedSegmento);
                     usuarioServicio.CrearUsuarioCategoriaElegida(usuario.Id, selectedCategoria);
+                    Session["Usuario"] = usuario;
                     return RedirectToAction("PerfilUsuario", "Usuario", usuario);
                 }
                 else
                 {
+                    Session["Usuario"] = usuario;
                     return RedirectToAction("PerfilEntidad", "Usuario", usuario);
                 }
             }
@@ -178,7 +219,7 @@ namespace Vita.Controllers
             else
             {
 
-                Response.Write("<script>alert('Por Favor seleccione una imagen'); </script>");
+                //Response.Write("<script>alert('Por Favor seleccione una imagen'); </script>");
                 path = "-1";
             }
             return path;
