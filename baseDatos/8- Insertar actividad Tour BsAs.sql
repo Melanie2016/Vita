@@ -41,8 +41,8 @@ En seguida, circularemos por el sofisticado barrio de La Recoleta, una zona de e
            ,'2019-11-11'
            ,NULL
            ,NULL
-           ,1
-		   ,6)/*Compleja*/
+           ,1  /*TieneFormularioDinamico*/
+		   ,6) /*EstadoId*/
 GO
 
 /*FECHAS*/
@@ -59,5 +59,5 @@ INSERT INTO [dbo].[FechaActividad]
            ,'2019-11-25'
            ,'13:00:00'
            ,'17:00:00'
-           ,6) /*ActividadId*/
+           ,4) /*ActividadId*/
 GO

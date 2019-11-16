@@ -16,7 +16,7 @@ INSERT INTO [dbo].[Actividad]
            ,[CreatedAt]
            ,[UpdatedAt]
            ,[DeletedAt]
-            ,[ConUsuarioPendiente]
+           ,[ConUsuarioPendiente] 
 		   ,[EstadoId])
      VALUES
            ('Zumba Kids'
@@ -33,8 +33,8 @@ INSERT INTO [dbo].[Actividad]
            ,'2019-11-08'
            ,NULL
            ,NULL
-           ,1
-		   ,6) /*Compleja*/
+           ,1  /*TieneFormularioDinamico*/
+		   ,6) /*EstadoId*/
 GO
 
 /*DOMICILIO*/

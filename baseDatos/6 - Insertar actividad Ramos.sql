@@ -35,8 +35,8 @@ INSERT INTO [dbo].[Actividad]
            ,'2019-11-08'
            ,NULL
            ,NULL
-           ,1
-		   ,6)
+           ,1 /*TieneFormularioDinamico*/
+		   ,6)/*EstadoId*/
 GO
 
 /*DOMICILIO*/
@@ -58,7 +58,7 @@ INSERT INTO [dbo].[Domicilio]
            ,'B1704'
            ,764
            ,2 /*UsuarioId*/
-           ,4 /*ActividadId*/
+           ,2 /*ActividadId*/
            ,null)
 GO
 
@@ -76,7 +76,7 @@ INSERT INTO [dbo].[FechaActividad]
            ,'2019-11-29'
            ,'09:00:00'
            ,'11:00:00'
-           ,4) /*ActividadId*/
+           ,2) /*ActividadId*/
 GO
 
 /*1era---------------------------------------------------------------------------------*/
