@@ -26,13 +26,18 @@ namespace Vita.Controllers
 
 
         [HttpGet]
-        public ActionResult CrearActividad()
+        public ActionResult CrearActividad(int? idActividad)
         {
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
             { return RedirectToAction("Login", "Login"); }
             else
             {
+                if(idActividad != null)
+                {
+                    ViewBag.ActividadCreada = actividadServicio.GetActividad(idActividad.Value);
+                }
+               
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 List<Provincia> provincias = localidadServicio.GetAllProvincias();
                 ViewBag.ListaProvincia = new MultiSelectList(provincias, "id", "descripcion");
@@ -73,7 +78,10 @@ namespace Vita.Controllers
 
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 actividadServicio.CrearActividad(actividad, buscarUsuarioLogueado, selectedSegmento);
-                var activdadCreada = actividadServicio.GetUltimaActividadPorUsuarioCreadaId(buscarUsuarioLogueado.Id);
+                var actividadCreada = actividadServicio.GetUltimaActividadPorUsuarioCreadaId(buscarUsuarioLogueado.Id);
+                return RedirectToAction("CrearActividad", "Actividad", actividadCreada.Id);
+
+                /*
                 if (activdadCreada.ConUsuarioPendiente == true)
                 {
                     return RedirectToAction("CrearFormularioDinamico", "Actividad", activdadCreada);
@@ -83,7 +91,7 @@ namespace Vita.Controllers
                 {
                     return RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
 
-                }
+                }*/
 
 
             }
@@ -600,6 +608,21 @@ namespace Vita.Controllers
                     }
                 }
 
+                return View(buscarUsuarioLogueado);
+            }
+        }
+
+
+        [HttpGet]
+        public ActionResult Publicar(Actividad actividad)
+        {
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                var user = new Usuario();
+                return View(user);
+            }
+            else
+            {
                 return View(buscarUsuarioLogueado);
             }
         }

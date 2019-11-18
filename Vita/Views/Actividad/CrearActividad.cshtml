@@ -33,7 +33,7 @@
                         <h3>Crear actividad</h3>
                         <div class="form-validation">
                             <!--Titulo  <form class="form-valide" action=CreacionActividad method=POST>-->
-                            @using (Html.BeginForm("CreacionActividad", "Actividad", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            @using (Html.BeginForm("CreacionActividad", "Actividad", FormMethod.Post, new { enctype = "multipart/form-data" ,id ="myform", name ="myform" }))
                             {
                                 <div class="form-group row">
                                     <!--Titulo-->
@@ -510,9 +510,9 @@
                                     <div class="col-lg-6" id="filtroLocalidad">
                                     </div>
                                 </div>
-
+                                <!--
                                 <div class="form-group row">
-                                    <!--Aprobación-->
+                                   
                                     <label class="col-lg-4 col-form-label" for="ConUsuarioPendiente">
                                         ¿La actividad necesita de su aprobación?
                                         Si es asi, se le va mandar un formulario a los usuarios para que completen antes de poder inscribirse.
@@ -524,11 +524,68 @@
                                         <label><input type="radio" id="complejaFalse" name="ConUsuarioPendiente" value="false"> No</label><br>
                                     </div>
                                 </div>
+                                -->
                                 <div class="form-group row" id="botonEnviar">
                                     <div class="col-lg-8 ml-auto">
-                                        <button type="submit" class="btn btn-primary">Crear Actividad</button>
+                                        <!-- Button trigger modal -->
+                                        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#guardar">Crear Actividad</button>
+                                    </div>
+
+                                </div>
+                                <div class="form-group row" >
+                                    <div class="col-lg-8 ml-auto">
+                                      
+                                        <div class="bootstrap-modal">
+                                           
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="guardar">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" >
+                                                            <h5 class="modal-title">Importante</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Puede elegir publicar la actividad ahora, o bien hacerlo luego.</p>
+                                                            <p>Al publicar, automaticamente la actividad pasa a ser visible para todos los usuarios.</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal"data-target="#soloCrear" data-dismiss="modal">Publicar ahora</button>
+                                                            <a href="/Actividad/Publicar?actividad=ViewBag.ActividadCreada"><button type="button" class="btn btn-primary" id="publicarLuego">Publicar luego</button></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                      
+                                            
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="publicarLuego">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" >
+                                                            <h5 class="modal-title">Importante</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Su actividad se ha creado con exito.</p>
+                                                            <p>Recuerde, para que los usuarios puedan acceder a esta actividad, debe publicarla. Puede hacerlo desde <a href="/Actividad/ListaActividades"> <u>aquí</u></a> </p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" id="salir" class="btn btn-primary" data-dismiss="modal">Salir</button>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                
                                     </div>
                                 </div>
+
+                               
                             }
                             @*<form class="form-valide" action="CrearFormularioDinamico" method="Get" id="formFormu">
             <div class="form-group row">
@@ -574,9 +631,14 @@
 </body>
 
 </html>
-
-
+    <!--
     <script>
+        function soloCrear() {
+            var formulario = document.getElementById("myform");
+            formulario.submit();
+         }
+    </script> -->
+    <script >
         //Todo siempre una vez cargada la página
         $(document).ready(function () {
 
