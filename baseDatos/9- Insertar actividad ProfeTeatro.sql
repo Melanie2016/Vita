@@ -48,11 +48,11 @@ Para el armado del taller me baso en mi experiencia como actriz y docente. A lo 
            ,570
            ,5 /*UsuarioId*/
            ,'~/Content/images/teatro.jpg'
-           ,'2019-11-11'
+           ,'2019-11-08'
            ,NULL
            ,NULL
-           ,1  /*TieneFormularioDinamico*/
-		   ,6) /*EstadoId*/
+           ,NULL  /*TieneFormularioDinamico*/
+		   ,7) /*EstadoId*/
 GO
 
 /*DOMICILIO*/
@@ -89,9 +89,9 @@ INSERT INTO [dbo].[FechaActividad]
            ,[HoraFin]
            ,[ActividadId])
      VALUES
-           (1
-           ,null
-           ,null
+           (1 /*Lunes*/
+           ,'2019-11-08'
+		   ,'2019-12-30'
            ,'09:00:00'
            ,'11:00:00'
            ,5) /*ActividadId*/
@@ -105,9 +105,9 @@ INSERT INTO [dbo].[FechaActividad]
            ,[HoraFin]
            ,[ActividadId])
      VALUES
-           (3
-           ,null
-           ,null
+           (3 /*Miercoles*/
+           ,'2019-11-08'
+		   ,'2019-12-30'
            ,'13:00:00'
            ,'15:00:00'
            ,5) /*ActividadId*/
@@ -121,9 +121,9 @@ INSERT INTO [dbo].[FechaActividad]
            ,[HoraFin]
            ,[ActividadId])
      VALUES
-           (5
-           ,null
-           ,null
+           (5 /*Viernes*/
+           ,'2019-11-08'
+		   ,'2019-12-30'
            ,'09:00:00'
            ,'11:00:00'
            ,5) /*ActividadId*/

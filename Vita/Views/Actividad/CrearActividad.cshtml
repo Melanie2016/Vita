@@ -30,18 +30,20 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h3>Crear actividad</h3>
+                        <h4 style="padding: 5px; color: #fff; background-image: linear-gradient(230deg, #C0AEDB, #bc4b8a); border-color: #337ab7; WIDTH: 100%; border-radius: 5px; padding-left: 10px; text-align: center;">CREAR ACTIVIDAD</h4>
+                        <br />
                         <div class="form-validation">
                             <!--Titulo  <form class="form-valide" action=CreacionActividad method=POST>-->
                             @using (Html.BeginForm("CreacionActividad", "Actividad", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
+                                <h5 style="padding: 5px; color: #fff; background-color: #337ab7; border-color: #337ab7; WIDTH: 17%; border-radius: 5px; text-align: center;">DATOS GENERALES</h5>
                                 <div class="form-group row">
                                     <!--Titulo-->
                                     <label class="col-lg-4 col-form-label" for="Titulo">
                                         Título de la actividad<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-username" name="Titulo" placeholder="Truco..">
+                                        <input type="text" class="form-control" id="val-username" name="Titulo" placeholder="Truco.." required>
                                     </div>
                                 </div>
 
@@ -51,7 +53,7 @@
                                         Breve descripción <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <textarea class="form-control" id="val-suggestions" name="Descripcion" rows="5" placeholder="Torneo de truco con premios..."></textarea>
+                                        <textarea class="form-control" id="val-suggestions" name="Descripcion" rows="5" placeholder="Torneo de truco con premios..." required></textarea>
                                     </div>
                                 </div>
 
@@ -98,26 +100,66 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <!--PREGUNTA SI TIENE FECHA INICIO Y FIN-->
-                                    <label class="col-lg-4 col-form-label">
-                                        ¿La actividad va a tener una fecha de inicio y una fecha de fin?
-                                        <span class="text-danger">*</span>
+                                    <!--Cupo-->
+                                    <label class="col-lg-4 col-form-label" for="CantidadCupo">
+                                        Cantidad de cupos disponibles<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <label><input type="radio" id="cbox1" name="fecha" value="true" title="Si escoge esta opción deberá ingresar dias y horario de inicio y fin de la actividad"> Si</label><br>
-                                        <label><input type="radio" id="cbox2" name="fecha" value="false" title="Si escoge esta opción deberá seleccionar los días de la semana en los cuales estará disponible la actividad"> No</label><br>
+                                        <input type="text" class="form-control" id="val-number" name="CantidadCupo" placeholder="100" required>
                                     </div>
                                 </div>
 
-                                <div id="fechas" style="display:none">
+                                <div class="form-group row">
+                                    <!--Edad minima-->
+                                    <label class="col-lg-4 col-form-label" for="EdadMinima">
+                                        Edad mínima<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="val-number" name="EdadMinima" placeholder="25" required>
+                                    </div>
+                                </div>
+
+                                <!--Edad maxima-->
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="EdadMaxima">
+                                        Edad máxima<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="val-number" name="EdadMaxima" placeholder="70" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <!--Precio-->
+                                    <label class="col-lg-4 col-form-label" for="Precio">
+                                        Precio <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="val-currency" name="Precio" placeholder="0.00">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <!--Foto-->
+                                    <label class="col-lg-4 col-form-label" for="Foto">
+                                        Ingrese una foto de la Actividad<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input class="file-upload" type="file" id="Foto" name="Foto" />
+                                    </div>
+                                </div>
+
+                                <h5 style="padding: 5px; color: #fff; background-color: #337ab7; border-color: #337ab7; WIDTH: 10%; border-radius: 5px; text-align: center;">FECHAS</h5>
+
+                                <div id="fechas">
                                     <div class="form-group row">
                                         <!--Fecha Desde-->
                                         <label class="col-lg-4 col-form-label" for="RangoFecha">
-                                            Fecha desde <span class="text-danger">*</span>
+                                            Fecha de inicio <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
                                             <div class="input-group date" style="width:200px;">
-                                                <input type="text" class="form-control" placeholder="01/12/2019" name="InicioEvento" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+                                                <input type="text" class="form-control" placeholder="01/12/2019" name="InicioEvento" data-provide="datepicker" data-date-format="dd/mm/yyyy" required>
                                                 <div class="input-group-addon">
                                                     <span class="glyphicon glyphicon-th"></span>
                                                 </div>
@@ -131,18 +173,18 @@
                                             Hora de inicio <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="time" class="form-control" id="val-number" name="HoraInicio" style="width:200px;">
+                                            <input type="time" class="form-control" id="HoraInicio" name="HoraInicio" style="width:200px;" required>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <!--Fecha Hasta-->
                                         <label class="col-lg-4 col-form-label" for="RangoFecha">
-                                            Fecha hasta <span class="text-danger">*</span>
+                                            Fecha fin <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
                                             <div class="input-group date" style="width:200px;">
-                                                <input type="text" class="form-control" placeholder="02/12/2019" name="FinEvento" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+                                                <input type="text" class="form-control" placeholder="02/12/2019" name="FinEvento" data-provide="datepicker" data-date-format="dd/mm/yyyy" required>
                                                 <div class="input-group-addon">
                                                     <span class="glyphicon glyphicon-th"></span>
                                                 </div>
@@ -156,16 +198,28 @@
                                             Hora de fin <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="time" class="form-control" id="val-number" name="HoraFin" style="width:200px;">
+                                            <input type="time" class="form-control" id="HoraFin" name="HoraFin" style="width:200px;" required>
                                         </div>
                                     </div>
 
                                 </div>
 
+                                <div class="form-group row">
+                                    <!--PREGUNTA SI TIENE DIAS Y HORARIOS FIJOS EN LA SEMANA-->
+                                    <label class="col-lg-4 col-form-label">
+                                        ¿Es una actividad que tiene dias y horarios fijos en la semana?
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <label><input type="radio" id="cbox1" name="fecha" value="true" title="Si escoge esta opción deberá seleccionar los días de la semana en los cuales estará disponible la actividad" required> Si</label><br>
+                                        <label><input type="radio" id="cbox2" name="fecha" value="false" required> No</label><br>
+                                    </div>
+                                </div>
+
                                 <div class="form-group row" id="dias" style="display:none">
                                     <!--Dias de la semana-->
                                     <label class="col-lg-4 col-form-label">
-                                        Seleccione los dias en los cuales la actividad estará disponible<span class="text-danger">*</span>
+                                        Seleccione los dias en los cuales estará disponible la actividad<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
                                         <input type="checkbox" id="Lunes" name="Lunes" style="margin-left: 10px;"> Lunes
@@ -178,39 +232,6 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row" id="horarios" style="display:none">
-                                    <!--PREGUNTA SI TIENE UN MISMO HORARIO PARA TODOS LOS DIAS DE LA SEMANA QUE ESCOGIÓ-->
-                                    <label class="col-lg-4 col-form-label">
-                                        ¿La actividad va a tener la misma hora de inicio y fin en los dias de la semana que seleccionó?
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <label><input type="radio" id="cbox3" name="horario" value="true" title="Si escoge esta opción deberá ingresar la hora de inicio y fin que será la misma para todos los diás que seleccionó"> Si</label><br>
-                                        <label><input type="radio" id="cbox4" name="horario" value="false" title="Si escoge esta opción deberá ingresar la hora de inicio y fin de cada día de la semana en forma particular"> No</label><br>
-                                    </div>
-                                </div>
-
-                                <div id="mismoHorario" style="display:none">
-                                    <div class="form-group row">
-                                        <!--Hora Inicio-->
-                                        <label class="col-lg-4 col-form-label">
-                                            Hora de inicio <span class="text-danger">*</span>
-                                        </label>
-                                        <div class="col-lg-6">
-                                            <input type="time" class="form-control" id="val-number" name="HoraInicioMismoDia" style="width:200px;">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <!--Hora Fin-->
-                                        <label class="col-lg-4 col-form-label">
-                                            Hora de fin <span class="text-danger">*</span>
-                                        </label>
-                                        <div class="col-lg-6">
-                                            <input type="time" class="form-control" id="val-number" name="HoraFinMismoDia" style="width:200px;">
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <!--Horario Lunes-->
                                 <div id="horarioLunes" style="display:none">
                                     <div class="form-group row">
@@ -219,7 +240,7 @@
                                             Hora de inicio <b>Lunes</b><span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="time" class="form-control" id="val-number" name="HoraInicioLunes" style="width:200px;">
+                                            <input type="time" class="form-control" id="HoraInicioLunes" name="HoraInicioLunes" style="width:200px;">
                                         </div>
                                     </div>
 
@@ -229,7 +250,7 @@
                                             Hora de fin <b>Lunes</b><span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="time" class="form-control" id="val-number" name="HoraFinLunes" style="width:200px;">
+                                            <input type="time" class="form-control" id="HoraFinLunes" name="HoraFinLunes" style="width:200px;">
                                         </div>
                                     </div>
                                 </div>
@@ -242,7 +263,7 @@
                                             Hora de inicio <b>Martes</b><span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="time" class="form-control" id="val-number" name="HoraInicioMartes" style="width:200px;">
+                                            <input type="time" class="form-control" id="HoraInicioMartes" name="HoraInicioMartes" style="width:200px;">
                                         </div>
                                     </div>
 
@@ -252,7 +273,7 @@
                                             Hora de fin <b>Martes</b><span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="time" class="form-control" id="val-number" name="HoraFinMartes" style="width:200px;">
+                                            <input type="time" class="form-control" id="HoraFinMartes" name="HoraFinMartes" style="width:200px;">
                                         </div>
                                     </div>
                                 </div>
@@ -265,7 +286,7 @@
                                             Hora de inicio <b>Miercoles</b><span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="time" class="form-control" id="val-number" name="HoraInicioMiercoles" style="width:200px;">
+                                            <input type="time" class="form-control" id="HoraInicioMiercoles" name="HoraInicioMiercoles" style="width:200px;">
                                         </div>
                                     </div>
 
@@ -275,7 +296,7 @@
                                             Hora de fin <b>Miercoles</b><span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="time" class="form-control" id="val-number" name="HoraFinMiercoles" style="width:200px;">
+                                            <input type="time" class="form-control" id="HoraFinMiercoles" name="HoraFinMiercoles" style="width:200px;">
                                         </div>
                                     </div>
                                 </div>
@@ -288,7 +309,7 @@
                                             Hora de inicio <b>Jueves</b><span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="time" class="form-control" id="val-number" name="HoraInicioJueves" style="width:200px;">
+                                            <input type="time" class="form-control" id="HoraInicioJueves" name="HoraInicioJueves" style="width:200px;">
                                         </div>
                                     </div>
 
@@ -298,7 +319,7 @@
                                             Hora de fin <b>Jueves</b><span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="time" class="form-control" id="val-number" name="HoraFinJueves" style="width:200px;">
+                                            <input type="time" class="form-control" id="HoraFinJueves" name="HoraFinJueves" style="width:200px;">
                                         </div>
                                     </div>
                                 </div>
@@ -311,7 +332,7 @@
                                             Hora de inicio <b>Viernes</b><span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="time" class="form-control" id="val-number" name="HoraInicioViernes" style="width:200px;">
+                                            <input type="time" class="form-control" id="HoraInicioViernes" name="HoraInicioViernes" style="width:200px;">
                                         </div>
                                     </div>
 
@@ -321,7 +342,7 @@
                                             Hora de fin <b>Viernes</b><span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="time" class="form-control" id="val-number" name="HoraFinViernes" style="width:200px;">
+                                            <input type="time" class="form-control" id="HoraFinViernes" name="HoraFinViernes" style="width:200px;">
                                         </div>
                                     </div>
                                 </div>
@@ -334,7 +355,7 @@
                                             Hora de inicio <b>Sabado</b><span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="time" class="form-control" id="val-number" name="HoraInicioSabado" style="width:200px;">
+                                            <input type="time" class="form-control" id="HoraInicioSabado" name="HoraInicioSabado" style="width:200px;">
                                         </div>
                                     </div>
 
@@ -344,7 +365,7 @@
                                             Hora de fin <b>Sabado</b><span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="time" class="form-control" id="val-number" name="HoraFinSabado" style="width:200px;">
+                                            <input type="time" class="form-control" id="HoraFinSabado" name="HoraFinSabado" style="width:200px;">
                                         </div>
                                     </div>
                                 </div>
@@ -357,7 +378,7 @@
                                             Hora de inicio <b>Domingo</b><span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="time" class="form-control" id="val-number" name="HoraInicioDomingo" style="width:200px;">
+                                            <input type="time" class="form-control" id="HoraInicioDomingo" name="HoraInicioDomingo" style="width:200px;">
                                         </div>
                                     </div>
 
@@ -367,60 +388,21 @@
                                             Hora de fin <b>Domingo</b><span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="time" class="form-control" id="val-number" name="HoraFinDomingo" style="width:200px;">
+                                            <input type="time" class="form-control" id="HoraFinDomingo" name="HoraFinDomingo" style="width:200px;">
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <!--Cupo-->
-                                    <label class="col-lg-4 col-form-label" for="CantidadCupo">
-                                        Cantidad de cupos disponibles<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-number" name="CantidadCupo" placeholder="100">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <!--Edad minima-->
-                                    <label class="col-lg-4 col-form-label" for="EdadMinima">
-                                        Edad mínima<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-number" name="EdadMinima" placeholder="25">
-                                    </div>
-                                </div>
-
-                                <!--Edad maxima-->
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="EdadMaxima">
-                                        Edad máxima<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-number" name="EdadMaxima" placeholder="70">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <!--Precio-->
-                                    <label class="col-lg-4 col-form-label" for="Precio">
-                                        Precio (en caso de no tener, poner cero en número) <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-currency" name="Precio" placeholder="21.60">
-                                    </div>
-                                </div>
-
                                 <!--DOMICILIO-->
-                                <div>Cargar domicilio de la actividad</div>
+                                <h5 style="padding: 5px; color: #fff; background-color: #337ab7; border-color: #337ab7; WIDTH: 10%; border-radius: 5px; text-align: center;">DOMICILIO</h5>
+
                                 <div class="form-group row">
                                     <!--Calle-->
                                     <label class="col-lg-4 col-form-label" for="NombreCalle">
                                         Ingrese nombre de la calle<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-username" name="NombreCalle" placeholder="Nombre de la calle">
+                                        <input type="text" class="form-control" id="val-username" name="NombreCalle" placeholder="Nombre de la calle" required>
                                     </div>
                                 </div>
 
@@ -430,7 +412,7 @@
                                         Ingrese el numero de la calle<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-number" name="NumeroCalle" placeholder="Numero de la calle">
+                                        <input type="text" class="form-control" id="val-number" name="NumeroCalle" placeholder="Numero de la calle" required>
                                     </div>
                                 </div>
 
@@ -460,17 +442,7 @@
                                         Ingrese el codigo postal<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control" name="CodigoPostal" placeholder="B1704">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <!--Nro calle-->
-                                    <label class="col-lg-4 col-form-label" for="Foto">
-                                        Ingrese una foto de la Actividad<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <input class="file-upload" type="file" id="Foto" name="Foto" />
+                                        <input type="text" class="form-control" name="CodigoPostal" placeholder="B1704" required>
                                     </div>
                                 </div>
 
@@ -511,6 +483,8 @@
                                     </div>
                                 </div>
 
+                                <h5 style="padding: 5px; color: #fff; background-color: #337ab7; border-color: #337ab7; WIDTH: 15%; border-radius: 5px; text-align: center;">APROBACIÓN</h5>
+
                                 <div class="form-group row">
                                     <!--Aprobación-->
                                     <label class="col-lg-4 col-form-label" for="ConUsuarioPendiente">
@@ -520,8 +494,8 @@
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6" id="aprobacionCompleja">
-                                        <label><input type="radio" id="complejaTrue" name="ConUsuarioPendiente" value="true"> Si</label><br>
-                                        <label><input type="radio" id="complejaFalse" name="ConUsuarioPendiente" value="false"> No</label><br>
+                                        <label><input type="radio" id="complejaTrue" name="ConUsuarioPendiente" value="true" required> Si</label><br>
+                                        <label><input type="radio" id="complejaFalse" name="ConUsuarioPendiente" value="false" required> No</label><br>
                                     </div>
                                 </div>
                                 <div class="form-group row" id="botonEnviar">
