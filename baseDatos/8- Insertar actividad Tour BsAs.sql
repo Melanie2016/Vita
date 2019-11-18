@@ -16,7 +16,7 @@ INSERT INTO [dbo].[Actividad]
            ,[CreatedAt]
            ,[UpdatedAt]
            ,[DeletedAt]
-            ,[ConUsuarioPendiente]
+           ,[ConUsuarioPendiente]
 		   ,[EstadoId])
      VALUES
            ('Visita guiada por Buenos Aires'
@@ -38,11 +38,11 @@ En seguida, circularemos por el sofisticado barrio de La Recoleta, una zona de e
            ,5467 /*Recoleta*/
            ,4 /*UsuarioId*/
            ,'~/Content/images/casa-rosada.jpg'
-           ,'2019-11-11'
+           ,'2019-11-08'
            ,NULL
            ,NULL
-           ,1  /*TieneFormularioDinamico*/
-		   ,6) /*EstadoId*/
+           ,NULL  /*TieneFormularioDinamico*/
+		   ,7) /*EstadoId*/
 GO
 
 /*FECHAS*/
@@ -55,8 +55,8 @@ INSERT INTO [dbo].[FechaActividad]
            ,[ActividadId])
      VALUES
            (null
-           ,'2019-11-25'
-           ,'2019-11-25'
+           ,'2019-12-08'
+           ,'2019-12-08'
            ,'13:00:00'
            ,'17:00:00'
            ,4) /*ActividadId*/

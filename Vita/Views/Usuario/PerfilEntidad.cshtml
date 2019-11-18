@@ -5,37 +5,6 @@
 }
 @model Usuario
 
-<script>
-    window.onload = function () {
-
-        var options = {
-            exportEnabled: true,
-            animationEnabled: true,
-            title: {
-                text: "Popularidad"
-            },
-            data: [
-                {
-                    type: "splineArea",
-                    dataPoints: [
-                        { y: 10 },
-                        { y: 6 },
-                        { y: 14 },
-                        { y: 12 },
-                        { y: 19 },
-                        { y: 14 },
-                        { y: 05 },
-                        { y: 10 },
-                        { y: 22 }
-                    ]
-                }
-            ]
-        };
-        $("#chartContainer").CanvasJSChart(options);
-
-    }
-</script>
-
 
 <link href="~/Content/css/FotoPerfil.css" rel="stylesheet" media="all">
 
@@ -140,13 +109,6 @@
                         </table>
                         <!--Table-->
                         <button type="submit" class="btn btn-default">MODIFICAR</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <div class="card">
-                        <div id="chartContainer" style="height: 200px; width: 100%; "></div>
                     </div>
                 </div>
             </div>
