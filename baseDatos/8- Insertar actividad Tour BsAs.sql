@@ -45,6 +45,36 @@ En seguida, circularemos por el sofisticado barrio de La Recoleta, una zona de e
 		   ,7) /*EstadoId*/
 GO
 
+/*SEGMENTO*/
+INSERT INTO [dbo].[ActividadSegmento]
+           ([ActividadId]
+           ,[SegmentoId]
+           ,[CreatedAt]
+           ,[UpdatedAt]
+           ,[DeletedAt])
+     VALUES
+           (4 /*ActividadId*/
+           ,2 /*Segmento*/
+           ,'2019-11-08'
+           ,null
+           ,null)
+GO
+
+/*SEGMENTO*/
+INSERT INTO [dbo].[ActividadSegmento]
+           ([ActividadId]
+           ,[SegmentoId]
+           ,[CreatedAt]
+           ,[UpdatedAt]
+           ,[DeletedAt])
+     VALUES
+           (4 /*ActividadId*/
+           ,3 /*Segmento*/
+           ,'2019-11-08'
+           ,null
+           ,null)
+GO
+
 /*FECHAS*/
 INSERT INTO [dbo].[FechaActividad]
            ([DiaSemanaId] 

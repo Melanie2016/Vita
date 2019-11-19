@@ -47,7 +47,7 @@
                                                     <!--Categoria-->
                                                     <div class="input-field" style="padding: 10px">
                                                         <div class="input-select">
-                                                            <select data-trigger="" id="filtroCategoria" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+                                                            <select data-trigger="" id="filtroCategoria" name="categoriaId" style="border: 1px solid rgba(0, 0, 0, 0.1)">
                                                                 <option placeholder="" value="" style="color:#00bbec;">Categoria</option>
                                                                 @foreach (var item in ViewBag.Categorias)
                                                                 {
@@ -61,7 +61,7 @@
                                                     <!--Subcategoria-->
                                                     <div class="input-field">
                                                         <div class="input-select" id="filtroSubcategoria">
-                                                            <select data-trigger="" id="vistaSub" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+                                                            <select data-trigger="" id="vistaSub" name="subcategoriaId" style="border: 1px solid rgba(0, 0, 0, 0.1)">
                                                                 <option placeholder="" value="">Subcategoría</option>
                                                             </select>
                                                         </div>
@@ -70,9 +70,9 @@
                                                     <!--Segmento-->
                                                     <div class="input-field">
                                                         <div class="input-select">
-                                                            <select data-trigger="" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+                                                            <select data-trigger="" name="segmentoId" style="border: 1px solid rgba(0, 0, 0, 0.1)">
                                                                 <option placeholder="" value="">Segmento</option>
-                                                                @foreach (var item in  ViewBag.Segmentos)
+                                                                @foreach (var item in ViewBag.Segmentos)
                                                                 {
                                                                     <option value="@item.Id">@item.Descripcion</option>
                                                                 }
@@ -81,11 +81,11 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="row second">
+                                                <div class="row second" style="margin-top: -20px;">
                                                     <!--Provincia-->
                                                     <div class="input-field">
                                                         <div class="input-select" style="width: 220px; margin-left: 10px;">
-                                                            <select data-trigger="" id="filtroProvincia" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1);">
+                                                            <select data-trigger="" id="filtroProvincia" name="provinciaId" style="border: 1px solid rgba(0, 0, 0, 0.1);">
                                                                 <option placeholder="" value="">Provincia</option>
                                                                 @foreach (var item in ViewBag.Provincias)
                                                                 {
@@ -98,7 +98,7 @@
                                                     <div class="input-field">
                                                         <!--Departamento-->
                                                         <div class="input-select" id="filtroDepartamento">
-                                                            <select data-trigger="" id="vistaDep" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+                                                            <select data-trigger="" id="vistaDep" name="departamentoId" style="border: 1px solid rgba(0, 0, 0, 0.1)">
                                                                 <option placeholder="" value="">Departamento</option>
                                                             </select>
                                                         </div>
@@ -107,13 +107,29 @@
                                                     <div class="input-field">
                                                         <!--Localidad-->
                                                         <div class="input-select" id="filtroLocalidad">
-                                                            <select data-trigger="" id="vistaLoc" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+                                                            <select data-trigger="" id="vistaLoc" name="localidadId" style="border: 1px solid rgba(0, 0, 0, 0.1)">
                                                                 <option placeholder="" value="">Localidad</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row third">
+
+                                                <div class="row second" style="margin-top: -10px;">
+                                                    <!--Precio-->
+                                                    <div class="input-field">
+                                                        <div class="input-select" style="width: 220px; margin-left: 10px;">
+                                                            <select data-trigger="" name="precio" style="border: 1px solid rgba(0, 0, 0, 0.1);">
+                                                                <option placeholder="" value="">Precio</option>
+                                                                <option value="gratuitas">Gratuitas</option>
+                                                                <option value="pagas">Pagas</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="input-field"></div>
+                                                    <div class="input-field"></div>
+                                                </div>
+
+                                                <div class="row third" style="margin-top: -10px;">
                                                     <div class="input-field">
                                                         <div class="result-count" style="margin-left: 20px;">
                                                             <span></span>
@@ -269,7 +285,7 @@
                     success: function (res) {
                         //Creando el segundo select
                         $("#vistaSub").hide();
-                        $("#filtroSubcategoria").empty().append('<select id="filtroSub"  data-trigger="" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1); width: 239px; color: #00bbec; padding: 13px 0; font-weight: bold; font-size: 13px; padding-left: 10px; cursor: pointer; background-image: url(/Content/images/flecha.png); -webkit-appearance: none; background-repeat: no-repeat;background-position: right center; background-position-x: 94%;">');
+                        $("#filtroSubcategoria").empty().append('<select id="filtroSub"  data-trigger="" name="subcategoriaId" style="border: 1px solid rgba(0, 0, 0, 0.1); width: 239px; color: #00bbec; padding: 13px 0; font-weight: bold; font-size: 13px; padding-left: 10px; cursor: pointer; background-image: url(/Content/images/flecha.png); -webkit-appearance: none; background-repeat: no-repeat;background-position: right center; background-position-x: 94%;">');
                         $('#filtroSub').append("<option style='color: #c3bbbb; font-weight: bold; font-size: 12px;'>Subcategoria</option>");
                         $.each(res, function () {
                             $('#filtroSub').append("<option style='color: #666; font-weight: bold; font-size: 12px;' value=" + this.Id + '>' + this.Descripcion + "</option>");
@@ -295,7 +311,7 @@
                     success: function (res) {
                         //Creando el segundo select
                         $("#vistaDep").hide();
-                        $("#filtroDepartamento").empty().append('<select id="filtroDep"  data-trigger="" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1); width: 239px; color: #00bbec; padding: 13px 0; font-weight: bold; font-size: 13px; padding-left: 10px; cursor: pointer; background-image: url(/Content/images/flecha.png); -webkit-appearance: none; background-repeat: no-repeat;background-position: right center; background-position-x: 94%;">');
+                        $("#filtroDepartamento").empty().append('<select id="filtroDep"  data-trigger="" name="departamentoId" style="border: 1px solid rgba(0, 0, 0, 0.1); width: 239px; color: #00bbec; padding: 13px 0; font-weight: bold; font-size: 13px; padding-left: 10px; cursor: pointer; background-image: url(/Content/images/flecha.png); -webkit-appearance: none; background-repeat: no-repeat;background-position: right center; background-position-x: 94%;">');
                         $('#filtroDep').append("<option style='color: #c3bbbb; font-weight: bold; font-size: 12px;'>Departamento</option>");
                         $.each(res, function () {
                             $('#filtroDep').append("<option style='color: #666; font-weight: bold; font-size: 12px;' value=" + this.Id + '>' + this.Descripcion + "</option>");
@@ -319,7 +335,7 @@
                                 success: function (res) {
                                     //Creando el segundo select
                                     $("#vistaLoc").hide();
-                                    $("#filtroLocalidad").empty().append('<select id="filtroLoc"  data-trigger="" name="choices-single-defaul" style="border: 1px solid rgba(0, 0, 0, 0.1); width: 239px; color: #00bbec; padding: 13px 0; font-weight: bold; font-size: 13px; padding-left: 10px; cursor: pointer; background-image: url(/Content/images/flecha.png); -webkit-appearance: none; background-repeat: no-repeat;background-position: right center; background-position-x: 94%;">');
+                                    $("#filtroLocalidad").empty().append('<select id="filtroLoc"  data-trigger="" name="localidadId" style="border: 1px solid rgba(0, 0, 0, 0.1); width: 239px; color: #00bbec; padding: 13px 0; font-weight: bold; font-size: 13px; padding-left: 10px; cursor: pointer; background-image: url(/Content/images/flecha.png); -webkit-appearance: none; background-repeat: no-repeat;background-position: right center; background-position-x: 94%;">');
                                     $('#filtroLoc').append("<option style='color: #c3bbbb; font-weight: bold; font-size: 12px;'>Localidad</option>");
                                     $.each(res, function () {
                                         $('#filtroLoc').append("<option style='color: #666; font-weight: bold; font-size: 12px;' value=" + this.Id + '>' + this.Descripcion + "</option>");

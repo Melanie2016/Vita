@@ -26,7 +26,7 @@ INSERT INTO [dbo].[Actividad]
            ,100
            ,30
            ,3
-           ,3
+           ,13
            ,552 /*LocalidadId*/
            ,1 /*UsuarioId*/
            ,'~/Content/images/Zumba-kids.jpg'
@@ -35,6 +35,21 @@ INSERT INTO [dbo].[Actividad]
            ,NULL
            ,NULL  /*TieneFormularioDinamico*/
 		   ,7) /*EstadoId*/
+GO
+
+/*SEGMENTO*/
+INSERT INTO [dbo].[ActividadSegmento]
+           ([ActividadId]
+           ,[SegmentoId]
+           ,[CreatedAt]
+           ,[UpdatedAt]
+           ,[DeletedAt])
+     VALUES
+           (1 /*ActividadId*/
+           ,1 /*Segmento*/
+           ,'2019-11-08'
+           ,null
+           ,null)
 GO
 
 /*DOMICILIO*/

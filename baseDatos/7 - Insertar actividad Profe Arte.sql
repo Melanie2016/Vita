@@ -39,6 +39,51 @@ INSERT INTO [dbo].[Actividad]
 		   ,7) /*EstadoId*/
 GO
 
+/*SEGMENTO*/
+INSERT INTO [dbo].[ActividadSegmento]
+           ([ActividadId]
+           ,[SegmentoId]
+           ,[CreatedAt]
+           ,[UpdatedAt]
+           ,[DeletedAt])
+     VALUES
+           (3 /*ActividadId*/
+           ,1 /*Segmento*/
+           ,'2019-11-08'
+           ,null
+           ,null)
+GO
+
+/*SEGMENTO*/
+INSERT INTO [dbo].[ActividadSegmento]
+           ([ActividadId]
+           ,[SegmentoId]
+           ,[CreatedAt]
+           ,[UpdatedAt]
+           ,[DeletedAt])
+     VALUES
+           (3 /*ActividadId*/
+           ,2 /*Segmento*/
+           ,'2019-11-08'
+           ,null
+           ,null)
+GO
+
+/*SEGMENTO*/
+INSERT INTO [dbo].[ActividadSegmento]
+           ([ActividadId]
+           ,[SegmentoId]
+           ,[CreatedAt]
+           ,[UpdatedAt]
+           ,[DeletedAt])
+     VALUES
+           (3 /*ActividadId*/
+           ,3 /*Segmento*/
+           ,'2019-11-08'
+           ,null
+           ,null)
+GO
+
 /*DOMICILIO*/
 INSERT INTO [dbo].[Domicilio]
            ([NombreCalle]
