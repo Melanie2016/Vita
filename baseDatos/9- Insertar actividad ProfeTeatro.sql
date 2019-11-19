@@ -55,6 +55,36 @@ Para el armado del taller me baso en mi experiencia como actriz y docente. A lo 
 		   ,7) /*EstadoId*/
 GO
 
+/*SEGMENTO*/
+INSERT INTO [dbo].[ActividadSegmento]
+           ([ActividadId]
+           ,[SegmentoId]
+           ,[CreatedAt]
+           ,[UpdatedAt]
+           ,[DeletedAt])
+     VALUES
+           (5 /*ActividadId*/
+           ,2 /*Segmento*/
+           ,'2019-11-08'
+           ,null
+           ,null)
+GO
+
+/*SEGMENTO*/
+INSERT INTO [dbo].[ActividadSegmento]
+           ([ActividadId]
+           ,[SegmentoId]
+           ,[CreatedAt]
+           ,[UpdatedAt]
+           ,[DeletedAt])
+     VALUES
+           (5 /*ActividadId*/
+           ,3 /*Segmento*/
+           ,'2019-11-08'
+           ,null
+           ,null)
+GO
+
 /*DOMICILIO*/
 INSERT INTO [dbo].[Domicilio]
            ([NombreCalle]
