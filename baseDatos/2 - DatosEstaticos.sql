@@ -88,6 +88,7 @@ SET IDENTITY_INSERT TipoDatoCampo ON
 INSERT INTO TipoDatoCampo(Id, Descripcion) VALUES (1,'Texto');
 INSERT INTO TipoDatoCampo(Id, Descripcion) VALUES (2,'Número');
 INSERT INTO TipoDatoCampo(Id, Descripcion) VALUES (3,'Fecha');
+INSERT INTO TipoDatoCampo(Id, Descripcion) VALUES (3,'Imagen');
 SET IDENTITY_INSERT TipoDatoCampo Off
 
 /*DIASEMANA*/

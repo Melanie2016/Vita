@@ -41,6 +41,8 @@ namespace Vita.ViewModels
         public int LocalidadId { get; set; }
         public int UsuarioId { get; set; }
         public string Foto { get; set; }
+
+        public string Url { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime DeletedAt { get; set; }
