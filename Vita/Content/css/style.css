@@ -10521,3 +10521,216 @@ input[type=submit] {
   font-style: italic;
   font-size: 15px;
 }
+
+
+.popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  z-index: 1000;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: transform 0.5s, opacity 0.5s;
+  transition: transform 0.5s, opacity 0.5s, -webkit-transform 0.5s;
+  overflow-y: auto;
+  display: none;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+.popup:not([class*="fade"]) {
+  background: rgba(17, 17, 17, 0.9);
+}
+.popupShown .popup.visible {
+  display: block;
+  -webkit-animation: popupFadeIn 0.75s;
+          animation: popupFadeIn 0.75s;
+}
+.popup.hidePopup {
+  opacity: 0;
+  pointer-events: none;
+}
+.popup .content {
+  overflow-y: auto;
+}
+.popup .close:not(.button) {
+  position: fixed;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  padding: 14px;
+  font-size: 0;
+  opacity: 0.5;
+  z-index: 200;
+  transition: 0.25s;
+  margin: 0;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+.popup .close:not(.button).left {
+  right: inherit;
+  left: 0;
+}
+.popup .close:not(.button):hover {
+  opacity: 1;
+}
+.popup .close:not(.button) svg {
+  width: 30px;
+  height: 30px;
+  fill: #fff;
+}
+.popup .close.button {
+  position: fixed;
+  z-index: 200;
+  margin: 15px;
+}
+.popup.white .close svg {
+  fill: #202020;
+}
+.popup .wrap {
+  padding: 18px 58px;
+}
+.popup .wrap.spaces {
+  padding: 58px;
+}
+.popup.fullscreen .wrap {
+  padding: 0;
+}
+.popup.fullscreen .embedVideo {
+  height: 100vh;
+  padding-bottom: 0;
+}
+
+@-webkit-keyframes popupFadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes popupFadeIn {
+  from {
+    opacity: 0;
+  }
+}
+.popupShown,
+.popupShown body,
+.sidebarShown,
+.sidebarShown body {
+  overflow-y: hidden !important;
+}
+
+/* embed video container for slides and popups */
+.embedVideo {
+  position: relative;
+  padding-bottom: 56.25%;
+  /* 16x9 */
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.embedVideo iframe,
+.embedVideo object,
+.embedVideo embed,
+.embedVideo video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.embedVideo.size-16x10 {
+  padding-bottom: 62.5%;
+}
+
+.embedVideo.size-4x3 {
+  padding-bottom: 75%;
+}
+
+.embedVideo.size-1x1,
+.embedVideo.size-square {
+  padding-bottom: 100%;
+}
+.videoThumbnail {
+  cursor: pointer;
+  position: relative;
+  font-size: 0;
+  overflow: hidden;
+  line-height: 0;
+}
+.videoThumbnail.rounded {
+  border-radius: 6px;
+}
+.videoThumbnail:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: url("../assets/svg/video-icon.svg") no-repeat;
+  background-position: center center;
+  transition: 0.5s;
+}
+.videoThumbnail:not(.noTint):hover:after {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+.videoThumbnail:hover:before {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  transition: 0.25s;
+}
+.videoThumbnail:active:before {
+  opacity: 0.8;
+}
+.videoThumbnail.small {
+  max-width: 200px;
+  display: block;
+}
+.videoThumbnail.small:before {
+  background-size: 44px;
+}
+
+.popupTrigger,
+.dropdownTrigger,
+.sidebarTrigger {
+  cursor: pointer;
+}
+
+.slide .background,
+.popup .background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.slide .background iframe,
+.popup .background iframe {
+  border: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.slide:not(.youtube) .background iframe,
+.popup:not(.youtube) .background iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.slide .button, .popup .button {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.slide .button.small, .popup .button.small {
+  margin-left: 4px;
+  margin-right: 4px;
+}

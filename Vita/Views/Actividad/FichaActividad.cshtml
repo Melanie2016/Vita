@@ -136,6 +136,7 @@
                         }
 
                         <br />
+
                         <!--MAPA-->
                         @if (ViewBag.Domicilio != null)
                         {
@@ -147,9 +148,19 @@
                         }
                         <!--FIN MAPA-->
                         <!--VIDEO-->
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/ccSk5gLadF8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-                    </div>
+                  
+                               @if (ViewBag.Actividad.Url != null)
+                                {
+
+                                    var videoURI = new Uri (ViewBag.Actividad.Url);
+   
+                                    var videoId = HttpUtility.ParseQueryString(videoURI.Query).Get("v");
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/@videoId" frameborder="0"  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                }
+
+                        </div>
+
                     <div class="col-lg-3 ml-auto">
 
                         <div class="mb-5">

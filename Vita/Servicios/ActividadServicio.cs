@@ -231,6 +231,7 @@ namespace Vita.Servicios
                 CategoriaId = actividadViewModel.CategoriaId,
                 SubcategoriaId = actividadViewModel.SubCategoriaId,
                 Foto = actividadViewModel.Foto,
+                Url = actividadViewModel.Url,
                 LocalidadId = actividadViewModel.LocalidadId,
                 UsuarioId = usuario.Id,
                 CreatedAt = DateTime.Now,

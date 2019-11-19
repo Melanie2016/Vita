@@ -21,6 +21,7 @@
           <Property Name="LocalidadId" Type="int" Nullable="false" />
           <Property Name="UsuarioId" Type="int" />
           <Property Name="Foto" Type="nvarchar(max)" />
+          <Property Name="Url" Type="nvarchar(max)" />
           <Property Name="CreatedAt" Type="date" />
           <Property Name="UpdatedAt" Type="date" />
           <Property Name="DeletedAt" Type="date" />
@@ -867,6 +868,7 @@
           <Property Name="LocalidadId" Type="Int32" Nullable="false" />
           <Property Name="UsuarioId" Type="Int32" />
           <Property Name="Foto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <Property Name="DeletedAt" Type="DateTime" Precision="0" />
@@ -1783,6 +1785,7 @@
                 <ScalarProperty Name="LocalidadId" ColumnName="LocalidadId" />
                 <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
                 <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
