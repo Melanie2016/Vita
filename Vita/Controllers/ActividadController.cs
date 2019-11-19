@@ -323,9 +323,9 @@ namespace Vita.Controllers
 
 
         [HttpPost]
-        public ActionResult Actividades(string textoIngresado)
+        public ActionResult Actividades(string textoIngresado, int? categoriaId, int? subCategoriaId, int? segmentoId, int? provinciaId, int? departamentoId, int? localidadId, string precio)
         {
-            var lista = actividadServicio.GetBusquedaAvanzada(textoIngresado);
+            var lista = actividadServicio.GetBusquedaAvanzada(textoIngresado, categoriaId, subCategoriaId, segmentoId, provinciaId, departamentoId, localidadId, precio);
             ViewBag.Lista = lista;
             ViewBag.Contador = lista.Count();
             ViewBag.Valor = textoIngresado;

@@ -422,10 +422,13 @@ namespace Vita.Servicios
             }
         }
 
-        public List<Actividad> GetBusquedaAvanzada(string textoIngresado)
+        public List<Actividad> GetBusquedaAvanzada(string textoIngresado, int? categoriaId, int? subCategoriaId, int? segmentoId, int? provinciaId, int? departamentoId, int? localidadId, string precio)
         {
             var listaVali = new List<Actividad>();
             var lista = new List<Actividad>();
+            var listaFinal = new List<Actividad>();
+            var listaFiltroPrecio = new List<Actividad>();
+
             var edadOprecio = 0;
             Exception excepcion = null;
             try
@@ -467,12 +470,150 @@ namespace Vita.Servicios
                 lista.AddRange(listaEdad);
             }
 
+            //filtro por provincia, departamento y localidad
             foreach (var act in lista)
             {
                 var actividadValidad = GetActividad(act.Id);
-                listaVali.Add(actividadValidad);
+
+                if (provinciaId != null) //busco por provincia
+                {
+                    if (act.Localidad.Departamento.ProvinciaId == provinciaId)
+                    {
+                        if (departamentoId != null) //busco por departamento
+                        {
+                            if (act.Localidad.DepartamentoId == departamentoId)
+                            {
+                                if (localidadId != null) //busco por localidad
+                                {
+                                    if (act.LocalidadId == localidadId)
+                                    {
+                                        listaVali.Add(actividadValidad);
+                                    }
+                                }
+                                else
+                                {
+                                    listaVali.Add(actividadValidad);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            listaVali.Add(actividadValidad);
+                        }
+                    }
+                }
+                else
+                {
+                    listaVali.Add(actividadValidad);
+                }
             }
-            return listaVali;
+
+
+            //Fitro por categoria, subcategoria y segmento
+            foreach (var item in listaVali)
+            {
+                if (categoriaId != null)
+                {
+                    if (item.CategoriaId == categoriaId) //busco por categoria
+                    {
+                        if (subCategoriaId != null)
+                        {
+                            if (item.SubcategoriaId == subCategoriaId) //busco por subcategoria
+                            {
+                                listaFinal.Add(item);
+                            }
+                        }
+                        else
+                        {
+                            if (segmentoId != null)
+                            {
+                                foreach (var seg in item.ActividadSegmento) //una actividad puede tener muchos segmentos
+                                {
+                                    if (seg.SegmentoId == segmentoId) //busco por segmento
+                                    {
+                                        listaFinal.Add(item);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                listaFinal.Add(item);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (segmentoId != null)
+                    {
+                        foreach (var seg in item.ActividadSegmento) //una actividad puede tener muchos segmentos
+                        {
+                           if( seg.SegmentoId == segmentoId) //busco por segmento
+                            {
+                                listaFinal.Add(item);
+                            }
+                        }
+                    }
+                }
+            }
+
+           
+            if (categoriaId != null || subCategoriaId != null || segmentoId != null)
+            {
+                //filtro por precio
+                foreach (var item in listaFinal)
+                {
+                    if (precio != null) //busco por precio
+                    {
+                        if (item.Precio != null && precio == "pagas")
+                        {
+                            listaFiltroPrecio.Add(item);
+                        }
+
+                        if (item.Precio == null && precio == "gratuitas")
+                        {
+                            listaFiltroPrecio.Add(item);
+                        }
+                    }
+                }
+
+                if (precio != null && precio != "")
+                {
+                    return listaFiltroPrecio;
+                }
+                else
+                {
+                    return listaFinal;
+                }
+            }
+            else
+            {
+                //filtro por precio
+                foreach (var item in listaVali)
+                {
+                    if (precio != null && precio != "") //busco por precio
+                    {
+                        if (item.Precio != null && precio == "pagas")
+                        {
+                            listaFiltroPrecio.Add(item);
+                        }
+
+                        if (item.Precio == null && precio == "gratuitas")
+                        {
+                            listaFiltroPrecio.Add(item);
+                        }
+                    }
+                }
+
+                if (precio != null && precio !="" )
+                {
+                    return listaFiltroPrecio;
+                }
+                else
+                {
+                    return listaVali;
+                }
+            }
         }
 
         public List<Actividad> GetBusquedaPorIdCategoria(string categoriaId)
