@@ -19,8 +19,7 @@ namespace Vita.ViewModels
         public int ActividadId { get; set; }
         public int EntidadId { get; set; }
         public List<CampoViewModel> CamposVm { get; set; }
-
-
+        public bool publicar { get; set; }
 
 
        
@@ -37,3 +36,9 @@ namespace Vita.ViewModels
 
     }
 }
+
+
+
+
+
+

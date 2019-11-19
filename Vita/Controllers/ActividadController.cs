@@ -26,17 +26,14 @@ namespace Vita.Controllers
 
 
         [HttpGet]
-        public ActionResult CrearActividad(int? idActividad)
+        public ActionResult CrearActividad()
         {
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
             { return RedirectToAction("Login", "Login"); }
             else
             {
-                if(idActividad != null)
-                {
-                    ViewBag.ActividadCreada = actividadServicio.GetActividad(idActividad.Value);
-                }
+            
                
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 List<Provincia> provincias = localidadServicio.GetAllProvincias();
@@ -79,19 +76,10 @@ namespace Vita.Controllers
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 actividadServicio.CrearActividad(actividad, buscarUsuarioLogueado, selectedSegmento);
                 var actividadCreada = actividadServicio.GetUltimaActividadPorUsuarioCreadaId(buscarUsuarioLogueado.Id);
-                return RedirectToAction("CrearActividad", "Actividad", actividadCreada.Id);
 
-                /*
-                if (activdadCreada.ConUsuarioPendiente == true)
-                {
-                    return RedirectToAction("CrearFormularioDinamico", "Actividad", activdadCreada);
-
-                }
-                else
-                {
-                    return RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
-
-                }*/
+                return actividadCreada.ConUsuarioPendiente == true
+                    ? RedirectToAction("ExplicativoForm", "Actividad", actividadCreada)
+                    : RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
 
 
             }
@@ -484,7 +472,7 @@ namespace Vita.Controllers
             }
         }
         [HttpGet]
-        public ActionResult CrearFormularioDinamico(Actividad actividad)
+        public ActionResult CrearFormularioDinamico(string idActividad, bool? publicar)
         {
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -612,9 +600,7 @@ namespace Vita.Controllers
             }
         }
 
-
-        [HttpGet]
-        public ActionResult Publicar(Actividad actividad)
+        public ActionResult ExplicativoForm(Actividad actividad)
         {
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
             {
@@ -623,7 +609,25 @@ namespace Vita.Controllers
             }
             else
             {
+                ViewBag.Actividad = actividadServicio.GetActividad(actividad.Id);
                 return View(buscarUsuarioLogueado);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Publicar(string idActividad)
+        {
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                var user = new Usuario();
+                return View(user);
+            }
+            else
+            {
+
+                actividadServicio.PublicarActividad(int.Parse(idActividad));
+                //ViewBag.actividadCreada = actividadServicio.GetActividad(actividad.Id);
+                return RedirectToAction("ListaActividades", "Actividad");
             }
         }
 

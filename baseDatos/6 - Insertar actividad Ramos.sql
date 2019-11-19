@@ -18,7 +18,7 @@ INSERT INTO [dbo].[Actividad]
            ,[CreatedAt]
            ,[UpdatedAt]
            ,[DeletedAt]
-             ,[ConUsuarioPendiente]
+           ,[ConUsuarioPendiente]
 		   ,[EstadoId])
      VALUES
            ('Zumba al aire libre'
@@ -35,8 +35,8 @@ INSERT INTO [dbo].[Actividad]
            ,'2019-11-08'
            ,NULL
            ,NULL
-           ,1 /*TieneFormularioDinamico*/
-		   ,6)/*EstadoId*/
+           ,NULL /*TieneFormularioDinamico*/
+		   ,7)/*EstadoId*/
 GO
 
 /*DOMICILIO*/
@@ -72,8 +72,8 @@ INSERT INTO [dbo].[FechaActividad]
            ,[ActividadId])
      VALUES
            (null
-           ,'2019-11-29'
-           ,'2019-11-29'
+           ,'2019-12-05'
+           ,'2019-12-05'
            ,'09:00:00'
            ,'11:00:00'
            ,2) /*ActividadId*/

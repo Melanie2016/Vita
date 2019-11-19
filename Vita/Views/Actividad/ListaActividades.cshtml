@@ -30,13 +30,14 @@
                         <tr>
                             <th scope="col">Imagen</th>
                             <th scope="col">Titulo actividad</th>
-                            <th scope="col">Zona</th>
-                            <th scope="col">Edad</th>
+                            <th scope="col">Cupo</th>
                             <th scope="col">Aprobados</th>
                             <th scope="col">Pendientes</th>
                             <th scope="col">Rechazados</th>
-                            <th scope="col">Cupo</th>
-                            <th scope="colgroup">Accion</th>
+                            <th scope="colgroup"></th>
+                            <th scope="colgroup"></th>
+                            <th scope="colgroup"></th>
+                            <th scope="colgroup">Estado</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,8 +58,9 @@
                             <tr>
                                 <td><a href="/Actividad/FichaActividad/?idActividad=@i.Id&inscribirse=false"><img src="@Url.Content(ViewBag.Url)" style="width: 190px; height: 120px;"> </a></td>
                                 <td>@i.Titulo</td>
-                                <td>@i.Localidad.Descripcion</td>
-                                <td>@i.EdadMinima - @i.EdadMaxima</td>
+                                <td>
+                                    @Convert.ToInt32(@i.CantidadCupo - @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count()) / @i.CantidadCupo
+                                </td>
                                 <td style="text-align: center;">
                                     <a href="/Actividad/ListaEstado?estadoId=1&actividadId=@i.Id"><span class="label gradient-3 rounded" style="font-size: 15px !important;">@i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count() </span></a>
                                 </td>
@@ -76,14 +78,24 @@
                                         </span>
                                     </a>
                                 </td>
-                                <td>
-                                    @Convert.ToInt32(@i.CantidadCupo - @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count()) de @i.CantidadCupo
+                                
+                                <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span></td>
+                                <td><span><a href="#" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-close color-danger"></i></a></span></td>
+                                
+                                <td>@if (i.Estado.Id != 7) 
+                                {
+                                    <a href="/Actividad/CrearFormularioDinamico?actividad=@i.Id"><span data-toggle="tooltip" data-placement="top" title="Agregar formulario personalizado" ><i class="fa fa-file-text-o fa-2x"></i></span></a>
+                                }else{
+                                    <span> </span>
+                                }
                                 </td>
-                                <td>
-                                    <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span>
-                                </td>
-                                <td>
-                                    <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
+                                <td>@if (i.Estado.Id != 7) 
+                                {
+                                    <a href="/Actividad/Publicar?idActividad=@i.Id"><button class="btn mb-1 btn-primary">Publicar</button></a>
+                                    
+                                }else{
+                                    <span>Publicada</span>
+                                }
                                 </td>
 
                             </tr>

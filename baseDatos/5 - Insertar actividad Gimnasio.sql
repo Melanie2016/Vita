@@ -33,8 +33,8 @@ INSERT INTO [dbo].[Actividad]
            ,'2019-11-08'
            ,NULL
            ,NULL
-           ,1  /*TieneFormularioDinamico*/
-		   ,6) /*EstadoId*/
+           ,NULL  /*TieneFormularioDinamico*/
+		   ,7) /*EstadoId*/
 GO
 
 /*DOMICILIO*/
@@ -70,8 +70,8 @@ INSERT INTO [dbo].[FechaActividad]
            ,[ActividadId])
      VALUES
            (1 /*Lunes*/
-           ,null
-           ,null
+           ,'2019-11-08'
+           ,'2019-12-30'
            ,'14:00:00'
            ,'15:00:00'
            ,1) /*ActividadId*/
@@ -86,8 +86,8 @@ INSERT INTO [dbo].[FechaActividad]
            ,[ActividadId])
      VALUES
            (3 /*Miercoles*/
-           ,null
-           ,null
+           ,'2019-11-08'
+           ,'2019-12-30'
            ,'14:00:00'
            ,'15:00:00'
            ,1) /*ActividadId*/

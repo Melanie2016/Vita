@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using Vita.ViewModels;
 
+
 namespace Vita.Servicios
 {
     public class ActividadServicio
@@ -260,8 +261,10 @@ namespace Vita.Servicios
                 myDbContext.SaveChanges();
                 this.CrearSegmentoActividad(actividadNueva.Id, selectedSegmento);
 
-                //Tiene una fecha de inicio y fin
-                if (actividadViewModel.InicioEvento != null)
+                //Tiene una fecha de inicio y fin solamente
+                if (actividadViewModel.InicioEvento != null && actividadViewModel.HoraInicioLunes == null && actividadViewModel.HoraInicioMartes == null
+                    && actividadViewModel.HoraInicioMiercoles == null && actividadViewModel.HoraInicioJueves == null && actividadViewModel.HoraInicioViernes == null
+                    && actividadViewModel.HoraInicioSabado == null && actividadViewModel.HoraInicioDomingo == null)
                 {
                     FechaActividad fechasActividadNuevo = new FechaActividad
                     {
@@ -275,32 +278,17 @@ namespace Vita.Servicios
                     myDbContext.FechaActividad.Add(fechasActividadNuevo);
                     myDbContext.SaveChanges();
                 }
-                else
+                else //Tiene varios dias a la semana con horarios
                 {
-                    //Tiene varios dias a la semana con horarios
 
                     //LUNES
-                    //Tiene el mismo horario que otros dias
-                    if (actividadViewModel.Lunes == "1" && actividadViewModel.HoraInicioLunes == null)
-                    {
-                        FechaActividad fechasActividadLunes = new FechaActividad
-                        {
-                            DiaSemanaId = 1,
-                            HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMismoDia),
-                            HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMismoDia),
-                            ActividadId = actividadNueva.Id
-                        };
-
-                        myDbContext.FechaActividad.Add(fechasActividadLunes);
-                        myDbContext.SaveChanges();
-                    }
-
-                    //Tiene su propio horario
                     if (actividadViewModel.HoraInicioLunes != null)
                     {
                         FechaActividad fechasActividadLunes = new FechaActividad
                         {
                             DiaSemanaId = 1,
+                            InicioEvento = Convert.ToDateTime(actividadViewModel.InicioEvento + " " + actividadViewModel.HoraInicio),
+                            FinEvento = Convert.ToDateTime(actividadViewModel.FinEvento + " " + actividadViewModel.HoraFin),
                             HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioLunes),
                             HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinLunes),
                             ActividadId = actividadNueva.Id
@@ -311,27 +299,13 @@ namespace Vita.Servicios
                     }
 
                     //MARTES
-                    //Tiene el mismo horario que otros dias
-                    if (actividadViewModel.Martes == "1" && actividadViewModel.HoraInicioMartes == null)
-                    {
-                        FechaActividad fechasActividadMartes = new FechaActividad
-                        {
-                            DiaSemanaId = 2,
-                            HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMismoDia),
-                            HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMismoDia),
-                            ActividadId = actividadNueva.Id
-                        };
-
-                        myDbContext.FechaActividad.Add(fechasActividadMartes);
-                        myDbContext.SaveChanges();
-                    }
-
-                    //Tiene su propio horario
                     if (actividadViewModel.HoraInicioMartes != null)
                     {
                         FechaActividad fechasActividadMartes = new FechaActividad
                         {
                             DiaSemanaId = 2,
+                            InicioEvento = Convert.ToDateTime(actividadViewModel.InicioEvento + " " + actividadViewModel.HoraInicio),
+                            FinEvento = Convert.ToDateTime(actividadViewModel.FinEvento + " " + actividadViewModel.HoraFin),
                             HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMartes),
                             HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMartes),
                             ActividadId = actividadNueva.Id
@@ -345,26 +319,13 @@ namespace Vita.Servicios
 
                     //MIERCOLES
                     //Tiene el mismo horario que otros dias
-                    if (actividadViewModel.Miercoles == "1" && actividadViewModel.HoraInicioMiercoles == null)
-                    {
-                        FechaActividad fechasActividadMiercoles = new FechaActividad
-                        {
-                            DiaSemanaId = 3,
-                            HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMismoDia),
-                            HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMismoDia),
-                            ActividadId = actividadNueva.Id
-                        };
-
-                        myDbContext.FechaActividad.Add(fechasActividadMiercoles);
-                        myDbContext.SaveChanges();
-                    }
-
-                    //Tiene su propio horario
                     if (actividadViewModel.HoraInicioMiercoles != null)
                     {
                         FechaActividad fechasActividadMiercoles = new FechaActividad
                         {
                             DiaSemanaId = 3,
+                            InicioEvento = Convert.ToDateTime(actividadViewModel.InicioEvento + " " + actividadViewModel.HoraInicio),
+                            FinEvento = Convert.ToDateTime(actividadViewModel.FinEvento + " " + actividadViewModel.HoraFin),
                             HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMiercoles),
                             HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMiercoles),
                             ActividadId = actividadNueva.Id
@@ -375,27 +336,13 @@ namespace Vita.Servicios
                     }
 
                     //JUEVES
-                    //Tiene el mismo horario que otros dias
-                    if (actividadViewModel.Jueves == "1" && actividadViewModel.HoraInicioJueves == null)
-                    {
-                        FechaActividad fechasActividadJueves = new FechaActividad
-                        {
-                            DiaSemanaId = 4,
-                            HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMismoDia),
-                            HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMismoDia),
-                            ActividadId = actividadNueva.Id
-                        };
-
-                        myDbContext.FechaActividad.Add(fechasActividadJueves);
-                        myDbContext.SaveChanges();
-                    }
-
-                    //Tiene su propio horario
                     if (actividadViewModel.HoraInicioJueves != null)
                     {
                         FechaActividad fechasActividadJueves = new FechaActividad
                         {
                             DiaSemanaId = 4,
+                            InicioEvento = Convert.ToDateTime(actividadViewModel.InicioEvento + " " + actividadViewModel.HoraInicio),
+                            FinEvento = Convert.ToDateTime(actividadViewModel.FinEvento + " " + actividadViewModel.HoraFin),
                             HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioJueves),
                             HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinJueves),
                             ActividadId = actividadNueva.Id
@@ -406,27 +353,13 @@ namespace Vita.Servicios
                     }
 
                     //VIERNES
-                    //Tiene el mismo horario que otros dias
-                    if (actividadViewModel.Viernes == "1" && actividadViewModel.HoraInicioViernes == null)
-                    {
-                        FechaActividad fechasActividadViernes = new FechaActividad
-                        {
-                            DiaSemanaId = 5,
-                            HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMismoDia),
-                            HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMismoDia),
-                            ActividadId = actividadNueva.Id
-                        };
-
-                        myDbContext.FechaActividad.Add(fechasActividadViernes);
-                        myDbContext.SaveChanges();
-                    }
-
-                    //Tiene su propio horario
                     if (actividadViewModel.HoraInicioViernes != null)
                     {
                         FechaActividad fechasActividadViernes = new FechaActividad
                         {
                             DiaSemanaId = 5,
+                            InicioEvento = Convert.ToDateTime(actividadViewModel.InicioEvento + " " + actividadViewModel.HoraInicio),
+                            FinEvento = Convert.ToDateTime(actividadViewModel.FinEvento + " " + actividadViewModel.HoraFin),
                             HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioViernes),
                             HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinViernes),
                             ActividadId = actividadNueva.Id
@@ -437,27 +370,13 @@ namespace Vita.Servicios
                     }
 
                     //SABADO
-                    //Tiene el mismo horario que otros dias
-                    if (actividadViewModel.Sabado == "1" && actividadViewModel.HoraInicioSabado == null)
-                    {
-                        FechaActividad fechasActividadSabado = new FechaActividad
-                        {
-                            DiaSemanaId = 6,
-                            HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMismoDia),
-                            HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMismoDia),
-                            ActividadId = actividadNueva.Id
-                        };
-
-                        myDbContext.FechaActividad.Add(fechasActividadSabado);
-                        myDbContext.SaveChanges();
-                    }
-
-                    //Tiene su propio horario
                     if (actividadViewModel.HoraInicioSabado != null)
                     {
                         FechaActividad fechasActividadSabado = new FechaActividad
                         {
                             DiaSemanaId = 6,
+                            InicioEvento = Convert.ToDateTime(actividadViewModel.InicioEvento + " " + actividadViewModel.HoraInicio),
+                            FinEvento = Convert.ToDateTime(actividadViewModel.FinEvento + " " + actividadViewModel.HoraFin),
                             HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioSabado),
                             HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinSabado),
                             ActividadId = actividadNueva.Id
@@ -468,27 +387,13 @@ namespace Vita.Servicios
                     }
 
                     //DOMINGO
-                    //Tiene el mismo horario que otros dias
-                    if (actividadViewModel.Domingo == "1" && actividadViewModel.HoraInicioDomingo == null)
-                    {
-                        FechaActividad fechasActividadDomingo = new FechaActividad
-                        {
-                            DiaSemanaId = 0,
-                            HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioMismoDia),
-                            HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinMismoDia),
-                            ActividadId = actividadNueva.Id
-                        };
-
-                        myDbContext.FechaActividad.Add(fechasActividadDomingo);
-                        myDbContext.SaveChanges();
-                    }
-
-                    //Tiene su propio horario
                     if (actividadViewModel.HoraInicioDomingo != null)
                     {
                         FechaActividad fechasActividadDomingo = new FechaActividad
                         {
                             DiaSemanaId = 0,
+                            InicioEvento = Convert.ToDateTime(actividadViewModel.InicioEvento + " " + actividadViewModel.HoraInicio),
+                            FinEvento = Convert.ToDateTime(actividadViewModel.FinEvento + " " + actividadViewModel.HoraFin),
                             HoraInicio = TimeSpan.Parse(actividadViewModel.HoraInicioDomingo),
                             HoraFin = TimeSpan.Parse(actividadViewModel.HoraFinDomingo),
                             ActividadId = actividadNueva.Id
@@ -599,7 +504,12 @@ namespace Vita.Servicios
                     var domi = localidadServicio.GetDomicilioByActividadId(act.Id);
                     act.Domicilio.Add(domi);
                 }
-                lista2.Add(act);
+
+                //Me fijo si la fecha actual es menor a la fecha de fin de la actividad y el estado es publicada, entonces muestro la actividad
+                if (DateTime.Now < act.FechaActividad.FirstOrDefault().FinEvento && act.EstadoId == 7)
+                {
+                    lista2.Add(act);
+                }
             }
 
             return lista2;
@@ -609,6 +519,7 @@ namespace Vita.Servicios
         {
             var lista2 = new List<Actividad>();
             var lista = myDbContext.Actividad.ToList();
+
             foreach (var act in lista)
             {
                 if (act.Localidad == null)
@@ -632,8 +543,14 @@ namespace Vita.Servicios
                     var domi = localidadServicio.GetDomicilioByActividadId(act.Id);
                     act.Domicilio.Add(domi);
                 }
-                lista2.Add(act);
+
+                //Me fijo si la fecha actual es menor a la fecha de fin de la actividad y el estado es publicada, entonces muestro la actividad
+               if(DateTime.Now < act.FechaActividad.FirstOrDefault().FinEvento && act.EstadoId == 7)
+               {
+                    lista2.Add(act);
+               }
             }
+
 
             return lista2;
         }
@@ -774,5 +691,17 @@ namespace Vita.Servicios
                 myDbContext.SaveChanges();
             }
         }
+
+
+
+        public void PublicarActividad(int idActividad)
+        {
+            var actividadBD = myDbContext.Actividad.Where(x => x.Id == idActividad).FirstOrDefault();
+
+            actividadBD.EstadoId = ConstantesUtil.ESTADO_PUBLICADA;
+            myDbContext.SaveChanges();
+        }
+
+
     }
 }

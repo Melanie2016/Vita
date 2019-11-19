@@ -182,7 +182,7 @@
                                         <img src="~/Content/images/reloj.png" /><span style="font-size:18px;color:black">Fecha y Hora</span>
                                         @foreach (var item in ViewBag.FechasActividad)
                                         {
-                                            if (item.InicioEvento != null) //Es una actividad con una fecha desde y hasta
+                                            if (item.InicioEvento != null && item.DiaSemanaId == null) //Es una actividad con una fecha de inicio y fin solamente
                                             {
                                                 <input type="hidden" value="@item.Id" name="FechaActividadId" />
 
