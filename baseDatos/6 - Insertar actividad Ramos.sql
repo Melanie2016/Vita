@@ -15,6 +15,7 @@ INSERT INTO [dbo].[Actividad]
            ,[LocalidadId]
            ,[UsuarioId]
            ,[Foto]
+		   ,[Url]
            ,[CreatedAt]
            ,[UpdatedAt]
            ,[DeletedAt]
@@ -32,6 +33,7 @@ INSERT INTO [dbo].[Actividad]
            ,764 /*LocalidId*/
            ,2 /*UsuarioId*/
            ,'~/Content/images/Zumba-aire-libre.jpg'
+		   ,'https://www.youtube.com/watch?v=AYS5vglBAjg'
            ,'2019-11-08'
            ,NULL
            ,NULL

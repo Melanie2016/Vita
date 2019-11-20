@@ -28,10 +28,10 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 style="padding: 5px; color: #fff; background-image: linear-gradient(230deg, #C0AEDB, #bc4b8a); border-color: #337ab7; WIDTH: 40%; border-radius: 5px; padding-left: 10px; text-align: center;">CREAR FORMULARIO DINÁMICO</h4>
+                        <h4 style="padding: 5px; color: #fff; background-image: linear-gradient(230deg, #C0AEDB, #bc4b8a); border-color: #337ab7; WIDTH: 33%; border-radius: 5px; padding-left: 10px; text-align: center;">CREAR FORMULARIO DINÁMICO</h4>
                         <br />
                         <div class="form-validation">
-                            <form class="form-valide" action=/Actividad/CreacionFormularioDinamico method=POST>
+                            <form class="form-valide" action=/Actividad/CreacionFormularioDinamico method=POST name="myform">
 
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="Titulo">
@@ -52,15 +52,15 @@
 
 
                                 <div><h4>Agregar las consignas:</h4></div>
-                                <p><a class="btn" id="btnAgregarEmpleado" style="background-color: #5edeb5; color: white; text-decoration: underline;">Nueva consigna</a></p>
+                                <p><a class="btn" id="btnAgregarEmpleado" style="background-color: #69D49A; color: white; text-decoration: underline;">Nueva consigna</a></p>
                                 <hr />
                                 <div id="ContenedorEmpleados"></div>
                                
 
                                 <div class="form-group row">
                                         <div class="col-lg-8 ml-auto">
-
-                                            <button type="submit" ng-click="" class="btn btn-primary">Guardar formulario</button>
+                                            <input type="hidden" id="publicar" name="publicar" value="@ViewBag.PublicarAhora">
+                                            <button type="submit" ng-click="" onclick="GuardarFormulario()" class="btn btn-primary">Guardar formulario</button>
                                         </div>
                                     </div>
                             </form>
@@ -72,6 +72,14 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        function GuardarFormulario() {
+                var formulario = document.getElementById("myform");
+                document.myform.publicar.value = '@ViewBag.PublicarAhora';
+                formulario.submit();
+
+            }
+    </script>
 </body>
 </html>
 

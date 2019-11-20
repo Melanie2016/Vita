@@ -30,7 +30,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 style="padding: 5px; color: #fff; background-image: linear-gradient(230deg, #C0AEDB, #bc4b8a); border-color: #337ab7; WIDTH: 100%; border-radius: 5px; padding-left: 10px; text-align: center;">CREAR ACTIVIDAD</h4>
+                        <h4 style="padding: 5px; color: #fff; background-image: linear-gradient(230deg, #C0AEDB, #bc4b8a); border-color: #337ab7; WIDTH: 33%; border-radius: 5px; padding-left: 10px; text-align: center;">CREAR ACTIVIDAD</h4>
                         <br />
                         <div class="form-validation">
                             <!--Titulo  <form class="form-valide" action=CreacionActividad method=POST>-->
@@ -165,7 +165,7 @@
                                     <div class="form-group row">
                                         <!--Fecha Desde-->
                                         <label class="col-lg-4 col-form-label" for="RangoFecha">
-                                            Fecha de inicio <span class="text-danger">*</span>
+                                            Fecha de inicio de la actividad<span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
                                             <div class="input-group date" style="width:200px;">
@@ -180,7 +180,7 @@
                                     <div class="form-group row">
                                         <!--Hora Inicio-->
                                         <label class="col-lg-4 col-form-label">
-                                            Hora de inicio <span class="text-danger">*</span>
+                                            Hora de inicio de la actividad <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
                                             <input type="time" class="form-control" id="HoraInicio" name="HoraInicio" style="width:200px;" required>
@@ -190,7 +190,7 @@
                                     <div class="form-group row">
                                         <!--Fecha Hasta-->
                                         <label class="col-lg-4 col-form-label" for="RangoFecha">
-                                            Fecha fin <span class="text-danger">*</span>
+                                            Fecha de fin de la actividad <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
                                             <div class="input-group date" style="width:200px;">
@@ -205,7 +205,7 @@
                                     <div class="form-group row">
                                         <!--Hora Fin-->
                                         <label class="col-lg-4 col-form-label">
-                                            Hora de fin <span class="text-danger">*</span>
+                                            Hora de fin de la actividad<span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
                                             <input type="time" class="form-control" id="HoraFin" name="HoraFin" style="width:200px;" required>
@@ -493,7 +493,7 @@
                                     </div>
                                 </div>
                                 <input type="hidden" id="ConUsuarioPendiente" name="ConUsuarioPendiente"> 
-
+                                <input type="hidden" id="AccionCrearPublicar" name="AccionCrearPublicar">
                                 <div class="form-group row" id="botonEnviar">
                                     <div class="col-lg-8 ml-auto">
                                         <!-- Button trigger modal -->
@@ -598,13 +598,15 @@
         <script type="text/javascript">
             function crear() {
                 var formulario = document.getElementById("myform");
-                document.myform.ConUsuarioPendiente.value = false;
+                document.myform.ConUsuarioPendiente.value = true;
+                document.myform.AccionCrearPublicar.value = false;
                 formulario.submit();
 
             }
             function publicar() {
                 var formulario = document.getElementById("myform");
                 document.myform.ConUsuarioPendiente.value = true;
+                document.myform.AccionCrearPublicar.value = true;
                 formulario.submit();
              }
    

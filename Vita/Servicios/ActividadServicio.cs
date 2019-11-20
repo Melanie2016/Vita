@@ -824,22 +824,16 @@ namespace Vita.Servicios
                     respuestaNueva.Respuesta1 = f.RespuestaTextoLargo;
                 }
 
-                if (f.RespuestaTextoCorto == null && f.RespuestaDate.Date != fecha.Date)
+                if (f.RespuestaTextoCorto == null && f.RespuestaDate.Date != fecha.Date && f.RespuestaTextoLargo == null)
                 {
                     respuestaNueva.Respuesta1 = f.RespuestaDate.ToString();
                 }
-                if (f.RespuestaTextoLargo == null && f.RespuestaDate.Date != fecha.Date)
-                {
-                    respuestaNueva.Respuesta1 = f.RespuestaDate.ToString();
-                }
-                if (f.RespuestaTextoCorto == null && f.RespuestaDate.Date == fecha.Date)
+              
+                if (f.RespuestaTextoCorto == null && f.RespuestaDate.Date == fecha.Date && f.RespuestaTextoLargo == null)
                 {
                     respuestaNueva.Respuesta1 = f.RespuestaNumero.ToString();
                 }
-                if (f.RespuestaTextoLargo == null && f.RespuestaDate.Date == fecha.Date)
-                {
-                    respuestaNueva.Respuesta1 = f.RespuestaNumero.ToString();
-                }
+                
                 if(f.RespuestaFoto != null && f.RespuestaDate.Date == fecha.Date)
                 {
                     respuestaNueva.Respuesta1 = f.RespuestaFoto.ToString();
