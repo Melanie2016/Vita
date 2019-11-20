@@ -493,7 +493,7 @@
                                     </div>
                                 </div>
                                 <input type="hidden" id="ConUsuarioPendiente" name="ConUsuarioPendiente"> 
-
+                                <input type="hidden" id="AccionCrearPublicar" name="AccionCrearPublicar">
                                 <div class="form-group row" id="botonEnviar">
                                     <div class="col-lg-8 ml-auto">
                                         <!-- Button trigger modal -->
@@ -598,13 +598,15 @@
         <script type="text/javascript">
             function crear() {
                 var formulario = document.getElementById("myform");
-                document.myform.ConUsuarioPendiente.value = false;
+                document.myform.ConUsuarioPendiente.value = true;
+                document.myform.AccionCrearPublicar.value = false;
                 formulario.submit();
 
             }
             function publicar() {
                 var formulario = document.getElementById("myform");
                 document.myform.ConUsuarioPendiente.value = true;
+                document.myform.AccionCrearPublicar.value = true;
                 formulario.submit();
              }
    

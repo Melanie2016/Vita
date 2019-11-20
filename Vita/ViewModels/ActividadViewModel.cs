@@ -47,5 +47,6 @@ namespace Vita.ViewModels
         public DateTime UpdatedAt { get; set; }
         public DateTime DeletedAt { get; set; }
         public bool ConUsuarioPendiente { get; set; }
+        public bool AccionCrearPublicar { get; set; }
     }
 }

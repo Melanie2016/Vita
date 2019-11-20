@@ -77,7 +77,7 @@ namespace Vita.Controllers
                 actividadServicio.CrearActividad(actividad, buscarUsuarioLogueado, selectedSegmento);
                 var actividadCreada = actividadServicio.GetUltimaActividadPorUsuarioCreadaId(buscarUsuarioLogueado.Id);
 
-                return actividadCreada.ConUsuarioPendiente == true
+                return actividad.AccionCrearPublicar == true
                     ? RedirectToAction("ExplicativoForm", "Actividad", actividadCreada)
                     : RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
 
@@ -479,6 +479,7 @@ namespace Vita.Controllers
             { return RedirectToAction("Login", "Login"); }
             else
             {
+                ViewBag.PublicarAhora = publicar;
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 return View(buscarUsuarioLogueado);
             }
@@ -498,6 +499,9 @@ namespace Vita.Controllers
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 var activdadCreada = actividadServicio.GetUltimaActividadPorUsuarioCreadaId(buscarUsuarioLogueado.Id);
                 actividadServicio.CrearFormularioDinamico(formularioDinamicoViewModel, activdadCreada);
+                if(formularioDinamicoViewModel.publicar == true) {
+                    actividadServicio.PublicarActividad(activdadCreada.Id);
+                }
                 return RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
 
 
