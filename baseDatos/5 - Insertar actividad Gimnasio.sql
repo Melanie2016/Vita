@@ -13,6 +13,7 @@ INSERT INTO [dbo].[Actividad]
            ,[LocalidadId]
            ,[UsuarioId]
            ,[Foto]
+		   ,[Url]
            ,[CreatedAt]
            ,[UpdatedAt]
            ,[DeletedAt]
@@ -30,6 +31,7 @@ INSERT INTO [dbo].[Actividad]
            ,552 /*LocalidadId*/
            ,1 /*UsuarioId*/
            ,'~/Content/images/Zumba-kids.jpg'
+		   ,'https://www.youtube.com/watch?v=9fgA6TJ5VHY'
            ,'2019-11-08'
            ,NULL
            ,NULL
