@@ -190,7 +190,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="20" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="60" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -1085,7 +1085,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Campos" Relationship="Self.TipoDatoCampoIdFk" FromRole="TipoDatoCampo" ToRole="Campos" />
         </EntityType>
         <EntityType Name="Usuario">

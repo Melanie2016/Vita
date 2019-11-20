@@ -815,18 +815,35 @@ namespace Vita.Servicios
                 Respuesta respuestaNueva = new Respuesta();
                 respuestaNueva.CamposId = f.CamposId;
                 respuestaNueva.UsuarioId = f.UsuarioId;
-                if (f.RespuestaTexto != null)
+                if (f.RespuestaTextoCorto != null)
                 {
-                    respuestaNueva.Respuesta1 = f.RespuestaTexto;
+                    respuestaNueva.Respuesta1 = f.RespuestaTextoCorto;
+                }
+                if(f.RespuestaTextoLargo != null)
+                {
+                    respuestaNueva.Respuesta1 = f.RespuestaTextoLargo;
                 }
 
-                if (f.RespuestaTexto == null && f.RespuestaDate.Date != fecha.Date)
+                if (f.RespuestaTextoCorto == null && f.RespuestaDate.Date != fecha.Date)
                 {
                     respuestaNueva.Respuesta1 = f.RespuestaDate.ToString();
                 }
-                if(f.RespuestaTexto == null && f.RespuestaDate.Date == fecha.Date)
+                if (f.RespuestaTextoLargo == null && f.RespuestaDate.Date != fecha.Date)
+                {
+                    respuestaNueva.Respuesta1 = f.RespuestaDate.ToString();
+                }
+                if (f.RespuestaTextoCorto == null && f.RespuestaDate.Date == fecha.Date)
                 {
                     respuestaNueva.Respuesta1 = f.RespuestaNumero.ToString();
+                }
+                if (f.RespuestaTextoLargo == null && f.RespuestaDate.Date == fecha.Date)
+                {
+                    respuestaNueva.Respuesta1 = f.RespuestaNumero.ToString();
+                }
+                if(f.RespuestaFoto != null && f.RespuestaDate.Date == fecha.Date)
+                {
+                    respuestaNueva.Respuesta1 = f.RespuestaFoto.ToString();
+
                 }
                 respuestaNueva.CreatedAt = DateTime.Now;
                 myDbContext.Respuesta.Add(respuestaNueva);

@@ -239,7 +239,7 @@ REFERENCES Usuario (Id));
 
 create table TipoDatoCampo(
 Id int identity(1,1) primary key,
-Descripcion varchar(20) /* Numero, texto, fecha, opcion */
+Descripcion varchar(60) /* Numero, texto, fecha, opcion */
 );
 create table Campos(
 Id int identity(1,1) primary key,

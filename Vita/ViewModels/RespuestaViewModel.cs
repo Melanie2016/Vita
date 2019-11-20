@@ -11,8 +11,11 @@ namespace Vita.ViewModels
         public int UsuarioId { get; set; }
 
         public DateTime RespuestaDate { get; set; }
-        public string RespuestaTexto { get; set; }
 
+        public string RespuestaTextoCorto { get; set; }
+        public string RespuestaTextoLargo { get; set; }
         public int RespuestaNumero { get; set; }
+        public string RespuestaFoto { get; set; }
     }
+
 }

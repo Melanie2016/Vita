@@ -85,10 +85,11 @@ SET IDENTITY_INSERT Estado OFF
 
 /*TIPODATOCAMPO*/
 SET IDENTITY_INSERT TipoDatoCampo ON
-INSERT INTO TipoDatoCampo(Id, Descripcion) VALUES (1,'Texto');
-INSERT INTO TipoDatoCampo(Id, Descripcion) VALUES (2,'Número');
-INSERT INTO TipoDatoCampo(Id, Descripcion) VALUES (3,'Fecha');
-INSERT INTO TipoDatoCampo(Id, Descripcion) VALUES (3,'Imagen');
+INSERT INTO TipoDatoCampo(Id, Descripcion) VALUES (1,'Texto Corto (menos de 50 caracteres)');
+INSERT INTO TipoDatoCampo(Id, Descripcion) VALUES (2,'Texto Largo (más de 51 caracteres)');
+INSERT INTO TipoDatoCampo(Id, Descripcion) VALUES (3,'Número');
+INSERT INTO TipoDatoCampo(Id, Descripcion) VALUES (4,'Fecha');
+INSERT INTO TipoDatoCampo(Id, Descripcion) VALUES (5,'Imagen');
 SET IDENTITY_INSERT TipoDatoCampo Off
 
 /*DIASEMANA*/

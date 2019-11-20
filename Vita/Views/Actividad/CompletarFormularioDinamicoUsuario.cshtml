@@ -38,7 +38,8 @@
                             @using (Html.BeginForm("GuardarFormularioUsuario", "Actividad", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
                                 <div id="ContenedorEmpleados"></div>
-                                { var index = -1;
+                                {
+                                    var index = -1;
                                     foreach (var cam in ViewBag.Formulario.Campos)
                                     {
                                         index++;
@@ -52,12 +53,27 @@
                                                     {<span class="text-danger">*</span>}
                                                 </label>
                                                 <div class="col-lg-6">
-                                                    <textarea class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaTexto" rows="5"></textarea>
+                                                    <input class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaTextoCorto" maxlength="50"  />
                                                 </div>
                                             </div>
                                         }
 
                                         if (cam.TipoDatoCampoId == 2)
+                                        {
+
+                                            <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
+                                            <div class="form-group row">
+                                                <label class="col-lg-4 col-form-label">
+                                                    @cam.Nombre  @if (cam.Obligatorio)
+                                                    {<span class="text-danger">*</span>}
+                                                </label>
+                                                <div class="col-lg-6">
+                                                    <textarea class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaTextoLargo" rows="5"></textarea>
+                                                </div>
+                                            </div>
+                                        }
+
+                                        if (cam.TipoDatoCampoId == 3)
                                         {
                                             <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
                                             <div class="form-group row">
@@ -71,11 +87,10 @@
                                                 </div>
                                             </div>
                                         }
-                                        if (cam.TipoDatoCampoId == 3)
+                                        if (cam.TipoDatoCampoId == 4)
                                         {
                                             <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
                                             <div class="form-group row">
-                                                <!--Fecha Hasta-->
                                                 <label class="col-lg-4 col-form-label">
                                                     @cam.Nombre  @if (cam.Obligatorio)
                                                     {<span class="text-danger">*</span>}
@@ -90,6 +105,21 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        }
+                                        if (cam.TipoDatoCampoId == 5)
+                                        {
+                                            <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
+                                            <div class="form-group row">
+                                                <!--Foto-->
+                                                <label class="col-lg-4 col-form-label" for="Foto">
+                                                    @cam.Nombre  @if (cam.Obligatorio)
+                                                    {<span class="text-danger">*</span>}
+                                                </label>
+                                                <div class="col-lg-6">
+                                                    <input class="file-upload" type="file" id="Foto"   name="CamposVm[@index].RespuestaFoto" />
+                                                </div>
+                                            </div>
+
                                         }
                                     }
 
