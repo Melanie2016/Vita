@@ -565,6 +565,10 @@ namespace Vita.Controllers
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 foreach (var c in formu.CamposVm)
                 {
+                    if(c.Foto!= null)
+                    {
+                        c.RespuestaFoto = this.uploadimage(c.Foto);
+                    }
                     c.UsuarioId = buscarUsuarioLogueado.Id;
                 }
 

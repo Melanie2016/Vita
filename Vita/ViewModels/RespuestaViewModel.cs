@@ -15,7 +15,10 @@ namespace Vita.ViewModels
         public string RespuestaTextoCorto { get; set; }
         public string RespuestaTextoLargo { get; set; }
         public int RespuestaNumero { get; set; }
+
         public string RespuestaFoto { get; set; }
+        public HttpPostedFileBase Foto { get; set; }
+
     }
 
 }
