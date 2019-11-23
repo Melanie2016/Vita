@@ -10,34 +10,34 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-8 col-xl-3">
-            <div class="card">
+            <div class="card" style="border:0">
                 <div class="card-body">
                     <div class="row mb-6">
                         <div class="col-12 text-center">
 
                             <div class="avatar-wrapper">
                                 @if (Model.Foto != null && Model.Foto.Length > 0)
-                                {
+{
                                 <img src="@Url.Content(Model.Foto)" alt="" style="height: 200px; width: 200px; border: 3px solid #fff; border-radius: 50%; margin: 0; padding: 0; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);">
-                                }
-                                else
-                                {
-                                    if (Model.Sexo.Descripcion == "Masculino")
-                                    {
-                                        ViewBag.Url = "/Content/images/hombre.png";
-                                    }
-                                    else
-                                    {
-                                        if (Model.Sexo.Descripcion == "Femenino")
-                                        {
-                                            ViewBag.Url = "/Content/images/mujer.jpg";
-                                        }
-                                        else
-                                        {
-                                            ViewBag.Url = "/Content/images/desconocido.png";
-                                        }
-                                    }
-                                }
+}
+else
+{
+    if (Model.Sexo.Descripcion == "Masculino")
+    {
+        ViewBag.Url = "/Content/images/hombre.png";
+    }
+    else
+    {
+        if (Model.Sexo.Descripcion == "Femenino")
+        {
+            ViewBag.Url = "/Content/images/mujer.jpg";
+        }
+        else
+        {
+            ViewBag.Url = "/Content/images/desconocido.png";
+        }
+    }
+}
                                 <img class="profile-pic" src="@ViewBag.Url" width="100" height="100" alt="">
                                 <input class="file-upload" type="file" id="Foto" name="Foto" />
                             </div>
@@ -50,28 +50,30 @@
                     </div>
                     <br><br>
 
-                    <h4>Sobre mí</h4>@Model.SobreMi
-                    <p class="text-muted"></p>
+                    <h4 style="font-size: 1.125rem; font-family: Roboto, sans-serif;">Sobre mí</h4>
+                    <p class="text-muted" style="font-size: 0.875rem; font-family: Roboto, sans-serif;">@Model.SobreMi</p>
                     <ul class="card-profile__info">
-                        <li class="mb-1"><strong class="text-dark mr-4">Contacto</strong> <br><span>@Model.Celular</span></li>
-                        <li><strong class="text-dark mr-4">Email</strong> <span>@Model.Email</span></li>
+                        <li class="mb-1"><strong class="text-dark mr-4" style="font-size: 0.875rem; font-family: Roboto, sans-serif">Contacto</strong> <br><span style="color: #76838f; font-size: 0.875rem; font-family: Roboto, sans-serif;">@Model.Celular</span></li>
+                        <li><strong class="text-dark mr-4" style="font-size: 0.875rem; font-family: Roboto, sans-serif">Email</strong> <span style="color: #76838f; font-size: 0.875rem; font-family: Roboto, sans-serif;">@Model.Email</span></li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="col-lg- col-xl-9">
-            <div class="card">
+            <div class="card" style="border:0">
                 <div class="card-body">
-                    <div class="media media-reply">
+                    <div class="media-body">
                         <div class="media-body">
                             <div class="d-sm-flex justify-content-between mb-2">
-                                <h5 class="mb-sm-0">@Model.UsuarioName<small class="text-muted ml-3">última modificación hace (@Model.UpdatedAt) días </small></h5>
+                                <h5 class="mb-sm-0" style="font-size: 1rem;">@Model.UsuarioName<small class="text-muted ml-3" style="color: #8898aa !important;">última modificación hace (@Model.UpdatedAt) días </small></h5>
                                 <!--<div class="media-reply__link">
                                     <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
                                     <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
                                     <button class="btn btn-transparent text-dark font-weight-bold p-0 ml-2">Reply</button>
                                 </div>-->
                             </div>
+
+                            <br />
 
                             <div class="media mt-3">
                                 <div class="media-body">
@@ -82,7 +84,7 @@
                                             <thead> </thead>
                                             <!--Table head-->
                                             <!--Table body-->
-                                            <tbody>
+                                            <tbody style="color:#76838f; font-family: Roboto, sans-serif; font-size: 0.875rem;">
                                                 <tr>
                                                     <td hidden>@Model.Id</td>
                                                 </tr>
@@ -96,7 +98,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Fecha de Nacimiento</th>
-                                                    <td>@Model.FechaNacimiento</td>
+                                                    <td>@Model.FechaNacimiento.ToString().Remove(11)</td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Sexo</th>

@@ -149,6 +149,7 @@ namespace Vita.Controllers
             ViewBag.ElegirDia = false;
             ViewBag.Inscripto = false;
             ViewBag.Compleja = false;
+            ViewBag.CompletarFormulario = false;
 
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -167,8 +168,8 @@ namespace Vita.Controllers
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 bool inscripto = actividadServicio.BuscarUsuarioInscriptoEnActividad(buscarUsuarioLogueado.Id, int.Parse(idActividad));
                 ViewBag.Inscripto = inscripto;
-
                 ViewBag.Logueado = true;
+                ViewBag.Rol = buscarUsuarioLogueado.RolId;
 
                 return View(buscarUsuarioLogueado);
             }
@@ -189,6 +190,7 @@ namespace Vita.Controllers
             ViewBag.ElegirDia = false;
             ViewBag.Inscripto = false;
             ViewBag.Compleja = false;
+            ViewBag.CompletarFormulario = false;
 
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -206,6 +208,7 @@ namespace Vita.Controllers
             {
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 ViewBag.Logueado = true;
+                ViewBag.Rol = buscarUsuarioLogueado.RolId;
 
                 if (inscribirse == "true")
                 {
@@ -229,6 +232,10 @@ namespace Vita.Controllers
 
                         if (resultado == 1) //quedó inscripto en la actividad
                         {
+                            if (actividad.ConUsuarioPendiente == true)
+                            {
+                                ViewBag.CompletarFormulario = true;
+                            }
 
                             //Parte del Mail
                             /*

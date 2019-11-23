@@ -182,11 +182,18 @@
                                     <input type="hidden" value="@ViewBag.Actividad.Id" name="idActividad" />
                                     <input type="hidden" value="true" name="inscribirse" />
 
-                                    if (!ViewBag.Inscripto) //Si no está inscripto en la actividad, puede inscribirse
+                                    if (!ViewBag.Inscripto && ViewBag.Rol != 2) //Si no está inscripto en la actividad y no es una entidad, puede inscribirse
                                     {
                                         if (ViewBag.Resultado != 1) //puede ser que justo se inscribió recién y hay que ocultarle el botón
                                         {
                                             <input type="submit" class="nav-link" style=" background-color: #7D4BBC;font-weight: bold;text-align: center;color: white;border-radius: 5px; width: 250px; height: 38px; padding-top: 5px; margin-bottom: 35px;" value="Inscribirse" />
+                                        }
+                                        else //se inscribió en la actividad
+                                        {
+                                            if (ViewBag.CompletarFormulario) //tiene formulario dinamico y debe completarlo
+                                            {
+                                                <a href="/Actividad/ActividadesDelUsuarioInscripto" class="nav-link" style=" background-color: #69D385;font-weight: bold;text-align: center;color: white;border-radius: 5px;">Completar Formulario</a>
+                                            }
                                         }
                                     }
 
@@ -223,7 +230,7 @@
                                             {
                                                 if (ViewBag.Logueado) //Esta logueado y son distintos dias y horarios
                                                 {
-                                                    if (!ViewBag.Inscripto) //Si no está inscripto en la actividad, puede inscribirse
+                                                    if (!ViewBag.Inscripto && ViewBag.Rol != 2) //Si no está inscripto en la actividad y no es una entidad, puede inscribirse
                                                     {
                                                         if (ViewBag.Resultado != 1) //puede ser que justo se inscribió recién y hay que ocultarle las opciones
                                                         {
