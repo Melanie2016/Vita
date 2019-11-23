@@ -48,82 +48,131 @@
                             {
                                 ViewBag.Url = "/Content/images/sin_foto.png";
                             }
-                        <tr>
-                            <td><a href="/Actividad/FichaActividad/?idActividad=@i.Id&inscribirse=false"><img src="@Url.Content(ViewBag.Url)" style="width: 190px; height: 120px;"> </a></td>
-                            <td>@i.Titulo</td>
-                            <td>@i.Localidad.Descripcion</td>
-                            <td>@i.EdadMinima - @i.EdadMaxima</td>
-                           
+                            <tr>
+                                <td><a href="/Actividad/FichaActividad/?idActividad=@i.Id&inscribirse=false"><img src="@Url.Content(ViewBag.Url)" style="width: 190px; height: 120px;"> </a></td>
+                                <td>@i.Titulo</td>
+                                <td>@i.Localidad.Descripcion</td>
+                                <td>@i.EdadMinima - @i.EdadMaxima</td>
 
-                            @if (i.ConUsuarioPendiente == true)
-                            {
-                                var estado = @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion;
-                            <td style="text-align: center;">
-                            <!-- <a href="/Actividad/ListaEstado?estadoId=2&actividadId=@i.Id"> -->
-
-
-                                @if (estado == "Pendiente")
+                               
+                                @if (i.ConUsuarioPendiente == true)
                                 {
-                                    <a href="/Actividad/CompletarFormularioDinamicoUsuario?actividadId=@i.Id">
-                                        <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                            Completar Form
-                                        </span>
-                                    </a>
-
-                                    <p>
-                                    </p>
+                                    var estado = @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion;
+                                    <td style="text-align: center;">
 
 
-                                    <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                        @estado
-                                    </span>
+                                        @{
+                                            var formulario = ViewBag.ListaRespuestaFormu;
+                                            //foreach(var f in formulario)
+                                            //{
+                                            //    if(f.)
+                                            //}
+                                            if (formulario.Count != 0)//tiene un formulario
+                                            {
+                                                if (estado == "Pendiente")
+                                                {
+                                                    <p>
+                                                        Formulario ya completado
+                                                    </p>
+
+
+                                                    <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                        @estado
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <p>
+                                                    </p>
+
+                                                    if (estado == "Aprobado")
+                                                    {
+                                                        <p>
+                                                            Formulario ya completado
+                                                        </p>
+                                                        <span class="label gradient-3 rounded" style="font-size: 15px !important;">
+                                                            @estado
+                                                        </span>
+                                                    }
+                                                    else //rechazado
+                                                    {
+                                                        <p>
+                                                            Formulario ya completado
+                                                        </p>
+                                                        <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                            @estado
+                                                        </span>
+                                                    }
+
+                                                }
+                                            }
+                                            else //no tiene formulario
+                                            {
+                                                if (estado == "Pendiente" && formulario.Count == 0)
+                                                {
+                                                    <a href="/Actividad/CompletarFormularioDinamicoUsuario?actividadId=@i.Id">
+                                                        <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                            Completar Form
+                                                        </span>
+                                                    </a>
+
+                                                    <p>
+                                                    </p>
+
+
+                                                    <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                        @estado
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <p>
+                                                    </p>
+
+                                                    if (estado == "Aprobado")
+                                                    {
+                                                        <span class="label gradient-3 rounded" style="font-size: 15px !important;">
+                                                            @estado
+                                                        </span>
+                                                    }
+                                                    else //rechazado
+                                                    {
+                                                        <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                            @estado
+                                                        </span>
+                                                    }
+
+                                                }
+                                            }
+
+                                           
+                                        }
+
+
+                                    </td>
+
                                 }
+
                                 else
                                 {
-                                    <p>
-                                    </p>
+                                    var estado = @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion;
+                                    <td style="text-align: center;">
 
-                                    if (estado == "Aprobado")
-                                    {
-                                        <span class="label gradient-3 rounded" style="font-size: 15px !important;">
-                                            @estado
-                                        </span>
-                                    }
-                                    else //rechazado
-                                    {
-                                        <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                            @estado
-                                        </span>
-                                    }
+                                        @if (estado == "Aprobado")
+                                        {
+                                            <span class="label gradient-3 rounded" style="font-size: 15px !important;">
+                                                @estado
+                                            </span>
+                                        }
+                                        else //rechazado
+                                        {
+                                            <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                @estado
+                                            </span>
+                                        }
 
+                                    </td>
                                 }
-
-
-
-                        </td>
-
-                            }
-
-                            else
-                            {
-                                var estado = @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion;
-                        <td style="text-align: center;">
-
-                                @if (estado == "Aprobado")
-                                {
-                                    <span class="label gradient-3 rounded" style="font-size: 15px !important;">
-                                        @estado
-                                    </span>
-                                }
-                                else //rechazado
-                                {
-                                    <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                        @estado
-                                    </span>
-                                }
-
-                        </td>
-                            }
 
 
 

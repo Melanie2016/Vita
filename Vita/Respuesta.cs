@@ -15,6 +15,8 @@ namespace Vita
     public partial class Respuesta
     {
         public int Id { get; set; }
+        public Nullable<int> ActividadId { get; set; }
+        public Nullable<int> FormularioDinamicoId { get; set; }
         public Nullable<int> CamposId { get; set; }
         public Nullable<int> UsuarioId { get; set; }
         public string Respuesta1 { get; set; }
@@ -22,7 +24,9 @@ namespace Vita
         public Nullable<System.DateTime> UpdatedAt { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
     
+        public virtual Actividad Actividad { get; set; }
         public virtual Campos Campos { get; set; }
+        public virtual FormularioDinamico FormularioDinamico { get; set; }
         public virtual Usuario Usuario { get; set; }
     }
 }

@@ -815,6 +815,8 @@ namespace Vita.Servicios
                 Respuesta respuestaNueva = new Respuesta();
                 respuestaNueva.CamposId = f.CamposId;
                 respuestaNueva.UsuarioId = f.UsuarioId;
+                respuestaNueva.FormularioDinamicoId = f.FormularioDinamicoId;
+                respuestaNueva.ActividadId = f.ActividadId;
                 if (f.RespuestaTextoCorto != null)
                 {
                     respuestaNueva.Respuesta1 = f.RespuestaTextoCorto;
@@ -854,7 +856,11 @@ namespace Vita.Servicios
             actividadBD.EstadoId = ConstantesUtil.ESTADO_PUBLICADA;
             myDbContext.SaveChanges();
         }
-
+        public List<Respuesta> GetRespuestasByUsuarioIdandActividadId(int usuarioId, int actividadId)
+        {
+            var respuestas = myDbContext.Respuesta.Where(x => x.UsuarioId == usuarioId && x.ActividadId == actividadId).ToList();
+            return respuestas;
+        }
 
     }
 }

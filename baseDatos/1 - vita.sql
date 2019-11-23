@@ -258,12 +258,18 @@ REFERENCES FormularioDinamico (Id));
 
 create table Respuesta(
 Id int identity(1,1) primary key,
+ActividadId int,
+FormularioDinamicoId int,
 CamposId int,
 UsuarioId int, 
 Respuesta varchar(max),
 CreatedAt Date null,
 UpdatedAt Date null, 
 DeletedAt Date null, 
+CONSTRAINT ActividadIdFkR FOREIGN KEY(ActividadId)
+REFERENCES Actividad (Id),
+CONSTRAINT FormularioDinamicoIdRFK FOREIGN KEY(FormularioDinamicoId)
+REFERENCES FormularioDinamico (Id),
 CONSTRAINT CamposIdFk FOREIGN KEY(CamposId)
 REFERENCES Campos (Id),
 CONSTRAINT UsuarioIdfk FOREIGN KEY(UsuarioId)

@@ -518,7 +518,14 @@ namespace Vita.Controllers
             else
             {
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
-                ViewBag.ListaActividades = actividadServicio.GetAllActividadByRolUsuarioId(buscarUsuarioLogueado.Id);
+                var actividades= actividadServicio.GetAllActividadByRolUsuarioId(buscarUsuarioLogueado.Id);
+                ViewBag.ListaActividades = actividades;
+                List<Respuesta> listaRespuestas = new List<Respuesta>();
+                foreach(var ac in actividades)
+                {
+                    listaRespuestas.AddRange(actividadServicio.GetRespuestasByUsuarioIdandActividadId(buscarUsuarioLogueado.Id, ac.Id).ToList());
+                }
+                ViewBag.ListaRespuestaFormu = listaRespuestas;
                 return View(buscarUsuarioLogueado);
             }
         }
@@ -570,6 +577,8 @@ namespace Vita.Controllers
                         c.RespuestaFoto = this.uploadimage(c.Foto);
                     }
                     c.UsuarioId = buscarUsuarioLogueado.Id;
+                    
+                   
                 }
 
                actividadServicio.GuardarFormularioUsuario(formu);

@@ -43,6 +43,8 @@
                                     foreach (var cam in ViewBag.Formulario.Campos)
                                     {
                                         index++;
+                                        <input name="CamposVm[@index].ActividadId" value="@ViewBag.Formulario.Actividad.Id" hidden />
+                                        <input name="CamposVm[@index].FormularioDinamicoId" value="@ViewBag.Formulario.Id" hidden />
                                         if (cam.TipoDatoCampoId == 1)
                                         {
 
@@ -53,7 +55,7 @@
                                                     {<span class="text-danger">*</span>}
                                                 </label>
                                                 <div class="col-lg-6">
-                                                    <input class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaTextoCorto" maxlength="50"  />
+                                                    <input class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaTextoCorto" maxlength="50" />
                                                 </div>
                                             </div>
                                         }
@@ -116,7 +118,7 @@
                                                     {<span class="text-danger">*</span>}
                                                 </label>
                                                 <div class="col-lg-6">
-                                                    <input class="file-upload" type="file" id="Foto"   name="CamposVm[@index].Foto" />
+                                                    <input class="file-upload" type="file" id="Foto" name="CamposVm[@index].Foto" />
                                                 </div>
                                             </div>
 
