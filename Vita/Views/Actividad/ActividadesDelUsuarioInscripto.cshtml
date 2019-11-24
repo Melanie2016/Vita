@@ -60,110 +60,121 @@
                                 @if (i.ConUsuarioPendiente == true)
                                 {
                                     var estado = @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion;
-                                    <td style="text-align: center;">
+                            <td style="text-align: center;">
 
 
-                                        @{
-                                            List<Respuesta> respuestas = new List<Respuesta>();
-                                             List<Respuesta> re = new List<Respuesta>();
-                                            if (respuestasDeBd.Count != 0)
-                                            {
-                                                foreach (var r in respuestasDeBd)
-                                                {
-                                                    respuestas.Add(r);
-                                                }
-                                                re= respuestas.Where(x => x.ActividadId == i.Id).ToList();
-                                            }
-
-                                            if (re.Count != 0)
-                                            {
-                                                //List<Respuesta> respuestas = new List<Respuesta>();
-                                                //foreach (var r in respuestasDeBd)
-                                                //{
-                                                //    respuestas.AddRange(r);
-                                                //}
-                                                //var re= respuestas.Where(x => x.ActividadId == i.Id).ToList();
-                                                if (estado == "Pendiente")
-                                                {
-                                                    <p>
-                                                        Formulario ya completado
-                                                    </p>
-
-
-                                                    <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                                        @estado
-                                                    </span>
-                                                }
-                                                else
-                                                {
-                                                    <p>
-                                                    </p>
-
-                                                    if (estado == "Aprobado")
-                                                    {
-                                                        <p>
-                                                            Formulario ya completado
-                                                        </p>
-                                                        <span class="label gradient-3 rounded" style="font-size: 15px !important;">
-                                                            @estado
-                                                        </span>
-                                                    }
-                                                    else //rechazado
-                                                    {
-                                                        <p>
-                                                            Formulario ya completado
-                                                        </p>
-                                                        <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                                            @estado
-                                                        </span>
-                                                    }
-
-                                                }
-                                            }
-                                            else //no tiene formulario
-                                            {
-                                            
-                                                if (estado == "Pendiente" && re.Count== 0)
-                                                {
-                                                    <a href="/Actividad/CompletarFormularioDinamicoUsuario?actividadId=@i.Id">
-                                                        <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                                            Completar formulario
-                                                        </span>
-                                                    </a>
-
-                                                    <p>
-                                                    </p>
-
-
-                                                    <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                                        @estado
-                                                    </span>
-                                                }
-                                                else
-                                                {
-                                                    <p>
-                                                    </p>
-
-                                                    if (estado == "Aprobado")
-                                                    {
-                                                        <span class="label gradient-3 rounded" style="font-size: 15px !important;">
-                                                            @estado
-                                                        </span>
-                                                    }
-                                                    else //rechazado
-                                                    {
-                                                        <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                                            @estado
-                                                        </span>
-                                                    }
-
-                                                }
-                                            }
-                                         
+                                @{
+                                    List<Respuesta> respuestas = new List<Respuesta>();
+                                    List<Respuesta> re = new List<Respuesta>();
+                                    if (respuestasDeBd.Count != 0)
+                                    {
+                                        foreach (var r in respuestasDeBd)
+                                        {
+                                            respuestas.Add(r);
                                         }
+                                        re = respuestas.Where(x => x.ActividadId == i.Id).ToList();
+                                    }
+
+                                    if (re.Count != 0)// tiene respuestas de un formulario
+                                    {
+
+                                        if (estado == "Rehacer formulario")
+                                        {
+                                            <a href="/Actividad/CompletarFormularioDinamicoUsuario?actividadId=@i.Id">
+                                                <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                   Ir a rehacer formulario
+                                                </span>
+                                            </a>
+
+                                            <p>
+                                            </p>
 
 
-                                    </td>
+                                            <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                @estado
+                                            </span>
+                                        }
+                                        else if (estado == "Pendiente de aprobación")
+                                        {
+                                            <p>
+                                                Formulario ya completado
+                                            </p>
+
+
+                                            <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                @estado
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <p>
+                                            </p>
+
+                                            if (estado == "Aprobado")
+                                            {
+                                                <p>
+                                                    Formulario ya completado
+                                                </p>
+                                                <span class="label gradient-3 rounded" style="font-size: 15px !important;">
+                                                    @estado
+                                                </span>
+                                            }
+                                            else //rechazado
+                                            {
+                                                <p>
+                                                    Formulario ya completado
+                                                </p>
+                                                <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                    @estado
+                                                </span>
+                                            }
+
+                                        }
+                                    }
+                                    else //no tiene formulario
+                                    {
+
+                                        if (estado == "Pendiente de aprobación" && re.Count == 0)
+                                        {
+                                            <a href="/Actividad/CompletarFormularioDinamicoUsuario?actividadId=@i.Id">
+                                                <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                    Completar formulario
+                                                </span>
+                                            </a>
+
+                                            <p>
+                                            </p>
+
+
+                                            <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                @estado
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <p>
+                                            </p>
+
+                                            if (estado == "Aprobado")
+                                            {
+                                                <span class="label gradient-3 rounded" style="font-size: 15px !important;">
+                                                    @estado
+                                                </span>
+                                            }
+                                            else //rechazado
+                                            {
+                                                <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                    @estado
+                                                </span>
+                                            }
+
+                                        }
+                                    }
+
+                                }
+
+
+                            </td>
 
                                 }
 
