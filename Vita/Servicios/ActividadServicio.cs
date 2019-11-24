@@ -477,36 +477,40 @@ namespace Vita.Servicios
             {
                 var actividadValidad = GetActividad(act.Id);
 
-                if (provinciaId != null) //busco por provincia
+                //Me fijo si la fecha actual es menor a la fecha de fin de la actividad y el estado es publicada, entonces muestro la actividad
+                if (DateTime.Now < act.FechaActividad.FirstOrDefault().FinEvento && act.EstadoId == 7)
                 {
-                    if (act.Localidad.Departamento.ProvinciaId == provinciaId)
+                    if (provinciaId != null) //busco por provincia
                     {
-                        if (departamentoId != null) //busco por departamento
+                        if (act.Localidad.Departamento.ProvinciaId == provinciaId)
                         {
-                            if (act.Localidad.DepartamentoId == departamentoId)
+                            if (departamentoId != null) //busco por departamento
                             {
-                                if (localidadId != null) //busco por localidad
+                                if (act.Localidad.DepartamentoId == departamentoId)
                                 {
-                                    if (act.LocalidadId == localidadId)
+                                    if (localidadId != null) //busco por localidad
+                                    {
+                                        if (act.LocalidadId == localidadId)
+                                        {
+                                            listaVali.Add(actividadValidad);
+                                        }
+                                    }
+                                    else
                                     {
                                         listaVali.Add(actividadValidad);
                                     }
                                 }
-                                else
-                                {
-                                    listaVali.Add(actividadValidad);
-                                }
+                            }
+                            else
+                            {
+                                listaVali.Add(actividadValidad);
                             }
                         }
-                        else
-                        {
-                            listaVali.Add(actividadValidad);
-                        }
                     }
-                }
-                else
-                {
-                    listaVali.Add(actividadValidad);
+                    else
+                    {
+                        listaVali.Add(actividadValidad);
+                    }
                 }
             }
 
