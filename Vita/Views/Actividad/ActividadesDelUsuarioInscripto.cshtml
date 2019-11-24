@@ -171,124 +171,120 @@
                                                 }
 
                                             }
-                                        }
-                                        else //no tiene formulario
-                                        {
-
-                                            if (estado == "Pendiente de aprobación" && re.Count == 0)
+                                            if (estado != "Cancelado" && estado != "Rechazado" && estado != "Finalizado")
                                             {
-                                                <a href="/Actividad/CompletarFormularioDinamicoUsuario?actividadId=@i.Id">
-                                                    <span class="label gradient-2 rounded" style="font-size: 15px !important; background-image: linear-gradient(230deg, #69D385, #a9dab6);">
-                                                        Completar formulario
-                                                    </span>
-                                                </a>
+                                            <td>
+                                                <span><a href="/Actividad/DarseDeBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
+                                            </td>
+                                        }
+                                    }
+                                    else //no tiene formulario
+                                    {
 
+                                        if (estado == "Pendiente de aprobación" && re.Count == 0)
+                                        {
+                                            <a href="/Actividad/CompletarFormularioDinamicoUsuario?actividadId=@i.Id">
+                                                <span class="label gradient-2 rounded" style="font-size: 15px !important; background-image: linear-gradient(230deg, #69D385, #a9dab6);">
+                                                    Completar formulario
+                                                </span>
+                                            </a>
+
+                                            <p>
+                                            </p>
+
+
+                                            <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                @estado
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <p>
+                                            </p>
+
+                                            if (estado == "Aprobado")
+                                            {
+                                                <span class="label gradient-3 rounded" style="font-size: 15px !important;">
+                                                    @estado
+                                                </span>
+                                            }
+                                            else if (estado == "Cancelado")
+                                            {
                                                 <p>
+                                                    Usted se dió de baja a está actividad<br />
+                                                    el dia @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().DeletedAt
                                                 </p>
-
-
                                                 <span class="label gradient-2 rounded" style="font-size: 15px !important;">
                                                     @estado
                                                 </span>
                                             }
-                                            else
+                                            else //rechazado
                                             {
-                                                <p>
-                                                </p>
-
-                                                if (estado == "Aprobado")
-                                                {
-                                                    <span class="label gradient-3 rounded" style="font-size: 15px !important;">
-                                                        @estado
-                                                    </span>
-                                                }
-                                                else if (estado == "Cancelado")
-                                                {
-                                                    <p>
-                                                        Usted se dió de baja a está actividad<br />
-                                                        el dia @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().DeletedAt
-                                                    </p>
-                                                    <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                                        @estado
-                                                    </span>
-                                                }
-                                                else //rechazado
-                                                {
-                                                    <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                                        @estado
-                                                    </span>
-                                                }
-
+                                                <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                    @estado
+                                                </span>
                                             }
+
+                                        }
+                                        if (estado != "Cancelado" && estado != "Rechazado" && estado != "Finalizado")
+                                        {
+                                            <td>
+                                                <span><a href="/Actividad/DarseDeBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
+                                            </td>
+                                        }
+                                    }
+
+                                    }
+
+
+                                    </td>
+
+                                }
+
+                                else
+                                {
+                                    var estado = @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion;
+                                    <td style="text-align: center;">
+
+                                        @if (estado == "Aprobado")
+                                        {
+                                            <span class="label gradient-3 rounded" style="font-size: 15px !important;">
+                                                @estado
+                                            </span>
+
+                                        }
+                                        else if (estado == "Cancelado")
+                                        {
+                                            <p>
+                                                Usted se dió de baja a está actividad<br />
+                                                el dia @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().DeletedAt
+                                            </p>
+                                            <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                @estado
+                                            </span>
+                                        }
+                                        else //rechazado
+                                        {
+                                            <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                @estado
+                                            </span>
                                         }
 
-                                    }
 
-
-                                </td>
-
-                            }
-
-                            else
-                            {
-                                var estado = @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion;
-                                <td style="text-align: center;">
-
-                                    @if (estado == "Aprobado")
-                                    {
-                                        <span class="label gradient-3 rounded" style="font-size: 15px !important;">
-                                            @estado
-                                        </span>
-                                    }
-                                    else if (estado == "Cancelado")
-                                    {
-                                        <p>
-                                            Usted se dió de baja a está actividad<br />
-                                            el dia @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().DeletedAt
-                                        </p>
-                                        <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                            @estado
-                                        </span>
-                                    }
-                                    else //rechazado
-                                    {
-                                        <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                            @estado
-                                        </span>
-                                    }
-
-
-                                </td>
-
-                            }
-
-
-
-
-
-                            
-                                @*@{var estado2 = @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion;
-
-                                if (estado2 != "Cancelado" )
-                                
-                                    <td>
-                                        <span><a href="/Actividad/DarseDeBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
                                     </td>
-                                     
-                              }*@
+                                    if (estado != "Cancelado" && estado != "Rechazado" && estado != "Finalizado")
+                                    {
+                                        <td>
+                                            <span><a href="/Actividad/DarseDeBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
+                                        </td>
+                                    }
 
-                            <td>
-                                <span><a href="/Actividad/DarseDeBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                            </td>
+
+
+                                }
 
                         </tr>
-
-
-
-
                         }
-
-
                     </tbody>
                 </table>
             </div>
