@@ -5,26 +5,86 @@
 }
 
 @model Usuario
+    <link href="../../Content/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
+    <!-- Page plugins css -->
+    <link href="../../Content/plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
+    <!-- Color picker plugins css -->
+    <link href="../../Content/plugins/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet">
+    <!-- Date picker plugins css -->
+    <link href="../../Content/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!-- Daterange picker plugins css -->
+    <link href="../../Content/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+    <link href="../../Content/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
 <section class="container-fluid">
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Mis actividades</h4>
 
             <div class="table-responsive">
-                <div class="header-left" style="margin-left:80%;">
-                    <div class="input-group icons">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
+                <div class="header-left" style="margin-left:90%;">
+                   
+                        <div>
+                           <button class=" btn btn-ligth" id="botonFiltrar" onclick="muestra_oculta('contenido')"><i class="fa fa-filter"></i> &nbsp; Filtrar</button>
                         </div>
-                        <input type="search" class="form-control" placeholder="Buscar categoria" aria-label="Search Dashboard">
-                        <div class="drop-down animated flipInX d-md-none">
-                            <form action="#">
-                                <input type="text" class="form-control" placeholder="Search">
-                            </form>
-                        </div>
-                    </div>
+                      
+                   
                 </div>
-                <br><br><br><br><br>
+                <div class="card" id="contenido" style="background-color: #F5F5F5; width: 90%;">
+                    <div class="card-body">
+                                <div class="basic-form">
+                                    <form action="/Actividad/ListaActividades" method="post" name="formulario1">
+                                        <div class="form-row"> <!-- Primer fila -->
+                                            <div class="form-group col-md-6">
+                                                <label>Titulo</label>
+                                                <input type="text" class="form-control"  placeholder="Nombre de la actividad" >
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Categorias</label>
+                                                <select id="inputState" class="form-control" name="idCategoria">
+                                                    <option selected="selected">Seleccionar...</option>
+                                                    @foreach (var item in ViewBag.Categorias)
+                                                                {
+                                                                    <option value="@item.Id">@item.Descripcion</option>
+                                                                }
+                                                </select>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="form-row"> <!-- Segunda fila -->
+                                            <div class="form-group col-md-6">
+                                                <label for="RangoFecha">Desde</label>
+                                        
+                                                <div class="input-group date" style="width:200px;">
+                                                    <input type="text" class="form-control" placeholder="Seleccionar.." name="fechaDesde" data-provide="datepicker" data-date-format="dd/mm/yyyy" autocomplete="off">
+                                                    <div class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-th"></span>
+                                                    </div>
+                                                
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="RangoFecha">Hasta</label>
+                                        
+                                                <div class="input-group date" style="width:200px;">
+                                                    <input type="text" class="form-control" placeholder="Seleccionar.." name="fechaHasta" data-provide="datepicker" data-date-format="dd/mm/yyyy" autocomplete="off" >
+                                                    <div class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-th"></span>
+                                                    </div>
+                                                
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+
+                                        
+                                            <button type="submit" class="btn btn-secondary">Buscar</button>
+                                    </form>
+                                </div>
+                            </div>
+                    
+                </div>
+                <br><br>
                 <table class="table header-border table-hover verticle-middle">
                     <thead>
                         <tr>
@@ -41,177 +101,169 @@
                         </tr>
                     </thead>
                     <tbody>
-
-                        @*@foreach (Actividad i in Model)*@
-
-                        @foreach (Actividad i in ViewBag.ListaActvidades)
-                        {
-                            if (i.Foto != null && i.Foto.Length > 0)
+                        @if(ViewBag.ListaActvidadesFiltrada == null){
+                            foreach (Actividad i in ViewBag.ListaActvidades)
                             {
-                                ViewBag.Url = i.Foto;
-                            }
-                            else
-                            {
-                                ViewBag.Url = "/Content/images/sin_foto.png";
-                    
-                            }
-                            <tr>
-                                <td><a href="/Actividad/FichaActividad/?idActividad=@i.Id&inscribirse=false"><img src="@Url.Content(ViewBag.Url)" style="width: 190px; height: 120px;"> </a></td>
-                                <td>@i.Titulo</td>
-                                <td>
-                                    @Convert.ToInt32(@i.CantidadCupo - @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count()) / @i.CantidadCupo
-                                </td>
-                                <td style="text-align: center;">
-                                    <a href="/Actividad/ListaEstado?estadoId=1&actividadId=@i.Id"><span class="label gradient-3 rounded" style="font-size: 15px !important;">@i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count() </span></a>
-                                </td>
-                                <td style="text-align: center;">
-                                    <a href="/Actividad/ListaEstado?estadoId=2&actividadId=@i.Id">
-                                        <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                            @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Pendiente" && x.ActividadId == i.Id).Count()
-                                        </span>
-                                    </a>
-                                </td>
-                                <td style="text-align: center;">
-                                    <a href="/Actividad/ListaEstado?estadoId=4&actividadId=@i.Id">
-                                        <span class="label gradient-1 rounded" style="font-size: 15px !important;">
-                                            @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Rechazado" && x.ActividadId == i.Id).Count()
-                                        </span>
-                                    </a>
-                                </td>
-                                
-                                <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span></td>
-                                <td><span><a href="#" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-close color-danger"></i></a></span></td>
-                                
-                                <td>@if (i.Estado.Id != 7 && i.FormularioDinamico.Where(x => x.ActividadId == i.Id).FirstOrDefault() == null) 
+                                if (i.Foto != null && i.Foto.Length > 0)
                                 {
-                                    <a href="/Actividad/CrearFormularioDinamico?actividad=@i.Id"><span data-toggle="tooltip" data-placement="top" title="Agregar formulario personalizado" ><i class="fa fa-file-text-o fa-2x"></i></span></a>
-                                }else{
-                                <a href="/Actividad/RespuestasFormularioDinamico?actividadId=@i.Id?usuarioRespuestaId=@Model.Id"><span data-toggle="tooltip" data-placement="top" title="Ver formulario"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></span></a>
+                                    ViewBag.Url = i.Foto;
                                 }
-                                </td>
-                                <td>@if (i.Estado.Id != 7) 
+                                else
                                 {
-                                    <a href="/Actividad/Publicar?idActividad=@i.Id"><button class="btn mb-1 btn-primary">Publicar</button></a>
+                                    ViewBag.Url = "/Content/images/sin_foto.png";
+                        
+                                }
+                                <tr>
+                                    <td><a href="/Actividad/FichaActividad/?idActividad=@i.Id&inscribirse=false"><img src="@Url.Content(ViewBag.Url)" style="width: 190px; height: 120px;"> </a></td>
+                                    <td>@i.Titulo</td>
+                                    <td>
+                                        @Convert.ToInt32(@i.CantidadCupo - @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count()) / @i.CantidadCupo
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <a href="/Actividad/ListaEstado?estadoId=1&actividadId=@i.Id"><span class="label gradient-3 rounded" style="font-size: 15px !important;">@i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count() </span></a>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <a href="/Actividad/ListaEstado?estadoId=2&actividadId=@i.Id">
+                                            <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Pendiente" && x.ActividadId == i.Id).Count()
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <a href="/Actividad/ListaEstado?estadoId=4&actividadId=@i.Id">
+                                            <span class="label gradient-1 rounded" style="font-size: 15px !important;">
+                                                @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Rechazado" && x.ActividadId == i.Id).Count()
+                                            </span>
+                                        </a>
+                                    </td>
                                     
-                                }else{
-                                    <span>Publicada</span>
+                                    <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span></td>
+                                    <td><span><a href="#" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-close color-danger"></i></a></span></td>
+                                    
+                                    <td>@if (i.Estado.Id != 7 && i.FormularioDinamico.Where(x => x.ActividadId == i.Id).FirstOrDefault() == null) 
+                                    {
+                                        <a href="/Actividad/CrearFormularioDinamico?actividad=@i.Id"><span data-toggle="tooltip" data-placement="top" title="Agregar formulario personalizado" ><i class="fa fa-file-text-o fa-2x"></i></span></a>
+                                    }else{
+                                    <a href="/Actividad/RespuestasFormularioDinamico?actividadId=@i.Id?usuarioRespuestaId=@Model.Id"><span data-toggle="tooltip" data-placement="top" title="Ver formulario"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></span></a>
+                                    }
+                                    </td>
+                                    <td>@if (i.Estado.Id != 7) 
+                                    {
+                                        <a href="/Actividad/Publicar?idActividad=@i.Id"><button class="btn mb-1 btn-primary">Publicar</button></a>
+                                        
+                                    }else{
+                                        <span>Publicada</span>
+                                    }
+                                    </td>
+
+                                </tr>
+
+                            }
+                        }else{
+                            foreach (Actividad i in ViewBag.ListaActvidadesFiltrada)
+                            {
+                                if (i.Foto != null && i.Foto.Length > 0)
+                                {
+                                    ViewBag.Url = i.Foto;
                                 }
-                                </td>
+                                else
+                                {
+                                    ViewBag.Url = "/Content/images/sin_foto.png";
+                        
+                                }
+                                <tr>
+                                    <td><a href="/Actividad/FichaActividad/?idActividad=@i.Id&inscribirse=false"><img src="@Url.Content(ViewBag.Url)" style="width: 190px; height: 120px;"> </a></td>
+                                    <td>@i.Titulo</td>
+                                    <td>
+                                        @Convert.ToInt32(@i.CantidadCupo - @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count()) / @i.CantidadCupo
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <a href="/Actividad/ListaEstado?estadoId=1&actividadId=@i.Id"><span class="label gradient-3 rounded" style="font-size: 15px !important;">@i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count() </span></a>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <a href="/Actividad/ListaEstado?estadoId=2&actividadId=@i.Id">
+                                            <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Pendiente" && x.ActividadId == i.Id).Count()
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <a href="/Actividad/ListaEstado?estadoId=4&actividadId=@i.Id">
+                                            <span class="label gradient-1 rounded" style="font-size: 15px !important;">
+                                                @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Rechazado" && x.ActividadId == i.Id).Count()
+                                            </span>
+                                        </a>
+                                    </td>
+                                    
+                                    <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span></td>
+                                    <td><span><a href="#" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-close color-danger"></i></a></span></td>
+                                    
+                                    <td>@if (i.Estado.Id != 7 && i.FormularioDinamico.Where(x => x.ActividadId == i.Id).FirstOrDefault() == null) 
+                                    {
+                                        <a href="/Actividad/CrearFormularioDinamico?actividad=@i.Id"><span data-toggle="tooltip" data-placement="top" title="Agregar formulario personalizado" ><i class="fa fa-file-text-o fa-2x"></i></span></a>
+                                    }else{
+                                    <a href="/Actividad/RespuestasFormularioDinamico?actividadId=@i.Id?usuarioRespuestaId=@Model.Id"><span data-toggle="tooltip" data-placement="top" title="Ver formulario"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></span></a>
+                                    }
+                                    </td>
+                                    <td>@if (i.Estado.Id != 7) 
+                                    {
+                                        <a href="/Actividad/Publicar?idActividad=@i.Id"><button class="btn mb-1 btn-primary">Publicar</button></a>
+                                        
+                                    }else{
+                                        <span>Publicada</span>
+                                    }
+                                    </td>
 
-                            </tr>
+                                </tr>
 
+                            }
                         }
 
-                        @*<tr>
-            <th><img src="../../Content/images/1.jpg"></th>
-            <td>Air Conditioner</td>
-            <td>Air Conditioner</td>
-            <td>Air Conditioner</td>
-            <td>
-                <div class="progress" style="height: 10px">
-                    <div class="progress-bar gradient-1" style="width: 70%;" role="progressbar">
-                        <span class="sr-only">70% Complete</span>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <span class="label gradient-1 btn-rounded">70%</span>
-            </td>
-            <td>
-                <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
-            </td>
-            <td>
-                <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-            </td>
-        </tr>
-        <tr>
-            <th><img src="../../Content/images/2.jpg"></th>
-            <td>Textiles</td>
-            <td>Textiles</td>
-            <td>Textiles</td>
-            <td>
-                <div class="progress" style="height: 10px">
-                    <div class="progress-bar gradient-2" style="width: 70%;" role="progressbar">
-                        <span class="sr-only">70% Complete</span>
-                    </div>
-                </div>
-            </td>
-            <td><span class="label btn-rounded gradient-2">70%</span></td>
-            <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i></a></td>
-            <td>
-                <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-            </td>
-        </tr>
-        <tr>
-            <th><img src="../../Content/images/5.jpg"></th>
-            <td>Milk Powder</td>
-            <td>Milk Powder</td>
-            <td>Milk Powder</td>
-            <td>
-                <div class="progress" style="height: 10px">
-                    <div class="progress-bar gradient-3" style="width: 70%;" role="progressbar">
-                        <span class="sr-only">70% Complete</span>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <span class="label btn-rounded gradient-3">70%</span>
-            </td>
-            <td>
-                <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
-            </td>
-            <td>
-                <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-            </td>
-        </tr>
-        <tr>
-            <th><img src="../../Content/images/4.jpg"></th>
-            <td>Vehicles</td>
-            <td>Vehicles</td>
-            <td>Vehicles</td>
-            <td>
-                <div class="progress" style="height: 10px">
-                    <div class="progress-bar gradient-8" style="width: 70%;" role="progressbar">
-                        <span class="sr-only">70% Complete</span>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <span class="label gradient-8 btn-rounded">70%</span>
-            </td>
-            <td>
-                <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
-            </td>
-            <td>
-                <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-            </td>
-        </tr>
-        <tr>
-            <th><img src="../../Content/images/3.jpg"></th>
-            <td>Boats</td>
-            <td>Boats</td>
-            <td>Boats</td>
-            <td>
-                <div class="progress" style="height: 10px">
-                    <div class="progress-bar gradient-1" style="width: 70%;" role="progressbar">
-                        <span class="sr-only">70% Complete</span>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <span class="label gradient-1 btn-rounded">70%</span>
-            </td>
-            <td>
-                <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
-            </td>
-            <td>
-                <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-            </td>
-        </tr>*@
+                            
+
+                        
+                        
+                        
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+    <script src="../../Content/plugins/common/common.min.js"></script>
+    <script src="../../Content/js/custom.min.js"></script>
+    <script src="../../Content/js/settings.js"></script>
+    <script src="../../Content/js/gleek.js"></script>
+    <script src="../../Content/js/styleSwitcher.js"></script>
+
+    <script src="../../Content/plugins/moment/moment.js"></script>
+    <script src="../../Content/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <!-- Clock Plugin JavaScript -->
+    <script src="../../Content/plugins/clockpicker/dist/jquery-clockpicker.min.js"></script>
+    <!-- Color Picker Plugin JavaScript -->
+    <script src="../../Content/plugins/jquery-asColorPicker-master/libs/jquery-asColor.js"></script>
+    <script src="../../Content/plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js"></script>
+    <script src="../../Content/plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js"></script>
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="../../Content/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <!-- Date range Plugin JavaScript -->
+    <script src="../../Content/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <script src="../../Content/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <script src="../../Content/js/plugins-init/form-pickers-init.js"></script>
+    <script src="../../Content/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    
+    <script>
+        function muestra_oculta(id){
+            if (document.getElementById){ //se obtiene el id
+            var el = document.getElementById(id); //se define la variable "el" igual a nuestro div
+            el.style.display = (el.style.display == 'none') ? 'block' : 'none'; //damos un atributo display:none que oculta el div
+            }
+            }
+            window.onload = function(){/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
+            muestra_oculta('contenido');/* "contenido_a_mostrar" es el nombre que le dimos al DIV */
+        }
+
+
+    </script>
 </section>
 

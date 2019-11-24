@@ -309,7 +309,7 @@ namespace Vita.Controllers
             {
                 buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
                 ViewBag.ListaActvidades = actividadServicio.GetAllActividadByRolEntidadId(buscarUsuarioLogueado.Id);
-
+                ViewBag.Categorias = categoriaServicio.GetAllCategorias();
                 //  ViewBag.ListaUsuariosInscriptoActividad = actividadServicio.GetAllActividadUsuarioInscriptoByActividadId( tiene que recibir la actividad id para poder hacerlo, hay que porbar)
 
                 return View(buscarUsuarioLogueado);
@@ -317,6 +317,25 @@ namespace Vita.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult ListaActividades(int? idCategoria, DateTime? fechaDesde , DateTime? fechaHasta)
+        {
+            //obtengo usuario logueado
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
+                ViewBag.ListaActvidadesFiltrada = actividadServicio.GetActividadesFiltradasPorUsuario(buscarUsuarioLogueado.Id, idCategoria,fechaDesde,fechaHasta);
+                ViewBag.Categorias = categoriaServicio.GetAllCategorias(); // solo para q no rompa en el filtro cuando vuelvo a llamar a la vista
+                ViewBag.ListaActvidades = actividadServicio.GetAllActividadByRolEntidadId(buscarUsuarioLogueado.Id);
+                return View(buscarUsuarioLogueado);
+
+
+            }
+        }
 
         [HttpPost]
         public ActionResult Actividades(string textoIngresado, int? categoriaId, int? subCategoriaId, int? segmentoId, int? provinciaId, int? departamentoId, int? localidadId, string precio)
