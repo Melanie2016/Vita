@@ -33,8 +33,8 @@ namespace Vita.Controllers
             { return RedirectToAction("Login", "Login"); }
             else
             {
-            
-               
+
+
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 List<Provincia> provincias = localidadServicio.GetAllProvincias();
                 ViewBag.ListaProvincia = new MultiSelectList(provincias, "id", "descripcion");
@@ -178,7 +178,7 @@ namespace Vita.Controllers
         [HttpPost]
         public ActionResult FichaActividad(string idActividad, string inscribirse, int[] FechaActividadId, ViewModels.Gmail model)
         {
-            
+
 
             var actividad = actividadServicio.GetActividad(int.Parse(idActividad));
             ViewBag.Actividad = actividad;
@@ -242,7 +242,7 @@ namespace Vita.Controllers
                             MailAddress to = new MailAddress(buscarUsuarioLogueado.Email);
                             MailAddress from = new MailAddress("vita.contactanos@gmail.com");
                             MailMessage mm = new MailMessage(from, to); */
-          
+
 
                             var mensaje = "";
                             var body = "";
@@ -256,26 +256,26 @@ namespace Vita.Controllers
                                 mensaje = "Su inscripción está en estado PENDIENTE. Debe completar el formulario con los requisitos solicitados para poder realizar esta actividad. El mismo lo podrá ver en su perfil en la sección MIS ACTIVIDADES INSCRIPTAS. Se le informará cuando su inscripción este aprobada.";
                                 body = "Tu inscripción a la actividad " + tituloActividad + " está en estado pendiente de aprobación. Te avisaremos cuando esté aprobada. Gracias! "; //Mensaje whatsApp
 
-                     
+
                             }
                             else //Queda aprobado de una
                             {
                                 mensaje = "Su inscripción ha sido exitosa. Puede ir a su perfil para ver sus actividades";
                                 body = "Tu inscripción a la actividad " + tituloActividad + " ha sido exitosa! "; //Mensaje whatsApp
                                                                                                                   //Parte Email
-                              /*  mm.Subject = "Inscripción a " + tituloActividad + " exitosa";
-                                mm.Body = "¡Hola! A partir de ahora, Comienza tu nueva actividad - " + tituloActividad + " - VITA Espera que sea de tu agrado y lo más importante... ¡Que te diviertas! ";
-                                mm.IsBodyHtml = true;
+                                                                                                                  /*  mm.Subject = "Inscripción a " + tituloActividad + " exitosa";
+                                                                                                                    mm.Body = "¡Hola! A partir de ahora, Comienza tu nueva actividad - " + tituloActividad + " - VITA Espera que sea de tu agrado y lo más importante... ¡Que te diviertas! ";
+                                                                                                                    mm.IsBodyHtml = true;
 
-                                SmtpClient smtp = new SmtpClient();
-                                smtp.Host = "smtp.gmail.com";
-                                smtp.Port = 587;
-                                smtp.EnableSsl = true;
+                                                                                                                    SmtpClient smtp = new SmtpClient();
+                                                                                                                    smtp.Host = "smtp.gmail.com";
+                                                                                                                    smtp.Port = 587;
+                                                                                                                    smtp.EnableSsl = true;
 
-                                NetworkCredential nc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
-                                smtp.UseDefaultCredentials = true;
-                                smtp.Credentials = nc;
-                                smtp.Send(mm);*/
+                                                                                                                    NetworkCredential nc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
+                                                                                                                    smtp.UseDefaultCredentials = true;
+                                                                                                                    smtp.Credentials = nc;
+                                                                                                                    smtp.Send(mm);*/
                             }
 
                             ViewBag.Mensaje = mensaje;
@@ -578,7 +578,7 @@ namespace Vita.Controllers
             else
             {
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
-          
+
                 foreach (var c in formu.CamposVm)
                 {
                     //var res = actividadServicio.GetRespuestaById(c.Id);
@@ -636,7 +636,7 @@ namespace Vita.Controllers
                 ViewBag.Formulario = actividadServicio.GetFormularioDinamicoByActividadId(actividadId);
                 var respuestas = actividadServicio.GetRespuestasByUsuarioIdandActividadId(buscarUsuarioLogueado.Id, actividadId);
                 ViewBag.FormularioAModificar = respuestas;
-                
+
                 return View(buscarUsuarioLogueado);
             }
         }
@@ -730,5 +730,24 @@ namespace Vita.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult DarseDeBajaActividad(int actividadId)
+        {
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                var user = new Usuario();
+                return View(user);
+            }
+            else
+            {
+                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+
+
+                actividadServicio.DarseDeBajaActividad(actividadId, buscarUsuarioLogueado.Id);
+
+
+                return RedirectToAction("ActividadesDelUsuarioInscripto", "Actividad", buscarUsuarioLogueado);
+            }
+        }
     }
 }

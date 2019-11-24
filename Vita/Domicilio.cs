@@ -24,6 +24,9 @@ namespace Vita
         public Nullable<int> UsuarioId { get; set; }
         public Nullable<int> ActividadId { get; set; }
         public Nullable<System.DateTime> FechaRegistroEnDb { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public Nullable<System.DateTime> DeletedAt { get; set; }
     
         public virtual Actividad Actividad { get; set; }
         public virtual Localidad Localidad { get; set; }

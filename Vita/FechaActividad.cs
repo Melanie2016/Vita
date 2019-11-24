@@ -27,6 +27,9 @@ namespace Vita
         public System.TimeSpan HoraInicio { get; set; }
         public System.TimeSpan HoraFin { get; set; }
         public int ActividadId { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public Nullable<System.DateTime> DeletedAt { get; set; }
     
         public virtual Actividad Actividad { get; set; }
         public virtual DiaSemana DiaSemana { get; set; }

@@ -140,6 +140,7 @@ REFERENCES SubCategoria (id),
 CONSTRAINT EstadoIdFkActividad FOREIGN KEY(EstadoId)
 REFERENCES Estado (id)
 );
+
 create table FechaActividad(
 Id int identity(1,1) primary key,
 DiaSemanaId int null,
@@ -148,6 +149,9 @@ FinEvento date  null,
 HoraInicio time not null,
 HoraFin time not null,
 ActividadId int not null,
+CreatedAt Date null,
+UpdatedAt Date null, 
+DeletedAt Date null,
 CONSTRAINT DiaSemanaIdfk FOREIGN KEY(DiaSemanaId)
 REFERENCES DiaSemana (id),
 CONSTRAINT ActividadFechasId FOREIGN KEY(ActividadId)
@@ -164,6 +168,9 @@ LocalidadId int,
 UsuarioId int,
 ActividadId int,
 FechaRegistroEnDb Date,
+CreatedAt Date null,
+UpdatedAt Date null, 
+DeletedAt Date null,
 CONSTRAINT DomicilioUsuarioId FOREIGN KEY(UsuarioId)
 REFERENCES Usuario (Id),
 CONSTRAINT DomicilioLocalidadId FOREIGN KEY(LocalidadId)
@@ -204,6 +211,9 @@ create Table InscripcionFecha(
 Id int identity(1,1) primary key,
 UsuarioInscriptoActividadId int,
 FechaActividadId int,
+CreatedAt Date null,
+UpdatedAt Date null, 
+DeletedAt Date null,
 CONSTRAINT UsuarioInscriptoActividadIdFk FOREIGN KEY(UsuarioInscriptoActividadId)
 REFERENCES UsuarioInscriptoActividad (Id),
 CONSTRAINT FechaActividadIdFk FOREIGN KEY(FechaActividadId)
@@ -241,6 +251,7 @@ create table TipoDatoCampo(
 Id int identity(1,1) primary key,
 Descripcion varchar(60) /* Numero, texto, fecha, opcion */
 );
+
 create table Campos(
 Id int identity(1,1) primary key,
 Nombre varchar(max) null,

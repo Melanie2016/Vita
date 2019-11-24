@@ -88,6 +88,9 @@
           <Property Name="UsuarioId" Type="int" />
           <Property Name="ActividadId" Type="int" />
           <Property Name="FechaRegistroEnDb" Type="date" />
+          <Property Name="CreatedAt" Type="date" />
+          <Property Name="UpdatedAt" Type="date" />
+          <Property Name="DeletedAt" Type="date" />
         </EntityType>
         <EntityType Name="Estado">
           <Key>
@@ -107,6 +110,9 @@
           <Property Name="HoraInicio" Type="time" Precision="7" Nullable="false" />
           <Property Name="HoraFin" Type="time" Precision="7" Nullable="false" />
           <Property Name="ActividadId" Type="int" Nullable="false" />
+          <Property Name="CreatedAt" Type="date" />
+          <Property Name="UpdatedAt" Type="date" />
+          <Property Name="DeletedAt" Type="date" />
         </EntityType>
         <EntityType Name="FormularioDinamico">
           <Key>
@@ -128,6 +134,9 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UsuarioInscriptoActividadId" Type="int" />
           <Property Name="FechaActividadId" Type="int" />
+          <Property Name="CreatedAt" Type="date" />
+          <Property Name="UpdatedAt" Type="date" />
+          <Property Name="DeletedAt" Type="date" />
         </EntityType>
         <EntityType Name="Localidad">
           <Key>
@@ -991,6 +1000,9 @@
           <Property Name="UsuarioId" Type="Int32" />
           <Property Name="ActividadId" Type="Int32" />
           <Property Name="FechaRegistroEnDb" Type="DateTime" Precision="0" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Actividad" Relationship="Self.DomicilioActividadId" FromRole="Domicilio" ToRole="Actividad" />
           <NavigationProperty Name="Localidad" Relationship="Self.DomicilioLocalidadId" FromRole="Domicilio" ToRole="Localidad" />
           <NavigationProperty Name="Usuario" Relationship="Self.DomicilioUsuarioId" FromRole="Domicilio" ToRole="Usuario" />
@@ -1016,6 +1028,9 @@
           <Property Name="HoraInicio" Type="Time" Nullable="false" Precision="7" />
           <Property Name="HoraFin" Type="Time" Nullable="false" Precision="7" />
           <Property Name="ActividadId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Actividad" Relationship="Self.ActividadFechasId" FromRole="FechaActividad" ToRole="Actividad" />
           <NavigationProperty Name="DiaSemana" Relationship="Self.DiaSemanaIdfk" FromRole="FechaActividad" ToRole="DiaSemana" />
           <NavigationProperty Name="InscripcionFecha" Relationship="Self.FechaActividadIdFk" FromRole="FechaActividad" ToRole="InscripcionFecha" />
@@ -1044,6 +1059,9 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UsuarioInscriptoActividadId" Type="Int32" />
           <Property Name="FechaActividadId" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="FechaActividad" Relationship="Self.FechaActividadIdFk" FromRole="InscripcionFecha" ToRole="FechaActividad" />
           <NavigationProperty Name="UsuarioInscriptoActividad" Relationship="Self.UsuarioInscriptoActividadIdFk" FromRole="InscripcionFecha" ToRole="UsuarioInscriptoActividad" />
         </EntityType>
@@ -1929,6 +1947,9 @@
                 <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
                 <ScalarProperty Name="ActividadId" ColumnName="ActividadId" />
                 <ScalarProperty Name="FechaRegistroEnDb" ColumnName="FechaRegistroEnDb" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1950,6 +1971,9 @@
                 <ScalarProperty Name="HoraInicio" ColumnName="HoraInicio" />
                 <ScalarProperty Name="HoraFin" ColumnName="HoraFin" />
                 <ScalarProperty Name="ActividadId" ColumnName="ActividadId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1973,6 +1997,9 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UsuarioInscriptoActividadId" ColumnName="UsuarioInscriptoActividadId" />
                 <ScalarProperty Name="FechaActividadId" ColumnName="FechaActividadId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
