@@ -33,8 +33,8 @@ namespace Vita.Controllers
             { return RedirectToAction("Login", "Login"); }
             else
             {
-
-
+            
+               
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 List<Provincia> provincias = localidadServicio.GetAllProvincias();
                 ViewBag.ListaProvincia = new MultiSelectList(provincias, "id", "descripcion");
@@ -149,6 +149,7 @@ namespace Vita.Controllers
             ViewBag.ElegirDia = false;
             ViewBag.Inscripto = false;
             ViewBag.Compleja = false;
+            ViewBag.CompletarFormulario = false;
 
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -167,8 +168,8 @@ namespace Vita.Controllers
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 bool inscripto = actividadServicio.BuscarUsuarioInscriptoEnActividad(buscarUsuarioLogueado.Id, int.Parse(idActividad));
                 ViewBag.Inscripto = inscripto;
-
                 ViewBag.Logueado = true;
+                ViewBag.Rol = buscarUsuarioLogueado.RolId;
 
                 return View(buscarUsuarioLogueado);
             }
@@ -177,7 +178,7 @@ namespace Vita.Controllers
         [HttpPost]
         public ActionResult FichaActividad(string idActividad, string inscribirse, int[] FechaActividadId, ViewModels.Gmail model)
         {
-
+            
 
             var actividad = actividadServicio.GetActividad(int.Parse(idActividad));
             ViewBag.Actividad = actividad;
@@ -189,6 +190,7 @@ namespace Vita.Controllers
             ViewBag.ElegirDia = false;
             ViewBag.Inscripto = false;
             ViewBag.Compleja = false;
+            ViewBag.CompletarFormulario = false;
 
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -206,6 +208,7 @@ namespace Vita.Controllers
             {
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 ViewBag.Logueado = true;
+                ViewBag.Rol = buscarUsuarioLogueado.RolId;
 
                 if (inscribirse == "true")
                 {
@@ -229,13 +232,17 @@ namespace Vita.Controllers
 
                         if (resultado == 1) //quedó inscripto en la actividad
                         {
+                            if (actividad.ConUsuarioPendiente == true)
+                            {
+                                ViewBag.CompletarFormulario = true;
+                            }
 
                             //Parte del Mail
-
+                            /*
                             MailAddress to = new MailAddress(buscarUsuarioLogueado.Email);
                             MailAddress from = new MailAddress("vita.contactanos@gmail.com");
-                            MailMessage mm = new MailMessage(from, to);
-
+                            MailMessage mm = new MailMessage(from, to); */
+          
 
                             var mensaje = "";
                             var body = "";
@@ -249,15 +256,15 @@ namespace Vita.Controllers
                                 mensaje = "Su inscripción está en estado PENDIENTE. Debe completar el formulario con los requisitos solicitados para poder realizar esta actividad. El mismo lo podrá ver en su perfil en la sección MIS ACTIVIDADES INSCRIPTAS. Se le informará cuando su inscripción este aprobada.";
                                 body = "Tu inscripción a la actividad " + tituloActividad + " está en estado pendiente de aprobación. Te avisaremos cuando esté aprobada. Gracias! "; //Mensaje whatsApp
 
-
+                     
                             }
                             else //Queda aprobado de una
                             {
                                 mensaje = "Su inscripción ha sido exitosa. Puede ir a su perfil para ver sus actividades";
                                 body = "Tu inscripción a la actividad " + tituloActividad + " ha sido exitosa! "; //Mensaje whatsApp
                                                                                                                   //Parte Email
-                                mm.Subject = "Inscripción a" + tituloActividad + "exitosa";
-                                mm.Body = "¡Hola! A partir de ahora, Comienza tu nueva actividad -" + tituloActividad + " - VITA Espera que sea de tu agrado y lo más importante... ¡Que te diviertas! ";
+                              /*  mm.Subject = "Inscripción a " + tituloActividad + " exitosa";
+                                mm.Body = "¡Hola! A partir de ahora, Comienza tu nueva actividad - " + tituloActividad + " - VITA Espera que sea de tu agrado y lo más importante... ¡Que te diviertas! ";
                                 mm.IsBodyHtml = true;
 
                                 SmtpClient smtp = new SmtpClient();
@@ -268,7 +275,7 @@ namespace Vita.Controllers
                                 NetworkCredential nc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
                                 smtp.UseDefaultCredentials = true;
                                 smtp.Credentials = nc;
-                                smtp.Send(mm);
+                                smtp.Send(mm);*/
                             }
 
                             ViewBag.Mensaje = mensaje;
@@ -577,8 +584,6 @@ namespace Vita.Controllers
                         c.RespuestaFoto = this.uploadimage(c.Foto);
                     }
                     c.UsuarioId = buscarUsuarioLogueado.Id;
-
-
                 }
 
                 actividadServicio.GuardarFormularioUsuario(formu);
@@ -607,33 +612,6 @@ namespace Vita.Controllers
                 {
                     if (item.ActividadId == actividadId)
                     {
-                        respuestasFoto = item.Respuesta.Where(x => x.CamposId == 5).ToList();
-                        //foreach(var reFo in respuestasFoto)
-                        //{
-
-                        //    HttpPostedFileBase httpPostedFileBase =  (HttpPostedFileBase) new MemoryPostedFile(reFo.Respuesta1);
-
-
-                        //}
-                        //public string uploadimage(HttpPostedFileBase file)
-                        //{
-                        //    Random r = new Random();
-                        //    string path = "-1";
-                        //    int random = r.Next();
-                        //    if (file != null && file.ContentLength > 0)
-
-                        //    {
-                        //        string extension = Path.GetExtension(file.FileName);
-                        //        if (extension.ToLower().Equals(".jpg") || extension.ToLower().Equals(".jpeg") || extension.ToLower().Equals(".png") || extension.ToLower().Equals(".JPEG"))
-
-
-
-                        //                path = Path.Combine(Server.MapPath("~/Content/imagenes"), random + Path.GetFileName(file.FileName));
-                        //                file.SaveAs(path);
-                        //                path = "~/Content/imagenes/" + random + Path.GetFileName(file.FileName);
-
-
-
                         ViewBag.Campos = item.Campos; //consignas
                         ViewBag.IdFormularioDinamico = item.Id; //id formulario dinamico
                         ViewBag.NombreFormulario = item.Titulo; //titulo

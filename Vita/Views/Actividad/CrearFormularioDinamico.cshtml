@@ -28,7 +28,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 style="padding: 5px; color: #fff; background-image: linear-gradient(230deg, #C0AEDB, #bc4b8a); border-color: #337ab7; WIDTH: 33%; border-radius: 5px; padding-left: 10px; text-align: center;">CREAR FORMULARIO DINÁMICO</h4>
+                        <h4>CREAR FORMULARIO DINÁMICO</h4>
                         <br />
                         <div class="form-validation">
                             <form class="form-valide" action=/Actividad/CreacionFormularioDinamico method=POST name="myform">
@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="Descripcion">
-                                        Breve descripción para explicar al usuario <span class="text-danger">*</span>
+                                        Breve descripción para explicar al usuario en que consiste el formulario <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
                                         <textarea class="form-control" id="val-suggestions" name="Descripcion" rows="5" placeholder="El siguiente formulario es de caracter obligatorio para poder....." required></textarea>
@@ -98,7 +98,7 @@
                 '<div id="' + nombre +'">' +
                 '<div class="form-group row">' +
                 ' <label class="col-lg-4 col-form-label" for="CamposVm[' + index + '].Nombre">' +
-                ' Ingresar titulo de la consigna <span class="text-danger">*</span>' +
+                ' Ingrese pregunta <span class="text-danger">*</span>' +
                 ' </label>' +
                 ' <div class="col-lg-6">' +
                 '<textarea class="form-control" id="val-suggestions" name="CamposVm[' + index + '].Nombre" rows="5" placeholder="Tienes problemas para correr o ejercitarse?...." required></textarea>' +
@@ -123,7 +123,7 @@
                 '  <div class="form-group row">' +
 
                 ' <label class="col-lg-4 col-form-label" for="CamposVm[' + index + '].Obligatorio">' +
-                ' ¿Está consigna va a ser obligatoria?' +
+                ' ¿Está pregunta va a ser obligatoria?' +
                 ' Si es asi, los usuarios deberán completarla si o si.' +
 
                 ' <span class="text-danger">*</span>' +

@@ -249,3 +249,44 @@ INSERT INTO [dbo].[Usuario]
            ,null)
 GO
 
+/*ULSA*/
+INSERT INTO [dbo].[Usuario]
+           ([Nombre]
+           ,[Apellido]
+           ,[FechaNacimiento]
+           ,[SexoId]
+           ,[Dni]
+           ,[Email]
+           ,[LocalidadId]
+           ,[Celular]
+           ,[Telefono]
+           ,[UsuarioName]
+           ,[Pass]
+           ,[SitioWeb]
+           ,[SobreMi]
+           ,[RolId]
+           ,[Foto]
+           ,[CreatedAt]
+           ,[UpdatedAt]
+           ,[DeletedAt])
+     VALUES
+           ('Ulsa'
+           ,null
+           ,null
+           ,null
+           ,null
+           ,'info@ulsa.com.ar'
+           ,600 /*LocalidadId*/
+           ,1127814553
+           ,null
+           ,'Ulsa'
+           ,'1234'
+           ,'www.ulsa.com.ar'
+           ,'Somos ULSA, una Fundación sin fines de lucro conformada por un equipo multidisciplinario de profesionales universitarios, terciarios y estudiantes avanzados comprometidos con la temática diversidad y derechos humanos, usuarios de Lengua de Señas Argentina, LSA.'
+           ,2
+           ,'~/Content/images/ulsa.png'
+           ,'2019-11-23'
+           ,null
+           ,null)
+
+GO
