@@ -916,7 +916,7 @@ namespace Vita.Servicios
 
                 }
                 //Le cambio el estado
-                this.CambiarEstadoUsuarioInscriptoGeneral(2, respuestaVieja.UsuarioId.Value, respuestaVieja.ActividadId.Value);
+                this.CambiarEstadoUsuarioInscriptoGeneral(9, respuestaVieja.UsuarioId.Value, respuestaVieja.ActividadId.Value);
                 myDbContext.SaveChanges();
             }
 

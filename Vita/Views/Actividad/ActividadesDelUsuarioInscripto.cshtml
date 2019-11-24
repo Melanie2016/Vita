@@ -82,7 +82,23 @@
                                         {
                                             <a href="/Actividad/ModificarFormularioDinamicoUsuario?actividadId=@i.Id">
                                                 <span class="label gradient-2 rounded" style="font-size: 15px !important; background-image: linear-gradient(230deg, #69D385, #a9dab6);">
-                                                   Ir a rehacer formulario
+                                                    Ir a rehacer formulario
+                                                </span>
+                                            </a>
+
+                                            <p>
+                                            </p>
+
+
+                                            <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                @estado
+                                            </span>
+                                        }
+                                        else if (estado == "Rehizó el formulario, a la espera de la aprobación")
+                                        {
+                                            <a href="/Actividad/VerRespuestaFormulario?actividadId=@i.Id">
+                                                <span class="label gradient-2 rounded" style="font-size: 15px !important; background-image: linear-gradient(230deg, #69D385, #a9dab6);">
+                                                  ver respuestas
                                                 </span>
                                             </a>
 

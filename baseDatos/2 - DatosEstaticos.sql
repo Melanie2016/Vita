@@ -76,6 +76,8 @@ INSERT INTO Estado(Id, Descripcion) Values (5,'Finalizado');
 INSERT INTO Estado(Id, Descripcion) Values (6,'Creada');
 INSERT INTO Estado(Id, Descripcion) Values (7,'Publicada');
 INSERT INTO Estado(Id, Descripcion) Values (8,'Rehacer formulario');
+INSERT INTO Estado(Id, Descripcion) Values (9,'Rehizó el formulario, a la espera de la aprobación');
+
 
 
 SET IDENTITY_INSERT Estado OFF
