@@ -803,6 +803,15 @@ namespace Vita.Servicios
             usuarioIns.UpdatedAt = DateTime.Now;
             myDbContext.SaveChanges();
         }
+        public void CambiarEstadoUsuarioInscriptoGeneral(int estadoId, int usuarioId, int actividadId)
+        {
+            var usuarioIns = myDbContext.UsuarioInscriptoActividad.Where(x => x.UsuarioId == usuarioId && x.ActividadId == actividadId).FirstOrDefault();
+
+            usuarioIns.EstadoId = estadoId;
+          
+            usuarioIns.UpdatedAt = DateTime.Now;
+            myDbContext.SaveChanges();
+        }
         public FormularioDinamico GetFormularioDinamicoByActividadId(int actividadId)
         {
             var formu = myDbContext.FormularioDinamico.Where(x => x.ActividadId == actividadId).FirstOrDefault();
@@ -850,9 +859,6 @@ namespace Vita.Servicios
                 myDbContext.SaveChanges();
             }
         }
-
-
-
         public void PublicarActividad(int idActividad)
         {
             var actividadBD = myDbContext.Actividad.Where(x => x.Id == idActividad).FirstOrDefault();
@@ -871,5 +877,51 @@ namespace Vita.Servicios
             return respuestas;
         }
         
+        public Respuesta GetRespuestaById(int respuestaId)
+        {
+            var respuesta = myDbContext.Respuesta.Where(x => x.Id == respuestaId).FirstOrDefault();
+            return respuesta;
+        }
+        public void ActualizarRespuestas(List<RespuestaViewModel> respuestaViewModels)
+        {
+            foreach(var r in respuestaViewModels)
+            {
+                var respuestaVieja = myDbContext.Respuesta.Find(r.Id);
+                respuestaVieja.UpdatedAt = DateTime.UtcNow;
+
+                DateTime fecha = new DateTime(978361200);//esto es fecha null
+
+                if (r.RespuestaTextoCorto != null)
+                {
+                    respuestaVieja.Respuesta1 = r.RespuestaTextoCorto;
+                }
+                if (r.RespuestaTextoLargo != null)
+                {
+                    respuestaVieja.Respuesta1 = r.RespuestaTextoLargo;
+                }
+
+                if (r.RespuestaTextoCorto == null && r.RespuestaDate.Date != fecha.Date && r.RespuestaTextoLargo == null)
+                {
+                    respuestaVieja.Respuesta1 = r.RespuestaDate.ToString();
+                }
+
+                if (r.RespuestaTextoCorto == null && r.RespuestaDate.Date == fecha.Date && r.RespuestaTextoLargo == null)
+                {
+                    respuestaVieja.Respuesta1 = r.RespuestaNumero.ToString();
+                }
+
+                if (r.RespuestaFoto != null && r.RespuestaDate.Date == fecha.Date)
+                {
+                    respuestaVieja.Respuesta1 = r.RespuestaFoto.ToString();
+
+                }
+                //Le cambio el estado
+                this.CambiarEstadoUsuarioInscriptoGeneral(2, respuestaVieja.UsuarioId.Value, respuestaVieja.ActividadId.Value);
+                myDbContext.SaveChanges();
+            }
+
+
+        }
+            
+        }
     }
-}

@@ -1033,6 +1033,7 @@
       <DependentUpon>VitaEntities.edmx</DependentUpon>
     </Content>
     <Content Include="Views\Actividad\RespuestasFormularioDinamico.cshtml" />
+    <Content Include="Views\Actividad\ModificarFormularioDinamicoUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

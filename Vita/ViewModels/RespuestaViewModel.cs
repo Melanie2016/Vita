@@ -8,6 +8,7 @@ namespace Vita.ViewModels
     public class RespuestaViewModel
     {
   
+        public int Id { get; set; }
         public int ActividadId { get; set; }
         public int FormularioDinamicoId { get; set; }
         public int CamposId { get; set; }

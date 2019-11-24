@@ -566,6 +566,35 @@ namespace Vita.Controllers
                 return View(buscarUsuarioLogueado);
             }
         }
+
+        [HttpPost]
+        public ActionResult ActualizarFormularioUsuario(FormularioLlenoViewModel formu)
+        {
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                var user = new Usuario();
+                return View(user);
+            }
+            else
+            {
+                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+          
+                foreach (var c in formu.CamposVm)
+                {
+                    //var res = actividadServicio.GetRespuestaById(c.Id);
+                    if (c.Foto != null)
+                    {
+                        c.RespuestaFoto = this.uploadimage(c.Foto);
+                    }
+                    c.UsuarioId = buscarUsuarioLogueado.Id;
+                }
+
+                actividadServicio.ActualizarRespuestas(formu.CamposVm);
+
+
+                return RedirectToAction("ActividadesDelUsuarioInscripto", "Actividad", buscarUsuarioLogueado);
+            }
+        }
         [HttpPost]
         public ActionResult GuardarFormularioUsuario(FormularioLlenoViewModel formu)
         {
@@ -593,6 +622,24 @@ namespace Vita.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult ModificarFormularioDinamicoUsuario(int actividadId)
+        {
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                var user = new Usuario();
+                return View(user);
+            }
+            else
+            {
+                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                ViewBag.Formulario = actividadServicio.GetFormularioDinamicoByActividadId(actividadId);
+                var respuestas = actividadServicio.GetRespuestasByUsuarioIdandActividadId(buscarUsuarioLogueado.Id, actividadId);
+                ViewBag.FormularioAModificar = respuestas;
+                
+                return View(buscarUsuarioLogueado);
+            }
+        }
         [HttpGet]
         public ActionResult RespuestasFormularioDinamico(int actividadId, int usuarioRespuestaId)
         {
