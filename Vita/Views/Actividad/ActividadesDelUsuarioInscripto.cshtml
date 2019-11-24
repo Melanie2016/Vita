@@ -6,7 +6,7 @@
 
 @model Usuario
 <section class="container-fluid">
-    <div class="card">
+    <div class="card" style="border: 0;">
         <div class="card-body">
             <h4 class="card-title">Mis actividades</h4>
 
@@ -81,7 +81,7 @@
                                         if (estado == "Rehacer formulario")
                                         {
                                             <a href="/Actividad/CompletarFormularioDinamicoUsuario?actividadId=@i.Id">
-                                                <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                <span class="label gradient-2 rounded" style="font-size: 15px !important; background-image: linear-gradient(230deg, #69D385, #a9dab6);">
                                                    Ir a rehacer formulario
                                                 </span>
                                             </a>
@@ -137,7 +137,7 @@
                                         if (estado == "Pendiente de aprobación" && re.Count == 0)
                                         {
                                             <a href="/Actividad/CompletarFormularioDinamicoUsuario?actividadId=@i.Id">
-                                                <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                <span class="label gradient-2 rounded" style="font-size: 15px !important; background-image: linear-gradient(230deg, #69D385, #a9dab6);">
                                                     Completar formulario
                                                 </span>
                                             </a>
