@@ -40,6 +40,8 @@
 
                         @foreach (Actividad i in ViewBag.ListaActividades)
                         {
+                            var respuestasDeBd = ViewBag.ListaRespuestaFormu;
+                       
                             if (i.Foto != null && i.Foto.Length > 0)
                             {
                                 ViewBag.Url = i.Foto;
@@ -54,7 +56,7 @@
                                 <td>@i.Localidad.Descripcion</td>
                                 <td>@i.EdadMinima - @i.EdadMaxima</td>
 
-                               
+
                                 @if (i.ConUsuarioPendiente == true)
                                 {
                                     var estado = @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion;
@@ -62,13 +64,25 @@
 
 
                                         @{
-                                            var formulario = ViewBag.ListaRespuestaFormu;
-                                            //foreach(var f in formulario)
-                                            //{
-                                            //    if(f.)
-                                            //}
-                                            if (formulario.Count != 0)//tiene un formulario
+                                            List<Respuesta> respuestas = new List<Respuesta>();
+                                             List<Respuesta> re = new List<Respuesta>();
+                                            if (respuestasDeBd.Count != 0)
                                             {
+                                                foreach (var r in respuestasDeBd)
+                                                {
+                                                    respuestas.Add(r);
+                                                }
+                                                re= respuestas.Where(x => x.ActividadId == i.Id).ToList();
+                                            }
+
+                                            if (re.Count != 0)
+                                            {
+                                                //List<Respuesta> respuestas = new List<Respuesta>();
+                                                //foreach (var r in respuestasDeBd)
+                                                //{
+                                                //    respuestas.AddRange(r);
+                                                //}
+                                                //var re= respuestas.Where(x => x.ActividadId == i.Id).ToList();
                                                 if (estado == "Pendiente")
                                                 {
                                                     <p>
@@ -108,11 +122,12 @@
                                             }
                                             else //no tiene formulario
                                             {
-                                                if (estado == "Pendiente" && formulario.Count == 0)
+                                            
+                                                if (estado == "Pendiente" && re.Count== 0)
                                                 {
                                                     <a href="/Actividad/CompletarFormularioDinamicoUsuario?actividadId=@i.Id">
                                                         <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                                            Completar Form
+                                                            Completar formulario
                                                         </span>
                                                     </a>
 
@@ -144,8 +159,7 @@
 
                                                 }
                                             }
-
-                                           
+                                         
                                         }
 
 
@@ -171,7 +185,9 @@
                                             </span>
                                         }
 
+
                                     </td>
+
                                 }
 
 
@@ -187,112 +203,7 @@
 
                         }
 
-                        @*<tr>
-                                <th><img src="../../Content/images/1.jpg"></th>
-                                <td>Air Conditioner</td>
-                                <td>Air Conditioner</td>
-                                <td>Air Conditioner</td>
-                                <td>
-                                    <div class="progress" style="height: 10px">
-                                        <div class="progress-bar gradient-1" style="width: 70%;" role="progressbar">
-                                            <span class="sr-only">70% Complete</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="label gradient-1 btn-rounded">70%</span>
-                                </td>
-                                <td>
-                                    <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
-                                </td>
-                                <td>
-                                    <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><img src="../../Content/images/2.jpg"></th>
-                                <td>Textiles</td>
-                                <td>Textiles</td>
-                                <td>Textiles</td>
-                                <td>
-                                    <div class="progress" style="height: 10px">
-                                        <div class="progress-bar gradient-2" style="width: 70%;" role="progressbar">
-                                            <span class="sr-only">70% Complete</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><span class="label btn-rounded gradient-2">70%</span></td>
-                                <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i></a></td>
-                                <td>
-                                    <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><img src="../../Content/images/5.jpg"></th>
-                                <td>Milk Powder</td>
-                                <td>Milk Powder</td>
-                                <td>Milk Powder</td>
-                                <td>
-                                    <div class="progress" style="height: 10px">
-                                        <div class="progress-bar gradient-3" style="width: 70%;" role="progressbar">
-                                            <span class="sr-only">70% Complete</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="label btn-rounded gradient-3">70%</span>
-                                </td>
-                                <td>
-                                    <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
-                                </td>
-                                <td>
-                                    <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><img src="../../Content/images/4.jpg"></th>
-                                <td>Vehicles</td>
-                                <td>Vehicles</td>
-                                <td>Vehicles</td>
-                                <td>
-                                    <div class="progress" style="height: 10px">
-                                        <div class="progress-bar gradient-8" style="width: 70%;" role="progressbar">
-                                            <span class="sr-only">70% Complete</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="label gradient-8 btn-rounded">70%</span>
-                                </td>
-                                <td>
-                                    <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
-                                </td>
-                                <td>
-                                    <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><img src="../../Content/images/3.jpg"></th>
-                                <td>Boats</td>
-                                <td>Boats</td>
-                                <td>Boats</td>
-                                <td>
-                                    <div class="progress" style="height: 10px">
-                                        <div class="progress-bar gradient-1" style="width: 70%;" role="progressbar">
-                                            <span class="sr-only">70% Complete</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="label gradient-1 btn-rounded">70%</span>
-                                </td>
-                                <td>
-                                    <span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
-                                </td>
-                                <td>
-                                    <span><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                </td>
-                            </tr>*@
+
                     </tbody>
                 </table>
             </div>
@@ -300,3 +211,6 @@
     </div>
 </section>
 
+<script>
+
+</script>

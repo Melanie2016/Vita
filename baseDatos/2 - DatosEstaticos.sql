@@ -69,7 +69,7 @@ SET IDENTITY_INSERT Segmento OFF
 /*ESTADO*/
 SET IDENTITY_INSERT Estado ON
 INSERT INTO Estado(Id, Descripcion) Values (1,'Aprobado');
-INSERT INTO Estado(Id, Descripcion) Values (2,'Pendiente');
+INSERT INTO Estado(Id, Descripcion) Values (2,'Pendiente de aprobación');
 INSERT INTO Estado(Id, Descripcion) Values (3,'Cancelado');
 INSERT INTO Estado(Id, Descripcion) Values (4,'Rechazado');
 INSERT INTO Estado(Id, Descripcion) Values (5,'Finalizado');

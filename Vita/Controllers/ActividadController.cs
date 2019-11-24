@@ -33,8 +33,8 @@ namespace Vita.Controllers
             { return RedirectToAction("Login", "Login"); }
             else
             {
-            
-               
+
+
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 List<Provincia> provincias = localidadServicio.GetAllProvincias();
                 ViewBag.ListaProvincia = new MultiSelectList(provincias, "id", "descripcion");
@@ -177,7 +177,7 @@ namespace Vita.Controllers
         [HttpPost]
         public ActionResult FichaActividad(string idActividad, string inscribirse, int[] FechaActividadId, ViewModels.Gmail model)
         {
-            
+
 
             var actividad = actividadServicio.GetActividad(int.Parse(idActividad));
             ViewBag.Actividad = actividad;
@@ -235,7 +235,7 @@ namespace Vita.Controllers
                             MailAddress to = new MailAddress(buscarUsuarioLogueado.Email);
                             MailAddress from = new MailAddress("vita.contactanos@gmail.com");
                             MailMessage mm = new MailMessage(from, to);
-          
+
 
                             var mensaje = "";
                             var body = "";
@@ -249,7 +249,7 @@ namespace Vita.Controllers
                                 mensaje = "Su inscripción está en estado PENDIENTE. Debe completar el formulario con los requisitos solicitados para poder realizar esta actividad. El mismo lo podrá ver en su perfil en la sección MIS ACTIVIDADES INSCRIPTAS. Se le informará cuando su inscripción este aprobada.";
                                 body = "Tu inscripción a la actividad " + tituloActividad + " está en estado pendiente de aprobación. Te avisaremos cuando esté aprobada. Gracias! "; //Mensaje whatsApp
 
-                     
+
                             }
                             else //Queda aprobado de una
                             {
@@ -499,7 +499,8 @@ namespace Vita.Controllers
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 var activdadCreada = actividadServicio.GetUltimaActividadPorUsuarioCreadaId(buscarUsuarioLogueado.Id);
                 actividadServicio.CrearFormularioDinamico(formularioDinamicoViewModel, activdadCreada);
-                if(formularioDinamicoViewModel.publicar == true) {
+                if (formularioDinamicoViewModel.publicar == true)
+                {
                     actividadServicio.PublicarActividad(activdadCreada.Id);
                 }
                 return RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
@@ -518,13 +519,12 @@ namespace Vita.Controllers
             else
             {
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
-                var actividades= actividadServicio.GetAllActividadByRolUsuarioId(buscarUsuarioLogueado.Id);
+                var actividades = actividadServicio.GetAllActividadByRolUsuarioId(buscarUsuarioLogueado.Id);
                 ViewBag.ListaActividades = actividades;
                 List<Respuesta> listaRespuestas = new List<Respuesta>();
-                foreach(var ac in actividades)
-                {
-                    listaRespuestas.AddRange(actividadServicio.GetRespuestasByUsuarioIdandActividadId(buscarUsuarioLogueado.Id, ac.Id).ToList());
-                }
+
+                listaRespuestas.AddRange(actividadServicio.GetRespuestasByUsuarioId(buscarUsuarioLogueado.Id).ToList());
+
                 ViewBag.ListaRespuestaFormu = listaRespuestas;
                 return View(buscarUsuarioLogueado);
             }
@@ -572,17 +572,17 @@ namespace Vita.Controllers
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 foreach (var c in formu.CamposVm)
                 {
-                    if(c.Foto!= null)
+                    if (c.Foto != null)
                     {
                         c.RespuestaFoto = this.uploadimage(c.Foto);
                     }
                     c.UsuarioId = buscarUsuarioLogueado.Id;
-                    
-                   
+
+
                 }
 
-               actividadServicio.GuardarFormularioUsuario(formu);
-                
+                actividadServicio.GuardarFormularioUsuario(formu);
+
 
                 return RedirectToAction("ActividadesDelUsuarioInscripto", "Actividad", buscarUsuarioLogueado);
             }
@@ -601,14 +601,42 @@ namespace Vita.Controllers
                 buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
                 var actividad = actividadServicio.GetActividad(actividadId);
                 ViewBag.UsuarioRespuestaId = usuarioRespuestaId;
+                var respuestasFoto = new List<Respuesta>();
 
                 foreach (var item in actividad.FormularioDinamico)
                 {
-                    if(item.ActividadId == actividadId)
+                    if (item.ActividadId == actividadId)
                     {
+                        respuestasFoto = item.Respuesta.Where(x => x.CamposId == 5).ToList();
+                        //foreach(var reFo in respuestasFoto)
+                        //{
+
+                        //    HttpPostedFileBase httpPostedFileBase =  (HttpPostedFileBase) new MemoryPostedFile(reFo.Respuesta1);
+
+
+                        //}
+                        //public string uploadimage(HttpPostedFileBase file)
+                        //{
+                        //    Random r = new Random();
+                        //    string path = "-1";
+                        //    int random = r.Next();
+                        //    if (file != null && file.ContentLength > 0)
+
+                        //    {
+                        //        string extension = Path.GetExtension(file.FileName);
+                        //        if (extension.ToLower().Equals(".jpg") || extension.ToLower().Equals(".jpeg") || extension.ToLower().Equals(".png") || extension.ToLower().Equals(".JPEG"))
+
+
+
+                        //                path = Path.Combine(Server.MapPath("~/Content/imagenes"), random + Path.GetFileName(file.FileName));
+                        //                file.SaveAs(path);
+                        //                path = "~/Content/imagenes/" + random + Path.GetFileName(file.FileName);
+
+
+
                         ViewBag.Campos = item.Campos; //consignas
                         ViewBag.IdFormularioDinamico = item.Id; //id formulario dinamico
-                        ViewBag.NombreFormulario= item.Titulo; //titulo
+                        ViewBag.NombreFormulario = item.Titulo; //titulo
                         ViewBag.DescripcionFormulario = item.Descripcion; //descripcion
                     }
                 }

@@ -861,6 +861,11 @@ namespace Vita.Servicios
             var respuestas = myDbContext.Respuesta.Where(x => x.UsuarioId == usuarioId && x.ActividadId == actividadId).ToList();
             return respuestas;
         }
-
+        public List<Respuesta> GetRespuestasByUsuarioId(int usuarioId)
+        {
+            var respuestas = myDbContext.Respuesta.Where(x => x.UsuarioId == usuarioId).ToList();
+            return respuestas;
+        }
+        
     }
 }
