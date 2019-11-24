@@ -1025,6 +1025,9 @@
     <Content Include="Views\Usuario\RegistroEntidad.cshtml" />
     <Content Include="Views\Usuario\RegistroEntidad.cshtml" />
     <Content Include="Views\Actividad\ExplicativoForm.cshtml" />
+    <Content Include="Views\Actividad\RespuestasFormularioDinamico.cshtml" />
+    <Content Include="Views\Actividad\ModificarFormularioDinamicoUsuario.cshtml" />
+    <Content Include="Views\Actividad\VerRespuestaFormulario.cshtml" />
     <EntityDeploy Include="VitaEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>VitaEntities.Designer.cs</LastGenOutput>

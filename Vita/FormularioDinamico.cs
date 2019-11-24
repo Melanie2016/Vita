@@ -18,6 +18,7 @@ namespace Vita
         public FormularioDinamico()
         {
             this.Campos = new HashSet<Campos>();
+            this.Respuesta = new HashSet<Respuesta>();
         }
     
         public int Id { get; set; }
@@ -33,5 +34,7 @@ namespace Vita
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Campos> Campos { get; set; }
         public virtual Usuario Usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Respuesta> Respuesta { get; set; }
     }
 }

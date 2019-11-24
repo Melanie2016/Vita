@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "VerRespuestaFormulario";
+    Layout = "~/Views/Shared/_LayoutPerfilUsuario.cshtml";
+}
+
+    <section class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <div class="media media-reply">
+                    <div class="media-body">
+                        @if (ViewBag.Campos != null)
+                        {
+                            <div class="d-sm-flex justify-content-between mb-2">
+                                <h5 class="mb-sm-0">@ViewBag.NombreFormulario <small class="text-muted ml-3"> @ViewBag.DescripcionFormulario </small></h5>
+                            </div>
+
+                            <div class="media mt-3">
+                                <div class="media-body">
+                                    <table id="tablePreview" class="table">
+
+                                        @foreach (var item in ViewBag.Campos)
+                                        {
+                                            if (item.FormularioDinamicoId == ViewBag.IdFormularioDinamico)
+                                            {
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="row">@item.Nombre</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            @foreach (var res in item.Respuesta)
+                                                            {
+                                                                if (res.UsuarioId == ViewBag.UsuarioRespuestaId)
+                                                                {
+                                                                    ViewBag.Respuesta = res.Respuesta1.ToString();
+                                                                }
+                                                                @ViewBag.Respuesta
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            }
+                                        }
+                                    </table>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+

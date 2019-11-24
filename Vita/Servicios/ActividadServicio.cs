@@ -533,36 +533,40 @@ namespace Vita.Servicios
             {
                 var actividadValidad = GetActividad(act.Id);
 
-                if (provinciaId != null) //busco por provincia
+                //Me fijo si la fecha actual es menor a la fecha de fin de la actividad y el estado es publicada, entonces muestro la actividad
+                if (DateTime.Now < act.FechaActividad.FirstOrDefault().FinEvento && act.EstadoId == 7)
                 {
-                    if (act.Localidad.Departamento.ProvinciaId == provinciaId)
+                    if (provinciaId != null) //busco por provincia
                     {
-                        if (departamentoId != null) //busco por departamento
+                        if (act.Localidad.Departamento.ProvinciaId == provinciaId)
                         {
-                            if (act.Localidad.DepartamentoId == departamentoId)
+                            if (departamentoId != null) //busco por departamento
                             {
-                                if (localidadId != null) //busco por localidad
+                                if (act.Localidad.DepartamentoId == departamentoId)
                                 {
-                                    if (act.LocalidadId == localidadId)
+                                    if (localidadId != null) //busco por localidad
+                                    {
+                                        if (act.LocalidadId == localidadId)
+                                        {
+                                            listaVali.Add(actividadValidad);
+                                        }
+                                    }
+                                    else
                                     {
                                         listaVali.Add(actividadValidad);
                                     }
                                 }
-                                else
-                                {
-                                    listaVali.Add(actividadValidad);
-                                }
+                            }
+                            else
+                            {
+                                listaVali.Add(actividadValidad);
                             }
                         }
-                        else
-                        {
-                            listaVali.Add(actividadValidad);
-                        }
                     }
-                }
-                else
-                {
-                    listaVali.Add(actividadValidad);
+                    else
+                    {
+                        listaVali.Add(actividadValidad);
+                    }
                 }
             }
 
@@ -606,7 +610,7 @@ namespace Vita.Servicios
                     {
                         foreach (var seg in item.ActividadSegmento) //una actividad puede tener muchos segmentos
                         {
-                           if( seg.SegmentoId == segmentoId) //busco por segmento
+                            if (seg.SegmentoId == segmentoId) //busco por segmento
                             {
                                 listaFinal.Add(item);
                             }
@@ -615,7 +619,7 @@ namespace Vita.Servicios
                 }
             }
 
-           
+
             if (categoriaId != null || subCategoriaId != null || segmentoId != null)
             {
                 //filtro por precio
@@ -663,7 +667,7 @@ namespace Vita.Servicios
                     }
                 }
 
-                if (precio != null && precio !="" )
+                if (precio != null && precio != "")
                 {
                     return listaFiltroPrecio;
                 }
@@ -743,10 +747,10 @@ namespace Vita.Servicios
                 }
 
                 //Me fijo si la fecha actual es menor a la fecha de fin de la actividad y el estado es publicada, entonces muestro la actividad
-               if(DateTime.Now < act.FechaActividad.FirstOrDefault().FinEvento && act.EstadoId == 7)
-               {
+                if (DateTime.Now < act.FechaActividad.FirstOrDefault().FinEvento && act.EstadoId == 7)
+                {
                     lista2.Add(act);
-               }
+                }
             }
 
 
@@ -774,6 +778,7 @@ namespace Vita.Servicios
                     {
                         UsuarioInscriptoActividadId = usuarioActividad.Id,
                         FechaActividadId = item,
+                        CreatedAt = DateTime.UtcNow,
                         FechaActividad = myDbContext.FechaActividad.Find(item),
                         UsuarioInscriptoActividad = myDbContext.UsuarioInscriptoActividad.Find(usuarioActividad.Id)
                     };
@@ -855,6 +860,15 @@ namespace Vita.Servicios
             usuarioIns.UpdatedAt = DateTime.Now;
             myDbContext.SaveChanges();
         }
+        public void CambiarEstadoUsuarioInscriptoGeneral(int estadoId, int usuarioId, int actividadId)
+        {
+            var usuarioIns = myDbContext.UsuarioInscriptoActividad.Where(x => x.UsuarioId == usuarioId && x.ActividadId == actividadId).FirstOrDefault();
+
+            usuarioIns.EstadoId = estadoId;
+
+            usuarioIns.UpdatedAt = DateTime.Now;
+            myDbContext.SaveChanges();
+        }
         public FormularioDinamico GetFormularioDinamicoByActividadId(int actividadId)
         {
             var formu = myDbContext.FormularioDinamico.Where(x => x.ActividadId == actividadId).FirstOrDefault();
@@ -865,17 +879,19 @@ namespace Vita.Servicios
         public void GuardarFormularioUsuario(FormularioLlenoViewModel formu)
         {
             DateTime fecha = new DateTime(978361200);//esto es fecha null
-           
+
             foreach (var f in formu.CamposVm)
             {
                 Respuesta respuestaNueva = new Respuesta();
                 respuestaNueva.CamposId = f.CamposId;
                 respuestaNueva.UsuarioId = f.UsuarioId;
+                respuestaNueva.FormularioDinamicoId = f.FormularioDinamicoId;
+                respuestaNueva.ActividadId = f.ActividadId;
                 if (f.RespuestaTextoCorto != null)
                 {
                     respuestaNueva.Respuesta1 = f.RespuestaTextoCorto;
                 }
-                if(f.RespuestaTextoLargo != null)
+                if (f.RespuestaTextoLargo != null)
                 {
                     respuestaNueva.Respuesta1 = f.RespuestaTextoLargo;
                 }
@@ -884,13 +900,13 @@ namespace Vita.Servicios
                 {
                     respuestaNueva.Respuesta1 = f.RespuestaDate.ToString();
                 }
-              
+
                 if (f.RespuestaTextoCorto == null && f.RespuestaDate.Date == fecha.Date && f.RespuestaTextoLargo == null)
                 {
                     respuestaNueva.Respuesta1 = f.RespuestaNumero.ToString();
                 }
-                
-                if(f.RespuestaFoto != null && f.RespuestaDate.Date == fecha.Date)
+
+                if (f.RespuestaFoto != null && f.RespuestaDate.Date == fecha.Date)
                 {
                     respuestaNueva.Respuesta1 = f.RespuestaFoto.ToString();
 
@@ -900,9 +916,6 @@ namespace Vita.Servicios
                 myDbContext.SaveChanges();
             }
         }
-
-
-
         public void PublicarActividad(int idActividad)
         {
             var actividadBD = myDbContext.Actividad.Where(x => x.Id == idActividad).FirstOrDefault();
@@ -910,7 +923,74 @@ namespace Vita.Servicios
             actividadBD.EstadoId = ConstantesUtil.ESTADO_PUBLICADA;
             myDbContext.SaveChanges();
         }
+        public List<Respuesta> GetRespuestasByUsuarioIdandActividadId(int usuarioId, int actividadId)
+        {
+            var respuestas = myDbContext.Respuesta.Where(x => x.UsuarioId == usuarioId && x.ActividadId == actividadId).ToList();
+            return respuestas;
+        }
+        public List<Respuesta> GetRespuestasByUsuarioId(int usuarioId)
+        {
+            var respuestas = myDbContext.Respuesta.Where(x => x.UsuarioId == usuarioId).ToList();
+            return respuestas;
+        }
+
+        public Respuesta GetRespuestaById(int respuestaId)
+        {
+            var respuesta = myDbContext.Respuesta.Where(x => x.Id == respuestaId).FirstOrDefault();
+            return respuesta;
+        }
+        public void ActualizarRespuestas(List<RespuestaViewModel> respuestaViewModels)
+        {
+            foreach (var r in respuestaViewModels)
+            {
+                var respuestaVieja = myDbContext.Respuesta.Find(r.Id);
+                respuestaVieja.UpdatedAt = DateTime.UtcNow;
+
+                DateTime fecha = new DateTime(978361200);//esto es fecha null
+
+                if (r.RespuestaTextoCorto != null)
+                {
+                    respuestaVieja.Respuesta1 = r.RespuestaTextoCorto;
+                }
+                if (r.RespuestaTextoLargo != null)
+                {
+                    respuestaVieja.Respuesta1 = r.RespuestaTextoLargo;
+                }
+
+                if (r.RespuestaTextoCorto == null && r.RespuestaDate.Date != fecha.Date && r.RespuestaTextoLargo == null)
+                {
+                    respuestaVieja.Respuesta1 = r.RespuestaDate.ToString();
+                }
+
+                if (r.RespuestaTextoCorto == null && r.RespuestaDate.Date == fecha.Date && r.RespuestaTextoLargo == null)
+                {
+                    respuestaVieja.Respuesta1 = r.RespuestaNumero.ToString();
+                }
+
+                if (r.RespuestaFoto != null && r.RespuestaDate.Date == fecha.Date)
+                {
+                    respuestaVieja.Respuesta1 = r.RespuestaFoto.ToString();
+
+                }
+                //Le cambio el estado
+                this.CambiarEstadoUsuarioInscriptoGeneral(9, respuestaVieja.UsuarioId.Value, respuestaVieja.ActividadId.Value);
+                myDbContext.SaveChanges();
+            }
 
 
+        }
+        public void DarseDeBajaActividad(int actividadId, int usuarioId)
+        {
+            var usuarioInscrip = myDbContext.UsuarioInscriptoActividad.Where(x => x.UsuarioId == usuarioId && x.ActividadId == actividadId).FirstOrDefault();
+            var inscripFecha = myDbContext.InscripcionFecha.Where(x => x.UsuarioInscriptoActividadId == usuarioInscrip.Id).ToList();
+            foreach(var f in inscripFecha)
+            {
+                f.DeletedAt = DateTime.UtcNow;
+            }
+            usuarioInscrip.DeletedAt = DateTime.UtcNow;
+            usuarioInscrip.EstadoId = 3;
+            myDbContext.SaveChanges();
+            
+        }
     }
 }
