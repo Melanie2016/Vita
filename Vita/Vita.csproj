@@ -1027,7 +1027,7 @@
     <Content Include="Views\Actividad\ExplicativoForm.cshtml" />
     <Content Include="Views\Actividad\RespuestasFormularioDinamico.cshtml" />
     <Content Include="Views\Actividad\ModificarFormularioDinamicoUsuario.cshtml" />
-    <Content Include="Views\Actividad\VerRespuestaFormulario.cshtml" />
+    <Content Include="Views\Actividad\VerFormularioEntidad.cshtml" />
     <EntityDeploy Include="VitaEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>VitaEntities.Designer.cs</LastGenOutput>
@@ -1035,6 +1035,7 @@
     <Content Include="VitaEntities.edmx.diagram">
       <DependentUpon>VitaEntities.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\Actividad\VerRespuestaFormulario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
