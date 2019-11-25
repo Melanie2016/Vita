@@ -36,8 +36,19 @@
                                                                 if (res.UsuarioId == ViewBag.UsuarioRespuestaId)
                                                                 {
                                                                     ViewBag.Respuesta = res.Respuesta1.ToString();
+                                                                    if (res.Campos.TipoDatoCampoId == 5)
+                                                                    {
+                                                                        if (ViewBag.Respuesta != "0")
+                                                                        {
+                                                                            <img src="@Url.Content(ViewBag.Respuesta)" style="width: 40%;" />
+                                                                        }
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @ViewBag.Respuesta
+                                                                    }
+
                                                                 }
-                                                                @ViewBag.Respuesta
                                                             }
                                                         </td>
                                                     </tr>
@@ -50,6 +61,11 @@
                         }
                     </div>
                 </div>
+
+                <div style="margin-left:70px;">
+                    <a href="/Actividad/ActividadesDelUsuarioInscripto"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#guardar">Volver</button></a>
+                </div>
+
             </div>
         </div>
     </section>
