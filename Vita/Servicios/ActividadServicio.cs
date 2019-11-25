@@ -409,6 +409,7 @@ namespace Vita.Servicios
 
         }
 
+
         public void CrearSegmentoActividad(int actividadId, int[] selectedSegmento)
         {
             foreach (var segmento in selectedSegmento)
@@ -422,6 +423,61 @@ namespace Vita.Servicios
                 myDbContext.ActividadSegmento.Add(actvidadSegmento);
                 myDbContext.SaveChanges();
             }
+        }
+
+
+        internal List<Actividad> GetActividadesFiltradasPorUsuario(int idUsuario ,int? idCategoria,DateTime? fechaDesde, DateTime? fechaHasta )
+        {
+            List<Actividad> listaResultadoDeMentis = null;
+            if(idCategoria != null) // si filtra por categoria
+            {
+               
+                if (fechaDesde != null && fechaHasta != null) // si filtra por categoria y fechas 
+                {
+                    var actividadesFiltradasPorFechas = new List<Actividad>();
+                    //  List<UsuarioInscriptoActividad> listaActividadDelUsuario = myDbContext.UsuarioInscriptoActividad.Include("Actividad").Where(x => x.UsuarioId.Equals(idUsuario)).ToList();
+                    var fechasFiltradas = myDbContext.FechaActividad.Include("Actividad").Where(x => x.InicioEvento <= fechaDesde && x.FinEvento >= fechaHasta).ToList();
+                    foreach (var i in fechasFiltradas)
+                    {
+                        var actividad = myDbContext.Actividad.Where(x => x.Id == i.ActividadId && x.UsuarioId == idUsuario && x.CategoriaId == idCategoria).FirstOrDefault();
+
+                        if (actividad != null)
+                        {
+                            actividadesFiltradasPorFechas.Add(actividad);
+                        }
+                    }
+
+                    return actividadesFiltradasPorFechas;
+                }
+                else // si solo filtro por categoria 
+                {
+                    var actvidiadesFiltradasPorCategoria = myDbContext.Actividad.Where(x => x.CategoriaId == idCategoria && x.UsuarioId == idUsuario).ToList();
+                    return actvidiadesFiltradasPorCategoria;
+                }
+                
+            }
+
+            if(fechaDesde != null && fechaHasta != null) // si solo filtro por fechas
+            {
+                var actividadesFiltradasPorFechas = new List<Actividad>();
+                //  List<UsuarioInscriptoActividad> listaActividadDelUsuario = myDbContext.UsuarioInscriptoActividad.Include("Actividad").Where(x => x.UsuarioId.Equals(idUsuario)).ToList();
+                var fechasFiltradas = myDbContext.FechaActividad.Include("Actividad").Where(x => x.InicioEvento <= fechaDesde && x.FinEvento >= fechaHasta).ToList();
+                foreach (var i in fechasFiltradas)
+                {
+                    var actividad = myDbContext.Actividad.Where(x => x.Id == i.ActividadId && x.UsuarioId == idUsuario).FirstOrDefault();
+
+                    if(actividad != null) {
+                        actividadesFiltradasPorFechas.Add(actividad);
+                    }
+                }
+
+                return actividadesFiltradasPorFechas;
+            }
+            else
+            {
+                return listaResultadoDeMentis;
+            }
+            
         }
 
         public List<Actividad> GetBusquedaAvanzada(string textoIngresado, int? categoriaId, int? subCategoriaId, int? segmentoId, int? provinciaId, int? departamentoId, int? localidadId, string precio)
