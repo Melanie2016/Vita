@@ -91,7 +91,7 @@
 
                             <div id="ContenedorLogueado" class="user-img c-pointer position-relative" data-toggle="dropdown" style="width:162px; height:48px; margin-right: -112px;">
                                 <a href="javascript:void(0)" class="log-user" data-toggle="dropdown">
-                                    <span style="color:#464a53; font-size: 14px;">Hola @Model.UsuarioName</span> <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
+                                    <span style="color:#464a53; font-size: 14px; font-family:Roboto, sans-serif;">Hola @Model.UsuarioName</span> <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
                                 </a>
                                 <span class="activity active" style="height: 13px; width: 13px; border-radius: 50%; display: inline-block; position: absolute; border: 3px solid #fff; bottom: .9rem; right: 0rem; left: auto; background-image: linear-gradient(230deg, #AFEDC0, #69D385); margin-right: 14px; margin-bottom: 2px;"></span>
                                 @if (Model.Foto != null && Model.Foto.Length > 0)
@@ -129,7 +129,7 @@
                                 }
 
                             </div>
-                            <div class="drop-down dropdown-profile animated fadeIn dropdown-menu" style="width: 12rem; box-shadow: 0px 1px 10px 0 rgba(0, 0, 0, 0.15); width: 192px; margin-left:-40px; height: 137px;">
+                            <div class="drop-down dropdown-profile animated fadeIn dropdown-menu" style="width: 12rem; box-shadow: 0px 1px 10px 0 rgba(0, 0, 0, 0.15); width: 192px; margin-left:-40px; height: 100px;">
                                 <div class="dropdown-content-body">
                                     <ul style="padding: 20px;">
                                         <li>
@@ -141,16 +141,10 @@
                                             {
                                                 ViewBag.Perfil = "/Usuario/PerfilUsuario";
                                             }
-                                            <a href="@ViewBag.Perfil" style="color:#007bff;"><i></i><img src="../../Content/images/icon1.png" /> <span style="font-size: 15px;">Perfil</span></a>
+                                            <a href="@ViewBag.Perfil" style="color:#76838f;"><i></i><img src="../../Content/images/icon1.png" /> <span style="font-size: 15px;">Perfil</span></a>
                                         </li>
-                                        <li>
-                                            <a href="javascript:void()" style="color:#007bff;">
-                                                <i></i><img src="../../Content/images/icon2.png" /> <span style="font-size: 15px;">Inbox</span> <div class="badge gradient-3 badge-pill gradient-1">3</div>
-                                            </a>
-                                        </li>
-
                                         <hr class="my-2">
-                                        <li><a href="/Login/Logout" style="color:#007bff;"><i></i> <img src="../../Content/images/icon3.png" /> <span style="font-size: 15px;">Cerrar sesión</span></a></li>
+                                        <li><a href="/Login/Logout" style="color:#76838f;"><i></i> <img src="../../Content/images/icon3.png" /> <span style="font-size: 15px;">Cerrar sesión</span></a></li>
                                     </ul>
                                 </div>
                             </div>

@@ -314,7 +314,7 @@ INSERT INTO [dbo].[Campos]
            ('Si ya has cursado en ULSA, adjunta la copia (Foto) del último certificado de cursada aprobada (solo en caso de haber cursado anteriormente).'
            ,1 /*FormularioDinamicoId*/
            ,5 /*TipoDato*/
-           ,1 /*Obligatorio*/
+           ,0 /*Obligatorio*/
            ,'2019-11-23'
            ,null
            ,null)
