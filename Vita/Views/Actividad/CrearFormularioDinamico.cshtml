@@ -50,22 +50,21 @@
                                     </div>
                                 </div>
 
-
-                                <div><h4>Agregar las consignas:</h4></div>
-                                <p><a class="btn" id="btnAgregarEmpleado" style="background-color: #69D49A; color: white; text-decoration: underline;">Nueva consigna</a></p>
-                                <hr />
-                                <div id="ContenedorEmpleados"></div>
-                               
-
+                                <p><a class="btn mb-1 btn-success" id="btnAgregarEmpleado" style="color: white;">Nueva consigna</a></p>
+                                <hr /><br />
+                                <!--Acordeon-->
+                                <div id="accordion-three" class="accordion"></div>
+                                <!---->
+                                <br /><br />
                                 <div class="form-group row">
-                                        <div class="col-lg-8 ml-auto">
+                                    <div class="col-lg-8 ml-auto">
+                                        <div style="margin-left: 70px;">
                                             <input type="hidden" id="publicar" name="publicar" value="@ViewBag.PublicarAhora">
                                             <button type="submit" ng-click="" onclick="GuardarFormulario()" class="btn btn-primary">Guardar formulario</button>
                                         </div>
                                     </div>
+                                </div>
                             </form>
-
-
                         </div>
                     </div>
                 </div>
@@ -89,12 +88,20 @@
     $(document).ready(function () {
 
         var index = 0;
+        var indexAux = 1;
 
         $("#btnAgregarEmpleado").click(function () {
 
             var nombre = "campo" + index.toString();
 
-            $("#ContenedorEmpleados").append(
+            $("#accordion-three").append(
+                '<div class="card">' +
+                '<div class="card-header" style="background-color: #eeeeee57;">' +
+                '<h5 class="mb-0" data-toggle="collapse" data-target="#collapse'+index.toString()+'" aria-expanded="true" aria-controls="collapse'+index.toString()+'">' +
+                '<i class="fa" aria-hidden="true"></i> Consigna'+indexAux.toString()+'</h5>'+
+                '</div>' +
+                '<div id="collapse'+index.toString()+'" class="collapse show" data-parent="#accordion-three">' +
+                '<div class="card-body">'+
                 '<div id="' + nombre +'">' +
                 '<div class="form-group row">' +
                 ' <label class="col-lg-4 col-form-label" for="CamposVm[' + index + '].Nombre">' +
@@ -140,13 +147,12 @@
                 '<div class="col-lg-8 ml-auto">' +
 
                 //'  <button type="button" id="eliminarPregunta" class="btn btn-primary">Eliminar pregunta</button>' +
-                '<p><a class="btn" id="eliminarPregunta" style = "background-color: #ea5e5e; color: white;"> Eliminar pregunta</a ></p > ' +
+                '<p><a class="btn mb-1 btn-danger" style="color:white" id="eliminarPregunta"> Eliminar pregunta</a ></p > ' +
                 '</div>' +
-                ' </div >' +
                 '</div>' +
-                '<hr />'
-
-               
+                '</div>' +
+                '</div>' +
+                '</div>'
             );
 
             $("#eliminarPregunta").click(function () {
@@ -154,6 +160,7 @@
             });
 
             index++;
+            indexAux++;
         });
     });
 </script>
