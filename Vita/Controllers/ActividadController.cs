@@ -305,6 +305,7 @@ namespace Vita.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult ListaActividades()
         {
             //obtengo usuario logueado
@@ -314,13 +315,21 @@ namespace Vita.Controllers
             }
             else
             {
+                DateTime fechaNull = new DateTime(978361200);//esto es fecha null
+
                 buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
-                ViewBag.ListaActvidades = actividadServicio.GetAllActividadByRolEntidadId(buscarUsuarioLogueado.Id);
-                ViewBag.Categorias = categoriaServicio.GetAllCategorias();
-                //  ViewBag.ListaUsuariosInscriptoActividad = actividadServicio.GetAllActividadUsuarioInscriptoByActividadId( tiene que recibir la actividad id para poder hacerlo, hay que porbar)
+                var actividades = actividadServicio.GetAllActividadByRolEntidadId(buscarUsuarioLogueado.Id);
+                if (actividades.Any())
+                {
+                    var listaActividadesVigentes = actividades.Where(x => x.DeletedAt == fechaNull).ToList();
+                    ViewBag.ListaActvidades = listaActividadesVigentes;
+
+                    ViewBag.Categorias = categoriaServicio.GetAllCategorias();
+                    ViewBag.ListaActividadesEliminadas = actividadServicio.GetAllActividadesEliminadasByEntidadId(buscarUsuarioLogueado.Id);
+                    var actividadesVigentes = actividadServicio.GetAllActividadesVigentesByEntidadId(buscarUsuarioLogueado.Id);
+                }
 
                 return View(buscarUsuarioLogueado);
-                // return View(actividades);
             }
         }
 
@@ -750,7 +759,7 @@ namespace Vita.Controllers
         }
 
         [HttpGet]
-        public ActionResult DarseDeBajaActividad(int actividadId)
+        public ActionResult EliminaroDarseBajaActividad(int actividadId)
         {
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
             {
@@ -763,9 +772,12 @@ namespace Vita.Controllers
 
 
                 actividadServicio.DarseDeBajaActividad(actividadId, buscarUsuarioLogueado.Id);
+                var usuario = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
 
-
-                return RedirectToAction("ActividadesDelUsuarioInscripto", "Actividad", buscarUsuarioLogueado);
+                return usuario.RolId == 1
+                   ? RedirectToAction("ActividadesDelUsuarioInscripto", "Actividad", buscarUsuarioLogueado)
+                   : RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
+               // return RedirectToAction("ActividadesDelUsuarioInscripto", "Actividad", buscarUsuarioLogueado);
             }
         }
     }

@@ -981,16 +981,92 @@ namespace Vita.Servicios
         }
         public void DarseDeBajaActividad(int actividadId, int usuarioId)
         {
-            var usuarioInscrip = myDbContext.UsuarioInscriptoActividad.Where(x => x.UsuarioId == usuarioId && x.ActividadId == actividadId).FirstOrDefault();
-            var inscripFecha = myDbContext.InscripcionFecha.Where(x => x.UsuarioInscriptoActividadId == usuarioInscrip.Id).ToList();
-            foreach(var f in inscripFecha)
+            var usuario = myDbContext.Usuario.Where(x => x.Id == usuarioId).FirstOrDefault();
+
+            if (usuario.RolId == 1)//usuario cliente
             {
-                f.DeletedAt = DateTime.UtcNow;
+                var usuarioInscrip = myDbContext.UsuarioInscriptoActividad.Where(x => x.UsuarioId == usuarioId && x.ActividadId == actividadId).FirstOrDefault();
+                var inscripFecha = myDbContext.InscripcionFecha.Where(x => x.UsuarioInscriptoActividadId == usuarioInscrip.Id).ToList();
+                foreach (var f in inscripFecha)
+                {
+                    f.DeletedAt = DateTime.UtcNow;
+                }
+                usuarioInscrip.DeletedAt = DateTime.UtcNow;
+                usuarioInscrip.EstadoId = 3;
+                myDbContext.SaveChanges();
             }
-            usuarioInscrip.DeletedAt = DateTime.UtcNow;
-            usuarioInscrip.EstadoId = 3;
-            myDbContext.SaveChanges();
+            else//usuario entidad
+            {
+               
+                    var actividad = myDbContext.Actividad.Where(x => x.Id == actividadId).FirstOrDefault();
+                    var domicilio = myDbContext.Domicilio.Where(x => x.ActividadId == actividadId).FirstOrDefault();
+                    var fechaActividades = myDbContext.FechaActividad.Where(x => x.ActividadId == actividadId).ToList();
+                    var formularioDinamico = myDbContext.FormularioDinamico.Where(x => x.ActividadId == actividadId).FirstOrDefault();
+                    if (formularioDinamico != null)
+                    {
+                        formularioDinamico.DeletedAt = DateTime.UtcNow;
+                        var campos = myDbContext.Campos.Where(x => x.FormularioDinamicoId == formularioDinamico.Id).ToList();
+                        foreach(var cam in campos)
+                        {
+                            cam.DeletedAt = DateTime.UtcNow;
+                        }
+                    }
+                    foreach (var fechaActivida in fechaActividades)
+                    {
+                        fechaActivida.DeletedAt = DateTime.UtcNow;
+                    }
+
+                    domicilio.DeletedAt = DateTime.UtcNow;
+                    actividad.DeletedAt = DateTime.UtcNow;
+                    actividad.EstadoId = 10; //cancelado osea eliminado
+                    myDbContext.SaveChanges();
+                
+               
+               
+
+            }
+       
             
         }
+
+        /*Lista de actividades por entidad*/
+
+        /*Eliminadas*/
+        public List<Actividad> GetAllActividadesEliminadasByEntidadId(int usuarioId)
+        {
+            DateTime fechaNull = new DateTime(978361200);//esto es fecha null
+
+            var actividadesEliminadas = myDbContext.Actividad.Where(x => x.UsuarioId == usuarioId &&  x.DeletedAt != fechaNull).ToList();
+            return actividadesEliminadas;
+        }
+
+        /*Vigentes fecha a un dia de que se empiece*/
+        public List<Actividad> GetAllActividadesVigentesByEntidadId(int usuarioId)
+        {
+            DateTime fechaNull = new DateTime(978361200);//esto es fecha null
+            var fechaActual = new TimeSpan(DateTime.UtcNow.Day, DateTime.UtcNow.Month, DateTime.UtcNow.Year);
+            var fecha = DateTime.UtcNow;
+            List<Actividad> listaActividades = new List<Actividad>();
+
+            var actividadesSinEliminar = myDbContext.Actividad.Where(x => x.UsuarioId == usuarioId && x.DeletedAt == fechaNull).ToList();
+            if (actividadesSinEliminar.Any())
+            {
+                foreach (var ac in actividadesSinEliminar)
+                {
+                    var fechasActividades = myDbContext.FechaActividad.Where(x => x.ActividadId == ac.Id).FirstOrDefault();
+                    var fechaInicio = (DateTime)fechasActividades.InicioEvento;
+                    if (fechaInicio.Date > fecha.Date.AddDays(1))//ACA ES DONDE TENGO QUE VALIDAR LA FECHA 
+                    {
+                        var actividad = myDbContext.Actividad.Where(x => x.Id == fechasActividades.ActividadId).FirstOrDefault();
+                        listaActividades.Add(actividad);
+                    }
+                        
+                }
+            }
+            
+            return listaActividades;
+        }
+
+
     }
 }
