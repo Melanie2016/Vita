@@ -11,10 +11,10 @@
                     <div class="media-body">
                         @if (ViewBag.Campos != null)
                         {
-                        <div class="alert alert-info" role="alert">
-                            Este es el formulario que presentará a los usuarios interesados en esta Actividad. Recuerde que los datos son importantes, úselos responsablemente.
-                        </div>
-                       
+                            <div class="alert alert-info" role="alert">
+                                Este es el formulario que presentará a los usuarios interesados en esta Actividad. Recuerde que los datos son importantes, úselos responsablemente.
+                            </div>
+
 
                             <div class="d-sm-flex justify-content-between mb-2">
                                 <h5 class="mb-sm-0">@ViewBag.NombreFormulario <small class="text-muted ml-3"> @ViewBag.DescripcionFormulario </small></h5>
@@ -22,24 +22,33 @@
 
                             <div class="media mt-3">
                                 <div class="media-body">
-                                    <table id="tablePreview" class="table">
+                                    <table id="table table-bordered" class="table">
 
                                         @foreach (var item in ViewBag.Campos)
                                         {
                                             if (item.FormularioDinamicoId == ViewBag.IdFormularioDinamico)
                                             {
-                                                <table class="table table-bordered">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td scope="row">@item.Nombre</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            }
+
+                                                <tbody>
+                                                    <tr>
+                                                        <td scope="row">@item.Nombre</td>
+                                                    </tr>
+                                                </tbody>
 
                                             }
-                                        </table>
+
+
+                                        }
+
+                                    </table>
                                 </div>
+                            </div>
+                        }
+
+                        else
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                Usted no ha creado un formulario para esta Actividad
                             </div>
                         }
                     </div>
