@@ -1044,7 +1044,7 @@ namespace Vita.Servicios
         public List<Actividad> GetAllActividadesVigentesByEntidadId(int usuarioId)
         {
             DateTime fechaNull = new DateTime(978361200);//esto es fecha null
-            var fechaActual = new TimeSpan(DateTime.UtcNow.Day, DateTime.UtcNow.Month, DateTime.UtcNow.Year);
+           // var fechaActual = new TimeSpan(DateTime.UtcNow.Day, DateTime.UtcNow.Month, DateTime.UtcNow.Year);
             var fecha = DateTime.UtcNow;
             List<Actividad> listaActividades = new List<Actividad>();
 
