@@ -1048,7 +1048,7 @@ namespace Vita.Servicios
             var fecha = DateTime.UtcNow;
             List<Actividad> listaActividades = new List<Actividad>();
 
-            var actividadesSinEliminar = myDbContext.Actividad.Where(x => x.UsuarioId == usuarioId && x.DeletedAt == fechaNull).ToList();
+            var actividadesSinEliminar = myDbContext.Actividad.Where(x => x.UsuarioId == usuarioId && (x.DeletedAt == fechaNull || x.DeletedAt == null)).ToList();
             if (actividadesSinEliminar.Any())
             {
                 foreach (var ac in actividadesSinEliminar)

@@ -321,10 +321,11 @@ namespace Vita.Controllers
                 var actividades = actividadServicio.GetAllActividadByRolEntidadId(buscarUsuarioLogueado.Id);
                 if (actividades.Any())
                 {
-                    var listaActividadesVigentes = actividades.Where(x => x.DeletedAt == fechaNull).ToList();
-                    ViewBag.ListaActvidades = listaActividadesVigentes;
+                 
 
                     ViewBag.Categorias = categoriaServicio.GetAllCategorias();
+                    var listaActividadesVigentes = actividades.Where(x => x.DeletedAt == fechaNull || x.DeletedAt==null ).ToList();
+                    ViewBag.ListaActvidades = listaActividadesVigentes;
                     ViewBag.ListaActividadesEliminadas = actividadServicio.GetAllActividadesEliminadasByEntidadId(buscarUsuarioLogueado.Id);
                     var actividadesVigentes = actividadServicio.GetAllActividadesVigentesByEntidadId(buscarUsuarioLogueado.Id);
                 }
