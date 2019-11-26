@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <br><br><br><br><br>
-                <table class="table header-border table-hover verticle-middle">
+                <table class="table header-border table-hover verticle-middle" style="font-family: Roboto, sans-serif; font-size: 14px;">
 
                     @if (ViewBag.ListaActividades.Count != 0)
                     {
@@ -59,154 +59,195 @@
                             {
                                 ViewBag.Url = "/Content/images/sin_foto.png";
                             }
-                        <tr>
-                            <td><a href="/Actividad/FichaActividad/?idActividad=@i.Id&inscribirse=false"><img src="@Url.Content(ViewBag.Url)" style="width: 190px; height: 120px;"> </a></td>
-                            <td>@i.Titulo</td>
-                            <td>@i.Localidad.Descripcion</td>
-                            <td>@i.EdadMinima - @i.EdadMaxima</td>
+                            <tr>
+                                <td><a href="/Actividad/FichaActividad/?idActividad=@i.Id&inscribirse=false"><img src="@Url.Content(ViewBag.Url)" style="width: 190px; height: 120px;"> </a></td>
+                                <td>@i.Titulo</td>
+                                <td>@i.Localidad.Descripcion</td>
+                                <td>@i.EdadMinima - @i.EdadMaxima</td>
 
 
-                            @if (i.ConUsuarioPendiente == true)
-                            {
-                                var estado = @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion;
-                        <td style="text-align: center;">
-
-
-                            @{
-                                List<Respuesta> respuestas = new List<Respuesta>();
-                                List<Respuesta> re = new List<Respuesta>();
-                                if (respuestasDeBd.Count != 0)
+                                @if (i.ConUsuarioPendiente == true)
                                 {
-                                    foreach (var r in respuestasDeBd)
-                                    {
-                                        respuestas.Add(r);
+                                    var estado = @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion;
+                                    <td style="text-align: center;">
+
+
+                                        @{
+                                            List<Respuesta> respuestas = new List<Respuesta>();
+                                            List<Respuesta> re = new List<Respuesta>();
+                                            if (respuestasDeBd.Count != 0)
+                                            {
+                                                foreach (var r in respuestasDeBd)
+                                                {
+                                                    respuestas.Add(r);
+                                                }
+                                                re = respuestas.Where(x => x.ActividadId == i.Id).ToList();
+                                            }
+
+                                            if (re.Count != 0)// tiene respuestas de un formulario
+                                            {
+
+                                                if (estado == "Rehacer formulario")
+                                                {
+
+                                                    <a href="/Actividad/ModificarFormularioDinamicoUsuario?actividadId=@i.Id">
+                                                        <span class="label gradient-2 rounded" style="font-size: 15px !important; background-image: linear-gradient(230deg, #69D385, #a9dab6);">
+                                                            Ir a rehacer formulario
+                                                        </span>
+                                                    </a>
+                                                    <br /><br />
+                                                    <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                        @estado
+                                                    </span>
+                                                }
+                                                else if (estado == "Rehizó el formulario, a la espera de la aprobación")
+                                                {
+                                                    <p>
+                                                        Rehiciste el formulario
+                                                        <a href="/Actividad/VerRespuestaFormulario?actividadId=@i.Id"><span data-toggle="tooltip" data-placement="top" title="Ver tus respuestas"><i class="fa fa-eye fa-2x" aria-hidden="true" style="    color: #76838f; font-size: 25px;"></i></span></a>
+                                                    </p>
+
+                                                    <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                        A la espera de la aprobación
+                                                    </span>
+
+                                                }
+                                                else if (estado == "Pendiente de aprobación")
+                                                {
+                                                    <p>
+                                                        Formulario ya realizado
+                                                        <a href="/Actividad/VerRespuestaFormulario?actividadId=@i.Id"><span data-toggle="tooltip" data-placement="top" title="Ver tus respuestas"><i class="fa fa-eye fa-2x" aria-hidden="true" style="    color: #76838f; font-size: 25px;"></i></span></a>
+                                                    </p>
+
+                                                    <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                        @estado
+                                                    </span>
+                                                }
+                                                else if (estado == "Cancelado")
+                                                {
+                                                    <p>
+                                                        Usted se dió de baja a está actividad<br />
+                                                        el dia @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().DeletedAt.ToString().Remove(10)
+                                                    </p>
+                                                    <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                        @estado
+                                                    </span>
+                                                }
+                                                else
+                                                {
+
+                                                    if (estado == "Aprobado")
+                                                    {
+                                                        <p>
+                                                            Formulario ya realizado
+                                                        </p>
+                                                        <span class="label gradient-3 rounded" style="font-size: 15px !important;">
+                                                            @estado
+                                                        </span>
+                                                    }
+                                                    else //rechazado
+                                                    {
+                                                        <p>
+                                                            Formulario ya realizado
+                                                        </p>
+                                                        <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                            @estado
+                                                        </span>
+                                                    }
+
+                                                }
+                                                if (estado != "Cancelado" && estado != "Rechazado" && estado != "Finalizado")
+                                                {
+                                                <td>
+                                                    <span><a href="/Actividad/EliminaroDarseBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Darme de baja"><i class="fa fa-close color-danger"></i></a></span>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td></td>
+                                            }
+
+                                        }
+
+                                        else //no tiene formulario
+                                        {
+
+                                            if (estado == "Pendiente de aprobación" && re.Count == 0)
+                                            {
+                                                <a href="/Actividad/CompletarFormularioDinamicoUsuario?actividadId=@i.Id">
+                                                    <span class="label gradient-2 rounded" style="font-size: 15px !important; background-image: linear-gradient(230deg, #69D385, #a9dab6);">
+                                                        Completar formulario
+                                                    </span>
+                                                </a>
+                                                <br /><br>
+                                                <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                    @estado
+                                                </span>
+                                            }
+                                            else
+                                            {
+
+                                                if (estado == "Aprobado")
+                                                {
+                                                    <span class="label gradient-3 rounded" style="font-size: 15px !important;">
+                                                        @estado
+                                                    </span>
+                                                }
+                                                else if (estado == "Cancelado")
+                                                {
+                                                    <p>
+                                                        Usted se dió de baja a está actividad<br />
+                                                        el dia @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().DeletedAt.ToString().Remove(10)
+                                                    </p>
+                                                    <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                        @estado
+                                                    </span>
+                                                }
+                                                else //rechazado
+                                                {
+                                                    <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                                        @estado
+                                                    </span>
+                                                }
+
+                                            }
+                                            if (estado != "Cancelado" && estado != "Rechazado" && estado != "Finalizado")
+                                            {
+                                                <td>
+                                                    <span><a href="/Actividad/EliminaroDarseBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Darme de baja"><i class="fa fa-close color-danger"></i></a></span>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                    <td></td>
+                                            }
+
+                                        }
+
+                                        }
+
+
+                                        </td>
+
                                     }
-                                    re = respuestas.Where(x => x.ActividadId == i.Id).ToList();
-                                }
 
-                                if (re.Count != 0)// tiene respuestas de un formulario
-                                {
-
-                                    if (estado == "Rehacer formulario")
-                                    {
-                                        <a href="/Actividad/ModificarFormularioDinamicoUsuario?actividadId=@i.Id">
-                                            <span class="label gradient-2 rounded" style="font-size: 15px !important; background-image: linear-gradient(230deg, #69D385, #a9dab6);">
-                                                Ir a rehacer formulario
-                                            </span>
-                                        </a>
-
-                                        <p>
-                                        </p>
-
-
-                                        <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                            @estado
-                                        </span>
-                                    }
-                                    else if (estado == "Rehizó el formulario, a la espera de la aprobación")
-                                    {
-                                        <a href="/Actividad/VerRespuestaFormulario?actividadId=@i.Id">
-                                            <span class="label gradient-2 rounded" style="font-size: 15px !important; background-image: linear-gradient(230deg, #69D385, #a9dab6);">
-                                                ver respuestas
-                                            </span>
-                                        </a>
-
-                                        <p>
-                                        </p>
-
-
-                                        <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                            @estado
-                                        </span>
-                                    }
-                                    else if (estado == "Pendiente de aprobación")
-                                    {
-                                        <p>
-                                            Formulario ya realizado
-                                            <a href="/Actividad/VerRespuestaFormulario?actividadId=@i.Id"><span data-toggle="tooltip" data-placement="top" title="Ver respuestas del formulario"><i class="fa fa-eye fa-2x" aria-hidden="true" style="    color: #76838f; font-size: 25px;"></i></span></a>
-                                        </p>
-
-                                        <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                            @estado
-                                        </span>
-                                    }
-                                    else if (estado == "Cancelado")
-                                    {
-                                        <p>
-                                            Formulario ya realizado,<br /> pero usted se dió de baja a está actividad<br />
-                                            el dia @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().DeletedAt
-                                        </p>
-                                        <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                            @estado
-                                        </span>
-                                    }
                                     else
                                     {
-                                        <p>
-                                        </p>
+                                        var estado = @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion;
+                                        <td style="text-align: center;">
 
-                                        if (estado == "Aprobado")
-                                        {
-                                            <p>
-                                                Formulario ya realizado
-                                            </p>
-                                            <span class="label gradient-3 rounded" style="font-size: 15px !important;">
-                                                @estado
-                                            </span>
-                                        }
-                                        else //rechazado
-                                        {
-                                            <p>
-                                                Formulario ya realizado
-                                            </p>
-                                            <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                                @estado
-                                            </span>
-                                        }
-
-                                    }
-                                    if (estado != "Cancelado" && estado != "Rechazado" && estado != "Finalizado")
-                                    {
-<td>
-                                                <span><a href="/Actividad/EliminaroDarseBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                            </td>
-                                        }
-                                    }
-                                    else //no tiene formulario
-                                    {
-
-                                        if (estado == "Pendiente de aprobación" && re.Count == 0)
-                                        {
-                                            <a href="/Actividad/CompletarFormularioDinamicoUsuario?actividadId=@i.Id">
-                                                <span class="label gradient-2 rounded" style="font-size: 15px !important; background-image: linear-gradient(230deg, #69D385, #a9dab6);">
-                                                    Completar formulario
-                                                </span>
-                                            </a>
-
-                                            <p>
-                                            </p>
-
-
-                                            <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                                @estado
-                                            </span>
-                                        }
-                                        else
-                                        {
-                                            <p>
-                                            </p>
-
-                                            if (estado == "Aprobado")
+                                            @if (estado == "Aprobado")
                                             {
                                                 <span class="label gradient-3 rounded" style="font-size: 15px !important;">
                                                     @estado
                                                 </span>
+
                                             }
                                             else if (estado == "Cancelado")
                                             {
                                                 <p>
                                                     Usted se dió de baja a está actividad<br />
-                                                    el dia @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().DeletedAt
+                                                    el dia @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().DeletedAt.ToString().Remove(10)
                                                 </p>
                                                 <span class="label gradient-2 rounded" style="font-size: 15px !important;">
                                                     @estado
@@ -219,65 +260,17 @@
                                                 </span>
                                             }
 
-                                        }
+
+                                        </td>
                                         if (estado != "Cancelado" && estado != "Rechazado" && estado != "Finalizado")
                                         {
                                             <td>
                                                 <span><a href="/Actividad/DarseDeBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
                                             </td>
                                         }
-                                    }
 
                                     }
-
-
-                                    </td>
-
-                                }
-
-                                else
-                                {
-                                    var estado = @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion;
-                                    <td style="text-align: center;">
-
-                                        @if (estado == "Aprobado")
-                                        {
-                                            <span class="label gradient-3 rounded" style="font-size: 15px !important;">
-                                                @estado
-                                            </span>
-
-                                        }
-                                        else if (estado == "Cancelado")
-                                        {
-                                            <p>
-                                                Usted se dió de baja a está actividad<br />
-                                                el dia @i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().DeletedAt
-                                            </p>
-                                            <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                                @estado
-                                            </span>
-                                        }
-                                        else //rechazado
-                                        {
-                                            <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                                @estado
-                                            </span>
-                                        }
-
-
-                                    </td>
-                                    if (estado != "Cancelado" && estado != "Rechazado" && estado != "Finalizado")
-                                    {
-                                        <td>
-                                            <span><a href="/Actividad/DarseDeBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                        </td>
-                                    }
-
-
-
-                                }
-
-                        </tr>
+                            </tr>
                         }
                     </tbody>
                 </table>
