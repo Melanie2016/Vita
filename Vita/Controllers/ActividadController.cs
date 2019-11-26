@@ -681,7 +681,18 @@ namespace Vita.Controllers
             {
                 buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
                 var actividad = actividadServicio.GetActividad(actividadId);
+                ViewBag.ActividadId = actividad.Id.ToString();
                 ViewBag.UsuarioRespuestaId = usuarioRespuestaId;
+                var usuarioInscripto = usuarioServicio.GetById(usuarioRespuestaId);
+
+                foreach (var item in usuarioInscripto.UsuarioInscriptoActividad)
+                {
+                    if(item.ActividadId == actividadId)
+                    {
+                        ViewBag.Estado = item.EstadoId;
+                    }
+                }
+
                 var respuestasFoto = new List<Respuesta>();
 
                 foreach (var item in actividad.FormularioDinamico)
