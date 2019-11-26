@@ -97,7 +97,7 @@
                         {
                             <thead>
                                 <tr>
-                                    <th scope="col">Imagen</th>
+                                    <th scope="col"></th>
                                     <th scope="col">Titulo actividad</th>
                                     <th scope="col">Cupo</th>
                                     <th scope="col">Aprobados</th>
@@ -154,8 +154,8 @@
                                         </a>
                                     </td>
 
-                                    <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span></td>
-                                    <td><span><a href="/Actividad/EliminaroDarseBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-close color-danger"></i></a></span></td>
+                                    <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Editar actividad"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span></td>
+                                    <td><span><a href="/Actividad/EliminaroDarseBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Eliminar actividad"><i class="fa fa-close color-danger"></i></a></span></td>
 
                                     <td>
                                         @if (i.Estado.Id != 7 && i.FormularioDinamico.Where(x => x.ActividadId == i.Id).FirstOrDefault() == null)
@@ -220,8 +220,8 @@
                                         </a>
                                     </td>
 
-                                    <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span></td>
-                                    <td><span><a href="/Actividad/EliminaroDarseBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-close color-danger"></i></a></span></td>
+                                    <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Editar actividad"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span></td>
+                                    <td><span><a href="/Actividad/EliminaroDarseBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Eliminar actividad"><i class="fa fa-close color-danger"></i></a></span></td>
 
                                     <td>
                                         @if (i.Estado.Id != 7 && i.FormularioDinamico.Where(x => x.ActividadId == i.Id).FirstOrDefault() == null)

@@ -8,7 +8,7 @@
 <section class="container-fluid">
     <div class="card" style="border: 0;">
         <div class="card-body">
-            <h2 class="card-title">Mis actividades</h2>
+            <h4 class="card-title">Mis actividades inscriptas</h4>
 
             <div class="table-responsive">
                 <div class="header-left" style="margin-left:80%;">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <br><br><br><br><br>
-                <table class="table header-border table-hover verticle-middle" style="font-family: Roboto, sans-serif; font-size: 14px;">
+                <table class="table header-border table-hover verticle-middle" style="font-family: Roboto, sans-serif; font-size: 14px; color:#76838f">
 
                     @if (ViewBag.ListaActividades.Count != 0)
                     {
@@ -265,8 +265,11 @@
                                         if (estado != "Cancelado" && estado != "Rechazado" && estado != "Finalizado")
                                         {
                                             <td>
-                                                <span><a href="/Actividad/DarseDeBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
+                                                <span><a href="/Actividad/EliminaroDarseBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Darme de baja"><i class="fa fa-close color-danger"></i></a></span>
                                             </td>
+                                        }
+                                        {
+                                            <td></td>
                                         }
 
                                     }

@@ -10,11 +10,14 @@
 <section class="container-fluid">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Hay @ViewBag.ListaUsuario.Count usuarios de la actividad:</h4><br />
-            <h5> @ViewBag.Actividad.Titulo, @ViewBag.Actividad.Descripcion</h5>
+            <h4 class="card-title">Hay @ViewBag.ListaUsuario.Count usuarios en la actividad:</h4><br />
+            <h6 style="color:#76838f"> @ViewBag.Actividad.Titulo, @ViewBag.Actividad.Descripcion</h6>
             <form action="/Actividad/AprobarUsuario" method="post">
                 <input type="number" value="@ViewBag.Actividad.Id" name="ActividadId" hidden />
                 <div class="table-responsive">
+
+                    <br /><br />
+
                     @if (ViewBag.Estado == "2") //Sólo en el estado PENDIENTE muestro los botones de aprobar y rechazar
                     {
                         <div class="header-left" style="margin-left:80%;">
@@ -47,7 +50,6 @@
                                 {
                                     <th scope="colgroup">Formulario</th>
                                 }
-                                <th scope="colgroup">Accion</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -88,11 +90,6 @@
                                         </td>
                                     }
                                     
-
-                                    <td>
-                                        <span><a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span>
-                                    </td>
-
                                 </tr>
                             }
 
