@@ -53,7 +53,10 @@
                                 <p><a class="btn mb-1 btn-success" id="btnAgregarEmpleado" style="color: white;">Nueva consigna</a></p>
                                 <hr /><br />
                                 <!--Acordeon-->
-                                <div id="accordion-three" class="accordion"></div>
+                                <div id="accordion-three" class="accordion">
+
+                                    <div class="contenedor"></div>
+                                </div>
                                 <!---->
                                 <br /><br />
                                 <div class="form-group row">
@@ -85,24 +88,32 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 
 <script>
+
+
+    $('body').on('focus', ".contenedor", function () {
+        $(this).contenedor();
+    });
+
     $(document).ready(function () {
 
+        var wrapper = $("#accordion-three"); //Fields wrapper
+        var add_button = $("#btnAgregarEmpleado");
         var index = 0;
         var indexAux = 1;
 
-        $("#btnAgregarEmpleado").click(function () {
-
+        $(add_button).click(function (e) {
+            e.preventDefault();
             var nombre = "campo" + index.toString();
-
-            $("#accordion-three").append(
+            $(wrapper).append(
+                '<div class="removeMe" >' +
                 '<div class="card">' +
                 '<div class="card-header" style="background-color: #eeeeee57;">' +
-                '<h5 class="mb-0" data-toggle="collapse" data-target="#collapse'+index.toString()+'" aria-expanded="true" aria-controls="collapse'+index.toString()+'">' +
-                '<i class="fa" aria-hidden="true"></i> Consigna'+indexAux.toString()+'</h5>'+
+                '<h5 class="mb-0" data-toggle="collapse" data-target="#collapse' + index.toString() + '" aria-expanded="true" aria-controls="collapse' + index.toString() + '">' +
+                '<i class="fa" aria-hidden="true"></i> Consigna' + indexAux.toString() + '</h5>' +
                 '</div>' +
-                '<div id="collapse'+index.toString()+'" class="collapse show" data-parent="#accordion-three">' +
-                '<div class="card-body">'+
-                '<div id="' + nombre +'">' +
+                '<div id="collapse' + index.toString() + '" class="collapse show" data-parent="#accordion-three">' +
+                '<div class="card-body">' +
+                '<div id="' + nombre + '">' +
                 '<div class="form-group row">' +
                 ' <label class="col-lg-4 col-form-label" for="CamposVm[' + index + '].Nombre">' +
                 ' Ingrese pregunta <span class="text-danger">*</span>' +
@@ -118,11 +129,11 @@
                 '  <div class="col-lg-6">' +
                 '  <select class="form-control" id="filtroCategoria" data-live-search="true" title="Seleccione tipo de categoria de la actividad.." name="CamposVm[' + index + '].TipoDatoCampoId">' +
                 ' <option value=0>Elegir tipo de respuesta</option>' +
-                 ' <option value=1>Texto Corto (menos de 50 caracteres)</option>' +
+                ' <option value=1>Texto Corto (menos de 50 caracteres)</option>' +
                 ' <option value=2>Texto Largo (más de 51 caracteres)</option>' +
                 ' <option value=3>Número</option>' +
                 ' <option value=4>Fecha</option>' +
-                 ' <option value=5>Imagen</option>' +
+                ' <option value=5>Imagen</option>' +
                 '  </select>' +
 
                 ' </div>' +
@@ -147,7 +158,8 @@
                 '<div class="col-lg-8 ml-auto">' +
 
                 //'  <button type="button" id="eliminarPregunta" class="btn btn-primary">Eliminar pregunta</button>' +
-                '<p><a class="btn mb-1 btn-danger" style="color:white" id="eliminarPregunta"> Eliminar pregunta</a ></p > ' +
+                '<p><a class="btn mb-1 btn-danger remove-date" style="color:white" id="eliminarPregunta"> Eliminar pregunta</a ></p > ' +
+                '</div>' +
                 '</div>' +
                 '</div>' +
                 '</div>' +
@@ -155,12 +167,15 @@
                 '</div>'
             );
 
-            $("#eliminarPregunta").click(function () {
-               
-            });
-
             index++;
             indexAux++;
+
+        });
+        $(wrapper).on("click", ".remove-date", function (e) { //user click on remove text
+            e.preventDefault(); $(this).closest('div.removeMe').remove(); index--; indexAux--;;
         });
     });
+
+
+
 </script>

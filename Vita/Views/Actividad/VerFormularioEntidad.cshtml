@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "VerRespuestaFormulario";
+    Layout = "~/Views/Shared/_LayoutPerfilEntidad.cshtml";
+}
+
+    <section class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <div class="media media-reply">
+                    <div class="media-body">
+                        @if (ViewBag.Campos != null)
+                        {
+                            <div class="alert alert-info" role="alert">
+                                Este es el formulario que presentará a los usuarios interesados en esta Actividad. Recuerde que los datos son importantes, úselos responsablemente.
+                            </div>
+
+
+                            <div class="d-sm-flex justify-content-between mb-2">
+                                <h5 class="mb-sm-0">@ViewBag.NombreFormulario <small class="text-muted ml-3"> @ViewBag.DescripcionFormulario </small></h5>
+                            </div>
+
+                            <div class="media mt-3">
+                                <div class="media-body">
+                                    <table id="table table-bordered" class="table">
+
+                                        @foreach (var item in ViewBag.Campos)
+                                        {
+                                            if (item.FormularioDinamicoId == ViewBag.IdFormularioDinamico)
+                                            {
+
+                                                <tbody>
+                                                    <tr>
+                                                        <td scope="row">@item.Nombre</td>
+                                                    </tr>
+                                                </tbody>
+
+                                            }
+
+
+                                        }
+
+                                    </table>
+                                </div>
+                            </div>
+                        }
+
+                        else
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                Usted no ha creado un formulario para esta Actividad
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div style="margin-left:70px;">
+                    <a href="/Actividad/ListaActividades"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#guardar">Volver</button></a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+

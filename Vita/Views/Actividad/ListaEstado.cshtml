@@ -10,11 +10,14 @@
 <section class="container-fluid">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Hay @ViewBag.ListaUsuario.Count usuarios de la actividad:</h4><br />
-            <h5> @ViewBag.Actividad.Titulo, @ViewBag.Actividad.Descripcion</h5>
+            <h4 class="card-title">Hay @ViewBag.ListaUsuario.Count usuarios en la actividad:</h4><br />
+            <h6 style="color:#76838f"> @ViewBag.Actividad.Titulo, @ViewBag.Actividad.Descripcion</h6>
             <form action="/Actividad/AprobarUsuario" method="post">
-                <input type="number" value="@ViewBag.Actividad.Id" name="ActividadId" hidden/>
+                <input type="number" value="@ViewBag.Actividad.Id" name="ActividadId" hidden />
                 <div class="table-responsive">
+
+                    <br /><br />
+
                     @if (ViewBag.Estado == "2") //Sólo en el estado PENDIENTE muestro los botones de aprobar y rechazar
                     {
                         <div class="header-left" style="margin-left:80%;">
@@ -47,7 +50,6 @@
                                 {
                                     <th scope="colgroup">Formulario</th>
                                 }
-                                <th scope="colgroup">Accion</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -84,14 +86,10 @@
                                     @if (ViewBag.Estado == "2") //Pendiente
                                     {
                                         <td>
-                                            <span><a href="/Actividad/RespuestasFormularioDinamico?actividadId=@ViewBag.Actividad.Id&usuarioRespuestaId=@i.Id" data-toggle="tooltip" data-placement="top"  title="Ver respuestas del formulario"   style="color: #f97197; font-weight: bold; text-decoration: underline;">Ver respuestas</a></span>
+                                            <div style="text-align:center"><a href="/Actividad/RespuestasFormularioDinamico?actividadId=@ViewBag.Actividad.Id&usuarioRespuestaId=@i.Id"><span data-toggle="tooltip" data-placement="top" title="Ver respuestas del formulario"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></span></a></div>
                                         </td>
                                     }
-
-                                    <td>
-                                        <span><a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span>
-                                    </td>
-
+                                    
                                 </tr>
                             }
 
@@ -99,53 +97,53 @@
                         </tbody>
                     </table>
 
-</form>
-            </div>
+            </form>
         </div>
     </div>
+    </div>
     <script type="text/javascript">
-      function selectAll(){
-        var items=document.getElementsByName('case');
-        for(var i=0; i<items.length; i++){
-          if(items[i].type=='checkbox' && items[i].checked==true){
-            items[i].checked=false;
-            }else{
-                items[i].checked=true;
+        function selectAll() {
+            var items = document.getElementsByName('case');
+            for (var i = 0; i < items.length; i++) {
+                if (items[i].type == 'checkbox' && items[i].checked == true) {
+                    items[i].checked = false;
+                } else {
+                    items[i].checked = true;
+                }
+
             }
-            
+
         }
 
-      }
-      
-       
+
     </script>
 
     <script type="text/javascript">
-        $(function() {
+        $(function () {
             $('#btnAprobar').attr('disabled', 'disabled');
             $('#btnRechazar').attr('disabled', 'disabled');
 
-                $('#selectall').click(function(){
-                    if ($(this).is(':checked')) {
-                        $('#btnAprobar').removeAttr('disabled');
-                        $('#btnRechazar').removeAttr('disabled');
-                        
-                    } else {
-                        $('#btnAprobar').attr('disabled', 'disabled');
-                        $('#btnRechazar').attr('disabled', 'disabled');
-                    }
-                });
+            $('#selectall').click(function () {
+                if ($(this).is(':checked')) {
+                    $('#btnAprobar').removeAttr('disabled');
+                    $('#btnRechazar').removeAttr('disabled');
 
-                $('.case').change(function(){
-                    if ($(this).is(':checked')) {
-                        $('#btnAprobar').removeAttr('disabled');
-                        $('#btnRechazar').removeAttr('disabled');
-                        
-                    } else {
-                        $('#btnAprobar').attr('disabled', 'disabled');
-                        $('#btnRechazar').attr('disabled', 'disabled');
-                    }
-                });
+                } else {
+                    $('#btnAprobar').attr('disabled', 'disabled');
+                    $('#btnRechazar').attr('disabled', 'disabled');
+                }
             });
+
+            $('.case').change(function () {
+                if ($(this).is(':checked')) {
+                    $('#btnAprobar').removeAttr('disabled');
+                    $('#btnRechazar').removeAttr('disabled');
+
+                } else {
+                    $('#btnAprobar').attr('disabled', 'disabled');
+                    $('#btnRechazar').attr('disabled', 'disabled');
+                }
+            });
+        });
     </script>
 </section>

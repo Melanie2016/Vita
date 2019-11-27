@@ -5,30 +5,30 @@
 }
 
 <section class="container-fluid">
-    <div class="card">
+    <div class="card" style="border-radius: .25rem; border: 1px solid rgba(0, 0, 0, 0.125);">
         <div class="card-body">
             <div class="media media-reply">
                 <div class="media-body">
                     @if (ViewBag.Campos != null)
                     {
                         <div class="d-sm-flex justify-content-between mb-2">
-                            <h5 class="mb-sm-0">@ViewBag.NombreFormulario <small class="text-muted ml-3"> @ViewBag.DescripcionFormulario </small></h5>
+                            <h5 class="mb-sm-0" style="font-size: 1.25rem;">@ViewBag.NombreFormulario <small class="text-muted ml-3" style="color: #6c757d!important;"> @ViewBag.DescripcionFormulario </small></h5>
                         </div>
 
                         <div class="media mt-3">
                             <div class="media-body">
-                                <table id="tablePreview" class="table">
+                                <table id="tablePreview" class="table" style="color:black;">
 
                                     @foreach (var item in ViewBag.Campos)
                                     {
                                         if (item.FormularioDinamicoId == ViewBag.IdFormularioDinamico)
                                         {
-                                            <thead>
+                                            <thead style="border-bottom: 2px solid #dee2e6;">
                                                 <tr>
                                                     <th scope="row">@item.Nombre</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody style="border-bottom: 2px solid #dee2e6;border-bottom: none;">
                                                 <tr>
                                                     <td>
                                                         @foreach (var res in item.Respuesta)
@@ -36,8 +36,19 @@
                                                             if (res.UsuarioId == ViewBag.UsuarioRespuestaId)
                                                             {
                                                                 ViewBag.Respuesta = res.Respuesta1.ToString();
+                                                                if (res.Campos.TipoDatoCampoId == 5)
+                                                                {
+                                                                    if (ViewBag.Respuesta != "0")
+                                                                    {
+                                                                        <img src="@Url.Content(ViewBag.Respuesta)" style="width: 40%;" />
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    @ViewBag.Respuesta
+                                                                }
                                                             }
-                                                            @ViewBag.Respuesta
+
                                                         }
                                                     </td>
                                                 </tr>
@@ -50,6 +61,11 @@
                     }
                 </div>
             </div>
+
+            <div style="margin-left:70px;">
+                <a href="/Actividad/ListaEstado?estadoId=@ViewBag.Estado&actividadId=@ViewBag.ActividadId"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#guardar">Volver</button></a>
+            </div>
+
         </div>
     </div>              
 </section>
