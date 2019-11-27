@@ -566,13 +566,32 @@ namespace Vita.Controllers
             }
         }
         [HttpPost]
-        public ActionResult AprobarUsuario(UsuarioEstado usuarioEstado)
+        public ActionResult AprobarUsuario(UsuarioEstado usuarioEstado, String Para, String Asunto, String Mensaje)
         {
 
             //   foreach(var us in usuarioEstado.Usuarios)
             //   {
             actividadServicio.CambiarEstadoUsuarioInscripto(usuarioEstado.Estado, usuarioEstado.UsuarioId,
                 usuarioEstado.ActividadId);
+            actividadServicio.CambiarEstadoUsuarioInscripto(usuarioEstado.Estado, usuarioEstado.UsuarioId,
+           usuarioEstado.ActividadId);
+
+            MailMessage correo = new MailMessage();
+            correo.From = new MailAddress("vita.contactanos@gmail.com");
+            correo.To.Add(Para);
+            correo.Subject = Asunto;
+            correo.Body = Mensaje;
+            correo.IsBodyHtml = true;
+
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 587;
+            smtp.EnableSsl = true;
+
+            NetworkCredential nc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
+            smtp.UseDefaultCredentials = true;
+            smtp.Credentials = nc;
+            smtp.Send(correo);
 
             //  }
             return RedirectToAction("ListaActividades", "Actividad");
