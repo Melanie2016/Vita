@@ -19,20 +19,12 @@
 
                     <br /><br />
 
-                    @{
-                        if (@ViewBag.ListaUsuario.Count == 0)
-                        {
-                            <p>No tiene actividades creadas, vaya a <span style="font-weight:bold;  color: #b200ff;"><a href="/Actividad/CrearActividad/"> CREAR ACTIVIDAD</a></span></p>
-                        }
-                        else
-                        {
-
-                            if (ViewBag.Estado == "2" || ViewBag.Estado == "9") //Sólo en el estado PENDIENTE muestro los botones de aprobar y rechazar
-                            {
-                                <div class="header-left" style="margin-left:80%;">
-                                    <a href=#>
-                                        <button type="submit" class="btn mb-1 gradient-3" id="btnAprobar" name=Estado value=true>Aprobar</button>
-                                        <a href=#><button type="button" class="btn btn-primary" id="btnRechazar" data-toggle="modal" data-target="#guardar">Rechazar</button> </a>
+                    @if (ViewBag.Estado == "2") //Sólo en el estado PENDIENTE muestro los botones de aprobar y rechazar
+                    {
+                        <div class="header-left" style="margin-left:80%;">
+                            <a href=#>
+                                <button type="submit" class="btn btn-success" style="color:white" id="btnAprobar" name=Estado value=true>Aprobar</button>
+                                <a href=#><button type="button" class="btn btn-primary" id="btnRechazar" data-toggle="modal" data-target="#guardar">Rechazar</button> </a>
 
                                         <div class="bootstrap-modal">
 
@@ -123,15 +115,15 @@
                                             </div>
                                         </div>
 
-                                </div>
-                            }
-                            if (ViewBag.Estado == "1") //Sólo en el estado APROBADO puede rechazar
-                            {
-                                <div class="header-left" style="margin-left:80%;">
-                                    <a href=#><button type="submit" class="btn mb-1 gradient-1" id="btnRechazar" name=Estado value=false>Rechazar</button> </a>
-                                </div>
-                            }
-                            <br><br><br><br><br>
+</div>
+                    }
+                    @if (ViewBag.Estado == "1") //Sólo en el estado APROBADO puede rechazar
+                    {
+                        <div class="header-left" style="margin-left:80%;">
+                            <a href=#><button type="submit" class="btn btn-primary" id="btnRechazar" name=Estado value=false>Rechazar</button> </a>
+                        </div>
+                    }
+                    <br><br><br><br><br>
 
 
 
@@ -173,22 +165,22 @@
                                                name="EstadoAnterior" hidden />
                                         <tr>
 
-                                            <td><input type="checkbox" class="case" name="case" /></td>
-                                            <td><img src="@Url.Content(ViewBag.Url)" style="width: 190px; height: 120px;"></td>
-                                            <td>@i.Nombre @i.Apellido</td>
-                                            <td>@i.Localidad.Descripcion</td>
-                                            <td>@Convert.ToInt32(@DateTime.Now.Year - @i.FechaNacimiento.Value.Year)</td>
-                                            <td>@i.Sexo.Descripcion</td>
-                                            <td>
-                                                @estado
-                                                @*@i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion*@
-                                            </td>
-                                            @if (ViewBag.Estado == "2") //Pendiente
-                                            {
-                                                <td>
-                                                    <div style="text-align:center"><a href="/Actividad/RespuestasFormularioDinamico?actividadId=@ViewBag.Actividad.Id&usuarioRespuestaId=@i.Id"><span data-toggle="tooltip" data-placement="top" title="Ver respuestas del formulario"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></span></a></div>
-                                                </td>
-                                            }
+                                    <td><input type="checkbox" class="case" name="case" /></td>
+                                    <td><img src="@Url.Content(ViewBag.Url)" style="width: 150px; height: 110px; border-radius: 3px;"></td>
+                                    <td>@i.Nombre @i.Apellido</td>
+                                    <td>@i.Localidad.Descripcion</td>
+                                    <td>@Convert.ToInt32(@DateTime.Now.Year - @i.FechaNacimiento.Value.Year)</td>
+                                    <td>@i.Sexo.Descripcion</td>
+                                    <td>
+                                        @estado
+                                        @*@i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion*@
+                                    </td>
+                                    @if (ViewBag.Estado == "2") //Pendiente
+                                    {
+                                        <td>
+                                            <div style="text-align:center"><a href="/Actividad/RespuestasFormularioDinamico?actividadId=@ViewBag.Actividad.Id&usuarioRespuestaId=@i.Id"><span data-toggle="tooltip" data-placement="top" title="Ver respuestas del formulario"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></span></a></div>
+                                        </td>
+                                    }
 
                                         </tr>
                                     }

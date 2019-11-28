@@ -839,7 +839,7 @@ namespace Vita.Servicios
 
         public bool BuscarUsuarioInscriptoEnActividad(int usuarioId, int actividadId)
         {
-            var usuarioInscriptoActividad = myDbContext.UsuarioInscriptoActividad.Where(x => x.ActividadId == actividadId && x.UsuarioId == usuarioId).FirstOrDefault();
+            var usuarioInscriptoActividad = myDbContext.UsuarioInscriptoActividad.Where(x => x.ActividadId == actividadId && x.UsuarioId == usuarioId && x.EstadoId != 3).FirstOrDefault(); //el cancelado se puede volver a inscribir
             bool inscripto = false;
 
             if (usuarioInscriptoActividad != null)
