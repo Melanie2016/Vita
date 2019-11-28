@@ -4,6 +4,7 @@
 }
 @model Usuario
 
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
 
@@ -21,9 +22,100 @@
                     @if (ViewBag.Estado == "2" || ViewBag.Estado== "9") //Sólo en el estado PENDIENTE muestro los botones de aprobar y rechazar
                     {
                         <div class="header-left" style="margin-left:80%;">
-                            <a href=#><button type="submit" class="btn mb-1 gradient-3" id="btnAprobar" name=Estado value=true>Aprobar</button> </a>
-                            <a href=#><button type="submit" class="btn mb-1 gradient-1" id="btnRechazar" name=Estado value=false>Rechazar</button> </a>
-                        </div>
+                            <a href=#>
+                                <button type="submit" class="btn mb-1 gradient-3" id="btnAprobar" name=Estado value=true>Aprobar</button>
+                                <a href=#><button type="button" class="btn btn-primary" id="btnRechazar" data-toggle="modal" data-target="#guardar">Rechazar</button> </a>
+
+                                <div class="bootstrap-modal">
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="guardar">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Rechazar Usuario a @ViewBag.Actividad.Titulo </h5>
+                                                    <button type="button" class="close" data-dismiss="modal">
+                                                        <span>&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+    
+                                                    <p>¿Desea notificarle el motivo del rechazo? (Recomendado)</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn mb-1 gradient-1" name=Estado value=false>No</button>
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#notificar">Notificar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bootstrap-modal">
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="notificar">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Notifique al Usuario</h5>
+                                                    <button type="button" class="close" data-dismiss="modal">
+                                                        <span>&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Enviar Mensaje</p>
+                                                    @foreach (Usuario i in ViewBag.ListaUsuario)
+                                                    {
+                                                        using (Html.BeginForm("AprobarUsuario", "Actividad", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                        {
+                                                            <div class="form-group row">
+                                                                <!--Descripcion-->
+                                                                <label class="col-lg-4 col-form-label" for="Para">
+                                                                    Para: <span class="text-danger">*</span>
+                                                                </label>
+                                                                <div class="col-lg-6">
+                                                                    <input type="text" class="form-control" id="val-username" name="Para" value="@i.Email" readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <!--Descripcion-->
+                                                                <label class="col-lg-4 col-form-label" for="Asunto">
+                                                                    Asunto: <span class="text-danger">*</span>
+                                                                </label>
+                                                                <div class="col-lg-6">
+                                                                    <input type="text" class="form-control" id="val-username" name="Asunto"  value="Rechazo en Actividad @ViewBag.Actividad.Titulo" readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <!--Descripcion-->
+                                                                <label class="col-lg-4 col-form-label" for="Mensaje">
+                                                                    Mensaje: <span class="text-danger">*</span>
+                                                                </label>
+                                                                <div class="col-lg-6">
+                                                                    <textarea class="form-control" id="val-suggestions" name="Mensaje" rows="5" placeholder="El motivo del rechazo es porque..."></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row" id="botonEnviar">
+                                                                <div class="col-lg-8 ml-auto">
+                                                                    <!-- Button trigger modal -->
+                                                                    <div style="margin-left:70px;">
+                                                                        <button type="submit" class="btn btn-primary"  name=Estado value=false>Enviar</button>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                        }
+                                                    }
+                                                </div>
+ 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+</div>
                     }
                     @if (ViewBag.Estado == "1") //Sólo en el estado APROBADO puede rechazar
                     {
@@ -89,15 +181,17 @@
                                             <div style="text-align:center"><a href="/Actividad/RespuestasFormularioDinamico?actividadId=@ViewBag.Actividad.Id&usuarioRespuestaId=@i.Id"><span data-toggle="tooltip" data-placement="top" title="Ver respuestas del formulario"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></span></a></div>
                                         </td>
                                     }
-                                    
+
                                 </tr>
                             }
+
 
 
                         </tbody>
                     </table>
 
             </form>
+
         </div>
     </div>
     </div>
