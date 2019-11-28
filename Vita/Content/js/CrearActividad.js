@@ -33,6 +33,9 @@
         $('#HoraInicioDomingo').val('');
         $('#HoraFinDomingo').val('');
 
+        $('#HsInicio').val('');
+        $('#HsFin').val('');
+
         if (lunes.checked == true) {
             $("#Lunes").prop("checked", false);
         }
@@ -62,10 +65,14 @@
         }
 
         $('#dias').show(); //muestro dias de la semana
+        $('#HoraInicio').hide(); //oculto hora inicio
+        $('#HoraFin').hide(); //oculto hora fin
 
     });
 
     $("#cbox2").on("click", function () { //No tiene dias y horarios fijos en la semana
+        $('#HoraInicio').show(); //muestro hora inicio
+        $('#HoraFin').show(); //muestro hora fin
         $('#dias').hide(); //oculto dias de la semana
         $('#horarioLunes').hide(); //oculto la hora de inicio y fin del lunes
         $('#horarioMartes').hide(); //oculto la hora de inicio y fin del martes
