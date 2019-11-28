@@ -18,9 +18,15 @@
                 <div class="table-responsive">
 
                     <br /><br />
+
                     @{
-                        if (@ViewBag.ListaUsuario.Count != 0)
+                        if (@ViewBag.ListaUsuario.Count == 0)
                         {
+                            <p>No tiene actividades creadas, vaya a <span style="font-weight:bold;  color: #b200ff;"><a href="/Actividad/CrearActividad/"> CREAR ACTIVIDAD</a></span></p>
+                        }
+                        else
+                        {
+
                             if (ViewBag.Estado == "2" || ViewBag.Estado == "9") //Sólo en el estado PENDIENTE muestro los botones de aprobar y rechazar
                             {
                                 <div class="header-left" style="margin-left:80%;">
@@ -134,7 +140,7 @@
                                 <thead>
                                     <tr>
                                         <th><input type="checkbox" id="selectall" value="1" onchange='selectAll()' /></th>
-                                        <th scope="col"></th>
+                                        <th scope="col">Foto</th>
                                         <th scope="col">Nombre y apellido</th>
                                         <th scope="col">Zona</th>
                                         <th scope="col">Edad</th>
@@ -148,7 +154,7 @@
                                 </thead>
                                 <tbody>
 
-                                    @*@foreach (Actividad i in Model)*@
+
                                     @foreach (Usuario i in ViewBag.ListaUsuario)
                                     {
                                         var estado = i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == i.Id).FirstOrDefault().Estado.Descripcion;
@@ -190,16 +196,33 @@
 
 
                                 </tbody>
-                            </table>
+                            </table><br />
+                            <form name="volver" method="get" action="/Actividad/ListaActividades">
+
+                                <button type="submit" class="btn mb-1 gradient-3" id="volver">Volver atrás</button>
+                            </form>
+
                         }
                     }
 
+                </div>
+            </form>
+            @{
+                if (ViewBag.ListaUsuario.Count == 0)
+                {
+                    <br>
+                    <form name="volver" method="get" action="/Actividad/ListaActividades">
 
-</form>
+                        <button type="submit" class="btn mb-1 gradient-3" id="volver">Volver atrás</button>
+                    </form>
+                }
+            }
 
         </div>
+
     </div>
-    </div>
+    
+    
     <script type="text/javascript">
         function selectAll() {
             var items = document.getElementsByName('case');
