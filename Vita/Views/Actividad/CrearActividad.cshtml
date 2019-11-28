@@ -162,6 +162,19 @@
                                 <h5 style="padding: 5px; color: #fff; background-color: #69D49A; border-color: #337ab7; WIDTH: 10%; border-radius: 5px; text-align: center;">FECHAS</h5>
 
                                 <div id="fechas">
+
+                                    <div class="form-group row">
+                                        <!--PREGUNTA SI TIENE DIAS Y HORARIOS FIJOS EN LA SEMANA-->
+                                        <label class="col-lg-4 col-form-label">
+                                            ¿La actividad tiene dias y horarios fijos en la semana?
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <label><input type="radio" id="cbox1" name="fecha" value="true" title="Si escoge esta opción deberá seleccionar los días de la semana en los cuales estará disponible la actividad" required> Si</label><br>
+                                            <label><input type="radio" id="cbox2" name="fecha" value="false" required> No</label><br>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group row">
                                         <!--Fecha Desde-->
                                         <label class="col-lg-4 col-form-label" for="RangoFecha">
@@ -173,18 +186,6 @@
                                                 <div class="input-group-addon">
                                                     <span class="glyphicon glyphicon-th"></span>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <!--Hora Inicio-->
-                                        <label class="col-lg-4 col-form-label">
-                                            Hora de inicio de la actividad <span class="text-danger">*</span>
-                                        </label>
-                                        <div class="col-lg-6">
-                                            <div class="input-group clockpicker">
-                                                <input type="text" class="form-control" value="10:30" name="HoraInicio" required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                             </div>
                                         </div>
                                     </div>
@@ -204,30 +205,30 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group row">
+                                    <div class="form-group row" id="HoraInicio" style="display:none">
+                                        <!--Hora Inicio-->
+                                        <label class="col-lg-4 col-form-label">
+                                            Hora de inicio de la actividad <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <div class="input-group clockpicker">
+                                                <input type="text" class="form-control"  placeholder="10:30" id="HsInicio" name="HoraInicio" required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row" id="HoraFin" style="display:none">
                                         <!--Hora Fin-->
                                         <label class="col-lg-4 col-form-label">
                                             Hora de fin de la actividad<span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
                                             <div class="input-group clockpicker">
-                                                <input type="text" class="form-control" value="11:30" name="HoraFin" required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                <input type="text" class="form-control" placeholder="11:30" id="HsFin" name="HoraFin" required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                             </div>
                                         </div>
                                     </div>
 
-                                </div>
-
-                                <div class="form-group row">
-                                    <!--PREGUNTA SI TIENE DIAS Y HORARIOS FIJOS EN LA SEMANA-->
-                                    <label class="col-lg-4 col-form-label">
-                                        ¿La actividad tiene dias y horarios fijos en la semana?
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <label><input type="radio" id="cbox1" name="fecha" value="true" title="Si escoge esta opción deberá seleccionar los días de la semana en los cuales estará disponible la actividad" required> Si</label><br>
-                                        <label><input type="radio" id="cbox2" name="fecha" value="false" required> No</label><br>
-                                    </div>
                                 </div>
 
                                 <div class="form-group row" id="dias" style="display:none">
@@ -255,7 +256,7 @@
                                         </label>
                                         <div class="col-lg-6">
                                             <div class="input-group clockpicker">
-                                                <input type="text" id="HoraInicioLunes" name="HoraInicioLunes" class="form-control" value="10:30" required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                <input type="text" id="HoraInicioLunes" name="HoraInicioLunes" class="form-control" required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                             </div>
                                         </div>
                                     </div>
@@ -267,7 +268,7 @@
                                         </label>
                                         <div class="col-lg-6">
                                             <div class="input-group clockpicker">
-                                                <input type="text" id="HoraFinLunes" name="HoraFinLunes" class="form-control" value="10:30" required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                <input type="text" id="HoraFinLunes" name="HoraFinLunes" class="form-control"  required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                             </div>
                                         </div>
                                     </div>
@@ -282,7 +283,7 @@
                                         </label>
                                         <div class="col-lg-6">
                                             <div class="input-group clockpicker">
-                                                <input type="text" id="HoraInicioMartes" name="HoraInicioMartes" class="form-control" value="10:30" required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                <input type="text" id="HoraInicioMartes" name="HoraInicioMartes" class="form-control"  required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                             </div>
                                         </div>
                                     </div>
@@ -294,7 +295,7 @@
                                         </label>
                                         <div class="col-lg-6">
                                             <div class="input-group clockpicker">
-                                                <input type="text" id="HoraFinMartes" name="HoraFinMartes" class="form-control" value="10:30" required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                <input type="text" id="HoraFinMartes" name="HoraFinMartes" class="form-control"  required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                             </div>
                                         </div>
                                     </div>
@@ -309,7 +310,7 @@
                                         </label>
                                         <div class="col-lg-6">
                                             <div class="input-group clockpicker">
-                                                <input type="text" id="HoraInicioMiercoles" name="HoraInicioMiercoles" class="form-control" value="10:30" required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                <input type="text" id="HoraInicioMiercoles" name="HoraInicioMiercoles" class="form-control"  required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                             </div>
                                         </div>
                                     </div>
@@ -321,7 +322,7 @@
                                         </label>
                                         <div class="col-lg-6">
                                             <div class="input-group clockpicker">
-                                                <input type="text" id="HoraFinMiercoles" name="HoraFinMiercoles" class="form-control" value="10:30" required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                <input type="text" id="HoraFinMiercoles" name="HoraFinMiercoles" class="form-control"  required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                             </div>
                                         </div>
                                     </div>
@@ -336,7 +337,7 @@
                                         </label>
                                         <div class="col-lg-6">
                                             <div class="input-group clockpicker">
-                                                <input type="text" id="HoraInicioJueves" name="HoraInicioJueves" class="form-control" value="10:30" required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                <input type="text" id="HoraInicioJueves" name="HoraInicioJueves" class="form-control"  required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                             </div>
                                         </div>
                                     </div>
@@ -348,7 +349,7 @@
                                         </label>
                                         <div class="col-lg-6">
                                             <div class="input-group clockpicker">
-                                                <input type="text" id="HoraFinJueves" name="HoraFinJueves" class="form-control" value="10:30" required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                <input type="text" id="HoraFinJueves" name="HoraFinJueves" class="form-control"  required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                             </div>
                                         </div>
                                     </div>
@@ -363,7 +364,7 @@
                                         </label>
                                         <div class="col-lg-6">
                                             <div class="input-group clockpicker">
-                                                <input type="text" id="HoraInicioViernes" name="HoraInicioViernes" class="form-control" value="10:30" required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                <input type="text" id="HoraInicioViernes" name="HoraInicioViernes" class="form-control"  required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                             </div>
                                         </div>
                                     </div>
@@ -375,7 +376,7 @@
                                         </label>
                                         <div class="col-lg-6">
                                             <div class="input-group clockpicker">
-                                                <input type="text" id="HoraFinViernes" name="HoraFinViernes" class="form-control" value="10:30" required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                <input type="text" id="HoraFinViernes" name="HoraFinViernes" class="form-control"  required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                             </div>
                                         </div>
                                     </div>
@@ -390,7 +391,7 @@
                                         </label>
                                         <div class="col-lg-6">
                                             <div class="input-group clockpicker">
-                                                <input type="text" id="HoraInicioSabado" name="HoraInicioSabado" class="form-control" value="10:30" required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                <input type="text" id="HoraInicioSabado" name="HoraInicioSabado" class="form-control"  required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                             </div>
                                         </div>
                                     </div>
@@ -402,7 +403,7 @@
                                         </label>
                                         <div class="col-lg-6">
                                             <div class="input-group clockpicker">
-                                                <input type="text" id="HoraFinSabado" name="HoraFinSabado" class="form-control" value="10:30" required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                <input type="text" id="HoraFinSabado" name="HoraFinSabado" class="form-control"  required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                             </div>
                                         </div>
                                     </div>
@@ -417,7 +418,7 @@
                                         </label>
                                         <div class="col-lg-6">
                                             <div class="input-group clockpicker">
-                                                <input type="text" id="HoraInicioDomingo" name="HoraInicioDomingo" class="form-control" value="10:30" required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                <input type="text" id="HoraInicioDomingo" name="HoraInicioDomingo" class="form-control"  required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                             </div>
                                         </div>
                                     </div>
@@ -429,7 +430,7 @@
                                         </label>
                                         <div class="col-lg-6">
                                             <div class="input-group clockpicker">
-                                                <input type="text" id="HoraFinDomingo" name="HoraFinDomingo" class="form-control" value="10:30" required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                <input type="text" id="HoraFinDomingo" name="HoraFinDomingo" class="form-control"  required> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                             </div>
                                         </div>
                                     </div>
@@ -537,25 +538,26 @@
                                 </div>
                                 <div class="form-group row" >
                                     <div class="col-lg-8 ml-auto">
-                                      
+
                                         <div class="bootstrap-modal">
-                                           
+
                                             <!-- Modal -->
                                             <div class="modal fade" id="guardar">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
-                                                        <div class="modal-header" >
+                                                        <div class="modal-header">
                                                             <h5 class="modal-title">Su actividad se ha creado con exito!</h5>
-                                                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                            <button type="button" class="close" data-dismiss="modal">
+                                                                <span>&times;</span>
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p>Puede elegir publicar la actividad ahora, o bien hacerlo luego.</p>
-                                                            <p>Al publicar, automaticamente la actividad pasa a ser visible para todos los usuarios.</p>
+                                                            <p>Puede elegir publicar la actividad ahora o publicarla luego</p>
+                                                            <p>Al publicar ahora, automaticamente la actividad pasa a ser visible para todos los usuarios.</p>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#publicarLuego" data-dismiss="modal" onclick="crear()">Publicar luego</button>
                                                             <button type="button" class="btn btn-primary" onclick="publicar()">Publicar ahora</button>
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#publicarLuego" data-dismiss="modal" onclick="crear()">Publicar luego</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -563,29 +565,26 @@
                                         </div>
 
                                         <!-- Modal -->
-                                            <div class="modal fade" id="publicarLuego">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header" >
-                                                            <h5 class="modal-title">Importante</h5>
-                                                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>Importante</p>
-                                                            <p>Recuerde, para que los usuarios puedan acceder a esta actividad, debe publicarla. Puede hacerlo desde <a href="/Actividad/ListaActividades"> <u>aquí</u></a> </p>
-                                                            
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" id="salir" class="btn btn-primary" data-dismiss="modal">Salir</button>
-                                                            
-                                                        </div>
+                                        <!--<div class="modal fade" id="publicarLuego">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header" >
+                                                        <h5 class="modal-title">Importante!</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Importante!</p>
+                                                        <p>Recuerde, para que los usuarios puedan acceder a esta actividad, debe publicarla. Puede hacerlo desde <a href="/Actividad/ListaActividades"> <u>aquí</u></a> </p>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" id="salir" class="btn btn-primary" data-dismiss="modal">Salir</button>
+
                                                     </div>
                                                 </div>
                                             </div>
-                                            
-                                          
-                                
+                                        </div>-->
                                     </div>
                                 </div>
 

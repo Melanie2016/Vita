@@ -87,6 +87,7 @@
                         <!---->
                         <!--Inicio Carousel-->
                         <!--Carousel Wrapper-->
+                        <h4 class="h5 mb-4 text-black" style="font-size: 30px; color: #30e3ca;">@ViewBag.Actividad.Titulo</h4>
                         <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
                             <!--Slides-->
                             <div class="carousel-inner" role="listbox">
@@ -120,13 +121,12 @@
                         <!--/.Carousel Wrapper-->
                         <!--Fin Carousel-->
 
-                        <h4 class="h5 mb-4 text-black" style="font-size: 25px; color: #30e3ca;">@ViewBag.Actividad.Titulo</h4>
                         <strong style="color: #666; font-size: 14px; font-weight:bold">Descripción</strong>
                         <p>@ViewBag.Actividad.Descripcion</p>
                         <strong style="color: #666; font-size: 14px; font-weight:bold">Edad </strong>
                         <p>A partir de @ViewBag.Actividad.EdadMinima hasta @ViewBag.Actividad.EdadMaxima años</p>
                         <strong style="color: #666; font-size: 14px; font-weight:bold">Precio</strong>
-                        @if (@ViewBag.Actividad.Precio != null)
+                        @if (@ViewBag.Actividad.Precio != null && @ViewBag.Actividad.Precio != 0)
                         {
                             <p>$@ViewBag.Actividad.Precio</p>
                         }
