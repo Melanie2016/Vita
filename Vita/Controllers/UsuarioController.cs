@@ -334,24 +334,34 @@ namespace Vita.Controllers
 
             List<Categoria> intereses = categoriaServicio.GetAllCategorias();
             ViewBag.ListaIntereses = new MultiSelectList(intereses, "id", "descripcion");
+            List<Provincia> provincias = localidadServicio.GetAllProvincias();
+            ViewBag.ListaProvincia = new MultiSelectList(provincias, "id", "descripcion");
+
+            ViewBag.ProvinciaDescripcion = localidadServicio.GetProvincia(usuario.LocalidadId.Value).Descripcion;
+            ViewBag.LocalidadId = usuario.LocalidadId;
+            ViewBag.DepartamentoDescripcion = localidadServicio.GetDepartamento(usuario.LocalidadId.Value).Descripcion;
+            ViewBag.LocalidadDescripcion = usuario.Localidad.Descripcion;
             return View(usuario);
+          
         }
   
         
         [HttpPost]
-        public ActionResult ModificarPerfilUsuario(Usuario usuario, string btnConfirmar, string btnCancelar, int[] selectedSegmento, int[] selectedCategoria)
+      //  public ActionResult ModificarPerfilUsuario(Usuario usuario, string btnConfirmar, string btnCancelar, int[] selectedSegmento, int[] selectedCategoria)
+          public ActionResult ModificarPerfilUsuario(UsuarioModificarViewModel userViewModel)
         {
+            var usua = new Usuario();
             if (ModelState.IsValid)
             {
                
-                usuarioServicio.ModificarUsuario(usuario,selectedCategoria,selectedSegmento);
-                usuario = usuarioServicio.GetById(usuario.Id);
-                return RedirectToAction("PerfilUsuario", "Usuario", usuario);
+                usuarioServicio.ModificarUsuario(userViewModel);
+                  usua = usuarioServicio.GetById(userViewModel.Id);
+                return RedirectToAction("PerfilUsuario", "Usuario", usua);
 
             }
             else
             {
-                return View(usuario);
+                return View(usua);
             }
         }
 

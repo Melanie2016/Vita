@@ -21,6 +21,22 @@ namespace Vita.Servicios
         {
             return myDbContext.Provincia.OrderBy(x => x.Descripcion).ToList();
         }
+        public Provincia GetProvincia(int localidadId)
+        {
+            var localidad = myDbContext.Localidad.Where(x => x.Id == localidadId).FirstOrDefault();
+            var departamento = myDbContext.Departamento.Where(x => x.Id== localidad.DepartamentoId).FirstOrDefault();
+            var provincia = myDbContext.Provincia.Where(x => x.Id == departamento.ProvinciaId).FirstOrDefault();
+
+            return provincia;
+        }
+
+        public Departamento GetDepartamento(int localidadId)
+        {
+            var localidad = myDbContext.Localidad.Where(x => x.Id == localidadId).FirstOrDefault();
+            var departamento = myDbContext.Departamento.Where(x => x.Id == localidad.DepartamentoId).FirstOrDefault();
+
+            return departamento;
+        }
         public List<Departamento> GetDepartamentosByProvinciaId(int ? provinciaId)
         {
             return myDbContext.Departamento.OrderBy(x => x.Descripcion).Where(x=>x.ProvinciaId== provinciaId).ToList();

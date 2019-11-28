@@ -345,8 +345,8 @@ namespace Vita.Controllers
             }
         }
 
-        [HttpPost]
-        public ActionResult ListaActividades(int? idCategoria, DateTime? fechaDesde, DateTime? fechaHasta)
+        [HttpPost] //texto tiene que pasar 
+        public ActionResult ListaActividades(int? idCategoria, DateTime? fechaDesde , DateTime? fechaHasta)
         {
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -515,6 +515,7 @@ namespace Vita.Controllers
                 ViewBag.ListaUsuario = actividadServicio.GetUsuariosByEstadoId(estadoId, actividadId);
                 ViewBag.Actividad = actividadServicio.GetActividad(actividadId);
                 ViewBag.Estado = estadoId.ToString();
+                ViewBag.EstadoString = actividadServicio.GetByEstadoId(estadoId).Descripcion;
                 return View(buscarUsuarioLogueado);
             }
         }

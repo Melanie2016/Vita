@@ -11,7 +11,7 @@
 <section class="container-fluid">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Hay @ViewBag.ListaUsuario.Count usuarios en la actividad:</h4><br />
+            <h4 class="card-title">Hay @ViewBag.ListaUsuario.Count usuarios en la actividad, con estado @ViewBag.EstadoString </h4><br />
             <h6 style="color:#76838f"> @ViewBag.Actividad.Titulo, @ViewBag.Actividad.Descripcion</h6>
             <form action="/Actividad/AprobarUsuario" method="post">
                 <input type="number" value="@ViewBag.Actividad.Id" name="ActividadId" hidden />
@@ -26,94 +26,94 @@
                                 <button type="submit" class="btn btn-success" style="color:white" id="btnAprobar" name=Estado value=true>Aprobar</button>
                                 <a href=#><button type="button" class="btn btn-primary" id="btnRechazar" data-toggle="modal" data-target="#guardar">Rechazar</button> </a>
 
-                                <div class="bootstrap-modal">
+                                        <div class="bootstrap-modal">
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="guardar">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Rechazar Usuario a @ViewBag.Actividad.Titulo </h5>
-                                                    <button type="button" class="close" data-dismiss="modal">
-                                                        <span>&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-    
-                                                    <p>¿Desea notificarle el motivo del rechazo? (Recomendado)</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn mb-1 gradient-1" name=Estado value=false>No</button>
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#notificar">Notificar</button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="guardar">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Rechazar Usuario a @ViewBag.Actividad.Titulo </h5>
+                                                            <button type="button" class="close" data-dismiss="modal">
+                                                                <span>&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            <p>¿Desea notificarle el motivo del rechazo? (Recomendado)</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn mb-1 gradient-1" name=Estado value=false>No</button>
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#notificar">Notificar</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
 
-                                <div class="bootstrap-modal">
+                                        <div class="bootstrap-modal">
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="notificar">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Notifique al Usuario</h5>
-                                                    <button type="button" class="close" data-dismiss="modal">
-                                                        <span>&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Enviar Mensaje</p>
-                                                    @foreach (Usuario i in ViewBag.ListaUsuario)
-                                                    {
-                                                        using (Html.BeginForm("AprobarUsuario", "Actividad", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                                        {
-                                                            <div class="form-group row">
-                                                                <!--Descripcion-->
-                                                                <label class="col-lg-4 col-form-label" for="Para">
-                                                                    Para: <span class="text-danger">*</span>
-                                                                </label>
-                                                                <div class="col-lg-6">
-                                                                    <input type="text" class="form-control" id="val-username" name="Para" value="@i.Email" readonly>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <!--Descripcion-->
-                                                                <label class="col-lg-4 col-form-label" for="Asunto">
-                                                                    Asunto: <span class="text-danger">*</span>
-                                                                </label>
-                                                                <div class="col-lg-6">
-                                                                    <input type="text" class="form-control" id="val-username" name="Asunto"  value="Rechazo en Actividad @ViewBag.Actividad.Titulo" readonly>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <!--Descripcion-->
-                                                                <label class="col-lg-4 col-form-label" for="Mensaje">
-                                                                    Mensaje: <span class="text-danger">*</span>
-                                                                </label>
-                                                                <div class="col-lg-6">
-                                                                    <textarea class="form-control" id="val-suggestions" name="Mensaje" rows="5" placeholder="El motivo del rechazo es porque..."></textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row" id="botonEnviar">
-                                                                <div class="col-lg-8 ml-auto">
-                                                                    <!-- Button trigger modal -->
-                                                                    <div style="margin-left:70px;">
-                                                                        <button type="submit" class="btn btn-primary"  name=Estado value=false>Enviar</button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="notificar">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Notifique al Usuario</h5>
+                                                            <button type="button" class="close" data-dismiss="modal">
+                                                                <span>&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Enviar Mensaje</p>
+                                                            @foreach (Usuario i in ViewBag.ListaUsuario)
+                                                            {
+                                                                using (Html.BeginForm("AprobarUsuario", "Actividad", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                                {
+                                                                    <div class="form-group row">
+                                                                        <!--Descripcion-->
+                                                                        <label class="col-lg-4 col-form-label" for="Para">
+                                                                            Para: <span class="text-danger">*</span>
+                                                                        </label>
+                                                                        <div class="col-lg-6">
+                                                                            <input type="text" class="form-control" id="val-username" name="Para" value="@i.Email" readonly>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
+                                                                    <div class="form-group row">
+                                                                        <!--Descripcion-->
+                                                                        <label class="col-lg-4 col-form-label" for="Asunto">
+                                                                            Asunto: <span class="text-danger">*</span>
+                                                                        </label>
+                                                                        <div class="col-lg-6">
+                                                                            <input type="text" class="form-control" id="val-username" name="Asunto" value="Rechazo en Actividad @ViewBag.Actividad.Titulo" readonly>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <!--Descripcion-->
+                                                                        <label class="col-lg-4 col-form-label" for="Mensaje">
+                                                                            Mensaje: <span class="text-danger">*</span>
+                                                                        </label>
+                                                                        <div class="col-lg-6">
+                                                                            <textarea class="form-control" id="val-suggestions" name="Mensaje" rows="5" placeholder="El motivo del rechazo es porque..."></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row" id="botonEnviar">
+                                                                        <div class="col-lg-8 ml-auto">
+                                                                            <!-- Button trigger modal -->
+                                                                            <div style="margin-left:70px;">
+                                                                                <button type="submit" class="btn btn-primary" name=Estado value=false>Enviar</button>
+                                                                            </div>
+                                                                        </div>
 
-                                                            </div>
+                                                                    </div>
 
-                                                        }
-                                                    }
+                                                                }
+                                                            }
+                                                        </div>
+
+                                                    </div>
                                                 </div>
- 
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
 
 </div>
                     }
@@ -128,42 +128,42 @@
 
 
 
-                    <table class="table header-border table-hover verticle-middle">
-                        <thead>
-                            <tr>
-                                <th><input type="checkbox" id="selectall" value="1" onchange='selectAll()' /></th>
-                                <th scope="col"></th>
-                                <th scope="col">Nombre y apellido</th>
-                                <th scope="col">Zona</th>
-                                <th scope="col">Edad</th>
-                                <th scope="col">Sexo</th>
-                                <th scope="col">Estado</th>
-                                @if (ViewBag.Estado == "2") //Pendiente
-                                {
-                                    <th scope="colgroup">Formulario</th>
-                                }
-                            </tr>
-                        </thead>
-                        <tbody>
+                            <table class="table header-border table-hover verticle-middle">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" id="selectall" value="1" onchange='selectAll()' /></th>
+                                        <th scope="col">Foto</th>
+                                        <th scope="col">Nombre y apellido</th>
+                                        <th scope="col">Zona</th>
+                                        <th scope="col">Edad</th>
+                                        <th scope="col">Sexo</th>
+                                        <th scope="col">Estado</th>
+                                        @if (ViewBag.Estado == "2") //Pendiente
+                                        {
+                                            <th scope="colgroup">Formulario</th>
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                            @*@foreach (Actividad i in Model)*@
-                            @foreach (Usuario i in ViewBag.ListaUsuario)
-                            {
-                                var estado = i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == i.Id).FirstOrDefault().Estado.Descripcion;
 
-                                if (i.Foto != null && i.Foto.Length > 0)
-                                {
-                                    ViewBag.Url = i.Foto;
-                                }
-                                else
-                                {
-                                    ViewBag.Url = "/Content/images/sin_foto.png";
-                                }
-                                <input type="number" value=@i.Id
-                                       name="UsuarioId" hidden />
-                                <input type="number" value=@i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == i.Id).FirstOrDefault().Estado.Id
-                                       name="EstadoAnterior" hidden />
-                                <tr>
+                                    @foreach (Usuario i in ViewBag.ListaUsuario)
+                                    {
+                                        var estado = i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == i.Id).FirstOrDefault().Estado.Descripcion;
+
+                                        if (i.Foto != null && i.Foto.Length > 0)
+                                        {
+                                            ViewBag.Url = i.Foto;
+                                        }
+                                        else
+                                        {
+                                            ViewBag.Url = "/Content/images/sin_foto.png";
+                                        }
+                                        <input type="number" value=@i.Id
+                                               name="UsuarioId" hidden />
+                                        <input type="number" value=@i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == i.Id).FirstOrDefault().Estado.Id
+                                               name="EstadoAnterior" hidden />
+                                        <tr>
 
                                     <td><input type="checkbox" class="case" name="case" /></td>
                                     <td><img src="@Url.Content(ViewBag.Url)" style="width: 150px; height: 110px; border-radius: 3px;"></td>
@@ -182,19 +182,39 @@
                                         </td>
                                     }
 
-                                </tr>
-                            }
+                                        </tr>
+                                    }
 
 
 
-                        </tbody>
-                    </table>
+                                </tbody>
+                            </table><br />
+                            <form name="volver" method="get" action="/Actividad/ListaActividades">
 
+                                <button type="submit" class="btn mb-1 gradient-3" id="volver">Volver atrás</button>
+                            </form>
+
+                        }
+                    }
+
+                </div>
             </form>
+            @{
+                if (ViewBag.ListaUsuario.Count == 0)
+                {
+                    <br>
+                    <form name="volver" method="get" action="/Actividad/ListaActividades">
+
+                        <button type="submit" class="btn mb-1 gradient-3" id="volver">Volver atrás</button>
+                    </form>
+                }
+            }
 
         </div>
+
     </div>
-    </div>
+    
+    
     <script type="text/javascript">
         function selectAll() {
             var items = document.getElementsByName('case');
