@@ -90,7 +90,7 @@
                         <h4 class="h5 mb-4 text-black" style="font-size: 30px; color: #30e3ca;">@ViewBag.Actividad.Titulo</h4>
                         <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
                             <!--Slides-->
-                            <div class="carousel-inner" role="listbox">
+                            <div class="carousel-inner" role="listbox" style="border-radius: 3px;">
                                 <!--First slide-->
                                 @if (ViewBag.Actividad.Foto != null && ViewBag.Actividad.Foto.Length > 0)
                                 {
@@ -138,6 +138,8 @@
                         <br />
 
                         <!--MAPA-->
+                        <strong style="color: #666; font-size: 14px; font-weight:bold">Cómo llegar</strong><br />
+
                         @if (ViewBag.Domicilio != null)
                         {
                             <iframe src="https://maps.google.com/maps?q=@ViewBag.Domicilio.NombreCalle%20=@ViewBag.Domicilio.NumeroCalle%20=@ViewBag.Domicilio.CodigoPostal%20=@ViewBag.Actividad.Localidad.Descripcion%20Buenos%20Aires&t=&z=15&ie=UTF8&iwloc=&output=embed" width="550" height="398" frameborder="0" style="border:0" allowfullscreen></iframe>
@@ -192,7 +194,7 @@
                                         {
                                             if (ViewBag.CompletarFormulario) //tiene formulario dinamico y debe completarlo
                                             {
-                                                <a href="/Actividad/ActividadesDelUsuarioInscripto" class="nav-link" style=" background-color: #69D385;font-weight: bold;text-align: center;color: white;border-radius: 5px;">Completar Formulario</a>
+                                                <a href="/Actividad/CompletarFormularioDinamicoUsuario?actividadId=@ViewBag.ActividadId" class="nav-link" style=" background-color: #69D385;font-weight: bold;text-align: center;color: white;border-radius: 5px;">Completar Formulario</a>
                                             }
                                         }
                                     }

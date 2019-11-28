@@ -141,6 +141,7 @@ namespace Vita.Controllers
         {
             var actividad = actividadServicio.GetActividad(int.Parse(idActividad));
             ViewBag.Actividad = actividad;
+            ViewBag.ActividadId = actividad.Id;
             ViewBag.FechasActividad = actividad.FechaActividad;
             ViewBag.Resultado = 0;
             ViewBag.IniciarSesion = "false";
@@ -182,6 +183,7 @@ namespace Vita.Controllers
 
             var actividad = actividadServicio.GetActividad(int.Parse(idActividad));
             ViewBag.Actividad = actividad;
+            ViewBag.ActividadId = actividad.Id;
             ViewBag.FechasActividad = actividad.FechaActividad;
             ViewBag.Resultado = 0;
             ViewBag.IniciarSesion = "false";
@@ -227,6 +229,7 @@ namespace Vita.Controllers
                         {
                             estadoString = "1";//aprobado
                         }
+
                         var resultado = actividadServicio.InscribirUsuarioEnActividad(buscarUsuarioLogueado, idActividad, estadoString, FechaActividadId); //Aprobado
                         ViewBag.Resultado = resultado;
 
@@ -253,7 +256,7 @@ namespace Vita.Controllers
                             if (actividad.ConUsuarioPendiente == true) //Su inscripción queda pendiente
                             {
                                 ViewBag.Compleja = true; //debe completar el formulario
-                                mensaje = "Su inscripción está en estado PENDIENTE. Debe completar el formulario con los requisitos solicitados para poder realizar esta actividad. El mismo lo podrá ver en su perfil en la sección MIS ACTIVIDADES INSCRIPTAS. Se le informará cuando su inscripción este aprobada.";
+                                mensaje = "Su inscripción está en estado PENDIENTE. Debe completar un formulario con los requisitos solicitados para realizar esta actividad. Se le informará cuando su inscripción este aprobada.";
                                 body = "Tu inscripción a la actividad " + tituloActividad + " está en estado pendiente de aprobación. Te avisaremos cuando esté aprobada. Gracias! "; //Mensaje whatsApp
 
 
@@ -261,38 +264,46 @@ namespace Vita.Controllers
                             else //Queda aprobado de una
                             {
                                 mensaje = "Su inscripción ha sido exitosa. Puede ir a su perfil para ver sus actividades";
-                                body = "Tu inscripción a la actividad " + tituloActividad + " ha sido exitosa! "; //Mensaje whatsApp
-                                                                                                                  //Parte Email
-                                                                                                                  /*  mm.Subject = "Inscripción a " + tituloActividad + " exitosa";
-                                                                                                                    mm.Body = "¡Hola! A partir de ahora, Comienza tu nueva actividad - " + tituloActividad + " - VITA Espera que sea de tu agrado y lo más importante... ¡Que te diviertas! ";
-                                                                                                                    mm.IsBodyHtml = true;
+                                body = "Tu inscripción a la actividad " + tituloActividad + " ha sido exitosa! ";
+                                //Parte Email
+                                /*  mm.Subject = "Inscripción a " + tituloActividad + " exitosa";
+                                  mm.Body = "¡Hola! A partir de ahora, Comienza tu nueva actividad - " + tituloActividad + " - VITA Espera que sea de tu agrado y lo más importante... ¡Que te diviertas! ";
+                                  mm.IsBodyHtml = true;
 
-                                                                                                                    SmtpClient smtp = new SmtpClient();
-                                                                                                                    smtp.Host = "smtp.gmail.com";
-                                                                                                                    smtp.Port = 587;
-                                                                                                                    smtp.EnableSsl = true;
+                                  SmtpClient smtp = new SmtpClient();
+                                  smtp.Host = "smtp.gmail.com";
+                                  smtp.Port = 587;
+                                  smtp.EnableSsl = true;
 
-                                                                                                                    NetworkCredential nc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
-                                                                                                                    smtp.UseDefaultCredentials = true;
-                                                                                                                    smtp.Credentials = nc;
-                                                                                                                    smtp.Send(mm);*/
+                                  NetworkCredential nc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
+                                  smtp.UseDefaultCredentials = true;
+                                  smtp.Credentials = nc;
+                                  smtp.Send(mm);*/
                             }
 
                             ViewBag.Mensaje = mensaje;
 
-                            //Notificaciones de whatsap
-                            /*var accountSid = "";
-                            var authToken = "";
+                            //Notificaciones de WhatsApp
+                            try
+                            {
+                                var accountSid = "ACe237f679127cbe29fcb106e4f6a0be6f";
+                                var authToken = "";
 
-                            TwilioClient.Init(accountSid, authToken);
-                            var message = MessageResource.Create(
-                                from: new Twilio.Types.PhoneNumber("whatsapp:+14155238886"),
-                                body: body,
-                                to: new Twilio.Types.PhoneNumber(celular)
-                            );
+                                /*TwilioClient.Init(accountSid, authToken);
+                                var message = MessageResource.Create(
+                                    from: new Twilio.Types.PhoneNumber("whatsapp:+14155238886"),
+                                    body: body,
+                                    to: new Twilio.Types.PhoneNumber(celular)
+                                );
+
+                                var respuestaApi = message.Sid;*/
+                            }
+                            catch
+                            {
+
+                            }
 
 
-                            var respuestaApi = message.Sid;*/
                         }
                         else
                         {
@@ -321,10 +332,10 @@ namespace Vita.Controllers
                 var actividades = actividadServicio.GetAllActividadByRolEntidadId(buscarUsuarioLogueado.Id);
                 if (actividades.Any())
                 {
-                 
+
 
                     ViewBag.Categorias = categoriaServicio.GetAllCategorias();
-                    var listaActividadesVigentes = actividades.Where(x => x.DeletedAt == fechaNull || x.DeletedAt==null ).ToList();
+                    var listaActividadesVigentes = actividades.Where(x => x.DeletedAt == fechaNull || x.DeletedAt == null).ToList();
                     ViewBag.ListaActvidades = listaActividadesVigentes;
                     ViewBag.ListaActividadesEliminadas = actividadServicio.GetAllActividadesEliminadasByEntidadId(buscarUsuarioLogueado.Id);
                     var actividadesVigentes = actividadServicio.GetAllActividadesVigentesByEntidadId(buscarUsuarioLogueado.Id);
@@ -335,7 +346,7 @@ namespace Vita.Controllers
         }
 
         [HttpPost]
-        public ActionResult ListaActividades(int? idCategoria, DateTime? fechaDesde , DateTime? fechaHasta)
+        public ActionResult ListaActividades(int? idCategoria, DateTime? fechaDesde, DateTime? fechaHasta)
         {
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -345,7 +356,7 @@ namespace Vita.Controllers
             else
             {
                 buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
-                ViewBag.ListaActvidadesFiltrada = actividadServicio.GetActividadesFiltradasPorUsuario(buscarUsuarioLogueado.Id, idCategoria,fechaDesde,fechaHasta);
+                ViewBag.ListaActvidadesFiltrada = actividadServicio.GetActividadesFiltradasPorUsuario(buscarUsuarioLogueado.Id, idCategoria, fechaDesde, fechaHasta);
                 ViewBag.Categorias = categoriaServicio.GetAllCategorias(); // solo para q no rompa en el filtro cuando vuelvo a llamar a la vista
                 ViewBag.ListaActvidades = actividadServicio.GetAllActividadByRolEntidadId(buscarUsuarioLogueado.Id);
                 return View(buscarUsuarioLogueado);
@@ -593,6 +604,39 @@ namespace Vita.Controllers
             smtp.Credentials = nc;
             smtp.Send(correo);
 
+            //Notificaciones de WhatsApp
+            var body = "";
+            var tituloActividad = actividadServicio.GetActividad(usuarioEstado.ActividadId).Titulo;
+            var celular = "whatsapp:+549" + usuarioServicio.GetUsuarioById(usuarioEstado.UsuarioId).Celular;
+
+            if (usuarioEstado.Estado)
+            {
+                body = "Tu inscripción a la actividad " + tituloActividad + " ha sido aprobada!";
+            }
+            else
+            {
+                body = "Tu inscripción a la actividad " + tituloActividad + " ha sido rechazada.";
+            }
+
+            try
+            {
+                var accountSid = "ACe237f679127cbe29fcb106e4f6a0be6f";
+                var authToken = "";
+
+                /*TwilioClient.Init(accountSid, authToken);
+                var message = MessageResource.Create(
+                    from: new Twilio.Types.PhoneNumber("whatsapp:+14155238886"),
+                    body: body,
+                    to: new Twilio.Types.PhoneNumber(celular)
+                );
+
+                var respuestaApi = message.Sid;*/
+            }
+            catch
+            {
+
+            }
+
             //  }
             return RedirectToAction("ListaActividades", "Actividad");
             // return RedirectToActionPermanent("ListaEstado", "Actividad",usuarioEstado.EstadoAnterior, usuarioEstado.ActividadId);
@@ -706,7 +750,7 @@ namespace Vita.Controllers
 
                 foreach (var item in usuarioInscripto.UsuarioInscriptoActividad)
                 {
-                    if(item.ActividadId == actividadId)
+                    if (item.ActividadId == actividadId)
                     {
                         ViewBag.Estado = item.EstadoId;
                     }
@@ -838,7 +882,7 @@ namespace Vita.Controllers
                 return usuario.RolId == 1
                    ? RedirectToAction("ActividadesDelUsuarioInscripto", "Actividad", buscarUsuarioLogueado)
                    : RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
-               // return RedirectToAction("ActividadesDelUsuarioInscripto", "Actividad", buscarUsuarioLogueado);
+                // return RedirectToAction("ActividadesDelUsuarioInscripto", "Actividad", buscarUsuarioLogueado);
             }
         }
     }

@@ -23,7 +23,7 @@
                     {
                         <div class="header-left" style="margin-left:80%;">
                             <a href=#>
-                                <button type="submit" class="btn mb-1 gradient-3" id="btnAprobar" name=Estado value=true>Aprobar</button>
+                                <button type="submit" class="btn btn-success" style="color:white" id="btnAprobar" name=Estado value=true>Aprobar</button>
                                 <a href=#><button type="button" class="btn btn-primary" id="btnRechazar" data-toggle="modal" data-target="#guardar">Rechazar</button> </a>
 
                                 <div class="bootstrap-modal">
@@ -120,7 +120,7 @@
                     @if (ViewBag.Estado == "1") //Sólo en el estado APROBADO puede rechazar
                     {
                         <div class="header-left" style="margin-left:80%;">
-                            <a href=#><button type="submit" class="btn mb-1 gradient-1" id="btnRechazar" name=Estado value=false>Rechazar</button> </a>
+                            <a href=#><button type="submit" class="btn btn-primary" id="btnRechazar" name=Estado value=false>Rechazar</button> </a>
                         </div>
                     }
                     <br><br><br><br><br>
@@ -166,7 +166,7 @@
                                 <tr>
 
                                     <td><input type="checkbox" class="case" name="case" /></td>
-                                    <td><img src="@Url.Content(ViewBag.Url)" style="width: 190px; height: 120px;"></td>
+                                    <td><img src="@Url.Content(ViewBag.Url)" style="width: 150px; height: 110px; border-radius: 3px;"></td>
                                     <td>@i.Nombre @i.Apellido</td>
                                     <td>@i.Localidad.Descripcion</td>
                                     <td>@Convert.ToInt32(@DateTime.Now.Year - @i.FechaNacimiento.Value.Year)</td>

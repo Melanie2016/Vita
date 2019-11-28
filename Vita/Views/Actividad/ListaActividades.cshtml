@@ -131,7 +131,7 @@
 
                                 }
                                 <tr>
-                                    <td><a href="/Actividad/FichaActividad/?idActividad=@i.Id&inscribirse=false"><img src="@Url.Content(ViewBag.Url)" style="width: 190px; height: 120px;"> </a></td>
+                                    <td><a href="/Actividad/FichaActividad/?idActividad=@i.Id&inscribirse=false"><img src="@Url.Content(ViewBag.Url)" style="width: 150px; height: 110px; border-radius: 3px;"> </a></td>
                                     <td>@i.Titulo</td>
                                     <td>
                                         @Convert.ToInt32(@i.CantidadCupo - @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count()) / @i.CantidadCupo
