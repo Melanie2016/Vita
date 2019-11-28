@@ -334,7 +334,7 @@ namespace Vita.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost] //texto tiene que pasar 
         public ActionResult ListaActividades(int? idCategoria, DateTime? fechaDesde , DateTime? fechaHasta)
         {
             //obtengo usuario logueado

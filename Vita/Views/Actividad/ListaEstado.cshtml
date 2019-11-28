@@ -10,7 +10,7 @@
 <section class="container-fluid">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Hay @ViewBag.ListaUsuario.Count usuarios en la actividad:</h4><br />
+            <h4 class="card-title">Hay @ViewBag.ListaUsuario.Count usuarios en la actividad, con estado </h4><br />
             <h6 style="color:#76838f"> @ViewBag.Actividad.Titulo, @ViewBag.Actividad.Descripcion</h6>
             <form action="/Actividad/AprobarUsuario" method="post">
                 <input type="number" value="@ViewBag.Actividad.Id" name="ActividadId" hidden />
@@ -18,7 +18,7 @@
 
                     <br /><br />
 
-                    @if (ViewBag.Estado == "2") //Sólo en el estado PENDIENTE muestro los botones de aprobar y rechazar
+                    @if (ViewBag.Estado == "2" || ViewBag.Estado== "9") //Sólo en el estado PENDIENTE muestro los botones de aprobar y rechazar
                     {
                         <div class="header-left" style="margin-left:80%;">
                             <a href=#><button type="submit" class="btn mb-1 gradient-3" id="btnAprobar" name=Estado value=true>Aprobar</button> </a>

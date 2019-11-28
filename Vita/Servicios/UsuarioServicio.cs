@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Vita.ViewModels;
 
 namespace Vita.Servicios
 {
@@ -107,7 +108,7 @@ namespace Vita.Servicios
                 myDbContext.SaveChanges();
             }
         }
-        public void ModificarUsuario(Usuario us, int[] selectedSegmento, int[] selectedCategoria)
+        public void ModificarUsuario(UsuarioModificarViewModel us)
         {
 
             Usuario usuarioModificar = myDbContext.Usuario.Find(us.Id);
@@ -129,7 +130,7 @@ namespace Vita.Servicios
             var listaUsuarioSegmento = new List<UsuarioSegmento>();
             foreach (var segmentoUser in segmentousuario)
             {
-                foreach (var segmento in selectedSegmento)//la lista con los segmento elegidos actualizados
+                foreach (var segmento in us.selectedSegmento)//la lista con los segmento elegidos actualizados
                 {
                     if (!(segmentoUser.SegmentoId== segmento))
                     {

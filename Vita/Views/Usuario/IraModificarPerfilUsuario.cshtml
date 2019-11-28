@@ -58,156 +58,278 @@
                             <div class="d-sm-flex justify-content-between mb-2">
                                 <h5 class="mb-sm-0"><small class="text-muted ml-3">última modificación hace () días </small></h5>
                                 <!--<div class="media-reply__link">
-                                <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                                <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
-                                <button class="btn btn-transparent text-dark font-weight-bold p-0 ml-2">Reply</button>
-                            </div>-->
+                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
+                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
+                                    <button class="btn btn-transparent text-dark font-weight-bold p-0 ml-2">Reply</button>
+                                </div>-->
                             </div>
 
 
 
 
 
-                            <div class="media mt-3">
-                                <div class="media-body">
-                                    <form action="ModificarPerfilUsuario" method="post">
-                                        <!--Table-->
-                                        <table id="tablePreview" class="table">
-                                            <!--Table head-->
-                                            <thead> </thead>
-                                            <!--Table head-->
-                                            <!--Table body-->
-                                            <tbody>
-                                                <tr>
-                                                  
-                                                    <td> <input class="input--style-4" type="text" hidden name="Id" value="@Model.Id"></td>
+                            <form action="ModificarPerfilUsuario" method="post">
+                                <!--Table-->
+                                <table id="tablePreview" class="table">
+                                    <!--Table head-->
+                                    <thead> </thead>
+                                    <!--Table head-->
+                                    <!--Table body-->
+                                    <tbody>
+                                        <tr>
+                                            <td> <input class="input--style-4" type="text" hidden name="RolId" value=1></td>
 
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Nombre</th>
-                                                    <td> <input class="input--style-4" type="text" name="Nombre" value="@Model.Nombre"></td>
+                                            <td> <input class="input--style-4" type="text" hidden name="Id" value="@Model.Id"></td>
 
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Apellido</th>
-                                                    <td> <input class="input--style-4" type="text" value="@Model.Apellido" name="Apellido"></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Fecha de Nacimiento</th>
-                                                    <td>
-                                                        <input class="input--style-4 js-datepicker" type="text" name="FechaNacimiento" value="@Model.FechaNacimiento">
-                                                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Sexo</th>
-                                                    <td>
-                                                        <select class="selectpicker" id="sexoId" onchange="changeOption(this)"
-                                                                 data-live-search="true" title="Seleccione sexo.." name="SexoId">
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Nombre</th>
+                                            <td> <input class="input--style-4" type="text" name="Nombre" value="@Model.Nombre"></td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Apellido</th>
+                                            <td> <input class="input--style-4" type="text" value="@Model.Apellido" name="Apellido"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Fecha de Nacimiento</th>
+                                            <td>
+                                                <input class="input--style-4 js-datepicker" type="text" name="FechaNacimiento" value="@Model.FechaNacimiento">
+                                                <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Sexo</th>
+
+                                            <td>
+                                                <select class="input--style-4" id="sexoId" onchange="changeOption(this)"
+                                                        data-live-search="true" title="@Model.Sexo.Descripcion" name="SexoId">
+
+                                                    @*<option name="SexoId"value="@Model.Sexo.Id">@Model.Sexo.Descripcion</option>*@
+                                                    @foreach (var item in ViewBag.ListaSexo as MultiSelectList)
+                                                    {
+
+                                                        <option value="@item.Value">@item.Text</option>
+                                                    }
+
+                                                </select>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <th scope="row">DNI</th>
+                                            <td> <input class="input--style-4" type="number" name="Dni" value="@Model.Dni"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Email</th>
+                                            <td><input class="input--style-4" type="email" name="Email" value="@Model.Email"></td>
+                                        </tr>
+                                        <!-------------------------------------------------------------------------------->
+                                        <tr>
+
+                                            <!--Provincia-->
+                                            <th scope="row">Seleccione Provincia</th>
+
+                                            <td>
+                                                <select class="input--style-4" id="filtroProvincia" title="@ViewBag.ProvinciaDescripcion" name="LocalidadId" width: 260px; height: 50px; border: 0;">
+
+                                                    <option name="valorActual" value="@ViewBag.ProvinciaId">@ViewBag.ProvinciaDescripcion</option>
+                                                    @foreach (var item in ViewBag.ListaProvincia as MultiSelectList)
+                                                    {
+
+                                                        <option name="valorActual" value="@item.Value">@item.Text</option>
+
+                                                    }
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" >
+                                                Seleccione Departamento
+
+                                            </th>
+                                            <td>
+                                                <div>
+                                                    <div id="filtroDepartamento"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <th scope="row">
+                                                Seleccione Localidad
+
+                                            </th>
+                                            <td>
+                                                <div id="filtroLocalidad">
+
+                                                </div>
+
+                                            </td>
 
 
-                                                            @foreach (var item in ViewBag.ListaSexo as MultiSelectList)
-                                                            {
-                                                                <option value="@item.Value">@item.Text</option>
-                                                            }
-
-                                                        </select>
-                                                    </td>
-
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">DNI</th>
-                                                    <td> <input class="input--style-4" type="number" name="Dni" value="@Model.Dni"></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Email</th>
-                                                    <td><input class="input--style-4" type="email" name="Email" value="@Model.Email"></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Localidad</th>
-                                                    <td>
-                                                        <select class="selectpicker" id="LocalidadId" onchange="changeOption(this)"
-                                                                data-live-search="true" title="Seleccione localidad.." name="LocalidadId">
 
 
-                                                            @foreach (var item in ViewBag.ListaLocalidades as MultiSelectList)
-                                                            {
-                                                                <option value="@item.Value">@item.Text  </option>
-                                                            }
+                                        </tr>
 
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Celular</th>
-                                                    <td><input class="input--style-4" type="number" value="@Model.Celular" name="Celular"></td>
 
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Intereses</th>
+                                        <tr>
+                                            <th scope="row">Departamento</th>
+                                            <td>
+                                                <select class="input--style-4" id="LocalidadId" onchange="changeOption(this)"
+                                                        data-live-search="true" title="@ViewBag.DepartamentoDescripcion" name="DepartamentoId">
 
-                                                    <td>
-                                                        @foreach (var item in ViewBag.ListaIntereses)
-                                                        {
-                                                            <input type="checkbox" name="selectedCategoria" value="@item.Value" />
-                                                            @item.Text<br />
-                                                        }
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Segmento</th>
 
-                                                    <td>
-                                                        @foreach (var item in ViewBag.ListaSegmentos)
-                                                        {
-                                                            <input type="checkbox" name="selectedSegmento" value="@item.Value" />
-                                                            @item.Text <br />
-                                                        }
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Sobre mí</th>
-                                                    <td>
+                                                    <option >@ViewBag.DepartamentoDescripcion </option>
+                                                    
 
-                                                        <textarea class="form-control" id="val-suggestions" name="SobreMi" rows="10" cols="70"> @Model.SobreMi</textarea>
+                                                </select>
+                                            </td>
+                                        </tr>
 
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Usuario</th>
-                                                    <td> <input class="input--style-4" type="text" name="UsuarioName" value="@Model.UsuarioName"></td>
 
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Password</th>
-                                                    <td><input class="input--style-4" type="password" value="@Model.Pass" name="Pass"></td>
+                                        <tr>
+                                            <th scope="row">Localidad</th>
+                                            <td>
+                                                <select class="input--style-4" id="LocalidadId" onchange="changeOption(this)"
+                                                        data-live-search="true" title="@Model.Localidad.Descripcion" name="LocalidadId">
 
-                                                </tr>
-                                            </tbody>
-                                            <!--Table body-->
-                                        </table>
-                                        <!--Table-->
 
-                                        <button type="submit" class="btn btn-default">MODIFICAR</button>
-                                    </form>
-                                </div>
-                            </div>
+                                                   
+                                                    <option >@Model.Localidad.Descripcion </option>
+                                                    
+
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Celular</th>
+                                            <td><input class="input--style-4" type="number" value="@Model.Celular" name="Celular"></td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Intereses</th>
+
+                                            <td>
+                                                @foreach (var item in ViewBag.ListaIntereses)
+                                                {
+                                                    <input type="checkbox" name="selectedCategoria" value="@item.Value" />
+                                                    @item.Text<br />
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Segmento</th>
+
+                                            <td>
+                                                @foreach (var item in ViewBag.ListaSegmentos)
+                                                {
+                                                    <input type="checkbox" name="selectedSegmento" value="@item.Value" />
+                                                    @item.Text <br />
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Sobre mí</th>
+                                            <td>
+
+                                                <textarea class="form-control" id="val-suggestions" name="SobreMi" rows="10" cols="70"> @Model.SobreMi</textarea>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Usuario</th>
+                                            <td> <input class="input--style-4" type="text" name="UsuarioName" value="@Model.UsuarioName"></td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Password</th>
+                                            <td><input class="input--style-4" type="password" value="@Model.Pass" name="Pass"></td>
+
+                                        </tr>
+                                    </tbody>
+                                    <!--Table body-->
+                                </table>
+                                <!--Table-->
+
+                                <button type="submit" class="btn btn-default">MODIFICAR</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-              </div>
-        </div>
-        <!-- #/ container -->
+    </div>
+</div>
+    </div>
+</div>
+<!-- #/ container -->
 
-        <script src="~/vendor/jquery/jquery.min.js"></script>
-        <script src="~/Content/js/FotoPerfil.js"></script>
+<script src="~/vendor/jquery/jquery.min.js"></script>
+<script src="~/Content/js/FotoPerfil.js"></script>
 
-        <!-- Scripts del Login-->
-        <script src="~/vendor/jquery/jquery.min.js"></script>
-        <script src="~/vendor/select2/select2.min.js"></script>
-        <script src="~/vendor/datepicker/moment.min.js"></script>
-        <script src="~/vendor/datepicker/daterangepicker.js"></script>
-        <script src="/Content/js/registro.js"></script>
+<!-- Scripts del Login-->
+<script src="~/vendor/jquery/jquery.min.js"></script>
+<script src="~/vendor/select2/select2.min.js"></script>
+<script src="~/vendor/datepicker/moment.min.js"></script>
+<script src="~/vendor/datepicker/daterangepicker.js"></script>
+<script src="/Content/js/registro.js"></script>
+
+<!-- Aca es donde se arma la magia -->
+<script>
+    //Todo siempre una vez cargada la página
+    $(document).ready(function () {
+
+        //Esto corre cuando cambias de opción en el primer select
+        $('#filtroProvincia').on('change', function () {
+
+            var idProvincia = this.value;
+
+            //Si elegiste la opción de los guíones paramos aca para no hacer nada
+            if (idProvincia === 0) {
+                $("#filtroDepartamento").html("Selecciona una provincia");
+                return;
+            }
+
+            //Ajax
+            $.ajax({
+                //   url: "obtenerDepartamentosUsuario/" + idProvincia,
+                url: "obtenerDepartamentos/" + this.value,
+                type: 'GET',
+                dataType: "json",
+                success: function (res) {
+                    //Por si queres ver una por una las cosas que vuelven descomenta el alert
+                    // alert(res);
+
+                    //Creando el segundo select
+                    $("#filtroDepartamento").empty().append('<select id="filtro2" class="input--style-4" name="DepartamentoId">');
+
+                    $.each(res, function () {
+                        $("#filtro2").append($("<option>").val(this.Id).text(this.Descripcion));
+                    });
+                    //Esto corre cuando cambias de opción en el segundo select
+                    $('#filtro2').on('change', function () {
+                        //Ajax
+                        $.ajax({
+                            url: "obtenerLocalidades/" + this.value,
+
+                            type: 'GET',
+                            dataType: "json",
+                            success: function (res) {
+                                // alert(res);
+                                //Creando el tercer select
+                                $("#filtroLocalidad").empty().append('<select id="filtro3" class="input--style-4" name="LocalidadId">');
+                                $.each(res, function () {
+                                    $("#filtro3").append($("<option>").val(this.Id).text(this.Descripcion));
+                                });
+                            }
+                        });
+                    });
+                }
+            });
+        });
+    });
+</script>
+
 
