@@ -805,7 +805,12 @@ namespace Vita.Servicios
             return listaActividad;
         }
 
-        public List<Actividad> GetByEstadoId(int estadoId, int actividadId)
+        public Estado GetByEstadoId(int estadoId)
+        {
+            var estado = myDbContext.Estado.Where(x => x.Id == estadoId).FirstOrDefault();
+            return estado;
+        }
+        public List<Actividad> GetAllActividadByestadoIdAndActividadId(int estadoId, int actividadId)
         {
             var listaActividad = new List<Actividad>();
             var listaUsuarioInscriptoActividad = myDbContext.UsuarioInscriptoActividad.Where(x => x.ActividadId == actividadId && x.EstadoId == estadoId).ToList();
