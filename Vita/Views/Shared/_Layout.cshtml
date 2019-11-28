@@ -75,8 +75,6 @@
             <div class="collapse navbar-collapse" id="ftco-nav">
 
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="index.html" class="nav-link"></a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link"></a></li>
                     <li class="nav-item"><a href="/Home/Index" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="/Actividad/Actividades" class="nav-link">Buscar actividades</a></li>
 
@@ -89,11 +87,10 @@
                     {
                         <li class="icons dropdown" style="margin-left: 10px;">
 
-                            <div id="ContenedorLogueado" class="user-img c-pointer position-relative" data-toggle="dropdown" style="width:162px; height:48px; margin-right: -112px;">
+                            <div id="ContenedorLogueado" class="user-img c-pointer position-relative" data-toggle="dropdown" style="width:162px; height:48px; margin-right: -120px;  margin-top: 1px;">
                                 <a href="javascript:void(0)" class="log-user" data-toggle="dropdown">
-                                    <span style="color:#464a53; font-size: 14px; font-family:Roboto, sans-serif;">Hola @Model.UsuarioName</span> <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
+                                    <span style="color:#464a53; font-size: 14px; font-family:Roboto, sans-serif;">Hola @Model.UsuarioName!</span> <i class="fa fa-angle-down f-s-14" aria-hidden="true" style=" color: #abafb3; font-size: 18px; margin-left: 10px;"></i>
                                 </a>
-                                <span class="activity active" style="height: 13px; width: 13px; border-radius: 50%; display: inline-block; position: absolute; border: 3px solid #fff; bottom: .9rem; right: 0rem; left: auto; background-image: linear-gradient(230deg, #AFEDC0, #69D385); margin-right: 14px; margin-bottom: 2px;"></span>
                                 @if (Model.Foto != null && Model.Foto.Length > 0)
                                 {
                                     <img src="@Url.Content(Model.Foto)" height="40" width="40" alt="" style="height: 40px; width: 40px; border: 3px solid #fff; border-radius: 50%; margin: 0; padding: 0; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);">
