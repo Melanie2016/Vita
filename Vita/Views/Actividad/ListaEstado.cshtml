@@ -43,7 +43,7 @@
                                                             <p>¿Desea notificarle el motivo del rechazo? (Recomendado)</p>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="submit" class="btn mb-1 gradient-1" name=Estado value=false>No</button>
+                                                            <button type="submit" class="btn btn-primary" name=Estado value=false>No</button>
                                                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#notificar">Notificar</button>
                                                         </div>
                                                     </div>
@@ -189,26 +189,14 @@
 
                                 </tbody>
                             </table><br />
-                            <form name="volver" method="get" action="/Actividad/ListaActividades">
-
-                                <button type="submit" class="btn mb-1 gradient-3" id="volver">Volver atrás</button>
-                            </form>
-
-                        }
-                    }
 
                 </div>
             </form>
-            @{
-                if (ViewBag.ListaUsuario.Count == 0)
-                {
-                    <br>
-                    <form name="volver" method="get" action="/Actividad/ListaActividades">
 
-                        <button type="submit" class="btn mb-1 gradient-3" id="volver">Volver atrás</button>
-                    </form>
-                }
-            }
+             <br>
+             <form name="volver" method="get" action="/Actividad/ListaActividades">
+                 <button type="submit" class="btn mb-1 btn-info" id="volver">Volver atrás</button>
+             </form>
 
         </div>
 
