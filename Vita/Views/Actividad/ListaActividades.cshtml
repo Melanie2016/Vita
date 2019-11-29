@@ -141,9 +141,9 @@
                                         <a href="/Actividad/ListaEstado?estadoId=1&actividadId=@i.Id"><span class="label gradient-3 rounded" style="font-size: 15px !important;">@i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count() </span></a>
                                     </td>
                                     <td style="text-align: center;">
-                                        <a href="/Actividad/ListaEstado?estadoId=2&actividadId=@i.Id">
+                                        <a href="/Actividad/ListaEstado?estadoId=2&estadoId2=9&actividadId=@i.Id">
                                             <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                                @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Pendiente de aprobación" && x.ActividadId == i.Id).Count()
+                                                @i.UsuarioInscriptoActividad.Where(x =>( x.Estado.Descripcion == "Pendiente de aprobación" || x.Estado.Descripcion=="Rehizó el formulario, a la espera de la aprobación" ) && x.ActividadId == i.Id).Count()
                                             </span>
                                         </a>
                                     </td>
