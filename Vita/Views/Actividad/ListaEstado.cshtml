@@ -157,7 +157,19 @@
                                         }
                                         else
                                         {
-                                            ViewBag.Url = "/Content/images/sin_foto.png";
+                                            if(i.SexoId == 1) //Femenino
+                                            {
+                                                ViewBag.Url = "/Content/images/mujer.jpg";
+                                            }
+                                            if (i.SexoId == 2) //Masculino
+                                            {
+                                                ViewBag.Url = "/Content/images/hombre.png";
+                                            }
+                                            if (i.SexoId == 3) //Indefinido
+                                            {
+                                                ViewBag.Url = "/Content/images/desconocido.png";
+                                            }
+
                                         }
                                         <input type="number" value=@i.Id
                                                name="UsuarioId" hidden />
@@ -166,7 +178,7 @@
                                         <tr>
 
                                     <td><input type="checkbox" class="case" name="case" /></td>
-                                    <td><img src="@Url.Content(ViewBag.Url)" style="width: 150px; height: 110px; border-radius: 3px;"></td>
+                                    <td><img src="@Url.Content(ViewBag.Url)" style="width: 130px; height: 110px; border-radius: 3px;"></td>
                                     <td>@i.Nombre @i.Apellido</td>
                                     <td>@i.Localidad.Descripcion</td>
                                     <td>@Convert.ToInt32(@DateTime.Now.Year - @i.FechaNacimiento.Value.Year)</td>
