@@ -29,8 +29,8 @@
                             <div>
                                 <button class=" btn btn-ligth" id="botonFiltrar" onclick="muestra_oculta('contenido')"><i class="fa fa-filter"></i> &nbsp; Filtrar</button>
                             </div>
-                        } 
                         }
+                    }
 
                 </div>
                 <div class="card" id="contenido" style="background-color: #F5F5F5; width: 90%;">
@@ -97,12 +97,13 @@
                         {
                             <thead>
                                 <tr>
-                                    <th scope="col"></th>
+                                    <th scope="col">Foto</th>
                                     <th scope="col">Titulo actividad</th>
                                     <th scope="col">Cupo</th>
                                     <th scope="col">Aprobados</th>
                                     <th scope="col">Pendientes</th>
                                     <th scope="col">Rechazados</th>
+                                    <th scope="col">Cancelados</th>
                                     <th scope="colgroup"></th>
                                     <th scope="colgroup"></th>
                                     <th scope="colgroup"></th>
@@ -140,9 +141,9 @@
                                         <a href="/Actividad/ListaEstado?estadoId=1&actividadId=@i.Id"><span class="label gradient-3 rounded" style="font-size: 15px !important;">@i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count() </span></a>
                                     </td>
                                     <td style="text-align: center;">
-                                        <a href="/Actividad/ListaEstado?estadoId=2&actividadId=@i.Id">
+                                        <a href="/Actividad/ListaEstado?estadoId=2&estadoId2=9&actividadId=@i.Id">
                                             <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                                @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Pendiente de aprobación" && x.ActividadId == i.Id).Count()
+                                                @i.UsuarioInscriptoActividad.Where(x =>( x.Estado.Descripcion == "Pendiente de aprobación" || x.Estado.Descripcion=="Rehizó el formulario, a la espera de la aprobación" ) && x.ActividadId == i.Id).Count()
                                             </span>
                                         </a>
                                     </td>
@@ -153,7 +154,13 @@
                                             </span>
                                         </a>
                                     </td>
-
+                                    <td style="text-align: center;">
+                                        <a href="/Actividad/ListaEstado?estadoId=3&actividadId=@i.Id">
+                                            <span class="label gradient-1 rounded" style="font-size: 15px !important;">
+                                                @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Cancelado" && x.ActividadId == i.Id).Count()
+                                            </span>
+                                        </a>
+                                    </td>
                                     <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Editar actividad"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span></td>
                                     <td><span><a href="/Actividad/EliminaroDarseBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Eliminar actividad"><i class="fa fa-close color-danger"></i></a></span></td>
 

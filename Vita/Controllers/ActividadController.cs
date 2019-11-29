@@ -502,7 +502,7 @@ namespace Vita.Controllers
             return result;
         }
         [HttpGet]
-        public ActionResult ListaEstado(int estadoId, int actividadId)
+        public ActionResult ListaEstado(int estadoId, int ? estadoId2 , int actividadId)
         {
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -512,7 +512,19 @@ namespace Vita.Controllers
             else
             {
                 buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
-                ViewBag.ListaUsuario = actividadServicio.GetUsuariosByEstadoId(estadoId, actividadId);
+                if(estadoId2 != null)
+                {
+                    List<Usuario> listaUsuario = new List<Usuario>();
+                    var lista1Usuario = actividadServicio.GetUsuariosByEstadoId(estadoId, actividadId);
+                    var lista2Usuario = actividadServicio.GetUsuariosByEstadoId(estadoId2.Value, actividadId);
+                    listaUsuario.AddRange(lista1Usuario);
+                    listaUsuario.AddRange(lista2Usuario);
+                    ViewBag.ListaUsuario = listaUsuario;
+                }
+                else {
+                    ViewBag.ListaUsuario = actividadServicio.GetUsuariosByEstadoId(estadoId, actividadId);
+
+                }
                 ViewBag.Actividad = actividadServicio.GetActividad(actividadId);
                 ViewBag.Estado = estadoId.ToString();
                 ViewBag.EstadoString = actividadServicio.GetByEstadoId(estadoId).Descripcion;
@@ -578,7 +590,7 @@ namespace Vita.Controllers
             }
         }
         [HttpPost]
-        public ActionResult AprobarUsuario(UsuarioEstado usuarioEstado, String Para, String Asunto, String Mensaje)
+        public ActionResult AprobarORechazarUsuario(UsuarioEstado usuarioEstado, String Para, String Asunto, String Mensaje)
         {
 
             //   foreach(var us in usuarioEstado.Usuarios)
