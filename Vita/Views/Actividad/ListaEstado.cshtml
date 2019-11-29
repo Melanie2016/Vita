@@ -31,7 +31,7 @@
                             {
                                 <div class="header-left" style="margin-left:80%;">
                                     <a href=#>
-                                        <button type="submit" class="btn mb-1 gradient-3" id="btnAprobar" name=Estado value=true>Aprobar</button>
+                                        <button type="submit" class="btn btn-success" style="color:White" id="btnAprobar" name=Estado value=true>Aprobar</button>
                                         <a href=#><button type="button" class="btn btn-primary" id="btnRechazar" data-toggle="modal" data-target="#guardar">Rechazar</button> </a>
 
                                         <div class="bootstrap-modal">
@@ -149,7 +149,7 @@
                                                             <p>¿Desea notificarle el motivo del rechazo? (Recomendado)</p>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="submit" class="btn mb-1 gradient-1" name=Estado value=false>No</button>
+                                                            <button type="submit" class="btn btn-primary" name=Estado value=false>No</button>
                                                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#notificar">Notificar</button>
                                                         </div>
                                                     </div>
@@ -267,7 +267,19 @@
                                         }
                                         else
                                         {
-                                            ViewBag.Url = "/Content/images/sin_foto.png";
+                                            if(i.SexoId == 1) //Femenino
+                                            {
+                                                ViewBag.Url = "/Content/images/mujer.jpg";
+                                            }
+                                            if (i.SexoId == 2) //Masculino
+                                            {
+                                                ViewBag.Url = "/Content/images/hombre.png";
+                                            }
+                                            if (i.SexoId == 3) //Indefinido
+                                            {
+                                                ViewBag.Url = "/Content/images/desconocido.png";
+                                            }
+
                                         }
                                         <input type="number" value=@i.Id
                                                name="UsuarioId" hidden />
@@ -282,21 +294,22 @@
                                             }
 
 
-                                            <td><img src="@Url.Content(ViewBag.Url)" style="width: 190px; height: 120px;"></td>
-                                            <td>@i.Nombre @i.Apellido</td>
-                                            <td>@i.Localidad.Descripcion</td>
-                                            <td>@Convert.ToInt32(@DateTime.Now.Year - @i.FechaNacimiento.Value.Year)</td>
-                                            <td>@i.Sexo.Descripcion</td>
-                                            <td>
-                                                @estado
-                                                @*@i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion*@
-                                            </td>
-                                            @if (ViewBag.Estado == "2") //Pendiente
-                                            {
-                                                <td>
-                                                    <div style="text-align:center"><a href="/Actividad/RespuestasFormularioDinamico?actividadId=@ViewBag.Actividad.Id&usuarioRespuestaId=@i.Id"><span data-toggle="tooltip" data-placement="top" title="Ver respuestas del formulario"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></span></a></div>
-                                                </td>
-                                            }
+                                    
+                                    <td><img src="@Url.Content(ViewBag.Url)" style="width: 130px; height: 110px; border-radius: 3px;"></td>
+                                    <td>@i.Nombre @i.Apellido</td>
+                                    <td>@i.Localidad.Descripcion</td>
+                                    <td>@Convert.ToInt32(@DateTime.Now.Year - @i.FechaNacimiento.Value.Year)</td>
+                                    <td>@i.Sexo.Descripcion</td>
+                                    <td>
+                                        @estado
+                                        @*@i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion*@
+                                    </td>
+                                    @if (ViewBag.Estado == "2") //Pendiente
+                                    {
+                                        <td>
+                                            <div style="text-align:center"><a href="/Actividad/RespuestasFormularioDinamico?actividadId=@ViewBag.Actividad.Id&usuarioRespuestaId=@i.Id"><span data-toggle="tooltip" data-placement="top" title="Ver respuestas del formulario"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></span></a></div>
+                                        </td>
+                                    }
 
                                         </tr>
                                     }
@@ -315,7 +328,7 @@
 
             <form name="volver" method="get" action="/Actividad/ListaActividades">
 
-                <button type="submit" class="btn mb-1 gradient-3" id="volver">Volver atrás</button>
+                <button type="submit" class="btn mb-1 btn-info" id="volver">Volver atrás</button>
             </form>
 
 
