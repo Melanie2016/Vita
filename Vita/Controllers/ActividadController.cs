@@ -567,7 +567,7 @@ namespace Vita.Controllers
             }
         }
         [HttpPost]
-        public ActionResult AprobarUsuario(UsuarioEstado usuarioEstado, String Para, String Asunto, String Mensaje)
+        public ActionResult AprobarORechazarUsuario(UsuarioEstado usuarioEstado, String Para, String Asunto, String Mensaje)
         {
 
             //   foreach(var us in usuarioEstado.Usuarios)
