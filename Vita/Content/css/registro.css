@@ -256,14 +256,15 @@ h6 {
    ========================================================================== */
 .btn {
   display: inline-block;
-  line-height: 50px;
-  padding: 0 50px;
+  width: 107px;
+  height: 38px;
+  font-size: 1rem;
+  line-height: 1.25;
   -webkit-transition: all 0.4s ease;
   -o-transition: all 0.4s ease;
   -moz-transition: all 0.4s ease;
   transition: all 0.4s ease;
   cursor: pointer;
-  font-size: 18px;
   color: #fff;
   font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
 }
@@ -295,11 +296,11 @@ h6 {
 }
 
 .btn--blue {
-  background: #6c63ff;
+    background: #17a2b8;
 }
 
 .btn--blue:hover {
-  background: #3868cd;
+  background: #138496;
 }
 
 /* ==========================================================================
