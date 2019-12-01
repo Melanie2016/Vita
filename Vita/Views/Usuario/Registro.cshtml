@@ -18,7 +18,7 @@
         <div class="card card-4">
             <div class="card-body">
                 <!--  <form action="/Usuario/Registrar" method="Post" class="formu-usuario" id="form-rol-usuario">-->
-                @using (Html.BeginForm("Registro", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("Registro", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data", @class ="form-validation" }))
                 {
 
 
@@ -50,14 +50,14 @@
                             <div class="input-group">
                                 <!--Nombre-->
                                 <label class="label">Nombre</label>
-                                <input class="input--style-4" type="text" name="Nombre">
+                                <input class="input--style-4" type="text" name="Nombre" required>
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group">
                                 <!--Apellido-->
                                 <label class="label">Apellido</label>
-                                <input class="input--style-4" type="text" name="Apellido">
+                                <input class="input--style-4" type="text" name="Apellido" required>
                             </div>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                                 <!--Fecha de nacimiento-->
                                 <label class="label">Fecha de nacimiento</label>
                                 <div class="input-group-icon">
-                                    <input class="input--style-4 js-datepicker" type="text" name="FechaNacimiento">
+                                    <input class="input--style-4 js-datepicker" type="text" name="FechaNacimiento" required>
                                     <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                 </div>
                             </div>
@@ -98,7 +98,7 @@
                             <div class="input-group">
                                 <!--DNI-->
                                 <label class="label">DNI</label>
-                                <input class="input--style-4" type="number" name="Dni" placeholder="36124554">
+                                <input class="input--style-4" type="number" name="Dni" placeholder="36124554" required>
                             </div>
                         </div>
 
@@ -106,7 +106,7 @@
                             <div class="input-group">
                                 <!--Email-->
                                 <label class="label">Email</label>
-                                <input class="input--style-4" type="email" name="Email" placeholder="ejemplo@gmail.com">
+                                <input class="input--style-4" type="email" name="Email" placeholder="ejemplo@gmail.com" required>
                             </div>
                         </div>
                     </div>
@@ -152,7 +152,7 @@
                             <div class="input-group">
                                 <!--Celular-->
                                 <label class="label">Celular</label>
-                                <input class="input--style-4" type="number" name="Celular" placeholder="1143424456">
+                                <input class="input--style-4" type="number" name="Celular" placeholder="1143424456" required>
                             </div>
                         </div>
                     </div>
@@ -208,7 +208,7 @@
                             <div class="input-group">
                                 <!--Usuario-->
                                 <label class="label">Usuario</label>
-                                <input class="input--style-4" type="text" name="UsuarioName">
+                                <input class="input--style-4" type="text" name="UsuarioName" required>
                             </div>
                         </div>
 
@@ -216,7 +216,7 @@
                             <div class="input-group">
                                 <!--Contraseña-->
                                 <label class="label">Contraseña</label>
-                                <input class="input--style-4" type="password" name="Pass">
+                                <input class="input--style-4" type="password" name="Pass" required>
                             </div>
                         </div>
                     </div>
