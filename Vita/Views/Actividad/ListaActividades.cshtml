@@ -118,10 +118,13 @@
                     }
 
                     <tbody>
-                        @if (ViewBag.ListaActvidadesFiltrada == null)
+                        @if (ViewBag.ListaActvidadesFiltrada == null) //sin filtrar 
                         {
                             foreach (Actividad i in ViewBag.ListaActvidades)
                             {
+                                var usuariosEliminar = new List<UsuarioInscriptoActividad>();
+
+                                usuariosEliminar = i.UsuarioInscriptoActividad.ToList(); //almaceno los usuarios de cada actividad
                                 if (i.Foto != null && i.Foto.Length > 0)
                                 {
                                     ViewBag.Url = i.Foto;
@@ -131,69 +134,98 @@
                                     ViewBag.Url = "/Content/images/sin_foto.png";
 
                                 }
-                                <tr>
-                                    <td><a href="/Actividad/FichaActividad/?idActividad=@i.Id&inscribirse=false"><img src="@Url.Content(ViewBag.Url)" style="width: 150px; height: 110px; border-radius: 3px;"> </a></td>
-                                    <td>@i.Titulo</td>
-                                    <td>
-                                        @Convert.ToInt32(@i.CantidadCupo - @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count()) / @i.CantidadCupo
-                                    </td>
-                                    <td style="text-align: center;">
-                                        <a href="/Actividad/ListaEstado?estadoId=1&actividadId=@i.Id"><span class="label gradient-3 rounded" style="font-size: 15px !important;">@i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count() </span></a>
-                                    </td>
-                                    <td style="text-align: center;">
-                                        <a href="/Actividad/ListaEstado?estadoId=2&estadoId2=9&actividadId=@i.Id">
-                                            <span class="label gradient-2 rounded" style="font-size: 15px !important;">
-                                                @i.UsuarioInscriptoActividad.Where(x =>( x.Estado.Descripcion == "Pendiente de aprobación" || x.Estado.Descripcion=="Rehizó el formulario, a la espera de la aprobación" ) && x.ActividadId == i.Id).Count()
-                                            </span>
-                                        </a>
-                                    </td>
-                                    <td style="text-align: center;">
-                                        <a href="/Actividad/ListaEstado?estadoId=4&actividadId=@i.Id">
-                                            <span class="label gradient-1 rounded" style="font-size: 15px !important;">
-                                                @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Rechazado" && x.ActividadId == i.Id).Count()
-                                            </span>
-                                        </a>
-                                    </td>
-                                    <td style="text-align: center;">
-                                        <a href="/Actividad/ListaEstado?estadoId=3&actividadId=@i.Id">
-                                            <span class="label gradient-1 rounded" style="font-size: 15px !important; background-image: linear-gradient(230deg, #96c6ce, #4ba7bc);">
-                                                @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Cancelado" && x.ActividadId == i.Id).Count()
-                                            </span>
-                                        </a>
-                                    </td>
-                                    <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Editar actividad"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span></td>
-                                    <td><span><a href="/Actividad/EliminaroDarseBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Eliminar actividad"><i class="fa fa-close color-danger"></i></a></span></td>
+                        <tr>
+                            <td><a href="/Actividad/FichaActividad/?idActividad=@i.Id&inscribirse=false"><img src="@Url.Content(ViewBag.Url)" style="width: 150px; height: 110px; border-radius: 3px;"> </a></td>
+                            <td>@i.Titulo</td>
+                            <td>
+                                @Convert.ToInt32(@i.CantidadCupo - @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count()) / @i.CantidadCupo
+                            </td>
+                            <td style="text-align: center;">
+                                <a href="/Actividad/ListaEstado?estadoId=1&actividadId=@i.Id"><span class="label gradient-3 rounded" style="font-size: 15px !important;">@i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count() </span></a>
+                            </td>
+                            <td style="text-align: center;">
+                                <a href="/Actividad/ListaEstado?estadoId=2&estadoId2=9&actividadId=@i.Id">
+                                    <span class="label gradient-2 rounded" style="font-size: 15px !important;">
+                                        @i.UsuarioInscriptoActividad.Where(x => (x.Estado.Descripcion == "Pendiente de aprobación" || x.Estado.Descripcion == "Rehizó el formulario, a la espera de la aprobación") && x.ActividadId == i.Id).Count()
+                                    </span>
+                                </a>
+                            </td>
+                            <td style="text-align: center;">
+                                <a href="/Actividad/ListaEstado?estadoId=4&actividadId=@i.Id">
+                                    <span class="label gradient-1 rounded" style="font-size: 15px !important;">
+                                        @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Rechazado" && x.ActividadId == i.Id).Count()
+                                    </span>
+                                </a>
+                            </td>
+                            <td style="text-align: center;">
+                                <a href="/Actividad/ListaEstado?estadoId=3&actividadId=@i.Id">
+                                    <span class="label gradient-1 rounded" style="font-size: 15px !important; background-image: linear-gradient(230deg, #96c6ce, #4ba7bc);">
+                                        @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Cancelado" && x.ActividadId == i.Id).Count()
+                                    </span>
+                                </a>
+                            </td>
 
-                                    <td>
-                                        @if (i.Estado.Id != 7 && i.FormularioDinamico.Where(x => x.ActividadId == i.Id).FirstOrDefault() == null)
-                                        {
-                                            <a href="/Actividad/CrearFormularioDinamico?actividad=@i.Id"><span data-toggle="tooltip" data-placement="top" title="Agregar formulario personalizado"><i class="fa fa-file-text-o fa-2x"></i></span></a>
-                                        }
-                                        else
-                                        {
-                                            <a href="/Actividad/VerFormularioEntidad?actividadId=@i.Id"><span data-toggle="tooltip" data-placement="top" title="Ver formulario"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></span></a>
-                                        }
-                                    </td>
-                                    <td>
-                                        @if (i.Estado.Id != 7)
-                                        {
-                                            <a href="/Actividad/Publicar?idActividad=@i.Id"><button class="btn mb-1 btn-primary">Publicar</button></a>
+                            @if (usuariosEliminar.Count != 0)// si tengo usuarios incriptos entra aca
+                            {
+                                //busco los usuarios sin estado aprobado, pendiente con pendiente con formulario hecho
+                                var usuariosOtros = usuariosEliminar.Where(x => x.Estado.Descripcion != "Aprobado" && x.Estado.Descripcion != "Pendiente de aprobación" && x.Estado.Descripcion != "Rehizó el formulario, a la espera de la aprobación").ToList();
 
-                                        }
-                                        else
-                                        {
-                                            <span>Publicada</span>
-                                        }
-                                    </td>
+                                //busco los usuarios con estado aprobado, pendiente con pendiente con formulario hecho
+                                var usuariosNoEliminar = usuariosEliminar.Where(x => x.Estado.Descripcion == "Aprobado" || x.Estado.Descripcion == "Pendiente de aprobación" || x.Estado.Descripcion == "Rehizó el formulario, a la espera de la aprobación").ToList();
+                                if (usuariosNoEliminar.Count != 0) // si tengo usuarios que no debo eliminar, bloqueo el boton 
+                                {
+                                    <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="No puede editar una actividad con usuarios" onclick="return false"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span></td>
+                                    <td><span><a href="/Actividad/EliminaroDarseBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="No puede eliminar una actividad con usuarios" onclick="return false"><i class="fa fa-close color-danger"></i></a></span></td>
+                                }
+                                if (usuariosOtros.Count != 0)//si tengo usuarios de estados distinto a eliminar, habilito boton eliminar
+                                {
+                                    <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Editar actividad"><i class="fa fa-pencil color-muted m-r-5" style="color:blue;"></i> </a></span></td>
+                                    <td><span><a href="/Actividad/EliminaroDarseBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Eliminar actividad"><i class="fa fa-close color-danger" style="color:red;"></i></a></span></td>
+                                }
 
-                                </tr>
+                            }
+                            else //no tengo usuarios inscriptos, habilito botones
+                            {
+                                <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Editar actividad"><i class="fa fa-pencil color-muted m-r-5" style="color:blue;"></i> </a></span></td>
+                                <td><span><a href="/Actividad/EliminaroDarseBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Eliminar actividad"><i class="fa fa-close color-danger" style="color:red;"></i></a></span></td>
+
+                            }
+
+                            <td>
+                                @if (i.Estado.Id != 7 && i.FormularioDinamico.Where(x => x.ActividadId == i.Id).FirstOrDefault() == null)
+                                {
+                                    <a href="/Actividad/CrearFormularioDinamico?actividad=@i.Id"><span data-toggle="tooltip" data-placement="top" title="Agregar formulario personalizado"><i class="fa fa-file-text-o fa-2x"></i></span></a>
+                                }
+                                else
+                                {
+                                    <a href="/Actividad/VerFormularioEntidad?actividadId=@i.Id"><span data-toggle="tooltip" data-placement="top" title="Ver formulario"><i class="fa fa-eye fa-2x" aria-hidden="true" style="color:#F318B0"></i></span></a>
+                                }
+                            </td>
+                            <td>
+                                @if (i.Estado.Id != 7)
+                                {
+                                    <a href="/Actividad/Publicar?idActividad=@i.Id"><button class="btn mb-1 btn-primary">Publicar</button></a>
+
+                                }
+                                else
+                                {
+                                    <span>Publicada</span>
+                                }
+                            </td>
+
+                        </tr>
 
                             }
                         }
-                        else
+                        else //filtradas 
                         {
                             foreach (Actividad i in ViewBag.ListaActvidadesFiltrada)
                             {
+                                var usuariosEliminar2 = new List<UsuarioInscriptoActividad>();
+                                usuariosEliminar2 = i.UsuarioInscriptoActividad.ToList(); //almaceno los usuarios de cada actividad
+
+
+                                var filtradasPuedeEliminar = ViewBag.ListaActvidadesFiltrada;
                                 if (i.Foto != null && i.Foto.Length > 0)
                                 {
                                     ViewBag.Url = i.Foto;
@@ -204,7 +236,7 @@
 
                                 }
                                 <tr>
-                                    <td><a href="/Actividad/FichaActividad/?idActividad=@i.Id&inscribirse=false"><img src="@Url.Content(ViewBag.Url)" style="width: 190px; height: 120px;"> </a></td>
+                                    <td><a href="/Actividad/FichaActividad/?idActividad=@i.Id&inscribirse=false"><img src="@Url.Content(ViewBag.Url)"  style="width: 150px; height: 110px; border-radius: 3px;"> </a></td>
                                     <td>@i.Titulo</td>
                                     <td>
                                         @Convert.ToInt32(@i.CantidadCupo - @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Aprobado" && x.ActividadId == i.Id).Count()) / @i.CantidadCupo
@@ -226,9 +258,39 @@
                                             </span>
                                         </a>
                                     </td>
+                                    <td style="text-align: center;">
+                                        <a href="/Actividad/ListaEstado?estadoId=3&actividadId=@i.Id">
+                                            <span class="label gradient-1 rounded" style="font-size: 15px !important; background-image: linear-gradient(230deg, #96c6ce, #4ba7bc);">
+                                                @i.UsuarioInscriptoActividad.Where(x => x.Estado.Descripcion == "Cancelado" && x.ActividadId == i.Id).Count()
+                                            </span>
+                                        </a>
+                                    </td>
 
-                                    <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Editar actividad"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span></td>
-                                    <td><span><a href="/Actividad/EliminaroDarseBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Eliminar actividad"><i class="fa fa-close color-danger"></i></a></span></td>
+                                    @if (usuariosEliminar2.Count != 0)// si tengo usuarios incriptos entra aca
+                                    {
+                                        //busco los usuarios sin estado aprobado, pendiente con pendiente con formulario hecho
+                                        var usuariosOtros2 = usuariosEliminar2.Where(x => x.Estado.Descripcion != "Aprobado" && x.Estado.Descripcion != "Pendiente de aprobación" && x.Estado.Descripcion != "Rehizó el formulario, a la espera de la aprobación").ToList();
+
+                                        //busco los usuarios con estado aprobado, pendiente con pendiente con formulario hecho
+                                        var usuariosNoEliminar2 = usuariosEliminar2.Where(x => x.Estado.Descripcion == "Aprobado" || x.Estado.Descripcion == "Pendiente de aprobación" || x.Estado.Descripcion == "Rehizó el formulario, a la espera de la aprobación").ToList();
+                                        if (usuariosNoEliminar2.Count != 0) // si tengo usuarios que no debo eliminar, bloqueo el boton
+                                        {
+                                            <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="No puede editar una actividad con usuarios" onclick="return false"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span></td>
+                                            <td><span><a href="/Actividad/EliminaroDarseBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="No puede eliminar una actividad con usuarios" onclick="return false"><i class="fa fa-close color-danger"></i></a></span></td>
+                                        }
+                                        if (usuariosOtros2.Count != 0)//si tengo usuarios de estados distinto a eliminar, habilito boton eliminar
+                                        {
+                                            <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Editar actividad"><i class="fa fa-pencil color-muted m-r-5" style="color:blue;"></i> </a></span></td>
+                                            <td><span><a href="/Actividad/EliminaroDarseBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Eliminar actividad"><i class="fa fa-close color-danger" style="color:red;"></i></a></span></td>
+                                        }
+
+                                    }
+                                    else //no tengo usuarios inscriptos, habilito botones
+                                    {
+                                        <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Editar actividad"><i class="fa fa-pencil color-muted m-r-5" style="color:blue;"></i> </a></span></td>
+                                        <td><span><a href="/Actividad/EliminaroDarseBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Eliminar actividad"><i class="fa fa-close color-danger" style="color:red;"></i></a></span></td>
+
+                                    }
 
                                     <td>
                                         @if (i.Estado.Id != 7 && i.FormularioDinamico.Where(x => x.ActividadId == i.Id).FirstOrDefault() == null)

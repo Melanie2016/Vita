@@ -461,7 +461,7 @@ namespace Vita.Servicios
             {
                 var actividadesFiltradasPorFechas = new List<Actividad>();
                 //  List<UsuarioInscriptoActividad> listaActividadDelUsuario = myDbContext.UsuarioInscriptoActividad.Include("Actividad").Where(x => x.UsuarioId.Equals(idUsuario)).ToList();
-                var fechasFiltradas = myDbContext.FechaActividad.Include("Actividad").Where(x => x.InicioEvento <= fechaDesde && x.FinEvento >= fechaHasta).ToList();
+                var fechasFiltradas = myDbContext.FechaActividad.Include("Actividad").Where(x => x.InicioEvento >= fechaDesde && x.InicioEvento <= fechaHasta && x.FinEvento >= fechaDesde && x.FinEvento <= fechaHasta).ToList();
                 foreach (var i in fechasFiltradas)
                 {
                     var actividad = myDbContext.Actividad.Where(x => x.Id == i.ActividadId && x.UsuarioId == idUsuario).FirstOrDefault();
