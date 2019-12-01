@@ -859,18 +859,20 @@ namespace Vita.Controllers
             {
                 buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
                 var actividad = actividadServicio.GetActividad(actividadId);
-                ViewBag.UsuarioRespuestaId = buscarUsuarioLogueado.Id;
+                ViewBag.Formulario = actividadServicio.GetFormularioDinamicoByActividadId(actividadId);
 
-                foreach (var item in actividad.FormularioDinamico)
-                {
-                    if (item.ActividadId == actividadId)
-                    {
-                        ViewBag.Campos = item.Campos; //consignas
-                        ViewBag.IdFormularioDinamico = item.Id; //id formulario dinamico
-                        ViewBag.NombreFormulario = item.Titulo; //titulo
-                        ViewBag.DescripcionFormulario = item.Descripcion; //descripcion
-                    }
-                }
+                //ViewBag.UsuarioRespuestaId = buscarUsuarioLogueado.Id;
+
+                //foreach (var item in actividad.FormularioDinamico)
+                //{
+                //    if (item.ActividadId == actividadId)
+                //    {
+                //        ViewBag.Campos = item.Campos; //consignas
+                //        ViewBag.IdFormularioDinamico = item.Id; //id formulario dinamico
+                //        ViewBag.NombreFormulario = item.Titulo; //titulo
+                //        ViewBag.DescripcionFormulario = item.Descripcion; //descripcion
+                //    }
+                //}
 
                 return View(buscarUsuarioLogueado);
             }

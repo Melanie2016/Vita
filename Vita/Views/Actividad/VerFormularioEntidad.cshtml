@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutPerfilEntidad.cshtml";
 }
 
-    <section class="container-fluid">
+    @*<section class="container-fluid">
         <div class="card">
             <div class="card-body">
                 <div class="media media-reply">
@@ -60,5 +60,196 @@
 
             </div>
         </div>
-    </section>
+    </section>*@
 
+
+
+    <body>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="card" style="font-family: Roboto, sans-serif;">
+                        <div class="card-body">
+                            
+                            <div class="alert alert-info" role="alert">
+                                Este es el formulario que presentará a los usuarios interesados en esta Actividad. Recuerde que los datos son importantes, úselos responsablemente.
+                            </div>
+                            <h3>Formulario de la Actividad @ViewBag.Formulario.Actividad.Titulo</h3>
+                            <br />
+
+                            <h4 style="font-size: 15px; color: #04335f;">@ViewBag.Formulario.Descripcion</h4>
+
+                            <br /><br />
+                            <div class="form-validation" style="font-size: 14px;">
+                                @using (Html.BeginForm("GuardarFormularioUsuario", "Actividad", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    <div id="ContenedorEmpleados"></div>
+                                    {
+                                        var index = -1;
+                                        foreach (var cam in ViewBag.Formulario.Campos)
+                                        {
+                                            index++;
+                                            <input name="CamposVm[@index].ActividadId" value="@ViewBag.Formulario.Actividad.Id" hidden />
+                                            <input name="CamposVm[@index].FormularioDinamicoId" value="@ViewBag.Formulario.Id" hidden />
+                                            if (cam.TipoDatoCampoId == 1)
+                                            {
+
+                                                <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label">
+                                                        @cam.Nombre  @if (cam.Obligatorio)
+                                                        {<span class="text-danger">*</span>}
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        @if (cam.Obligatorio) //agrego validación que sea obligatorio
+                                                        {
+                                                            <input class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaTextoCorto" maxlength="50" required />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaTextoCorto" maxlength="50" />
+                                                        }
+
+                                                    </div>
+                                                </div>
+                                            }
+
+                                            if (cam.TipoDatoCampoId == 2)
+                                            {
+
+                                                <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label">
+                                                        @cam.Nombre  @if (cam.Obligatorio)
+                                                        {<span class="text-danger">*</span>}
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        @if (cam.Obligatorio) //agrego validación que sea obligatorio
+                                                        {
+                                                            <textarea class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaTextoLargo" rows="5" required></textarea>
+                                                        }
+                                                        else
+                                                        {
+                                                            <textarea class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaTextoLargo" rows="5"></textarea>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            }
+
+                                            if (cam.TipoDatoCampoId == 3)
+                                            {
+                                                <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label">
+                                                        @cam.Nombre  @if (cam.Obligatorio)
+                                                        {<span class="text-danger">*</span>}
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        @if (cam.Obligatorio)
+                                                        {
+                                                            <input type="number" class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaNumero" required />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="number" class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaNumero" />
+                                                        }
+                                                    </div>
+                                                </div>
+                                            }
+                                            if (cam.TipoDatoCampoId == 4)
+                                            {
+                                                <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label">
+                                                        @cam.Nombre  @if (cam.Obligatorio)
+                                                        {<span class="text-danger">*</span>}
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <div class="input-group date" style="width:200px;">
+                                                            @if (cam.Obligatorio)
+                                                            {
+                                                                <input type="text" class="form-control" placeholder="02/12/2019" name="CamposVm[@index].RespuestaDate" data-provide="datepicker" data-date-format="dd/mm/yyyy" required>
+                                                            }
+                                                            else
+                                                            {
+                                                                <input type="text" class="form-control" placeholder="02/12/2019" name="CamposVm[@index].RespuestaDate" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+                                                            }
+                                                            <div class="input-group-addon">
+                                                                <span class="glyphicon glyphicon-th"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            if (cam.TipoDatoCampoId == 5)
+                                            {
+                                                <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
+                                                <div class="form-group row">
+                                                    <!--Foto-->
+                                                    <label class="col-lg-4 col-form-label" for="Foto">
+                                                        @cam.Nombre  @if (cam.Obligatorio)
+                                                        {<span class="text-danger">*</span>}
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        @if (cam.Obligatorio)
+                                                        {
+                                                            <input class="file-upload" type="file" id="Foto" name="CamposVm[@index].Foto" required onclick="return false" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input class="file-upload" type="file" id="Foto" name="CamposVm[@index].Foto" onclick="return false" />
+                                                        }
+                                                    </div>
+                                                </div>
+
+                                            }
+                                        }
+
+
+
+                                    }
+
+                                    <div class="form-group row" id="botonEnviar">
+                                        <div class="col-lg-8 ml-auto">
+                                            <button type="submit" class="btn btn-primary" style="background:lightgray; color:black" onclick="return false">Guardar respuestas</button>
+                                        </div>
+                                    </div>
+
+                                }
+                                <div>
+                                    <a href="/Actividad/ListaActividades"><button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target="#guardar">Volver</button></a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="~/vendor/jquery/jquery.min.js"></script>
+        <script src="~/Content/js/CrearActividad.js"></script>
+
+        <script src="../../Content/plugins/common/common.min.js"></script>
+        <script src="../../Content/js/custom.min.js"></script>
+        <script src="../../Content/js/settings.js"></script>
+        <script src="../../Content/js/gleek.js"></script>
+        <script src="../../Content/js/styleSwitcher.js"></script>
+
+        <script src="../../Content/plugins/moment/moment.js"></script>
+        <script src="../../Content/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+        <!-- Clock Plugin JavaScript -->
+        <script src="../../Content/plugins/clockpicker/dist/jquery-clockpicker.min.js"></script>
+        <!-- Color Picker Plugin JavaScript -->
+        <script src="../../Content/plugins/jquery-asColorPicker-master/libs/jquery-asColor.js"></script>
+        <script src="../../Content/plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js"></script>
+        <script src="../../Content/plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js"></script>
+        <!-- Date Picker Plugin JavaScript -->
+        <script src="../../Content/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+        <!-- Date range Plugin JavaScript -->
+        <script src="../../Content/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+        <script src="../../Content/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+        <script src="../../Content/js/plugins-init/form-pickers-init.js"></script>
+        <script src="../../Content/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    </body>
