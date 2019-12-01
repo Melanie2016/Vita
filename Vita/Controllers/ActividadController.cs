@@ -795,6 +795,8 @@ namespace Vita.Controllers
                 {
                     if (item.ActividadId == actividadId)
                     {
+                        ViewBag.DatosUsuario = usuarioServicio.GetById(usuarioRespuestaId);
+                        ViewBag.Actividad = item.Actividad;
                         ViewBag.Campos = item.Campos; //consignas
                         ViewBag.IdFormularioDinamico = item.Id; //id formulario dinamico
                         ViewBag.NombreFormulario = item.Titulo; //titulo

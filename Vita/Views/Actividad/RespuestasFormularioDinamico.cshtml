@@ -17,45 +17,52 @@
 
                         <div class="media mt-3">
                             <div class="media-body">
-                                <table id="tablePreview" class="table" style="color:black;">
-
+                                <p>Formulario que pertenece a la actividad @ViewBag.Actividad.Titulo, respuestas dadas por el usuario: @ViewBag.DatosUsuario.Nombre @ViewBag.DatosUsuario.Apellido </p>
                                     @foreach (var item in ViewBag.Campos)
                                     {
                                         if (item.FormularioDinamicoId == ViewBag.IdFormularioDinamico)
                                         {
-                                            <thead style="border-bottom: 2px solid #dee2e6;">
-                                                <tr>
-                                                    <th scope="row">@item.Nombre</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody style="border-bottom: 2px solid #dee2e6;border-bottom: none;">
-                                                <tr>
-                                                    <td>
-                                                        @foreach (var res in item.Respuesta)
+                                            
+                                            <div class="form-group row">
+                                                <label class="col-lg-4 col-form-label">
+                                                    @item.Nombre  @if (item.Obligatorio)
+                                                    {<span class="text-danger">*</span>}
+                                                </label>
+                                                <div class="col-lg-6">
+
+                                                    @foreach (var res in item.Respuesta)
+                                                    {
+                                                        if (res.UsuarioId == ViewBag.UsuarioRespuestaId)
                                                         {
-                                                            if (res.UsuarioId == ViewBag.UsuarioRespuestaId)
+                                                            ViewBag.Respuesta = res.Respuesta1.ToString();
+
+
+                                                            if (res.Campos.TipoDatoCampoId == 5)
                                                             {
-                                                                ViewBag.Respuesta = res.Respuesta1.ToString();
-                                                                if (res.Campos.TipoDatoCampoId == 5)
+                                                                if (ViewBag.Respuesta != "0")
                                                                 {
-                                                                    if (ViewBag.Respuesta != "0")
-                                                                    {
-                                                                        <img src="@Url.Content(ViewBag.Respuesta)" style="width: 40%;" />
-                                                                    }
-                                                                }
-                                                                else
-                                                                {
-                                                                    @ViewBag.Respuesta
+                                                                    <img src="@Url.Content(ViewBag.Respuesta)" style="width: 40%;" />
                                                                 }
                                                             }
+                                                            else
+                                                            {
+                                                                <input class="form-control" id="val-suggestions" value=@ViewBag.Respuesta maxlength="50" disabled />
 
+                                                            }
                                                         }
-                                                    </td>
-                                                </tr>
-                                            </tbody>
+
+                                                    }
+
+
+                                                </div>
+                                            </div>
+
+
+
+                                           
                                         }
                                     }
-                                </table>
+                                
                             </div>
                         </div>
                     }
@@ -67,5 +74,6 @@
             </div>
 
         </div>
-    </div>              
+    </div>
 </section>
+
