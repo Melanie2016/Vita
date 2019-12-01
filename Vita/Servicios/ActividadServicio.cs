@@ -426,58 +426,194 @@ namespace Vita.Servicios
         }
 
 
-        internal List<Actividad> GetActividadesFiltradasPorUsuario(int idUsuario ,int? idCategoria,DateTime? fechaDesde, DateTime? fechaHasta )
+        public List<Actividad> GetActividadesFiltradasPorUsuario( string titulo, int idUsuario ,int? idCategoria, int? idEstado, DateTime? fechaDesde)
         {
-            List<Actividad> listaResultadoDeMentis = null;
-            if(idCategoria != null) // si filtra por categoria
-            {
-               
-                if (fechaDesde != null && fechaHasta != null) // si filtra por categoria y fechas 
-                {
-                    var actividadesFiltradasPorFechas = new List<Actividad>();
-                    //  List<UsuarioInscriptoActividad> listaActividadDelUsuario = myDbContext.UsuarioInscriptoActividad.Include("Actividad").Where(x => x.UsuarioId.Equals(idUsuario)).ToList();
-                    var fechasFiltradas = myDbContext.FechaActividad.Include("Actividad").Where(x => x.InicioEvento <= fechaDesde && x.FinEvento >= fechaHasta).ToList();
-                    foreach (var i in fechasFiltradas)
-                    {
-                        var actividad = myDbContext.Actividad.Where(x => x.Id == i.ActividadId && x.UsuarioId == idUsuario && x.CategoriaId == idCategoria).FirstOrDefault();
 
-                        if (actividad != null)
+            var actividadesFiltradas = new List<Actividad>();
+
+            var listaResultadoDeMentis = new List<Actividad>();
+            
+
+            if(titulo != "" && titulo != null) 
+            {
+                if (idCategoria != null) 
+                {
+                    if(idEstado != null) 
+                    {
+                        if (fechaDesde != null) // si filtra por categoria, titulo, estado , fechas 
                         {
-                            actividadesFiltradasPorFechas.Add(actividad);
+                            
+                                //  List<UsuarioInscriptoActividad> listaActividadDelUsuario = myDbContext.UsuarioInscriptoActividad.Include("Actividad").Where(x => x.UsuarioId.Equals(idUsuario)).ToList();
+                            var fechasFiltradas = myDbContext.FechaActividad.Include("Actividad").Where(x => x.InicioEvento >= fechaDesde && x.Actividad.UsuarioId == idUsuario).ToList();
+                            foreach (var i in fechasFiltradas)
+                            {
+                                
+                                var actividad = myDbContext.Actividad.Where(x => x.Id == i.ActividadId && x.CategoriaId == idCategoria && i.Actividad.Titulo.Contains(titulo) && i.Actividad.EstadoId == idEstado).FirstOrDefault();
+
+                                if (actividad != null)
+                                {
+                                    actividadesFiltradas.Add(actividad);
+                                }
+                            }
+
+                            return actividadesFiltradas;
+                        }
+                        else // por categoria, titulo y estado
+                        {
+                                var actvidiadesFiltradasPorCategoria = myDbContext.Actividad.Where(x => x.CategoriaId == idCategoria && x.UsuarioId == idUsuario && x.Titulo.Contains(titulo) && x.EstadoId == idEstado).ToList();
+                                return actvidiadesFiltradasPorCategoria;
                         }
                     }
-
-                    return actividadesFiltradasPorFechas;
-                }
-                else // si solo filtro por categoria 
-                {
-                    var actvidiadesFiltradasPorCategoria = myDbContext.Actividad.Where(x => x.CategoriaId == idCategoria && x.UsuarioId == idUsuario).ToList();
-                    return actvidiadesFiltradasPorCategoria;
-                }
-                
-            }
-
-            if(fechaDesde != null && fechaHasta != null) // si solo filtro por fechas
-            {
-                var actividadesFiltradasPorFechas = new List<Actividad>();
-                //  List<UsuarioInscriptoActividad> listaActividadDelUsuario = myDbContext.UsuarioInscriptoActividad.Include("Actividad").Where(x => x.UsuarioId.Equals(idUsuario)).ToList();
-                var fechasFiltradas = myDbContext.FechaActividad.Include("Actividad").Where(x => x.InicioEvento >= fechaDesde && x.InicioEvento <= fechaHasta && x.FinEvento >= fechaDesde && x.FinEvento <= fechaHasta).ToList();
-                foreach (var i in fechasFiltradas)
-                {
-                    var actividad = myDbContext.Actividad.Where(x => x.Id == i.ActividadId && x.UsuarioId == idUsuario).FirstOrDefault();
-
-                    if(actividad != null) {
-                        actividadesFiltradasPorFechas.Add(actividad);
+                    else // si filtro por categoria y titulo 
+                    {
+                        var actvidiadesFiltradasPorCategoria = myDbContext.Actividad.Where(x => x.CategoriaId == idCategoria && x.UsuarioId == idUsuario && x.Titulo.Contains(titulo)).ToList();
+                        return actvidiadesFiltradasPorCategoria;
                     }
-                }
 
-                return actividadesFiltradasPorFechas;
+                }
+                else // SOLO POR TITULO
+                {
+                    var actvidiadesFiltradasPorCategoria = myDbContext.Actividad.Where(x => x.Titulo.Contains(titulo) && x.UsuarioId == idUsuario).ToList();
+                    return actvidiadesFiltradasPorCategoria;
+                      
+                }
             }
             else
             {
-                return listaResultadoDeMentis;
+                if (idCategoria != null)
+                {
+
+                    if (fechaDesde != null)
+                    {
+
+                        if (idEstado != null) // si filtra por categoria, fechas y estado
+                        {
+
+                            //  List<UsuarioInscriptoActividad> listaActividadDelUsuario = myDbContext.UsuarioInscriptoActividad.Include("Actividad").Where(x => x.UsuarioId.Equals(idUsuario)).ToList();
+                            var fechasFiltradas = myDbContext.FechaActividad.Include("Actividad").Where(x => x.InicioEvento >= fechaDesde && x.Actividad.UsuarioId == idUsuario).ToList();
+                            foreach (var i in fechasFiltradas)
+                            {
+                                var actividad = myDbContext.Actividad.Where(x => x.Id == i.ActividadId && x.CategoriaId == idCategoria && x.EstadoId == idEstado).FirstOrDefault();
+
+                                if (actividad != null)
+                                {
+                                    actividadesFiltradas.Add(actividad);
+                                }
+                            }
+
+                            return actividadesFiltradas;
+                        }
+                        else // si filtra por categoria y fechas
+                        {
+
+                            //  List<UsuarioInscriptoActividad> listaActividadDelUsuario = myDbContext.UsuarioInscriptoActividad.Include("Actividad").Where(x => x.UsuarioId.Equals(idUsuario)).ToList();
+                            var fechasFiltradas = myDbContext.FechaActividad.Include("Actividad").Where(x => x.InicioEvento >= fechaDesde && x.Actividad.UsuarioId == idUsuario).ToList();
+                            foreach (var i in fechasFiltradas)
+                            {
+                                var actividad = myDbContext.Actividad.Where(x => x.Id == i.ActividadId && x.CategoriaId == idCategoria).FirstOrDefault();
+
+                                if (actividad != null)
+                                {
+                                    actividadesFiltradas.Add(actividad);
+                                }
+                            }
+
+                            return actividadesFiltradas;
+                        }
+
+                    }
+                    else // si solo filtro por categoria y estado 
+                    {
+                        if (idEstado != null)
+                        {
+                            var actvidiadesFiltradasPorCategoria = myDbContext.Actividad.Where(x => x.CategoriaId == idCategoria && x.UsuarioId == idUsuario && x.EstadoId == idEstado).ToList();
+                            return actvidiadesFiltradasPorCategoria;
+                        }
+                        else //SOLO POR CATEGORIA 
+                        {
+                            var actvidiadesFiltradasPorCategoria = myDbContext.Actividad.Where(x => x.CategoriaId == idCategoria && x.UsuarioId == idUsuario).ToList();
+                            return actvidiadesFiltradasPorCategoria;
+                        }
+                    }
+
+                }
+                else
+                {
+                    if (fechaDesde != null) // si solo filtro por fechas
+                    {
+                        if (idEstado != null)// si solo filtro por fechas y estados
+                        {
+
+                            //  List<UsuarioInscriptoActividad> listaActividadDelUsuario = myDbContext.UsuarioInscriptoActividad.Include("Actividad").Where(x => x.UsuarioId.Equals(idUsuario)).ToList();
+                            var fechasFiltradas = myDbContext.FechaActividad.Include("Actividad").Where(x => x.InicioEvento >= fechaDesde && x.Actividad.UsuarioId == idUsuario).ToList();
+
+                            foreach (var i in fechasFiltradas)
+                            {
+                                var actividad = myDbContext.Actividad.Where(x => x.Id == i.ActividadId && x.EstadoId == idEstado).FirstOrDefault();
+
+                                if (actividad != null)
+                                {
+                                    actividadesFiltradas.Add(actividad);
+                                }
+                            }
+
+                            return actividadesFiltradas;
+                        }
+                        else // SOLO POR FECHA
+                        {
+
+                            //  List<UsuarioInscriptoActividad> listaActividadDelUsuario = myDbContext.UsuarioInscriptoActividad.Include("Actividad").Where(x => x.UsuarioId.Equals(idUsuario)).ToList();
+                            var fechasFiltradas = myDbContext.FechaActividad.Include("Actividad").Where(x => x.InicioEvento >= fechaDesde && x.Actividad.UsuarioId == idUsuario).ToList();
+                            foreach (var i in fechasFiltradas)
+                            {
+                                var actividad = myDbContext.Actividad.Where(x => x.Id == i.ActividadId).FirstOrDefault();
+
+                                if (actividad != null)
+                                {
+                                    actividadesFiltradas.Add(actividad);
+                                }
+                            }
+
+                            return actividadesFiltradas;
+                        }
+                    }
+                    else
+                    {
+
+                        if (idEstado != null)
+                        {
+                            if (titulo != null)
+                            {
+
+                                var actividad = myDbContext.Actividad.Where(x => x.Titulo.Contains(titulo) && x.EstadoId == idEstado).FirstOrDefault();
+
+                                if (actividad != null)
+                                {
+                                    actividadesFiltradas.Add(actividad);
+                                }
+                                return actividadesFiltradas;
+                            }
+                            else
+                            {
+                                var actividad = myDbContext.Actividad.Where(x => x.EstadoId == idEstado).FirstOrDefault();
+
+                                if (actividad != null)
+                                {
+                                    actividadesFiltradas.Add(actividad);
+                                }
+                                return actividadesFiltradas;
+                            }
+
+                        }
+                        else
+                        {
+                            return listaResultadoDeMentis;
+                        }
+                    }
+                }
             }
-            
+           
+
         }
 
         public List<Actividad> GetBusquedaAvanzada(string textoIngresado, int? categoriaId, int? subCategoriaId, int? segmentoId, int? provinciaId, int? departamentoId, int? localidadId, string precio)
@@ -810,6 +946,34 @@ namespace Vita.Servicios
             var estado = myDbContext.Estado.Where(x => x.Id == estadoId).FirstOrDefault();
             return estado;
         }
+        public List<Estado> GetEstadosActividad()
+        {
+            var searchIds = new List<int> { ConstantesUtil.ESTADO_ACTIVIDAD_FINALIZADA, ConstantesUtil.ESTADO_ACTIVIDAD_CREADA, ConstantesUtil.ESTADO_ACTIVIDAD_PUBLICADA };
+            var estados = (from e in myDbContext.Estado
+                           where searchIds.Contains(e.Id)
+                           select e).Distinct().ToList();
+            foreach (var e in estados)
+            {
+                if (e.Id == ConstantesUtil.ESTADO_ACTIVIDAD_FINALIZADA)
+                {
+                    e.Descripcion = "Actividades vencidas";
+                }
+                else
+                {
+                    if (e.Id == ConstantesUtil.ESTADO_ACTIVIDAD_CREADA)
+                    {
+                        e.Descripcion = "Pendientes de publicación";
+                    }
+                    else
+                    {
+                        e.Descripcion = "Actividades publicadas";
+                    }
+                }
+               
+            }
+                return estados;
+        }
+
         public List<Actividad> GetAllActividadByestadoIdAndActividadId(int estadoId, int actividadId)
         {
             var listaActividad = new List<Actividad>();
@@ -925,7 +1089,7 @@ namespace Vita.Servicios
         {
             var actividadBD = myDbContext.Actividad.Where(x => x.Id == idActividad).FirstOrDefault();
 
-            actividadBD.EstadoId = ConstantesUtil.ESTADO_PUBLICADA;
+            actividadBD.EstadoId = ConstantesUtil.ESTADO_ACTIVIDAD_PUBLICADA;
             myDbContext.SaveChanges();
         }
         public List<Respuesta> GetRespuestasByUsuarioIdandActividadId(int usuarioId, int actividadId)
