@@ -745,6 +745,26 @@ namespace Vita.Controllers
                 return View(buscarUsuarioLogueado);
             }
         }
+
+        [HttpGet]
+        public ActionResult ModificarFormularioDinamicoEntidad(int actividadId)
+        {
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                var user = new Usuario();
+                return View(user);
+            }
+            else
+            {
+                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                ViewBag.Formulario = actividadServicio.GetFormularioDinamicoByActividadId(actividadId);
+              //  var respuestas = actividadServicio.GetRespuestasByUsuarioIdandActividadId(buscarUsuarioLogueado.Id, actividadId);
+             //   ViewBag.FormularioAModificar = respuestas;
+
+                return View(buscarUsuarioLogueado);
+            }
+        }
+
         [HttpGet]
         public ActionResult RespuestasFormularioDinamico(int actividadId, int usuarioRespuestaId)
         {
