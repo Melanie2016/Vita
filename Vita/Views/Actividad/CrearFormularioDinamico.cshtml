@@ -19,6 +19,40 @@
     <!-- Daterange picker plugins css -->
     <link href="../../Content/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
     <link href="../../Content/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <style>
+        .botonF1{
+            width:60px;
+            height:60px;
+            position: fixed;
+            right:70px;
+            bottom:190px;
+            border-radius:50%;
+            line-height:60px;
+            z-index:999;
+            border-radius:100%;
+            background:#7D4BBC;
+            border:none;
+            outline:none;
+            color:#FFF;
+            font-size:36px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+            transition:.3s;  
+            text-align: center;
+            cursor:pointer;
+            display:block;
+      
+       
+        }
+        span{
+          transition:.5s;  
+        }
+        .botonF1:hover span{
+          transform:rotate(360deg);
+        }
+        .botonF1:active{
+          transform:scale(1.1);
+        }
+    </style> 
 </head>
 
 <body>
@@ -50,8 +84,8 @@
                                     </div>
                                 </div>
 
-                                <p><a class="btn mb-1 btn-success" id="btnAgregarEmpleado" style="color: white;">Nueva consigna</a></p>
-                                <hr /><br />
+                                <p><a class="botonF1" id="btnAgregarEmpleado" style="color: white;"><span data-toggle="tooltip" data-placement="top" title="Agregar consigna">+</span></a></p>
+                                <br /><br><br><hr />
                                 <!--Acordeon-->
                                 <div id="accordion-three" class="accordion">
 
