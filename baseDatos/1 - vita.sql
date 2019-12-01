@@ -2,6 +2,10 @@ Create Database Vita
 GO
 USE Vita
 GO
+
+
+ 
+
 create table DiaSemana(
 Id int identity(0,1) primary key,
 Descripcion varchar(30)); 
@@ -290,4 +294,30 @@ REFERENCES Usuario (Id));
 
 
 
+
+create table MotivoRechazoFormDinamico(
+Id int identity(1,1) primary key,
+EntidadId int,
+UsuarioId int,
+FormularioDinamicoId int,
+ActividadId int,
+CreatedAt Date null,
+UpdatedAt Date null, 
+DeletedAt Date null, 
+DescripcionMotivo varchar(max),
+CONSTRAINT EntidadIdfkmr FOREIGN KEY(UsuarioId)
+REFERENCES Usuario (Id),
+CONSTRAINT UsuarioIdmtfk FOREIGN KEY(UsuarioId)
+REFERENCES Usuario (Id),
+CONSTRAINT FormularioDinamicoIdmrfk FOREIGN KEY(FormularioDinamicoId)
+REFERENCES FormularioDinamico (Id),
+CONSTRAINT ActividadIdmrfk FOREIGN KEY(ActividadId)
+REFERENCES Actividad (Id));
+
+create table CampoRechazado(
+Id int identity(1,1) primary key,
+CampoRechazadoId int,
+MotivoRechazoFormDinamicoId int,
+CONSTRAINT MotivoRechazoFormDinamicoIdpk FOREIGN KEY(MotivoRechazoFormDinamicoId)
+REFERENCES MotivoRechazoFormDinamico (Id));
 

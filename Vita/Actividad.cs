@@ -20,6 +20,7 @@ namespace Vita
             this.FechaActividad = new HashSet<FechaActividad>();
             this.FormularioDinamico = new HashSet<FormularioDinamico>();
             this.Respuesta = new HashSet<Respuesta>();
+            this.MotivoRechazoFormDinamico = new HashSet<MotivoRechazoFormDinamico>();
             this.ActividadSegmento = new HashSet<ActividadSegmento>();
             this.UsuarioInscriptoActividad = new HashSet<UsuarioInscriptoActividad>();
             this.Domicilio = new HashSet<Domicilio>();
@@ -50,6 +51,8 @@ namespace Vita
         public virtual ICollection<FormularioDinamico> FormularioDinamico { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Respuesta> Respuesta { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MotivoRechazoFormDinamico> MotivoRechazoFormDinamico { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActividadSegmento> ActividadSegmento { get; set; }
         public virtual SubCategoria SubCategoria { get; set; }

@@ -7,71 +7,144 @@
 <section class="container-fluid">
     <div class="card" style="border-radius: .25rem; border: 1px solid rgba(0, 0, 0, 0.125);">
         <div class="card-body">
-            <div class="media media-reply">
-                <div class="media-body">
-                    @if (ViewBag.Campos != null)
-                    {
-                        <div class="d-sm-flex justify-content-between mb-2">
-                            <h5 class="mb-sm-0" style="font-size: 1.25rem;">@ViewBag.NombreFormulario <small class="text-muted ml-3" style="color: #6c757d!important;"> @ViewBag.DescripcionFormulario </small></h5>
-                        </div>
+            <form action="/Actividad/MandarRehacerFormuDinamico" method="post">
 
-                        <div class="media mt-3">
-                            <div class="media-body">
-                                <p>Formulario que pertenece a la actividad @ViewBag.Actividad.Titulo, respuestas dadas por el usuario: @ViewBag.DatosUsuario.Nombre @ViewBag.DatosUsuario.Apellido </p>
-                                    @foreach (var item in ViewBag.Campos)
-                                    {
-                                        if (item.FormularioDinamicoId == ViewBag.IdFormularioDinamico)
-                                        {
-                                            
+                <input type="number" hidden name="ActividadId" value="@ViewBag.Actividad.Id" />
+                <input type="number" hidden name="UsuarioId" value="@ViewBag.DatosUsuario.Id" />
+                <input type="number" hidden name="FormularioDinamicoId" value="@ViewBag.IdFormularioDinamico" />
+                
+
+                <div class="media media-reply">
+                    <div class="media-body">
+                        @if (ViewBag.Campos != null)
+                        {
+                            <div class="d-sm-flex justify-content-between mb-2">
+                                <h5 class="mb-sm-0" style="font-size: 1.25rem;">@ViewBag.NombreFormulario <small class="text-muted ml-3" style="color: #6c757d!important;"> @ViewBag.DescripcionFormulario </small></h5>
+                            </div>
+
+                            <div class="media mt-3">
+                                <div class="media-body">
+
+
+
+                                    <p>Formulario que pertenece a la actividad @ViewBag.Actividad.Titulo, respuestas dadas por el usuario: @ViewBag.DatosUsuario.Nombre @ViewBag.DatosUsuario.Apellido </p>
+                                    <table>
+                                        <tr>
+                                            <th>Marcar las que necesitan re hacerce</th>
+
+                                        </tr>
+                                        @{
+                                           
+                                            var contadorIndex =  -1;
+
+                                            foreach (var item in ViewBag.Campos)
+                                            {
+                                                contadorIndex ++;
+                                                if (item.FormularioDinamicoId == ViewBag.IdFormularioDinamico)
+                                                {
+
+                                                    <tr>
+
+
+                                                        <td>
+                                                            <div class="form-group row">
+                                                                <label class="col-lg-4 col-form-label">
+                                                                    @item.Nombre  @if (item.Obligatorio)
+                                                                    {<span class="text-danger">*</span>}
+                                                                </label>
+                                                                <div class="col-lg-5">
+
+                                                                    @foreach (var res in item.Respuesta)
+                                                                    {
+                                                                        if (res.UsuarioId == ViewBag.UsuarioRespuestaId)
+                                                                        {
+                                                                            ViewBag.Respuesta = res.Respuesta1.ToString();
+
+
+                                                                            if (res.Campos.TipoDatoCampoId == 5)
+                                                                            {
+                                                                                if (ViewBag.Respuesta != "0")
+                                                                                {
+                                                                                    <img src="@Url.Content(ViewBag.Respuesta)" style="width: 40%;" />
+                                                                                }
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <input class="form-control" id="val-suggestions" value=@ViewBag.Respuesta maxlength="50" disabled />
+
+                                                                            }
+                                                                        }
+
+                                                                    }
+
+
+                                                                </div>
+                                                                <div class="col-lg-2">
+                                                                    
+                                                                    <input type="checkbox" value="@item.Id" name="CamposRehacer[@contadorIndex].Id" style="background:#000000" />
+                                                                </div>
+                                                            </div>
+                                                        </td>
+
+
+
+                                                    </tr>
+
+
+                                                }
+                                            }
+                                        }
+                                    </table>
+
+
+                                </div>
+                            </div>
+                        }
+                        <div class="bootstrap-modal">
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="rehacer">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Esta a punto de notificar al usuario que rehaga el formulario</h5>
+                                            <button type="button" class="close" data-dismiss="modal">
+                                                <span>&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Una vez enviado, el usuario tendra que rehacer el formulario para poder estar inscripto</p>
+                                            <p>Ingresar el motivo, por el cual, las conginas que selecciono debera rehacer:</p>
                                             <div class="form-group row">
-                                                <label class="col-lg-4 col-form-label">
-                                                    @item.Nombre  @if (item.Obligatorio)
-                                                    {<span class="text-danger">*</span>}
+                                                <label class="col-lg-4 col-form-label" for="Asunto">
+                                                    Motivo: <span class="text-danger">*</span>
                                                 </label>
                                                 <div class="col-lg-6">
-
-                                                    @foreach (var res in item.Respuesta)
-                                                    {
-                                                        if (res.UsuarioId == ViewBag.UsuarioRespuestaId)
-                                                        {
-                                                            ViewBag.Respuesta = res.Respuesta1.ToString();
-
-
-                                                            if (res.Campos.TipoDatoCampoId == 5)
-                                                            {
-                                                                if (ViewBag.Respuesta != "0")
-                                                                {
-                                                                    <img src="@Url.Content(ViewBag.Respuesta)" style="width: 40%;" />
-                                                                }
-                                                            }
-                                                            else
-                                                            {
-                                                                <input class="form-control" id="val-suggestions" value=@ViewBag.Respuesta maxlength="50" disabled />
-
-                                                            }
-                                                        }
-
-                                                    }
-
-
+                                                    <textarea class="form-control" id="val-suggestions" name="DescripcionMotivo" rows="5" placeholder="El motivo de rehacer el formulario es porque..."></textarea>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            @*<button type="button" class="btn btn-primary">Guardar</button>*@
+                                            <button type="submit" class="btn mb-1 btn-info">Guardar</button>
 
-
-
-                                           
-                                        }
-                                    }
-                                
+                                            @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#publicarLuego" data-dismiss="modal" onclick="crear()">Publicar luego</button>*@
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    }
+                    </div>
                 </div>
-            </div>
 
-            <div>
-                <a href="/Actividad/ListaEstado?estadoId=@ViewBag.Estado&actividadId=@ViewBag.ActividadId"><button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target="#guardar">Volver</button></a>
-            </div>
+                <div>
+                    <a href="/Actividad/ListaEstado?estadoId=@ViewBag.Estado&actividadId=@ViewBag.ActividadId"><button type="button" class="btn mb-1 btn-info">Volver</button></a>
+                </div>
+
+                <div>
+                    <a href="#"><button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target="#rehacer">Mandar a rehacer formulario</button></a>
+                </div>
+            </form>
 
         </div>
     </div>

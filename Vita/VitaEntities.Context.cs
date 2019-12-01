@@ -27,6 +27,7 @@ namespace Vita
     
         public virtual DbSet<Actividad> Actividad { get; set; }
         public virtual DbSet<ActividadSegmento> ActividadSegmento { get; set; }
+        public virtual DbSet<CampoRechazado> CampoRechazado { get; set; }
         public virtual DbSet<Campos> Campos { get; set; }
         public virtual DbSet<Categoria> Categoria { get; set; }
         public virtual DbSet<Departamento> Departamento { get; set; }
@@ -37,6 +38,7 @@ namespace Vita
         public virtual DbSet<FormularioDinamico> FormularioDinamico { get; set; }
         public virtual DbSet<InscripcionFecha> InscripcionFecha { get; set; }
         public virtual DbSet<Localidad> Localidad { get; set; }
+        public virtual DbSet<MotivoRechazoFormDinamico> MotivoRechazoFormDinamico { get; set; }
         public virtual DbSet<Provincia> Provincia { get; set; }
         public virtual DbSet<Respuesta> Respuesta { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }

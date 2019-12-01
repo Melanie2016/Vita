@@ -165,6 +165,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="CampoRechazado.cs">
+      <DependentUpon>VitaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Campos.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
@@ -200,6 +203,9 @@
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Localidad.cs">
+      <DependentUpon>VitaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MotivoRechazoFormDinamico.cs">
       <DependentUpon>VitaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -249,11 +255,13 @@
     </Compile>
     <Compile Include="ViewModels\ActividadFechaViewModel.cs" />
     <Compile Include="ViewModels\ActividadViewModel.cs" />
+    <Compile Include="ViewModels\CampoRehacerViewModel.cs" />
     <Compile Include="ViewModels\CampoViewModel.cs" />
     <Compile Include="ViewModels\FormularioDinamicoViewModel.cs" />
     <Compile Include="ViewModels\FormularioLlenoViewModel.cs" />
     <Compile Include="ViewModels\Gmail.cs" />
     <Compile Include="ViewModels\ListaViewModel.cs" />
+    <Compile Include="ViewModels\RehacerFormuDinamico.cs" />
     <Compile Include="ViewModels\RespuestaViewModel.cs" />
     <Compile Include="ViewModels\UsuarioEstado.cs" />
     <Compile Include="ViewModels\UsuarioModificarViewModel.cs" />
@@ -1031,6 +1039,7 @@
     <Content Include="Views\Actividad\ModificarFormularioDinamicoUsuario.cshtml" />
     <Content Include="Views\Actividad\VerFormularioEntidad.cshtml" />
     <Content Include="Views\Actividad\VerRespuestaFormulario.cshtml" />
+    <Content Include="Views\Actividad\ModificarFormularioDinamicoEntidad.cshtml" />
     <EntityDeploy Include="VitaEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>VitaEntities.Designer.cs</LastGenOutput>
@@ -1038,7 +1047,6 @@
     <Content Include="VitaEntities.edmx.diagram">
       <DependentUpon>VitaEntities.edmx</DependentUpon>
     </Content>
-    <Content Include="Views\Actividad\ModificarFormularioDinamicoEntidad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

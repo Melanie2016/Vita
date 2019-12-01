@@ -20,6 +20,8 @@ namespace Vita
             this.Actividad = new HashSet<Actividad>();
             this.Domicilio = new HashSet<Domicilio>();
             this.FormularioDinamico = new HashSet<FormularioDinamico>();
+            this.MotivoRechazoFormDinamico = new HashSet<MotivoRechazoFormDinamico>();
+            this.MotivoRechazoFormDinamico1 = new HashSet<MotivoRechazoFormDinamico>();
             this.Respuesta = new HashSet<Respuesta>();
             this.UsuarioInscriptoActividad = new HashSet<UsuarioInscriptoActividad>();
             this.UsuarioCategoriaElegida = new HashSet<UsuarioCategoriaElegida>();
@@ -54,6 +56,10 @@ namespace Vita
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FormularioDinamico> FormularioDinamico { get; set; }
         public virtual Localidad Localidad { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MotivoRechazoFormDinamico> MotivoRechazoFormDinamico { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MotivoRechazoFormDinamico> MotivoRechazoFormDinamico1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Respuesta> Respuesta { get; set; }
         public virtual Rol Rol { get; set; }

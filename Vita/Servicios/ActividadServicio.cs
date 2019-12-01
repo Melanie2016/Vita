@@ -1033,7 +1033,36 @@ namespace Vita.Servicios
        
             
         }
+        public void MandarRehacerFormuDinamico(RehacerFormuDinamico form)
+        {
+            MotivoRechazoFormDinamico motivoNuevo = new MotivoRechazoFormDinamico();
+            List<CampoRechazado> campoRechazados = new List<CampoRechazado>();
 
+            motivoNuevo.ActividadId = form.ActividadId;
+            motivoNuevo.CreatedAt = DateTime.UtcNow;
+            motivoNuevo.DescripcionMotivo = form.DescripcionMotivo;
+            motivoNuevo.UsuarioId = form.UsuarioId;
+            motivoNuevo.EntidadId = form.EntidadId;
+            motivoNuevo.FormularioDinamicoId = form.FormularioDinamicoId;
+            myDbContext.MotivoRechazoFormDinamico.Add(motivoNuevo);
+            myDbContext.SaveChanges();
+
+            CampoRechazado campoRechazadosNuevo = new CampoRechazado();
+            foreach(var cam in form.CamposRehacer)
+            {
+                campoRechazadosNuevo.MotivoRechazoFormDinamicoId = motivoNuevo.Id;
+                campoRechazadosNuevo.CampoRechazadoId = cam.Id;                
+                campoRechazados.Add(campoRechazadosNuevo);
+
+
+            }
+            this.CambiarEstadoUsuarioInscriptoGeneral(8, motivoNuevo.UsuarioId.Value, motivoNuevo.ActividadId.Value);
+           
+            myDbContext.CampoRechazado.AddRange(campoRechazados);
+            myDbContext.SaveChanges();
+
+
+        }
         /*Lista de actividades por entidad*/
 
         /*Eliminadas*/

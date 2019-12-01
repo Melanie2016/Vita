@@ -39,6 +39,14 @@
           <Property Name="UpdatedAt" Type="date" />
           <Property Name="DeletedAt" Type="date" />
         </EntityType>
+        <EntityType Name="CampoRechazado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CampoRechazadoId" Type="int" />
+          <Property Name="MotivoRechazoFormDinamicoId" Type="int" />
+        </EntityType>
         <EntityType Name="Campos">
           <Key>
             <PropertyRef Name="Id" />
@@ -145,6 +153,20 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" />
           <Property Name="DepartamentoId" Type="int" />
+        </EntityType>
+        <EntityType Name="MotivoRechazoFormDinamico">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntidadId" Type="int" />
+          <Property Name="UsuarioId" Type="int" />
+          <Property Name="FormularioDinamicoId" Type="int" />
+          <Property Name="ActividadId" Type="int" />
+          <Property Name="CreatedAt" Type="date" />
+          <Property Name="UpdatedAt" Type="date" />
+          <Property Name="DeletedAt" Type="date" />
+          <Property Name="DescripcionMotivo" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
@@ -308,6 +330,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="ActividadIdmrfk">
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="0..1" />
+          <End Role="MotivoRechazoFormDinamico" Type="Self.MotivoRechazoFormDinamico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actividad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MotivoRechazoFormDinamico">
+              <PropertyRef Name="ActividadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="ActividadSegmentoId">
           <End Role="Actividad" Type="Self.Actividad" Multiplicity="1" />
           <End Role="ActividadSegmento" Type="Self.ActividadSegmento" Multiplicity="*" />
@@ -452,6 +486,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="EntidadIdfkmr">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="MotivoRechazoFormDinamico" Type="Self.MotivoRechazoFormDinamico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MotivoRechazoFormDinamico">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="EstadoIdFkActividad">
           <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
           <End Role="Actividad" Type="Self.Actividad" Multiplicity="*" />
@@ -485,6 +531,18 @@
             </Principal>
             <Dependent Role="InscripcionFecha">
               <PropertyRef Name="FechaActividadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FormularioDinamicoIdmrfk">
+          <End Role="FormularioDinamico" Type="Self.FormularioDinamico" Multiplicity="0..1" />
+          <End Role="MotivoRechazoFormDinamico" Type="Self.MotivoRechazoFormDinamico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormularioDinamico">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MotivoRechazoFormDinamico">
+              <PropertyRef Name="FormularioDinamicoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -545,6 +603,18 @@
             </Principal>
             <Dependent Role="Usuario">
               <PropertyRef Name="LocalidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MotivoRechazoFormDinamicoIdpk">
+          <End Role="MotivoRechazoFormDinamico" Type="Self.MotivoRechazoFormDinamico" Multiplicity="0..1" />
+          <End Role="CampoRechazado" Type="Self.CampoRechazado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MotivoRechazoFormDinamico">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CampoRechazado">
+              <PropertyRef Name="MotivoRechazoFormDinamicoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -680,6 +750,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="UsuarioIdmtfk">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="MotivoRechazoFormDinamico" Type="Self.MotivoRechazoFormDinamico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MotivoRechazoFormDinamico">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="UsuarioInscriptoActividadIdFk">
           <End Role="UsuarioInscriptoActividad" Type="Self.UsuarioInscriptoActividad" Multiplicity="0..1" />
           <End Role="InscripcionFecha" Type="Self.InscripcionFecha" Multiplicity="*" />
@@ -719,6 +801,7 @@
         <EntityContainer Name="VitaModelStoreContainer">
           <EntitySet Name="Actividad" EntityType="Self.Actividad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActividadSegmento" EntityType="Self.ActividadSegmento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CampoRechazado" EntityType="Self.CampoRechazado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Campos" EntityType="Self.Campos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
@@ -729,6 +812,7 @@
           <EntitySet Name="FormularioDinamico" EntityType="Self.FormularioDinamico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InscripcionFecha" EntityType="Self.InscripcionFecha" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MotivoRechazoFormDinamico" EntityType="Self.MotivoRechazoFormDinamico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Respuesta" EntityType="Self.Respuesta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
@@ -752,6 +836,10 @@
           <AssociationSet Name="ActividadIdFkR" Association="Self.ActividadIdFkR">
             <End Role="Actividad" EntitySet="Actividad" />
             <End Role="Respuesta" EntitySet="Respuesta" />
+          </AssociationSet>
+          <AssociationSet Name="ActividadIdmrfk" Association="Self.ActividadIdmrfk">
+            <End Role="Actividad" EntitySet="Actividad" />
+            <End Role="MotivoRechazoFormDinamico" EntitySet="MotivoRechazoFormDinamico" />
           </AssociationSet>
           <AssociationSet Name="ActividadSegmentoId" Association="Self.ActividadSegmentoId">
             <End Role="Actividad" EntitySet="Actividad" />
@@ -801,6 +889,10 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="FormularioDinamico" EntitySet="FormularioDinamico" />
           </AssociationSet>
+          <AssociationSet Name="EntidadIdfkmr" Association="Self.EntidadIdfkmr">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="MotivoRechazoFormDinamico" EntitySet="MotivoRechazoFormDinamico" />
+          </AssociationSet>
           <AssociationSet Name="EstadoIdFkActividad" Association="Self.EstadoIdFkActividad">
             <End Role="Estado" EntitySet="Estado" />
             <End Role="Actividad" EntitySet="Actividad" />
@@ -812,6 +904,10 @@
           <AssociationSet Name="FechaActividadIdFk" Association="Self.FechaActividadIdFk">
             <End Role="FechaActividad" EntitySet="FechaActividad" />
             <End Role="InscripcionFecha" EntitySet="InscripcionFecha" />
+          </AssociationSet>
+          <AssociationSet Name="FormularioDinamicoIdmrfk" Association="Self.FormularioDinamicoIdmrfk">
+            <End Role="FormularioDinamico" EntitySet="FormularioDinamico" />
+            <End Role="MotivoRechazoFormDinamico" EntitySet="MotivoRechazoFormDinamico" />
           </AssociationSet>
           <AssociationSet Name="FormularioDinamicoIdpk" Association="Self.FormularioDinamicoIdpk">
             <End Role="FormularioDinamico" EntitySet="FormularioDinamico" />
@@ -832,6 +928,10 @@
           <AssociationSet Name="localidadUsuarioId" Association="Self.localidadUsuarioId">
             <End Role="Localidad" EntitySet="Localidad" />
             <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="MotivoRechazoFormDinamicoIdpk" Association="Self.MotivoRechazoFormDinamicoIdpk">
+            <End Role="MotivoRechazoFormDinamico" EntitySet="MotivoRechazoFormDinamico" />
+            <End Role="CampoRechazado" EntitySet="CampoRechazado" />
           </AssociationSet>
           <AssociationSet Name="ProvinciaDepartamentoId" Association="Self.ProvinciaDepartamentoId">
             <End Role="Provincia" EntitySet="Provincia" />
@@ -877,6 +977,10 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Respuesta" EntitySet="Respuesta" />
           </AssociationSet>
+          <AssociationSet Name="UsuarioIdmtfk" Association="Self.UsuarioIdmtfk">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="MotivoRechazoFormDinamico" EntitySet="MotivoRechazoFormDinamico" />
+          </AssociationSet>
           <AssociationSet Name="UsuarioInscriptoActividadIdFk" Association="Self.UsuarioInscriptoActividadIdFk">
             <End Role="UsuarioInscriptoActividad" EntitySet="UsuarioInscriptoActividad" />
             <End Role="InscripcionFecha" EntitySet="InscripcionFecha" />
@@ -920,6 +1024,7 @@
           <NavigationProperty Name="FechaActividad" Relationship="Self.ActividadFechasId" FromRole="Actividad" ToRole="FechaActividad" />
           <NavigationProperty Name="FormularioDinamico" Relationship="Self.ActividadFormularioId" FromRole="Actividad" ToRole="FormularioDinamico" />
           <NavigationProperty Name="Respuesta" Relationship="Self.ActividadIdFkR" FromRole="Actividad" ToRole="Respuesta" />
+          <NavigationProperty Name="MotivoRechazoFormDinamico" Relationship="Self.ActividadIdmrfk" FromRole="Actividad" ToRole="MotivoRechazoFormDinamico" />
           <NavigationProperty Name="ActividadSegmento" Relationship="Self.ActividadSegmentoId" FromRole="Actividad" ToRole="ActividadSegmento" />
           <NavigationProperty Name="SubCategoria" Relationship="Self.ActividadSubcategoriaId" FromRole="Actividad" ToRole="SubCategoria" />
           <NavigationProperty Name="Usuario" Relationship="Self.ActividadUsuarioId" FromRole="Actividad" ToRole="Usuario" />
@@ -941,6 +1046,15 @@
           <Property Name="DeletedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Actividad" Relationship="Self.ActividadSegmentoId" FromRole="ActividadSegmento" ToRole="Actividad" />
           <NavigationProperty Name="Segmento" Relationship="Self.SegmentoActividadId" FromRole="ActividadSegmento" ToRole="Segmento" />
+        </EntityType>
+        <EntityType Name="CampoRechazado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CampoRechazadoId" Type="Int32" />
+          <Property Name="MotivoRechazoFormDinamicoId" Type="Int32" />
+          <NavigationProperty Name="MotivoRechazoFormDinamico" Relationship="Self.MotivoRechazoFormDinamicoIdpk" FromRole="CampoRechazado" ToRole="MotivoRechazoFormDinamico" />
         </EntityType>
         <EntityType Name="Campos">
           <Key>
@@ -1050,6 +1164,7 @@
           <NavigationProperty Name="Actividad" Relationship="Self.ActividadFormularioId" FromRole="FormularioDinamico" ToRole="Actividad" />
           <NavigationProperty Name="Campos" Relationship="Self.FormularioDinamicoIdpk" FromRole="FormularioDinamico" ToRole="Campos" />
           <NavigationProperty Name="Usuario" Relationship="Self.EntidadFormularioId" FromRole="FormularioDinamico" ToRole="Usuario" />
+          <NavigationProperty Name="MotivoRechazoFormDinamico" Relationship="Self.FormularioDinamicoIdmrfk" FromRole="FormularioDinamico" ToRole="MotivoRechazoFormDinamico" />
           <NavigationProperty Name="Respuesta" Relationship="Self.FormularioDinamicoIdRFK" FromRole="FormularioDinamico" ToRole="Respuesta" />
         </EntityType>
         <EntityType Name="InscripcionFecha">
@@ -1076,6 +1191,25 @@
           <NavigationProperty Name="Departamento" Relationship="Self.LocalidadDepartamentoId" FromRole="Localidad" ToRole="Departamento" />
           <NavigationProperty Name="Domicilio" Relationship="Self.DomicilioLocalidadId" FromRole="Localidad" ToRole="Domicilio" />
           <NavigationProperty Name="Usuario" Relationship="Self.localidadUsuarioId" FromRole="Localidad" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="MotivoRechazoFormDinamico">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntidadId" Type="Int32" />
+          <Property Name="UsuarioId" Type="Int32" />
+          <Property Name="FormularioDinamicoId" Type="Int32" />
+          <Property Name="ActividadId" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="0" />
+          <Property Name="DescripcionMotivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Actividad" Relationship="Self.ActividadIdmrfk" FromRole="MotivoRechazoFormDinamico" ToRole="Actividad" />
+          <NavigationProperty Name="CampoRechazado" Relationship="Self.MotivoRechazoFormDinamicoIdpk" FromRole="MotivoRechazoFormDinamico" ToRole="CampoRechazado" />
+          <NavigationProperty Name="FormularioDinamico" Relationship="Self.FormularioDinamicoIdmrfk" FromRole="MotivoRechazoFormDinamico" ToRole="FormularioDinamico" />
+          <NavigationProperty Name="Usuario" Relationship="Self.EntidadIdfkmr" FromRole="MotivoRechazoFormDinamico" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.UsuarioIdmtfk" FromRole="MotivoRechazoFormDinamico" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
@@ -1173,6 +1307,8 @@
           <NavigationProperty Name="Domicilio" Relationship="Self.DomicilioUsuarioId" FromRole="Usuario" ToRole="Domicilio" />
           <NavigationProperty Name="FormularioDinamico" Relationship="Self.EntidadFormularioId" FromRole="Usuario" ToRole="FormularioDinamico" />
           <NavigationProperty Name="Localidad" Relationship="Self.localidadUsuarioId" FromRole="Usuario" ToRole="Localidad" />
+          <NavigationProperty Name="MotivoRechazoFormDinamico" Relationship="Self.EntidadIdfkmr" FromRole="Usuario" ToRole="MotivoRechazoFormDinamico" />
+          <NavigationProperty Name="MotivoRechazoFormDinamico1" Relationship="Self.UsuarioIdmtfk" FromRole="Usuario" ToRole="MotivoRechazoFormDinamico" />
           <NavigationProperty Name="Respuesta" Relationship="Self.UsuarioIdfk" FromRole="Usuario" ToRole="Respuesta" />
           <NavigationProperty Name="Rol" Relationship="Self.usuarioRolId" FromRole="Usuario" ToRole="Rol" />
           <NavigationProperty Name="Sexo" Relationship="Self.sexoUsuarioId" FromRole="Usuario" ToRole="Sexo" />
@@ -1268,6 +1404,18 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Respuesta">
+              <PropertyRef Name="ActividadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ActividadIdmrfk">
+          <End Role="Actividad" Type="Self.Actividad" Multiplicity="0..1" />
+          <End Role="MotivoRechazoFormDinamico" Type="Self.MotivoRechazoFormDinamico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actividad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MotivoRechazoFormDinamico">
               <PropertyRef Name="ActividadId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1377,6 +1525,18 @@
             </Principal>
             <Dependent Role="ActividadSegmento">
               <PropertyRef Name="SegmentoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MotivoRechazoFormDinamicoIdpk">
+          <End Role="MotivoRechazoFormDinamico" Type="Self.MotivoRechazoFormDinamico" Multiplicity="0..1" />
+          <End Role="CampoRechazado" Type="Self.CampoRechazado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MotivoRechazoFormDinamico">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CampoRechazado">
+              <PropertyRef Name="MotivoRechazoFormDinamicoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1548,6 +1708,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FormularioDinamicoIdmrfk">
+          <End Role="FormularioDinamico" Type="Self.FormularioDinamico" Multiplicity="0..1" />
+          <End Role="MotivoRechazoFormDinamico" Type="Self.MotivoRechazoFormDinamico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormularioDinamico">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MotivoRechazoFormDinamico">
+              <PropertyRef Name="FormularioDinamicoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FormularioDinamicoIdRFK">
           <End Role="FormularioDinamico" Type="Self.FormularioDinamico" Multiplicity="0..1" />
           <End Role="Respuesta" Type="Self.Respuesta" Multiplicity="*" />
@@ -1581,6 +1753,30 @@
             </Principal>
             <Dependent Role="Usuario">
               <PropertyRef Name="LocalidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EntidadIdfkmr">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="MotivoRechazoFormDinamico" Type="Self.MotivoRechazoFormDinamico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MotivoRechazoFormDinamico">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UsuarioIdmtfk">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="MotivoRechazoFormDinamico" Type="Self.MotivoRechazoFormDinamico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MotivoRechazoFormDinamico">
+              <PropertyRef Name="UsuarioId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1683,6 +1879,7 @@
         <EntityContainer Name="VitaEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Actividad" EntityType="Self.Actividad" />
           <EntitySet Name="ActividadSegmento" EntityType="Self.ActividadSegmento" />
+          <EntitySet Name="CampoRechazado" EntityType="Self.CampoRechazado" />
           <EntitySet Name="Campos" EntityType="Self.Campos" />
           <EntitySet Name="Categoria" EntityType="Self.Categoria" />
           <EntitySet Name="Departamento" EntityType="Self.Departamento" />
@@ -1693,6 +1890,7 @@
           <EntitySet Name="FormularioDinamico" EntityType="Self.FormularioDinamico" />
           <EntitySet Name="InscripcionFecha" EntityType="Self.InscripcionFecha" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" />
+          <EntitySet Name="MotivoRechazoFormDinamico" EntityType="Self.MotivoRechazoFormDinamico" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" />
           <EntitySet Name="Respuesta" EntityType="Self.Respuesta" />
           <EntitySet Name="Rol" EntityType="Self.Rol" />
@@ -1716,6 +1914,10 @@
           <AssociationSet Name="ActividadIdFkR" Association="Self.ActividadIdFkR">
             <End Role="Actividad" EntitySet="Actividad" />
             <End Role="Respuesta" EntitySet="Respuesta" />
+          </AssociationSet>
+          <AssociationSet Name="ActividadIdmrfk" Association="Self.ActividadIdmrfk">
+            <End Role="Actividad" EntitySet="Actividad" />
+            <End Role="MotivoRechazoFormDinamico" EntitySet="MotivoRechazoFormDinamico" />
           </AssociationSet>
           <AssociationSet Name="ActividadSegmentoId" Association="Self.ActividadSegmentoId">
             <End Role="Actividad" EntitySet="Actividad" />
@@ -1752,6 +1954,10 @@
           <AssociationSet Name="SegmentoActividadId" Association="Self.SegmentoActividadId">
             <End Role="Segmento" EntitySet="Segmento" />
             <End Role="ActividadSegmento" EntitySet="ActividadSegmento" />
+          </AssociationSet>
+          <AssociationSet Name="MotivoRechazoFormDinamicoIdpk" Association="Self.MotivoRechazoFormDinamicoIdpk">
+            <End Role="MotivoRechazoFormDinamico" EntitySet="MotivoRechazoFormDinamico" />
+            <End Role="CampoRechazado" EntitySet="CampoRechazado" />
           </AssociationSet>
           <AssociationSet Name="CamposIdFk" Association="Self.CamposIdFk">
             <End Role="Campos" EntitySet="Campos" />
@@ -1809,6 +2015,10 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="FormularioDinamico" EntitySet="FormularioDinamico" />
           </AssociationSet>
+          <AssociationSet Name="FormularioDinamicoIdmrfk" Association="Self.FormularioDinamicoIdmrfk">
+            <End Role="FormularioDinamico" EntitySet="FormularioDinamico" />
+            <End Role="MotivoRechazoFormDinamico" EntitySet="MotivoRechazoFormDinamico" />
+          </AssociationSet>
           <AssociationSet Name="FormularioDinamicoIdRFK" Association="Self.FormularioDinamicoIdRFK">
             <End Role="FormularioDinamico" EntitySet="FormularioDinamico" />
             <End Role="Respuesta" EntitySet="Respuesta" />
@@ -1820,6 +2030,14 @@
           <AssociationSet Name="localidadUsuarioId" Association="Self.localidadUsuarioId">
             <End Role="Localidad" EntitySet="Localidad" />
             <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="EntidadIdfkmr" Association="Self.EntidadIdfkmr">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="MotivoRechazoFormDinamico" EntitySet="MotivoRechazoFormDinamico" />
+          </AssociationSet>
+          <AssociationSet Name="UsuarioIdmtfk" Association="Self.UsuarioIdmtfk">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="MotivoRechazoFormDinamico" EntitySet="MotivoRechazoFormDinamico" />
           </AssociationSet>
           <AssociationSet Name="UsuarioIdfk" Association="Self.UsuarioIdfk">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -1892,6 +2110,15 @@
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CampoRechazado">
+            <EntityTypeMapping TypeName="VitaModel.CampoRechazado">
+              <MappingFragment StoreEntitySet="CampoRechazado">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CampoRechazadoId" ColumnName="CampoRechazadoId" />
+                <ScalarProperty Name="MotivoRechazoFormDinamicoId" ColumnName="MotivoRechazoFormDinamicoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2009,6 +2236,21 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="DepartamentoId" ColumnName="DepartamentoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MotivoRechazoFormDinamico">
+            <EntityTypeMapping TypeName="VitaModel.MotivoRechazoFormDinamico">
+              <MappingFragment StoreEntitySet="MotivoRechazoFormDinamico">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EntidadId" ColumnName="EntidadId" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="FormularioDinamicoId" ColumnName="FormularioDinamicoId" />
+                <ScalarProperty Name="ActividadId" ColumnName="ActividadId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="DescripcionMotivo" ColumnName="DescripcionMotivo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -346,7 +346,7 @@ namespace Vita.Controllers
         }
 
         [HttpPost] //texto tiene que pasar 
-        public ActionResult ListaActividades(int? idCategoria, DateTime? fechaDesde , DateTime? fechaHasta)
+        public ActionResult ListaActividades(int? idCategoria, DateTime? fechaDesde, DateTime? fechaHasta)
         {
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -502,7 +502,7 @@ namespace Vita.Controllers
             return result;
         }
         [HttpGet]
-        public ActionResult ListaEstado(int estadoId, int ? estadoId2 , int actividadId)
+        public ActionResult ListaEstado(int estadoId, int? estadoId2, int actividadId)
         {
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -512,7 +512,7 @@ namespace Vita.Controllers
             else
             {
                 buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
-                if(estadoId2 != null)
+                if (estadoId2 != null)
                 {
                     List<Usuario> listaUsuario = new List<Usuario>();
                     var lista1Usuario = actividadServicio.GetUsuariosByEstadoId(estadoId, actividadId);
@@ -521,7 +521,8 @@ namespace Vita.Controllers
                     listaUsuario.AddRange(lista2Usuario);
                     ViewBag.ListaUsuario = listaUsuario;
                 }
-                else {
+                else
+                {
                     ViewBag.ListaUsuario = actividadServicio.GetUsuariosByEstadoId(estadoId, actividadId);
 
                 }
@@ -758,8 +759,8 @@ namespace Vita.Controllers
             {
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 ViewBag.Formulario = actividadServicio.GetFormularioDinamicoByActividadId(actividadId);
-              //  var respuestas = actividadServicio.GetRespuestasByUsuarioIdandActividadId(buscarUsuarioLogueado.Id, actividadId);
-             //   ViewBag.FormularioAModificar = respuestas;
+                //  var respuestas = actividadServicio.GetRespuestasByUsuarioIdandActividadId(buscarUsuarioLogueado.Id, actividadId);
+                //   ViewBag.FormularioAModificar = respuestas;
 
                 return View(buscarUsuarioLogueado);
             }
@@ -920,6 +921,24 @@ namespace Vita.Controllers
                    ? RedirectToAction("ActividadesDelUsuarioInscripto", "Actividad", buscarUsuarioLogueado)
                    : RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
                 // return RedirectToAction("ActividadesDelUsuarioInscripto", "Actividad", buscarUsuarioLogueado);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult MandarRehacerFormuDinamico(RehacerFormuDinamico formu)
+        {
+            //obtengo usuario logueado
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                formu.EntidadId = buscarUsuarioLogueado.Id;
+                actividadServicio.MandarRehacerFormuDinamico(formu);
+                return RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
+
             }
         }
     }

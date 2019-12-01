@@ -178,10 +178,14 @@
                                                       <div class="col-lg-6">
                                                           @if (cam.Obligatorio)
                                                           {
+                                                              @*<img src="@Url.Content(CamposVm[@index].Foto)" style="width: 40%;" />*@
+
                                                               <input class="file-upload" type="file" id="Foto" value="@ra5" name="CamposVm[@index].Foto" required />@ra5
                                                           }
                                                           else
                                                           {
+                                                              @*<img src="@Url.Content(CamposVm[@index].Foto)" style="width: 40%;" />*@
+
                                                               <input class="file-upload" type="file" id="Foto" value="@ra5" name="CamposVm[@index].Foto" />@ra5
                                                           }
                                                       </div>

@@ -12,32 +12,29 @@ namespace Vita
     using System;
     using System.Collections.Generic;
     
-    public partial class FormularioDinamico
+    public partial class MotivoRechazoFormDinamico
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public FormularioDinamico()
+        public MotivoRechazoFormDinamico()
         {
-            this.Campos = new HashSet<Campos>();
-            this.MotivoRechazoFormDinamico = new HashSet<MotivoRechazoFormDinamico>();
-            this.Respuesta = new HashSet<Respuesta>();
+            this.CampoRechazado = new HashSet<CampoRechazado>();
         }
     
         public int Id { get; set; }
-        public string Titulo { get; set; }
-        public string Descripcion { get; set; }
-        public Nullable<int> ActividadId { get; set; }
         public Nullable<int> EntidadId { get; set; }
+        public Nullable<int> UsuarioId { get; set; }
+        public Nullable<int> FormularioDinamicoId { get; set; }
+        public Nullable<int> ActividadId { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
+        public string DescripcionMotivo { get; set; }
     
         public virtual Actividad Actividad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Campos> Campos { get; set; }
+        public virtual ICollection<CampoRechazado> CampoRechazado { get; set; }
+        public virtual FormularioDinamico FormularioDinamico { get; set; }
         public virtual Usuario Usuario { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MotivoRechazoFormDinamico> MotivoRechazoFormDinamico { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Respuesta> Respuesta { get; set; }
+        public virtual Usuario Usuario1 { get; set; }
     }
 }
