@@ -333,7 +333,7 @@ namespace Vita.Controllers
                 if (actividades.Any())
                 {
 
-
+                    ViewBag.Estados = actividadServicio.GetEstadosActividad();
                     ViewBag.Categorias = categoriaServicio.GetAllCategorias();
                     var listaActividadesVigentes = actividades.Where(x => x.DeletedAt == fechaNull || x.DeletedAt == null).ToList();
                     ViewBag.ListaActvidades = listaActividadesVigentes;
@@ -346,7 +346,7 @@ namespace Vita.Controllers
         }
 
         [HttpPost] //texto tiene que pasar 
-        public ActionResult ListaActividades(int? idCategoria, DateTime? fechaDesde, DateTime? fechaHasta)
+        public ActionResult ListaActividades(string titulo, int? idCategoria, int? idEstado, DateTime? fechaDesde )
         {
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -355,9 +355,17 @@ namespace Vita.Controllers
             }
             else
             {
+                var ListaActvidadesFiltrada = new List<Actividad>();
                 buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
-                ViewBag.ListaActvidadesFiltrada = actividadServicio.GetActividadesFiltradasPorUsuario(buscarUsuarioLogueado.Id, idCategoria, fechaDesde, fechaHasta);
+                ListaActvidadesFiltrada = actividadServicio.GetActividadesFiltradasPorUsuario(titulo,buscarUsuarioLogueado.Id, idCategoria, idEstado, fechaDesde);
+                ViewBag.ListaActvidadesFiltrada = ListaActvidadesFiltrada;
+                
+                if (ListaActvidadesFiltrada.Count() == 0)
+                {
+                    ViewBag.resultadoVacio = "No se encontraron resultados para esta busqueda";
+                }
                 ViewBag.Categorias = categoriaServicio.GetAllCategorias(); // solo para q no rompa en el filtro cuando vuelvo a llamar a la vista
+                ViewBag.Estados = actividadServicio.GetEstadosActividad();
                 ViewBag.ListaActvidades = actividadServicio.GetAllActividadByRolEntidadId(buscarUsuarioLogueado.Id);
                 return View(buscarUsuarioLogueado);
 
