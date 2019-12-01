@@ -17,11 +17,13 @@
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
             <div class="card-body">
-                @using (Html.BeginForm("Registro", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("Registro", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-validation" }))
                 {
 
 
                     <h2 id="tipo_usuario" class="form-title">¡Hola @TempData["first_name"]@TempData["lastname"]! <br /> ¿Qué tipo de persona eres?</h2>
+
+                    <input type="hidden" value="facebook" name="tipoRegistro" />
 
                     <!--Tipo de persona-->
                     <center>
@@ -48,19 +50,30 @@
                         <div class="input-group" hidden>
                             <input class="input--style-4" type="number" value="1" name="RolId">
                         </div>
+
+                        <!--Validaciones-->
+                        <div class="row row-space">
+                            @if (ViewBag.HayValidaciones)
+                            {
+                                <div role="alert" style="color: #856404; background-color: #fff3cd; border-color: #ffeeba; width: 100%; height: 45px; margin-bottom: 1rem;  padding-top: 11px; padding-left: 10px;  border-radius: 0.25rem;">
+                                    @ViewBag.Mensaje
+                                </div>
+                            }
+                        </div>
+
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Nombre-->
                                     <label class="label">Nombre</label>
-                                    <input class="input--style-4" type="text" name="Nombre" value="@TempData["first_name"] ">
+                                    <input class="input--style-4" type="text" name="Nombre" value="@TempData["first_name"] " required>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Apellido-->
                                     <label class="label">Apellido</label>
-                                    <input class="input--style-4" type="text" name="Apellido" value="@TempData["lastname"] ">
+                                    <input class="input--style-4" type="text" name="Apellido" value="@TempData["lastname"] " required>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +84,7 @@
                                     <!--Fecha de nacimiento-->
                                     <label class="label">Fecha de nacimiento</label>
                                     <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="text" name="FechaNacimiento">
+                                        <input class="input--style-4 js-datepicker" type="text" name="FechaNacimiento" required>
                                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                     </div>
                                 </div>
@@ -101,7 +114,7 @@
                                 <div class="input-group">
                                     <!--DNI-->
                                     <label class="label">DNI</label>
-                                    <input class="input--style-4" type="number" name="Dni">
+                                    <input class="input--style-4" type="number" name="Dni" required>
                                 </div>
                             </div>
 
@@ -109,7 +122,7 @@
                                 <div class="input-group">
                                     <!--Email-->
                                     <label class="label">Email</label>
-                                    <input class="input--style-4" type="email" name="Email" value=" @TempData["email"]">
+                                    <input class="input--style-4" type="email" name="Email" value=" @TempData["email"]" required>
                                 </div>
                             </div>
                         </div>
@@ -155,7 +168,7 @@
                                 <div class="input-group">
                                     <!--Celular-->
                                     <label class="label">Celular</label>
-                                    <input class="input--style-4" type="number" name="Celular" placeholder="1143424456">
+                                    <input class="input--style-4" type="number" name="Celular" placeholder="1143424456" required>
                                 </div>
                             </div>
                         </div>
@@ -191,26 +204,26 @@
                                     </div>
                                 </div>
                             </div>
-                         </div>
-                        
+                        </div>
+
                         <div class="form-group row">
                             <!--Descripción sobre mi-->
                             <label class="label" for="SobreMi">
                                 Breve descripción sobre vos y tus gustos <span class="text-danger">*</span>
                             </label><br /><br />
                             <div class="col-2">
-                                <textarea class="form-control" id="val-suggestions" name="SobreMi" rows="10" cols="70" placeholder="Ingresa tu descripción personal..."></textarea>
+                                <textarea class="form-control" id="val-suggestions" name="SobreMi" rows="10" cols="70" placeholder="Ingresa tu descripción personal..." required></textarea>
                             </div>
                         </div>
 
-                         <br />
+                        <br />
 
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Usuario-->
                                     <label class="label">Usuario</label>
-                                    <input class="input--style-4" type="text" name="UsuarioName">
+                                    <input class="input--style-4" type="text" name="UsuarioName" required>
                                 </div>
                             </div>
 
@@ -218,7 +231,7 @@
                                 <div class="input-group">
                                     <!--Contraseña-->
                                     <label class="label">Contraseña</label>
-                                    <input class="input--style-4" type="password" name="Pass">
+                                    <input class="input--style-4" type="password" name="Pass" required>
                                 </div>
                             </div>
                         </div>
@@ -231,7 +244,7 @@
                     </div>
                 }
 
-                <form action="/Usuario/Registro" method="Post" class="formu-entidad" id="form-rol-entidad">
+                <form action="/Usuario/Registro" method="Post" class="formu-entidad form-validation" id="form-rol-entidad">
 
                     <div id="empresa">
                         <div class="input-group" hidden>
@@ -243,14 +256,14 @@
                                 <div class="input-group">
                                     <!--Nombre de la empresa-->
                                     <label class="label">Nombre</label>
-                                    <input class="input--style-4" type="text" name="Nombre" value="@TempData["first_name"] ">
+                                    <input class="input--style-4" type="text" name="Nombre" value="@TempData["first_name"] " required>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <!--Email de la empresa-->
                                     <label class="label">Email</label>
-                                    <input class="input--style-4" type="text" name="Email" value="@TempData["email"]">
+                                    <input class="input--style-4" type="text" name="Email" value="@TempData["email"]" required>
                                 </div>
                             </div>
                         </div>
@@ -305,7 +318,7 @@
                                 <div class="input-group">
                                     <!--Celular de la empresa-->
                                     <label class="label">Celular</label>
-                                    <input class="input--style-4" type="number" name="Celular">
+                                    <input class="input--style-4" type="number" name="Celular" required>
                                 </div>
                             </div>
                             <div class="col-2">
@@ -322,7 +335,7 @@
                                 Breve descripción sobre tu entidad <span class="text-danger">*</span>
                             </label><br /><br />
                             <div class="col-2">
-                                <textarea class="form-control" id="val-suggestions" name="SobreMi" rows="10" cols="70" placeholder="Ingresa tu descripción personal..."></textarea>
+                                <textarea class="form-control" id="val-suggestions" name="SobreMi" rows="10" cols="70" placeholder="Ingresa tu descripción personal..." required></textarea>
                             </div>
                         </div>
 
@@ -333,7 +346,7 @@
                                 <div class="input-group">
                                     <!--Usuario-->
                                     <label class="label">Usuario</label>
-                                    <input class="input--style-4" type="text" name="UsuarioName">
+                                    <input class="input--style-4" type="text" name="UsuarioName" required>
                                 </div>
                             </div>
 
@@ -341,7 +354,7 @@
                                 <div class="input-group">
                                     <!--Contraseña-->
                                     <label class="label">Contraseña</label>
-                                    <input class="input--style-4" type="password" name="Pass">
+                                    <input class="input--style-4" type="password" name="Pass" required>
                                 </div>
                             </div>
                         </div>

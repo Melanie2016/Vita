@@ -21,6 +21,7 @@
                 @using (Html.BeginForm("Registro", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data", @class ="form-validation" }))
                 {
 
+                    <input type="hidden" value="comun" name="tipoRegistro" />
 
                     <!--FOTO DE PERFIL-->
                     <div class="avatar-wrapper" id="avatar">
@@ -197,7 +198,7 @@
                             Breve descripción sobre vos y tus gustos <span class="text-danger">*</span>
                         </label><br /><br />
                         <div class="col-2">
-                            <textarea class="form-control" id="val-suggestions" name="SobreMi" rows="10" cols="70" placeholder="Ingresa tu descripción personal..."></textarea>
+                            <textarea class="form-control" id="val-suggestions" name="SobreMi" rows="10" cols="70" placeholder="Ingresa tu descripción personal..." required></textarea>
                         </div>
                     </div>
 

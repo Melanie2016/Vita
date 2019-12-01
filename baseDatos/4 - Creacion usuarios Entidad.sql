@@ -35,7 +35,7 @@ INSERT INTO [dbo].[Usuario]
            ,'OxiGym'
            ,'1234'
            ,'www.facebook.com/llavalloloxigenogym/'
-           ,'Ofrece el desarrollo de actividades físicas que proporcionan placer, satisfacción y bienestar. Intentando cumplir los objetivos, expectativas y necesidades de nuestros clientes.'
+           ,'Ofrecemos el desarrollo de actividades físicas que proporcionan placer, satisfacción y bienestar. Intentando cumplir los objetivos, expectativas y necesidades de nuestros clientes.'
            ,2
            ,'~/Content/images/gym_llavallol.jpg'
            ,'2019-11-08'

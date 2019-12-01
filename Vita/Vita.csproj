@@ -265,6 +265,7 @@
     <Compile Include="ViewModels\RespuestaViewModel.cs" />
     <Compile Include="ViewModels\UsuarioEstado.cs" />
     <Compile Include="ViewModels\UsuarioModificarViewModel.cs" />
+    <Compile Include="Views\Actividad\CheckedViewModel.cs" />
     <Compile Include="VitaEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -293,6 +294,7 @@
     <Content Include="Content\css\ChatSimple.css" />
     <Content Include="Content\css\css\bootstrap-reboot.css" />
     <Content Include="Content\css\css\mixins\_text-hide.css" />
+    <Content Include="Content\css\css\ModificarUsuario.css" />
     <Content Include="Content\css\estiloPerfil.css" />
     <Content Include="Content\css\FotoPerfil.css" />
     <Content Include="Content\css\Sugerencias.css" />
@@ -1047,6 +1049,7 @@
     <Content Include="VitaEntities.edmx.diagram">
       <DependentUpon>VitaEntities.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\Usuario\IraModificarPerfilEntidad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
