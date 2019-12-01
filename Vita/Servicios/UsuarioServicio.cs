@@ -16,12 +16,12 @@ namespace Vita.Servicios
         {
             return myDbContext.Usuario.Find(id);
         }
-        
+
 
         public void CrearUsuario(Usuario usuario)
         {
             //falta validar tooodo
-            if(usuario.LocalidadId== null)
+            if (usuario.LocalidadId == null)
             {
                 usuario.LocalidadId = 3;
             }
@@ -32,13 +32,13 @@ namespace Vita.Servicios
         }
         public Usuario GetById(int id)
         {
-            var usuario= myDbContext.Usuario.FirstOrDefault(x => x.Id == id);
-            
-            if(usuario.Localidad == null)
+            var usuario = myDbContext.Usuario.FirstOrDefault(x => x.Id == id);
+
+            if (usuario.Localidad == null)
             {
                 usuario.Localidad = localidadServicio.GetLocalidadById(usuario.LocalidadId.Value);
             }
-            if(usuario.Sexo == null && usuario.RolId == 1)
+            if (usuario.Sexo == null && usuario.RolId == 1)
             {
                 usuario.Sexo = sexoServicio.GetSexoId(usuario.SexoId.Value);
             }
@@ -46,17 +46,17 @@ namespace Vita.Servicios
         }
         public Usuario VerificarLogin(Usuario u)
         {
-         
-                if (u.Email != null)
-                {
-                    var user = myDbContext.Usuario.Where((us => us.Email.Equals(u.Email) && us.Pass.Equals(u.Pass))).FirstOrDefault();
-                    return user;
-                }
-                else
-                {
-                    var user = myDbContext.Usuario.Where(us => us.UsuarioName.Equals(u.UsuarioName) && us.Pass.Equals(u.Pass)).FirstOrDefault();
-                    return user;
-                }     
+
+            if (u.Email != null)
+            {
+                var user = myDbContext.Usuario.Where((us => us.Email.Equals(u.Email) && us.Pass.Equals(u.Pass))).FirstOrDefault();
+                return user;
+            }
+            else
+            {
+                var user = myDbContext.Usuario.Where(us => us.UsuarioName.Equals(u.UsuarioName) && us.Pass.Equals(u.Pass)).FirstOrDefault();
+                return user;
+            }
         }
 
         public Usuario VerificarExistenciaUsuarioNombre(Usuario u)
@@ -69,7 +69,7 @@ namespace Vita.Servicios
         {
             if (u.Dni.HasValue)//en caso de ser un usuario
             {
-                var user = myDbContext.Usuario.Where(us => us.Dni ==u.Dni).FirstOrDefault();
+                var user = myDbContext.Usuario.Where(us => us.Dni == u.Dni).FirstOrDefault();
                 return user;
             }
             else
@@ -102,7 +102,7 @@ namespace Vita.Servicios
                 {
                     UsuarioId = usuarioId,
                     CategoriaId = categoria,
-                    CreatedAt=DateTime.Now
+                    CreatedAt = DateTime.Now
                 };
                 myDbContext.UsuarioCategoriaElegida.Add(usuarioCategoriaElegida);
                 myDbContext.SaveChanges();
@@ -111,43 +111,86 @@ namespace Vita.Servicios
         public void ModificarUsuario(UsuarioModificarViewModel us)
         {
 
-            Usuario usuarioModificar = myDbContext.Usuario.Find(us.Id);
-            usuarioModificar.Nombre = us.Nombre;
-            usuarioModificar.Apellido = us.Apellido;
-            usuarioModificar.Dni = us.Dni;
-            usuarioModificar.UpdatedAt = DateTime.Now;
-            usuarioModificar.SexoId = us.SexoId;
-            usuarioModificar.SobreMi = us.SobreMi;
-            usuarioModificar.UsuarioName = us.UsuarioName;
-            usuarioModificar.Celular = us.Celular;
-            usuarioModificar.FechaNacimiento = us.FechaNacimiento;
-            usuarioModificar.Email = us.Email;
-            usuarioModificar.LocalidadId = us.LocalidadId;
-            usuarioModificar.Pass = us.Pass;
-   
-
-            var segmentousuario = myDbContext.UsuarioSegmento.Where(x => x.UsuarioId == us.Id).ToList();
-            var listaUsuarioSegmento = new List<UsuarioSegmento>();
-            foreach (var segmentoUser in segmentousuario)
+            if (us.RolId == 1) //USUARIO
             {
-                foreach (var segmento in us.selectedSegmento)//la lista con los segmento elegidos actualizados
+                Usuario usuarioModificar = myDbContext.Usuario.Find(us.Id);
+                usuarioModificar.Nombre = us.Nombre;
+                usuarioModificar.Apellido = us.Apellido;
+                usuarioModificar.Dni = us.Dni;
+                usuarioModificar.UpdatedAt = DateTime.Now;
+                usuarioModificar.SexoId = us.SexoId;
+                usuarioModificar.SobreMi = us.SobreMi;
+                usuarioModificar.UsuarioName = us.UsuarioName;
+                usuarioModificar.Celular = us.Celular;
+                usuarioModificar.FechaNacimiento = us.FechaNacimiento;
+                usuarioModificar.Email = us.Email;
+
+                if (us.LocalidadId != 0)
                 {
-                    if (!(segmentoUser.SegmentoId== segmento))
+                    usuarioModificar.LocalidadId = us.LocalidadId;
+                }
+                usuarioModificar.Pass = us.Pass;
+
+                //Segmentos
+                var segmentosUsuario = myDbContext.UsuarioSegmento.Where(x => x.UsuarioId == us.Id).ToList();
+                var listaUsuarioSegmento = new List<UsuarioSegmento>();
+
+                myDbContext.UsuarioSegmento.RemoveRange(segmentosUsuario);
+                myDbContext.SaveChanges();
+
+                foreach (var segmento in us.selectedSegmento)
+                {
+                    var usuarioSegmentoNuevo = new UsuarioSegmento
                     {
-                        var usuariosegmentoNuevo = new UsuarioSegmento
-                        {
-                            SegmentoId = segmento,
-                            UsuarioId = us.Id,
-                            CreatedAt = DateTime.Now
-                        };
-                        listaUsuarioSegmento.Add(usuariosegmentoNuevo);
+                        SegmentoId = segmento,
+                        UsuarioId = us.Id,
+                        CreatedAt = DateTime.Now
+                    };
+                    listaUsuarioSegmento.Add(usuarioSegmentoNuevo);
+                }
 
+                myDbContext.UsuarioSegmento.AddRange(listaUsuarioSegmento);
+                myDbContext.SaveChanges();
 
-                    }
-                }       
+                //Categorias
+                var categoriasUsuario = myDbContext.UsuarioCategoriaElegida.Where(x => x.UsuarioId == us.Id).ToList();
+                var listaUsuarioCategoria = new List<UsuarioCategoriaElegida>();
+
+                myDbContext.UsuarioCategoriaElegida.RemoveRange(categoriasUsuario);
+                myDbContext.SaveChanges();
+
+                foreach (var categoria in us.selectedCategoria)
+                {
+                    var usuarioCategoriaNuevo = new UsuarioCategoriaElegida
+                    {
+                        CategoriaId = categoria,
+                        UsuarioId = us.Id,
+                        CreatedAt = DateTime.Now
+                    };
+                    listaUsuarioCategoria.Add(usuarioCategoriaNuevo);
+                }
+
+                myDbContext.UsuarioCategoriaElegida.AddRange(listaUsuarioCategoria);
+                myDbContext.SaveChanges();
             }
-            myDbContext.UsuarioSegmento.AddRange(listaUsuarioSegmento);
-            myDbContext.SaveChanges();
+            else //ENTIDAD
+            {
+                Usuario usuarioModificar = myDbContext.Usuario.Find(us.Id);
+                usuarioModificar.Nombre = us.Nombre;
+                usuarioModificar.UpdatedAt = DateTime.Now;
+                usuarioModificar.SobreMi = us.SobreMi;
+                usuarioModificar.UsuarioName = us.UsuarioName;
+                usuarioModificar.Telefono = us.Telefono;
+                usuarioModificar.Celular = us.Celular;
+                usuarioModificar.Email = us.Email;
+                usuarioModificar.SitioWeb = us.SitioWeb;
+                usuarioModificar.Pass = us.Pass;
+                if (us.LocalidadId != 0)
+                {
+                    usuarioModificar.LocalidadId = us.LocalidadId;
+                }
+                myDbContext.SaveChanges();
+            }
         }
 
 

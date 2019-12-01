@@ -9,6 +9,7 @@ using System.Web.Routing;
 using System.Web.Script.Serialization;
 using Vita.Servicios;
 using Vita.ViewModels;
+using Vita.Views.Actividad;
 
 namespace Vita.Controllers
 {
@@ -30,7 +31,7 @@ namespace Vita.Controllers
             List<Provincia> provincias = localidadServicio.GetAllProvincias();
             ViewBag.ListaProvincia = new MultiSelectList(provincias, "id", "descripcion");
 
-            List <Sexo> sexos = sexoServicio.GetAllSexo();
+            List<Sexo> sexos = sexoServicio.GetAllSexo();
             ViewBag.ListaSexo = new MultiSelectList(sexos, "id", "descripcion");
 
             List<Segmento> segmentos = segmentoServicio.GetAllSegmento();
@@ -115,7 +116,7 @@ namespace Vita.Controllers
         }
 
         [HttpPost]
-        public ActionResult Registro(Usuario usuario, int[] selectedSegmento, int[] selectedCategoria, HttpPostedFileBase Foto)
+        public ActionResult Registro(Usuario usuario, int[] selectedSegmento, int[] selectedCategoria, HttpPostedFileBase Foto, string tipoRegistro)
         {
             ViewBag.HayValidaciones = false;
 
@@ -148,22 +149,37 @@ namespace Vita.Controllers
                 ViewBag.HayValidaciones = true;
                 ViewBag.Mensaje = "El nombre de usuario ya se encuentra registrado. Ingrese otro";
 
-                if(usuario.RolId == 1) //Persona
+                if (usuario.RolId == 1) //Persona
                 {
-                    return View();
+                    if (tipoRegistro == "facebook")
+                    {
+                        return RedirectToAction("RegistrarFacebook", new RouteValueDictionary(new { controller = "Usuario", action = "RegistrarFacebook", ViewBag.Mensaje }));
+                    }
+                    else
+                    {
+                        return View();
+                    }
                 }
                 else //Entidad
                 {
-                    return RedirectToAction("RegistroEntidad", new RouteValueDictionary( new { controller = "Usuario", action = "RegistroEntidad", HayValidaciones = true }));
+                    return RedirectToAction("RegistroEntidad", new RouteValueDictionary(new { controller = "Usuario", action = "RegistroEntidad", HayValidaciones = true }));
                 }
-                
+
             }
             else if (existeElUsuario != null)
             {
                 //ACA DEBERIA DECIR, su usuario ya existe 
                 ViewBag.HayValidaciones = true;
                 ViewBag.Mensaje = "Ya existe un usuario registrado con el número de documento " + usuario.Dni;
-                return View();
+
+                if (tipoRegistro == "facebook")
+                {
+                    return RedirectToAction("RegistrarFacebook", new RouteValueDictionary(new { controller = "Usuario", action = "RegistrarFacebook", ViewBag.Mensaje }));
+                }
+                else
+                {
+                    return View();
+                }
             }
             else
             {
@@ -240,6 +256,16 @@ namespace Vita.Controllers
                 else
                 {
                     buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
+
+                    if (buscarUsuarioLogueado.UpdatedAt != null)
+                    {
+                        ViewBag.UltimaModificacion = buscarUsuarioLogueado.UpdatedAt.ToString().Remove(11);
+                    }
+                    else
+                    {
+                        ViewBag.UltimaModificacion = "";
+                    }
+
                     List<Categoria> categoriasElegidas = categoriaServicio.GetAllCategoriasDelUsuario(buscarUsuarioLogueado);
                     ViewBag.ListacategoriasElegidas = new MultiSelectList(categoriasElegidas, "id", "descripcion");
                     List<Segmento> segmentoElegidos = segmentoServicio.GetAllSegmentosDelUsuario(buscarUsuarioLogueado);
@@ -252,6 +278,16 @@ namespace Vita.Controllers
             else
             {
                 usuarioLogueado = usuarioServicio.GetById(usuario.Id);
+
+                if (usuarioLogueado.UpdatedAt != null)
+                {
+                    ViewBag.UltimaModificacion = usuarioLogueado.UpdatedAt.ToString().Remove(11);
+                }
+                else
+                {
+                    ViewBag.UltimaModificacion = "";
+                }
+
                 List<Categoria> categoriasElegidas = categoriaServicio.GetAllCategoriasDelUsuario(usuarioLogueado);
                 ViewBag.ListacategoriasElegidas = new MultiSelectList(categoriasElegidas, "id", "descripcion");
                 List<Segmento> segmentoElegidos = segmentoServicio.GetAllSegmentosDelUsuario(usuarioLogueado);
@@ -264,9 +300,16 @@ namespace Vita.Controllers
 
 
         [HttpGet]
-        public ActionResult RegistrarFacebook(Usuario usuario)
+        public ActionResult RegistrarFacebook(Usuario usuario, string Mensaje)
         {
+            ViewBag.HayValidaciones = false;
 
+            if (Mensaje != null)
+            {
+                ViewBag.HayValidaciones = true;
+                ViewBag.Mensaje = Mensaje;
+
+            }
 
             List<Provincia> provincias = localidadServicio.GetAllProvincias();
             ViewBag.ListaProvincia = new MultiSelectList(provincias, "id", "descripcion");
@@ -299,6 +342,16 @@ namespace Vita.Controllers
                 else
                 {
                     buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
+
+                    if (buscarUsuarioLogueado.UpdatedAt != null)
+                    {
+                        ViewBag.UltimaModificacion = buscarUsuarioLogueado.UpdatedAt.ToString().Remove(11);
+                    }
+                    else
+                    {
+                        ViewBag.UltimaModificacion = "";
+                    }
+
                     return View(buscarUsuarioLogueado);
                 }
 
@@ -306,6 +359,16 @@ namespace Vita.Controllers
             else
             {
                 usuarioLogueado = usuarioServicio.GetById(usuario.Id);
+
+                if (usuarioLogueado.UpdatedAt != null)
+                {
+                    ViewBag.UltimaModificacion = usuarioLogueado.UpdatedAt.ToString().Remove(11);
+                }
+                else
+                {
+                    ViewBag.UltimaModificacion = "";
+                }
+
                 return View(usuarioLogueado);
             }
         }
@@ -316,47 +379,102 @@ namespace Vita.Controllers
 
             var usuario = Session["Usuario"] as Usuario;
             usuario = usuarioServicio.GetById(usuario.Id);
-            List<Categoria> categoriasElegidas = categoriaServicio.GetAllCategoriasDelUsuario(usuario);
-            ViewBag.ListacategoriasElegidas = new MultiSelectList(categoriasElegidas, "id", "descripcion");
-            List<Segmento> segmentoElegidos = segmentoServicio.GetAllSegmentosDelUsuario(usuario);
-            ViewBag.ListasegmentosElegidos = new MultiSelectList(segmentoElegidos, "id", "descripcion");
+
+            if (usuario.UpdatedAt != null)
+            {
+                ViewBag.UltimaModificacion = usuario.UpdatedAt.ToString().Remove(11);
+            }
+            else
+            {
+                ViewBag.UltimaModificacion = "";
+            }
+
             List<Sexo> sexos = sexoServicio.GetAllSexo();
             ViewBag.ListaSexo = new MultiSelectList(sexos, "id", "descripcion");
 
             List<Segmento> segmentos = segmentoServicio.GetAllSegmento();
-            ViewBag.ListaSegmentos = new MultiSelectList(segmentos, "id", "descripcion");
+            List<CheckedViewModel> ListaSegmentosUsuario = new List<CheckedViewModel>();
+
+            foreach (var item in segmentos)
+            {
+                CheckedViewModel segmento = new CheckedViewModel();
+                segmento.Id = item.Id;
+                segmento.Descripcion = item.Descripcion;
+
+                foreach (var segUsu in usuario.UsuarioSegmento)
+                {
+                    if (item.Id == segUsu.SegmentoId)
+                    {
+                        segmento.Cheked = true;
+                    }
+                }
+
+                ListaSegmentosUsuario.Add(segmento);
+
+            }
+            ViewBag.ListaSegmentosUsuario = ListaSegmentosUsuario;
 
             List<Localidad> localidades = localidadServicio.GetAllLocalidades();
             ViewBag.ListaLocalidades = new MultiSelectList(localidades, "id", "descripcion");
 
-            List<Categoria> rubros = categoriaServicio.GetAllCategorias();
-            ViewBag.ListaRubro = new MultiSelectList(rubros, "id", "descripcion");
+            List<Categoria> categorias = categoriaServicio.GetAllCategorias();
+            List<CheckedViewModel> ListaCategoriasUsuario = new List<CheckedViewModel>();
 
-            List<Categoria> intereses = categoriaServicio.GetAllCategorias();
-            ViewBag.ListaIntereses = new MultiSelectList(intereses, "id", "descripcion");
+            foreach (var item in categorias)
+            {
+                CheckedViewModel categoria = new CheckedViewModel();
+
+                categoria.Id = item.Id;
+                categoria.Descripcion = item.Descripcion;
+
+                foreach (var cateUsu in usuario.UsuarioCategoriaElegida)
+                {
+                    if (item.Id == cateUsu.CategoriaId)
+                    {
+                        categoria.Cheked = true;
+                    }
+                }
+
+                ListaCategoriasUsuario.Add(categoria);
+
+            }
+
+            ViewBag.ListaInteresesUsuario = ListaCategoriasUsuario;
+
             List<Provincia> provincias = localidadServicio.GetAllProvincias();
             ViewBag.ListaProvincia = new MultiSelectList(provincias, "id", "descripcion");
+            ViewBag.ProvinciaId = usuario.Localidad.Departamento.ProvinciaId;
 
-            ViewBag.ProvinciaDescripcion = localidadServicio.GetProvincia(usuario.LocalidadId.Value).Descripcion;
             ViewBag.LocalidadId = usuario.LocalidadId;
-            ViewBag.DepartamentoDescripcion = localidadServicio.GetDepartamento(usuario.LocalidadId.Value).Descripcion;
             ViewBag.LocalidadDescripcion = usuario.Localidad.Descripcion;
+
+            ViewBag.DepartamentId = usuario.Localidad.DepartamentoId;
+            ViewBag.DesDepartamento = usuario.Localidad.Departamento.Descripcion;
+
             return View(usuario);
-          
+
         }
-  
-        
+
+
         [HttpPost]
-      //  public ActionResult ModificarPerfilUsuario(Usuario usuario, string btnConfirmar, string btnCancelar, int[] selectedSegmento, int[] selectedCategoria)
-          public ActionResult ModificarPerfilUsuario(UsuarioModificarViewModel userViewModel)
+        public ActionResult ModificarPerfilUsuario(UsuarioModificarViewModel userViewModel)
         {
             var usua = new Usuario();
             if (ModelState.IsValid)
             {
-               
+
                 usuarioServicio.ModificarUsuario(userViewModel);
-                  usua = usuarioServicio.GetById(userViewModel.Id);
-                return RedirectToAction("PerfilUsuario", "Usuario", usua);
+                usua = usuarioServicio.GetById(userViewModel.Id);
+
+                if (userViewModel.RolId == 1)
+                {
+                    return RedirectToAction("PerfilUsuario", "Usuario", usua);
+                }
+                else
+                {
+                    return RedirectToAction("PerfilEntidad", "Usuario", usua);
+                }
+
 
             }
             else
@@ -367,7 +485,7 @@ namespace Vita.Controllers
 
         [HttpGet]
         public JsonResult GetEvents()
-        {            
+        {
             {
 
                 var usuario = Session["Usuario"] as Usuario;
@@ -388,6 +506,82 @@ namespace Vita.Controllers
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 return View(buscarUsuarioLogueado);
             }
+        }
+
+        [HttpGet]
+        public ActionResult IraModificarPerfilEntidad()
+        {
+
+            var usuario = Session["Usuario"] as Usuario;
+            usuario = usuarioServicio.GetById(usuario.Id);
+
+            if (usuario.UpdatedAt != null)
+            {
+                ViewBag.UltimaModificacion = usuario.UpdatedAt.ToString().Remove(11);
+            }
+            else
+            {
+                ViewBag.UltimaModificacion = "";
+            }
+
+            List<Segmento> segmentos = segmentoServicio.GetAllSegmento();
+            List<CheckedViewModel> ListaSegmentosUsuario = new List<CheckedViewModel>();
+
+            foreach (var item in segmentos)
+            {
+                CheckedViewModel segmento = new CheckedViewModel();
+                segmento.Id = item.Id;
+                segmento.Descripcion = item.Descripcion;
+
+                foreach (var segUsu in usuario.UsuarioSegmento)
+                {
+                    if (item.Id == segUsu.SegmentoId)
+                    {
+                        segmento.Cheked = true;
+                    }
+                }
+
+                ListaSegmentosUsuario.Add(segmento);
+
+            }
+            ViewBag.ListaSegmentosUsuario = ListaSegmentosUsuario;
+
+            List<Categoria> categorias = categoriaServicio.GetAllCategorias();
+            List<CheckedViewModel> ListaCategoriasUsuario = new List<CheckedViewModel>();
+
+            foreach (var item in categorias)
+            {
+                CheckedViewModel categoria = new CheckedViewModel();
+
+                categoria.Id = item.Id;
+                categoria.Descripcion = item.Descripcion;
+
+                foreach (var cateUsu in usuario.UsuarioCategoriaElegida)
+                {
+                    if (item.Id == cateUsu.CategoriaId)
+                    {
+                        categoria.Cheked = true;
+                    }
+                }
+
+                ListaCategoriasUsuario.Add(categoria);
+
+            }
+
+            ViewBag.ListaRubroEntidad = ListaCategoriasUsuario;
+
+            List<Provincia> provincias = localidadServicio.GetAllProvincias();
+            ViewBag.ListaProvincia = new MultiSelectList(provincias, "id", "descripcion");
+            ViewBag.ProvinciaId = usuario.Localidad.Departamento.ProvinciaId;
+
+            ViewBag.LocalidadId = usuario.LocalidadId;
+            ViewBag.LocalidadDescripcion = usuario.Localidad.Descripcion;
+
+            ViewBag.DepartamentId = usuario.Localidad.DepartamentoId;
+            ViewBag.DesDepartamento = usuario.Localidad.Departamento.Descripcion;
+
+            return View(usuario);
+
         }
     }
 }

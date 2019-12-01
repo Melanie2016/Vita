@@ -1,7 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "ModificarPerfilUsuario";
-    Layout = "~/Views/Shared/_LayoutPerfilUsuario.cshtml";
+    ViewBag.Title = "ModificarPerfilEntidad";
+    Layout = "~/Views/Shared/_LayoutPerfilEntidad.cshtml";
 }
 
 @model Usuario
@@ -46,7 +46,7 @@
                         </div>
                         <br><br>
                         <div class="col-12 text-center">
-                            <button class="btn btn-success px-4 upload-button">CAMBIAR FOTO</button>
+                            <button class="btn btn-danger px-5 upload-button">CAMBIAR FOTO</button>
                         </div>
                     </div>
                     <br><br>
@@ -80,7 +80,7 @@
                                     <!--Table body-->
                                     <tbody style="color:#76838f; font-family: Roboto, sans-serif; font-size: 0.875rem;">
                                         <tr>
-                                            <td style="border: none;"> <input class="input--style-4" type="text" hidden name="RolId" value=1></td>
+                                            <td style="border: none;"> <input class="input--style-4" type="text" hidden name="RolId" value=2></td>
 
                                             <td style="border: none;"> <input class="input--style-4" type="text" hidden name="Id" value="@Model.Id"></td>
 
@@ -89,40 +89,6 @@
                                             <th scope="row">Nombre</th>
                                             <td> <input class="estilo-input" type="text" name="Nombre" value="@Model.Nombre"></td>
 
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Apellido</th>
-                                            <td> <input class="estilo-input" type="text" value="@Model.Apellido" name="Apellido"></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Fecha de Nacimiento</th>
-                                            <td>
-                                                <input class="input--style-4 js-datepicker estilo-input" type="text" name="FechaNacimiento" value="@Model.FechaNacimiento.ToString().Remove(11)">
-                                                <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Sexo</th>
-
-                                            <td>
-                                                <select class="estilo-input" id="sexoId" onchange="changeOption(this)"
-                                                        data-live-search="true" title="@Model.Sexo.Descripcion" name="SexoId">
-
-                                                    @*<option name="SexoId"value="@Model.Sexo.Id">@Model.Sexo.Descripcion</option>*@
-                                                    @foreach (var item in ViewBag.ListaSexo as MultiSelectList)
-                                                    {
-
-                                                        <option value="@item.Value">@item.Text</option>
-                                                    }
-
-                                                </select>
-                                            </td>
-
-                                        </tr>
-
-                                        <tr>
-                                            <th scope="row">DNI</th>
-                                            <td> <input class="estilo-input" type="number" name="Dni" value="@Model.Dni"></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Email</th>
@@ -194,50 +160,22 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                            <th scope="row">Telefono</th>
+                                            <td><input class="estilo-input" type="number" value="@Model.Telefono" name="Telefono"></td>
+
+                                        </tr>
+                                        <tr>
                                             <th scope="row">Celular</th>
                                             <td><input class="estilo-input" type="number" value="@Model.Celular" name="Celular"></td>
 
                                         </tr>
                                         <tr>
-                                            <th scope="row">Intereses</th>
+                                            <th scope="row">Sitio Web Personal</th>
+                                            <td> <input class="estilo-input" type="text" name="SitioWeb" value="@Model.SitioWeb"></td>
 
-                                            <td>
-                                                @foreach (var item in ViewBag.ListaInteresesUsuario)
-                                                {
-                                                    if (item.Cheked)
-                                                    {
-                                                        <input type="checkbox" name="selectedCategoria" value="@item.Id" checked="checked" />
-                                                        @item.Descripcion <br />
-                                                    }
-                                                    else
-                                                    {
-                                                        <input type="checkbox" name="selectedCategoria" value="@item.Id"/>
-                                                        @item.Descripcion <br />
-                                                    }
-                                                }
-                                            </td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">Segmento</th>
-
-                                            <td>
-                                                @foreach (var item in ViewBag.ListaSegmentosUsuario)
-                                                {
-                                                    if (item.Cheked)
-                                                    {
-                                                        <input type="checkbox" name="selectedSegmento" value="@item.Id" checked="checked" />
-                                                        @item.Descripcion <br />
-                                                    }
-                                                    else
-                                                    {
-                                                        <input type="checkbox" name="selectedSegmento" value="@item.Id" />
-                                                        @item.Descripcion <br />
-                                                    }
-                                                }
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Sobre mí</th>
+                                            <th scope="row">Sobre nosotros</th>
                                             <td>
 
                                                 <textarea class="estilo-input" id="val-suggestions" name="SobreMi" rows="10" cols="70"> @Model.SobreMi</textarea>
@@ -260,7 +198,7 @@
                                 <!--Table-->
 
                                 <button type="submit" class="btn btn-primary">Aceptar</button>
-                                <a href="/Usuario/PerfilUsuario"><button type="button" class="btn btn-primary">Cancelar</button></a>
+                                <a href="/Usuario/PerfilEntidad"><button type="button" class="btn btn-primary">Cancelar</button></a>
                             </form>
                         </div>
                     </div>

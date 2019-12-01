@@ -22,7 +22,7 @@
                             <div class="avatar-wrapper">
                                 @if (Model.Foto != null && Model.Foto.Length > 0)
                                 {
-                                <img src="@Url.Content(Model.Foto)" alt="" style="height: 200px; width: 200px; border: 3px solid #fff; border-radius: 50%; margin: 0; padding: 0; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);">
+                                    <img src="@Url.Content(Model.Foto)" alt="" style="height: 200px; width: 200px; border: 3px solid #fff; border-radius: 50%; margin: 0; padding: 0; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);">
                                 }
                                 else
                                 {
@@ -31,7 +31,7 @@
                                 }
 
 
-                                <input class="file-upload" type="file" id="Foto" name="Foto"/>
+                                <input class="file-upload" type="file" id="Foto" name="Foto" />
                             </div>
                             <!---->
                         </div>
@@ -42,7 +42,8 @@
                     </div>
 
                     <h4>Sobre nosotros</h4>
-                    <p class="text-muted">@Model.SobreMi
+                    <p class="text-muted">
+                        @Model.SobreMi
                     </p>
                     <ul class="card-profile__info">
                         <li class="mb-1"><strong class="text-dark mr-4">Contacto</strong> <br /><span>@Model.Telefono</span></li>
@@ -55,60 +56,62 @@
             <div class="card">
                 <div class="card-body">
                     <div class="media-body">
-                        <h5 class="mb-sm-0">@Model.UsuarioName<small class="text-muted ml-3">última modificación hace (@Model.UpdatedAt) días </small></h5>
+                        <h5 class="mb-sm-0">@Model.UsuarioName<small class="text-muted ml-3">última modificación el día (@ViewBag.UltimaModificacion) </small></h5>
                         <br><br />
                         <!--Table-->
-                        <table id="tablePreview" class="table">
-                            <!--Table head-->
-                            <thead></thead>
-                            <!--Table head-->
-                            <!--Table body-->
-                            <tbody>
-                                <tr>
-                                    <td hidden>@Model.Id</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Nombre</th>
-                                    <td>@Model.Nombre</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Email</th>
-                                    <td>@Model.Email</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Localidad</th>
-                                    <td>@Model.Localidad.Descripcion</td><!--Puede tirarte el error al crear, pero si te fijas en la base, ya lo creo, no quitar, ya lo voy a ver-->
-                                </tr>
-                                <tr>
-                                    <th scope="row">Teléfono</th>
-                                    <td>@Model.Telefono</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Celular</th>
-                                    <td>@Model.Celular</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Sitio Web Personal</th>
-                                    <td>@Model.SitioWeb</td>
-                                </tr>
+                        <form action="/Usuario/IraModificarPerfilEntidad">
+                            <table id="tablePreview" class="table">
+                                <!--Table head-->
+                                <thead></thead>
+                                <!--Table head-->
+                                <!--Table body-->
+                                <tbody>
+                                    <tr>
+                                        <td hidden>@Model.Id</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Nombre</th>
+                                        <td>@Model.Nombre</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Email</th>
+                                        <td>@Model.Email</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Localidad</th>
+                                        <td>@Model.Localidad.Descripcion</td><!--Puede tirarte el error al crear, pero si te fijas en la base, ya lo creo, no quitar, ya lo voy a ver-->
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Teléfono</th>
+                                        <td>@Model.Telefono</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Celular</th>
+                                        <td>@Model.Celular</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Sitio Web Personal</th>
+                                        <td>@Model.SitioWeb</td>
+                                    </tr>
 
-                                <tr>
-                                    <th scope="row">Sobre nosotros</th>
-                                    <td>@Model.SobreMi</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Usuario</th>
-                                    <td>@Model.UsuarioName</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Password</th>
-                                    <td>*****</td>
-                                </tr>
-                            </tbody>
-                            <!--Table body-->
-                        </table>
+                                    <tr>
+                                        <th scope="row">Sobre nosotros</th>
+                                        <td>@Model.SobreMi</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Usuario</th>
+                                        <td>@Model.UsuarioName</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Password</th>
+                                        <td>*****</td>
+                                    </tr>
+                                </tbody>
+                                <!--Table body-->
+                            </table>
+                            <button type="submit" class="btn btn-primary" style="font-size: 14px;">Modificar</button>
+                        </form>
                         <!--Table-->
-                        <button type="submit" class="btn btn-default" style="font-size: 14px;">MODIFICAR</button>
                     </div>
                 </div>
             </div>

@@ -17,27 +17,27 @@
 
                             <div class="avatar-wrapper">
                                 @if (Model.Foto != null && Model.Foto.Length > 0)
-{
-                                <img src="@Url.Content(Model.Foto)" alt="" style="height: 200px; width: 200px; border: 3px solid #fff; border-radius: 50%; margin: 0; padding: 0; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);">
-}
-else
-{
-    if (Model.Sexo.Descripcion == "Masculino")
-    {
-        ViewBag.Url = "/Content/images/hombre.png";
-    }
-    else
-    {
-        if (Model.Sexo.Descripcion == "Femenino")
-        {
-            ViewBag.Url = "/Content/images/mujer.jpg";
-        }
-        else
-        {
-            ViewBag.Url = "/Content/images/desconocido.png";
-        }
-    }
-}
+                                {
+                                    <img src="@Url.Content(Model.Foto)" alt="" style="height: 200px; width: 200px; border: 3px solid #fff; border-radius: 50%; margin: 0; padding: 0; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);">
+                                }
+                                else
+                                {
+                                    if (Model.Sexo.Descripcion == "Masculino")
+                                    {
+                                        ViewBag.Url = "/Content/images/hombre.png";
+                                    }
+                                    else
+                                    {
+                                        if (Model.Sexo.Descripcion == "Femenino")
+                                        {
+                                            ViewBag.Url = "/Content/images/mujer.jpg";
+                                        }
+                                        else
+                                        {
+                                            ViewBag.Url = "/Content/images/desconocido.png";
+                                        }
+                                    }
+                                }
                                 <img class="profile-pic" src="@ViewBag.Url" width="100" height="100" alt="">
                                 <input class="file-upload" type="file" id="Foto" name="Foto" />
                             </div>
@@ -65,7 +65,7 @@ else
                     <div class="media-body">
                         <div class="media-body">
                             <div class="d-sm-flex justify-content-between mb-2">
-                                <h5 class="mb-sm-0" style="font-size: 1rem;">@Model.UsuarioName<small class="text-muted ml-3" style="color: #8898aa !important;">última modificación hace (@Model.UpdatedAt) días </small></h5>
+                                <h5 class="mb-sm-0" style="font-size: 1rem;">@Model.UsuarioName<small class="text-muted ml-3" style="color: #8898aa !important;">última modificación el dia (@ViewBag.UltimaModificacion) </small></h5>
                                 <!--<div class="media-reply__link">
                                     <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
                                     <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
@@ -77,7 +77,7 @@ else
 
                             <div class="media mt-3">
                                 <div class="media-body">
-                                    <form action="IraModificarPerfilUsuario">
+                                    <form action="/Usuario/IraModificarPerfilUsuario">
                                         <!--Table-->
                                         <table id="tablePreview" class="table">
                                             <!--Table head-->
@@ -156,9 +156,9 @@ else
                                         </table>
                                         <!--Table-->
 
-                                        <button type="submit" class="btn btn-default">MODIFICAR</button>
-                                </form>
-                               </div>
+                                        <button type="submit" class="btn btn-primary">Modificar</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
