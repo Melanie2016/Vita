@@ -74,6 +74,7 @@
                             <div class="alert alert-info" role="alert">
                                 Este es el formulario que presentará a los usuarios interesados en esta Actividad. Recuerde que los datos son importantes, úselos responsablemente.
                             </div>
+                            <br />
                             <h3>Formulario de la Actividad @ViewBag.Formulario.Actividad.Titulo</h3>
                             <br />
 
@@ -103,11 +104,11 @@
                                                           <div class="col-lg-6">
                                                               @if (cam.Obligatorio) //agrego validación que sea obligatorio
                                                               {
-                                                                  <input class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaTextoCorto" maxlength="50" required />
+                                                                  <input class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaTextoCorto" maxlength="50" disabled required/>
                                                               }
                                                               else
                                                               {
-                                                                  <input class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaTextoCorto" maxlength="50" />
+                                                                  <input class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaTextoCorto" maxlength="50" disabled />
                                                               }
 
                                                           </div>
@@ -126,11 +127,11 @@
                                                           <div class="col-lg-6">
                                                               @if (cam.Obligatorio) //agrego validación que sea obligatorio
                                                               {
-                                                                  <textarea class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaTextoLargo" rows="5" required></textarea>
+                                                                  <textarea class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaTextoLargo" rows="5" disabled required></textarea>
                                                               }
                                                               else
                                                               {
-                                                                  <textarea class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaTextoLargo" rows="5"></textarea>
+                                                                  <textarea class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaTextoLargo" rows="5" disabled></textarea>
                                                               }
                                                           </div>
                                                       </div>
@@ -147,11 +148,11 @@
                                                           <div class="col-lg-6">
                                                               @if (cam.Obligatorio)
                                                               {
-                                                                  <input type="number" class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaNumero" required />
+                                                                  <input type="number" class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaNumero" disabled required />
                                                               }
                                                               else
                                                               {
-                                                                  <input type="number" class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaNumero" />
+                                                                  <input type="number" class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaNumero" disabled/>
                                                               }
                                                           </div>
                                                       </div>
@@ -168,11 +169,11 @@
                                                               <div class="input-group date" style="width:200px;">
                                                                   @if (cam.Obligatorio)
                                                                   {
-                                                                      <input type="text" class="form-control" placeholder="02/12/2019" name="CamposVm[@index].RespuestaDate" data-provide="datepicker" data-date-format="dd/mm/yyyy" required>
+                                                                      <input type="text" class="form-control" placeholder="02/12/2019" name="CamposVm[@index].RespuestaDate" data-provide="datepicker" data-date-format="dd/mm/yyyy" disabled required>
                                                                   }
                                                                   else
                                                                   {
-                                                                      <input type="text" class="form-control" placeholder="02/12/2019" name="CamposVm[@index].RespuestaDate" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+                                                                      <input type="text" class="form-control" placeholder="02/12/2019" name="CamposVm[@index].RespuestaDate" data-provide="datepicker" data-date-format="dd/mm/yyyy" disabled>
                                                                   }
                                                                   <div class="input-group-addon">
                                                                       <span class="glyphicon glyphicon-th"></span>
@@ -193,11 +194,11 @@
                                                           <div class="col-lg-6">
                                                               @if (cam.Obligatorio)
                                                               {
-                                                                  <input class="file-upload" type="file" id="Foto" name="CamposVm[@index].Foto" required onclick="return false" />
+                                                                  <input class="file-upload" type="file" id="Foto" name="CamposVm[@index].Foto" disabled required onclick="return false" />
                                                               }
                                                               else
                                                               {
-                                                                  <input class="file-upload" type="file" id="Foto" name="CamposVm[@index].Foto" onclick="return false" />
+                                                                  <input class="file-upload" type="file" id="Foto" name="CamposVm[@index].Foto" disabled onclick="return false" />
                                                               }
                                                           </div>
                                                       </div>
@@ -209,13 +210,14 @@
 
                                           }
 
-                                          <div class="form-group row" id="botonEnviar">
+                                          <!--<div class="form-group row" id="botonEnviar">
                                               <div class="col-lg-8 ml-auto">
                                                   <button type="submit" class="btn btn-primary" style="background:lightgray; color:black" onclick="return false">Guardar respuestas</button>
                                               </div>
-                                          </div>
+                                          </div>-->
 
                                       }
+                                      <br />
                                       <div>
                                           <a href="/Actividad/ListaActividades"><button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target="#guardar">Volver</button></a>
                                       </div>
