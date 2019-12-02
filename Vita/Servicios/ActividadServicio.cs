@@ -1212,9 +1212,10 @@ namespace Vita.Servicios
             myDbContext.MotivoRechazoFormDinamico.Add(motivoNuevo);
             myDbContext.SaveChanges();
 
-            CampoRechazado campoRechazadosNuevo = new CampoRechazado();
+            
             foreach(var cam in form.CamposRehacer)
             {
+                CampoRechazado campoRechazadosNuevo = new CampoRechazado();
                 campoRechazadosNuevo.MotivoRechazoFormDinamicoId = motivoNuevo.Id;
                 campoRechazadosNuevo.CampoRechazadoId = cam.Id;                
                 campoRechazados.Add(campoRechazadosNuevo);

@@ -11,8 +11,16 @@
 <section class="container-fluid">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Hay @ViewBag.ListaUsuario.Count usuarios en la actividad, con estado @ViewBag.EstadoString </h4><br />
-            <h6 style="color:#76838f"> @ViewBag.Actividad.Titulo, @ViewBag.Actividad.Descripcion</h6>
+            @if (@ViewBag.ListaUsuario.Count == 1)
+            {
+                <h4 class="card-title">Hay @ViewBag.ListaUsuario.Count usuario en la actividad  @ViewBag.Actividad.Titulo, con estado @ViewBag.EstadoString </h4><br />
+            }
+            else
+            {
+                <h4 class="card-title">Hay @ViewBag.ListaUsuario.Count usuarios en la actividad  @ViewBag.Actividad.Titulo, con estado @ViewBag.EstadoString </h4><br />
+
+            }
+            <h6 style="text-align:justify; color:#76838f"> @ViewBag.Actividad.Descripcion</h6>
             <form action="/Actividad/AprobarORechazarUsuario" method="post">
                 <input type="number" value="@ViewBag.Actividad.Id" name="ActividadId" hidden />
                 <div class="table-responsive">
@@ -21,9 +29,9 @@
 
                     @{
                         @*if (@ViewBag.ListaUsuario.Count == 0)
-            {
-                <p>No tiene actividades creadas, vaya a <span style="font-weight:bold;  color: #b200ff;"><a href="/Actividad/CrearActividad/"> CREAR ACTIVIDAD</a></span></p>
-            }*@
+                    {
+                        <p>No tiene actividades creadas, vaya a <span style="font-weight:bold;  color: #b200ff;"><a href="/Actividad/CrearActividad/"> CREAR ACTIVIDAD</a></span></p>
+                    }*@
                         if (@ViewBag.ListaUsuario.Count != 0)
                         {
 
@@ -223,9 +231,9 @@
 
                                 </div>
                                 @*<div class="header-left" style="margin-left:80%;">
-                                    <a href=#><button type="button" class="btn btn-primary" id="btnRechazar" data-toggle="modal" data-target="#guardar">Rechazar</button> </a>
+                                <a href=#><button type="button" class="btn btn-primary" id="btnRechazar" data-toggle="modal" data-target="#guardar">Rechazar</button> </a>
 
-                                </div>*@
+                            </div>*@
                             }
                             <br><br><br><br><br>
 
@@ -267,7 +275,7 @@
                                         }
                                         else
                                         {
-                                            if(i.SexoId == 1) //Femenino
+                                            if (i.SexoId == 1) //Femenino
                                             {
                                                 ViewBag.Url = "/Content/images/mujer.jpg";
                                             }
@@ -294,22 +302,22 @@
                                             }
 
 
-                                    
-                                    <td><img src="@Url.Content(ViewBag.Url)" style="width: 130px; height: 110px; border-radius: 3px;"></td>
-                                    <td>@i.Nombre @i.Apellido</td>
-                                    <td>@i.Localidad.Descripcion</td>
-                                    <td>@Convert.ToInt32(@DateTime.Now.Year - @i.FechaNacimiento.Value.Year)</td>
-                                    <td>@i.Sexo.Descripcion</td>
-                                    <td>
-                                        @estado
-                                        @*@i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion*@
-                                    </td>
-                                    @if (ViewBag.Estado == "2") //Pendiente
-                                    {
-                                        <td>
-                                            <div style="text-align:center"><a href="/Actividad/RespuestasFormularioDinamico?actividadId=@ViewBag.Actividad.Id&usuarioRespuestaId=@i.Id"><span data-toggle="tooltip" data-placement="top" title="Ver respuestas del formulario"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></span></a></div>
-                                        </td>
-                                    }
+
+                                            <td><img src="@Url.Content(ViewBag.Url)" style="width: 130px; height: 110px; border-radius: 3px;"></td>
+                                            <td>@i.Nombre @i.Apellido</td>
+                                            <td>@i.Localidad.Descripcion</td>
+                                            <td>@Convert.ToInt32(@DateTime.Now.Year - @i.FechaNacimiento.Value.Year)</td>
+                                            <td>@i.Sexo.Descripcion</td>
+                                            <td>
+                                                @estado
+                                                @*@i.UsuarioInscriptoActividad.Where(x => x.UsuarioId == Model.Id && x.ActividadId == i.Id).FirstOrDefault().Estado.Descripcion*@
+                                            </td>
+                                            @if (ViewBag.Estado == "2") //Pendiente
+                                            {
+                                                <td>
+                                                    <div style="text-align:center"><a href="/Actividad/RespuestasFormularioDinamico?actividadId=@ViewBag.Actividad.Id&usuarioRespuestaId=@i.Id"><span data-toggle="tooltip" data-placement="top" title="Ver respuestas del formulario"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></span></a></div>
+                                                </td>
+                                            }
 
                                         </tr>
                                     }
