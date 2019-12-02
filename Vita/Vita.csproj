@@ -257,6 +257,7 @@
     <Compile Include="ViewModels\ActividadViewModel.cs" />
     <Compile Include="ViewModels\CampoRehacerViewModel.cs" />
     <Compile Include="ViewModels\CampoViewModel.cs" />
+    <Compile Include="ViewModels\CantidadDeActividadPorCategoria.cs" />
     <Compile Include="ViewModels\FormularioDinamicoViewModel.cs" />
     <Compile Include="ViewModels\FormularioLlenoViewModel.cs" />
     <Compile Include="ViewModels\Gmail.cs" />

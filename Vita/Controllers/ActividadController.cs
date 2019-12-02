@@ -332,7 +332,14 @@ namespace Vita.Controllers
                 var actividades = actividadServicio.GetAllActividadByRolEntidadId(buscarUsuarioLogueado.Id);
                 if (actividades.Any())
                 {
+                    var cantidad1 = actividadServicio.CantidadActividadPorCategoriaId(1);
+                    var cantidad2 = actividadServicio.CantidadActividadPorCategoriaId(2);
+                    var cantidad3 = actividadServicio.CantidadActividadPorCategoriaId(3);
+                    var cantidad4 = actividadServicio.CantidadActividadPorCategoriaId(4);
+                    var cantidad5 = actividadServicio.CantidadActividadPorCategoriaId(5);
+                    var cantidad6 = actividadServicio.CantidadActividadPorCategoriaId(6);
 
+                    var todasCantidad = actividadServicio.GetAllCantidadActividadPorLasCategoria();
                     ViewBag.Estados = actividadServicio.GetEstadosActividad();
                     ViewBag.Categorias = categoriaServicio.GetAllCategorias();
                     var listaActividadesVigentes = actividades.Where(x => x.DeletedAt == fechaNull || x.DeletedAt == null).ToList();
@@ -356,6 +363,7 @@ namespace Vita.Controllers
             else
             {
                 var ListaActvidadesFiltrada = new List<Actividad>();
+              
                 buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
                 ListaActvidadesFiltrada = actividadServicio.GetActividadesFiltradasPorUsuario(titulo,buscarUsuarioLogueado.Id, idCategoria, idEstado, fechaDesde);
                 ViewBag.ListaActvidadesFiltrada = ListaActvidadesFiltrada;
@@ -983,5 +991,6 @@ namespace Vita.Controllers
 
             }
         }
+      
     }
 }

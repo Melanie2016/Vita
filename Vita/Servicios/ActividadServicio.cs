@@ -1264,7 +1264,31 @@ namespace Vita.Servicios
             
             return listaActividades;
         }
+        public CantidadDeActividadPorCategoria CantidadActividadPorCategoriaId(int CategoriaId)
+        {
+            var categoriaDescripcion = myDbContext.Categoria.Where(c=>c.Id==CategoriaId).FirstOrDefault().Descripcion;
+            var actividadesPorCategoria = myDbContext.Actividad.Where(a => a.CategoriaId == CategoriaId).Count();
 
+            var cantiQuey = new CantidadDeActividadPorCategoria();
+            cantiQuey.Descripcion = categoriaDescripcion;
+            cantiQuey.Cantidad = actividadesPorCategoria;
+
+            return cantiQuey;
+        }
+
+        public List<CantidadDeActividadPorCategoria> GetAllCantidadActividadPorLasCategoria()
+        {
+            var categorias = myDbContext.Categoria.ToList();
+            var listaCantiQuery= new List<CantidadDeActividadPorCategoria>();
+            foreach (var c in categorias)
+            {
+                var cantiQuey = new CantidadDeActividadPorCategoria();
+                cantiQuey.Descripcion = c.Descripcion;
+                cantiQuey.Cantidad = myDbContext.Actividad.Where(a => a.CategoriaId == c.Id).Count();
+                listaCantiQuery.Add(cantiQuey);
+            }
+            return listaCantiQuery;
+        }
 
     }
 }
