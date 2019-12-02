@@ -21,32 +21,45 @@ SET IDENTITY_INSERT SubCategoria ON
 INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (1,'Caminata',1);
 INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (2,'Gimnasia de mantenimiento',1);
 INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (3,'Zumba al aire libre',1);
-INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (4,'Excursión',1);
 
-INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (5,'Dominó',2);
-INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (6,'Ajedrez',2);
-INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (7,'Damas',2);
-INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (8,'Chinchón',2);
-INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (9,'Truco',2);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (4,'Dominó',2);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (5,'Ajedrez',2);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (6,'Damas',2);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (7,'Chinchón',2);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (8,'Truco',2);
 
-INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (10,'AquaGym',3);
-INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (11,'Yoga',3);
-INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (12,'Gimnasia',3);
-INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (13,'Baile, tango, zumba',3);
-INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (14,'Pilates',3);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (9,'AquaGym',3);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (10,'Yoga',3);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (11,'Gimnasia',3);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (12,'Baile, tango, zumba',3);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (13,'Pilates',3);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (14,'Spinning',3);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (15,'Crossfit',3);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (16,'Funcional',3);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (17,'Natación',3);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (18,'Hockey',3);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (19,'Futboll',3);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (20,'Voley',3);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (21,'Basketball',3);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (22,'Patin artístico',3);
 
-INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (15,'Manualidades, dibujo, pintura',4);
-INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (17,'Idiomas',4);
-INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (18,'Música, folclore, coros',4);
-INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (19,'Reciclado',4);
-INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (20,'Jardinería',4);
 
-INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (21,'Museo',5);
-INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (22,'Teatro',5);
-INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (23,'Cine',5);
-INSERT INTO SubCategoria(id, Descripcion, CategoriaId) Values (24,'Leer cuentos/ escribir/ cantar',5);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (23,'Manualidades, dibujo, pintura',4);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (24,'Idiomas',4);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (25,'Música, folclore, coros',4);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (26,'Reciclado',4);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (27,'Jardinería',4);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (28,'Workshop',4);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (29,'Gastronomia',4);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (30,'Salud',4);
 
-INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (25,'Excursión',6);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (31,'Museo',5);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (32,'Teatro',5);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (33,'Cine',5);
+INSERT INTO SubCategoria(id, Descripcion, CategoriaId) Values (34,'Leer cuentos/ escribir/ cantar',5);
+
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (35,'Visitas guiadas',6);
+INSERT INTO SubCategoria(Id, Descripcion, CategoriaId) Values (36,'Atracciones turísticas',6);
 SET IDENTITY_INSERT SubCategoria OFF
 
 /***********************************************/

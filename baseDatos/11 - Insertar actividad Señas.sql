@@ -27,7 +27,7 @@ INSERT INTO [dbo].[Actividad]
            ,1000
            ,20
            ,4
-           ,17
+           ,24
            ,600 /*LocalidadId*/
            ,7 /*UsuarioId*/
            ,'~/Content/images/actividad_ulsa.jpg'

@@ -27,7 +27,7 @@ INSERT INTO [dbo].[Actividad]
            ,200
            ,30
            ,3
-           ,3
+           ,15
            ,552
            ,1 /*UsuarioId*/
 		   ,'~/Content/images/crossfit.png'

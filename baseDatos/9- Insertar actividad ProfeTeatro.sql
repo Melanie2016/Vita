@@ -44,7 +44,7 @@ Para el armado del taller me baso en mi experiencia como actriz y docente. A lo 
            ,500
            ,20
            ,5
-           ,22
+           ,32
            ,570
            ,5 /*UsuarioId*/
            ,'~/Content/images/teatro.jpg'

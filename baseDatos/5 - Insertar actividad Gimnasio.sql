@@ -27,7 +27,7 @@ INSERT INTO [dbo].[Actividad]
            ,100
            ,30
            ,3
-           ,13
+           ,12
            ,552 /*LocalidadId*/
            ,1 /*UsuarioId*/
            ,'~/Content/images/Zumba-kids.jpg'

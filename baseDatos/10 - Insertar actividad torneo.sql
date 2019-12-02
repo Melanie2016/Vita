@@ -26,7 +26,7 @@ INSERT INTO [dbo].[Actividad]
            ,200
            ,40
            ,2
-           ,9
+           ,8
            ,896 /*IdLocalidad Tigre*/
            ,6 /*UsuarioId*/
            ,'~/Content/images/truco.jpg'

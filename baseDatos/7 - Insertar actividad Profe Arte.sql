@@ -28,7 +28,7 @@ INSERT INTO [dbo].[Actividad]
            ,150
            ,20
            ,4
-           ,15
+           ,23
            ,5475 /*LocalidadId Villa Devoto*/
            ,3 /*UsuarioId*/
            ,'~/Content/images/taller_arte.jpg'

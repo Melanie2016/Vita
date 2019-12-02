@@ -34,7 +34,7 @@ En seguida, circularemos por el sofisticado barrio de La Recoleta, una zona de e
            ,1100
            ,60
            ,6
-           ,25
+           ,35
            ,5467 /*Recoleta*/
            ,4 /*UsuarioId*/
            ,'~/Content/images/casa-rosada.jpg'
