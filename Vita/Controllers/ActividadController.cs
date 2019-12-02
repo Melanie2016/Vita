@@ -570,7 +570,7 @@ namespace Vita.Controllers
                 actividadServicio.CrearFormularioDinamico(formularioDinamicoViewModel, activdadCreada);
                 if (formularioDinamicoViewModel.publicar == true)
                 {
-                    actividadServicio.PublicarActividad(activdadCreada.Id);
+                    actividadServicio.PublicarActividad(activdadCreada.Id, true);
                 }
                 return RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
 
@@ -840,7 +840,7 @@ namespace Vita.Controllers
         }
 
         [HttpGet]
-        public ActionResult Publicar(string idActividad)
+        public ActionResult Publicar(string idActividad, bool? conUsuarioPendiente)
         {
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
             {
@@ -850,7 +850,7 @@ namespace Vita.Controllers
             else
             {
 
-                actividadServicio.PublicarActividad(int.Parse(idActividad));
+                actividadServicio.PublicarActividad(int.Parse(idActividad), conUsuarioPendiente);
                 //ViewBag.actividadCreada = actividadServicio.GetActividad(actividad.Id);
                 return RedirectToAction("ListaActividades", "Actividad");
             }

@@ -1085,11 +1085,12 @@ namespace Vita.Servicios
                 myDbContext.SaveChanges();
             }
         }
-        public void PublicarActividad(int idActividad)
+        public void PublicarActividad(int idActividad, bool? conUsuarioPendiente)
         {
             var actividadBD = myDbContext.Actividad.Where(x => x.Id == idActividad).FirstOrDefault();
 
             actividadBD.EstadoId = ConstantesUtil.ESTADO_ACTIVIDAD_PUBLICADA;
+            actividadBD.ConUsuarioPendiente = conUsuarioPendiente;
             myDbContext.SaveChanges();
         }
         public List<Respuesta> GetRespuestasByUsuarioIdandActividadId(int usuarioId, int actividadId)
