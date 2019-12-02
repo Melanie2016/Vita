@@ -460,8 +460,8 @@ namespace Vita.Controllers
         public ActionResult ModificarPerfilUsuario(UsuarioModificarViewModel userViewModel)
         {
             var usua = new Usuario();
-            if (ModelState.IsValid)
-            {
+           // if (ModelState.IsValid)
+            //{
 
                 usuarioServicio.ModificarUsuario(userViewModel);
                 usua = usuarioServicio.GetById(userViewModel.Id);
@@ -476,11 +476,11 @@ namespace Vita.Controllers
                 }
 
 
-            }
-            else
-            {
-                return View(usua);
-            }
+            //}
+            //else
+            //{
+            //    return View(usua);
+            //}
         }
 
         [HttpGet]
