@@ -3,346 +3,356 @@
 }
 
 
-    <section class="ftco-section">
-        <div class="header">
-            <div class="inner-header flex" style="height:25vh;">
-                <!--Just the logo.. Don't mind this-->
-                <div class="container h-100">
-                    <div class="container">
-                        <div class="row">
+<section class="ftco-section">
+    <div class="header">
+        <div class="inner-header flex" style="height:25vh;">
+            <!--Just the logo.. Don't mind this-->
+            <div class="container h-100">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="col-md-12 col-sm-12 col-xs-12">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
 
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!--Waves Container-->
-            <div>
-                <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                     viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-                    <defs>
-                        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-                    </defs>
-                    <g class="parallax">
-                        <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
-                        <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
-                        <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
-                        <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
-                    </g>
-                </svg>
-            </div>
-            <!--Waves end-->
         </div>
 
+        <!--Waves Container-->
+        <div>
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                 viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                <defs>
+                    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                </defs>
+                <g class="parallax">
+                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+                    <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+                </g>
+            </svg>
+        </div>
+        <!--Waves end-->
+    </div>
 
-        <div class="site-section">
-            <div class="container" style="margin-top: 30px;">
-                <div class="row">
-                    <div class="col-lg-8">
 
-                        <!--Mensaje Inscripción exitosa-->
-                        @if (ViewBag.Resultado == 1)
-                        {
-                            <div class="alert alert-success" role="alert">
-                                @ViewBag.Mensaje
-                            </div>
-                        }
+    <div class="site-section">
+        <div class="container" style="margin-top: 30px;">
+            <div class="row">
+                <div class="col-lg-8">
 
-                        <!--Ya se encuentra inscripto en la actividad-->
-                        @if (ViewBag.Inscripto)
-                        {
-                            <div class="alert alert-success" role="alert">
-                                Ya te encuentras inscripto en esta actividad!
-                            </div>
-                        }
-
-                        <!---->
-                        <!--Mensaje debe loguearse-->
-                        @if (ViewBag.IniciarSesion == "true")
-                        {
-                            <div class="alert alert-warning" role="alert">
-                                Debe iniciar sesión para inscribirse en la actividad
-                            </div>
-                        }
-                        <!---->
-                        <!--Debe elgir un dia y horario de la actividad-->
-                        @if (ViewBag.ElegirDia)
-                        {
-                            <div class="alert alert-warning" role="alert">
-                                Debe elegir un día para inscribirse en la actividad
-                            </div>
-                        }
-
-                        <!--Mensaje error al inscribirse-->
-                        @if (ViewBag.Resultado != 0 && ViewBag.Resultado != 1)
-                        {
-                            <div class="alert alert-danger" role="alert">
-                                @ViewBag.Mensaje
-                            </div>
-                        }
-                        <!---->
-                        <!--Inicio Carousel-->
-                        <!--Carousel Wrapper-->
-                        <h4 class="h5 mb-4 text-black" style="font-size: 30px; color: #30e3ca;">@ViewBag.Actividad.Titulo</h4>
-                        <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
-                            <!--Slides-->
-                            <div class="carousel-inner" role="listbox" style="border-radius: 3px;">
-                                <!--First slide-->
-                                @if (ViewBag.Actividad.Foto != null && ViewBag.Actividad.Foto.Length > 0)
-                                {
-                                    ViewBag.Url = ViewBag.Actividad.Foto;
-                                }
-                                else
-                                {
-                                    ViewBag.Url = "/Content/images/sin_foto.png";
-                                }
-
-                                <div class="carousel-item active" style=" height: 70vh; min-height: 300px">
-                                    <img class="d-block w-100" src="@Url.Content(ViewBag.Url)" style=" height: 500px !important; width: 100%;"
-                                         alt="First slide">
-                                </div>
-                            </div>
-                            <!--/.Slides-->
-                            <!--Controls-->
-                            <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                            <!--/.Controls-->
+                    <!--Mensaje Inscripción exitosa-->
+                    @if (ViewBag.Resultado == 1)
+                    {
+                        <div class="alert alert-success" role="alert">
+                            @ViewBag.Mensaje
                         </div>
-                        <!--/.Carousel Wrapper-->
-                        <!--Fin Carousel-->
+                    }
 
-                        <strong style="color: #666; font-size: 14px; font-weight:bold">Descripción</strong>
-                        <p>@ViewBag.Actividad.Descripcion</p>
-                        <strong style="color: #666; font-size: 14px; font-weight:bold">Edad </strong>
-                        <p>A partir de @ViewBag.Actividad.EdadMinima hasta @ViewBag.Actividad.EdadMaxima años</p>
-                        <strong style="color: #666; font-size: 14px; font-weight:bold">Precio</strong>
-                        @if (@ViewBag.Actividad.Precio != null && @ViewBag.Actividad.Precio != 0)
-                        {
-                            <p>$@ViewBag.Actividad.Precio</p>
-                        }
-                        else
-                        {
-                            <p>Gratuito</p>
-                        }
+                    <!--Ya se encuentra inscripto en la actividad-->
+                    @if (ViewBag.Inscripto)
+                    {
+                        <div class="alert alert-success" role="alert">
+                            Ya te encuentras inscripto en esta actividad!
+                        </div>
+                    }
 
-                        <br />
+                    <!---->
+                    <!--Mensaje debe loguearse-->
+                    @if (ViewBag.IniciarSesion == "true")
+                    {
+                        <div class="alert alert-warning" role="alert">
+                            Debe iniciar sesión para inscribirse en la actividad
+                        </div>
+                    }
+                    <!---->
+                    <!--Debe elgir un dia y horario de la actividad-->
+                    @if (ViewBag.ElegirDia)
+                    {
+                        <div class="alert alert-warning" role="alert">
+                            Debe elegir un día para inscribirse en la actividad
+                        </div>
+                    }
 
-                        <!--MAPA-->
-                        <strong style="color: #666; font-size: 14px; font-weight:bold">Cómo llegar</strong><br />
-
-                        @if (ViewBag.Domicilio != null)
-                        {
-                            <iframe src="https://maps.google.com/maps?q=@ViewBag.Domicilio.NombreCalle%20=@ViewBag.Domicilio.NumeroCalle%20=@ViewBag.Domicilio.CodigoPostal%20=@ViewBag.Actividad.Localidad.Descripcion%20Buenos%20Aires&t=&z=15&ie=UTF8&iwloc=&output=embed" width="550" height="398" frameborder="0" style="border:0" allowfullscreen></iframe>
-                        }
-                        else
-                        {
-                            <iframe src="https://maps.google.com/maps?q=@ViewBag.Actividad.Localidad.Descripcion%20Buenos%20Aires&t=&z=15&ie=UTF8&iwloc=&output=embed" width="550" height="398" frameborder="0" style="border:0" allowfullscreen></iframe>
-                        }
-                        <!--FIN MAPA-->
-                        <!--VIDEO-->
-
-
-
-                        @if (ViewBag.Actividad.Url != null)
-                        {
-
-                            var videoURI = new Uri(ViewBag.Actividad.Url);
-
-                            var videoId = HttpUtility.ParseQueryString(videoURI.Query).Get("v");
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/@videoId" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        }
-                        else //No tiene video
-                        {
-                            <iframe width="540" height="345" src="https://www.youtube.com/embed/-UBNgXNe-9A?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com">
-                            </iframe>
-                        }
-                    </div>
-
-                    <div class="col-lg-3 ml-auto">
-
-                        <div class="mb-5">
-                            @using (Html.BeginForm("FichaActividad", "Actividad", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    <!--Mensaje error al inscribirse-->
+                    @if (ViewBag.Resultado != 0 && ViewBag.Resultado != 1)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewBag.Mensaje
+                        </div>
+                    }
+                    <!---->
+                    <!--Inicio Carousel-->
+                    <!--Carousel Wrapper-->
+                    <h4 class="h5 mb-4 text-black" style="font-size: 30px; color: #30e3ca;">@ViewBag.Actividad.Titulo</h4>
+                    <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
+                        <!--Slides-->
+                        <div class="carousel-inner" role="listbox" style="border-radius: 3px;">
+                            <!--First slide-->
+                            @if (ViewBag.Actividad.Foto != null && ViewBag.Actividad.Foto.Length > 0)
                             {
-                                if (!ViewBag.Logueado)//No está logueado
-                                {
-                                    <div class="form-group">
-                                        <a href="/Actividad/FichaActividad?idActividad=@ViewBag.Actividad.Id&inscribirse=true" class="nav-link" style=" background-color: #7D4BBC;font-weight: bold;text-align: center;color: white;border-radius: 5px;">Inscribirse</a>
-                                    </div>
-                                }
-                                else //está logueado
-                                {
-                                    <input type="hidden" value="@ViewBag.Actividad.Id" name="idActividad" />
-                                    <input type="hidden" value="true" name="inscribirse" />
+                                ViewBag.Url = ViewBag.Actividad.Foto;
+                            }
+                            else
+                            {
+                                ViewBag.Url = "/Content/images/sin_foto.png";
+                            }
 
-                                    if (!ViewBag.Inscripto && ViewBag.Rol != 2) //Si no está inscripto en la actividad y no es una entidad, puede inscribirse
+                            <div class="carousel-item active" style=" height: 70vh; min-height: 300px">
+                                <img class="d-block w-100" src="@Url.Content(ViewBag.Url)" style=" height: 500px !important; width: 100%;"
+                                     alt="First slide">
+                            </div>
+                        </div>
+                        <!--/.Slides-->
+                        <!--Controls-->
+                        <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                        <!--/.Controls-->
+                    </div>
+                    <!--/.Carousel Wrapper-->
+                    <!--Fin Carousel-->
+
+                    <strong style="color: #666; font-size: 14px; font-weight:bold">Descripción</strong>
+                    <p>@ViewBag.Actividad.Descripcion</p>
+                    <strong style="color: #666; font-size: 14px; font-weight:bold">Edad </strong>
+                    <p>A partir de @ViewBag.Actividad.EdadMinima hasta @ViewBag.Actividad.EdadMaxima años</p>
+                    <strong style="color: #666; font-size: 14px; font-weight:bold">Precio</strong>
+                    @if (@ViewBag.Actividad.Precio != null && @ViewBag.Actividad.Precio != 0)
+                    {
+                        <p>$@ViewBag.Actividad.Precio</p>
+                    }
+                    else
+                    {
+                        <p>Gratuito</p>
+                    }
+
+                </div>
+
+                <div class="col-lg-3 ml-auto">
+
+                    <div class="mb-5">
+                        @using (Html.BeginForm("FichaActividad", "Actividad", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            if (!ViewBag.Logueado)//No está logueado
+                            {
+                                <div class="form-group">
+                                    <a href="/Actividad/FichaActividad?idActividad=@ViewBag.Actividad.Id&inscribirse=true" class="nav-link" style=" background-color: #7D4BBC;font-weight: bold;text-align: center;color: white;border-radius: 5px;">Inscribirse</a>
+                                </div>
+                            }
+                            else //está logueado
+                            {
+                                <input type="hidden" value="@ViewBag.Actividad.Id" name="idActividad" />
+                                <input type="hidden" value="true" name="inscribirse" />
+
+                                if (!ViewBag.Inscripto && ViewBag.Rol != 2) //Si no está inscripto en la actividad y no es una entidad, puede inscribirse
+                                {
+                                    if (ViewBag.Resultado != 1) //puede ser que justo se inscribió recién y hay que ocultarle el botón
                                     {
-                                        if (ViewBag.Resultado != 1) //puede ser que justo se inscribió recién y hay que ocultarle el botón
+                                        <input type="submit" class="nav-link" style=" background-color: #7D4BBC;font-weight: bold;text-align: center;color: white;border-radius: 5px; width: 250px; height: 38px; padding-top: 5px; margin-bottom: 35px;" value="Inscribirse" />
+                                    }
+                                    else //se inscribió en la actividad
+                                    {
+                                        if (ViewBag.CompletarFormulario) //tiene formulario dinamico y debe completarlo
                                         {
-                                            <input type="submit" class="nav-link" style=" background-color: #7D4BBC;font-weight: bold;text-align: center;color: white;border-radius: 5px; width: 250px; height: 38px; padding-top: 5px; margin-bottom: 35px;" value="Inscribirse" />
-                                        }
-                                        else //se inscribió en la actividad
-                                        {
-                                            if (ViewBag.CompletarFormulario) //tiene formulario dinamico y debe completarlo
-                                            {
-                                                <a href="/Actividad/CompletarFormularioDinamicoUsuario?actividadId=@ViewBag.ActividadId" class="nav-link" style=" background-color: #69D385;font-weight: bold;text-align: center;color: white;border-radius: 5px;">Completar Formulario</a>
-                                            }
+                                            <a href="/Actividad/CompletarFormularioDinamicoUsuario?actividadId=@ViewBag.ActividadId" class="nav-link" style=" background-color: #69D385;font-weight: bold;text-align: center;color: white;border-radius: 5px;">Completar Formulario</a>
                                         }
                                     }
-
                                 }
 
-                                <br />
-                                <div class="form-group">
-                                    <div class="wrap-icon">
-                                        <img src="~/Content/images/reloj.png" /><span style="font-size:18px;color:black">Fecha y Hora</span>
-                                        @foreach (var item in ViewBag.FechasActividad)
+                            }
+
+                            <br />
+                            <div class="form-group">
+                                <div class="wrap-icon">
+                                    <img src="~/Content/images/reloj.png" /><span style="font-size:18px;color:black">Fecha y Hora</span>
+                                    @foreach (var item in ViewBag.FechasActividad)
+                                    {
+                                        if (item.InicioEvento != null && item.DiaSemanaId == null) //Es una actividad con una fecha de inicio y fin solamente
                                         {
-                                            if (item.InicioEvento != null && item.DiaSemanaId == null) //Es una actividad con una fecha de inicio y fin solamente
+                                            <input type="hidden" value="@item.Id" name="FechaActividadId" />
+
+                                            if (item.InicioEvento == item.FinEvento) //mismo dia de comienzo y fin
                                             {
-                                                <input type="hidden" value="@item.Id" name="FechaActividadId" />
-
-                                                if (item.InicioEvento == item.FinEvento) //mismo dia de comienzo y fin
-                                                {
-                                                    <p style="color:#8a8686">
-                                                        @item.InicioEvento.ToString().Remove(10)  @item.HoraInicio.ToString().Remove(5) - @item.HoraFin.ToString().Remove(5)
-                                                    </p>
-                                                }
-                                                else //distinto dia de comienzo y fin
-                                                {
-                                                    <p style="color:#8a8686">
-                                                        @item.InicioEvento.ToString().Remove(10)  @item.HoraInicio.ToString().Remove(5)
-                                                    </p>
-                                                    <p style="color:#8a8686">
-                                                        @item.FinEvento.ToString().Remove(10)  @item.HoraFin.ToString().Remove(5)
-                                                    </p>
-                                                }
-
+                                                <p style="color:#8a8686">
+                                                    @item.InicioEvento.ToString().Remove(10)  @item.HoraInicio.ToString().Remove(5) - @item.HoraFin.ToString().Remove(5)
+                                                </p>
                                             }
-                                            else
+                                            else //distinto dia de comienzo y fin
                                             {
-                                                if (ViewBag.Logueado) //Esta logueado y son distintos dias y horarios
+                                                <p style="color:#8a8686">
+                                                    @item.InicioEvento.ToString().Remove(10)  @item.HoraInicio.ToString().Remove(5)
+                                                </p>
+                                                <p style="color:#8a8686">
+                                                    @item.FinEvento.ToString().Remove(10)  @item.HoraFin.ToString().Remove(5)
+                                                </p>
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            if (ViewBag.Logueado) //Esta logueado y son distintos dias y horarios
+                                            {
+                                                if (!ViewBag.Inscripto && ViewBag.Rol != 2) //Si no está inscripto en la actividad y no es una entidad, puede inscribirse
                                                 {
-                                                    if (!ViewBag.Inscripto && ViewBag.Rol != 2) //Si no está inscripto en la actividad y no es una entidad, puede inscribirse
+                                                    if (ViewBag.Resultado != 1) //puede ser que justo se inscribió recién y hay que ocultarle las opciones
                                                     {
-                                                        if (ViewBag.Resultado != 1) //puede ser que justo se inscribió recién y hay que ocultarle las opciones
-                                                        {
-                                                            <div>
-                                                                <input type="checkbox" name="FechaActividadId" value="@item.Id" style="opacity:1; width:15px; margin-top: -2px;" />
-                                                                <p style="color:#8a8686; margin-left: 20px;">
-                                                                    @item.DiaSemana.Descripcion  @item.HoraInicio.ToString().Remove(5) - @item.HoraFin.ToString().Remove(5)
-                                                                </p>
-                                                            </div>
-                                                        }
-                                                        else //Se inscribió recién en la actividad
-                                                        {
-                                                            <p style="color:#8a8686">
+                                                        <div>
+                                                            <input type="checkbox" name="FechaActividadId" value="@item.Id" style="opacity:1; width:15px; margin-top: -2px;" />
+                                                            <p style="color:#8a8686; margin-left: 20px;">
                                                                 @item.DiaSemana.Descripcion  @item.HoraInicio.ToString().Remove(5) - @item.HoraFin.ToString().Remove(5)
                                                             </p>
-                                                        }
-
+                                                        </div>
                                                     }
-                                                    else //está inscripto en la actividad
+                                                    else //Se inscribió recién en la actividad
                                                     {
                                                         <p style="color:#8a8686">
                                                             @item.DiaSemana.Descripcion  @item.HoraInicio.ToString().Remove(5) - @item.HoraFin.ToString().Remove(5)
                                                         </p>
                                                     }
+
                                                 }
-                                                else//No está logueado y son distintos dias y horarios
+                                                else //está inscripto en la actividad
                                                 {
                                                     <p style="color:#8a8686">
                                                         @item.DiaSemana.Descripcion  @item.HoraInicio.ToString().Remove(5) - @item.HoraFin.ToString().Remove(5)
                                                     </p>
                                                 }
                                             }
+                                            else//No está logueado y son distintos dias y horarios
+                                            {
+                                                <p style="color:#8a8686">
+                                                    @item.DiaSemana.Descripcion  @item.HoraInicio.ToString().Remove(5) - @item.HoraFin.ToString().Remove(5)
+                                                </p>
+                                            }
                                         }
-                                    </div>
+                                    }
                                 </div>
-                                <div class="form-group">
-                                    <div class="wrap-icon">
-                                        <img src="~/Content/images/contacto.png" /><span style="font-size:18px;color:black">Contacto</span>
-                                        <p style="color:#8a8686">
-                                            @ViewBag.Actividad.Usuario.Nombre
-                                        </p>
-                                        <p style="color:#8a8686">
-                                            Telefono:  @ViewBag.Actividad.Usuario.Telefono
-                                        </p>
-                                        <p style="color:#8a8686">
-                                            <img src="~/Content/images/logo_whatsapp.png" style="width: 23px; margin-top: -5px;" /><a href="https://api.whatsapp.com/send?phone=549-@ViewBag.Actividad.Usuario.Celular&text=Quiero%20saber%20m%C3%A1s%20de%20esta%20actividad:-@ViewBag.Actividad.Titulo-" style="color:#1ebea5; margin-left: 10px;">Preguntar por WhatsApp</a>
-                                        </p>
+                            </div>
+                            <div class="form-group">
+                                <div class="wrap-icon">
+                                    <img src="~/Content/images/contacto.png" /><span style="font-size:18px;color:black">Contacto</span>
+                                    <p style="color:#8a8686">
+                                        @ViewBag.Actividad.Usuario.Nombre
+                                    </p>
+                                    <p style="color:#8a8686">
+                                        Telefono:  @ViewBag.Actividad.Usuario.Telefono
+                                    </p>
+                                    <p style="color:#8a8686">
+                                        <img src="~/Content/images/logo_whatsapp.png" style="width: 23px; margin-top: -5px;" /><a href="https://api.whatsapp.com/send?phone=549-@ViewBag.Actividad.Usuario.Celular&text=Quiero%20saber%20m%C3%A1s%20de%20esta%20actividad:-@ViewBag.Actividad.Titulo-" style="color:#1ebea5; margin-left: 10px;">Preguntar por WhatsApp</a>
+                                    </p>
 
-                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="wrap-icon">
-                                        <span class="icon icon-room" style="font-size:20px; color:#FF5A49"></span><span style="font-size:18px; color:black">Ubicación</span>
-                                        @if (ViewBag.Domicilio != null)
-                                        {
-                                            <p style="color:#8a8686"> @ViewBag.Actividad.Localidad.Descripcion, @ViewBag.Domicilio.NombreCalle @ViewBag.Domicilio.NumeroCalle</p>
-                                        }
-                                        else
-                                        {
-                                            <p style="color:#8a8686"> @ViewBag.Actividad.Localidad.Descripcion </p>
-                                        }
+                            </div>
+                            <div class="form-group">
+                                <div class="wrap-icon">
+                                    <span class="icon icon-room" style="font-size:20px; color:#FF5A49"></span><span style="font-size:18px; color:black">Ubicación</span>
+                                    @if (ViewBag.Domicilio != null)
+                                    {
+                                        <p style="color:#8a8686"> @ViewBag.Actividad.Localidad.Descripcion, @ViewBag.Domicilio.NombreCalle @ViewBag.Domicilio.NumeroCalle</p>
+                                    }
+                                    else
+                                    {
+                                        <p style="color:#8a8686"> @ViewBag.Actividad.Localidad.Descripcion </p>
+                                    }
 
-                                    </div>
                                 </div>
-                            }
-                        </div>
-
-                        <!--Franja Horaria-->
-                        <!--<div class="mb-5">
-        <form action="#" method="post">
-            <div class="form-group">
-                <ul>
-                    <li>
-                        <label for="option1">
-                            <input type="radio" id="option1">
-                            Lunes de 10am - 11am
-                        </label>
-                    </li>
-                    <li>
-                        <label for="option2">
-                            <input type="radio" id="option2">
-                            Martes de 15pm - 16pm
-                        </label>
-                    </li>
-                    <li>
-                        <label for="option3">
-                            <input type="radio" id="option3">
-                            Miércoles de 10am - 11am
-                        </label>
-                    </li>
-                    <li>
-                        <label for="option4">
-                            <input type="radio" id="option4">
-                            Jueves de 20pm - 21pm
-                        </label>
-                    </li>
-                    <li>
-                        <label for="option4">
-                            <input type="radio" id="option4">
-                            Viernes de 15pm - 16pm
-                        </label>
-                    </li>
-                </ul>
-            </div>
-        </form>
-    </div>
-        -->
+                            </div>
+                        }
                     </div>
 
+                    <!--Franja Horaria-->
+                    <!--<div class="mb-5">
+                        <form action="#" method="post">
+                            <div class="form-group">
+                                <ul>
+                                    <li>
+                                        <label for="option1">
+                                            <input type="radio" id="option1">
+                                            Lunes de 10am - 11am
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="option2">
+                                            <input type="radio" id="option2">
+                                            Martes de 15pm - 16pm
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="option3">
+                                            <input type="radio" id="option3">
+                                            Miércoles de 10am - 11am
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="option4">
+                                            <input type="radio" id="option4">
+                                            Jueves de 20pm - 21pm
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label for="option4">
+                                            <input type="radio" id="option4">
+                                            Viernes de 15pm - 16pm
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+                        -->
                 </div>
+
             </div>
         </div>
-    </section>
+    </div>
+</section>
+</section>
+
+
+<section id="venue" class="wow fadeInUp">
+
+    <div class="container-fluid">
+
+        <div class="row no-gutters">
+            <div class="col-lg-6 venue-map">
+
+                @if (ViewBag.Domicilio != null)
+                {
+                    <iframe src="https://maps.google.com/maps?q=@ViewBag.Domicilio.NombreCalle%20=@ViewBag.Domicilio.NumeroCalle%20=@ViewBag.Domicilio.CodigoPostal%20=@ViewBag.Actividad.Localidad.Descripcion%20Buenos%20Aires&t=&z=15&ie=UTF8&iwloc=&output=embed" width="550" height="398" frameborder="0" style="border:0" allowfullscreen></iframe>
+                }
+                else
+                {
+                    <iframe src="https://maps.google.com/maps?q=@ViewBag.Actividad.Localidad.Descripcion%20Buenos%20Aires&t=&z=15&ie=UTF8&iwloc=&output=embed" width="550" height="398" frameborder="0" style="border:0" allowfullscreen></iframe>
+                }
+            </div>
+
+
+
+
+            @if (ViewBag.Actividad.Url != null)
+            {
+
+                var videoURI = new Uri(ViewBag.Actividad.Url);
+
+                var videoId = HttpUtility.ParseQueryString(videoURI.Query).Get("v");
+                <iframe width="920" height="505" src="https://www.youtube.com/embed/@videoId" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            }
+            else //No tiene video
+            {
+                <iframe width="920" height="435" src="https://www.youtube.com/embed/KfXbavvWlUM?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com">
+                </iframe>
+            }
+
+
+
+        </div>
+</section>
