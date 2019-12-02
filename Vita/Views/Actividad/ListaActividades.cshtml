@@ -196,7 +196,7 @@
                                     <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="No puede editar una actividad con usuarios" onclick="return false"><i class="fa fa-pencil color-muted m-r-5" style="color:#D5D2D2;"></i> </a></span></td>
                                     <td><span><a href="/Actividad/EliminaroDarseBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="No puede eliminar una actividad con usuarios" onclick="return false" style="color:#D5D2D2;"><i class="fa fa-close color-danger"></i></a></span></td>
                                 }
-                                if (usuariosOtros.Count != 0)//si tengo usuarios de estados distinto a eliminar, habilito boton eliminar
+                                if (usuariosOtros.Count != 0 && usuariosNoEliminar.Count == 0 )//si tengo usuarios de estados distinto a eliminar, habilito boton eliminar
                                 {
                                     <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Editar actividad"><i class="fa fa-pencil color-muted m-r-5" ></i> </a></span></td>
                                     <td><span><a href="/Actividad/EliminaroDarseBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Eliminar actividad"><i class="fa fa-close color-danger"></i></a></span></td>
@@ -318,7 +318,7 @@
                                             <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="No puede editar una actividad con usuarios" onclick="return false"><i class="fa fa-pencil color-muted m-r-5"></i> </a></span></td>
                                             <td><span><a href="/Actividad/EliminaroDarseBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="No puede eliminar una actividad con usuarios" onclick="return false"><i class="fa fa-close color-danger"></i></a></span></td>
                                         }
-                                        if (usuariosOtros2.Count != 0)//si tengo usuarios de estados distinto a eliminar, habilito boton eliminar
+                                        if (usuariosOtros2.Count != 0 && usuariosNoEliminar2.Count == 0 )//si tengo usuarios de estados distinto a eliminar, habilito boton eliminar
                                         {
                                             <td><span><a href="/Actividad/ModificarActividad" data-toggle="tooltip" data-placement="top" title="Editar actividad"><i class="fa fa-pencil color-muted m-r-5" style="color:blue;"></i> </a></span></td>
                                             <td><span><a href="/Actividad/EliminaroDarseBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Eliminar actividad"><i class="fa fa-close color-danger" style="color:red;"></i></a></span></td>
