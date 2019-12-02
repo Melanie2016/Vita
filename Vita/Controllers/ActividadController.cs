@@ -637,15 +637,23 @@ namespace Vita.Controllers
             }
             else
             {
-                body = "Tu inscripción a la actividad " + tituloActividad + " ha sido rechazada.";
+                if(Mensaje!= null)
+                {
+                    body = "Tu inscripción a la actividad " + tituloActividad + " ha sido rechazada. " + Mensaje;
+                }
+                else
+                {
+                    body = "Tu inscripción a la actividad " + tituloActividad + " ha sido rechazada.";
+                }
+               
             }
 
             try
             {
-                var accountSid = "ACe237f679127cbe29fcb106e4f6a0be6f";
+                /*var accountSid = "ACe237f679127cbe29fcb106e4f6a0be6f";
                 var authToken = "";
 
-                /*TwilioClient.Init(accountSid, authToken);
+                TwilioClient.Init(accountSid, authToken);
                 var message = MessageResource.Create(
                     from: new Twilio.Types.PhoneNumber("whatsapp:+14155238886"),
                     body: body,
@@ -945,6 +953,32 @@ namespace Vita.Controllers
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 formu.EntidadId = buscarUsuarioLogueado.Id;
                 actividadServicio.MandarRehacerFormuDinamico(formu);
+
+                //Notificaciones de WhatsApp
+                var tituloActividad = actividadServicio.GetActividad(formu.ActividadId).Titulo;
+                var body = "Hola! su inscripción a la actividad " + tituloActividad + " ha sido rechazada. Debe rehacer el formulario: " + formu.DescripcionMotivo;
+                var celular = "whatsapp:+549" + buscarUsuarioLogueado.Celular;
+
+                try
+                {
+                    var accountSid = "ACe237f679127cbe29fcb106e4f6a0be6f";
+                    var authToken = "";
+
+                   /* TwilioClient.Init(accountSid, authToken);
+                    var message = MessageResource.Create(
+                        from: new Twilio.Types.PhoneNumber("whatsapp:+14155238886"),
+                        body: body,
+                        to: new Twilio.Types.PhoneNumber(celular)
+                    );
+
+                    var respuestaApi = message.Sid;*/
+                }
+                catch
+                {
+
+                }
+
+
                 return RedirectToAction("ListaActividades", "Actividad", buscarUsuarioLogueado);
 
             }

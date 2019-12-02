@@ -12,7 +12,7 @@
                 <input type="number" hidden name="ActividadId" value="@ViewBag.Actividad.Id" />
                 <input type="number" hidden name="UsuarioId" value="@ViewBag.DatosUsuario.Id" />
                 <input type="number" hidden name="FormularioDinamicoId" value="@ViewBag.IdFormularioDinamico" />
-                
+
 
                 <div class="media media-reply">
                     <div class="media-body">
@@ -27,26 +27,25 @@
 
 
 
-                                    <p>Formulario que pertenece a la actividad @ViewBag.Actividad.Titulo, respuestas dadas por el usuario: @ViewBag.DatosUsuario.Nombre @ViewBag.DatosUsuario.Apellido </p>
+                                    <p>Formulario que pertenece a la actividad @ViewBag.Actividad.Titulo, respuestas dadas por el usuario: <b>@ViewBag.DatosUsuario.Nombre @ViewBag.DatosUsuario.Apellido </b></p>
                                     <table>
                                         <tr>
-                                            <th>Marcar las que necesitan re hacerce</th>
-
+                                            <th>Marcar las que respuestas que deben rehacerse:</th>
                                         </tr>
                                         @{
-                                           
-                                            var contadorIndex =  -1;
+
+                                            var contadorIndex = -1;
 
                                             foreach (var item in ViewBag.Campos)
                                             {
-                                                contadorIndex ++;
+                                                contadorIndex++;
                                                 if (item.FormularioDinamicoId == ViewBag.IdFormularioDinamico)
                                                 {
 
                                                     <tr>
 
 
-                                                        <td>
+                                                        <td><br /> 
                                                             <div class="form-group row">
                                                                 <label class="col-lg-4 col-form-label">
                                                                     @item.Nombre  @if (item.Obligatorio)
@@ -65,7 +64,7 @@
                                                                             {
                                                                                 if (ViewBag.Respuesta != "0")
                                                                                 {
-                                                                                    <img src="@Url.Content(ViewBag.Respuesta)" style="width: 40%;" />
+                                                                                    <img src="@Url.Content(ViewBag.Respuesta)" style="width: 60%;" />
                                                                                 }
                                                                             }
                                                                             else
@@ -80,7 +79,7 @@
 
                                                                 </div>
                                                                 <div class="col-lg-2">
-                                                                    
+
                                                                     <input type="checkbox" value="@item.Id" name="CamposRehacer[@contadorIndex].Id" style="background:#000000" />
                                                                 </div>
                                                             </div>
@@ -138,10 +137,7 @@
                 </div>
 
                 <div>
-                    <a href="/Actividad/ListaEstado?estadoId=@ViewBag.Estado&actividadId=@ViewBag.ActividadId"><button type="button" class="btn mb-1 btn-info">Volver</button></a>
-                </div>
-
-                <div>
+                    <!--<a href="/Actividad/ListaEstado?estadoId=@ViewBag.Estado&actividadId=@ViewBag.ActividadId"><button type="button" class="btn mb-1 btn-info">Volver</button></a>-->
                     <a href="#"><button type="button" class="btn mb-1 btn-info" data-toggle="modal" data-target="#rehacer">Mandar a rehacer formulario</button></a>
                 </div>
             </form>

@@ -28,188 +28,194 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-lg-12">
-                <div class="card">
+                <div class="card" style=" font-family: Roboto, sans-serif;">
                     <div class="card-body">
 
-                        <h3>Rehacer el formulario de la Actividad @ViewBag.Formulario.Actividad.Titulo</h3>
+                        <h4>Rehacer el formulario de la Actividad @ViewBag.Formulario.Actividad.Titulo</h4>
                         <br />
                         <h4 style="font-size: 15px; color: #04335f;">@ViewBag.Formulario.Descripcion</h4>
 
                         <br /><br />
-                              <div class="form-validation">
-                                  @using (Html.BeginForm("ActualizarFormularioUsuario", "Actividad", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                  {
-                                      <div id="ContenedorEmpleados"></div>
-                                      {
-                                          List<Respuesta> res = new List<Respuesta>();
-                                          foreach (var r in ViewBag.FormularioAModificar)
-                                          {
-                                              res.Add(r);
-                                          }
-                                          var index = -1;
-                                          foreach (var cam in ViewBag.Formulario.Campos)
-                                          {
+                        <div class="form-validation" style="font-size: 14px;">
+                            @using (Html.BeginForm("ActualizarFormularioUsuario", "Actividad", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <div id="ContenedorEmpleados"></div>
+                                {
+                                    List<Respuesta> res = new List<Respuesta>();
+                                    foreach (var r in ViewBag.FormularioAModificar)
+                                    {
+                                        res.Add(r);
+                                    }
+                                    var index = -1;
+                                    foreach (var cam in ViewBag.Formulario.Campos)
+                                    {
 
 
-                                              index++;
-                                              <input name="CamposVm[@index].ActividadId" value="@ViewBag.Formulario.Actividad.Id" hidden />
-                                              <input name="CamposVm[@index].FormularioDinamicoId" value="@ViewBag.Formulario.Id" hidden />
-                                              if (cam.TipoDatoCampoId == 1)
-                                              {
-                                                  string ra = "";
-                                                  ra = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Respuesta1).FirstOrDefault();
-                                                  var raId = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Id).FirstOrDefault();
-                                                  <input name="CamposVm[@index].Id" value="@raId" hidden />
-                                                  <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
+                                        index++;
+                                        <input name="CamposVm[@index].ActividadId" value="@ViewBag.Formulario.Actividad.Id" hidden />
+                                        <input name="CamposVm[@index].FormularioDinamicoId" value="@ViewBag.Formulario.Id" hidden />
+                                        if (cam.TipoDatoCampoId == 1)
+                                        {
+                                            string ra = "";
+                                            ra = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Respuesta1).FirstOrDefault();
+                                            var raId = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Id).FirstOrDefault();
+                                            <input name="CamposVm[@index].Id" value="@raId" hidden />
+                                            <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
 
-                                                  <div class="form-group row">
-                                                      <label class="col-lg-4 col-form-label">
-                                                          @cam.Nombre  @if (cam.Obligatorio)
-                                                          {<span class="text-danger">*</span>}
-                                                      </label>
-                                                      <div class="col-lg-6">
+                                            <div class="form-group row">
+                                                <label class="col-lg-4 col-form-label">
+                                                    @cam.Nombre  @if (cam.Obligatorio)
+                                                    {<span class="text-danger">*</span>}
+                                                </label>
+                                                <div class="col-lg-6">
 
-                                                          @if (cam.Obligatorio) //agrego validación que sea obligatorio
-                                                          {
-
-
-                                                              <input class="form-control" id="val-suggestions" value="@ra" name="CamposVm[@index].RespuestaTextoCorto" maxlength="50" required />
-                                                          }
-                                                          else
-                                                          {
-                                                              <input class="form-control" id="val-suggestions" value="@ra" name="CamposVm[@index].RespuestaTextoCorto" maxlength="50" />
-                                                          }
-
-                                                      </div>
-                                                  </div>
-                                              }
-
-                                              if (cam.TipoDatoCampoId == 2)
-                                              {
-                                                  string ra2 = "";
-                                                  ra2 = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Respuesta1).FirstOrDefault();
-                                                  var raId = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Id).FirstOrDefault();
-                                                  <input name="CamposVm[@index].Id" value="@raId" hidden />
-                                                  <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
-                                                  <div class="form-group row">
-                                                      <label class="col-lg-4 col-form-label">
-                                                          @cam.Nombre  @if (cam.Obligatorio)
-                                                          {<span class="text-danger">*</span>}
-                                                      </label>
-                                                      <div class="col-lg-6">
-                                                          @if (cam.Obligatorio) //agrego validación que sea obligatorio
-                                                          {
-                                                              <textarea class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaTextoLargo" rows="5" required>@ra2</textarea>
-                                                          }
-                                                          else
-                                                          {
-                                                              <textarea class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaTextoLargo" rows="5">@ra2</textarea>
-                                                          }
-                                                      </div>
-                                                  </div>
-                                              }
-
-                                              if (cam.TipoDatoCampoId == 3)
-                                              {
-                                                  string ra3 = "";
-                                                  ra3 = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Respuesta1).FirstOrDefault();
-                                                  var raId = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Id).FirstOrDefault();
-                                                  <input name="CamposVm[@index].Id" value="@raId" hidden />
-                                                  <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
-                                                  <div class="form-group row">
-                                                      <label class="col-lg-4 col-form-label">
-                                                          @cam.Nombre  @if (cam.Obligatorio)
-                                                          {<span class="text-danger">*</span>}
-                                                      </label>
-                                                      <div class="col-lg-6">
-                                                          @if (cam.Obligatorio)
-                                                          {
-                                                              <input type="number" class="form-control" id="val-suggestions" value="@ra3" name="CamposVm[@index].RespuestaNumero" required />
-                                                          }
-                                                          else
-                                                          {
-                                                              <input type="number" class="form-control" id="val-suggestions" value="@ra3" name="CamposVm[@index].RespuestaNumero" />
-                                                          }
-                                                      </div>
-                                                  </div>
-                                              }
-                                              if (cam.TipoDatoCampoId == 4)
-                                              {
-                                                  string ra4 = "";
-                                                  ra4 = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Respuesta1).FirstOrDefault();
-                                                  var raId = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Id).FirstOrDefault();
-                                                  <input name="CamposVm[@index].Id" value="@raId" hidden />
-                                                  <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
-                                                  <div class="form-group row">
-                                                      <label class="col-lg-4 col-form-label">
-                                                          @cam.Nombre  @if (cam.Obligatorio)
-                                                          {<span class="text-danger">*</span>}
-                                                      </label>
-                                                      <div class="col-lg-6">
-                                                          <div class="input-group date" style="width:200px;">
-                                                              @if (cam.Obligatorio)
-                                                              {
-                                                                  <input type="text" class="form-control" value="@ra4" placeholder="02/12/2019" name="CamposVm[@index].RespuestaDate" data-provide="datepicker" data-date-format="dd/mm/yyyy" required>
-                                                              }
-                                                              else
-                                                              {
-                                                                  <input type="text" class="form-control" value="@ra4" placeholder="02/12/2019" name="CamposVm[@index].RespuestaDate" data-provide="datepicker" data-date-format="dd/mm/yyyy">
-                                                              }
-                                                              <div class="input-group-addon">
-                                                                  <span class="glyphicon glyphicon-th"></span>
-                                                              </div>
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                              }
-                                              if (cam.TipoDatoCampoId == 5)
-                                              {
-                                                  string ra5 = "";
-                                                  ra5 = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Respuesta1).FirstOrDefault();
-                                                  var raId = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Id).FirstOrDefault();
-                                                  <input name="CamposVm[@index].Id" value="@raId" hidden />
-                                                  <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
-                                                  <div class="form-group row">
-                                                      <!--Foto-->
-                                                      <label class="col-lg-4 col-form-label" for="Foto">
-                                                          @cam.Nombre  @if (cam.Obligatorio)
-                                                          {<span class="text-danger">*</span>}
-                                                      </label>
-                                                      <div class="col-lg-6">
-                                                          @if (cam.Obligatorio)
-                                                          {
-                                                              @*<img src="@Url.Content(CamposVm[@index].Foto)" style="width: 40%;" />*@
-
-                                                              <input class="file-upload" type="file" id="Foto" value="@ra5" name="CamposVm[@index].Foto" required />@ra5
-                                                          }
-                                                          else
-                                                          {
-                                                              @*<img src="@Url.Content(CamposVm[@index].Foto)" style="width: 40%;" />*@
-
-                                                              <input class="file-upload" type="file" id="Foto" value="@ra5" name="CamposVm[@index].Foto" />@ra5
-                                                          }
-                                                      </div>
-                                                  </div>
-
-                                              }
+                                                    @if (cam.Obligatorio) //agrego validación que sea obligatorio
+                                                    {
 
 
-                                          }
+                                                        <input class="form-control" id="val-suggestions" value="@ra" name="CamposVm[@index].RespuestaTextoCorto" maxlength="50" required />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input class="form-control" id="val-suggestions" value="@ra" name="CamposVm[@index].RespuestaTextoCorto" maxlength="50" />
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        }
+
+                                        if (cam.TipoDatoCampoId == 2)
+                                        {
+                                            string ra2 = "";
+                                            ra2 = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Respuesta1).FirstOrDefault();
+                                            var raId = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Id).FirstOrDefault();
+                                            <input name="CamposVm[@index].Id" value="@raId" hidden />
+                                            <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
+                                            <div class="form-group row">
+                                                <label class="col-lg-4 col-form-label">
+                                                    @cam.Nombre  @if (cam.Obligatorio)
+                                                    {<span class="text-danger">*</span>}
+                                                </label>
+                                                <div class="col-lg-6">
+                                                    @if (cam.Obligatorio) //agrego validación que sea obligatorio
+                                                    {
+                                                        <textarea class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaTextoLargo" rows="5" required>@ra2</textarea>
+                                                    }
+                                                    else
+                                                    {
+                                                        <textarea class="form-control" id="val-suggestions" name="CamposVm[@index].RespuestaTextoLargo" rows="5">@ra2</textarea>
+                                                    }
+                                                </div>
+                                            </div>
+                                        }
+
+                                        if (cam.TipoDatoCampoId == 3)
+                                        {
+                                            string ra3 = "";
+                                            ra3 = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Respuesta1).FirstOrDefault();
+                                            var raId = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Id).FirstOrDefault();
+                                            <input name="CamposVm[@index].Id" value="@raId" hidden />
+                                            <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
+                                            <div class="form-group row">
+                                                <label class="col-lg-4 col-form-label">
+                                                    @cam.Nombre  @if (cam.Obligatorio)
+                                                    {<span class="text-danger">*</span>}
+                                                </label>
+                                                <div class="col-lg-6">
+                                                    @if (cam.Obligatorio)
+                                                    {
+                                                        <input type="number" class="form-control" id="val-suggestions" value="@ra3" name="CamposVm[@index].RespuestaNumero" required />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="number" class="form-control" id="val-suggestions" value="@ra3" name="CamposVm[@index].RespuestaNumero" />
+                                                    }
+                                                </div>
+                                            </div>
+                                        }
+                                        if (cam.TipoDatoCampoId == 4)
+                                        {
+                                            string ra4 = "";
+                                            ra4 = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Respuesta1).FirstOrDefault();
+                                            var raId = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Id).FirstOrDefault();
+                                            <input name="CamposVm[@index].Id" value="@raId" hidden />
+                                            <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
+                                            <div class="form-group row">
+                                                <label class="col-lg-4 col-form-label">
+                                                    @cam.Nombre  @if (cam.Obligatorio)
+                                                    {<span class="text-danger">*</span>}
+                                                </label>
+                                                <div class="col-lg-6">
+                                                    <div class="input-group date" style="width:200px;">
+                                                        @if (cam.Obligatorio)
+                                                        {
+                                                            <input type="text" class="form-control" value="@ra4" placeholder="02/12/2019" name="CamposVm[@index].RespuestaDate" data-provide="datepicker" data-date-format="dd/mm/yyyy" required>
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="text" class="form-control" value="@ra4" placeholder="02/12/2019" name="CamposVm[@index].RespuestaDate" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+                                                        }
+                                                        <div class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-th"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        if (cam.TipoDatoCampoId == 5)
+                                        {
+                                            string ra5 = "";
+                                            ra5 = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Respuesta1).FirstOrDefault();
+                                            var raId = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Id).FirstOrDefault();
+                                            <input name="CamposVm[@index].Id" value="@raId" hidden />
+                                            <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
+                                            <div class="form-group row">
+                                                <!--Foto-->
+                                                <label class="col-lg-4 col-form-label" for="Foto">
+                                                    @cam.Nombre  @if (cam.Obligatorio)
+                                                    {<span class="text-danger">*</span>}
+                                                </label>
+                                                <div class="col-lg-6">
+                                                    @if (cam.Obligatorio)
+                                                    {
+                                                        if (@ra5 != null)
+                                                        {
+                                                            <img src="@Url.Content(@ra5)" style="width: 60%;" />
+                                                        }
+                                                        <br /><br />
+                                                        <input class="file-upload" type="file" id="Foto" value="@ra5" name="CamposVm[@index].Foto" required />
+                                                    }
+                                                    else
+                                                    {
+                                                        if (@ra5 != null)
+                                                        {
+                                                            <img src="@Url.Content(@ra5)" style="width: 60%;" />
+                                                        }
+                                                        <br /><br />
+                                                        <input class="file-upload" type="file" id="Foto" value="@ra5" name="CamposVm[@index].Foto" />
+                                                    }
+                                                </div>
+                                            </div>
+
+                                        }
+
+
+                                    }
 
 
 
-                                      }
+                                }
 
-                                      <div class="form-group row" id="botonEnviar">
-                                          <div class="col-lg-8 ml-auto">
-                                              <button type="submit" class="btn btn-primary">Guardar respuestas</button>
-                                          </div>
-                                      </div>
+                                <div class="form-group row" id="botonEnviar">
+                                    <div class="col-lg-8 ml-auto">
+                                        <button type="submit" class="btn btn-primary" style="margin-left: 70px;  font-family: Roboto, sans-serif; font-size: 14px;">Guardar respuestas</button>
+                                    </div>
+                                </div>
 
-                                  }
+                            }
 
 
-                              </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -217,7 +223,7 @@
     </div>
 
     <script src="~/vendor/jquery/jquery.min.js"></script>
-  
+
 
     <script src="../../Content/plugins/common/common.min.js"></script>
     <script src="../../Content/js/custom.min.js"></script>

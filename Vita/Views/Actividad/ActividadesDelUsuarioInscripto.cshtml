@@ -11,20 +11,7 @@
             <h4 class="card-title">Mis actividades inscriptas</h4>
 
             <div class="table-responsive">
-                <div class="header-left" style="margin-left:80%;">
-                    <div class="input-group icons">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
-                        </div>
-                        <input type="search" class="form-control" placeholder="Buscar categoria" aria-label="Search Dashboard">
-                        <div class="drop-down animated flipInX d-md-none">
-                            <form action="#">
-                                <input type="text" class="form-control" placeholder="Search">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <br><br><br><br><br>
+                <br><br><br><br>
                 <table class="table header-border table-hover verticle-middle" style="font-family: Roboto, sans-serif; font-size: 14px; color:#76838f">
 
                     @if (ViewBag.ListaActividades.Count != 0)
@@ -89,16 +76,13 @@
 
                                                 if (estado == "Rehacer formulario")
                                                 {
-
-                                                    <a href="/Actividad/ModificarFormularioDinamicoUsuario?actividadId=@i.Id">
-                                                        <span class="label gradient-2 rounded" style="font-size: 15px !important; background-image: linear-gradient(230deg, #69D385, #a9dab6);">
-                                                            Ir a rehacer formulario
-                                                        </span>
-                                                    </a>
-                                                    <br /><br />
                                                     <span class="label gradient-2 rounded" style="font-size: 15px !important;">
                                                         @estado
                                                     </span>
+                                                    <br /><br />
+                                                    <a href="/Actividad/ModificarFormularioDinamicoUsuario?actividadId=@i.Id">
+                                                        <button type="button" class="btn mb-1 btn-primary" style="font-size: 14px; background-color: #69D385; border: none;"> Ir a rehacer formulario </button>
+                                                    </a>
                                                 }
                                                 else if (estado == "Rehizó el formulario, a la espera de la aprobación")
                                                 {
@@ -161,11 +145,11 @@
                                                 <td>
                                                     <span><a href="/Actividad/EliminaroDarseBajaActividad?actividadId=@i.Id" data-toggle="tooltip" data-placement="top" title="Darme de baja"><i class="fa fa-close color-danger"></i></a></span>
                                                 </td>
-                                                }
-                                                else
-                                                {
-                                                    <td></td>
-                                                }
+                                            }
+                                            else
+                                            {
+                                                <td></td>
+                                            }
 
                                         }
 
@@ -174,15 +158,14 @@
 
                                             if (estado == "Pendiente de aprobación" && re.Count == 0)
                                             {
-                                                <a href="/Actividad/CompletarFormularioDinamicoUsuario?actividadId=@i.Id">
-                                                    <span class="label gradient-2 rounded" style="font-size: 15px !important; background-image: linear-gradient(230deg, #69D385, #a9dab6);">
-                                                        Completar formulario
-                                                    </span>
-                                                </a>
-                                                <br /><br>
                                                 <span class="label gradient-2 rounded" style="font-size: 15px !important;">
                                                     @estado
                                                 </span>
+                                                <br />
+                                                <br>
+                                                <a href="/Actividad/CompletarFormularioDinamicoUsuario?actividadId=@i.Id">
+                                                    <button type="button" class="btn mb-1 btn-primary" style="font-size: 14px; background-color: #69D385; border: none;"> Completar formulario </button>
+                                                </a>
                                             }
                                             else
                                             {
@@ -219,7 +202,7 @@
                                             }
                                             else
                                             {
-                                                    <td></td>
+                                                <td></td>
                                             }
 
                                         }
