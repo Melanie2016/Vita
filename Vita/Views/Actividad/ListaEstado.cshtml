@@ -31,7 +31,7 @@
                             {
                                 <div class="header-left" style="margin-left:80%;">
                                     <a href=#>
-                                        <button type="submit" class="btn btn-success" style="color:White" id="btnAprobar" name=Estado value=true>Aprobar</button>
+                                        <button type="submit" class="btn btn-success" data-toggle="modal" name=Estado value=true>Aprobar</button>
                                         <a href=#><button type="button" class="btn btn-primary" id="btnRechazar" data-toggle="modal" data-target="#guardar">Rechazar</button> </a>
 
                                         <div class="bootstrap-modal">
@@ -48,10 +48,10 @@
                                                         </div>
                                                         <div class="modal-body">
 
-                                                            <p>¿Desea notificarle el motivo del rechazo? (Recomendado)</p>
+                                                            <p>¿Desea notificarle el motivo del rechazo (Recomendado) o simplemente, mandar un mensaje predeterminado?</p>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-primary" name=Estado value=false>No</button>
+                                                            <button type="submit" class="btn btn-primary" name="Rechazar" value=false>Mensaje Predeterminado</button>
                                                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#notificar">Notificar</button>
                                                         </div>
                                                     </div>
@@ -108,7 +108,7 @@
                                                                         <div class="col-lg-8 ml-auto">
                                                                             <!-- Button trigger modal -->
                                                                             <div style="margin-left:70px;">
-                                                                                <button type="submit" class="btn btn-primary" name=Estado value=false>Enviar</button>
+                                                                                <button type="submit" class="btn btn-primary" name="RechazoNoti" value=false>Enviar</button>
                                                                             </div>
                                                                         </div>
 
@@ -129,7 +129,7 @@
                             {
                                 <div class="header-left" style="margin-left:80%;">
                                     <a href=#>
-                                        @*<button type="submit" class="btn mb-1 gradient-3" id="btnAprobar" name=Estado value=true>Aprobar</button>*@
+                                        <button type="submit" class="btn btn-success" data-toggle="modal" name=Estado value=true>Aprobar</button>
                                         <a href=#><button type="button" class="btn btn-primary" id="btnRechazar" data-toggle="modal" data-target="#guardar">Rechazar</button> </a>
 
                                         <div class="bootstrap-modal">
@@ -146,10 +146,10 @@
                                                         </div>
                                                         <div class="modal-body">
 
-                                                            <p>¿Desea notificarle el motivo del rechazo? (Recomendado)</p>
+                                                            <p>¿Desea notificarle el motivo del rechazo (Recomendado) o simplemente, mandar un mensaje predeterminado?</p>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-primary" name=Estado value=false>No</button>
+                                                            <button type="submit" class="btn btn-primary" name="Rechazar" value=false>Mensaje Predeterminado</button>
                                                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#notificar">Notificar</button>
                                                         </div>
                                                     </div>
@@ -206,7 +206,7 @@
                                                                         <div class="col-lg-8 ml-auto">
                                                                             <!-- Button trigger modal -->
                                                                             <div style="margin-left:70px;">
-                                                                                <button type="submit" class="btn btn-primary" name=Estado value=false>Enviar</button>
+                                                                                <button type="submit" class="btn btn-primary" name="RechazoNoti" value=false>Enviar</button>
                                                                             </div>
                                                                         </div>
 
