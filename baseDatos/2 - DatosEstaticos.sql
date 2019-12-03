@@ -7,6 +7,7 @@ INSERT INTO Sexo(Id, Descripcion) VALUES (3, 'No quiero definirlo');
 SET IDENTITY_INSERT Sexo OFF
 
 /*categoria*/
+/*categoria*/
 SET IDENTITY_INSERT Categoria ON
 INSERT INTO Categoria(Id, Descripcion, DescCorta) VALUES (1, 'Actividades al aire libre', 'Al aire libre');
 INSERT INTO Categoria(Id, Descripcion, DescCorta) VALUES (2, 'Campeonatos/Torneos de juegos de mesa', 'Torneos');

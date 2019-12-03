@@ -14,6 +14,12 @@ namespace Vita.Servicios
         public const int ESTADO_RECHAZADO = 4;
         public const int ESTADO_ACTIVIDAD_FINALIZADA = 5;
         public const int ESTADO_ACTIVIDAD_CREADA = 6;
-        public const int ESTADO_ACTIVIDAD_PUBLICADA = 7; 
+        public const int ESTADO_ACTIVIDAD_PUBLICADA = 7;
+
+
+        //EXTRAS
+        public const int ESTADISTICA_CATEGORIA = 1;
+        public const int ESTADISTICA_SEMANA = 2;
     }
+
 }
