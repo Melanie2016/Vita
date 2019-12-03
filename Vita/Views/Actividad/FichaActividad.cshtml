@@ -134,7 +134,39 @@
                     {
                         <p>Gratuito</p>
                     }
+                    <br />
 
+                    <!--MAPA-->
+                    <strong style="color: #666; font-size: 14px; font-weight:bold">Cómo llegar</strong><br />
+
+                    @if (ViewBag.Domicilio != null)
+                    {
+                        <iframe src="https://maps.google.com/maps?q=@ViewBag.Domicilio.NombreCalle%20=@ViewBag.Domicilio.NumeroCalle%20=@ViewBag.Domicilio.CodigoPostal%20=@ViewBag.Actividad.Localidad.Descripcion%20Buenos%20Aires&t=&z=15&ie=UTF8&iwloc=&output=embed" width="550" height="398" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    }
+                    else
+                    {
+                        <iframe src="https://maps.google.com/maps?q=@ViewBag.Actividad.Localidad.Descripcion%20Buenos%20Aires&t=&z=15&ie=UTF8&iwloc=&output=embed" width="550" height="398" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    }
+                    <!--FIN MAPA-->
+                    <!--VIDEO-->
+
+
+
+                    @if (ViewBag.Actividad.Url != null)
+                    {
+
+                        var videoURI = new Uri(ViewBag.Actividad.Url);
+
+                        var videoId = HttpUtility.ParseQueryString(videoURI.Query).Get("v");
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/@videoId" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    }
+                    else //No tiene video
+                    {
+                <iframe width="540" height="345" src="https://www.youtube.com/embed/KfXbavvWlUM?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com">
+                   
+                </iframe>
+                    }
+                
                 </div>
 
                 <div class="col-lg-3 ml-auto">
@@ -315,44 +347,5 @@
         </div>
     </div>
 </section>
-</section>
 
 
-<section id="venue" class="wow fadeInUp">
-
-    <div class="container-fluid">
-
-        <div class="row no-gutters">
-            <div class="col-lg-6 venue-map">
-
-                @if (ViewBag.Domicilio != null)
-                {
-                    <iframe src="https://maps.google.com/maps?q=@ViewBag.Domicilio.NombreCalle%20=@ViewBag.Domicilio.NumeroCalle%20=@ViewBag.Domicilio.CodigoPostal%20=@ViewBag.Actividad.Localidad.Descripcion%20Buenos%20Aires&t=&z=15&ie=UTF8&iwloc=&output=embed" width="550" height="398" frameborder="0" style="border:0" allowfullscreen></iframe>
-                }
-                else
-                {
-                    <iframe src="https://maps.google.com/maps?q=@ViewBag.Actividad.Localidad.Descripcion%20Buenos%20Aires&t=&z=15&ie=UTF8&iwloc=&output=embed" width="550" height="398" frameborder="0" style="border:0" allowfullscreen></iframe>
-                }
-            </div>
-
-
-
-
-            @if (ViewBag.Actividad.Url != null)
-            {
-
-                var videoURI = new Uri(ViewBag.Actividad.Url);
-
-                var videoId = HttpUtility.ParseQueryString(videoURI.Query).Get("v");
-                <iframe width="920" height="505" src="https://www.youtube.com/embed/@videoId" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            }
-            else //No tiene video
-            {
-                <iframe width="920" height="435" src="https://www.youtube.com/embed/KfXbavvWlUM?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com">
-                </iframe>
-            }
-
-
-
-        </div>
-</section>
