@@ -1198,7 +1198,7 @@ namespace Vita.Servicios
        
             
         }
-        public void MandarRehacerFormuDinamico(RehacerFormuDinamico form)
+        public void MandarRehacerFormuDinamico(RehacerFormuDinamico form, int[] CamposRehacer)
         {
             MotivoRechazoFormDinamico motivoNuevo = new MotivoRechazoFormDinamico();
             List<CampoRechazado> campoRechazados = new List<CampoRechazado>();
@@ -1213,11 +1213,11 @@ namespace Vita.Servicios
             myDbContext.SaveChanges();
 
             
-            foreach(var cam in form.CamposRehacer)
+            foreach(var cam in CamposRehacer)
             {
                 CampoRechazado campoRechazadosNuevo = new CampoRechazado();
                 campoRechazadosNuevo.MotivoRechazoFormDinamicoId = motivoNuevo.Id;
-                campoRechazadosNuevo.CampoRechazadoId = cam.Id;                
+                campoRechazadosNuevo.CampoRechazadoId = cam;                
                 campoRechazados.Add(campoRechazadosNuevo);
 
 
