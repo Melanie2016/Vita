@@ -1020,7 +1020,7 @@ namespace Vita.Controllers
         }
 
         [HttpPost]
-        public ActionResult MandarRehacerFormuDinamico(RehacerFormuDinamico formu)
+        public ActionResult MandarRehacerFormuDinamico(RehacerFormuDinamico formu, int[] CamposRehacer)
         {
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -1031,7 +1031,7 @@ namespace Vita.Controllers
             {
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 formu.EntidadId = buscarUsuarioLogueado.Id;
-                actividadServicio.MandarRehacerFormuDinamico(formu);
+                actividadServicio.MandarRehacerFormuDinamico(formu, CamposRehacer);
 
                 //Notificaciones de WhatsApp
                 var tituloActividad = actividadServicio.GetActividad(formu.ActividadId).Titulo;
