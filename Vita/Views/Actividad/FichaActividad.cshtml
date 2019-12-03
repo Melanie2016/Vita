@@ -2,6 +2,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style type="text/css">
+    .category {
+        font-size: 11px;
+        display: inline-block;
+        padding: 5px 20px;
+        background: #e9ecef;
+        border-radius: 30px;
+        margin-bottom: 20px;
+        color: #000;
+        font-weight: bold;
+    }
+</style>
+
 
 <section class="ftco-section">
     <div class="header">
@@ -87,6 +100,7 @@
                     <!---->
                     <!--Inicio Carousel-->
                     <!--Carousel Wrapper-->
+                    <span class="category">@ViewBag.Actividad.Categoria.Descripcion</span>
                     <h4 class="h5 mb-4 text-black" style="font-size: 30px; color: #30e3ca;">@ViewBag.Actividad.Titulo</h4>
                     <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
                         <!--Slides-->
@@ -162,11 +176,10 @@
                     }
                     else //No tiene video
                     {
-                <iframe width="540" height="345" src="https://www.youtube.com/embed/KfXbavvWlUM?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com">
-                   
-                </iframe>
+                        <iframe width="540" height="345" src="https://www.youtube.com/embed/KfXbavvWlUM?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com">
+                        </iframe>
                     }
-                
+
                 </div>
 
                 <div class="col-lg-3 ml-auto">
