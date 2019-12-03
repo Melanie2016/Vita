@@ -257,6 +257,8 @@
     <Compile Include="ViewModels\ActividadViewModel.cs" />
     <Compile Include="ViewModels\CampoRehacerViewModel.cs" />
     <Compile Include="ViewModels\CampoViewModel.cs" />
+    <Compile Include="ViewModels\EstadisticasBarViewModel.cs" />
+    <Compile Include="ViewModels\EstadisticasDonutViewModel.cs" />
     <Compile Include="ViewModels\FormularioDinamicoViewModel.cs" />
     <Compile Include="ViewModels\FormularioLlenoViewModel.cs" />
     <Compile Include="ViewModels\Gmail.cs" />
@@ -1042,6 +1044,8 @@
     <Content Include="Views\Actividad\VerFormularioEntidad.cshtml" />
     <Content Include="Views\Actividad\VerRespuestaFormulario.cshtml" />
     <Content Include="Views\Actividad\ModificarFormularioDinamicoEntidad.cshtml" />
+    <Content Include="Views\Usuario\IraModificarPerfilEntidad.cshtml" />
+    <Content Include="Views\Actividad\EstadisticasCategoria.cshtml" />
     <EntityDeploy Include="VitaEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>VitaEntities.Designer.cs</LastGenOutput>
@@ -1049,7 +1053,7 @@
     <Content Include="VitaEntities.edmx.diagram">
       <DependentUpon>VitaEntities.edmx</DependentUpon>
     </Content>
-    <Content Include="Views\Usuario\IraModificarPerfilEntidad.cshtml" />
+    <Content Include="Views\Actividad\EstadisticasSemana.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
