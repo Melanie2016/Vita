@@ -341,17 +341,23 @@ namespace Vita.Controllers
                 DateTime fechaNull = new DateTime(978361200);//esto es fecha null
 
                 buscarUsuarioLogueado = usuarioServicio.GetById(buscarUsuarioLogueado.Id);
+                ViewBag.Estados = actividadServicio.GetEstadosActividad();
+                ViewBag.Categorias = categoriaServicio.GetAllCategorias();
                 var actividades = actividadServicio.GetAllActividadByRolEntidadId(buscarUsuarioLogueado.Id);
+
                 if (actividades.Any())
                 {
 
-                    ViewBag.Estados = actividadServicio.GetEstadosActividad();
-                    ViewBag.Categorias = categoriaServicio.GetAllCategorias();
                     var listaActividadesVigentes = actividades.Where(x => x.DeletedAt == fechaNull || x.DeletedAt == null).ToList();
                     ViewBag.ListaActvidades = listaActividadesVigentes;
                     ViewBag.ListaActividadesEliminadas = actividadServicio.GetAllActividadesEliminadasByEntidadId(buscarUsuarioLogueado.Id);
                     var actividadesVigentes = actividadServicio.GetAllActividadesVigentesByEntidadId(buscarUsuarioLogueado.Id);
                 }
+                else
+                {
+                    ViewBag.ListaActvidades = actividades;
+                }
+
 
                 return View(buscarUsuarioLogueado);
             }
