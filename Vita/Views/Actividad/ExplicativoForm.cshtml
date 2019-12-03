@@ -15,17 +15,16 @@
                     	
                     	<br>
 
-                    	<div style="text-align: center;">
-                    		<h3>¿ Su actividad requiere información relevante que los usuarios deban completar ?</h3>
-                    		<p>Te ofrecemos crear tu propio <u data-toggle="tooltip" data-placement="top" title="Consiste en crear preguntas personalizadas por usted mismo ">formulario</u> para  recolectar esos datos que necesitas</p>
+                        <div style="text-align: center;">
+                            <h3>¿ Su actividad requiere información relevante que los usuarios deban completar ?</h3>
+                            <p>Te ofrecemos crear tu propio <u data-toggle="tooltip" data-placement="top" title="Consiste en crear preguntas personalizadas por usted mismo ">formulario</u> para  recolectar esos datos que necesitas</p>
 
-                    		<div >
-                    			<br><br><br><br><br>
+                            <div>
+                                <br><br>
+                                <iframe width="1200" height="605" src="https://www.youtube.com/embed/4KKZzPjA12k?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com">
+                                </iframe>
 
-                    			<p>	imagen explicativa</p>
-
-                                <button type="button" class="btn btn-primary" >ver demo</button>
-                                <br><br><br><br><br>        
+                                <br><br><br>
                                 <h4 class="card-title">¿ Desea crear un formulario dinámico?</h4>
 
                                 <div class="basic-form">
@@ -33,48 +32,49 @@
                                         <div class="form-group">
                                             <label class="radio-inline mr-3">
                                                 <input type="radio" name="optradio" id="btnAgregarBtn"> Si
-                                            </label>                                           
+                                            </label>
                                             <label class="radio-inline mr-3">
                                                 <input type="radio" name="optradio" id="btnQuitarBtn" data-toggle="modal" data-target="#publicar" data-dismiss="modal"> No
                                             </label>
-                                            
+
                                             <div id="ContenedorBtn">
-                                                <a href="/Actividad/CrearFormularioDinamico?actividad=@ViewBag.Actividad&publicar=true"><button type="button" class="btn btn-primary" >Crear Formulario</button></a>
+                                                <a href="/Actividad/CrearFormularioDinamico?actividad=@ViewBag.Actividad&publicar=true"><button type="button" class="btn btn-primary">Crear Formulario</button></a>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
-                    		</div>
-							<div class="basic-form">
+                            </div>
+                            <div class="basic-form">
                                 <form>
                                     <div class="form-group">
-                                    	
-                                        
-                                       <div class="modal fade" id="publicar">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header" >
-                                                            <h5 class="modal-title">Importante</h5>
-                                                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>Estás listo para publicar tu actividad!</p>
-                                                            
-                                                            
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <a href="/Actividad/Publicar?idActividad=@ViewBag.Actividad.Id&conUsuarioPendiente=false"><button type="button" class="btn btn-primary" >Publicar</button></a>
-                                                            
-                                                        </div>
+
+
+                                        <div class="modal fade" id="publicar">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Importante</h5>
+                                                        <button type="button" class="close" data-dismiss="modal">
+                                                            <span>&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Estás listo para publicar tu actividad!</p>
+
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a href="/Actividad/Publicar?idActividad=@ViewBag.Actividad.Id&conUsuarioPendiente=false"><button type="button" class="btn btn-primary">Publicar</button></a>
+
                                                     </div>
                                                 </div>
                                             </div>
-                                        
+                                        </div>
+
                                     </div>
                                 </form>
                             </div>
-                    	</div>
+                        </div>
                     	
                     </div>
                 </div>
