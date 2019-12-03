@@ -40,6 +40,48 @@ namespace Vita.Servicios
             return act;
         }
 
+        public List<EstadisticasDonutViewModel> GetEstadisticasDonutCategoria()
+        {
+            var categorias = myDbContext.Categoria.ToList();
+            var listaCantiQuery = new List<EstadisticasDonutViewModel>();
+            foreach (var c in categorias)
+            {
+                var estadistica = new EstadisticasDonutViewModel();
+                estadistica.label = c.DescCorta;
+                estadistica.value = myDbContext.Actividad.Where(a => a.CategoriaId == c.Id).Count();
+                listaCantiQuery.Add(estadistica);
+            }
+            return listaCantiQuery;
+        }
+
+        public List<EstadisticasDonutViewModel> GetEstadisticasDonutSemana()
+        {
+            var diasSemana = myDbContext.DiaSemana.ToList();
+            var listaCantiQuery = new List<EstadisticasDonutViewModel>();
+            foreach (var d in diasSemana)
+            {
+                var estadistica = new EstadisticasDonutViewModel();
+                estadistica.label = d.Descripcion;
+                estadistica.value = myDbContext.InscripcionFecha.Where(x => x.FechaActividad.DiaSemanaId == d.Id).Count();
+                listaCantiQuery.Add(estadistica);
+            }
+            return listaCantiQuery;
+        }
+
+        public List<EstadisticasBarViewModel> GetEstadisticasBarCategoria()
+        {
+            var diasSemana = myDbContext.DiaSemana.ToList();
+            var listaCantiQuery = new List<EstadisticasBarViewModel>();
+            foreach (var d in diasSemana)
+            {
+                var estadistica = new EstadisticasBarViewModel();
+                estadistica.y = d.Descripcion;
+                estadistica.a = myDbContext.InscripcionFecha.Where(x => x.FechaActividad.DiaSemanaId == d.Id).Count();
+                listaCantiQuery.Add(estadistica);
+            }
+            return listaCantiQuery;
+        }
+
         //va a devolver una lista del viewMoDEL que cree (que solo tiene fecha desde, fecha hasta y descripcion de la actividad)
         public List<ActividadFechaViewModel> GetAllActividadByUsuario(Usuario usuario) //lista de activiades , solo la descripcion y fecha, MOMENTANEA
         {

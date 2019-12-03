@@ -7,13 +7,14 @@ INSERT INTO Sexo(Id, Descripcion) VALUES (3, 'No quiero definirlo');
 SET IDENTITY_INSERT Sexo OFF
 
 /*categoria*/
+/*categoria*/
 SET IDENTITY_INSERT Categoria ON
-INSERT INTO Categoria(Id, Descripcion) VALUES (1, 'Actividades al aire libre');
-INSERT INTO Categoria(Id, Descripcion) VALUES (2, 'Campeonatos/Torneos de juegos de mesa');
-INSERT INTO Categoria(Id, Descripcion) VALUES (3, 'Deportes');
-INSERT INTO Categoria(Id, Descripcion) VALUES (4, 'Talleres /Capacitaciones /Cursos');
-INSERT INTO Categoria(Id, Descripcion) VALUES (5, 'Actividades de interés cultural');
-INSERT INTO Categoria(Id, Descripcion) VALUES (6, 'Excursiones');
+INSERT INTO Categoria(Id, Descripcion, DescCorta) VALUES (1, 'Actividades al aire libre', 'Al aire libre');
+INSERT INTO Categoria(Id, Descripcion, DescCorta) VALUES (2, 'Campeonatos/Torneos de juegos de mesa', 'Torneos');
+INSERT INTO Categoria(Id, Descripcion, DescCorta) VALUES (3, 'Deportes', 'Deportes');
+INSERT INTO Categoria(Id, Descripcion, DescCorta) VALUES (4, 'Talleres /Capacitaciones /Cursos', 'Talleres');
+INSERT INTO Categoria(Id, Descripcion, DescCorta) VALUES (5, 'Actividades de interés cultural', 'Culturales');
+INSERT INTO Categoria(Id, Descripcion, DescCorta) VALUES (6, 'Excursiones', 'Excursiones');
 SET IDENTITY_INSERT Categoria OFF
 
 /*SubCategoria*/

@@ -37,7 +37,8 @@ Descripcion varchar(50)
 
 create Table Categoria(
 Id int identity(1,1) primary key,
-Descripcion varchar(100)
+Descripcion varchar(100),
+DescCorta varchar(50) NULL,
 );
 
 create table Rol(

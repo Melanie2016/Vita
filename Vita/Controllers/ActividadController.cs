@@ -848,7 +848,7 @@ namespace Vita.Controllers
             }
         }
 
-        public ActionResult Estadisticas()
+        public ActionResult EstadisticasCategoria()
         {
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -862,6 +862,49 @@ namespace Vita.Controllers
             }
         }
 
+        public ActionResult EstadisticasSemana()
+        {
+            //obtengo usuario logueado
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                return View(buscarUsuarioLogueado);
+            }
+        }
+
+
+        [HttpGet]
+        public JsonResult GetEstadisticasDonut(int estadisticaSeleccionada)
+        {
+            {
+                var usuario = Session["Usuario"] as Usuario;
+                if (estadisticaSeleccionada == ConstantesUtil.ESTADISTICA_CATEGORIA)
+                {
+                    var events = actividadServicio.GetEstadisticasDonutCategoria();
+                    return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                }
+                else
+                {
+                    var events = actividadServicio.GetEstadisticasDonutSemana();
+                    return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                }
+                
+            }
+        }
+
+        [HttpGet]
+        public JsonResult GetEstadisticasBar(int estadisticaSeleccionada)
+        {
+            {
+                var usuario = Session["Usuario"] as Usuario;
+                var events = actividadServicio.GetEstadisticasBarCategoria();
+                return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+        }
         [HttpGet]
         public ActionResult VerRespuestaFormulario(int actividadId)
         {
