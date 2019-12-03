@@ -261,6 +261,7 @@
     <Compile Include="ViewModels\EstadisticasDonutViewModel.cs" />
     <Compile Include="ViewModels\FormularioDinamicoViewModel.cs" />
     <Compile Include="ViewModels\FormularioLlenoViewModel.cs" />
+    <Compile Include="ViewModels\FormUsuarioRehacerViewModel.cs" />
     <Compile Include="ViewModels\Gmail.cs" />
     <Compile Include="ViewModels\ListaViewModel.cs" />
     <Compile Include="ViewModels\RehacerFormuDinamico.cs" />

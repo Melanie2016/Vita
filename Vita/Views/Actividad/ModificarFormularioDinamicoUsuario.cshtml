@@ -35,7 +35,11 @@
                         <br />
                         <h4 style="font-size: 15px; color: #04335f;">@ViewBag.Formulario.Descripcion</h4>
 
-                        <br /><br />
+                        <br />
+                        <div class="alert alert-info" role="alert">
+                            Motivo: @ViewBag.MotivoRechazo.DescripcionMotivo
+                        </div>
+                              
                         <div class="form-validation" style="font-size: 14px;">
                             @using (Html.BeginForm("ActualizarFormularioUsuario", "Actividad", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
