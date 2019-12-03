@@ -56,6 +56,8 @@
                                         <input name="CamposVm[@index].FormularioDinamicoId" value="@ViewBag.Formulario.Id" hidden />
                                         if (cam.TipoDatoCampoId == 1)
                                         {
+                                          
+
                                             string ra = "";
                                             ra = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Respuesta1).FirstOrDefault();
                                             var raId = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Id).FirstOrDefault();
@@ -82,6 +84,9 @@
 
                                                 </div>
                                             </div>
+
+
+
                                         }
 
                                         if (cam.TipoDatoCampoId == 2)
@@ -111,28 +116,59 @@
 
                                         if (cam.TipoDatoCampoId == 3)
                                         {
+                                            //var editar = false;
+                                            //foreach (var campoRechazado in ViewBag.CamposModificar)
+                                            //{
+                                            //    if (campoRechazado.CampoRechazadoId == 3)
+                                            //    {
+                                            //        editar = true;
+                                            //    }
+                                            //}
+                                            //if (editar == true)
+                                            //{
                                             string ra3 = "";
                                             ra3 = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Respuesta1).FirstOrDefault();
                                             var raId = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Id).FirstOrDefault();
-                                            <input name="CamposVm[@index].Id" value="@raId" hidden />
-                                            <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
-                                            <div class="form-group row">
-                                                <label class="col-lg-4 col-form-label">
-                                                    @cam.Nombre  @if (cam.Obligatorio)
-                                                    {<span class="text-danger">*</span>}
-                                                </label>
-                                                <div class="col-lg-6">
-                                                    @if (cam.Obligatorio)
-                                                    {
-                                                        <input type="number" class="form-control" id="val-suggestions" value="@ra3" name="CamposVm[@index].RespuestaNumero" required />
-                                                    }
-                                                    else
-                                                    {
-                                                        <input type="number" class="form-control" id="val-suggestions" value="@ra3" name="CamposVm[@index].RespuestaNumero" />
-                                                    }
+                                                <input name="CamposVm[@index].Id" value="@raId" hidden />
+                                                <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label">
+                                                        @cam.Nombre  @if (cam.Obligatorio)
+                                                        {<span class="text-danger">*</span>}
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        @if (cam.Obligatorio)
+                                                        {
+                                                            <input type="number" class="form-control" id="val-suggestions" value="@ra3" name="CamposVm[@index].RespuestaNumero" required />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="number" class="form-control" id="val-suggestions" value="@ra3" name="CamposVm[@index].RespuestaNumero" />
+                                                        }
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            @*}
+                                            else
+                                            {
+                                                string ra3 = "";
+                                                ra3 = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Respuesta1).FirstOrDefault();
+                                                var raId = res.Where(x => x.Campos.Id == cam.Id).Select(r => r.Id).FirstOrDefault();
+                                                <input name="CamposVm[@index].Id" value="@raId" hidden />
+                                                <input name="CamposVm[@index].CamposId" value="@cam.Id" hidden />
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label">
+                                                        @cam.Nombre  @if (cam.Obligatorio)
+                                                        {<span class="text-danger">*</span>}
+                                                    </label>
+                                                    <div class="col-lg-6">
+
+                                                        <input type="number" class="form-control" id="val-suggestions" value="@ra3" name="CamposVm[@index].RespuestaNumero" disabled />
+
+                                                    </div>
+                                                </div>
+                                            }*@
                                         }
+
                                         if (cam.TipoDatoCampoId == 4)
                                         {
                                             string ra4 = "";
@@ -162,6 +198,7 @@
                                                 </div>
                                             </div>
                                         }
+
                                         if (cam.TipoDatoCampoId == 5)
                                         {
                                             string ra5 = "";

@@ -1266,7 +1266,53 @@ namespace Vita.Servicios
             
             return listaActividades;
         }
+        public MotivoRechazoFormDinamico GetMotivoRechazoForm(int usuarioId, int formularioId, int actividadId)
+        {
+            var motivo = myDbContext.MotivoRechazoFormDinamico.
+                Where(x => x.UsuarioId == usuarioId && x.FormularioDinamicoId == formularioId && x.ActividadId == actividadId)
+                .OrderByDescending(x=>x.Id).FirstOrDefault();
+            return motivo;
+        }
+        public List<CampoRechazado> GetCampoRechazadosDelMotivoRechazoId(int motivoRechazoId)
+        {
+            var campos = myDbContext.CampoRechazado.Where(x => x.MotivoRechazoFormDinamicoId == motivoRechazoId).ToList();
+            return campos;
+        }
+
+        public FormUsuarioRehacerViewModel GetArmarFormularioRehacerUsuario(int usuarioId, int motivoId)
+        {
+            var motivo = myDbContext.MotivoRechazoFormDinamico.Where(x => x.Id == motivoId).OrderByDescending(x => x.Id).FirstOrDefault();
+            var formulario = myDbContext.FormularioDinamico.Where(x => x.ActividadId == motivo.ActividadId).FirstOrDefault();
+            var respuestas = this.GetRespuestasByUsuarioIdandActividadId(usuarioId, motivo.ActividadId.Value).ToList();
+            var camposRechazados = this.GetCampoRechazadosDelMotivoRechazoId(motivo.Id);
+            var formuRehacer = new FormUsuarioRehacerViewModel();
 
 
+            formuRehacer.Respuestas = respuestas;
+            var listaRehacer = new List<bool>();
+            foreach (var res in respuestas)
+            {
+                foreach (var r in camposRechazados)
+                {
+                 
+                    if (res.CamposId== r.CampoRechazadoId)
+                    {
+                        
+                        var rehace = true;
+                        listaRehacer.Add(rehace);
+                        //formuRehacer.Rehacer.Add(rehace);
+                    }
+                    //else
+                    //{
+                    //    var rehace = false;
+                    //    listaRehacer.Add(rehace);
+                    //    //formuRehacer.Rehacer.Add(rehace);
+                    //}
+                }
+            }
+            formuRehacer.Rehacer = listaRehacer;
+
+            return formuRehacer;
+        }
     }
 }

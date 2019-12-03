@@ -835,8 +835,14 @@ namespace Vita.Controllers
             {
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 ViewBag.Formulario = actividadServicio.GetFormularioDinamicoByActividadId(actividadId);
+                var motivoRechazo = actividadServicio.GetMotivoRechazoForm(buscarUsuarioLogueado.Id, ViewBag.Formulario.Id, ViewBag.Formulario.ActividadId);
+                var camposModificar = actividadServicio.GetCampoRechazadosDelMotivoRechazoId(motivoRechazo.Id);
                 var respuestas = actividadServicio.GetRespuestasByUsuarioIdandActividadId(buscarUsuarioLogueado.Id, actividadId);
+                var prueba = actividadServicio.GetArmarFormularioRehacerUsuario(buscarUsuarioLogueado.Id, motivoRechazo.Id);
                 ViewBag.FormularioAModificar = respuestas;
+                ViewBag.MotivoRechazo = motivoRechazo;
+                ViewBag.CamposModificar = camposModificar;
+                ViewBag.Prueba = prueba;
 
                 return View(buscarUsuarioLogueado);
             }
