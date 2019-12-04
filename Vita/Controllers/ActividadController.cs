@@ -282,9 +282,9 @@ namespace Vita.Controllers
                                     smtp.Credentials = nc;
                                     smtp.Send(mm);
                                 }
-                                catch 
+                                catch (Exception e)
                                 {
-
+                                    ViewBag.Mensaje = "No tenes internet";
                                 }
                                 
 
@@ -673,83 +673,113 @@ namespace Vita.Controllers
 
                 if (Estado != null)
                 {
+                    try
+                    {
+                        MailMessage mm = new MailMessage("vita.contactanos@gmail.com", to);
+                        mm.Subject = "Inscripción a " + tituloActividad + " Aprobada";
+                        mm.Body = "¡Tu solicitud ha sido aprobada! A partir de ahora, Comienza tu nueva actividad - " + tituloActividad + " - VITA Espera que sea de tu agrado y lo más importante... ¡Que te diviertas! ";
+                        mm.IsBodyHtml = true;
 
-                    MailMessage mm = new MailMessage("vita.contactanos@gmail.com", to);
-                    mm.Subject = "Inscripción a " + tituloActividad + " Aprobada";
-                    mm.Body = "¡Tu solicitud ha sido aprobada! A partir de ahora, Comienza tu nueva actividad - " + tituloActividad + " - VITA Espera que sea de tu agrado y lo más importante... ¡Que te diviertas! ";
-                    mm.IsBodyHtml = true;
+                        SmtpClient smtpp = new SmtpClient();
+                        smtpp.Host = "smtp.gmail.com";
+                        smtpp.Port = 587;
+                        smtpp.EnableSsl = true;
 
-                    SmtpClient smtpp = new SmtpClient();
-                    smtpp.Host = "smtp.gmail.com";
-                    smtpp.Port = 587;
-                    smtpp.EnableSsl = true;
+                        NetworkCredential ncc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
+                        smtpp.UseDefaultCredentials = true;
+                        smtpp.Credentials = ncc;
+                        smtpp.Send(mm);
+                    }
+                    catch
+                    {
 
-                    NetworkCredential ncc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
-                    smtpp.UseDefaultCredentials = true;
-                    smtpp.Credentials = ncc;
-                    smtpp.Send(mm);
+                    }
+               
                 }
 
                 else if (Rechazar != null)
                 {
+                    try
+                    {
+                        MailMessage mm = new MailMessage("vita.contactanos@gmail.com", to);
+                        mm.Subject = "Inscripción a " + tituloActividad + " Rechazada :( ";
+                        mm.Body = "Te han rechazado a la Actividad: - " + tituloActividad + " pero no te preocupes! ¡Tenemos muchas más Actividades para vos!";
+                        mm.IsBodyHtml = true;
 
-                    MailMessage mm = new MailMessage("vita.contactanos@gmail.com", to);
-                    mm.Subject = "Inscripción a " + tituloActividad + " Rechazada :( ";
-                    mm.Body = "Te han rechazado a la Actividad: - " + tituloActividad + " pero no te preocupes! ¡Tenemos muchas más Actividades para vos!";
-                    mm.IsBodyHtml = true;
+                        SmtpClient smtpp = new SmtpClient();
+                        smtpp.Host = "smtp.gmail.com";
+                        smtpp.Port = 587;
+                        smtpp.EnableSsl = true;
 
-                    SmtpClient smtpp = new SmtpClient();
-                    smtpp.Host = "smtp.gmail.com";
-                    smtpp.Port = 587;
-                    smtpp.EnableSsl = true;
+                        NetworkCredential ncc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
+                        smtpp.UseDefaultCredentials = true;
+                        smtpp.Credentials = ncc;
+                        smtpp.Send(mm);
+                    }
+                    catch
+                    {
 
-                    NetworkCredential ncc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
-                    smtpp.UseDefaultCredentials = true;
-                    smtpp.Credentials = ncc;
-                    smtpp.Send(mm);
+                    }
+                  
                 }
 
                 else if (RechazoNoti != null)
                 {
-
-                    MailMessage correo = new MailMessage();
-                    correo.From = new MailAddress("vita.contactanos@gmail.com");
-                    correo.To.Add(Para);
-                    correo.Subject = Asunto;
-                    correo.Body = Mensaje;
-                    correo.IsBodyHtml = true;
-
-                    SmtpClient smtp = new SmtpClient();
-                    smtp.Host = "smtp.gmail.com";
-                    smtp.Port = 587;
-                    smtp.EnableSsl = true;
-
-                    NetworkCredential nc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
-                    smtp.UseDefaultCredentials = true;
-                    smtp.Credentials = nc;
-                    smtp.Send(correo);
-                }
-
-                //Notificaciones de WhatsApp
-                var body = "";
-                var celular = "whatsapp:+549" + usuarioServicio.GetUsuarioById(usuarioEstado.UsuarioId).Celular;
-
-                if (usuarioEstado.Estado)
-                {
-                    body = "Tu inscripción a la actividad " + tituloActividad + " ha sido aprobada!";
-                }
-                else
-                {
-                    if (Mensaje != null)
+                    try
                     {
-                        body = "Tu inscripción a la actividad " + tituloActividad + " ha sido rechazada. " + Mensaje;
+                        MailMessage correo = new MailMessage();
+                        correo.From = new MailAddress("vita.contactanos@gmail.com");
+                        correo.To.Add(Para);
+                        correo.Subject = Asunto;
+                        correo.Body = Mensaje;
+                        correo.IsBodyHtml = true;
+
+                        SmtpClient smtp = new SmtpClient();
+                        smtp.Host = "smtp.gmail.com";
+                        smtp.Port = 587;
+                        smtp.EnableSsl = true;
+
+                        NetworkCredential nc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
+                        smtp.UseDefaultCredentials = true;
+                        smtp.Credentials = nc;
+                        smtp.Send(correo);
+                    }
+                    catch
+                    {
+
+                    }
+                
+                   
+                }
+
+                try
+                {
+                    //Notificaciones de WhatsApp
+                    var body = "";
+                    var celular = "whatsapp:+549" + usuarioServicio.GetUsuarioById(usuarioEstado.UsuarioId).Celular;
+
+                    if (usuarioEstado.Estado)
+                    {
+                        body = "Tu inscripción a la actividad " + tituloActividad + " ha sido aprobada!";
                     }
                     else
                     {
-                        body = "Tu inscripción a la actividad " + tituloActividad + " ha sido rechazada.";
+                        if (Mensaje != null)
+                        {
+                            body = "Tu inscripción a la actividad " + tituloActividad + " ha sido rechazada. " + Mensaje;
+                        }
+                        else
+                        {
+                            body = "Tu inscripción a la actividad " + tituloActividad + " ha sido rechazada.";
+                        }
+
                     }
+                }
+                catch
+                {
 
                 }
+                
 
                 try
                 {
