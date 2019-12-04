@@ -1184,7 +1184,7 @@ namespace Vita.Servicios
             var actividadBD = myDbContext.Actividad.Where(x => x.Id == idActividad).FirstOrDefault();
 
             actividadBD.EstadoId = ConstantesUtil.ESTADO_ACTIVIDAD_PUBLICADA;
-            actividadBD.ConUsuarioPendiente = conUsuarioPendiente;
+            actividadBD.ConUsuarioPendiente = actividadBD.ConUsuarioPendiente;
             myDbContext.SaveChanges();
         }
         public List<Respuesta> GetRespuestasByUsuarioIdandActividadId(int usuarioId, int actividadId)

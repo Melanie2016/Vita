@@ -239,7 +239,8 @@
                                     <td>
                                         @if (i.Estado.Id != 7)
                                         {
-                                            <a href="/Actividad/Publicar?idActividad=@i.Id"><button class="btn mb-1 btn-primary">Publicar</button></a>
+                                            
+                                            <a href="/Actividad/Publicar?idActividad=@i.Id&conUsuarioPendiente=@i.ConUsuarioPendiente.HasValue"><button class="btn mb-1 btn-primary">Publicar</button></a>
 
                                         }
                                         else
@@ -355,7 +356,7 @@
                                     <td>
                                         @if (i.Estado.Id != 7)
                                         {
-                                            <a href="/Actividad/Publicar?idActividad=@i.Id"><button class="btn mb-1 btn-primary">Publicar</button></a>
+                                            <a href="/Actividad/Publicar?idActividad=@i.Id&conUsuarioPendiente=@i.ConUsuarioPendiente"><button class="btn mb-1 btn-primary">Publicar</button></a>
 
                                         }
                                         else

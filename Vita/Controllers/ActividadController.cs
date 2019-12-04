@@ -150,7 +150,14 @@ namespace Vita.Controllers
             ViewBag.ElegirDia = false;
             ViewBag.Inscripto = false;
             ViewBag.Compleja = false;
-            ViewBag.CompletarFormulario = false;
+            if(actividad.ConUsuarioPendiente== true){
+                ViewBag.CompletarFormulario = true;
+            }
+            else
+            {
+                ViewBag.CompletarFormulario = false;
+            }
+           
 
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
@@ -256,21 +263,30 @@ namespace Vita.Controllers
                             if (actividad.ConUsuarioPendiente == true) //Su inscripción queda pendiente
                             {
                                 ViewBag.Compleja = true; //debe completar el formulario
-                                mensaje = "Su inscripción está en estado PENDIENTE. Debe completar un formulario con los requisitos solicitados para realizar esta actividad. Se le informará cuando su inscripción este aprobada.";
-                                body = "Tu inscripción a la actividad " + tituloActividad + " está en estado pendiente de aprobación. Te avisaremos cuando esté aprobada. Gracias! "; //Mensaje whatsApp
-                                mm.Subject = "Inscripción a " + tituloActividad + " en estado Pendiente";
-                                mm.Body = "¡Hola! Tu inscripción a la actividad " + tituloActividad + " está en estado pendiente de aprobación. Te avisaremos cuando esté aprobada. Gracias! ";
-                                mm.IsBodyHtml = true;
+                                try
+                                {
+                                 
+                                    mensaje = "Su inscripción está en estado PENDIENTE. Debe completar un formulario con los requisitos solicitados para realizar esta actividad. Se le informará cuando su inscripción este aprobada.";
+                                    body = "Tu inscripción a la actividad " + tituloActividad + " está en estado pendiente de aprobación. Te avisaremos cuando esté aprobada. Gracias! "; //Mensaje whatsApp
+                                    mm.Subject = "Inscripción a " + tituloActividad + " en estado Pendiente";
+                                    mm.Body = "¡Hola! Tu inscripción a la actividad " + tituloActividad + " está en estado pendiente de aprobación. Te avisaremos cuando esté aprobada. Gracias! ";
+                                    mm.IsBodyHtml = true;
 
-                                SmtpClient smtp = new SmtpClient();
-                                smtp.Host = "smtp.gmail.com";
-                                smtp.Port = 587;
-                                smtp.EnableSsl = true;
+                                    SmtpClient smtp = new SmtpClient();
+                                    smtp.Host = "smtp.gmail.com";
+                                    smtp.Port = 587;
+                                    smtp.EnableSsl = true;
 
-                                NetworkCredential nc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
-                                smtp.UseDefaultCredentials = true;
-                                smtp.Credentials = nc;
-                                smtp.Send(mm);
+                                    NetworkCredential nc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
+                                    smtp.UseDefaultCredentials = true;
+                                    smtp.Credentials = nc;
+                                    smtp.Send(mm);
+                                }
+                                catch 
+                                {
+
+                                }
+                                
 
                             }
                             else //Queda aprobado de una
