@@ -241,10 +241,10 @@ namespace Vita.Controllers
                             }
 
                             //Parte del Mail
-                            /*
+                            
                             MailAddress to = new MailAddress(buscarUsuarioLogueado.Email);
                             MailAddress from = new MailAddress("vita.contactanos@gmail.com");
-                            MailMessage mm = new MailMessage(from, to); */
+                            MailMessage mm = new MailMessage(from, to); 
 
 
                             var mensaje = "";
@@ -258,7 +258,7 @@ namespace Vita.Controllers
                                 ViewBag.Compleja = true; //debe completar el formulario
                                 mensaje = "Su inscripción está en estado PENDIENTE. Debe completar un formulario con los requisitos solicitados para realizar esta actividad. Se le informará cuando su inscripción este aprobada.";
                                 body = "Tu inscripción a la actividad " + tituloActividad + " está en estado pendiente de aprobación. Te avisaremos cuando esté aprobada. Gracias! "; //Mensaje whatsApp
-                                /* mm.Subject = "Inscripción a " + tituloActividad + " en estado Pendiente";
+                                mm.Subject = "Inscripción a " + tituloActividad + " en estado Pendiente";
                                 mm.Body = "¡Hola! Tu inscripción a la actividad " + tituloActividad + " está en estado pendiente de aprobación. Te avisaremos cuando esté aprobada. Gracias! ";
                                 mm.IsBodyHtml = true;
 
@@ -270,7 +270,7 @@ namespace Vita.Controllers
                                 NetworkCredential nc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
                                 smtp.UseDefaultCredentials = true;
                                 smtp.Credentials = nc;
-                                smtp.Send(mm);*/
+                                smtp.Send(mm);
 
                             }
                             else //Queda aprobado de una
@@ -278,7 +278,7 @@ namespace Vita.Controllers
                                 mensaje = "Su inscripción ha sido exitosa. Puede ir a su perfil para ver sus actividades";
                                 body = "Tu inscripción a la actividad " + tituloActividad + " ha sido exitosa! ";
                                 //Parte Email
-                                /*  mm.Subject = "Inscripción a " + tituloActividad + " exitosa";
+                                  mm.Subject = "Inscripción a " + tituloActividad + " exitosa";
                                   mm.Body = "¡Hola! A partir de ahora, Comienza tu nueva actividad - " + tituloActividad + " - VITA Espera que sea de tu agrado y lo más importante... ¡Que te diviertas! ";
                                   mm.IsBodyHtml = true;
 
@@ -290,7 +290,7 @@ namespace Vita.Controllers
                                   NetworkCredential nc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
                                   smtp.UseDefaultCredentials = true;
                                   smtp.Credentials = nc;
-                                  smtp.Send(mm);*/
+                                  smtp.Send(mm);
                             }
 
                             ViewBag.Mensaje = mensaje;
@@ -300,8 +300,8 @@ namespace Vita.Controllers
                             {
                                 var accountSid = "ACe237f679127cbe29fcb106e4f6a0be6f";
                                 var authToken = "";
-
-                                /*TwilioClient.Init(accountSid, authToken);
+                                    /*
+                                TwilioClient.Init(accountSid, authToken);
                                 var message = MessageResource.Create(
                                     from: new Twilio.Types.PhoneNumber("whatsapp:+14155238886"),
                                     body: body,
@@ -583,13 +583,14 @@ namespace Vita.Controllers
             }
         }
         [HttpGet]
-        public ActionResult CrearFormularioDinamico(string idActividad, bool? publicar)
+        public ActionResult CrearFormularioDinamico(int? idActividad, bool? publicar)
         {
             //obtengo usuario logueado
             if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
             { return RedirectToAction("Login", "Login"); }
             else
             {
+                ViewBag.Actividad = idActividad;
                 ViewBag.PublicarAhora = publicar;
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
                 return View(buscarUsuarioLogueado);
@@ -608,7 +609,7 @@ namespace Vita.Controllers
             {
 
                 buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
-                var activdadCreada = actividadServicio.GetUltimaActividadPorUsuarioCreadaId(buscarUsuarioLogueado.Id);
+                var activdadCreada = actividadServicio.GetActividad(formularioDinamicoViewModel.ActividadId);
                 actividadServicio.CrearFormularioDinamico(formularioDinamicoViewModel, activdadCreada);
                 if (formularioDinamicoViewModel.publicar == true)
                 {
@@ -643,118 +644,128 @@ namespace Vita.Controllers
         [HttpPost]
         public ActionResult AprobarORechazarUsuario(UsuarioEstado usuarioEstado, String Para, String Asunto, String Mensaje, String Estado, String Rechazar, String RechazoNoti, ViewModels.Gmail model)
         {
-
-            //   foreach(var us in usuarioEstado.Usuarios)
-            //   {
-            actividadServicio.CambiarEstadoUsuarioInscripto(usuarioEstado.Estado, usuarioEstado.UsuarioId,
-                usuarioEstado.ActividadId);
-            actividadServicio.CambiarEstadoUsuarioInscripto(usuarioEstado.Estado, usuarioEstado.UsuarioId,
-           usuarioEstado.ActividadId);
-            var tituloActividad = actividadServicio.GetActividad(usuarioEstado.ActividadId).Titulo;
-            var to = usuarioServicio.GetUsuarioById(usuarioEstado.UsuarioId).Email;
-
-            if (Estado != null)
+            try
             {
+                //   foreach(var us in usuarioEstado.Usuarios)
+                //   {
+                actividadServicio.CambiarEstadoUsuarioInscripto(usuarioEstado.Estado, usuarioEstado.UsuarioId,
+                    usuarioEstado.ActividadId);
+                actividadServicio.CambiarEstadoUsuarioInscripto(usuarioEstado.Estado, usuarioEstado.UsuarioId,
+               usuarioEstado.ActividadId);
+                var tituloActividad = actividadServicio.GetActividad(usuarioEstado.ActividadId).Titulo;
+                var to = usuarioServicio.GetUsuarioById(usuarioEstado.UsuarioId).Email;
 
-                MailMessage mm = new MailMessage("vita.contactanos@gmail.com", to);
-                mm.Subject = "Inscripción a " + tituloActividad + " Aprobada";
-                mm.Body = "¡Tu solicitud ha sido aprobada! A partir de ahora, Comienza tu nueva actividad - " + tituloActividad + " - VITA Espera que sea de tu agrado y lo más importante... ¡Que te diviertas! ";
-                mm.IsBodyHtml = true;
-
-                SmtpClient smtpp = new SmtpClient();
-                smtpp.Host = "smtp.gmail.com";
-                smtpp.Port = 587;
-                smtpp.EnableSsl = true;
-
-                NetworkCredential ncc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
-                smtpp.UseDefaultCredentials = true;
-                smtpp.Credentials = ncc;
-                smtpp.Send(mm); 
-            }
-
-            else if (Rechazar != null)
-            {
-
-                MailMessage mm = new MailMessage("vita.contactanos@gmail.com", to);
-                mm.Subject = "Inscripción a " + tituloActividad + " Rechazada :( ";
-                mm.Body = "Te han rechazado a la Actividad: - " + tituloActividad + " pero no te preocupes! ¡Tenemos muchas más Actividades para vos!";
-                mm.IsBodyHtml = true;
-
-                SmtpClient smtpp = new SmtpClient();
-                smtpp.Host = "smtp.gmail.com";
-                smtpp.Port = 587;
-                smtpp.EnableSsl = true;
-
-                NetworkCredential ncc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
-                smtpp.UseDefaultCredentials = true;
-                smtpp.Credentials = ncc;
-                smtpp.Send(mm);
-            }
-
-            else if (RechazoNoti != null)
-            {
-
-                MailMessage correo = new MailMessage();
-            correo.From = new MailAddress("vita.contactanos@gmail.com");
-            correo.To.Add(Para);
-            correo.Subject = Asunto;
-            correo.Body = Mensaje;
-            correo.IsBodyHtml = true;
-
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = "smtp.gmail.com";
-            smtp.Port = 587;
-            smtp.EnableSsl = true;
-
-            NetworkCredential nc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
-            smtp.UseDefaultCredentials = true;
-            smtp.Credentials = nc;
-            smtp.Send(correo);
-            }
-
-            //Notificaciones de WhatsApp
-            var body = "";
-            var celular = "whatsapp:+549" + usuarioServicio.GetUsuarioById(usuarioEstado.UsuarioId).Celular;
-
-            if (usuarioEstado.Estado)
-            {
-                body = "Tu inscripción a la actividad " + tituloActividad + " ha sido aprobada!";
-            }
-            else
-            {
-                if(Mensaje!= null)
+                if (Estado != null)
                 {
-                    body = "Tu inscripción a la actividad " + tituloActividad + " ha sido rechazada. " + Mensaje;
+
+                    MailMessage mm = new MailMessage("vita.contactanos@gmail.com", to);
+                    mm.Subject = "Inscripción a " + tituloActividad + " Aprobada";
+                    mm.Body = "¡Tu solicitud ha sido aprobada! A partir de ahora, Comienza tu nueva actividad - " + tituloActividad + " - VITA Espera que sea de tu agrado y lo más importante... ¡Que te diviertas! ";
+                    mm.IsBodyHtml = true;
+
+                    SmtpClient smtpp = new SmtpClient();
+                    smtpp.Host = "smtp.gmail.com";
+                    smtpp.Port = 587;
+                    smtpp.EnableSsl = true;
+
+                    NetworkCredential ncc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
+                    smtpp.UseDefaultCredentials = true;
+                    smtpp.Credentials = ncc;
+                    smtpp.Send(mm);
+                }
+
+                else if (Rechazar != null)
+                {
+
+                    MailMessage mm = new MailMessage("vita.contactanos@gmail.com", to);
+                    mm.Subject = "Inscripción a " + tituloActividad + " Rechazada :( ";
+                    mm.Body = "Te han rechazado a la Actividad: - " + tituloActividad + " pero no te preocupes! ¡Tenemos muchas más Actividades para vos!";
+                    mm.IsBodyHtml = true;
+
+                    SmtpClient smtpp = new SmtpClient();
+                    smtpp.Host = "smtp.gmail.com";
+                    smtpp.Port = 587;
+                    smtpp.EnableSsl = true;
+
+                    NetworkCredential ncc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
+                    smtpp.UseDefaultCredentials = true;
+                    smtpp.Credentials = ncc;
+                    smtpp.Send(mm);
+                }
+
+                else if (RechazoNoti != null)
+                {
+
+                    MailMessage correo = new MailMessage();
+                    correo.From = new MailAddress("vita.contactanos@gmail.com");
+                    correo.To.Add(Para);
+                    correo.Subject = Asunto;
+                    correo.Body = Mensaje;
+                    correo.IsBodyHtml = true;
+
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+
+                    NetworkCredential nc = new NetworkCredential("vita.contactanos@gmail.com", "vita0019");
+                    smtp.UseDefaultCredentials = true;
+                    smtp.Credentials = nc;
+                    smtp.Send(correo);
+                }
+
+                //Notificaciones de WhatsApp
+                var body = "";
+                var celular = "whatsapp:+549" + usuarioServicio.GetUsuarioById(usuarioEstado.UsuarioId).Celular;
+
+                if (usuarioEstado.Estado)
+                {
+                    body = "Tu inscripción a la actividad " + tituloActividad + " ha sido aprobada!";
                 }
                 else
                 {
-                    body = "Tu inscripción a la actividad " + tituloActividad + " ha sido rechazada.";
+                    if (Mensaje != null)
+                    {
+                        body = "Tu inscripción a la actividad " + tituloActividad + " ha sido rechazada. " + Mensaje;
+                    }
+                    else
+                    {
+                        body = "Tu inscripción a la actividad " + tituloActividad + " ha sido rechazada.";
+                    }
+
                 }
-               
-            }
 
-            try
-            {
-                /*var accountSid = "ACe237f679127cbe29fcb106e4f6a0be6f";
-                var authToken = "";
+                try
+                {
+                    /*
+                    var accountSid = "ACe237f679127cbe29fcb106e4f6a0be6f";
+                    var authToken = "";
 
-                TwilioClient.Init(accountSid, authToken);
-                var message = MessageResource.Create(
-                    from: new Twilio.Types.PhoneNumber("whatsapp:+14155238886"),
-                    body: body,
-                    to: new Twilio.Types.PhoneNumber(celular)
-                );
+                    TwilioClient.Init(accountSid, authToken);
+                    var message = MessageResource.Create(
+                        from: new Twilio.Types.PhoneNumber("whatsapp:+14155238886"),
+                        body: body,
+                        to: new Twilio.Types.PhoneNumber(celular)
+                    );
 
-                var respuestaApi = message.Sid;*/
+                    var respuestaApi = message.Sid;*/
+                }
+                catch
+                {
+
+                }
+
+                //  }
+                return RedirectToAction("ListaActividades", "Actividad");
+                // return RedirectToActionPermanent("ListaEstado", "Actividad",usuarioEstado.EstadoAnterior, usuarioEstado.ActividadId);
             }
             catch
             {
-
+                return RedirectToAction("ListaActividades", "Actividad");
             }
 
-            //  }
-            return RedirectToAction("ListaActividades", "Actividad");
-            // return RedirectToActionPermanent("ListaEstado", "Actividad",usuarioEstado.EstadoAnterior, usuarioEstado.ActividadId);
+
+
         }
 
         [HttpGet]
@@ -1113,15 +1124,15 @@ namespace Vita.Controllers
 
                 //Notificaciones de WhatsApp
                 var tituloActividad = actividadServicio.GetActividad(formu.ActividadId).Titulo;
-                var body = "Hola! su inscripción a la actividad " + tituloActividad + " ha sido rechazada. Debe rehacer el formulario: " + formu.DescripcionMotivo;
-                var celular = "whatsapp:+549" + buscarUsuarioLogueado.Celular;
-
+                var body = "Hola! su inscripción a la actividad " + tituloActividad + " ha sido rechazada. Debe rehacer el formulario: " + formu.DescripcionMotivo;         
+                var usuarioForm = usuarioServicio.GetById(formu.UsuarioId);
+                var celular = "whatsapp:+549" + usuarioForm.Celular;
                 try
                 {
                     var accountSid = "ACe237f679127cbe29fcb106e4f6a0be6f";
                     var authToken = "";
-
-                   /* TwilioClient.Init(accountSid, authToken);
+                    /*
+                   TwilioClient.Init(accountSid, authToken);
                     var message = MessageResource.Create(
                         from: new Twilio.Types.PhoneNumber("whatsapp:+14155238886"),
                         body: body,

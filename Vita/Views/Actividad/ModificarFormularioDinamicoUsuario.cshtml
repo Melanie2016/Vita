@@ -182,21 +182,29 @@
                                                 <div class="col-lg-6">
                                                     @if (cam.Obligatorio)
                                                     {
-                                                        if (@ra5 != null)
+                                                        if (@ra5 != null && @ra5.ToString() != "0")
                                                         {
                                                             <img src="@Url.Content(@ra5)" style="width: 60%;" />
+                                                        }else{
+                                                        
+
                                                         }
                                                         <br /><br />
-                                                        <input class="file-upload" type="file" id="Foto" value="@ra5" name="CamposVm[@index].Foto" required />
+                                                                       
+                                                             <input class="file-upload" type="file" id="Foto" value="@ra5" name="CamposVm[@index].Foto" required />
                                                     }
                                                     else
                                                     {
-                                                        if (@ra5 != null)
+                                                        if (@ra5 != null && @ra5.ToString() != "0")
                                                         {
                                                             <img src="@Url.Content(@ra5)" style="width: 60%;" />
+                                                        }else{
+                                                          
                                                         }
                                                         <br /><br />
                                                         <input class="file-upload" type="file" id="Foto" value="@ra5" name="CamposVm[@index].Foto" />
+                                                      
+                                                        
                                                     }
                                                 </div>
                                             </div>

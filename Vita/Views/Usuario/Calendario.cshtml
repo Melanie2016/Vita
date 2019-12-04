@@ -132,7 +132,7 @@
                 events = [];
                 $.ajax({
                     type: "GET",
-                    url: "/Usuario/GetEstadisticas",
+                    url: "/Usuario/GetEvents",
                     success: function (data) {
                         $.each(data, function (i, v) {
                             if(v.DiaSemana != -1){
