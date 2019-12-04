@@ -34,13 +34,13 @@
                         <br />
                         <div class="form-validation">
                             <!--Titulo  <form class="form-valide" action=CreacionActividad method=POST>-->
-                            @using (Html.BeginForm("CreacionActividad", "Actividad", FormMethod.Post, new { enctype = "multipart/form-data" ,id ="myform", name ="myform" }))
+                            @using (Html.BeginForm("CreacionActividad", "Actividad", FormMethod.Post, new { enctype = "multipart/form-data" ,id ="myform", name ="myform" , autocomplete = "off"}))
                             {
                                 <h5 style="padding: 5px; color: #fff; background-color: #69D49A ; border-color: #337ab7; WIDTH: 17%; border-radius: 5px; text-align: center;">DATOS GENERALES</h5>
                                 <div class="form-group row">
                                     <!--Titulo-->
-                                    <label class="col-lg-4 col-form-label" for="Titulo">
-                                        Título de la actividad<span class="text-danger">*</span>
+                                    <label class="col-lg-4 col-form-label" for="Titulo" >
+                                        Título de la actividad <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
                                         <input type="text" class="form-control" id="val-username" name="Titulo" placeholder="Truco.." required>

@@ -20,6 +20,7 @@ namespace Vita.Servicios
         //EXTRAS
         public const int ESTADISTICA_CATEGORIA = 1;
         public const int ESTADISTICA_SEMANA = 2;
+        public const int ESTADISTICA_SEGMENTO = 3;
     }
 
 }

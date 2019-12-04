@@ -737,10 +737,10 @@ namespace Vita.Controllers
 
                 try
                 {
-                    /*
+                    
                     var accountSid = "ACe237f679127cbe29fcb106e4f6a0be6f";
                     var authToken = "";
-
+                    /*
                     TwilioClient.Init(accountSid, authToken);
                     var message = MessageResource.Create(
                         from: new Twilio.Types.PhoneNumber("whatsapp:+14155238886"),
@@ -986,6 +986,19 @@ namespace Vita.Controllers
             }
         }
 
+        public ActionResult EstadisticasSegmento()
+        {
+            //obtengo usuario logueado
+            if (!(Session["Usuario"] is Usuario buscarUsuarioLogueado))
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                buscarUsuarioLogueado = usuarioServicio.GetUsuarioById(buscarUsuarioLogueado.Id);
+                return View(buscarUsuarioLogueado);
+            }
+        }
 
         [HttpGet]
         public JsonResult GetEstadisticasDonut(int estadisticaSeleccionada)
@@ -999,8 +1012,17 @@ namespace Vita.Controllers
                 }
                 else
                 {
-                    var events = actividadServicio.GetEstadisticasDonutSemana();
-                    return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                    if(estadisticaSeleccionada == ConstantesUtil.ESTADISTICA_SEMANA)
+                    {
+                        var events = actividadServicio.GetEstadisticasDonutSemana();
+                        return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                    }
+                    else
+                    {
+                        var events = actividadServicio.GetEstadisticasDonutSegmento();
+                        return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                    }
+                    
                 }
                 
             }
@@ -1018,9 +1040,17 @@ namespace Vita.Controllers
                 }
                 else
                 {
-
-                    var events = actividadServicio.GetEstadisticasBarSemana();
-                    return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                    if (estadisticaSeleccionada == ConstantesUtil.ESTADISTICA_SEMANA)
+                    {
+                        var events = actividadServicio.GetEstadisticasBarSemana();
+                        return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                    }
+                    else
+                    {
+                        var events = actividadServicio.GetEstadisticasBarSegmento();
+                        return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                    }
+                    
                 }
             }
         }

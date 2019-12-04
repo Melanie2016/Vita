@@ -67,6 +67,26 @@ namespace Vita.Servicios
             }
             return listaCantiQuery;
         }
+        
+
+        public List<EstadisticasDonutViewModel> GetEstadisticasDonutSegmento()
+        {
+            var segmentos = myDbContext.Segmento.ToList();
+            var listaCantiQuery = new List<EstadisticasDonutViewModel>();
+            foreach (var s in segmentos)
+            {
+                
+                    var estadistica = new EstadisticasDonutViewModel();
+                    estadistica.label = s.Descripcion == "Adultos mayores" ? "Mayores" : s.Descripcion;
+                    estadistica.value = myDbContext.ActividadSegmento.Where(x => x.SegmentoId == s.Id).Count();
+                    listaCantiQuery.Add(estadistica);
+                
+                    
+            }
+            return listaCantiQuery;
+        }
+
+
 
         public List<EstadisticasBarViewModel> GetEstadisticasBarCategoria()
         {
@@ -94,6 +114,25 @@ namespace Vita.Servicios
             }
             return listaCantiQuery;
         }
+
+        public List<EstadisticasBarViewModel> GetEstadisticasBarSegmento()
+        {
+            var segmentos = myDbContext.Segmento.ToList();
+            var listaCantiQuery = new List<EstadisticasBarViewModel>();
+
+            foreach (var s in segmentos)
+            {
+               var estadistica = new EstadisticasBarViewModel();
+               estadistica.y = s.Descripcion == "Adultos mayores" ? "Mayores" : s.Descripcion;
+               estadistica.a = myDbContext.ActividadSegmento.Where(x => x.SegmentoId == s.Id).Count();
+               listaCantiQuery.Add(estadistica);
+              
+            }
+            return listaCantiQuery;
+        }
+
+
+
 
         //va a devolver una lista del viewMoDEL que cree (que solo tiene fecha desde, fecha hasta y descripcion de la actividad)
         public List<ActividadFechaViewModel> GetAllActividadByUsuario(Usuario usuario) //lista de activiades , solo la descripcion y fecha, MOMENTANEA

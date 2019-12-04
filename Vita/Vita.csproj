@@ -1055,6 +1055,7 @@
       <DependentUpon>VitaEntities.edmx</DependentUpon>
     </Content>
     <Content Include="Views\Actividad\EstadisticasSemana.cshtml" />
+    <Content Include="Views\Actividad\EstadisticasSegmento.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

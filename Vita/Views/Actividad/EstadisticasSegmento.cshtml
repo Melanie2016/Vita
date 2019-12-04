@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "EstadisticasSegmento";
+Layout = "~/Views/Shared/_LayoutPerfilEntidad.cshtml";
+}
+<section class="ftco-section">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
+  	<script src="../../Morris/morris.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.js"></script>
+  	<script src="../../Morris/lib/example.js"></script>
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.css">
+
+	 <div class="container-fluid">
+	 			<div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                            	<h4>Popularidad por edades</h4>
+                            	<hr />
+                            	<p>En esta sección podrá informarse sobre las actividades más populares entre las diferentes edades.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                 
+									<div id="graph"></div>
+									<pre id="code" class="prettyprint linenums">
+									</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                            	
+                                <div id="bar-example"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+	</div>
+	<script type="text/javascript">
+		$("#code").hide();
+	</script>
+	<script>
+		$.ajax({
+			type: "GET",
+			url: "/Actividad/GetEstadisticasDonut?estadisticaSeleccionada=3",
+			data: 0,
+			dataType: "json", //parse the response data as JSON automatically
+			success: function(data) {
+			  	console.log(data);
+			    Morris.Donut({
+					element: 'graph',
+					data: data,
+					backgroundColor: '#FFFFFF',
+					labelColor: '#0C0C0C',
+					colors: [
+						'#31E99C',
+						'#68EEB5',
+						'#9AF3CD',
+						'#C9F9E5'
+					],
+					formatter: function (x) { 
+						if(x > 1){
+							return x + " Actividades"
+						}else{
+							return x + " Actividad"
+						}
+					}
+				});
+
+			}
+		});
+
+		
+	</script>
+	<script>
+		$.ajax({
+			type: "GET",
+			url: "/Actividad/GetEstadisticasBar?estadisticaSeleccionada=3",
+			data: 0,
+			dataType: "json", //parse the response data as JSON automatically
+			success: function(data) {
+			  	console.log(data);
+			    Morris.Bar({
+	 				element: 'bar-example',
+		  			data: data,
+	  				xkey: 'y',
+	  				ykeys: ['a'],
+	  				labels: [''],
+	  				xLabelAngle: 60,
+	  				barColors: function(row, series, type) {
+	    				if (type != 'bar') {
+	      					return;
+	    				}
+	    				switch (row.x) {
+	      					case 0: return '#F1DAF2';
+	      					case 1: return '#D7AFD9';
+	      					case 2: return '#D595D8';
+	      					case 3: return '#D17AD5';
+	      					case 4: return '#CF5DD3';
+	      					case 5: return '#CB3BCF';
+	      					case 6: return '#BC01C4';
+	      					default: return 'orange';
+	    				}
+	  				}
+				});
+			   
+			}
+		});
+		
+	</script>		
+
+</section>
